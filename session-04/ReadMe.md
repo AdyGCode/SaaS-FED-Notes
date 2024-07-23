@@ -1,8 +1,6 @@
 # Session 04
 
 
-- [Terminology: Database](Terminology-Database.md)
-- [Terminology: SQL](Terminology-SQL.md)
 - [Terminology: Security](Terminology-Security.md)
 - [Exercises and Journal Entry](Session-04-Exercises-and-Journal-Entry.md)
 ### Note
