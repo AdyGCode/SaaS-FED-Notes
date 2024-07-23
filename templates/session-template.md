@@ -7,7 +7,10 @@ auto-scaling: true
 size: 4k
 color: "#ccc"
 backgroundColor: "#060606"
-tags: SaaS, APIs, Back-End
+tags: 
+  - SaaS
+  - APIs
+  - Back-End
 
 date created: 03 July 2024
 date modified: 10 July 2024
@@ -43,4 +46,4 @@ content…
 
 # END
 
-Next up - [LINK TEXT](LINK)
+Next up - [LINK TEXT](#)
