@@ -1,8 +1,6 @@
 # Session 03
 
-- [Terminology: Services](Terminology-Services.md)
-- [Terminology: Programming](Terminology-Programming.md)
-- [Terminology: Web](Terminology-Web.md)
+
 - [Terminology: Database](Terminology-Database.md)
 - [Terminology: SQL](Terminology-SQL.md)
 - [Exercises and Journal Entry](Session-03-Exercises-and-Journal-Entry.md)
