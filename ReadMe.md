@@ -15,6 +15,12 @@ date created: 08 July 2024
 date modified: 08 July 2024
 ---
 
+# SaaS FED Notes
+
+This repository is for the development of notes and slides for SaaS FED as delivered by North Metropolitan TAFE.
+
+
+
 ```table-of-contents
 option1: value1
 option2: value2
@@ -24,29 +30,18 @@ option2: value2
 
 Please make sure you check the required [development environment](Development-Environments.md) details.
 
-# Part I - APIs
+## Badges
 
-| Session | S2/24<br>Week Starting | Title              |
-|---------|------------------------|--------------------|
-| 01      | 15/7                   |                    |
-| 02      | 22/7                   |                    |
-| 03      | 29/7                   |                    |
-| 04      | 5/8                    |                    |
-| 05      | 12/8                   |                    |
-| 06      | 19/8                   |                    |
-| 07      | 26/8                   |                    |
-| 08      | 2/9                    |                    |
-| 09      | 9/9                    |                    |
-| 10      | 16/9                   |                    |
-| --      | --                     | Mid Semester Break |
-| 11      | 23/9                   |                    |
-| 12      | 30/9                   |                    |
-| 13      | 7/10                   |                    |
-| 14      | 14/10                  |                    |
-| 15      | 21/10                  |                    |
-| 16      | 28/10                  |                    |
-| 17      | 4/11                   |                    |
-| 18      | 11/11                  |                    |
-|         |                        |                    |
-| 19      | 18/11                  |                    |
-| 20      | 25/11                  |                    |
+![GitHub Repo stars](https://img.shields.io/github/stars/AdyGCode/SaaS-FED-Notes?style=for-the-badge)
+![GitHub Last Commit](https://img.shields.io/github/last-commit/AdyGCode/ISaaS-FED-Notes?style=for-the-badge)
+![GitHub Downloads](https://img.shields.io/github/downloads/AdyGCode/SaaS-FED-Notes/total?style=for-the-badge)
+
+![Markdown](https://img.shields.io/badge/markdown-%23000000.svg?style=for-the-badge&logo=markdown&logoColor=white)
+![PHP](https://img.shields.io/badge/php-777BB4?style=for-the-badge&logo=php&logoColor=ffffff)
+![Laravel](https://img.shields.io/badge/laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=ffffff)
+![NodeJS](https://img.shields.io/badge/node.js-5FA04E?style=for-the-badge&logo=nodedotjs&logoColor=ffffff)
+![NPM](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=ffffff)
+![Composer](https://img.shields.io/badge/composer-3670A0?style=for-the-badge&logo=composer&logoColor=ffffff)
+![TailwindCSS](https://img.shields.io/badge/tailwindcss-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=ffffff)
+![Bash](https://img.shields.io/badge/bash-4EAA25?style=for-the-badge&logo=gnubash&logoColor=ffffff)
+![Git](https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=ffffff)
