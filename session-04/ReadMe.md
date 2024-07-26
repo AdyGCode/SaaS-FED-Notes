@@ -1,7 +1,7 @@
 # Session 04
 
 
-- [Terminology: Security](Terminology-Security.md)
+- [Terminology: Security](session-04/S04-Terminology-Security.md)
 - [Exercises and Journal Entry](Session-04-Exercises-and-Journal-Entry.md)
 ### Note
 
