@@ -1,8 +1,8 @@
 # Session 03
 
 
-- [Terminology: Database](Terminology-Database.md)
-- [Terminology: SQL](Terminology-SQL.md)
+- [Terminology: Database](session-03/S03-Terminology-Database.md)
+- [Terminology: SQL](session-03/S03-Terminology-SQL.md)
 - [Exercises and Journal Entry](Session-03-Exercises-and-Journal-Entry.md)
 
 
