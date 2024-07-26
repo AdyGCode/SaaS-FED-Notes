@@ -1,9 +1,9 @@
 # Session 05
 
 
-- [Terminology: MVC](Terminology-MVC.md)
-- [Terminology: Laravel](Terminology-Laravel.md)
-- [More on MVC](MVC-Background.md)
+- [Terminology: MVC](session-05/S05-Terminology-MVC.md)
+- [Terminology: Laravel](session-05/S05-Terminology-Laravel.md)
+- [More on MVC](session-05/S05-MVC-Background.md)
 - [Exercises and Journal Entry](Session-05-Exercises-and-Journal-Entry.md)
 ### Note
 
