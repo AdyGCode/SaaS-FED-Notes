@@ -26,24 +26,30 @@ option1: value1
 option2: value2
 ```
 
-# Development Environment
+## Development Environment
 
-Please make sure you check the required [development environment](session-01/Development-Environments.md) details.
+Please make sure you check the required [development environment](session-01/S01-Development-Environments.md) details.
 
 ## Badges
 
-![GitHub Repo stars](https://img.shields.io/github/stars/AdyGCode/SaaS-FED-Notes?style=for-the-badge)
-![GitHub Last Commit](https://img.shields.io/github/last-commit/AdyGCode/ISaaS-FED-Notes?style=for-the-badge)
-![GitHub Downloads](https://img.shields.io/github/downloads/AdyGCode/SaaS-FED-Notes/total?style=for-the-badge)
+| Area                  | Badges                                                                                                                                                                                                                                                                                                                                           |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| RRepository           | <br>![GitHub Repo stars](https://img.shields.io/github/stars/AdyGCode/SaaS-FED-Notes?style=for-the-badge)<br>![GitHub Last Commit](https://img.shields.io/github/last-commit/AdyGCode/ISaaS-FED-Notes?style=for-the-badge)<br>![GitHub Downloads](https://img.shields.io/github/downloads/AdyGCode/SaaS-FED-Notes/total?style=for-the-badge)<br> |
+| Content               |                                                                                                                                                                                                                                                                                                                                                  |
+| Languages             |                                                                                                                                                                                                                                                                                                                                                  |
+| Frameworks & Support  |                                                                                                                                                                                                                                                                                                                                                  |
+| Databases             |                                                                                                                                                                                                                                                                                                                                                  |
+| IDEs and Editors      | <br>![PhpStorm](https://img.shields.io/badge/phpstorm-000000?style=for-the-badge&logo=phpstorm&logoColor=ffffff)<br>![VSCode](https://img.shields.io/badge/vscode-000000?style=for-the-badge&logo=vscode&logoColor=ffffff)<br>                                                                                                                   |
+| Supporting Technology |                                                                                                                                                                                                                                                                                                                                                  |
 
 ### Content
 ![Markdown](https://img.shields.io/badge/markdown-000000.svg?style=for-the-badge&logo=markdown&logoColor=white)
 
 ### Languages
-![PHP](https://img.shields.io/badge/php-000000?style=for-the-badge&logo=php&logoColor=777BB4)
-![CSS](https://img.shields.io/badge/css3-000000?style=for-the-badge&logo=css3&logoColor=1572B6)
-![HTML](https://img.shields.io/badge/html5-000000?style=for-the-badge&logo=html5&logoColor=E34F26)
-![JavaScript](https://img.shields.io/badge/javascript-000000?style=for-the-badge&logo=javascript&logoColor=F7DF1E)
+![PHP](https://img.shields.io/badge/php-000000?style=for-the-badge&logo=php&logoColor=777BB4) 
+![CSS](https://img.shields.io/badge/css3-000000?style=for-the-badge&logo=css3&logoColor=1572B6) 
+![HTML](https://img.shields.io/badge/html5-000000?style=for-the-badge&logo=html5&logoColor=E34F26) 
+![JavaScript](https://img.shields.io/badge/javascript-000000?style=for-the-badge&logo=javascript&logoColor=F7DF1E) 
 
 
 ### Frameworks & Framework Support
@@ -59,14 +65,13 @@ Please make sure you check the required [development environment](session-01/Dev
 ![MariaDB](https://img.shields.io/badge/mariadb-003545?style=for-the-badge&logo=mariadb&logoColor=ffffff)
 
 ### IDEs and Editors
-![PhpStorm](https://img.shields.io/badge/phpstorm-000000?style=for-the-badge&logo=phpstorm&logoColor=ffffff)
-![VSCode](https://img.shields.io/badge/vscode-000000?style=for-the-badge&logo=vscode&logoColor=ffffff)
-
 
 ### Supporting Technology
 ![Bash](https://img.shields.io/badge/bash-4EAA25?style=for-the-badge&logo=gnubash&logoColor=ffffff)
 ![Git](https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=ffffff)
 
+
+## Acknowledgements
 
 - Icons from:https://simpleicons.org
 - Badges by https://shields.io/badges
