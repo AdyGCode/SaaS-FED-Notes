@@ -5,7 +5,7 @@
 - [Terminology: Network-Internet](session-02/S02-Terminology-Network-Internet.md)
 - [Terminology: Programming](session-02/S02-Terminology-Programming.md)
 - [Terminology: Web](session-02/S02-Terminology-Web.md)
-- - [PHP Basics I: Variables, Types, Arrays, Decisions and Loops](session-02/S01-PHP-Basics-I.md)
+- - [PHP Basics I: Variables, Types, Arrays, Decisions and Loops](session-02/S02-PHP-Basics-I.md)
 - [Exercises and Journal Entry](session-02/S02-Exercises-and-Journal-Entry.md)
 ### Note
 
