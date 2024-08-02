@@ -5,8 +5,7 @@
 - [Terminology: SQL](session-03/S03-Terminology-SQL.md)
 - [S03-Terminology-Testing-Debugging](session-03/S03-Terminology-Testing-Debugging.md)
 - [S03-PHP-Basics-II](session-03/S03-PHP-Basics-II.md)
-- [S03-PHP-Basics-III](session-03/S03-PHP-Basics-III.md)
-- [S03-PHP-Basics-IV](session-03/S03-PHP-Basics-IV.md)
+
 - [Exercises and Journal Entry](Session-03-Exercises-and-Journal-Entry.md)
 
 
