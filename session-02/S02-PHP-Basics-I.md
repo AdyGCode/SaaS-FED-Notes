@@ -195,11 +195,11 @@ The following will be added to the file:
 <!doctype html>  
 <html lang="en">  
 <head>  
-    <meta charset="UTF-8">  
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">  
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">  
-    <title>Page Title</title>  
+    <meta charset="UTF-8">  
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">  
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">  
+    <title>Page Title</title>  
 </head>  
 <body>    
   
@@ -215,14 +215,14 @@ The following will be added to the file:
 <!doctype html>  
 <html lang="en">  
 <head>  
-    <meta charset="UTF-8">  
-    <meta name="viewport"          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">  
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">  
-    <title>PHP with HTML</title>  
+    <meta charset="UTF-8">  
+    <meta name="viewport"          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">  
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">  
+    <title>PHP with HTML</title>  
 </head>  
 <body>  
-<?php    
-// PHP embedded inside PHP    
+<?php    
+// PHP embedded inside PHP    
 echo "Hello World.";  
 ?>  
 </body>  
@@ -239,18 +239,18 @@ You only need to close the PHP tag if there is HTML after the PHP code.
 <!doctype html>  
 <html lang="en">  
 <head>  
-    <meta charset="UTF-8">  
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">  
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">  
-    <title>PHP with HTML</title>  
+    <meta charset="UTF-8">  
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">  
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">  
+    <title>PHP with HTML</title>  
 </head>  
 <body>  
 
 </body>  
 </html>
 
-<?php    
+<?php    
 // PHP embedded after HTML
 // do something here
 ```
@@ -261,17 +261,17 @@ You only need to close the PHP tag if there is HTML after the PHP code.
 
 ```php
 <?php  
-    // Add PHP code after the Document Block
+    // Add PHP code after the Document Block
 
 ?>  
 <!doctype html>  
 <html lang="en">  
 <head>  
-    <meta charset="UTF-8">  
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">  
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">  
-    <title>PHP with HTML</title>  
+    <meta charset="UTF-8">  
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">  
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">  
+    <title>PHP with HTML</title>  
 </head>  
 <body>  
 
@@ -744,3 +744,9 @@ do {
 
 [An Essential Guide to PHP do-while Statement By Examples (phptutorial.net)](https://www.phptutorial.net/php-tutorial/php-do-while/)
 
+
+https://www.phptutorial.net/ section 1
+https://www.phptutorial.net/ section 2
+https://www.phptutorial.net/ section 3
+https://www.phptutorial.net/ section 4
+https://www.phptutorial.net/ section 5
