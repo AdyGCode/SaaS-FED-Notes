@@ -79,7 +79,7 @@ class Game {
     public $name;
     public $type;
     
-    public __construct($name,$type){
+    public function __construct($name,$type){
         $this->name = $name ?? "";
         $this->type = $type ?? "";
     }
@@ -109,7 +109,7 @@ class Game {
     public $name;
     public $type;
     
-    public __destruct(){
+    public function __destruct(){
         // Are you able to identify any situations a destruct may be useful?
     }
     
