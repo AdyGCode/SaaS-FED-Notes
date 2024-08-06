@@ -7,7 +7,5 @@
 - https://www.phptutorial.net/php-oop/ Section 5, 6, 7, 8
 - https://www.phptutorial.net/php-oop/ Section 9
 - https://www.phptutorial.net/php-oop/ Section 10
-- 
 
 
-# PHP and Errors / Exceptions
