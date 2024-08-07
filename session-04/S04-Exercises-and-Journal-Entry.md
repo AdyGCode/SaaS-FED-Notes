@@ -43,4 +43,5 @@ The `contact-save.php` file will do the following:
 Display the content of the `POST` method on a page, **WITHOUT** using the
 `var_dump` function.
 
-Hint: You will need to use the `$_POST` super-global, and a loop to do this.
+> **Hint:** 
+> You will need to use the `$_POST` super-global, and a loop to do this.
