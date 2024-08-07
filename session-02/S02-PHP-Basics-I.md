@@ -41,7 +41,7 @@ Supports wide range of databases
 
 # Basic PHP Page
 
-![[duck.svg|142]]
+![duck.svg|142](../assets/duck.svg)
 
 (from: [Duck - Free animals icons (flaticon.com)](https://www.flaticon.com/free-icon/duck_2307968?term=rubber+duck&page=1&position=36&origin=search&related_id=2307968))
 
@@ -50,7 +50,7 @@ Supports wide range of databases
 
 Open: `<?php`
 Close: `?>`
-![[PHP-Basics-I-20240723160049504.png]]
+![PHP-Basics-I-20240723160049504.png](../assets/PHP-Basics-I-20240723160049504.png)
 ---
 
 ## Basic Page continued
@@ -61,7 +61,7 @@ Every PHP Page must have documentation
 - Indicates who the code is by
 - Indicates when code was started
 
-![[PHP-Basics-I-20240723160259020.png]]
+![PHP-Basics-I-20240723160259020.png](../assets/PHP-Basics-I-20240723160259020.png)
 
 ---
 
@@ -139,7 +139,7 @@ PHP Class Files must be:
 - Type in the name of the file
 	- Use only a-z, A-Z, 0-9, full stops (.) and dashes (-)
 
-![](assets/phpstorm64_1shbmmdaJs.gif)
+![](../assets/phpstorm64_1shbmmdaJs.gif)
 
 #### Method Two - The Right Mouse Click
 
@@ -149,7 +149,7 @@ PHP Class Files must be:
 - Type in the name of the file
 	- Use only a-z, A-Z, 0-9, full stops (.) and dashes (-)
 
-![](assets/phpstorm64_3sqVeFqzk0.gif)
+![](../assets/phpstorm64_3sqVeFqzk0.gif)
 
 #### Method Three - The Keyboard Junkie
 
@@ -161,7 +161,7 @@ PHP Class Files must be:
 	- Use only a-z, A-Z, 0-9, full stops (.) and dashes (-)
 
 
-![](assets/phpstorm64_vvWkPlJBGl.gif)
+![](../assets/phpstorm64_vvWkPlJBGl.gif)
 ---
 
 ## PHP and HTML (et al)
@@ -297,7 +297,7 @@ Variables must:
 ## Examples:
 Note: Images are reproduced as code 
 ### Valid
- ![PHP-Basics-I-20240723162125584.png](PHP-Basics-I-20240723162125584.png)
+ ![PHP-Basics-I-20240723162125584.png](../assets/PHP-Basics-I-20240723162125584.png)
 
 ```php
 $_testing = "OK";  
