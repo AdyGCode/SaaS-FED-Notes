@@ -24,17 +24,21 @@ The file will be called `contact.php`.
 
 The form must have the following fields:
 
-- Name
-- Email
+- Name (Text)
+- Email (Text)
 - Subject (Select from: Website issue, Quote for work, Other)
-- Message
-- Privacy Policy (checkbox)
+- Message (Textbox)
+- Privacy Policy (Checkbox)
 
-The form will have `submit` and `clear` buttons. The first, sends the form data, 
-the latter clears the form's content.
+The form will have `submit` and `clear` buttons.
+
+The `submit` button sends the form data and `clear` clears the form's content.
 
 The form will submit to a file called `contact-save.php`.
 
 ### Exercise 2 - Contact Save
 
 The `contact-save.php` file will do the following:
+
+Display the content of the `POST` method on a page, **WITHOUT** using the
+`var_dump` function.
