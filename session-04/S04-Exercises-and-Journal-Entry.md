@@ -9,10 +9,19 @@ minLevel: 0
 maxLevel: 3
 includeLinks: true
 ```
+The journal entry this week will contain the following:
 
-## Journal
+- A summary of what you have learned, including any topics you found difficult to follow.
+- Any research you performed as part of the consolidation learning.
 
-## Study
+Remember to use MyBib to add links/references to your research.
+
+## Out of Class Study
+
+Make sure you have read through the following sections from [PHP OOP - Object-oriented Programming in PHP (phptutorial.net)](https://www.phptutorial.net/php-oop/):
+
+- **Sections 1 - 7 if not already completed
+- **Sections 8 - 15**
 
 ## Exercises
 
@@ -64,20 +73,3 @@ What is the SQL used to:
 - Create the new database?
 - Create the new user with the given password?
 - Give the new user permission to access the database?
-
-### Exercise 4
-
-We will start by refactoring the files we currently have:
-
-- rename the contact-save.php to contact-form-display.php
-
-Create the following PHP files:
-
-- `contact-save.php`
-- `database.php`
-
-In the `database.php` file create a database class that may be
-used to connect to, and then access the `XXX_SaaS_FED_2024_S2` database.
-
-In the contact-save.php file you are to save the data to the database 
-in a table called `form_submissions`.

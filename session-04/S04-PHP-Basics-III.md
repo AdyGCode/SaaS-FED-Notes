@@ -1,6 +1,4 @@
-# PHP Basics III
-
-# OOP in PHP
+# PHP Basics III - OOP Essentials
 
 References
 
@@ -24,6 +22,8 @@ The four main principles of OOP are:
   - Enabling objects of different classes to be treated as objects of a common interface, providing flexibility.
 - Abstraction: 
   - Simplifying complex systems by modeling classes based on real-world entities and interactions.
+
+---
 
 ## Defining a class
 
@@ -60,6 +60,8 @@ $munchkin->type="Competitive Role-Playing Card";
 echo $munchkin->details();
 ```
 
+---
+
 ## Properties and Methods and Accessibility
 
 Properties and Methods may be:
@@ -69,6 +71,8 @@ Properties and Methods may be:
   - Accessible within the class and its subclasses.
 - Private: 
   - Accessible only within the class.
+
+---
 
 ## Object Constructors
 
@@ -99,6 +103,8 @@ $munchkin = new Game("Munchkin","Competitive Role-Playing Card");
 
 echo $munchkin->details();
 ```
+
+---
 
 ## Object Destructors
 

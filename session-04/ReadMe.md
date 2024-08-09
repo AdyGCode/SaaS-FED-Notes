@@ -2,6 +2,10 @@
 
 
 - [Terminology: Security](session-04/S04-Terminology-Security.md)
+- [S04-PHP-Basics-III](S04-PHP-Basics-III.md)
+- [S04-PHP-Basics-IV](S04-PHP-Basics-IV.md)
+- [S04-PHP-Basics-V](S04-PHP-Basics-V.md)
+- [S04-PHP-Basics-VI](S04-PHP-Basics-VI.md)
 - [S04-Exercises-and-Journal-Entry](S04-Exercises-and-Journal-Entry.md)
 ### Note
 
