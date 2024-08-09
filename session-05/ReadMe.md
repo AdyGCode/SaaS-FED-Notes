@@ -1,6 +1,6 @@
 # Session 05
 
-
+- [S05-PHP-Basics-VII](S05-PHP-Basics-VII.md)
 - [Terminology: MVC](session-05/S05-Terminology-MVC.md)
 - [Terminology: Laravel](session-05/S05-Terminology-Laravel.md)
 - [More on MVC](session-05/S05-MVC-Background.md)

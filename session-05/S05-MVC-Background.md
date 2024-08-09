@@ -2,6 +2,8 @@
 
 **Model - View - Controller**
 
+> **Note:** Before commencing this section, make sure you have read and understood [S05 Terminology MVC](S05-Terminology-MVC.md)
+
 ---
 
 ## What is it?
