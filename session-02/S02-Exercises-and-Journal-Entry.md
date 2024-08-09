@@ -4,16 +4,24 @@ Here are your instructions for this session's Journal and other exercises and pr
 
 ## Journal
 
-In your Journal you will ...
+The journal entry this week will contain the following:
+
+- A summary of what you have learned, including any topics you found difficult to follow.
+- Any research you performed as part of the consolidation learning.
+
+Remember to use MyBib to add links/references to your research.
 
 ## Study
 
-...
+Make sure you have read through the following sections from PHP Tutorial (https://phptutorial.net):
+
+- **Sections 1 - 8**
+
 ## Exercises
 
-Research and explain in your own words the following terms from Softwre Development.
+Research and explain in your own words the following terms from Software Development.
 
-Remember that you must include a reference for each term using MyBin to create the reference.
+Remember that you must include a reference for each term using [MyBib](https://mybib.com) to create the reference.
 
 - KISS
 - WET
