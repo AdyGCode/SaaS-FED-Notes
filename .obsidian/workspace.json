@@ -1,0 +1,215 @@
+{
+  "main": {
+    "id": "2455f43e7fd102fc",
+    "type": "split",
+    "children": [
+      {
+        "id": "7da4c43cccafe970",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "65bea86da876b02e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "session-05/S05-Exercises-and-Journal-Entry.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "0bd64acc72aa612f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "session-02/S02-Exercises-and-Journal-Entry.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "f11f4012331f935b",
+    "type": "split",
+    "children": [
+      {
+        "id": "1da4a92188f4c7fc",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d4cf2c6c9d14eac7",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "8aa21dc05d340337",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "a78275c9c6887805",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 472.5
+  },
+  "right": {
+    "id": "26a2935f4ff09f9b",
+    "type": "split",
+    "children": [
+      {
+        "id": "c0913b43f267a815",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "6468b0e1f9973566",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "session-05/S05-Exercises-and-Journal-Entry.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "e5bb67f6b40e2470",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "session-05/S05-Exercises-and-Journal-Entry.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "1e935f594a46b7cd",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "cf8371fbaedfc31f",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "session-05/S05-Exercises-and-Journal-Entry.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "obsidian-advanced-slides:Show Slide Preview": false,
+      "table-editor-obsidian:Advanced Tables Toolbar": false,
+      "templater-obsidian:Templater": false,
+      "mermaid-tools:Open Mermaid Toolbar": false,
+      "workspaces:Manage workspace layouts": false,
+      "marp-slides:Show Slide Preview": false
+    }
+  },
+  "active": "65bea86da876b02e",
+  "lastOpenFiles": [
+    "assets/phpstorm64_k2K8iLNCwl.png",
+    "session-05/S05-PHP-Basics-VII.md",
+    "session-05/S05-Terminology-MVC.md",
+    "session-05/S05-Exercises-and-Journal-Entry.md",
+    "session-04/S04-Exercises-and-Journal-Entry.md",
+    "session-03/S03-Exercises-and-Journal-Entry.md",
+    "session-02/S02-Exercises-and-Journal-Entry.md",
+    "session-02/ReadMe.md",
+    "session-01/S01-Exercises-and-Journal-Entry.md",
+    "session-01/ReadMe.md",
+    "ReadMe.md",
+    "session-05/pdo-demo-browse-in.php~",
+    "session-05/pdo-demo-browse-in.php",
+    "session-05/pdo-demo-delete.php",
+    "session-05/pdo-demo-create-dummy.php",
+    "session-05/pdo-demo-edit.php",
+    "session-05/pdo-demo-read.php~",
+    "session-05/pdo-demo-read.php",
+    "session-05/pdo-demo-browse.php~",
+    "session-05/pdo-demo-browse.php",
+    "session-05/pdo-demo-create-many.php",
+    "session-05/ReadMe.md",
+    "session-04/ReadMe.md",
+    "session-06/S06-Terminology-Laravel.md",
+    "session-06/S05-Terminology-Laravel.md",
+    "session-02/S02-PHP-Basics-I.md",
+    "session-05/S05-Terminology-Laravel.md",
+    "session-05/S05-MVC-Background.md",
+    "session-04/S04-PHP-Basics-III.md",
+    "session-04/S04-PHP-Basics-VI.md",
+    "session-04/S04-PHP-Basics-IV.md",
+    "session-04/S04-PHP-Basics-V.md",
+    "session-03/S03-PHP-Basics-II.md",
+    "assets/Obsidian_ZLGMVkfS0m.png",
+    "assets/Obsidian_fraKwDeGAe.png",
+    "assets/msedge_wVAmLh0GTC.png",
+    "assets/msedge_EDXjBJolS2.png",
+    "assets/folder-example-1@0.5.png",
+    "assets/folder-example-2@0.5.png",
+    "assets/Obsidian_Qbxy4qxH8N.png",
+    "assets/Pasted image 20240809151045.png",
+    "assets/folder-example-1@1x.png",
+    "session-02/S02-PHP-Basics-I-Part-2.md",
+    "session-04/S04-Terminology-Security.md",
+    "session-03/ReadMe.md"
+  ]
+}

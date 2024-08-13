@@ -11,7 +11,7 @@
  *
  */
 
-require_once 'config.php';
+require_once 'config-04.php';
 
 $dsn = "mysql:host=$dbHost;dbname=$dbName;charset=UTF8";
 

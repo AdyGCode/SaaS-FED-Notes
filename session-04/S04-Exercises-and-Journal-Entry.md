@@ -23,6 +23,14 @@ Make sure you have read through the following sections from [PHP OOP - Object-or
 - **Sections 1 - 7 if not already completed
 - **Sections 8 - 15**
 
+# External Coursework
+
+PHP From Scratch
+- [OOP - Object Oriented Programming](https://www.traversymedia.com/products/php-from-scratch-beginner-to-advanced/categories/2154265677)
+- [Superglobals](https://www.traversymedia.com/products/php-from-scratch-beginner-to-advanced/categories/2154265741)
+
+
+
 ## Exercises
 
 ### Exercise 1 - Contact Form

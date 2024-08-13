@@ -29,3 +29,10 @@ Remember that you must include a reference for each term using [MyBib](https://m
 - YAGNI
 
 
+
+# External Coursework
+
+PHP From Scratch
+- [Intro & Setup](https://www.traversymedia.com/products/php-from-scratch-beginner-to-advanced/categories/2154261435)
+- [Data Types, Variables & Built-In Functions](https://www.traversymedia.com/products/php-from-scratch-beginner-to-advanced/categories/2154263596)
+- [Arrays & Iteration](https://www.traversymedia.com/products/php-from-scratch-beginner-to-advanced/categories/2154263887)

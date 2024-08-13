@@ -59,3 +59,8 @@ Please make sure you check the required [development environment](session-01/S01
 
 - Icons from:https://simpleicons.org
 - Badges by https://shields.io/badges
+
+Special acknowledgements to:
+
+- Brad Traversy and Traversy Media for their [PHP From Scratch course ](https://www.traversymedia.com/products/php-from-scratch-beginner-to-advanced).
+- PHP Tutorial (https://www.phptutorial.net/) for their PHP, PDO and OO PHP tutorials.

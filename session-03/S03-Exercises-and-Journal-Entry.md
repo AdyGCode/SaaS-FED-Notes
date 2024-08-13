@@ -29,3 +29,10 @@ Remember that you must include a reference for each term using [MyBib](https://m
 - HTTP
 - Session Management
 - Stateless Programming
+
+# External Coursework
+
+PHP From Scratch
+- [Control Structures & Conditionals](https://www.traversymedia.com/products/php-from-scratch-beginner-to-advanced/categories/2154265464)
+- [Functions](https://www.traversymedia.com/products/php-from-scratch-beginner-to-advanced/categories/2154265555)
+
