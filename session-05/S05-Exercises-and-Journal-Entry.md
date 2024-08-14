@@ -397,40 +397,67 @@ Write a database seeder `database/user-seeder.php` using the following data:
 
 | Given Name     | Family Name | eMail                           | Password  |
 | -------------- | ----------- | ------------------------------- | --------- |
-| Crystal Shanda | Lear        | Crystal.Shanda.Lear@example.com | Password1 |
-|                |             |                                 |           |
+| Joe            | King        | Joe.King@example.com            | Password1 |
+| Crystal Shanda | Lear        | Crystal.Shanda.Lear@example.com | Password2 |
+| Anita          | Lift        | Anita.Lift@example.com          | Password3 |
+| Jim            | Nasium      | Jim.Nasium@example.com          | Password4 |
+| Phil           | O'Stein     | Phil.O'Stein@example.com        | Password5 |
+| Ann            | Tartica     | Ann.Tartica@example.com         | Password6 |
+| Ray            | Zerzedge    | Ray.Zerzedge@example.com        | Password7 |
+| Manny          | King        | Manny.King@example.com          | Password8 |
 
-|   |   |   |   |
-|---|---|---|---|
-   
-|Anita|Lift|Anita.Lift@example.com|Password1|
+Use the "create many" example from the notes as a base for this.
 
-|   |   |   |   |
-|---|---|---|---|
-   
-|Jim|Nasium|Jim.Nasium@example.com|Password1|
+The password must be encrypted using the `md5()` function before injecting into the placeholder.
 
+### Exercise 20
 
-|   |   |   |   |
-|---|---|---|---|
-   
-|Phil|O'Stein|Phil.O'Stein@example.com|Password1|
+Now we get to the fun parts.
 
+In the first of this section of exercises we will be updating the index to show our users in the table.
 
-|   |   |   |   |
-|---|---|---|---|
-   
-|Ann|Tartica|Ann.Tartica@example.com|Password1|
+#### Hints:
 
+At the top of the `index.php` page, before including the page header:
 
-|   |   |   |   |
-|---|---|---|---|
-   
-|Ray|Zerzedge|Ray.Zerzedge@example.com|Password1|
+- Use the `Connection` class to create a new PDO instance.
+- Retrieve all the users from the users table
+
+In the body of the page:
+
+- Wrap the `<tr>...</tr>` used for the dummy user in a `foreach` loop.
+- Check that the page shows multiple copies of the dummy data.
 
 
-|   |   |   |   |
-|---|---|---|---|
-   
-|Joe|King|Joe.King@example.com|Password1|
+### Exercise 21
+
+- Replace the dummy data with the required fields from the retrieved user.
+- Check that the page shows the data correctly.
+
+
+### Exercise 22
+
+In the table, we need to change some links.
+
+- Change the show link to pass the user id to the show page as part of the URL: `user_id=x` where x is the actual user's id.
+- Repeat for the edit link.
+- Repeat for the delete link.
+
+**Note:**  This is NOT best practice, but provides us with a base to work from.
+
+### Exercise 23
+
+Update the links on all the users view pages to follow the principle outlines in Exercise 22.
+
+### Exercise 24
+
+Complete the required PHP code for the Show page, but retrieving the user identified in the user_id parameter from the URI.
+
+
+### Exercise 25
+
+Complete the required PHP code for the create page.
+
+Make
+
 
