@@ -295,7 +295,37 @@ In each of these files, include the `header.php` and `footer.php` as required.
 
 Open the new `create.php` file, and add the following:
 
+- A heading that says: "User Management: Create"
 - A form that uses the POST method to send a request to the same file (`create.php`) to create a new user.
 
-In the form you will add the following controls, plus appropriate labels that are linked using the `for` attribute:
+In the form you will add the following controls, plus appropriate labels that are linked using the `for` attribute.
 
+Also wrap each control in a `<section>` ... `</section>` element similar to this:
+
+```html
+<section>
+	<label for="test">Test:</label>
+	<input type="text" id="Test" name="test" />
+</section>
+```
+
+| control | type     | name             | id/for      | notes                             |
+| ------- | -------- | ---------------- | ----------- | --------------------------------- |
+| label   |          |                  | GivenName   | The label should be "Given Name:" |
+| input   | text     | given_name       | FamilyName  |                                   |
+| label   |          |                  | FamilyName  | Family Name                       |
+| input   | text     | family_name      | FamilyName  |                                   |
+| label   |          |                  | Email       | Email                             |
+| input   | email    | email            | Email       |                                   |
+| label   |          |                  | UserPass    | Password                          |
+| input   | password | user_password    | UserPass    |                                   |
+| label   |          |                  | ConfirmPass | Confirm Password                  |
+| input   | password | confirm_password | ConfirmPass |                                   |
+
+
+### Exercise 14
+
+Duplicate the `create.php` and rename it `update.php`.
+
+
+### Exercise 15
