@@ -31,9 +31,11 @@ Useful links for this:
 
 - [Windows terminal on Microsoft Store](https://apps.microsoft.com/detail/9n0dx20hk701?hl=en-gb&gl=AU)
 - [Setting up Git bash on Windows Terminal](https://help.screencraft.net.au/hc/2680392001/65/add-git-bash-to-microsoft-terminal?category_id=35)
-- [Adding Command Line Aliases to make you life easier](https://help.screencraft.net.au/hc/2680392001/66/add-bash-command-line-aliases-for-git?category_id=35) 
+- [Adding Command Line Aliases to make you life easier](https://help.screencraft.net.au/hc/2680392001/66/add-bash-command-line-aliases-for-git?category_id=35)
 
-Before commencing, open a (bash) terminal and follow these instructions, replacing XXX with your initials.
+## Exercises Preparation
+
+Before commencing, open a (bash) terminal and follow these instructions, replacing XXX with your (lowercase) initials.
 
 ```shell
 
@@ -101,7 +103,7 @@ In the SQL file create the SQL to do the following:
 - Grant the user full access to the `xxx_mvc_jokes` database.
 - Grant the user usage on all databases.
 
-> Remember that users and databases can only use lower case letters, numbers and the underscore.
+> **Note:** Remember that users and databases can only use lower case letters, numbers and the underscore.
 >
 > It is convention to only use LOWER CASE and UNDERSCORE.
 
@@ -129,16 +131,16 @@ In this file add the SQL to create the following tables with the provided specif
 >
 > It is convention to only use LOWER CASE and UNDERSCORE.
 
-| Table Name | Field Name | Type                 | Length | Default | Other         |
-|------------|------------|----------------------|--------|---------|---------------|
-| jokes      | id         | unsigned big integer |        |         | Autoincrement |
-|            | question   | text                 |        |         |               |
-|            | answer     | text                 |        |         | Nullable      |
-|            | tags       | varchar              | 192    |         | Nullable      |
-|            | created at | datetime             |        | now     |               |
-|            | updated at | datetime             |        | null    | nullable      |
-|            | author id  | unsigned big integer |        | 0       |               |
-|            |            |                      |        |         |               |
+| Table Name | Field Name | Type                 | Length | Default           | Other         |
+|------------|------------|----------------------|--------|-------------------|---------------|
+| jokes      | id         | unsigned big integer |        |                   | Autoincrement |
+|            | question   | text                 |        |                   |               |
+|            | answer     | text                 |        |                   | Nullable      |
+|            | tags       | varchar              | 192    |                   | Nullable      |
+|            | created at | datetime             |        | CURRENT_TIMESTAMP |               |
+|            | updated at | datetime             |        | null              | nullable      |
+|            | author id  | unsigned big integer |        | 0                 |               |
+|            |            |                      |        |                   |               |
 
 This table should have the following indexes added:
 
@@ -157,7 +159,7 @@ The second tables details are:
 |            | family name   | varchar              | 64     |                            | nullable      |
 |            | email         | varchar              | 320    |                            | not null      |
 |            | user password | varchar              | 255    | md5 version of 'Password1' | not null      |
-|            | created at    | datetime             |        | now                        |               |
+|            | created at    | datetime             |        | CURRENT_TIMESTAMP          |               |
 |            | updated at    | datetime             |        | null                       | nullable      |
 |            |               |                      |        |                            |               |
 
@@ -212,5 +214,24 @@ Create a `header.php` file in the `templates` folder
 Create a `footer.php` file in the `templates` folder
 
 - this file will contain the end of the standard HTML 5 code, `</body></html>`
-  Create an `index.php` file that:
-- Provides a
+
+
+### Exercise 8
+
+Create a new folder called `views`, and inside this folder two more folders, one for `users` and one for `jokes`.
+
+Make sure that all three folders have `.gitignore` files using the `touch` command.
+
+
+### Exercise 9
+
+In the `views/users` folder create a PHP file (`index.php`) that uses the echo command to show "Users Index".
+
+In the `views/jokes` folder create a PHP file (`index.php`) that uses the echo command to show "Jokes Index".
+
+
+In the public folder, create an `index.php` file that:
+
+- Provides a link to the users index page.
+- Provides a link to the jokes index page.
+
