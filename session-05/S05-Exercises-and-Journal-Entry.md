@@ -14,14 +14,24 @@ includeLinks: true
 
 Review the content so far, and note what has been learned.
 
-
 # External Coursework
 
 PHP From Scratch
+
 - [Database & PDO](https://www.traversymedia.com/products/php-from-scratch-beginner-to-advanced/categories/2154269413)
 
-
 # Exercises
+
+Remember we use the bsh (git-bash) terminal for our command line work.
+
+On Windows devices you will need to install and run the Windows Terminal application,
+then configure it to use the `git-bash` CLI.
+
+Useful links for this:
+
+- [Windows terminal on Microsoft Store](https://apps.microsoft.com/detail/9n0dx20hk701?hl=en-gb&gl=AU)
+- [Setting up Git bash on Windows Terminal](https://help.screencraft.net.au/hc/2680392001/65/add-git-bash-to-microsoft-terminal?category_id=35)
+- [Adding Command Line Aliases to make you life easier](https://help.screencraft.net.au/hc/2680392001/66/add-bash-command-line-aliases-for-git?category_id=35) 
 
 Before commencing, open a (bash) terminal and follow these instructions, replacing XXX with your initials.
 
@@ -41,7 +51,8 @@ git add ReadMe.md .gitignore
 git commit -m "init: Start of MVS Project
 ```
 
-Following these commands, open the folder as a PhpStorm project and check the structure is similar to the following image (it is missing the`database` folder):
+Following these commands, open the folder as a PhpStorm project and check the structure is similar to the following
+image (it is missing the`database` folder):
 
 ![](../assets/phpstorm64_k2K8iLNCwl.png)
 
@@ -51,19 +62,15 @@ Edit the tailwind.config.js file and edit/add:
 
 ```js
 /** @type {import('tailwindcss').Config} */
-module.exports = { 
-  content: [
-    "./**/*.{php,html}",
-    "./assets/js/*.js",
-  ], 
-  theme: {
-    extend: {
-    
+module.exports = {
+    content: [
+        "./**/*.{php,html}",
+        "./assets/js/*.js",
+    ],
+    theme: {
+        extend: {},
     },
-  }, 
-  plugins: [
-  
-  ], 
+    plugins: [],
 }
 ```
 
@@ -71,8 +78,8 @@ module.exports = {
 
 Create a new SQL file (filename: `setup.sql`) and save it in the database folder.
 
-
-At the top of the file add a suitable comment describing the purpose of the file, the author, date created and the version.
+At the top of the file add a suitable comment describing the purpose of the file, the author, date created and the
+version.
 
 ```text
 /*  
@@ -95,15 +102,15 @@ In the SQL file create the SQL to do the following:
 - Grant the user usage on all databases.
 
 > Remember that users and databases can only use lower case letters, numbers and the underscore.
-> 
+>
 > It is convention to only use LOWER CASE and UNDERSCORE.
-
 
 ### Exercise 2
 
 Create a new SQL file called `tables.sql`.
 
-At the top of the file add a suitable comment describing the purpose of the file, the author, date created and the version.
+At the top of the file add a suitable comment describing the purpose of the file, the author, date created and the
+version.
 
 ```text
 /*  
@@ -116,14 +123,14 @@ At the top of the file add a suitable comment describing the purpose of the file
  */
 ```
 
-In this file add the SQL to create the following tables with the provided specifications. 
+In this file add the SQL to create the following tables with the provided specifications.
 
-> Remember that field and table names MUST only contain `a`-`z` and underscore (`_`). 
-> 
+> Remember that field and table names MUST only contain `a`-`z` and underscore (`_`).
+>
 > It is convention to only use LOWER CASE and UNDERSCORE.
 
 | Table Name | Field Name | Type                 | Length | Default | Other         |
-| ---------- | ---------- | -------------------- | ------ | ------- | ------------- |
+|------------|------------|----------------------|--------|---------|---------------|
 | jokes      | id         | unsigned big integer |        |         | Autoincrement |
 |            | question   | text                 |        |         |               |
 |            | answer     | text                 |        |         | Nullable      |
@@ -143,16 +150,16 @@ FULLTEXT `tag_index` (`tags`)
 
 The second tables details are:
 
-| Table Name | Field Name    | Type                 | Length | Default                    | Other                      |
-| ---------- | ------------- | -------------------- | ------ | -------------------------- | -------------------------- |
+| Table Name | Field Name    | Type                 | Length | Default                    | Other         |
+|------------|---------------|----------------------|--------|----------------------------|---------------|
 | users      | id            | unsigned big integer |        |                            | Autoincrement |
-|            | given name    | varchar              | 64     |                            | not null                   |
-|            | family name   | varchar              | 64     |                            | nullable                   |
-|            | email         | varchar              | 320    |                            | not null                   |
-|            | user password | varchar              | 255    | md5 version of 'Password1' | not null                   |
-|            | created at    | datetime             |        | now                        |                            |
-|            | updated at    | datetime             |        | null                       | nullable                   |
-|            |               |                      |        |                            |                            |
+|            | given name    | varchar              | 64     |                            | not null      |
+|            | family name   | varchar              | 64     |                            | nullable      |
+|            | email         | varchar              | 320    |                            | not null      |
+|            | user password | varchar              | 255    | md5 version of 'Password1' | not null      |
+|            | created at    | datetime             |        | now                        |               |
+|            | updated at    | datetime             |        | null                       | nullable      |
+|            |               |                      |        |                            |               |
 
 This table should have the following indexes as part of its definition:
 
@@ -163,10 +170,10 @@ INDEX  `given_family`(`given_name`,`family_name`),
 INDEX  `family_given`(`family_name`,`given_name`)
 ```
 
-
 ### Exercise 3
 
 Create a suitable `config.php` file in the root of your project, and add variables as described below:
+
 - dbUser
 - dbPass
 - dbHost
@@ -178,7 +185,6 @@ Create a new Class file called `Connection.php` file in the includes folder.
 
 This connection class will use a static method `make` to create and return a PDO instance.
 
-
 ### Exercise 5
 
 Create a PHP Class file called `Utilities.php` in the includes folder.\
@@ -188,21 +194,23 @@ The Utilities class will provide a number of static methods that include:
 - `dump` which will dump the contents of one or more variables in a suitably formatted way.
 - `dd` which will dump the contents of one or more variables then terminate the script using the `die()` function
 
-
 ### Exercise 6
 
 Create a new file `db-test.php` in the root of your project.
 
 This file is to:
+
 - connect to your database
 - dump the PDO connection information
 
 ### Exercise 7
 
 Create a `header.php` file in the `templates` folder
+
 - The file will contain the standard HTML5 code from `..` to `<body>`
 
 Create a `footer.php` file in the `templates` folder
+
 - this file will contain the end of the standard HTML 5 code, `</body></html>`
-Create an `index.php` file that:
+  Create an `index.php` file that:
 - Provides a
