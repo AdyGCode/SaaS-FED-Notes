@@ -4422,7 +4422,9 @@ var i18n_default = {
 };
 
 // src/modal.ts
+var fs2 = __toESM(require("fs/promises"));
 var import_obsidian3 = require("obsidian");
+var import_path = __toESM(require("path"));
 
 // src/constant.ts
 var PageSize = {
@@ -4440,8 +4442,8 @@ var PageSize = {
 };
 
 // src/pdf.ts
-var fs = __toESM(require("fs/promises"));
 var import_electron = __toESM(require("electron"));
+var fs = __toESM(require("fs/promises"));
 
 // node_modules/.pnpm/tslib@1.14.1/node_modules/tslib/tslib.es6.js
 var extendStatics = function(d, b) {
@@ -19848,6 +19850,9 @@ function getHeadingTree(doc = document) {
   let prev = root;
   headings.forEach((heading) => {
     var _a;
+    if (heading.style.display == "none") {
+      return;
+    }
     const level = parseInt(heading.tagName.slice(1));
     const link = heading.querySelector("a.md-print-anchor");
     const regexMatch = /^af:\/\/(.+)$/.exec((_a = link == null ? void 0 : link.href) != null ? _a : "");
@@ -20144,8 +20149,9 @@ function setMetadata(pdfDoc, { title, author, keywords, subject, creator, create
   pdfDoc.setCreationDate(new Date(created_at != null ? created_at : /* @__PURE__ */ new Date()));
   pdfDoc.setModificationDate(new Date(updated_at != null ? updated_at : /* @__PURE__ */ new Date()));
 }
-async function exportToPDF(outputFile, config, w, doc, frontMatter) {
+async function exportToPDF(outputFile, config, w, { doc, frontMatter }) {
   var _a, _b, _c, _d, _e, _f, _g, _h, _i;
+  console.log("output pdf:", outputFile);
   let pageSize = config["pageSize"];
   if (config["pageSize"] == "Custom" && config["pageWidth"] && config["pageHeight"]) {
     pageSize = {
@@ -20225,6 +20231,17 @@ async function getOutputFile(filename, isTimestamp) {
     return;
   }
   return result.filePath;
+}
+async function getOutputPath(filename, isTimestamp) {
+  const result = await import_electron.default.remote.dialog.showOpenDialog({
+    title: "Export to PDF",
+    defaultPath: filename,
+    properties: ["openDirectory"]
+  });
+  if (result.canceled) {
+    return;
+  }
+  return result.filePaths[0];
 }
 
 // src/render.ts
@@ -20320,7 +20337,7 @@ function getFrontMatter(app, file) {
   return (_a = cache == null ? void 0 : cache.frontmatter) != null ? _a : {};
 }
 async function renderMarkdown(app, file, config, extra) {
-  var _a, _b, _c, _d, _e, _f, _g, _h, _i;
+  var _a, _b, _c, _d, _e, _f, _g, _h;
   const startTime = (/* @__PURE__ */ new Date()).getTime();
   const ws = app.workspace;
   if (((_a = ws.getActiveFile()) == null ? void 0 : _a.path) != file.path) {
@@ -20352,15 +20369,16 @@ async function renderMarkdown(app, file, config, extra) {
   app.vault.cachedRead(file);
   viewEl.toggleClass("rtl", app.vault.getConfig("rightToLeft"));
   viewEl.toggleClass("show-properties", "hidden" !== app.vault.getConfig("propertiesInDocument"));
-  if (config.showTitle) {
-    const h = viewEl.createEl("h1", {
-      text: (_f = extra == null ? void 0 : extra.title) != null ? _f : file.basename
-    });
-    h.id = (_g = extra == null ? void 0 : extra.id) != null ? _g : "";
-  }
+  const title = (_f = extra == null ? void 0 : extra.title) != null ? _f : file.basename;
+  viewEl.createEl("h1", { text: title }, (e) => {
+    var _a2;
+    e.addClass("__title__");
+    e.style.display = config.showTitle ? "block" : "none";
+    e.id = (_a2 = extra == null ? void 0 : extra.id) != null ? _a2 : "";
+  });
   const cache = app.metadataCache.getFileCache(file);
-  const lines = (_h = data == null ? void 0 : data.split("\n")) != null ? _h : [];
-  Object.entries((_i = cache == null ? void 0 : cache.blocks) != null ? _i : {}).forEach(([key, c]) => {
+  const lines = (_g = data == null ? void 0 : data.split("\n")) != null ? _g : [];
+  Object.entries((_h = cache == null ? void 0 : cache.blocks) != null ? _h : {}).forEach(([key, c]) => {
     const idx = c.position.end.line;
     lines[idx] = `<span id="^${key}" class="blockid"></span>
 ` + lines[idx];
@@ -20402,8 +20420,8 @@ async function renderMarkdown(app, file, config, extra) {
   await Promise.all(promises);
   printEl.findAll("a.internal-link").forEach((el2) => {
     var _a2, _b2;
-    const [title, anchor] = (_b2 = (_a2 = el2.dataset.href) == null ? void 0 : _a2.split("#")) != null ? _b2 : [];
-    if ((!title || (title == null ? void 0 : title.length) == 0 || title == file.basename) && (anchor == null ? void 0 : anchor.startsWith("^"))) {
+    const [title2, anchor] = (_b2 = (_a2 = el2.dataset.href) == null ? void 0 : _a2.split("#")) != null ? _b2 : [];
+    if ((!title2 || (title2 == null ? void 0 : title2.length) == 0 || title2 == file.basename) && (anchor == null ? void 0 : anchor.startsWith("^"))) {
       return;
     }
     el2.removeAttribute("href");
@@ -20419,14 +20437,15 @@ async function renderMarkdown(app, file, config, extra) {
   printEl.detach();
   comp.unload();
   printEl.remove();
-  const endTime = (/* @__PURE__ */ new Date()).getTime();
-  console.log(`render time:${endTime - startTime}ms`);
-  return doc;
+  doc.title = title;
+  console.log(`md render time:${(/* @__PURE__ */ new Date()).getTime() - startTime}ms`);
+  return { doc, frontMatter, file };
 }
 function fixDoc(doc, title) {
   const dest = modifyDest(doc);
   fixAnchors(doc, dest, title);
   encodeEmbeds(doc);
+  return doc;
 }
 function encodeEmbeds(doc) {
   const spans = Array.from(doc.querySelectorAll("span.markdown-embed")).reverse();
@@ -20452,14 +20471,14 @@ function fixCanvasToImage(el) {
     canvas.replaceWith(img);
   }
 }
-function createWebview() {
+function createWebview(scale2 = 1.25) {
   const webview = document.createElement("webview");
   webview.src = `app://obsidian.md/help.html`;
   webview.setAttribute(
     "style",
-    `height:calc(1/0.75 * 100%);
-     width: calc(1/0.75 * 100%);
-     transform: scale(0.75, 0.75);
+    `height:calc(${scale2} * 100%);
+     width: calc(${scale2} * 100%);
+     transform: scale(${1 / scale2}, ${1 / scale2});
      transform-origin: top left;
      border: 1px solid #f2f2f2;
     `
@@ -20491,8 +20510,6 @@ function waitForDomChange(target, timeout = 2e3, interval = 200) {
 }
 
 // src/modal.ts
-var import_path = __toESM(require("path"));
-var fs2 = __toESM(require("fs/promises"));
 function fullWidthButton(button) {
   button.buttonEl.setAttribute("style", `margin: "0 auto"; width: -webkit-fill-available`);
 }
@@ -20500,7 +20517,7 @@ function setInputWidth(inputEl) {
   inputEl.setAttribute("style", `width: 100px;`);
 }
 var ExportConfigModal = class extends import_obsidian3.Modal {
-  constructor(plugin, file, config) {
+  constructor(plugin, file, multiplePdf) {
     var _a, _b, _c, _d, _e;
     super(plugin.app);
     this.canceled = true;
@@ -20508,6 +20525,10 @@ var ExportConfigModal = class extends import_obsidian3.Modal {
     this.file = file;
     this.completed = false;
     this.i18n = i18n_default.current;
+    this.docs = [];
+    this.scale = 0.75;
+    this.webviews = [];
+    this.multiplePdf = multiplePdf;
     this.config = {
       pageSize: "A4",
       marginType: "1",
@@ -20536,18 +20557,15 @@ var ExportConfigModal = class extends import_obsidian3.Modal {
       const files = traverseFolder(this.file);
       for (const file of files) {
         docs.push(await renderMarkdown(app, file, this.config));
-        Object.assign(this.frontMatter, getFrontMatter(app, file));
       }
     } else {
-      const doc0 = await renderMarkdown(app, this.file, this.config);
-      docs.push(doc0);
-      const matter = getFrontMatter(app, this.file);
-      Object.assign(this.frontMatter, matter);
-      if (matter.toc) {
+      const { doc, frontMatter, file } = await renderMarkdown(app, this.file, this.config);
+      docs.push({ doc, frontMatter, file });
+      if (frontMatter.toc) {
         const cache = this.getFileCache(this.file);
         const files = (_b = (_a = cache == null ? void 0 : cache.links) == null ? void 0 : _a.map(({ link, displayText }) => {
           const id = crypto.randomUUID();
-          const elem = doc0.querySelector(`a[data-href="${link}"]`);
+          const elem = doc.querySelector(`a[data-href="${link}"]`);
           if (elem) {
             elem.href = `#${id}`;
           }
@@ -20559,92 +20577,82 @@ var ExportConfigModal = class extends import_obsidian3.Modal {
         }).filter((item) => item.file instanceof import_obsidian3.TFile)) != null ? _b : [];
         for (const item of files) {
           docs.push(await renderMarkdown(app, item.file, this.config, item));
-          Object.assign(this.frontMatter, getFrontMatter(app, item.file));
         }
         const leaf = this.app.workspace.getLeaf();
         await leaf.openFile(this.file);
       }
     }
-    this.doc = docs[0];
-    if (docs.length > 1) {
-      const sections = [];
-      for (const doc of docs) {
-        const element = doc.querySelector(".markdown-preview-view");
-        if (element) {
-          const section = this.doc.createElement("section");
-          Array.from(element.children).forEach((child) => {
-            section.appendChild(this.doc.importNode(child, true));
-          });
-          sections.push(section);
-        }
-      }
-      const root = this.doc.querySelector(".markdown-preview-view");
-      if (root) {
-        root.innerHTML = "";
-      }
-      sections.forEach((section) => {
-        root == null ? void 0 : root.appendChild(section);
-      });
+    if (!this.multiplePdf) {
+      this.mergeDoc(docs);
     }
-    fixDoc(this.doc, this.title);
-    return this.doc;
+    this.docs = docs.map(({ doc, ...rest }) => {
+      return { ...rest, doc: fixDoc(doc, doc.title) };
+    });
+  }
+  mergeDoc(docs) {
+    const { doc: doc0, frontMatter, file } = docs[0];
+    const sections = [];
+    for (const { doc } of docs) {
+      const element = doc.querySelector(".markdown-preview-view");
+      if (element) {
+        const section = doc0.createElement("section");
+        Array.from(element.children).forEach((child) => {
+          section.appendChild(doc0.importNode(child, true));
+        });
+        sections.push(section);
+      }
+    }
+    const root = doc0.querySelector(".markdown-preview-view");
+    if (root) {
+      root.innerHTML = "";
+    }
+    sections.forEach((section) => {
+      root == null ? void 0 : root.appendChild(section);
+    });
+    this.docs = [{ doc: doc0, frontMatter, file }];
   }
   calcPageSize(element, config) {
-    var _a, _b, _c, _d;
-    const conf = config != null ? config : this.config;
+    var _a, _b, _c;
+    const { pageSize, pageWidth } = config != null ? config : this.config;
     const el = element != null ? element : this.previewDiv;
-    const width = (_d = (_b = (_a = PageSize) == null ? void 0 : _a[conf["pageSize"]]) == null ? void 0 : _b[0]) != null ? _d : parseFloat((_c = conf["pageWidth"]) != null ? _c : "210");
-    const scale2 = Math.floor(mm2px(width) / el.offsetWidth * 100) / 100;
-    if (this.preview) {
-      this.preview.style.transform = `scale(${1 / scale2},${1 / scale2})`;
-      this.preview.style.width = `calc(${scale2} * 100%)`;
-      this.preview.style.height = `calc(${scale2} * 100%)`;
+    let width = (_c = (_b = (_a = PageSize) == null ? void 0 : _a[pageSize]) == null ? void 0 : _b[0]) != null ? _c : parseFloat(pageWidth);
+    if (isNaN(width)) {
+      width = 210;
     }
+    const scale2 = Math.floor(mm2px(width) / el.offsetWidth * 100) / 100;
+    this.webviews.forEach((wb) => {
+      wb.style.transform = `scale(${1 / scale2},${1 / scale2})`;
+      wb.style.width = `calc(${scale2} * 100%)`;
+      wb.style.height = `calc(${scale2} * 100%)`;
+    });
+    this.scale = scale2;
+    return scale2;
   }
   async calcWebviewSize() {
     await sleep(500);
-    const [width, height] = await this.preview.executeJavaScript(
-      "[document.body.offsetWidth, document.body.offsetHeight]"
-    );
-    const sizeEl = document.querySelector("#print-size");
-    if (sizeEl) {
-      sizeEl.innerHTML = `${width}\xD7${height}px
+    this.webviews.forEach(async (e, i) => {
+      var _a;
+      const [width, height] = await e.executeJavaScript("[document.body.offsetWidth, document.body.offsetHeight]");
+      const sizeEl = (_a = e.parentNode) == null ? void 0 : _a.querySelector(".print-size");
+      if (sizeEl) {
+        sizeEl.innerHTML = `${width}\xD7${height}px
 ${px2mm(width)}\xD7${px2mm(height)}mm`;
-    }
+      }
+    });
   }
   async togglePrintSize() {
-    const sizeEl = document.querySelector("#print-size");
-    if (sizeEl) {
+    var _a;
+    (_a = document.querySelectorAll(".print-size")) == null ? void 0 : _a.forEach((sizeEl) => {
       if (this.config["pageSize"] == "Custom") {
         sizeEl.style.visibility = "visible";
       } else {
         sizeEl.style.visibility = "hidden";
       }
-    }
+    });
   }
-  async appendWebview(e, render = true) {
-    if (render) {
-      await this.renderFiles();
-    }
-    const webview = createWebview();
-    this.preview = e.appendChild(webview);
-    this.preview.addEventListener("dom-ready", async (e2) => {
-      this.completed = true;
-      getAllStyles().forEach(async (css) => {
-        await this.preview.insertCSS(css);
-      });
-      if (this.config.cssSnippet && this.config.cssSnippet != "0") {
-        try {
-          const cssSnippet = await fs2.readFile(this.config.cssSnippet, { encoding: "utf8" });
-          const printCss = cssSnippet.replaceAll(/@media print\s*{([^}]+)}/g, "$1");
-          await this.preview.insertCSS(printCss);
-          await this.preview.insertCSS(cssSnippet);
-        } catch (error2) {
-          console.warn(error2);
-        }
-      }
-      await this.preview.executeJavaScript(`
-      document.body.innerHTML = decodeURIComponent(\`${encodeURIComponent(this.doc.body.innerHTML)}\`);
+  makeWebviewJs(doc) {
+    return `
+      document.body.innerHTML = decodeURIComponent(\`${encodeURIComponent(doc.body.innerHTML)}\`);
       document.head.innerHTML = decodeURIComponent(\`${encodeURIComponent(document.head.innerHTML)}\`);
       
       // Function to recursively decode and replace innerHTML of span.markdown-embed elements
@@ -20663,39 +20671,77 @@ ${px2mm(width)}\xD7${px2mm(height)}mm`;
       document.body.setAttribute("style", \`${document.body.getAttribute("style")}\`)
       document.body.addClass("theme-light");
       document.body.removeClass("theme-dark");
-      document.title = \`${this.title}\`;
-      `);
-      getPatchStyle().forEach(async (css) => {
-        await this.preview.insertCSS(css);
+      document.title = \`${doc.title}\`;
+      `;
+  }
+  /**
+   * append webview
+   * @param e HTMLDivElement
+   * @param render Rerender or not
+   */
+  async appendWebview(e, doc) {
+    const webview = createWebview(this.scale);
+    const preview = e.appendChild(webview);
+    this.webviews.push(preview);
+    this.preview = preview;
+    preview.addEventListener("dom-ready", async (e2) => {
+      this.completed = true;
+      getAllStyles().forEach(async (css) => {
+        await preview.insertCSS(css);
       });
-      this.calcWebviewSize();
+      if (this.config.cssSnippet && this.config.cssSnippet != "0") {
+        try {
+          const cssSnippet = await fs2.readFile(this.config.cssSnippet, { encoding: "utf8" });
+          const printCss = cssSnippet.replaceAll(/@media print\s*{([^}]+)}/g, "$1");
+          await preview.insertCSS(printCss);
+          await preview.insertCSS(cssSnippet);
+        } catch (error2) {
+          console.warn(error2);
+        }
+      }
+      await preview.executeJavaScript(this.makeWebviewJs(doc));
+      getPatchStyle().forEach(async (css) => {
+        await preview.insertCSS(css);
+      });
     });
+  }
+  async appendWebviews(e, render = true) {
+    var _a;
+    if (render) {
+      await this.renderFiles();
+    }
+    e.empty();
+    await Promise.all(
+      (_a = this.docs) == null ? void 0 : _a.map(async ({ doc }, i) => {
+        if (this.multiplePdf) {
+          e.createDiv({
+            text: `${i + 1}-${doc.title}`,
+            attr: { class: "filename" }
+          });
+        }
+        const div = e.createDiv({ attr: { class: "webview-wrapper" } });
+        div.createDiv({ attr: { class: "print-size" } });
+        await this.appendWebview(div, doc);
+      })
+    );
+    await this.calcWebviewSize();
   }
   async onOpen() {
     var _a, _b, _c;
     this.contentEl.empty();
     this.containerEl.style.setProperty("--dialog-width", "60vw");
     this.titleEl.setText("Export to PDF");
-    const wrapper = this.contentEl.createDiv();
-    wrapper.setAttribute("style", "display: flex; flex-direction: row; height: 75vh;");
+    const wrapper = this.contentEl.createDiv({ attr: { id: "better-export-pdf" } });
     const title = (_c = (_a = this.file) == null ? void 0 : _a.basename) != null ? _c : (_b = this.file) == null ? void 0 : _b.name;
-    this.frontMatter = { title };
-    this.title = title;
-    this.previewDiv = wrapper.createDiv({ attr: { style: "flex:auto; position:relative;" } }, async (el) => {
+    this.previewDiv = wrapper.createDiv({ attr: { class: "pdf-preview" } }, async (el) => {
       el.empty();
       const resizeObserver = new ResizeObserver(() => {
         this.calcPageSize(el);
       });
       resizeObserver.observe(el);
-      await this.appendWebview(el);
+      await this.appendWebviews(el);
+      this.togglePrintSize();
     });
-    this.previewDiv.createDiv({
-      attr: {
-        id: "print-size",
-        style: "position:absolute;right:8px;top:8px;z-index:99;font-size:0.75rem;white-space:pre-wrap;text-align:right;visibility:hidden;"
-      }
-    });
-    this.togglePrintSize();
     const contentEl = wrapper.createDiv();
     contentEl.setAttribute("style", "width:320px;margin-left:16px;");
     contentEl.addEventListener("keyup", (event) => {
@@ -20707,20 +20753,28 @@ ${px2mm(width)}\xD7${px2mm(height)}mm`;
     const handleExport = async () => {
       this.plugin.settings.prevConfig = this.config;
       await this.plugin.saveSettings();
-      if (this.completed) {
-        const outputFile = await getOutputFile(title, this.plugin.settings.isTimestamp);
-        if (outputFile) {
-          await exportToPDF(
-            outputFile,
-            { ...this.plugin.settings, ...this.config },
-            this.preview,
-            this.doc,
-            this.frontMatter
+      if (this.multiplePdf) {
+        const outputPath = await getOutputPath(title);
+        console.log("output:", outputPath);
+        if (outputPath) {
+          await Promise.all(
+            this.webviews.map(async (wb, i) => {
+              await exportToPDF(
+                `${outputPath}/${this.docs[i].file.basename}.pdf`,
+                { ...this.plugin.settings, ...this.config },
+                wb,
+                this.docs[i]
+              );
+            })
           );
           this.close();
         }
       } else {
-        new import_obsidian3.Notice("dom not ready");
+        const outputFile = await getOutputFile(title, this.plugin.settings.isTimestamp);
+        if (outputFile) {
+          await exportToPDF(outputFile, { ...this.plugin.settings, ...this.config }, this.webviews[0], this.docs[0]);
+          this.close();
+        }
       }
     };
     new import_obsidian3.Setting(contentEl).setHeading().addButton((button) => {
@@ -20730,8 +20784,7 @@ ${px2mm(width)}\xD7${px2mm(height)}mm`;
     });
     new import_obsidian3.Setting(contentEl).setHeading().addButton((button) => {
       button.setButtonText("Refresh").onClick(async () => {
-        this.previewDiv.empty();
-        await this.appendWebview(this.previewDiv);
+        await this.appendWebviews(this.previewDiv);
       });
       fullWidthButton(button);
     });
@@ -20747,14 +20800,20 @@ ${px2mm(width)}\xD7${px2mm(height)}mm`;
   generateForm(contentEl) {
     new import_obsidian3.Setting(contentEl).setName(this.i18n.exportDialog.filenameAsTitle).addToggle(
       (toggle) => toggle.setTooltip("Include file name as title").setValue(this.config["showTitle"]).onChange(async (value) => {
-        var _a;
         this.config["showTitle"] = value;
-        if (this.completed) {
-          await this.renderFiles();
-          (_a = this.preview) == null ? void 0 : _a.executeJavaScript(`
-            document.body.innerHTML = decodeURIComponent(\`${encodeURIComponent(this.doc.body.innerHTML)}\`);
-            `);
-        }
+        this.webviews.forEach((wv, i) => {
+          var _a, _b;
+          wv.executeJavaScript(`
+              var _title = document.querySelector("h1.__title__");
+              if (_title) {
+              	_title.style.display = "${value ? "block" : "none"}";
+              }
+              `);
+          const _title = (_b = (_a = this.docs[i]) == null ? void 0 : _a.doc) == null ? void 0 : _b.querySelector("h1.__title__");
+          if (_title) {
+            _title.style.display = value ? "block" : "none";
+          }
+        });
       })
     );
     const pageSizes = [
@@ -20871,8 +20930,7 @@ ${px2mm(width)}\xD7${px2mm(height)}mm`;
       new import_obsidian3.Setting(contentEl).setName(this.i18n.exportDialog.cssSnippets).addDropdown((dropdown) => {
         dropdown.addOption("0", "Not select").addOptions(snippets).setValue(this.config["cssSnippet"]).onChange(async (value) => {
           this.config["cssSnippet"] = value;
-          this.previewDiv.empty();
-          await this.appendWebview(this.previewDiv, false);
+          await this.appendWebviews(this.previewDiv, false);
         });
       });
     }
@@ -21048,7 +21106,6 @@ var BetterExportPdfPlugin = class extends import_obsidian5.Plugin {
       id: "export-current-file-to-pdf",
       name: this.i18n.exportCurrentFile,
       checkCallback: (checking) => {
-        var _a;
         const view = this.app.workspace.getActiveViewOfType(import_obsidian5.MarkdownView);
         const file = view == null ? void 0 : view.file;
         if (!file) {
@@ -21057,7 +21114,7 @@ var BetterExportPdfPlugin = class extends import_obsidian5.Plugin {
         if (checking) {
           return true;
         }
-        new ExportConfigModal(this, file, (_a = this.settings) == null ? void 0 : _a.prevConfig).open();
+        new ExportConfigModal(this, file).open();
         return true;
       }
     });
@@ -21074,10 +21131,24 @@ var BetterExportPdfPlugin = class extends import_obsidian5.Plugin {
         }
         menu.addItem((item) => {
           item.setTitle(title).setIcon("download").setSection("action").onClick(async () => {
-            var _a;
-            new ExportConfigModal(this, file, (_a = this.settings) == null ? void 0 : _a.prevConfig).open();
+            new ExportConfigModal(this, file).open();
           });
         });
+      })
+    );
+    this.registerEvent(
+      this.app.workspace.on("file-menu", (menu, file) => {
+        if (file instanceof import_obsidian5.TFolder) {
+          let title = "Export each file to PDF";
+          if (isDev) {
+            title = `${title} (dev)`;
+          }
+          menu.addItem((item) => {
+            item.setTitle(title).setIcon("download").setSection("action").onClick(async () => {
+              new ExportConfigModal(this, file, true).open();
+            });
+          });
+        }
       })
     );
   }

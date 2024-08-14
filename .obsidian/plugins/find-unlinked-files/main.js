@@ -631,18 +631,19 @@ var FindOrphanedFilesPlugin = class extends import_obsidian4.Plugin {
     const findLinkInTextRegex = /\[\[(.*?)\]\]|\[.*?\]\((.*?)\)/g;
     const canvasParsingPromises = canvasFiles.map(
       async (canvasFile) => {
+        var _a;
         const canvasFileContent = JSON.parse(
-          await this.app.vault.cachedRead(canvasFile)
+          await this.app.vault.cachedRead(canvasFile) || "{}"
         );
-        canvasFileContent.nodes.forEach((node) => {
-          var _a;
+        (_a = canvasFileContent.nodes) == null ? void 0 : _a.forEach((node) => {
+          var _a2;
           let linkTexts = [];
           if (node.type === "file") {
             linkTexts.push(node.file);
           } else if (node.type === "text") {
             let match;
             while ((match = findLinkInTextRegex.exec(node.text)) !== null) {
-              linkTexts.push((_a = match[1]) != null ? _a : match[2]);
+              linkTexts.push((_a2 = match[1]) != null ? _a2 : match[2]);
             }
           } else {
             return;

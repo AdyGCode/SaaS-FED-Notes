@@ -22,10 +22,9 @@ PHP From Scratch
 
 # Exercises
 
-Remember we use the bsh (git-bash) terminal for our command line work.
+Remember we use the bash (git-bash) terminal for our command line work.
 
-On Windows devices you will need to install and run the Windows Terminal application,
-then configure it to use the `git-bash` CLI.
+On Windows devices you will need to install and run the Windows Terminal application, then configure it to use the `git-bash` CLI.
 
 Useful links for this:
 
@@ -35,7 +34,7 @@ Useful links for this:
 
 ## Exercises Preparation
 
-Before commencing, open a (bash) terminal and follow these instructions, replacing XXX with your (lowercase) initials.
+Before commencing, open a (bash) terminal and follow these instructions, replacing `XXX` with your (lowercase) initials.
 
 ```shell
 
@@ -53,14 +52,13 @@ git add ReadMe.md .gitignore
 git commit -m "init: Start of MVS Project
 ```
 
-Following these commands, open the folder as a PhpStorm project and check the structure is similar to the following
-image (it is missing the`database` folder):
+Following these commands, open the folder as a PhpStorm project and check the structure is similar to the following image (it is missing the`database` folder):
 
 ![](../assets/phpstorm64_k2K8iLNCwl.png)
 
 ## Exercise 1
 
-Edit the tailwind.config.js file and edit/add:
+Edit the `tailwind.config.js` file and edit/add:
 
 ```js
 /** @type {import('tailwindcss').Config} */
@@ -207,13 +205,33 @@ This file is to:
 
 ### Exercise 7
 
+Create a basic HTML5 web page in the templates folder and name it `template.html`.
+
+Edit the template file and update the required parts to include tghe new lines from below 
+
+```html
+    <!-- Stylesheets and Fonts -->  
+    <link rel="stylesheet" href="/assets/css/site.css">  
+          
+<!-- Pre-page load and deferred JavaScript -->  
+
+</head>  
+<body>  
+  
+  
+<!-- Post Page load JavaScript -->
+</body>
+```
+
+Use this file to help build the next two files.
+
 Create a `header.php` file in the `templates` folder
 
-- The file will contain the standard HTML5 code from `..` to `<body>`
+- The file will contain the standard HTML5 code up to `<body>`
 
 Create a `footer.php` file in the `templates` folder
 
-- this file will contain the end of the standard HTML 5 code, `</body></html>`
+- this file will contain the end of the template including the comment added to the template file.
 
 
 ### Exercise 8
@@ -234,4 +252,30 @@ In the public folder, create an `index.php` file that:
 
 - Provides a link to the users index page.
 - Provides a link to the jokes index page.
+
+
+### Exercise 10
+
+Create a new file `app.css` in the `src` folder.
+
+In this file add:
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+### Exercise 11
+
+Start a new git bash terminal, and use the following commands:
+
+```bash
+cd xxx-mvc-jokes
+npx tailwindcss -i ./src/app.css -o ./assets/css/site.css --watch
+```
+
+This should watch for changes in your `html`, `php` and `js` files and automatically rebuild the `site.css` file for you.
+
+### Exercise 12
 
