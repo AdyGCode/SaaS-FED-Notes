@@ -150,16 +150,16 @@ FULLTEXT `tag_index` (`tags`)
 
 The second tables details are:
 
-| Table Name | Field Name    | Type                 | Length | Default                    | Other         |
-|------------|---------------|----------------------|--------|----------------------------|---------------|
-| users      | id            | unsigned big integer |        |                            | Autoincrement |
-|            | given name    | varchar              | 64     |                            | not null      |
-|            | family name   | varchar              | 64     |                            | nullable      |
-|            | email         | varchar              | 320    |                            | not null      |
-|            | user password | varchar              | 255    | md5 version of 'Password1' | not null      |
-|            | created at    | datetime             |        | CURRENT_TIMESTAMP          |               |
-|            | updated at    | datetime             |        | null                       | nullable      |
-|            |               |                      |        |                            |               |
+| Table Name | Field Name    | Type                 | Length | Default                                                    | Other         |
+| ---------- | ------------- | -------------------- | ------ | ---------------------------------------------------------- | ------------- |
+| users      | id            | unsigned big integer |        |                                                            | Autoincrement |
+|            | given name    | varchar              | 64     |                                                            | not null      |
+|            | family name   | varchar              | 64     |                                                            | nullable      |
+|            | email         | varchar              | 320    |                                                            | not null      |
+|            | user password | varchar              | 255    | PASSWORD('Password1') - we will use an MD5 hash in the PHP | not null      |
+|            | created at    | datetime             |        | CURRENT_TIMESTAMP                                          |               |
+|            | updated at    | datetime             |        | null                                                       | nullable      |
+|            |               |                      |        |                                                            |               |
 
 This table should have the following indexes as part of its definition:
 
@@ -374,4 +374,63 @@ Update the `index.php` file to show a suitable layout with the following shown i
 - show link to show page
 - edit link to update page
 - delete link to delete page
+
+Make make sure that the table has appropriate headings.
+
+Also add a dummy line with data for demonstration purposes when testing your page layout.
+
+### Exercise 18
+
+If you have not done so already, visit the pages you have created using the Laragon (or Herd) 'test' domain:
+
+- http://xxx-mvc-jokes.test/views/users/index.php
+- http://xxx-mvc-jokes.test/views/users/create.php
+- http://xxx-mvc-jokes.test/views/users/update.php
+- http://xxx-mvc-jokes.test/views/users/show.php
+- http://xxx-mvc-jokes.test/views/users/delete.php
+
+Take screenshots of the current pages, for inclusion in your Journal.
+
+### Exercise 19
+
+Write a database seeder `database/user-seeder.php` using the following data:
+
+| Given Name     | Family Name | eMail                           | Password  |
+| -------------- | ----------- | ------------------------------- | --------- |
+| Crystal Shanda | Lear        | Crystal.Shanda.Lear@example.com | Password1 |
+|                |             |                                 |           |
+
+|   |   |   |   |
+|---|---|---|---|
+   
+|Anita|Lift|Anita.Lift@example.com|Password1|
+
+|   |   |   |   |
+|---|---|---|---|
+   
+|Jim|Nasium|Jim.Nasium@example.com|Password1|
+
+
+|   |   |   |   |
+|---|---|---|---|
+   
+|Phil|O'Stein|Phil.O'Stein@example.com|Password1|
+
+
+|   |   |   |   |
+|---|---|---|---|
+   
+|Ann|Tartica|Ann.Tartica@example.com|Password1|
+
+
+|   |   |   |   |
+|---|---|---|---|
+   
+|Ray|Zerzedge|Ray.Zerzedge@example.com|Password1|
+
+
+|   |   |   |   |
+|---|---|---|---|
+   
+|Joe|King|Joe.King@example.com|Password1|
 
