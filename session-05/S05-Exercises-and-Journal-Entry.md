@@ -333,6 +333,9 @@ Duplicate the `create.php` and rename it `update.php`.
 
 Edit the heading appropriately.
 
+Change the text and name of the clear button to cancel. change its type to button.
+
+
 ### Exercise 15
 
 Edit the `show.php` file and add a layout that shows the following details:
@@ -343,3 +346,32 @@ Edit the `show.php` file and add a layout that shows the following details:
 - date updated
 
 The page should have a suitable link to go to the index page, and the edit page.
+
+
+### Exercise 16
+
+Edit the `delete.php` file and add a layout that shows the following details:
+- id
+- given name
+- family name
+- email address
+
+Add a form that has the following controls:
+
+- a submit button that says Delete
+- a button that says Cancel
+
+The page should have a suitable link to go to the index page, and the edit page.
+
+### Exercise 17
+
+Update the `index.php` file to show a suitable layout with the following shown in a table:
+
+- user id
+- user given name
+- user family name
+- user email
+- show link to show page
+- edit link to update page
+- delete link to delete page
+
