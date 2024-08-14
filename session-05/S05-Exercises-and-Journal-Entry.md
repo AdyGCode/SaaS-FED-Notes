@@ -279,3 +279,23 @@ This should watch for changes in your `html`, `php` and `js` files and automatic
 
 ### Exercise 12
 
+We are now at the point of creating the basic CRUD/BREAD pages.
+
+Create each of the the following empty PHP files:
+
+- `views/users/create.php`
+- `views/users/show.php`
+- `views/users/update.php`
+- `views/users/delete.php`
+
+In each of these files, include the `header.php` and `footer.php` as required.
+
+
+### Exercise 13
+
+Open the new `create.php` file, and add the following:
+
+- A form that uses the POST method to send a request to the same file (`create.php`) to create a new user.
+
+In the form you will add the following controls, plus appropriate labels that are linked using the `for` attribute:
+
