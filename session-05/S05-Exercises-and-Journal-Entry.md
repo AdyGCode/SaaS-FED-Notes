@@ -439,11 +439,11 @@ In the body of the page:
 
 In the table, we need to change some links.
 
-- Change the show link to pass the user id to the show page as part of the URL: `user_id=x` where x is the actual user's id.
+- Change the show link to pass the user id to the show page as part of the URL: `?user_id=x` where x is the actual user's id.
 - Repeat for the edit link.
 - Repeat for the delete link.
 
-**Note:**  This is NOT best practice, but provides us with a base to work from.
+> **Note:**  This is NOT best practice, but provides us with a base to work from.
 
 ### Exercise 23
 
@@ -451,13 +451,13 @@ Update the links on all the users view pages to follow the principle outlines in
 
 ### Exercise 24
 
-Complete the required PHP code for the Show page, but retrieving the user identified in the user_id parameter from the URI.
+Complete the required PHP code for the show page, but retrieving the user identified in the `user_id` parameter from the URI.
 
 
 ### Exercise 25
 
 Complete the required PHP code for the create page.
 
-Make
+
 
 
