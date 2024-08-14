@@ -460,4 +460,13 @@ Complete the required PHP code for the create page.
 
 
 
+### Exercise 26
+
+Complete the required PHP code for the edit page.
+
+You will need to do the following:
+- retrieve the user to be edited
+- place the current data into the form fields
+- 
+
 
