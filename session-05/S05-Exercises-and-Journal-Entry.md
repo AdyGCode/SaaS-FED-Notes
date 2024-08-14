@@ -321,11 +321,25 @@ Also wrap each control in a `<section>` ... `</section>` element similar to this
 | input   | password | user_password    | UserPass    |                                   |
 | label   |          |                  | ConfirmPass | Confirm Password                  |
 | input   | password | confirm_password | ConfirmPass |                                   |
+| button  | submit   | save             | Save        | Save                              |
+| button  | clear    | clear            | Clear       | Clear                             |
 
+
+Make sure there is also a link back to the users index page.
 
 ### Exercise 14
 
 Duplicate the `create.php` and rename it `update.php`.
 
+Edit the heading appropriately.
 
 ### Exercise 15
+
+Edit the `show.php` file and add a layout that shows the following details:
+- id
+- given name
+- family name
+- email address
+- date updated
+
+The page should have a suitable link to go to the index page, and the edit page.
