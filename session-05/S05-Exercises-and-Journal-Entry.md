@@ -74,7 +74,7 @@ module.exports = {
 }
 ```
 
-### Exercise 1
+## Exercise 2
 
 Create a new SQL file (filename: `setup.sql`) and save it in the database folder.
 
@@ -105,7 +105,7 @@ In the SQL file create the SQL to do the following:
 >
 > It is convention to only use LOWER CASE and UNDERSCORE.
 
-### Exercise 2
+## Exercise 3
 
 Create a new SQL file called `tables.sql`.
 
@@ -170,7 +170,7 @@ INDEX  `given_family`(`given_name`,`family_name`),
 INDEX  `family_given`(`family_name`,`given_name`)
 ```
 
-### Exercise 3
+## Exercise 3
 
 Create a suitable `config.php` file in the root of your project, and add variables as described below:
 
@@ -179,13 +179,13 @@ Create a suitable `config.php` file in the root of your project, and add variabl
 - dbHost
 - dbName
 
-### Exercise 4
+## Exercise 4
 
 Create a new Class file called `Connection.php` file in the includes folder.
 
 This connection class will use a static method `make` to create and return a PDO instance.
 
-### Exercise 5
+## Exercise 5
 
 Create a PHP Class file called `Utilities.php` in the includes folder.\
 
@@ -194,7 +194,7 @@ The Utilities class will provide a number of static methods that include:
 - `dump` which will dump the contents of one or more variables in a suitably formatted way.
 - `dd` which will dump the contents of one or more variables then terminate the script using the `die()` function
 
-### Exercise 6
+## Exercise 6
 
 Create a new file `db-test.php` in the root of your project.
 
@@ -203,7 +203,7 @@ This file is to:
 - connect to your database
 - dump the PDO connection information
 
-### Exercise 7
+## Exercise 7
 
 Create a basic HTML5 web page in the templates folder and name it `template.html`.
 
@@ -234,14 +234,14 @@ Create a `footer.php` file in the `templates` folder
 - this file will contain the end of the template including the comment added to the template file.
 
 
-### Exercise 8
+## Exercise 8
 
 Create a new folder called `views`, and inside this folder two more folders, one for `users` and one for `jokes`.
 
 Make sure that all three folders have `.gitignore` files using the `touch` command.
 
 
-### Exercise 9
+## Exercise 9
 
 In the `views/users` folder create a PHP file (`index.php`) that uses the echo command to show "Users Index".
 
@@ -254,7 +254,7 @@ In the public folder, create an `index.php` file that:
 - Provides a link to the jokes index page.
 
 
-### Exercise 10
+## Exercise 10
 
 Create a new file `app.css` in the `src` folder.
 
@@ -266,7 +266,7 @@ In this file add:
 @tailwind utilities;
 ```
 
-### Exercise 11
+## Exercise 11
 
 Start a new git bash terminal, and use the following commands:
 
@@ -277,7 +277,7 @@ npx tailwindcss -i ./src/app.css -o ./assets/css/site.css --watch
 
 This should watch for changes in your `html`, `php` and `js` files and automatically rebuild the `site.css` file for you.
 
-### Exercise 12
+## Exercise 12
 
 We are now at the point of creating the basic CRUD/BREAD pages.
 
@@ -291,7 +291,7 @@ Create each of the the following empty PHP files:
 In each of these files, include the `header.php` and `footer.php` as required.
 
 
-### Exercise 13
+## Exercise 13
 
 Open the new `create.php` file, and add the following:
 
@@ -327,7 +327,7 @@ Also wrap each control in a `<section>` ... `</section>` element similar to this
 
 Make sure there is also a link back to the users index page.
 
-### Exercise 14
+## Exercise 14
 
 Duplicate the `create.php` and rename it `update.php`.
 
@@ -336,7 +336,7 @@ Edit the heading appropriately.
 Change the text and name of the clear button to cancel. change its type to button.
 
 
-### Exercise 15
+## Exercise 15
 
 Edit the `show.php` file and add a layout that shows the following details:
 - id
@@ -348,7 +348,7 @@ Edit the `show.php` file and add a layout that shows the following details:
 The page should have a suitable link to go to the index page, and the edit page.
 
 
-### Exercise 16
+## Exercise 16
 
 Edit the `delete.php` file and add a layout that shows the following details:
 - id
@@ -363,7 +363,7 @@ Add a form that has the following controls:
 
 The page should have a suitable link to go to the index page, and the edit page.
 
-### Exercise 17
+## Exercise 17
 
 Update the `index.php` file to show a suitable layout with the following shown in a table:
 
@@ -379,7 +379,7 @@ Make make sure that the table has appropriate headings.
 
 Also add a dummy line with data for demonstration purposes when testing your page layout.
 
-### Exercise 18
+## Exercise 18
 
 If you have not done so already, visit the pages you have created using the Laragon (or Herd) 'test' domain:
 
@@ -391,7 +391,7 @@ If you have not done so already, visit the pages you have created using the Lara
 
 Take screenshots of the current pages, for inclusion in your Journal.
 
-### Exercise 19
+## Exercise 19
 
 Write a database seeder `database/user-seeder.php` using the following data:
 
@@ -410,7 +410,7 @@ Use the "create many" example from the notes as a base for this.
 
 The password must be encrypted using the `md5()` function before injecting into the placeholder.
 
-### Exercise 20
+## Exercise 20
 
 Now we get to the fun parts.
 
@@ -429,13 +429,13 @@ In the body of the page:
 - Check that the page shows multiple copies of the dummy data.
 
 
-### Exercise 21
+## Exercise 21
 
 - Replace the dummy data with the required fields from the retrieved user.
 - Check that the page shows the data correctly.
 
 
-### Exercise 22
+## Exercise 22
 
 In the table, we need to change some links.
 
@@ -445,22 +445,22 @@ In the table, we need to change some links.
 
 > **Note:**  This is NOT best practice, but provides us with a base to work from.
 
-### Exercise 23
+## Exercise 23
 
 Update the links on all the users view pages to follow the principle outlines in Exercise 22.
 
-### Exercise 24
+## Exercise 24
 
 Complete the required PHP code for the show page, but retrieving the user identified in the `user_id` parameter from the URI.
 
 
-### Exercise 25
+## Exercise 25
 
 Complete the required PHP code for the create page.
 
 
 
-### Exercise 26
+## Exercise 26
 
 Complete the required PHP code for the edit page.
 
