@@ -150,7 +150,7 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "daily-notes:Open today's note": false,
+      "daily-notes:Open today's daily note": false,
       "switcher:Open quick switcher": false,
       "graph:Open graph view": false,
       "canvas:Create new canvas": false,
@@ -166,6 +166,19 @@
   },
   "active": "65bea86da876b02e",
   "lastOpenFiles": [
+    "session-06/saas-vanilla-mvc-1.png",
+    "session-06/img.png",
+    "session-06/S06-MVC-1.md~",
+    "session-06/mvc/App/controllers/errors/404.php",
+    "session-06/mvc/App/controllers/errors",
+    "session-06/mvc/App/controllers/404.php",
+    "session-06/mvc/App/views/404.view.php",
+    "session-06/mvc/App/controllers/home.php",
+    "session-06/mvc/App/views/partials/navigation.view.php",
+    "session-06/mvc/App/views/partials/footer.view.php",
+    "session-06/mvc/App/views/partials/header.view.php",
+    "session-06/mvc/App/views/partials",
+    "session-06/S06-MVC-1.md",
     "assets/phpstorm64_k2K8iLNCwl.png",
     "session-05/S05-PHP-Basics-VII.md",
     "session-05/S05-Terminology-MVC.md",
@@ -177,16 +190,6 @@
     "session-01/S01-Exercises-and-Journal-Entry.md",
     "session-01/ReadMe.md",
     "ReadMe.md",
-    "session-05/pdo-demo-browse-in.php~",
-    "session-05/pdo-demo-browse-in.php",
-    "session-05/pdo-demo-delete.php",
-    "session-05/pdo-demo-create-dummy.php",
-    "session-05/pdo-demo-edit.php",
-    "session-05/pdo-demo-read.php~",
-    "session-05/pdo-demo-read.php",
-    "session-05/pdo-demo-browse.php~",
-    "session-05/pdo-demo-browse.php",
-    "session-05/pdo-demo-create-many.php",
     "session-05/ReadMe.md",
     "session-04/ReadMe.md",
     "session-06/S06-Terminology-Laravel.md",
@@ -207,9 +210,7 @@
     "assets/folder-example-2@0.5.png",
     "assets/Obsidian_Qbxy4qxH8N.png",
     "assets/Pasted image 20240809151045.png",
-    "assets/folder-example-1@1x.png",
     "session-02/S02-PHP-Basics-I-Part-2.md",
-    "session-04/S04-Terminology-Security.md",
-    "session-03/ReadMe.md"
+    "session-04/S04-Terminology-Security.md"
   ]
 }
