@@ -2,19 +2,45 @@
 
 # Continuing to build the Framework
 
-So far we have created the helpers, the routes and the database configuration.
 
-In this section we will look at the `public/index.php` file, and convert it from the current template file into a set of partials that will be stored in the `App/views/partials` folder..
-
-
-## Public `index.php`
+## Session
 
 
 
-## App Views
+
+
+### Exercise: Update Header Comments
+
+You are expected to update the header comments to give a title and explain the purpose of this class to other developers.
+
+## Validation
 
 
 
-## App Controllers
+
+### Exercise: Update Header Comments
+
+You are expected to update the header comments to give a title and explain the purpose of this class to other developers.
+
+## Authorisation
 
 
+
+### Exercise: Update Header Comments
+
+You are expected to update the header comments to give a title and explain the purpose of this class to other developers.
+
+## Middleware/Authorise
+
+
+
+
+
+### Exercise: Update Header Comments
+
+You are expected to update the header comments to give a title and explain the purpose of this class to other developers.
+
+
+---
+
+next... [S07-Vanilla-PHP-MVC-Pt-5](session-07/S07-Vanilla-PHP-MVC-Pt-5.md)

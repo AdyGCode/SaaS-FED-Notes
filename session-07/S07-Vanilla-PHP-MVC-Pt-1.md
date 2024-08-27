@@ -243,4 +243,5 @@ VALUES (40380, 20, 'Sheep BrickHeadz',
 
 OK, we now have a database with users and products tables.
 
-We are ready to start our PHP...
+We are ready to start our PHP... [S07-Vanilla-PHP-MVC-Pt-2](session-07/S07-Vanilla-PHP-MVC-Pt-2.md)
+

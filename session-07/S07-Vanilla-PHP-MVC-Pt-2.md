@@ -102,6 +102,58 @@ Generating autoload files
 
 If we were to add other composer packages to the project they would be added to this `composer.json` file, and the `composer.lock` would be updated. 
 
+## `.htaccess` and the Public folder
+
+When using a web server, we often have to reformat a request as we attempt to give some basic application security to the structure of the framework and application code.
+
+A common way to start this is to use a 'public' folder in the application. This public folder is then pointed to by the web server as the default location for files to be served.
+
+When using the Apache web server, we need to use a `.htaccess` file to manipulate the incoming "obfuscated" URI requests to the application's structure.
+
+```apacheconf
+RewriteEngine on  
+RewriteCond %{REQUEST_FILENAME} !-f  
+RewriteCond %{REQUEST_FILENAME} !-d  
+RewriteRule ^(.*)$ /index.php [NC,L,QSA]
+```
+
+So what does the above mean?
+
+```apacheconf
+RewriteEngine on
+```
+
+Turn on the "mod rewrite" engine...
+
+```apacheconf
+RewriteCond %{REQUEST_FILENAME} !-f  
+```
+
+Look at the request to check if the requested filename exists... (the `!-f` means "not a file"). If the file exists then the rewrite rule will not be applied.
+
+```apacheconf
+RewriteCond %{REQUEST_FILENAME} !-d  
+```
+
+Look at the request to check if the requested folder/directory... (the `!-d` means "not a directory/folder"). If the directory/folder exists then the rewrite rule will not be applied.
+
+```apacheconf
+RewriteRule ^(.*)$ /index.php [NC,L,QSA]
+```
+
+This is the rewrite rule, and it does the following:
+
+> If the URI matches the (regex) pattern `^(.*)$`, then it should be rewritten as `/index.php`.
+
+The flags in the square brackets, have the following meanings:
+
+| flag  | meaning                                                                                                |
+| ----- | ------------------------------------------------------------------------------------------------------ |
+| `NC`  | No Case.<br>The match is case-insensitive.                                                             |
+| `L`   | Last.<br>If this rule matches, no further rules will be processed.                                     |
+| `QSA` | Query String Append. <br>The query string from the original URL will be appended to the rewritten URL. |
+
+
 ## Configuration
 
 As a backup we will put a copy of the SQL we used to create our database and seed it. You may download a copy from and then move it into the `config` folder.
@@ -178,14 +230,16 @@ We are going to add the following functions:
 
 The `basePath` function obtains the base path so as to provide accurate and reliable paths to files when included and used across the framework and application.
 
-For example, if I was to use `basePath('index.php')` from within the `public` folder, then I would get a path of:
+For example, if we were to use `basePath('index.php')` from within the `public` folder, then we would get a path of:
+
 ```text
 C:\Users\USERNAME\Source\Repos\SaaS-Vanilla-MVC/index.php
 ```
 
 This is the absolute path to this file. 
 
-Note that it is the absolute path based on the ROOT folder.
+**Note** that it is the absolute path based on the ROOT folder.
+
 If we wanted the path to the DB configuration file we would use:
 
 `basePath('config/db.php')`
@@ -403,29 +457,5 @@ function redirect($url)
 ```
 
 
-
-
-
-## Routes
-
-
-
-## Framework
-
-
-
-## Framework Middleware
-
-
-
-## Public `index.php`
-
-
-
-## App Views
-
-
-
-## App Controllers
-
+next... [S07-Vanilla-PHP-MVC-Pt-3](session-07/S07-Vanilla-PHP-MVC-Pt-3.md)
 

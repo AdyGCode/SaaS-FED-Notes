@@ -4,21 +4,12 @@
 
 So far we have created the helpers, the routes and the database configuration.
 
-We are now ready to build the logic that runs the application, the controllers.
+In this section we will look at the `public/index.php` file, and convert it from the current template file into a set of partials that will be stored in the `App/views/partials` folder..
 
-## App Controllers
-
-
-### ErrorController
+## App Views
 
 
-### HomeController
 
 
-### ProductController
 
-
-### UserController
-
-
-## Testing the whole application
+and finally ... [S07-Vanilla-PHP-MVC-Pt-7](session-07/S07-Vanilla-PHP-MVC-Pt-7.md)
