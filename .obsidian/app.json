@@ -4,5 +4,5 @@
   "attachmentFolderPath": "assets",
   "alwaysUpdateLinks": true,
   "showUnsupportedFiles": true,
-  "newLinkFormat": "relative"
+  "newLinkFormat": "absolute"
 }
