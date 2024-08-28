@@ -1,34 +1,75 @@
 -- Create the 'SaaS Vanilla MVC' database & User
-CREATE USER IF NOT EXISTS 'xxx_saas_vanilla_mvc'@'127.0.0.1' IDENTIFIED WITH mysql_native_password BY 'PasswordSecret';
-GRANT USAGE ON *.* TO 'xxx_saas_vanilla_mvc'@'127.0.0.1';
-ALTER USER 'xxx_saas_vanilla_mvc'@'127.0.0.1' REQUIRE NONE WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;
+DROP USER IF EXISTS
+    'xxx_saas_vanilla_mvc'@'127.0.0.1';
 
-CREATE DATABASE IF NOT EXISTS `xxx_saas_vanilla_mvc`;
-GRANT ALL PRIVILEGES ON `xxx_saas_vanilla_mvc`.* TO 'xxx_saas_vanilla_mvc'@'127.0.0.1';
+CREATE USER IF NOT EXISTS
+    'xxx_saas_vanilla_mvc'@'127.0.0.1'
+        IDENTIFIED WITH mysql_native_password
+            BY 'PasswordSecret';
+
+GRANT USAGE ON *.* TO
+    'xxx_saas_vanilla_mvc'@'127.0.0.1';
+
+# ALTER USER 'xxx_saas_vanilla_mvc'@'127.0.0.1'
+#     REQUIRE NONE WITH
+#     MAX_QUERIES_PER_HOUR 0
+#     MAX_CONNECTIONS_PER_HOUR 0
+#     MAX_UPDATES_PER_HOUR 0
+#     MAX_USER_CONNECTIONS 0;
+
+DROP DATABASE IF EXISTS
+    `xxx_saas_vanilla_mvc`;
+
+CREATE DATABASE IF NOT EXISTS
+    `xxx_saas_vanilla_mvc`;
+
+GRANT ALL PRIVILEGES ON
+    `xxx_saas_vanilla_mvc`.*
+    TO 'xxx_saas_vanilla_mvc'@'127.0.0.1';
 
 USE xxx_saas_vanilla_mvc;
 
+-- Create the Users Table
 DROP TABLE IF EXISTS `users`;
 
 -- Table structure for 'users' table
 CREATE TABLE IF NOT EXISTS `users`
 (
-    `id`         int          NOT NULL AUTO_INCREMENT,
-    `name`       varchar(255)      DEFAULT NULL,
-    `email`      varchar(255) NOT NULL,
-    `password`   varchar(255) NOT NULL,
-    `city`       varchar(45)       DEFAULT NULL,
-    `state`      varchar(45)       DEFAULT NULL,
-    `country`    varchar(45)       DEFAULT 'Australia',
-    `created_at` timestamp    NULL DEFAULT CURRENT_TIMESTAMP,
+    `id`         BIGINT UNSIGNED  NOT NULL AUTO_INCREMENT,
+    `name`       VARCHAR(255)     DEFAULT NULL,
+    `email`      VARCHAR(320)     NOT NULL UNIQUE,
+    `password`   VARCHAR(255)     NOT NULL,
+    `city`       VARCHAR(45)      DEFAULT NULL,
+    `state`      VARCHAR(45)      DEFAULT NULL,
+    `country`    VARCHAR(45)      DEFAULT 'Australia',
+    `created_at` TIMESTAMP        NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
-  AUTO_INCREMENT = 7
+  AUTO_INCREMENT = 1000
   DEFAULT CHARSET = utf8mb4
-  COLLATE = utf8mb4_0900_ai_ci;
+  COLLATE = utf8mb4_general_ci;
 
+-- Product Table Creation
+DROP TABLE IF EXISTS `products`;
+
+-- Table structure for 'products' table
+CREATE TABLE IF NOT EXISTS `products`
+(
+    `id`          BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `user_id`     BIGINT UNSIGNED DEFAULT 10,
+    `name`        VARCHAR(255)    NOT NULL,
+    `description` TEXT,
+    `price`       INT UNSIGNED    DEFAULT NULL,
+    `created_at`  TIMESTAMP       NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1000
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_general_ci;
+
+-- Seeding
 -- Insert data into 'users' table
--- The Password is Password1 hashed using the PHP password_hash() method.
+-- The password is Password1 hashed using the PHP password_hash() method.
 --
 INSERT INTO `users`
 VALUES (10, 'Administrator', 'admin@example.com',
@@ -54,24 +95,6 @@ VALUES (100, 'John Doe', 'user1@example.com',
         '$2y$10$4Ae3n2iQ0MwXMNz0UEmNne2PaNyfYsBFYb97nayHWTDCwpnuPi6f.',
         'Adelaide', 'SA', 'Australia', '2024-08-20 17:59:13');
 
-DROP TABLE IF EXISTS `products`;
-
--- Table structure for 'products' table
-CREATE TABLE IF NOT EXISTS `products`
-(
-    `id`          bigint unsigned NOT NULL AUTO_INCREMENT,
-    `user_id`     bigint unsigned      DEFAULT 10,
-    `name`        varchar(255)    NOT NULL,
-    `description` text,
-    `price`       int                  DEFAULT NULL,
-    `created_at`  timestamp       NULL DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (`id`)
-) ENGINE = InnoDB
-  AUTO_INCREMENT = 21
-  DEFAULT CHARSET = utf8mb4
-  COLLATE = utf8mb4_0900_ai_ci;
-
--- Insert data into 'products' table
 INSERT INTO `products`(`id`, `user_id`, `name`, `description`, `price`, `created_at`)
 VALUES (40380, 20, 'Sheep BrickHeadz',
         'BrickHeadz theme: This set features an adorable sheep with a cute, blocky design, perfect for collectors and fans of the BrickHeadz series.',
@@ -118,5 +141,3 @@ VALUES (40380, 20, 'Sheep BrickHeadz',
        (885, 101, 'Space Scooter',
         'Space theme: A small, classic LEGO Space set featuring a simple yet iconic space scooter vehicle.', 999,
         '1979-01-01');
-
-
