@@ -10,7 +10,7 @@ Check the exercises from the previous sessions for details of what should be cov
 
 At this point you will have a folder (and file) structure similar to this:
 
-![image: Folder structure of project](assets/Pasted%20image%2020240827114631.png)
+![image: Folder structure of project](../assets/Pasted%20image%2020240827114631.png)
 
 ## What will we be creating?
 
@@ -28,7 +28,7 @@ Open Laragon, if you have not done so, and make sure that Apache and MySQL are r
 
 If they are not, click Start All. You should see something similar to this:
 
-![Image: Laragon started with Apache, MySQL, PostgreSQL, NginC, MongoDB, Redis and Memcached running](assets/Pasted%20image%2020240827115330.png)
+![Image: Laragon started with Apache, MySQL, PostgreSQL, NginC, MongoDB, Redis and Memcached running](../assets/Pasted%20image%2020240827115330.png)
 
 For administering the MySQL database, there are a number of options:
 - PhpMyAdmin
@@ -37,7 +37,7 @@ For administering the MySQL database, there are a number of options:
 
 Adrian uses a mixture depending on what OS they are using.
 
-For simplicity we will use PhpMyAdmin.
+For simplicity, we will use PhpMyAdmin.
 
 ### Installing PhpMyAdmin
 
@@ -63,7 +63,7 @@ Click OK to open the administration interface.
 
 When the interface is open, click on the SQL tab:
 
-![image: the database and SQL tabs in PhpMyAdmin](assets/Pasted%20image%2020240827120339.png)
+![image: the database and SQL tabs in PhpMyAdmin](../assets/Pasted%20image%2020240827120339.png)
 
 In the SQL query area you will now enter:
 
@@ -187,7 +187,7 @@ Execute and check no errors...
 
 We are almost done...
 
-Now add the following and we will execute for the final time, this time seeding the products table...
+Now add the following, and then we will execute for the final time, this time seeding the products table...
 
 ```sql
   
