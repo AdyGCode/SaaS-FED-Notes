@@ -1,5 +1,6 @@
 # Session 07
 
+- [S07 Vanilla PHP MVC: Pt 0](./session-07/S07-Vanilla-PHP-MVC-Pt-0.md)
 - [S07 Vanilla PHP MVC: Pt 1](session-07/S07-Vanilla-PHP-MVC-Pt-1.md)
 - [S07 Vanilla PHP MVC: Pt 2](session-07/S07-Vanilla-PHP-MVC-Pt-2.md)
 - [S07 Vanilla PHP MVC: Pt 3](session-07/S07-Vanilla-PHP-MVC-Pt-3.md)
