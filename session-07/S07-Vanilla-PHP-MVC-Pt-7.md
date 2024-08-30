@@ -6,19 +6,28 @@ So far we have created the helpers, the routes and the database configuration.
 
 We are now ready to build the logic that runs the application, the controllers.
 
-## App Controllers
+# Application Features
 
 
-### ErrorController
+
+## User Feature
+
+- Register
+- Login
+- Logout
 
 
-### HomeController
+## Product Feature
+
+- Index
+- Show
+- Create
+- Update
+- Delete
 
 
-### ProductController
 
 
-### UserController
 
 
 ## Testing the whole application

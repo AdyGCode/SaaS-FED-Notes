@@ -46,7 +46,7 @@ cp -f ~/Downloads/gitignore.txt .gitignore
 
 Now we create the various folders we need for the project:
 ```shell
-mkdir -p {App,Framework,public,config,src}
+mkdir -p {config,src}
 mkdir -p App/{controllers,views}
 mkdir -p Framework/middleware
 mkdir -p public/assets/{css,js,img,downloads}
@@ -63,7 +63,7 @@ touch src/source.css
 ```
 
 
-## Opening the new Project in PhpStorm
+## Opening the Project in PhpStorm
 
 Open PhpStorm, and use the "hamburger" menu:
 

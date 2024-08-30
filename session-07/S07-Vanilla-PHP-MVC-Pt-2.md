@@ -31,6 +31,8 @@ Now open this file in PhpStorm...
 
 We need to carefully edit this file and add the following:
 
+> **Note**: The name section must be in all lower case.
+
 ```json
 {  
   "name": "YOUR_GITHUB_NAME/GITHUB_REPOSITORY_NAME",  
@@ -219,10 +221,9 @@ Let's start with the header comments:
 
 We are going to add the following functions:
 - `basePath`
-- `loadView`
-- `loadPartial`
-- `inpsect`
-- `inspectAndDie`
+- `loadView` &  `loadPartial`
+- `inppect` & `dump`
+- `inspectAndDie` & `dd`
 - `sanitize`
 - `redirect`
 

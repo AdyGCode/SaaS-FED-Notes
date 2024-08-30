@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "session-07/S07-Vanilla-PHP-MVC-Pt-3.md",
+                "file": "session-07/S07-Vanilla-PHP-MVC-Pt-7.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "session-07/S07-Vanilla-PHP-MVC-Pt-3.md",
+                "file": "session-07/S07-Vanilla-PHP-MVC-Pt-7.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "session-07/S07-Vanilla-PHP-MVC-Pt-3.md",
+                "file": "session-07/S07-Vanilla-PHP-MVC-Pt-7.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,16 +125,16 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "session-07/S07-Vanilla-PHP-MVC-Pt-3.md"
+                "file": "session-07/S07-Vanilla-PHP-MVC-Pt-7.md"
               }
             }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -154,11 +154,21 @@
   },
   "active": "13721d47ad057a2b",
   "lastOpenFiles": [
-    "session-07/S07-Vanilla-PHP-MVC-Pt-7.md",
     "session-07/S07-Vanilla-PHP-MVC-Pt-6.md",
+    "assets/Pasted image 20240830182226.png",
+    "assets/Pasted image 20240830182209.png",
+    "assets/Pasted image 20240830181741.png",
+    "assets/Pasted image 20240830180600.png",
+    "assets/Pasted image 20240830174221.png",
     "session-07/S07-Vanilla-PHP-MVC-Pt-5.md",
+    "session-07/S07-Vanilla-PHP-MVC-Pt-7.md",
+    "assets/Pasted image 20240830162654.png",
+    "session-07/template.php",
     "session-07/S07-Vanilla-PHP-MVC-Pt-4.md",
     "session-07/S07-Vanilla-PHP-MVC-Pt-3.md",
+    "session-07/S07-Vanilla-PHP-MVC-Pt-2.md",
+    "session-07/S07-Vanilla-PHP-MVC-Pt-1.md",
+    "session-07/S07-Vanilla-PHP-MVC-Pt-0.md",
     "session-12/ReadMe.md",
     "session-13/ReadMe.md",
     "session-11/ReadMe.md",
@@ -174,8 +184,6 @@
     "session-19/ReadMe 1.md",
     "session-20/ReadMe.md",
     "session-07/ReadMe.md",
-    "session-07/S07-Vanilla-PHP-MVC-Pt-2.md",
-    "session-07/S07-Vanilla-PHP-MVC-Pt-1.md",
     "assets/Pasted image 20240827145943.png",
     "assets/Pasted image 20240827145826.png",
     "session-06/S06-TailwindCSS-Intro.md",
@@ -186,19 +194,10 @@
     "session-07/database.sql",
     "assets/Pasted image 20240827120339.png",
     "assets/Pasted image 20240827120045.png",
-    "assets/laragon_SlzdgI2Bym-output.gif",
-    "assets/Pasted image 20240827115330.png",
-    "assets/Pasted image 20240827114631.png",
-    "assets/Pasted image 20240827114230.png",
-    "assets/Pasted image 20240827114208.png",
-    "assets/Pasted image 20240827113920.png",
     "session-06/gitignore.txt.md",
     "session-06/gitignore.txt",
-    "session-07/S07-Exercises-and-Journal-Entry.md",
-    "session-01/S01-CLI-Commands.md",
     "session-06/S06-MVC-1.md~",
     "session-06/mvc/App/controllers/errors/404.php",
-    "session-06/mvc/App/controllers/errors",
-    "session-06/mvc/App/controllers/404.php"
+    "session-06/mvc/App/controllers/errors"
   ]
 }

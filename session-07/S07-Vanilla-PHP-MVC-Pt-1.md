@@ -68,14 +68,28 @@ When the interface is open, click on the SQL tab:
 In the SQL query area you will now enter:
 
 ```sql
--- Create the 'SaaS Vanilla MVC' database & User  
-CREATE USER IF NOT EXISTS 'xxx_saas_vanilla_mvc'@'127.0.0.1' IDENTIFIED WITH mysql_native_password BY 'PasswordSecret';  
+-- ----------------------------------------------------------------------------------------  
+-- Clear up previous versions of the Database and User  
+-- ----------------------------------------------------------------------------------------  
+DROP DATABASE IF EXISTS `xxx_saas_vanilla_mvc`;  
+DROP USER IF EXISTS 'xxx_saas_vanilla_mvc'@'127.0.0.1';  
+  
+-- ----------------------------------------------------------------------------------------  
+-- Create the 'SaaS Vanilla MVC' Database & User  
+-- ATTENTION: Replace xxx with YOUR INITIALS  
+-- ----------------------------------------------------------------------------------------  
+CREATE USER IF NOT EXISTS 'xxx_saas_vanilla_mvc'@'127.0.0.1'  
+    IDENTIFIED WITH mysql_native_password BY 'PasswordSecret';  
+  
 GRANT USAGE ON *.* TO 'xxx_saas_vanilla_mvc'@'127.0.0.1';  
-ALTER USER 'xxx_saas_vanilla_mvc'@'127.0.0.1' REQUIRE NONE WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;  
   
 CREATE DATABASE IF NOT EXISTS `xxx_saas_vanilla_mvc`;  
+  
 GRANT ALL PRIVILEGES ON `xxx_saas_vanilla_mvc`.* TO 'xxx_saas_vanilla_mvc'@'127.0.0.1';  
   
+-- ----------------------------------------------------------------------------------------  
+-- Make the DB active for commands  
+-- ----------------------------------------------------------------------------------------  
 USE xxx_saas_vanilla_mvc;
 ```
 
@@ -96,10 +110,15 @@ Make sure you have a blank line after the `USE xxx_saas_vanilla_mvc` line. (Reme
 Now add:
 
 ```sql
-DROP TABLE IF EXISTS `users`;  
+-- ----------------------------------------------------------------------------------------  
+-- Remove any existing Users table  
+-- ----------------------------------------------------------------------------------------  
+DROP TABLE IF EXISTS `xxx_saas_vanilla_mvc`.`users`;  
   
+-- ----------------------------------------------------------------------------------------  
 -- Table structure for 'users' table  
-CREATE TABLE IF NOT EXISTS `users`  
+-- ----------------------------------------------------------------------------------------  
+CREATE TABLE IF NOT EXISTS `xxx_saas_vanilla_mvc`.`users`  
 (  
     `id`         int          NOT NULL AUTO_INCREMENT,  
     `name`       varchar(255)      DEFAULT NULL,  
@@ -113,7 +132,7 @@ CREATE TABLE IF NOT EXISTS `users`
 ) ENGINE = InnoDB  
   AUTO_INCREMENT = 7  
   DEFAULT CHARSET = utf8mb4  
-  COLLATE = utf8mb4_0900_ai_ci;
+  COLLATE = utf8mb4_general_ci;
 ```
 
 This creates the `users` table.
@@ -126,11 +145,11 @@ Again click the Show Query Box.
 
 Now add the following (making sure you have a blank line after the previous SQL):
 ```sql
-  
--- Insert data into 'users' table  
+-- ----------------------------------------------------------------------------------------  
+-- Seed Users Table  
 -- The Password is Password1 hashed using the PHP password_hash() method.  
---  
-INSERT INTO `users`  
+-- ----------------------------------------------------------------------------------------  
+INSERT INTO `xxx_saas_vanilla_mvc`.`users`  
 VALUES (10, 'Administrator', 'admin@example.com',  
         '$2y$10$4Ae3n2iQ0MwXMNz0UEmNne2PaNyfYsBFYb97nayHWTDCwpnuPi6f.',  
         'Perth', 'WA', 'Australia', '2000-01-01 00:00:01');  
@@ -164,11 +183,15 @@ Once again click the Show Query Box, and add the following to the end of the que
 This will create the `products` table...
 
 ```sql
+-- ----------------------------------------------------------------------------------------  
+-- Remove any existing Products table  
+-- ----------------------------------------------------------------------------------------  
+DROP TABLE IF EXISTS `xxx_saas_vanilla_mvc`.`products`;  
   
-DROP TABLE IF EXISTS `products`;  
-  
--- Table structure for 'products' table  
-CREATE TABLE IF NOT EXISTS `products`  
+-- ----------------------------------------------------------------------------------------  
+-- Create the Products table  
+-- ----------------------------------------------------------------------------------------  
+CREATE TABLE IF NOT EXISTS `xxx_saas_vanilla_mvc`.`products`  
 (  
     `id`          bigint unsigned NOT NULL AUTO_INCREMENT,  
     `user_id`     bigint unsigned      DEFAULT 10,  
@@ -180,7 +203,7 @@ CREATE TABLE IF NOT EXISTS `products`
 ) ENGINE = InnoDB  
   AUTO_INCREMENT = 21  
   DEFAULT CHARSET = utf8mb4  
-  COLLATE = utf8mb4_0900_ai_ci;
+  COLLATE = utf8mb4_general_ci;
 ```
 
 Execute and check no errors...
@@ -190,9 +213,10 @@ We are almost done...
 Now add the following, and then we will execute for the final time, this time seeding the products table...
 
 ```sql
-  
--- Insert data into 'products' table  
-INSERT INTO `products`(`id`, `user_id`, `name`, `description`, `price`, `created_at`)  
+-- ----------------------------------------------------------------------------------------  
+-- Seed Products Table  
+-- ----------------------------------------------------------------------------------------  
+INSERT INTO `xxx_saas_vanilla_mvc`.`products`(`id`, `user_id`, `name`, `description`, `price`, `created_at`)  
 VALUES (40380, 20, 'Sheep BrickHeadz',  
         'BrickHeadz theme: This set features an adorable sheep with a cute, blocky design, perfect for collectors and fans of the BrickHeadz series.',  
         1999, '2020-01-01'),  
@@ -211,7 +235,7 @@ VALUES (40380, 20, 'Sheep BrickHeadz',
        (40379, 20, 'Valentine\'s Bear',  
         'BrickHeadz theme: A seasonal BrickHeadz set featuring a charming Valentine\'s Bear holding a heart, ideal for Valentine\'s Day.',  
         1999, '2020-01-01'),  
-       (40354,10,  'Dragon Dance',  
+       (40354, 10, 'Dragon Dance',  
         'Seasonal theme: This Chinese New Year-themed set features a vibrant and detailed dragon dance scene, complete with minifigures and traditional decorations.',  
         8999, '2019-01-01'),  
        (40440, 10, 'German Shepherd',  

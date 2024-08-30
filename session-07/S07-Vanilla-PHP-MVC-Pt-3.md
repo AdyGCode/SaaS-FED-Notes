@@ -16,7 +16,7 @@ The framework consists of:
 
 Remember that these are *not* extensive, but a very simple implementation, to show you how we create an MVC framework.
 
-The Authorsation and Authorise classes we create perform different purposes, and these will be explained when we cover them within these notes.
+The Authorisation and Authorise classes we create perform different purposes, and these will be explained when we cover them within these notes.
 
 We will start with the Database, then the Router, Session, before hitting the remaining 3 classes.
 
@@ -83,7 +83,9 @@ The header text only needs a small alteration:
 
 ```text
 /**  
- * Database Access Class * * Provides the database access tools used by our micro-framework
+ * Database Access Class 
+ * 
+ * Provides the database access tools used by our micro-framework
 ```
 
 Plus the file location will change to: `Framework/`.
@@ -416,7 +418,7 @@ if (count($uriSegments) === count($routeSegments) && strtoupper($route['method']
 
 So we do not waste time processing the first thing we do is to check if:
 - the number of segments in the requested URI and the number of segments in the current route are the same
-- and...
+and...
 - the method being used by the request is the same as the route expects.
 
 If this is true, we set the match to be true... then count the segments ready for processing.
@@ -462,40 +464,162 @@ You are expected to update the header comments to give a title and explain the p
 
 ## Session
 
+Use the same technique as previously to create a new class in the Framework folder, this time called Session.
+
+Fill out the header DocBlock as required.
+
+#### Start Method
+
+We will begin with the `start` method.
+
+```php
+  
+namespace Framework;  
+  
+class Session  
+{  
+    /**  
+     * Start the session     
+     *     
+     * @return void  
+     */    
+    public static function start()  
+    {  
+        if (session_status() == PHP_SESSION_NONE) {  
+            session_start();  
+        }  
+    }
+```
+
+This simply checks to see if a session has been created, if not it starts it!
+
+### Clear All method
+
+The clear all method is used to remove all session data, but most importantly it can be used as a way to clear a 'logged in' user's session. You will see it in action in a future set of notes.
+
+```php
+/**  
+ * Clear all session data 
+ * 
+ * @return void  
+ */
+public static function clearAll()  
+{  
+    session_unset();  
+    session_destroy();  
+}
+```
 
 
+### Clear method
 
+Unlike Clear All, the Clear method only removes ONE entry (key & value) from the session.
+
+```php
+/**  
+ * Clear session by key 
+ * 
+ * @param string $key  
+ * @return void  
+ */
+public static function clear($key)  
+{  
+    if (isset($_SESSION[$key])) {  
+        unset($_SESSION[$key]);  
+    }  
+}
+```
+
+### Get Method
+
+The get method is used to retrieve a key's value from, the session.
+
+It will return a value if the session's key is set, otherwise a default value which may be null, or user (developer) specified.
+
+```php
+/**  
+ * Get a session value by the key 
+ * 
+ * @param string $key  
+ * @param mixed $default  
+ * @return mixed  
+ */
+public static function get($key, $default = null)  
+{  
+    return isset($_SESSION[$key]) ? $_SESSION[$key] : $default;  
+}
+```
+
+### Set Method
+
+Set completes the opposite task to get/clear.
+
+The Set method is given a key and a value and stores or updates the value in the session for the provided key.
+
+```php
+/**  
+ * Set a session key/value pair 
+ * 
+ * @param string $key  
+ * @param mixed $value  
+ * @return void  
+ */
+public static function set($key, $value)  
+{  
+    $_SESSION[$key] = $value;  
+}
+```
+
+### Has method
+
+The has method checks to see if the session data contains a particular entry (key).
+
+```php
+/**  
+ * Check if session key exists 
+ * 
+ * @param string $key  
+ * @return bool  
+ */
+public static function has($key)  
+{  
+    return isset($_SESSION[$key]);  
+}
+```
+
+
+### Set & Get Flash Message Methods
+
+Flash messages are messages that are shown on a web page for a brief period of time. In the case of a site without any JavaScript interaction, this is usually between pager refreshes, or between page navigations.
+
+The methods use the get and set methods that are part of this class.
+
+#### Set Flash Message 
+
+```php
+public static function setFlashMessage($key, $message)  
+{  
+    self::set('flash_' . $key, $message);  
+}
+```
+
+
+#### Get Flash Message
+
+You will notice that Get Flash Message deletes the key that was set once it is retrieved, thus making the key 'transient'.
+
+```php
+public static function getFlashMessage($key, $default = null)  
+{  
+    $message = self::get('flash_' . $key, $default);  
+    self::clear('flash_' . $key);  
+    return $message;  
+}
+```
 
 ### Exercise: Update Header Comments
 
-You are expected to update the header comments to give a title and explain the purpose of this class to other developers.
-
-## Validation
-
-
-
-
-### Exercise: Update Header Comments
-
-You are expected to update the header comments to give a title and explain the purpose of this class to other developers.
-
-## Authorisation
-
-
-
-### Exercise: Update Header Comments
-
-You are expected to update the header comments to give a title and explain the purpose of this class to other developers.
-
-## Middleware/Authorise
-
-
-
-
-
-### Exercise: Update Header Comments
-
-You are expected to update the header comments to give a title and explain the purpose of this class to other developers.
+You are expected to update the header comments to give a title and explain the purpose of this class and its methods to other developers.
 
 
 ---
