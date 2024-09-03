@@ -184,7 +184,7 @@ Like the error view, the home view is a HTML/PHP page that is in the `App/views`
 
 Create a new PHP file in the `App/views` and name it `home.view.php`.
 
-Lets construct it fromt eh top...
+Lets construct it from the top...
 
 First update the DocBlock...
 
@@ -221,7 +221,7 @@ Now we construct the main element of the page:
         <header class="bg-zinc-700 text-zinc-200 -mx-4 -mt-8 p-8 text-2xl font-bold mb-8">
             <h1>Vanilla PHP MVC Demo</h1>
         </header>
-        <section class="grid grid-cols-2 my-8  gap-8">
+        <section class="flex flex-row flex-wrap justify-center my-8 gap-8">
 
 <!-- there will be approximately 50 lines of code to add here -->
 
@@ -246,17 +246,17 @@ Let's fix that.
 
 #### Add the User and Product Counts
 
-Go back to the `<section class="grid...">` line and press enter so you have a blank line after it...
+Go back to the `<section class="flex...">` line and press enter so you have a blank line after it...
 
 Add the following to create a "statistics card" with the total products on the site:
 
 ```php
-<section class="max-w-1/2 min-w-64 bg-white shadow rounded p-2 grid grid-cols-3">  
-    <h4 class="-ml-2 mr-6 bg-sky-700 text-sky-200 text-lg p-4 -my-2 rounded-l col-span-1">  
+<section class="w-1/4 bg-zinc-700 text-sky-300 shadow rounded p-2 flex flex-row">  
+    <h4 class="flex-0 w-1/2 -ml-2 mr-6 bg-sky-800 text-white text-lg p-4 -my-2 rounded-l">  
         Products:  
     </h4>  
-    <p class="col-span-2 text-4xl ml-6">  
-        <?= $productCount->total; ?>  
+    <p class="grow text-4xl ml-6">  
+        <?= $productCount->total ?>  
     </p>  
 </section>
 ```
@@ -264,12 +264,12 @@ Add the following to create a "statistics card" with the total products on the s
 Then immediately after this add the same for the user count, but we change the base colour:
 
 ```php
-<section class="max-w-1/2 min-w-64 bg-white shadow rounded p-2 grid grid-cols-3">  
-    <h4 class="-ml-2 mr-6 bg-red-700 text-red-200 text-lg p-4 -my-2 rounded-l col-span-1">  
+<section class="w-1/4 bg-zinc-700 text-red-300 shadow rounded p-2 flex flex-row">  
+    <h4 class="flex-0 w-1/2 -ml-2 mr-6 bg-red-800 text-white text-lg p-4 -my-2 rounded-l">  
         Users:  
     </h4>  
-    <p class="col-span-2 text-4xl ml-6">  
-        <?= $userCount->total; ?>  
+    <p class="grow text-4xl ml-6">  
+        <?= $userCount->total ?>  
     </p>  
 </section>
 ```
@@ -279,9 +279,6 @@ Here is an example of its output:
 ![](assets/Pasted%20image%2020240830180600.png)
 
 Ok, so that is the 'statistics' done.
-
-> **Note:** If you want to make these cards smaller, change the grid columns to `grid-cols-4`.
-
 
 #### Add the Product Cards
 
@@ -319,25 +316,24 @@ Replace the HTML Comment (`<!-- HTML... -->`) in the code we just added with:
 ```php
 <article class="max-w-96 min-w-64 bg-white shadow rounded p-2 flex flex-col">
     <header class="-mx-2 bg-zinc-700 text-zinc-200 text-lg p-4 -mt-2 mb-4 rounded-t flex-0">
-        <h4>
-        PRODUCT NAME
-            </h4>
+	    <h4>
+	        PRODUCT_NAME
+        </h4>
     </header>
     <section class="flex-grow grid grid-cols-5">
-        <p class="ml-4 col-span-2">
+	    <p class="ml-4 col-span-2">
 	        <img class="w-24 h-24 " src="https://dummyimage.com/200x200/a1a1aa/fff&text=Image+Here"
-            alt="Image: placeholder for PRODUCT ID">
+		         alt="">
         </p>
-        <p class="col-span-3 text-zinc-600">
-        PRODUCT DESCRIPTION
-        </p>
+        <p class="col-span-3 text-zinc-600">PRODUCT_DESCRIPTION</p>
     </section>
-    <footer class="-mx-2 bg-zinc-200 text-zinc-900 text-sm px-4 py-1 mt-4 -mb-2 rounded-b flex-0">
-    <p>Price: PRODUCT PRICE ?></p>
-    <a href="/products/PRODUCT ID"
-	    class="block w-full text-center px-5 py-2.5 shadow-sm rounded border
-                                  text-base font-medium text-zinc-700 bg-zinc-100 hover:bg-zinc-200">
-        Product Details
+    <footer class="-mx-2 bg-zinc-200 text-zinc-900 text-sm 
+                   px-4 py-1 mt-4 -mb-2 rounded-b flex-0">
+	    <p>Price: $PRODUCT_PRICE</p>
+	    <a href="/products/PRODUCT_ID"
+           class="block w-full text-center px-5 py-2.5 shadow-sm rounded border
+                  text-base font-medium text-zinc-700 bg-zinc-100 hover:bg-zinc-200">
+            Details
         </a>
     </footer>
 </article>
@@ -377,4 +373,4 @@ Try fixing it to match this (one product shown):
 ![](assets/Pasted%20image%2020240830182226.png)
 
 
-and finally ... [S07-Vanilla-PHP-MVC-Pt-7](session-07/S07-Vanilla-PHP-MVC-Pt-7.md)
+and finally ... [S08-Vanilla-PHP-MVC-Pt-7](session-08/S08-Vanilla-PHP-MVC-Pt-7.md)

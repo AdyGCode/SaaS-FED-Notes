@@ -63,9 +63,11 @@ $router->route($uri);
 
 ## Template HTML File
 
-Download the [`template.php`](session-07/template.php) file we provide.
+Download the [`template.php`](../session-07/template.php) file we provide.
 
 Copy/Move this into the `src` folder on the project so you have an easily accessed file.
+
+Open the fiule ready to copy sections into files as required in the next steps.
 
 We are ready to create the partials for the Application.
 
@@ -89,6 +91,8 @@ Now Open the `template.php` file you have, and copy the section of code from `<!
 
 Go back to the header partial file and paste this code into the space after the `?>` close PHP tag.
 
+![](../assets/phpstorm64_8NyNDIIMZg.png)
+
 Now we can do the navigation (and also the logo area).
 
 ### Navigation
@@ -98,6 +102,10 @@ As with the header, we create a new partial view and name it `navigation.view.ph
 Once you have done that, close the `?>` PHP tag, and then copy the section of the template code from `<header class="bg-black text-white p-4 flex-grow-0 flex flex-row align-middle content-center">` to `</header>`.
 
 Paste this code after the close PHP tag.
+
+Here is an image of the code as per 3/9/2024:
+
+![](../assets/pzVMYAcnII.png)
 
 Now the footer...
 
@@ -131,6 +139,10 @@ Edit the `<footer>`...`</footer>` content to be:
         <li><a href="#" class="text-zinc-500 hover:text-white">link 4</a></li>  
     </ul></section>
 ```
+
+Here is an image of the full code as of 3/9/24:
+
+![](../assets/1r6KVQrJ6b.png)
 
 ## New Partials
 
@@ -171,6 +183,9 @@ This simply processes a list of errors that is sent to the partial, and adds the
 
 The error block is based on code from https://tailwindtemplates.io/templates?category=alert.
 
+Here is an image of the code as of 3/9/2024:
+
+![](../assets/R6aGaIb7Hj.png)
 
 ### Message Partial
 
@@ -179,7 +194,6 @@ The message partial is similar, but it actually uses the Session class to allow 
 The code gets any success message from the session, and if one exists it shows the message in a green box.
 
 Likewise for the error message, except a red box.
-
 
 ```php
 
@@ -214,6 +228,10 @@ endif;
 ```
 
 The message blocks are based on code from https://tailwindtemplates.io/templates?category=alert.
+
+The code as an image as per 3/9/24:
+
+![](../assets/wWsoqyF1sX.png)
 
 
 next... [S07-Vanilla-PHP-MVC-Pt-6](session-06/S06-Vanilla-PHP-MVC-Pt-6.md)
