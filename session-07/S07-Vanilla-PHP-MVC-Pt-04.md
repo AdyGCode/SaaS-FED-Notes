@@ -23,7 +23,7 @@ Create a Validation class in the Framework folder.
 
 ### String Validation
 
-The sting validation checks to see if the provided value is a string, and then cheks the length of the string is between the minimum and maximum lengths.
+The string validation checks to see if the provided value is a string, and then cheks the length of the string is between the minimum and maximum lengths.
 
 We use the `INF` PHP constant to represent a string of any length, and thus provide the developpr with a simple way of testing for a string with a minimum length but no maximum:
 
@@ -167,6 +167,25 @@ public function handle($role)
 You are expected to update/add the method and class header comments to explain them to other developers.
 
 ---
+
+## Routes
+
+So we now get to the actual routes file.
+
+We will only create the "home" route to start:
+
+```php
+$router->get('/', 'HomeController@index');  
+```
+
+This adds a GET method route to the router that looks for the `/` endpoint for the URI.
+
+For example:
+- http://SOME-DOMAIN/
+
+For us it will be something similar to:
+- https://saas-vanilla-mvc.test/
+
 
 ## Next time...
 
