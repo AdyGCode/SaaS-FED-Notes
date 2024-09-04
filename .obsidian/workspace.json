@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "session-07/S07-Vanilla-PHP-MVC-Pt-00.md",
+                "file": "session-07/S07-Vanilla-PHP-MVC-Pt-04.md",
                 "mode": "source",
                 "source": false
               }
@@ -48,7 +48,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "routes.php",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "session-07/S07-Vanilla-PHP-MVC-Pt-00.md",
+                "file": "session-07/S07-Vanilla-PHP-MVC-Pt-04.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "session-07/S07-Vanilla-PHP-MVC-Pt-00.md",
+                "file": "session-07/S07-Vanilla-PHP-MVC-Pt-04.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "session-07/S07-Vanilla-PHP-MVC-Pt-00.md"
+                "file": "session-07/S07-Vanilla-PHP-MVC-Pt-04.md"
               }
             }
           }
@@ -154,16 +154,16 @@
   },
   "active": "f0f1517fe3c67330",
   "lastOpenFiles": [
-    "session-07/S07-Vanilla-PHP-MVC-Pt-01.md",
-    "session-07/S07-Vanilla-PHP-MVC-Pt-02.md",
     "session-07/S07-Vanilla-PHP-MVC-Pt-03.md",
-    "session-07/S07-Vanilla-PHP-MVC-Pt-04.md",
-    "session-08/S08-Vanilla-PHP-MVC-Pt-09.md",
     "session-08/S08-Vanilla-PHP-MVC-Pt-08.md",
     "session-08/S08-Vanilla-PHP-MVC-Pt-07.md",
     "session-08/S08-Vanilla-PHP-MVC-Pt-06.md",
     "session-08/S08-Vanilla-PHP-MVC-Pt-05.md",
+    "session-07/S07-Vanilla-PHP-MVC-Pt-04.md",
     "session-07/S07-Vanilla-PHP-MVC-Pt-00.md",
+    "session-07/S07-Vanilla-PHP-MVC-Pt-01.md",
+    "session-07/S07-Vanilla-PHP-MVC-Pt-02.md",
+    "session-08/S08-Vanilla-PHP-MVC-Pt-09.md",
     "session-08/S08-Vanilla-PHP-MVC-Pt-10.md",
     "session-07/S07-Exercises-and-Journal-Entry.md",
     "session-08/S08-Exercises-and-Journal-Entry.md",
