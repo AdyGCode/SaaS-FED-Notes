@@ -615,26 +615,6 @@ Finally set a flash message, and redirect to the products page.
 
 
 
-## Reflection Questions
-
-### Question 1: Data Binding
-
-What could we do to make sure that the data being entered is the correct type?
-
-How difficult would this be to implement?
-
-
-### Question 2: Refactoring
-
-There are sections of code in the application that are repeated, how could you refactor this code to reduce replication?
-
-
-### Question 3: Exceptions!
-
-Currently we have many places that exceptions could occur.
-
-Consider how you could make the application display a more meaningful and user friendly error when such a situation occurs.
-
 
 ---
 

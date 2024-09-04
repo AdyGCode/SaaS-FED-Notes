@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "session-07/S07-Vanilla-PHP-MVC-Pt-3.md",
+                "file": "session-08/S08-Vanilla-PHP-MVC-Pt-5.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,9 +85,9 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "session-07/S07-Vanilla-PHP-MVC-Pt-3.md",
-                "collapseAll": false,
-                "extraContext": false,
+                "file": "session-08/S08-Vanilla-PHP-MVC-Pt-5.md",
+                "collapseAll": true,
+                "extraContext": true,
                 "sortOrder": "alphabetical",
                 "showSearch": false,
                 "searchQuery": "",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "session-07/S07-Vanilla-PHP-MVC-Pt-3.md",
+                "file": "session-08/S08-Vanilla-PHP-MVC-Pt-5.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,16 +125,16 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "session-07/S07-Vanilla-PHP-MVC-Pt-3.md"
+                "file": "session-08/S08-Vanilla-PHP-MVC-Pt-5.md"
               }
             }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -152,14 +152,18 @@
       "marp-slides:Show Slide Preview": false
     }
   },
-  "active": "13721d47ad057a2b",
+  "active": "d4cf2c6c9d14eac7",
   "lastOpenFiles": [
     "session-08/S08-Vanilla-PHP-MVC-Pt-9.md",
+    "session-08/S08-Exercises-and-Journal-Entry.md",
+    "session-08/S08-Vanilla-PHP-MVC-Pt-10.md",
+    "session-08/ReadMe.md",
+    "session-07/S07-Exercises-and-Journal-Entry.md",
+    "session-07/S07-Vanilla-PHP-MVC-Pt-3.md",
     "session-08/S08-Vanilla-PHP-MVC-Pt-8.md",
     "session-08/S08-Vanilla-PHP-MVC-Pt-7.md",
     "session-08/S08-Vanilla-PHP-MVC-Pt-6.md",
     "session-08/S08-Vanilla-PHP-MVC-Pt-5.md",
-    "session-08/S08-Vanilla-PHP-MVC-Pt-10.md",
     "session-07/template.php",
     "assets/wWsoqyF1sX.png",
     "assets/vivaldi_qa5rLjIHgj.png",
@@ -175,12 +179,10 @@
     "session-07/S07-Vanilla-PHP-MVC-Pt-6.md",
     "session-07/S07-Vanilla-PHP-MVC-Pt-5.md",
     "session-07/S07-Vanilla-PHP-MVC-Pt-4.md",
-    "session-07/S07-Vanilla-PHP-MVC-Pt-3.md",
     "session-12/ReadMe.md",
     "session-13/ReadMe.md",
     "session-11/ReadMe.md",
     "session-11/S11-Terminology-Laravel.md",
-    "session-08/ReadMe.md",
     "session-09/ReadMe.md",
     "session-10/ReadMe.md",
     "session-14/ReadMe.md",
@@ -189,8 +191,6 @@
     "session-17/ReadMe.md",
     "session-18/ReadMe.md",
     "session-19/ReadMe 1.md",
-    "session-20/ReadMe.md",
-    "session-07/ReadMe.md",
     "assets/UserController.php",
     "assets/ProductController.php",
     "assets/HomeController.php",
