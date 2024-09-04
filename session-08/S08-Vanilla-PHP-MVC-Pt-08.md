@@ -18,6 +18,26 @@ The product feature has a number of basic facilities... these correspond to the 
 | Add             | Create         | Create |
 | Delete          | Delete         | Delete |
 
+### Add Product Routes
+
+Open the `routes.php` file again, and add:
+
+```php
+$router->get('/products', 'ProductController@index');  
+$router->get('/products/create', 'ProductController@create', ['auth']);  
+$router->get('/products/edit/{id}', 'ProductController@edit', ['auth']);  
+$router->get('/products/search', 'ProductController@search');  
+$router->get('/products/{id}', 'ProductController@show');  
+  
+$router->post('/products', 'ProductController@store', ['auth']);  
+$router->put('/products/{id}', 'ProductController@update', ['auth']);  
+
+$router->delete('/products/{id}', 'ProductController@destroy', ['auth']);
+```
+
+TODO: Add details for above
+
+
 ### Create the Product Controller Class
 
 To start, we need to create the class for the Prodcut Controller.
