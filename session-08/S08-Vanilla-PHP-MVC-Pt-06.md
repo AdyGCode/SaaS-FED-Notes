@@ -116,7 +116,17 @@ As usual you are charged with adding the relevant DocBlocks to the methods and u
 
 ## The Home Controller & View
 
-Before we start on the User and Product feature, we will add our home controller and view.
+Before we start on the User and Product feature, we will add our home route, home controller and view.
+
+### Home Route
+
+We have already done this!
+
+Look at the `routes.php` file and you will see we have a call to the router to check for a `GET` based HTTP request to the `/` endpoint, and direct this to the `HomeController`'s `index` method:
+
+```php
+$router->get('/', 'HomeController@index');
+```
 
 ### Home Controller
 

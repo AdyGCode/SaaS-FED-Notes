@@ -33,6 +33,18 @@ npm install && npm update
 npx tailwind -i src/source.css -o public/assets/css/site.css --watch
 ```
 
+## The Routes File Revisited
+
+At the end of the previous stage, we added a one line `routes.php` file in the root of the project:
+
+```php
+$router->get('/', 'HomeController@index');  
+```
+
+As stated previously, this router call adds a GET method route to the router that looks for the `/` endpoint for the URL.
+
+We will add additional routes to this file as needed as we progress through the next parts of the tutorial.
+
 
 ## Public `index.php`
 
