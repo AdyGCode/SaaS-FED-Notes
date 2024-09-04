@@ -624,4 +624,4 @@ You are expected to update the header comments to give a title and explain the p
 
 ---
 
-next... [S07-Vanilla-PHP-MVC-Pt-4](session-07/S07-Vanilla-PHP-MVC-Pt-4.md)
+next... [S07 Vanilla PHP MVC Pt 4](../session-07/S07-Vanilla-PHP-MVC-Pt-4.md)
