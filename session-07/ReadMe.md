@@ -1,12 +1,12 @@
 # Session 07
 
-- [S07 Vanilla PHP MVC: Pt 0](./session-07/S07-Vanilla-PHP-MVC-Pt-0.md)
-- [S07 Vanilla PHP MVC: Pt 1](session-07/S07-Vanilla-PHP-MVC-Pt-1.md)
-- [S07 Vanilla PHP MVC: Pt 2](session-07/S07-Vanilla-PHP-MVC-Pt-2.md)
-- [S07 Vanilla PHP MVC: Pt 3](session-07/S07-Vanilla-PHP-MVC-Pt-3.md)
-- [S07 Vanilla PHP MVC: Pt 4](session-08/S08-Vanilla-PHP-MVC-Pt-5.md)
-- [S07 Vanilla PHP MVC: Pt 5](session-08/S08-Vanilla-PHP-MVC-Pt-6.md)
-- [S07 Vanilla PHP MVC: Pt 6](session-08/S08-Vanilla-PHP-MVC-Pt-7.md)
+- [S07 Vanilla PHP MVC: Pt 0](../session-07/S07-Vanilla-PHP-MVC-Pt-0.md)
+- [S07 Vanilla PHP MVC: Pt 1](../session-07/S07-Vanilla-PHP-MVC-Pt-1.md)
+- [S07 Vanilla PHP MVC: Pt 2](../session-07/S07-Vanilla-PHP-MVC-Pt-2.md)
+- [S07 Vanilla PHP MVC: Pt 3](../session-07/S07-Vanilla-PHP-MVC-Pt-3.md)
+
+Tutorial continues in Session 08...
+
 - [Exercises and Journal Entry](./session-07/Session-07-Exercises-and-Journal-Entry.md)
 ### Note
 
