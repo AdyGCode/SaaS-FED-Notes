@@ -4,7 +4,34 @@
 
 So far we have created the helpers, the routes and the database configuration.
 
-In this section we will look at the `public/index.php` file, and convert it from the current template file into a set of partials that will be stored in the `App/views/partials` folder..
+In this section we will look at the `public/index.php` file, and convert it from the current template file into a set of partials that will be stored in the `App/views/partials` folder...
+
+## Before you continue...
+
+One item to note is that when you restart a project after leaving it for the day, you will need to restart the likes of the tailwind CSS compiler.
+
+It is also a good idea to run the `npm` and `composer` installs/updates.
+
+Also, we need to update the `tailwind.config.js` file a little...
+
+The content section needs to change to:
+
+```js
+content: [  
+  "./src/**/*.{html,js}",  
+  "./{App,public,config,Framework}/*.{html,js,php}"  
+],
+```
+
+Use the following:
+
+```shell
+composer install && npm install
+
+npm update && composer update
+
+npx tailwind -i src/source.css -o public/assets/css/site.css --watch
+```
 
 
 ## Public `index.php`
