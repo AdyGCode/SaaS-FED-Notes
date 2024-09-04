@@ -26,6 +26,32 @@ The User feature contains three main components:
 
 We are **not** implementing a user management feature in this tutorial, but you may do so for an exercise **after** the product feature is completed.
 
+### User Routes
+
+Before we can continue we want to add the expected routes to the `routes.php` file that will deal with the ability for the user to login, register and logout.
+
+Open the `routes.php` file and add:
+
+```php
+$router->get('/auth/register', 'UserController@create', ['guest']); 
+$router->get('/auth/login', 'UserController@login', ['guest']);  
+```
+
+These two `GET` routes allow the user to visit the `/auth/login` and `auth/register` endpoints.
+
+Both of the endpoints allow "guests" (people who are not authenticated) to visit them.
+
+After these two we then add endpoints that handle the user's submission of the registration and  login forms, plus the logout action.
+
+These all require `POST` actions so as to ensure data is *hidden* FROM THE url.
+
+```php
+$router->post('/auth/register', 'UserController@store', ['guest']);  
+$router->post('/auth/logout', 'UserController@logout', ['auth']);  
+$router->post('/auth/login', 'UserController@authenticate', ['guest']);
+```
+
+
 ### User Controller
 
 Begin by creating a new class named `UserController` in the `App/Controllers` folder.
