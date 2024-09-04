@@ -373,4 +373,4 @@ Try fixing it to match this (one product shown):
 ![](../assets/Pasted%20image%2020240830182226.png)
 
 
-and finally ... [S08-Vanilla-PHP-MVC-Pt-7](../session-08/S08-Vanilla-PHP-MVC-Pt-7.md)
+and finally ... [S08-Vanilla-PHP-MVC-Pt-07](session-08/S08-Vanilla-PHP-MVC-Pt-07.md)

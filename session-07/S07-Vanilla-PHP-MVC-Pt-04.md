@@ -172,4 +172,4 @@ You are expected to update/add the method and class header comments to explain t
 
 The next session continues the development with the creatoin of an application using our micro-framework code.
 
-[S08 Vanilla PHP MVC - Pt 5](../session-08/S08-Vanilla-PHP-MVC-Pt-5.md)
+[S08 Vanilla PHP MVC - Pt 5](session-08/S08-Vanilla-PHP-MVC-Pt-05.md)

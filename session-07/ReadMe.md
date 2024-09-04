@@ -1,9 +1,9 @@
 # Session 07
 
-- [S07 Vanilla PHP MVC: Pt 0](../session-07/S07-Vanilla-PHP-MVC-Pt-0.md)
-- [S07 Vanilla PHP MVC: Pt 1](../session-07/S07-Vanilla-PHP-MVC-Pt-1.md)
-- [S07 Vanilla PHP MVC: Pt 2](../session-07/S07-Vanilla-PHP-MVC-Pt-2.md)
-- [S07 Vanilla PHP MVC: Pt 3](../session-07/S07-Vanilla-PHP-MVC-Pt-3.md)
+- [S07 Vanilla PHP MVC: Pt 0](session-07/S07-Vanilla-PHP-MVC-Pt-00.md)
+- [S07 Vanilla PHP MVC: Pt 1](session-07/S07-Vanilla-PHP-MVC-Pt-01.md)
+- [S07 Vanilla PHP MVC: Pt 2](session-07/S07-Vanilla-PHP-MVC-Pt-02.md)
+- [S07 Vanilla PHP MVC: Pt 3](session-07/S07-Vanilla-PHP-MVC-Pt-03.md)
 
 Tutorial continues in Session 08...
 
