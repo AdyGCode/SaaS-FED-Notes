@@ -110,7 +110,7 @@ We are ready to create the partials for the Application.
 
 The partials contain the common sections of pages such as Header, Footer and Navigation.
 
-![](assets/Pasted%20image%2020240830162654.png)
+![](../assets/Pasted%20image%2020240830162654.png)
 
 Let's create each in turn.
 
@@ -280,4 +280,4 @@ The code as an image as per 3/9/24:
 ![](../assets/wWsoqyF1sX.png)
 
 
-next... [S07-Vanilla-PHP-MVC-Pt-6](session-06/S06-Vanilla-PHP-MVC-Pt-6.md)
+next... [S07-Vanilla-PHP-MVC-Pt-6](../session-06/S06-Vanilla-PHP-MVC-Pt-6.md)

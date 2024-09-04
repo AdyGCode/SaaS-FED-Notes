@@ -30,11 +30,11 @@ Create a new class in the `Framework` folder by doing the following:
 - Hover over New
 - Then hover over and click PHP Class
 
-![image: right mouse clicking on a folder to create a new PHP Class](assets/Pasted%20image%2020240827145826.png)
+![image: right mouse clicking on a folder to create a new PHP Class](../assets/Pasted%20image%2020240827145826.png)
 
 Now complete the resulting dialog box:
 
-![Image: New Class Dialog Box](assets/Pasted%20image%2020240827145943.png)
+![Image: New Class Dialog Box](../assets/Pasted%20image%2020240827145943.png)
 
 Here are the values:
 

@@ -619,5 +619,5 @@ Finally set a flash message, and redirect to the products page.
 ---
 
 
-So that's the coding done... time to test... [S07 Vanilla PHP MVC Pt 10 (Testing)](session-08/S08-Vanilla-PHP-MVC-Pt-10.md)
+So that's the coding done... time to test... [S07 Vanilla PHP MVC Pt 10 (Testing)](../session-08/S08-Vanilla-PHP-MVC-Pt-10.md)
 

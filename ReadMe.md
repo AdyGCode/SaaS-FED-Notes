@@ -40,7 +40,7 @@ includeLinks: true
 
 ## Development Environment
 
-Please make sure you check the required [development environment](session-01/S01-Development-Environments.md) details.
+Please make sure you check the required [development environment](../session-01/S01-Development-Environments.md) details.
 
 
 ## Badges

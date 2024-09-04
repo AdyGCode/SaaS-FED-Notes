@@ -1,12 +1,12 @@
 # Session 03
 
 
-- [Terminology: Database](session-03/S03-Terminology-Database.md)
-- [Terminology: SQL](session-03/S03-Terminology-SQL.md)
-- [S03-Terminology-Testing-Debugging](session-03/S03-Terminology-Testing-Debugging.md)
-- [S03-PHP-Basics-II](session-03/S03-PHP-Basics-II.md)
+- [Terminology: Database](../session-03/S03-Terminology-Database.md)
+- [Terminology: SQL](../session-03/S03-Terminology-SQL.md)
+- [S03-Terminology-Testing-Debugging](../session-03/S03-Terminology-Testing-Debugging.md)
+- [S03-PHP-Basics-II](../session-03/S03-PHP-Basics-II.md)
 
-- [Exercises and Journal Entry](Session-03-Exercises-and-Journal-Entry.md)
+- [Exercises and Journal Entry](../session-03-Exercises-and-Journal-Entry.md)
 
 
 ### Note

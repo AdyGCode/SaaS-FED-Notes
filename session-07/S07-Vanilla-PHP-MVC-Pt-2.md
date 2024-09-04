@@ -458,5 +458,5 @@ function redirect($url)
 ```
 
 
-next... [S07-Vanilla-PHP-MVC-Pt-3](session-07/S07-Vanilla-PHP-MVC-Pt-3.md)
+next... [S07-Vanilla-PHP-MVC-Pt-3](../session-07/S07-Vanilla-PHP-MVC-Pt-3.md)
 

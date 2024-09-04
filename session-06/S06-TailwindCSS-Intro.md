@@ -35,7 +35,7 @@ This initialises the repository.
 We now need to update the `.gitignore` in the root folder.
 
 Download this file:
-![](session-06/gitignore.txt)
+![](../session-06/gitignore.txt)
 
 Use the following command to copy the file, and rename it, into your project's root folder:
 
@@ -68,11 +68,11 @@ touch src/source.css
 
 Open PhpStorm, and use the "hamburger" menu:
 
-![Image: Hamburger Icon](assets/Pasted%20image%2020240827112528.png)
+![Image: Hamburger Icon](../assets/Pasted%20image%2020240827112528.png)
 
  Then click File, and click Open option:
  
-![image: File - Open dialog](assets/Pasted%20image%2020240827112545.png)
+![image: File - Open dialog](../assets/Pasted%20image%2020240827112545.png)
 
 Locate and then double-click on the new `SaaS-Vanilla-MVC` folder. Click Open to open the project.
 
@@ -447,7 +447,7 @@ Now we are going to cheat a little by using PhpStorm's ability to communicate wi
 
 Click on the hamburger, then hover over the Git menu, move down to GitHub and then click on the Share Project on GitHub option.
 
-![Image: Hamburger->git->Github->Share Project](assets/Pasted%20image%2020240827113920.png)
+![Image: Hamburger->git->Github->Share Project](../assets/Pasted%20image%2020240827113920.png)
 
 What happens next will depend  on if you have manged to use GitHub before and pushed content to the remote.
 
@@ -455,11 +455,11 @@ You may need to connect to your account.
 
 Once you have connected, PhpStorm will then load your account information, and at the same time it will check to see if the repository name has been used before (it defaults to the project name).
 
-![image: PhpStorm checking the GiHub account](assets/Pasted%20image%2020240827114208.png)
+![image: PhpStorm checking the GiHub account](../assets/Pasted%20image%2020240827114208.png)
 
 Once complete, if it finds the repository name already, it will warn you. In that case, we suggest using a modified name such as `SaaS-Vanilla-PHP-MVC` instead.
 
-![](assets/Pasted%20image%2020240827114230.png)
+![](../assets/Pasted%20image%2020240827114230.png)
 
 Note we have made the repository public as it is a demo, not an assessment.
 

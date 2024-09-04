@@ -2,7 +2,7 @@
 
 # Creating a Vanilla PHP MVC Application
 
-It is important to note that we are basing this MVC application on the work from the previous week ([S06 TailwindCSS Intro](session-06/S06-TailwindCSS-Intro.md)) and Brad Traversy's PHP from Scratch course.
+It is important to note that we are basing this MVC application on the work from the previous week ([S06 TailwindCSS Intro](../session-06/S06-TailwindCSS-Intro.md)) and Brad Traversy's PHP from Scratch course.
 
 To understand how he developed this basic framework concept, the process of refactoring from very 'wet' code, and the use of OOP it is important you follow his course through.
 
@@ -50,13 +50,13 @@ Hover over PhpMyAdmin and click
 
 it will then go and download and install PhpMyAdmin for you.
 
-![](assets/laragon_SlzdgI2Bym-output.gif)
+![](../assets/laragon_SlzdgI2Bym-output.gif)
 
 Click on the database button to open PhpMyAdmin in your browser.
 
 Once the page has opened, enter `root` fopr the username, and leave the password blank.
 
-![](assets/Pasted%20image%2020240827120045.png)
+![](../assets/Pasted%20image%2020240827120045.png)
 Click OK to open the administration interface.
 
 ## Setting up the Database & Database User
@@ -267,5 +267,5 @@ VALUES (40380, 20, 'Sheep BrickHeadz',
 
 OK, we now have a database with users and products tables.
 
-We are ready to start our PHP... [S07-Vanilla-PHP-MVC-Pt-2](session-07/S07-Vanilla-PHP-MVC-Pt-2.md)
+We are ready to start our PHP... [S07-Vanilla-PHP-MVC-Pt-2](../session-07/S07-Vanilla-PHP-MVC-Pt-2.md)
 

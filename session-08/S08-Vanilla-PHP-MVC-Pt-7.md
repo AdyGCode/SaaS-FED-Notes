@@ -641,5 +641,5 @@ public function logout()
 
 So that is the User Feature completed.
 
-The final step is the Products Feature which is covered in [S07 Vanilla PHP MVC Pt 8](session-08/S08-Vanilla-PHP-MVC-Pt-8.md)
+The final step is the Products Feature which is covered in [S07 Vanilla PHP MVC Pt 8](../session-08/S08-Vanilla-PHP-MVC-Pt-8.md)
 

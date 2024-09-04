@@ -70,7 +70,7 @@ loadPartial('footer');
 
 When used it will display a page similar to this:
 
-![404 error being shown using the error view](assets/Pasted%20image%2020240830174221.png)
+![404 error being shown using the error view](../assets/Pasted%20image%2020240830174221.png)
 
 ## Not Found
 
@@ -276,7 +276,7 @@ Then immediately after this add the same for the user count, but we change the b
 
 Here is an example of its output:
 
-![](assets/Pasted%20image%2020240830180600.png)
+![](../assets/Pasted%20image%2020240830180600.png)
 
 Ok, so that is the 'statistics' done.
 
@@ -341,7 +341,7 @@ Replace the HTML Comment (`<!-- HTML... -->`) in the code we just added with:
 
 When you preview this by visiting the web page, you should no see something like this:
 
-![](assets/Pasted%20image%2020240830181741.png)
+![](../assets/Pasted%20image%2020240830181741.png)
 
 #### Adding the Product information
 
@@ -360,7 +360,7 @@ Use the table below to do this:
 
 We now get (one product shown):
 
-![](assets/Pasted%20image%2020240830182209.png)
+![](../assets/Pasted%20image%2020240830182209.png)
 
 #### What is the problem?
 
@@ -370,7 +370,7 @@ How do you think you fix this?
 
 Try fixing it to match this (one product shown):
 
-![](assets/Pasted%20image%2020240830182226.png)
+![](../assets/Pasted%20image%2020240830182226.png)
 
 
-and finally ... [S08-Vanilla-PHP-MVC-Pt-7](session-08/S08-Vanilla-PHP-MVC-Pt-7.md)
+and finally ... [S08-Vanilla-PHP-MVC-Pt-7](../session-08/S08-Vanilla-PHP-MVC-Pt-7.md)

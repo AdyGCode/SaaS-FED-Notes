@@ -1,7 +1,7 @@
 # Session 04
 
 
-- [Terminology: Security](session-04/S04-Terminology-Security.md)
+- [Terminology: Security](../session-04/S04-Terminology-Security.md)
 - [S04-PHP-Basics-III](S04-PHP-Basics-III.md)
 - [S04-PHP-Basics-IV](S04-PHP-Basics-IV.md)
 - [S04-PHP-Basics-V](S04-PHP-Basics-V.md)

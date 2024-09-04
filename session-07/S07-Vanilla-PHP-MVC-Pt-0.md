@@ -34,7 +34,7 @@ This initialises the repository.
 We now need to update the `.gitignore` in the root folder.
 
 Download this file:
-![](session-06/gitignore.txt)
+![](../session-06/gitignore.txt)
 
 Use the following command to copy the file, and rename it, into your project's root folder:
 
@@ -67,11 +67,11 @@ touch src/source.css
 
 Open PhpStorm, and use the "hamburger" menu:
 
-![Image: Hamburger Icon](assets/Pasted%20image%2020240827112528.png)
+![Image: Hamburger Icon](../assets/Pasted%20image%2020240827112528.png)
 
 Then click File, and click Open option:
 
-![image: File - Open dialog](assets/Pasted%20image%2020240827112545.png)
+![image: File - Open dialog](../assets/Pasted%20image%2020240827112545.png)
 
 Locate and then double-click on the new `SaaS-Vanilla-MVC` folder. Click Open to open the project.
 
