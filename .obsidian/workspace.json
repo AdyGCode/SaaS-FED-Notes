@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "3441e774a4ebe417",
+        "id": "1ce8c442b21876bc",
         "type": "tabs",
         "children": [
           {
-            "id": "13721d47ad057a2b",
+            "id": "f0f1517fe3c67330",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -69,7 +69,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 414.5
+    "width": 437.5
   },
   "right": {
     "id": "26a2935f4ff09f9b",
@@ -152,18 +152,21 @@
       "marp-slides:Show Slide Preview": false
     }
   },
-  "active": "d4cf2c6c9d14eac7",
+  "active": "f0f1517fe3c67330",
   "lastOpenFiles": [
-    "session-08/S08-Vanilla-PHP-MVC-Pt-9.md",
-    "session-08/S08-Exercises-and-Journal-Entry.md",
-    "session-08/S08-Vanilla-PHP-MVC-Pt-10.md",
-    "session-08/ReadMe.md",
-    "session-07/S07-Exercises-and-Journal-Entry.md",
+    "session-07/S07-Vanilla-PHP-MVC-Pt-4.md",
     "session-07/S07-Vanilla-PHP-MVC-Pt-3.md",
+    "session-07/S07-Vanilla-PHP-MVC-Pt-2.md",
+    "session-07/S07-Vanilla-PHP-MVC-Pt-0.md",
+    "session-08/S08-Vanilla-PHP-MVC-Pt-5.md",
+    "session-08/S08-Vanilla-PHP-MVC-Pt-6.md",
+    "session-08/S08-Vanilla-PHP-MVC-Pt-9.md",
+    "session-08/S08-Vanilla-PHP-MVC-Pt-10.md",
+    "session-07/S07-Exercises-and-Journal-Entry.md",
+    "session-08/S08-Exercises-and-Journal-Entry.md",
+    "session-08/ReadMe.md",
     "session-08/S08-Vanilla-PHP-MVC-Pt-8.md",
     "session-08/S08-Vanilla-PHP-MVC-Pt-7.md",
-    "session-08/S08-Vanilla-PHP-MVC-Pt-6.md",
-    "session-08/S08-Vanilla-PHP-MVC-Pt-5.md",
     "session-07/template.php",
     "assets/wWsoqyF1sX.png",
     "assets/vivaldi_qa5rLjIHgj.png",
@@ -178,7 +181,6 @@
     "session-07/S07-Vanilla-PHP-MVC-Pt-7.md",
     "session-07/S07-Vanilla-PHP-MVC-Pt-6.md",
     "session-07/S07-Vanilla-PHP-MVC-Pt-5.md",
-    "session-07/S07-Vanilla-PHP-MVC-Pt-4.md",
     "session-12/ReadMe.md",
     "session-13/ReadMe.md",
     "session-11/ReadMe.md",
@@ -189,8 +191,6 @@
     "session-15/ReadMe.md",
     "session-16/ReadMe.md",
     "session-17/ReadMe.md",
-    "session-18/ReadMe.md",
-    "session-19/ReadMe 1.md",
     "assets/UserController.php",
     "assets/ProductController.php",
     "assets/HomeController.php",

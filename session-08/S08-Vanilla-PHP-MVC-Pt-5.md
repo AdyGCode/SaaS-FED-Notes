@@ -26,9 +26,9 @@ content: [
 Use the following:
 
 ```shell
-composer install && npm install
+composer install && composer update
 
-npm update && composer update
+npm install && npm update
 
 npx tailwind -i src/source.css -o public/assets/css/site.css --watch
 ```
@@ -87,6 +87,14 @@ $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $router->route($uri);
 
 ```
+
+
+## `.htaccess` File
+
+So how about this `.htaccess` file...
+
+
+
 
 ## Template HTML File
 
@@ -179,9 +187,9 @@ The message partial is used when we want to display a flash message on a page.
 
 ### Errors Partial
 
-The errors partial is named `errors.view.php`. 
+The errors partial is named `errors.view.php` and is in the same `App/views/partials` folder. 
 
-You are to complete the DocBlock at the start of the view, and then add the following code:
+You are to complete the Doc-Block at the start of the view, and then add the following code:
 
 ```php
 if (isset($errors) && $errors !== null): ?>  
@@ -213,6 +221,17 @@ The error block is based on code from https://tailwindtemplates.io/templates?cat
 Here is an image of the code as of 3/9/2024:
 
 ![](../assets/R6aGaIb7Hj.png)
+
+
+#### Fixing the glitch
+
+
+To fix this we need to change the `if` statement slightly:
+
+```php
+if (isset($errors) && count($errors)>0): ?>
+```
+
 
 ### Message Partial
 
