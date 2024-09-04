@@ -172,7 +172,9 @@ You are expected to update/add the method and class header comments to explain t
 
 So we now get to the actual routes file.
 
-We will only create the "home" route to start:
+Create a file `routes.php` next to the `helpers.php` file...
+
+In this, we will only create the "home" route to start:
 
 ```php
 $router->get('/', 'HomeController@index');  
