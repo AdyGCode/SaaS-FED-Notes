@@ -4,19 +4,15 @@
     "type": "split",
     "children": [
       {
-        "id": "1ce8c442b21876bc",
+        "id": "5d04682b126dd219",
         "type": "tabs",
         "children": [
           {
-            "id": "f0f1517fe3c67330",
+            "id": "286fa0c08306b8f3",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "session-07/S07-Vanilla-PHP-MVC-Pt-04.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           }
         ]
@@ -85,7 +81,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "session-07/S07-Vanilla-PHP-MVC-Pt-04.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -102,7 +97,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "session-07/S07-Vanilla-PHP-MVC-Pt-04.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -124,9 +118,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "session-07/S07-Vanilla-PHP-MVC-Pt-04.md"
-              }
+              "state": {}
             }
           }
         ],
@@ -152,14 +144,14 @@
       "marp-slides:Show Slide Preview": false
     }
   },
-  "active": "f0f1517fe3c67330",
+  "active": "286fa0c08306b8f3",
   "lastOpenFiles": [
+    "session-07/S07-Vanilla-PHP-MVC-Pt-04.md",
     "session-07/S07-Vanilla-PHP-MVC-Pt-03.md",
     "session-08/S08-Vanilla-PHP-MVC-Pt-08.md",
     "session-08/S08-Vanilla-PHP-MVC-Pt-07.md",
     "session-08/S08-Vanilla-PHP-MVC-Pt-06.md",
     "session-08/S08-Vanilla-PHP-MVC-Pt-05.md",
-    "session-07/S07-Vanilla-PHP-MVC-Pt-04.md",
     "session-07/S07-Vanilla-PHP-MVC-Pt-00.md",
     "session-07/S07-Vanilla-PHP-MVC-Pt-01.md",
     "session-07/S07-Vanilla-PHP-MVC-Pt-02.md",
