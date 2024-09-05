@@ -4,19 +4,15 @@
     "type": "split",
     "children": [
       {
-        "id": "3441e774a4ebe417",
+        "id": "8a0f478d082bb4c9",
         "type": "tabs",
         "children": [
           {
-            "id": "13721d47ad057a2b",
+            "id": "689ad1454905feee",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "session-08/S08-Vanilla-PHP-MVC-Pt-05.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           }
         ]
@@ -85,7 +81,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "session-08/S08-Vanilla-PHP-MVC-Pt-05.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +97,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "session-08/S08-Vanilla-PHP-MVC-Pt-05.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -124,8 +118,18 @@
             "type": "leaf",
             "state": {
               "type": "outline",
+              "state": {}
+            }
+          },
+          {
+            "id": "5abe21e00b207095",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
               "state": {
-                "file": "session-08/S08-Vanilla-PHP-MVC-Pt-05.md"
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
               }
             }
           }
@@ -138,28 +142,29 @@
   },
   "left-ribbon": {
     "hiddenItems": {
+      "obsidian-advanced-slides:Show Slide Preview": false,
+      "workspaces:Manage workspace layouts": false,
+      "publish:Publish changes...": false,
       "daily-notes:Open today's daily note": false,
       "switcher:Open quick switcher": false,
       "graph:Open graph view": false,
       "canvas:Create new canvas": false,
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
-      "workspaces:Manage workspace layouts": false,
-      "obsidian-advanced-slides:Show Slide Preview": false,
       "table-editor-obsidian:Advanced Tables Toolbar": false,
       "templater-obsidian:Templater": false,
       "mermaid-tools:Open Mermaid Toolbar": false,
       "marp-slides:Show Slide Preview": false
     }
   },
-  "active": "13721d47ad057a2b",
+  "active": "689ad1454905feee",
   "lastOpenFiles": [
+    "session-08/S08-Vanilla-PHP-MVC-Pt-05.md",
     "session-08/S08-Vanilla-PHP-MVC-Pt-9.md",
     "session-08/S08-Vanilla-PHP-MVC-Pt-09.md",
     "session-08/S08-Vanilla-PHP-MVC-Pt-08.md",
     "session-08/S08-Vanilla-PHP-MVC-Pt-07.md",
     "session-08/S08-Vanilla-PHP-MVC-Pt-06.md",
-    "session-08/S08-Vanilla-PHP-MVC-Pt-05.md",
     "session-08/S08-Exercises-and-Journal-Entry.md",
     "session-07/S07-Vanilla-PHP-MVC-Pt-04.md",
     "session-07/S07-Vanilla-PHP-MVC-Pt-03.md",

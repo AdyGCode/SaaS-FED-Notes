@@ -7,6 +7,7 @@
   "canvas",
   "outgoing-link",
   "tag-pane",
+  "properties",
   "page-preview",
   "daily-notes",
   "templates",
@@ -18,5 +19,6 @@
   "word-count",
   "slides",
   "workspaces",
-  "file-recovery"
+  "file-recovery",
+  "publish"
 ]

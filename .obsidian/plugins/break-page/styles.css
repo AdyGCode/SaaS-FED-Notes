@@ -1,0 +1,12 @@
+div.page-break::after {
+	content: "Break page. Need at least 1 blank line after.";
+	display: block;
+	font-style: italic;
+	color: gray;
+}
+
+@media print {
+	div.page-break::after {
+		display: none;
+	}
+}

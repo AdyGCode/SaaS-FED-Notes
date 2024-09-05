@@ -1,0 +1,23 @@
+{
+  "port": "3000",
+  "autoReload": true,
+  "autoStart": true,
+  "exportDirectory": "/Exports/Slides",
+  "enableChalkboard": false,
+  "enableOverview": true,
+  "enableMenu": true,
+  "enablePointer": false,
+  "enableTimeBar": false,
+  "theme": "black",
+  "highlightTheme": "zenburn",
+  "transition": "slide",
+  "transitionSpeed": "slow",
+  "controls": true,
+  "progress": true,
+  "slideNumber": true,
+  "showGrid": false,
+  "autoComplete": "always",
+  "paneMode": "split",
+  "themeDirectory": "",
+  "center": true
+}

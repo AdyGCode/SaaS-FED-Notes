@@ -1,0 +1,26 @@
+{
+  "dateFormat": "yyyy-MM-dd'T'HH:mm",
+  "enableCreateTime": true,
+  "headerUpdated": "updated",
+  "headerCreated": "created",
+  "minMinutesBetweenSaves": 1,
+  "ignoreGlobalFolder": [],
+  "ignoreCreatedFolder": [],
+  "enableExperimentalHash": false,
+  "fileHashMap": {
+    "Session-02/What-is-an-API.md": "c04868292a9b950f72d9b2e675d99d3e573b574fc02933ff77ade138c5e8cdee",
+    "Session-02/S02-Exercises-and-Journal-Entry.md": "f06172fa2aae08a262232feb61c8eecdcd1a224c121736c2b7e1d3772ddeaf82",
+    "Session-02/S02-Our-First-API.md": "1d1d51128e72b3eeef51a478760d2e8b3fe8e20ed80ddf5ac5f7cb1b746457ae",
+    "Session-03/ReadMe.md": "7f233b33a6822a372f13ec5092b80b7176119c4e58b9c7ddcd91f2515a01dd39",
+    "Session-03/S03-Designing-an-API.md": "b6c4a0fc5416135f4d385102261c0dd7c86115a6d1776972411bd41a0b298551",
+    "Session-03/S03-Exercises-and-Journal-Entry.md": "c51ed7bd50719422bdc87c8f9866a126a0e49fcc2a25f7ceb3c14ecd474c64a3",
+    "research.md": "f8253eebb2300a37a3b5036d4775e251e3c2cca0fab409e9b9ed7a994b8fe847",
+    "Session-05/S05-Portfolio-Work.md": "c64e378740ba18ffdf15b8b12983ab6db1564177c981f7d2e72988e6439f0fd8",
+    "Session-03/S03-Test-Driven-Development-User-Feature.md": "c2d98d988075b2c1165a3c41121c175ed7f79b4faada1538914d04e360ec8865",
+    "Session-04/ReadMe.md": "1ac4c0202be3443350b6edee197b505ee8bb340553d0c5eb88fb541bee45a58d",
+    "Session-04/S04-Portfolio-Work.md": "aa2542ccc1f434410c0d966b0002e3ab82ca2c7561a062996ca75b34340a241f",
+    "Session-04/S04-GitHub-Project-Management.md": "99df4ed33e9f325cc77ec4c7387d9fb98134880f3331c3a8f30b948888e4f9a0",
+    "Session-02/ReadMe.md": "a68b5ea8b5415b3e027ab3359777e4199f899d8f2daa2c096724474c15a945b1",
+    "Session-09/NoSQL-Introduction.md": "3fdc35dea4d2237ed132b4958c34a451519d18859fc45b0f63938a53bceff84d"
+  }
+}

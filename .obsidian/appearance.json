@@ -1,7 +1,12 @@
 {
+  "accentColor": "#007700",
+  "cssTheme": "Atom",
+  "monospaceFontFamily": "FiraCode Nerd Font",
   "interfaceFontFamily": "Inter",
   "textFontFamily": "Atkinson Hyperlegible",
-  "monospaceFontFamily": "FiraCode Nerd Font",
-  "baseFontSize": 30,
-  "baseFontSizeAction": true
+  "baseFontSize": 18,
+  "baseFontSizeAction": true,
+  "enabledCssSnippets": [
+    "CustomIcon-AutoGen"
+  ]
 }
