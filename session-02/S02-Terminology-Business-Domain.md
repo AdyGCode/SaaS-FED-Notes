@@ -1,3 +1,17 @@
+---
+theme: default
+paginate: true
+footer: © Copyright 2024, Adrian Gould & NM TAFE
+header: "![NMTAFE](../images/Black-Red-Banner.svg)"
+auto-scaling: true
+size: 4k
+color: "#ccc"
+backgroundColor: "#060606"
+tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testing, PEST
+created: 2024-08-01T09:23
+updated: 2024-09-10T16:37
+---
+
 # More on the Business Domain 
 
 The business domain refers to the specific area of business or industry that a software application is designed to serve. It encompasses the knowledge, processes, rules, and data specific to that particular business context. Understanding the business domain is crucial for designing and developing software that effectively addresses the needs of its users and stakeholders.
