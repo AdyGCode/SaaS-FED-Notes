@@ -1,3 +1,18 @@
+---
+theme: default
+paginate: true
+footer: © Copyright 2024, Adrian Gould & NM TAFE
+header: "![NMTAFE](../images/Black-Red-Banner.svg)"
+auto-scaling: true
+size: 4k
+color: "#ccc"
+backgroundColor: "#060606"
+tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testng, PEST
+date created: 03 July 2024
+date modified: 07 July 2024
+created: 2024-08-08T09:56
+updated: 2024-09-10T16:36
+---
 
 - Download Laragon from https://laragon.org
   - Versoin 6.0.0 https://github.com/leokhoa/laragon/releases/download/6.0.0/laragon-wamp.exe

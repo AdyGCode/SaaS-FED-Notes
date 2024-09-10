@@ -7,10 +7,11 @@ auto-scaling: true
 size: 4k
 color: "#ccc"
 backgroundColor: "#060606"
-tags: SaaS, APIs, Back-End
-
+tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testing, PEST
 date created: 03 July 2024
 date modified: 07 July 2024
+created: 2024-08-01T09:23
+updated: 2024-09-10T16:37
 ---
 
 # The CLI
