@@ -423,7 +423,12 @@ if (count($uriSegments) === count($routeSegments) && strtoupper($route['method']
             $match = false;  
             break;  
         }  
-  
+        // /is the start and end of regex pattern
+        // \escapes the curly brace, making it a regular character, it's looking for it.  
+        // parenthesis is the capturing group
+        // . is any character that is not a newline
+        // + is one or more proceeding elements
+        // ? lazy making match as few characters as possible
         if (preg_match('/\{(.+?)}/', $routeSegments[$i], $matches)) {  
             $params[$matches[1]] = $uriSegments[$i];  
         }  
