@@ -9,13 +9,15 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testng, PEST
 created: 2024-09-10T10:26
-updated: 2024-09-10T16:36
+updated: 2024-09-10T16:44
 ---
 
 
 Using the Micro-MVC Framework (based on the Traversy Media PHP from Scratch Course) we have been investigating and working with you are to create a simple web application.
 
 The project brief is outlined below.
+
+Full Assessment Document is available on the LMS (Blackboard).
 
 ### Project Brief
 
