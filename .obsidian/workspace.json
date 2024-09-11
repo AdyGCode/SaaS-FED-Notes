@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "5d04682b126dd219",
+        "id": "f9035686e1db0a32",
         "type": "tabs",
         "children": [
           {
-            "id": "286fa0c08306b8f3",
+            "id": "b1280c66435d73bb",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -44,7 +44,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "routes.php",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -65,7 +65,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 437.5
+    "width": 414.5
   },
   "right": {
     "id": "26a2935f4ff09f9b",
@@ -81,8 +81,8 @@
             "state": {
               "type": "backlink",
               "state": {
-                "collapseAll": true,
-                "extraContext": true,
+                "collapseAll": false,
+                "extraContext": false,
                 "sortOrder": "alphabetical",
                 "showSearch": false,
                 "searchQuery": "",
@@ -120,6 +120,18 @@
               "type": "outline",
               "state": {}
             }
+          },
+          {
+            "id": "5abe21e00b207095",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              }
+            }
           }
         ],
         "currentTab": 3
@@ -130,59 +142,60 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "daily-notes:Open today's note": false,
+      "obsidian-advanced-slides:Show Slide Preview": false,
+      "workspaces:Manage workspace layouts": false,
+      "publish:Publish changes...": false,
+      "daily-notes:Open today's daily note": false,
       "switcher:Open quick switcher": false,
       "graph:Open graph view": false,
       "canvas:Create new canvas": false,
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
-      "workspaces:Manage workspace layouts": false,
-      "obsidian-advanced-slides:Show Slide Preview": false,
       "table-editor-obsidian:Advanced Tables Toolbar": false,
       "templater-obsidian:Templater": false,
       "mermaid-tools:Open Mermaid Toolbar": false,
       "marp-slides:Show Slide Preview": false
     }
   },
-  "active": "286fa0c08306b8f3",
+  "active": "b1280c66435d73bb",
   "lastOpenFiles": [
-    "session-07/S07-Vanilla-PHP-MVC-Pt-04.md",
-    "session-07/S07-Vanilla-PHP-MVC-Pt-03.md",
+    "session-09/S09-Portfolio-Work.md",
+    "session-10/ReadMe.md",
+    "session-10/S10-Exercises-and-Journal-Entry.md",
+    "session-09/S09-Exercises-and-Journal-Entry.md",
+    "session-06/S06-TailwindCSS-Intro.md",
+    "session-07/S07-Vanilla-PHP-MVC-Pt-00.md",
+    "session-07/S07-Vanilla-PHP-MVC-Pt-01.md",
+    "session-07/S07-Exercises-and-Journal-Entry.md",
+    "session-09/ReadMe.md",
+    "session-01/ReadMe.md",
+    "session-19/ReadMe.md",
+    "session-01/S01-CLI-Commands.md",
+    "session-01/S01-Development-Environments.md",
+    "session-02/S02-Terminology-Services.md",
+    "session-02/S02-Terminology-Web.md",
+    "session-02/S02-Exercises-and-Journal-Entry.md",
+    "session-02/ReadMe.md",
+    "session-06/S06-Exercises-and-Journal-Entry.md",
+    "session-06/ReadMe.md",
+    "session-08/S08-Exercises-and-Journal-Entry.md",
+    "session-08/S08-Vanilla-PHP-MVC-Pt-05.md",
+    "session-08/S08-Vanilla-PHP-MVC-Pt-9.md",
+    "session-08/S08-Vanilla-PHP-MVC-Pt-09.md",
     "session-08/S08-Vanilla-PHP-MVC-Pt-08.md",
     "session-08/S08-Vanilla-PHP-MVC-Pt-07.md",
     "session-08/S08-Vanilla-PHP-MVC-Pt-06.md",
-    "session-08/S08-Vanilla-PHP-MVC-Pt-05.md",
-    "session-07/S07-Vanilla-PHP-MVC-Pt-00.md",
-    "session-07/S07-Vanilla-PHP-MVC-Pt-01.md",
-    "session-07/S07-Vanilla-PHP-MVC-Pt-02.md",
-    "session-08/S08-Vanilla-PHP-MVC-Pt-09.md",
-    "session-08/S08-Vanilla-PHP-MVC-Pt-10.md",
-    "session-07/S07-Exercises-and-Journal-Entry.md",
-    "session-08/S08-Exercises-and-Journal-Entry.md",
-    "session-08/ReadMe.md",
-    "session-07/template.php",
-    "assets/wWsoqyF1sX.png",
+    "assets/vivaldi_N1eHQIsXhb.png",
     "assets/vivaldi_qa5rLjIHgj.png",
     "assets/vivaldi_hiesZBHyQQ.png",
-    "assets/vivaldi_N1eHQIsXhb.png",
     "assets/vivaldi_962DFkjDpV.png",
-    "assets/pzVMYAcnII.png",
-    "assets/phpstorm64_8NyNDIIMZg.png",
+    "assets/wWsoqyF1sX.png",
     "assets/R6aGaIb7Hj.png",
+    "assets/pzVMYAcnII.png",
+    "assets/1r6KVQrJ6b.png",
+    "assets/phpstorm64_8NyNDIIMZg.png",
     "assets/Pasted image 20240830182226.png",
-    "assets/Pasted image 20240830182209.png",
-    "session-07/S07-Vanilla-PHP-MVC-Pt-7.md",
-    "session-07/S07-Vanilla-PHP-MVC-Pt-6.md",
-    "session-07/S07-Vanilla-PHP-MVC-Pt-5.md",
-    "session-12/ReadMe.md",
-    "session-13/ReadMe.md",
-    "session-11/ReadMe.md",
-    "session-11/S11-Terminology-Laravel.md",
-    "session-09/ReadMe.md",
-    "session-10/ReadMe.md",
-    "session-14/ReadMe.md",
-    "session-15/ReadMe.md",
-    "session-16/ReadMe.md",
+    "session-07/template.php",
     "assets/UserController.php",
     "assets/ProductController.php",
     "assets/HomeController.php",

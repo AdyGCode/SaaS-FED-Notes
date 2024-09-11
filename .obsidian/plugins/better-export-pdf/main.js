@@ -20377,10 +20377,24 @@ async function renderMarkdown(app, file, config, extra) {
     e.id = (_a2 = extra == null ? void 0 : extra.id) != null ? _a2 : "";
   });
   const cache = app.metadataCache.getFileCache(file);
-  const lines = (_g = data == null ? void 0 : data.split("\n")) != null ? _g : [];
-  Object.entries((_h = cache == null ? void 0 : cache.blocks) != null ? _h : {}).forEach(([key, c]) => {
-    const idx = c.position.end.line;
-    lines[idx] = `<span id="^${key}" class="blockid"></span>
+  const blocks = new Map(Object.entries((_g = cache == null ? void 0 : cache.blocks) != null ? _g : {}));
+  const lines = ((_h = data == null ? void 0 : data.split("\n")) != null ? _h : []).map((line, i) => {
+    for (const {
+      id,
+      position: { start, end }
+    } of blocks.values()) {
+      const blockid = `^${id}`;
+      if (line.includes(blockid) && i >= start.line && i <= end.line) {
+        blocks.delete(id);
+        return line.replace(blockid, `<span id="${blockid}" class="blockid"></span> ${blockid}`);
+      }
+    }
+    return line;
+  });
+  [...blocks.values()].forEach(({ id, position: { start, end } }) => {
+    const idx = start.line;
+    lines[idx] = `<span id="^${id}" class="blockid"></span>
+
 ` + lines[idx];
   });
   const fragment = {

@@ -258,7 +258,8 @@ var COUNT_TYPE_DISPLAY_STRINGS = {
   ["alias" /* Alias */]: "First Alias",
   ["created" /* Created */]: "Created Date",
   ["modified" /* Modified */]: "Last Updated Date",
-  ["filesize" /* FileSize */]: "File Size"
+  ["filesize" /* FileSize */]: "File Size",
+  ["frontmatterKey" /* FrontmatterKey */]: "Frontmatter Key"
 };
 var COUNT_TYPE_DESCRIPTIONS = {
   ["none" /* None */]: "Hidden.",
@@ -274,7 +275,8 @@ var COUNT_TYPE_DESCRIPTIONS = {
   ["alias" /* Alias */]: "The first alias property of each note.",
   ["created" /* Created */]: "Creation date. (On folders: earliest creation date of any note.)",
   ["modified" /* Modified */]: "Date of last edit. (On folders: latest edit date of any note.)",
-  ["filesize" /* FileSize */]: "Total size on hard drive."
+  ["filesize" /* FileSize */]: "Total size on hard drive.",
+  ["frontmatterKey" /* FrontmatterKey */]: "Key in the frontmatter block."
 };
 var UNFORMATTABLE_COUNT_TYPES = [
   "none" /* None */,
@@ -292,7 +294,8 @@ var COUNT_TYPE_DEFAULT_SHORT_SUFFIXES = {
   ["link" /* Link */]: "x",
   ["embed" /* Embed */]: "em",
   ["created" /* Created */]: "/c",
-  ["modified" /* Modified */]: "/u"
+  ["modified" /* Modified */]: "/u",
+  ["frontmatterKey" /* FrontmatterKey */]: ""
 };
 function getDescription(countType) {
   return `[${COUNT_TYPE_DISPLAY_STRINGS[countType]}] ${COUNT_TYPE_DESCRIPTIONS[countType]}`;
@@ -311,7 +314,8 @@ var COUNT_TYPES = [
   "alias" /* Alias */,
   "created" /* Created */,
   "modified" /* Modified */,
-  "filesize" /* FileSize */
+  "filesize" /* FileSize */,
+  "frontmatterKey" /* FrontmatterKey */
 ];
 var ALIGNMENT_TYPES = [
   "inline" /* Inline */,
@@ -324,10 +328,13 @@ var DEFAULT_SETTINGS = {
   // NOTES
   countType: "word" /* Word */,
   countTypeSuffix: "w",
+  frontmatterKey: "",
   countType2: "none" /* None */,
   countType2Suffix: "",
+  frontmatterKey2: "",
   countType3: "none" /* None */,
   countType3Suffix: "",
+  frontmatterKey3: "",
   pipeSeparator: "|",
   abbreviateDescriptions: false,
   alignment: "inline" /* Inline */,
@@ -404,6 +411,11 @@ var NovelWordCountSettingTab = class extends import_obsidian2.PluginSettingTab {
         this.plugin.settings.countTypeSuffix = COUNT_TYPE_DEFAULT_SHORT_SUFFIXES[this.plugin.settings.countType];
       }
     });
+    this.renderFrontmatterKeySetting(containerEl, {
+      countType: this.plugin.settings.countType,
+      oldKey: this.plugin.settings.frontmatterKey,
+      setNewKey: (value) => this.plugin.settings.frontmatterKey = value
+    });
     this.renderCustomFormatSetting(containerEl, {
       countType: this.plugin.settings.countType,
       oldSuffix: this.plugin.settings.countTypeSuffix,
@@ -417,6 +429,11 @@ var NovelWordCountSettingTab = class extends import_obsidian2.PluginSettingTab {
         this.plugin.settings.countType2Suffix = COUNT_TYPE_DEFAULT_SHORT_SUFFIXES[this.plugin.settings.countType2];
       }
     });
+    this.renderFrontmatterKeySetting(containerEl, {
+      countType: this.plugin.settings.countType2,
+      oldKey: this.plugin.settings.frontmatterKey2,
+      setNewKey: (value) => this.plugin.settings.frontmatterKey2 = value
+    });
     this.renderCustomFormatSetting(containerEl, {
       countType: this.plugin.settings.countType2,
       oldSuffix: this.plugin.settings.countType2Suffix,
@@ -429,6 +446,11 @@ var NovelWordCountSettingTab = class extends import_obsidian2.PluginSettingTab {
         this.plugin.settings.countType3 = value;
         this.plugin.settings.countType3Suffix = COUNT_TYPE_DEFAULT_SHORT_SUFFIXES[this.plugin.settings.countType3];
       }
+    });
+    this.renderFrontmatterKeySetting(containerEl, {
+      countType: this.plugin.settings.countType3,
+      oldKey: this.plugin.settings.frontmatterKey3,
+      setNewKey: (value) => this.plugin.settings.frontmatterKey3 = value
     });
     this.renderCustomFormatSetting(containerEl, {
       countType: this.plugin.settings.countType3,
@@ -756,6 +778,20 @@ var NovelWordCountSettingTab = class extends import_obsidian2.PluginSettingTab {
       );
     }
   }
+  renderFrontmatterKeySetting(containerEl, config) {
+    if (config.countType !== "frontmatterKey" /* FrontmatterKey */) {
+      return;
+    }
+    new import_obsidian2.Setting(containerEl).setDesc(
+      `[${COUNT_TYPE_DISPLAY_STRINGS["frontmatterKey" /* FrontmatterKey */]}] Key name`
+    ).addText(
+      (text) => text.setValue(config.oldKey).onChange(async (value) => {
+        config.setNewKey(value);
+        await this.plugin.saveSettings();
+        await this.plugin.updateDisplayedCounts();
+      })
+    );
+  }
   renderSeparator(containerEl) {
     containerEl.createEl("hr", {
       cls: "novel-word-count-hr"
@@ -1044,7 +1080,8 @@ var FileHelper = class {
       readingTimeInMinutes,
       linkCount: this.countLinks(metadata),
       embedCount: this.countEmbeds(metadata),
-      aliases: (0, import_obsidian3.parseFrontMatterAliases)(metadata == null ? void 0 : metadata.frontmatter)
+      aliases: (0, import_obsidian3.parseFrontMatterAliases)(metadata == null ? void 0 : metadata.frontmatter),
+      frontmatter: metadata == null ? void 0 : metadata.frontmatter
     });
   }
   getWordGoal(metadata) {
@@ -1188,15 +1225,18 @@ var NodeLabelHelper = class {
     ] : [
       this.getCountTypeWithSuffix(
         this.settings.countType,
-        this.settings.countTypeSuffix
+        this.settings.countTypeSuffix,
+        this.settings.frontmatterKey
       ),
       this.getCountTypeWithSuffix(
         this.settings.countType2,
-        this.settings.countType2Suffix
+        this.settings.countType2Suffix,
+        this.settings.frontmatterKey2
       ),
       this.getCountTypeWithSuffix(
         this.settings.countType3,
-        this.settings.countType3Suffix
+        this.settings.countType3Suffix,
+        this.settings.frontmatterKey3
       )
     ];
     const abbreviateDescriptions = counts.isDirectory && !this.settings.showSameCountsOnFolders ? this.settings.folderAbbreviateDescriptions : this.settings.abbreviateDescriptions;
@@ -1206,14 +1246,16 @@ var NodeLabelHelper = class {
         counts,
         ct.countType,
         abbreviateDescriptions,
-        ct.overrideSuffix
+        ct.overrideSuffix,
+        ct.frontmatterKey
       )
     ).filter((display) => display !== null).join(` ${separator} `);
   }
-  getCountTypeWithSuffix(countType, customSuffix) {
+  getCountTypeWithSuffix(countType, customSuffix, frontmatterKey) {
     return {
       countType,
-      overrideSuffix: this.settings.useAdvancedFormatting ? customSuffix : null
+      overrideSuffix: this.settings.useAdvancedFormatting ? customSuffix : null,
+      frontmatterKey
     };
   }
   getBasicCountString(config) {
@@ -1222,7 +1264,8 @@ var NodeLabelHelper = class {
     const suffix = (_a = config.overrideSuffix) != null ? _a : defaultSuffix;
     return `${config.count}${suffix}`;
   }
-  getDataTypeLabel(counts, countType, abbreviateDescriptions, overrideSuffix) {
+  getDataTypeLabel(counts, countType, abbreviateDescriptions, overrideSuffix, frontmatterKey) {
+    var _a;
     if (!counts || typeof counts.wordCount !== "number") {
       return null;
     }
@@ -1337,6 +1380,18 @@ var NodeLabelHelper = class {
           counts.sizeInBytes,
           abbreviateDescriptions
         );
+      case "frontmatterKey" /* FrontmatterKey */:
+        if (!frontmatterKey) {
+          return null;
+        }
+        const value = (_a = counts == null ? void 0 : counts.frontmatter) == null ? void 0 : _a[frontmatterKey];
+        if (value === void 0 || value === null) {
+          return null;
+        }
+        if (overrideSuffix !== null) {
+          return `${value}${overrideSuffix}`;
+        }
+        return value;
     }
     return null;
   }

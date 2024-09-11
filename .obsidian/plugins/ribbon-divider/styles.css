@@ -1,0 +1,17 @@
+/* styles.scss */
+.side-dock-actions .side-dock-ribbon-action.ribbon-divider {
+  height: 1px;
+  width: 70%;
+  padding: 4px 0;
+}
+.side-dock-actions .side-dock-ribbon-action.ribbon-divider:hover {
+  background-color: transparent;
+}
+.side-dock-actions .side-dock-ribbon-action.ribbon-divider:before {
+  content: "";
+  display: block;
+  height: 1px;
+  width: 100%;
+  background-color: var(--icon-color);
+  opacity: .5;
+}

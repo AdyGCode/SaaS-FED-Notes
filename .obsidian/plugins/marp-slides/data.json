@@ -1,0 +1,10 @@
+{
+  "CHROME_PATH": "",
+  "ThemePath": "templates\\slide-templates",
+  "EnableHTML": false,
+  "MathTypesettings": "mathjax",
+  "HTMLExportMode": "bespoke",
+  "EXPORT_PATH": "c:\\users\\5001775\\Source\\Repos\\SaaS-BED-Notes\\Exports\\Slides\\",
+  "EnableSyncPreview": true,
+  "EnableMarkdownItPlugins": true
+}
