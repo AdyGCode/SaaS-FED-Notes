@@ -15,6 +15,12 @@ updated: 2024-09-10T16:36
 
 - Portfolio Work
 - Demonstrations
+
+https://laravel.com/docs/11.x#meet-laravel
+
+https://bootcamp.laravel.com -> Build Chirper with Blade
+
+
 - [Exercises and Journal Entry](./session-10/Session-10-Exercises-and-Journal-Entry.md)
 ### Note
 
