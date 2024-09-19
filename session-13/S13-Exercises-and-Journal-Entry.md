@@ -12,7 +12,7 @@ created: 2024-09-10T15:54
 updated: 2024-09-19T10:22
 ---
 
-# Session 10 Exercises and Journal Entry
+# Session 13 Exercises and Journal Entry
 
 Here are your instructions for this session's Journal and other exercises and practice.
 

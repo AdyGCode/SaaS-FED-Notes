@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "session-10/S10-Exercises-and-Journal-Entry.md",
+                "file": "session-16/S16-Exercises-and-Journal-Entry.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "session-10/S10-Exercises-and-Journal-Entry.md",
+                "file": "session-16/S16-Exercises-and-Journal-Entry.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "session-10/S10-Exercises-and-Journal-Entry.md",
+                "file": "session-16/S16-Exercises-and-Journal-Entry.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "session-10/S10-Exercises-and-Journal-Entry.md"
+                "file": "session-16/S16-Exercises-and-Journal-Entry.md"
               }
             }
           },
@@ -165,13 +165,16 @@
       "marp-slides:Show Slide Preview": false
     }
   },
-  "active": "d4cf2c6c9d14eac7",
+  "active": "89198e616ec8f4d4",
   "lastOpenFiles": [
-    "session-11/S11-Exercises-and-Journal-Entry.md",
+    "session-15/S15-Exercises-and-Journal-Entry.md",
     "session-10/S10-Exercises-and-Journal-Entry.md",
+    "session-16/S16-Exercises-and-Journal-Entry.md",
+    "session-11/S11-Exercises-and-Journal-Entry.md",
     "session-12/S12-Exercises-and-Journal-Entry.md",
     "session-13/S13-Exercises-and-Journal-Entry.md",
     "session-14/S14-Exercises-and-Journal-Entry.md",
+    "session-10/S10-Exercises-and-Journal-Entry 1.md",
     "session-09/S09-Portfolio-Work.md",
     "session-08/S08-Vanilla-PHP-MVC-Pt-10.md",
     "session-11/S11-Terminology-Laravel.md",
@@ -192,12 +195,6 @@
     "session-19/ReadMe.md",
     "session-01/S01-CLI-Commands.md",
     "session-01/S01-Development-Environments.md",
-    "session-02/S02-Terminology-Services.md",
-    "session-02/S02-Terminology-Web.md",
-    "session-02/S02-Exercises-and-Journal-Entry.md",
-    "session-02/ReadMe.md",
-    "session-06/S06-Exercises-and-Journal-Entry.md",
-    "session-06/ReadMe.md",
     "assets/vivaldi_N1eHQIsXhb.png",
     "assets/vivaldi_qa5rLjIHgj.png",
     "assets/vivaldi_hiesZBHyQQ.png",
