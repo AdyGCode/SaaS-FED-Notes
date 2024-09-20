@@ -37872,19 +37872,19 @@
       "isCountable": true,
       "isDirectory": false,
       "noteCount": 1,
-      "wordCount": 91,
+      "wordCount": 663,
       "wordCountTowardGoal": 0,
       "wordGoal": null,
-      "pageCount": 0.30333333333333334,
-      "characterCount": 594,
-      "nonWhitespaceCharacterCount": 470,
-      "readingTimeInMinutes": 0.3433962264150943,
+      "pageCount": 2.21,
+      "characterCount": 4126,
+      "nonWhitespaceCharacterCount": 3311,
+      "readingTimeInMinutes": 2.5018867924528303,
       "linkCount": 3,
-      "embedCount": 0,
+      "embedCount": 2,
       "aliases": null,
       "createdDate": 1726820784009,
-      "modifiedDate": 1726820969170,
-      "sizeInBytes": 1140,
+      "modifiedDate": 1726827384463,
+      "sizeInBytes": 8032,
       "frontmatter": {
         "theme": "default",
         "paginate": true,
@@ -37902,7 +37902,7 @@
         "date created": "03 July 2024",
         "date modified": "10 July 2024",
         "created": "2024-09-20T11:17",
-        "updated": "2024-09-20T16:26"
+        "updated": "2024-09-20T18:11"
       }
     },
     "session-10/S10-Laravel-BootCamp-Part-1.md": {
@@ -37913,15 +37913,15 @@
       "wordCountTowardGoal": 0,
       "wordGoal": null,
       "pageCount": 5.12,
-      "characterCount": 9718,
-      "nonWhitespaceCharacterCount": 7674,
+      "characterCount": 9713,
+      "nonWhitespaceCharacterCount": 7669,
       "readingTimeInMinutes": 5.796226415094339,
       "linkCount": 2,
       "embedCount": 6,
       "aliases": null,
       "createdDate": 1726813309534,
-      "modifiedDate": 1726820979091,
-      "sizeInBytes": 13630,
+      "modifiedDate": 1726823532541,
+      "sizeInBytes": 13643,
       "frontmatter": {
         "theme": "default",
         "paginate": true,
@@ -37939,7 +37939,7 @@
         "date created": "03 July 2024",
         "date modified": "10 July 2024",
         "created": "2024-09-20T11:17",
-        "updated": "2024-09-20T16:27"
+        "updated": "2024-09-20T16:30"
       }
     },
     "assets/S10-Laravel-BootCamp-20240920160925699.png": {
@@ -38121,6 +38121,42 @@
       "createdDate": 1726818994660,
       "modifiedDate": 1726818994663,
       "sizeInBytes": 9511
+    },
+    "assets/S10-Laravel-BootCamp-Part-2-20240920172149440.png": {
+      "isCountable": false,
+      "isDirectory": false,
+      "noteCount": 0,
+      "wordCount": 0,
+      "wordCountTowardGoal": 0,
+      "wordGoal": 0,
+      "pageCount": 0,
+      "characterCount": 0,
+      "nonWhitespaceCharacterCount": 0,
+      "readingTimeInMinutes": 0,
+      "linkCount": 0,
+      "embedCount": 0,
+      "aliases": [],
+      "createdDate": 1726824109294,
+      "modifiedDate": 1726824109296,
+      "sizeInBytes": 15154
+    },
+    "assets/vivaldi_qqHh6J21aQ.gif": {
+      "isCountable": false,
+      "isDirectory": false,
+      "noteCount": 0,
+      "wordCount": 0,
+      "wordCountTowardGoal": 0,
+      "wordGoal": 0,
+      "pageCount": 0,
+      "characterCount": 0,
+      "nonWhitespaceCharacterCount": 0,
+      "readingTimeInMinutes": 0,
+      "linkCount": 0,
+      "embedCount": 0,
+      "aliases": [],
+      "createdDate": 1726826963802,
+      "modifiedDate": 1726826963803,
+      "sizeInBytes": 17895
     }
   }
 }

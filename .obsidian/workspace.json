@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "336b649182ad6551",
+        "id": "194b55faac738033",
         "type": "tabs",
         "children": [
           {
-            "id": "4f8dd7d8ef6b2525",
+            "id": "c30232df954a230d",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -157,13 +157,15 @@
       "marp-slides:Show Slide Preview": false
     }
   },
-  "active": "4f8dd7d8ef6b2525",
+  "active": "c30232df954a230d",
   "lastOpenFiles": [
-    "session-10/ReadMe.md",
+    "session-10/S10-Laravel-BootCamp-Part-2.md",
+    "assets/vivaldi_qqHh6J21aQ.gif",
+    "assets/S10-Laravel-BootCamp-Part-2-20240920172149440.png",
     "session-10/S10-Laravel-BootCamp-Part-1.md",
+    "session-10/ReadMe.md",
     "session-10/S10-Introducing-Laravel.md",
     "assets/S10-Introducing-Laravel-20240920133837144.png",
-    "session-10/S10-Laravel-BootCamp-Part-2.md",
     "assets/S10-Laravel-BootCamp-20240920160925699.png",
     "assets/S10-Laravel-BootCamp-20240920155634761.png",
     "assets/S10-Introducing-Laravel-20240920155255149.png",
@@ -171,8 +173,6 @@
     "assets/S10-Introducing-Laravel-20240920154001603.png",
     "assets/S10-Introducing-Laravel-20240920153937338.png",
     "assets/S10-Laravel-BootCamp-20240920151458090.png",
-    "assets/S10-Laravel-BootCamp-20240920143536181.png",
-    "assets/S10-Laravel-BootCamp-20240920143515412.png",
     "session-10/S10-Exercises-and-Journal-Entry.md",
     "session-11/S11-Terminology-Laravel.md",
     "session-16/S16-Exercises-and-Journal-Entry.md",

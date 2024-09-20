@@ -14,7 +14,7 @@ tags:
 date created: 03 July 2024
 date modified: 10 July 2024
 created: 2024-09-20T11:17
-updated: 2024-09-20T16:30
+updated: 2024-09-20T17:12
 ---
 
 # S10 Laravel Bootcamp: Part 1
@@ -51,7 +51,7 @@ Make sure that you have a Windows Terminal screen that looks like this, and the 
 
 ![](../assets/S10-Laravel-BootCamp-20240920154627366.png)
 
-## Chirper: Move over X, the bird is back!
+# Chirper: Move over X, the bird is back!
 
 We will be creating a very basic X style micro-blogging application, but keeping it to the basics... text only!
 
@@ -172,7 +172,7 @@ php artisan migrate
 
 This will execute any migrations that have not been run before... we will introduce you to another version of this command later when we look at seeding the database.
 
-## Routes, the Signposts to the App's Actions
+# Routes, the Signposts to the App's Actions
 
 We know how Routing works from our micro-framework, so let's look at the Laravel route file for a web application.
 
@@ -264,7 +264,7 @@ Here is an extract of the output for the command:
 ```
 
 
-## Chirp Controller - Index Method
+# Chirp Controller - Index Method
 
 Ok, locate the `index()` method in the `ChirpController` file...
 
@@ -433,7 +433,7 @@ You could try making a chirp but we will get the following:
 ![](../assets/S10-Laravel-BootCamp-20240920160925699.png)
 
 
-## Relationships are Important
+# Relationships are Important
 
 What! Um! Why?
 
@@ -504,7 +504,7 @@ protected $fillable = [
 
 Ok, try the Chirp out!
 
-## Coming up...
+# Coming up...
 
 In part two of our version of the Laravel Boot Camp, we will do the following:
 
