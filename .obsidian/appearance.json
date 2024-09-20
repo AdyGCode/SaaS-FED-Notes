@@ -4,7 +4,7 @@
   "monospaceFontFamily": "FiraCode Nerd Font",
   "interfaceFontFamily": "Inter",
   "textFontFamily": "Atkinson Hyperlegible",
-  "baseFontSize": 18,
+  "baseFontSize": 19,
   "baseFontSizeAction": true,
   "enabledCssSnippets": [
     "CustomIcon-AutoGen"

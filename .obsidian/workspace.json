@@ -4,19 +4,15 @@
     "type": "split",
     "children": [
       {
-        "id": "522c3418eb924381",
+        "id": "336b649182ad6551",
         "type": "tabs",
         "children": [
           {
-            "id": "89198e616ec8f4d4",
+            "id": "4f8dd7d8ef6b2525",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "session-16/S16-Exercises-and-Journal-Entry.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           }
         ]
@@ -85,7 +81,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "session-16/S16-Exercises-and-Journal-Entry.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +97,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "session-16/S16-Exercises-and-Journal-Entry.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -124,9 +118,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "session-16/S16-Exercises-and-Journal-Entry.md"
-              }
+              "state": {}
             }
           },
           {
@@ -165,11 +157,26 @@
       "marp-slides:Show Slide Preview": false
     }
   },
-  "active": "89198e616ec8f4d4",
+  "active": "4f8dd7d8ef6b2525",
   "lastOpenFiles": [
-    "session-15/S15-Exercises-and-Journal-Entry.md",
+    "session-10/ReadMe.md",
+    "session-10/S10-Laravel-BootCamp-Part-1.md",
+    "session-10/S10-Introducing-Laravel.md",
+    "assets/S10-Introducing-Laravel-20240920133837144.png",
+    "session-10/S10-Laravel-BootCamp-Part-2.md",
+    "assets/S10-Laravel-BootCamp-20240920160925699.png",
+    "assets/S10-Laravel-BootCamp-20240920155634761.png",
+    "assets/S10-Introducing-Laravel-20240920155255149.png",
+    "assets/S10-Laravel-BootCamp-20240920154627366.png",
+    "assets/S10-Introducing-Laravel-20240920154001603.png",
+    "assets/S10-Introducing-Laravel-20240920153937338.png",
+    "assets/S10-Laravel-BootCamp-20240920151458090.png",
+    "assets/S10-Laravel-BootCamp-20240920143536181.png",
+    "assets/S10-Laravel-BootCamp-20240920143515412.png",
     "session-10/S10-Exercises-and-Journal-Entry.md",
+    "session-11/S11-Terminology-Laravel.md",
     "session-16/S16-Exercises-and-Journal-Entry.md",
+    "session-15/S15-Exercises-and-Journal-Entry.md",
     "session-11/S11-Exercises-and-Journal-Entry.md",
     "session-12/S12-Exercises-and-Journal-Entry.md",
     "session-13/S13-Exercises-and-Journal-Entry.md",
@@ -177,15 +184,8 @@
     "session-10/S10-Exercises-and-Journal-Entry 1.md",
     "session-09/S09-Portfolio-Work.md",
     "session-08/S08-Vanilla-PHP-MVC-Pt-10.md",
-    "session-11/S11-Terminology-Laravel.md",
-    "session-10/ReadMe.md",
     "session-09/S09-Exercises-and-Journal-Entry.md",
     "session-09/S09-MOngoDB-1-Introduction.md",
-    "session-09/S09-MOngoDB-1-Introduction-20240912105316113.png",
-    "session-09/S09-MOngoDB-1-Introduction-20240912102155996.png",
-    "session-09/S09-MOngoDB-1-Introduction-20240912100751933.png",
-    "session-09/S09-MOngoDB-1-Introduction-20240912100740662.png",
-    "session-09/S09-MOngoDB-1-Introduction-20240912100047077.png",
     "session-06/S06-TailwindCSS-Intro.md",
     "session-07/S07-Vanilla-PHP-MVC-Pt-00.md",
     "session-07/S07-Vanilla-PHP-MVC-Pt-01.md",
@@ -194,12 +194,6 @@
     "session-01/ReadMe.md",
     "session-19/ReadMe.md",
     "session-01/S01-CLI-Commands.md",
-    "session-01/S01-Development-Environments.md",
-    "assets/vivaldi_N1eHQIsXhb.png",
-    "assets/vivaldi_qa5rLjIHgj.png",
-    "assets/vivaldi_hiesZBHyQQ.png",
-    "assets/vivaldi_962DFkjDpV.png",
-    "assets/wWsoqyF1sX.png",
     "session-07/template.php",
     "assets/UserController.php",
     "assets/ProductController.php",
