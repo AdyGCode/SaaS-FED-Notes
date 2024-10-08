@@ -4,12 +4,8 @@
   "better-word-count",
   "break-page",
   "code-styler",
-  "editing-toolbar",
-  "emoji-shortcodes",
   "find-unlinked-files",
   "github-sync",
-  "image-converter",
-  "marp-slides",
   "mermaid-tools",
   "novel-word-count",
   "obsidian-advanced-slides",
@@ -18,13 +14,11 @@
   "obsidian-icon-folder",
   "obsidian-linter",
   "obsidian-minimal-settings",
-  "obsidian-pandoc",
   "obsidian-plantuml",
   "obsidian-reading-time",
   "obsidian-text-format",
   "slides-extended",
   "table-editor-obsidian",
   "templater-obsidian",
-  "update-time-on-edit",
-  "obsidian-style-settings"
+  "update-time-on-edit"
 ]

@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "194b55faac738033",
+        "id": "71517b3225ea33fa",
         "type": "tabs",
         "children": [
           {
-            "id": "c30232df954a230d",
+            "id": "e5795d8c7f23e843",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -153,12 +153,14 @@
       "command-palette:Open command palette": false,
       "table-editor-obsidian:Advanced Tables Toolbar": false,
       "templater-obsidian:Templater": false,
-      "mermaid-tools:Open Mermaid Toolbar": false,
-      "marp-slides:Show Slide Preview": false
+      "mermaid-tools:Open Mermaid Toolbar": false
     }
   },
-  "active": "c30232df954a230d",
+  "active": "e5795d8c7f23e843",
   "lastOpenFiles": [
+    "session-12/S12-Laravel-02-Update-User.md",
+    "session-12/S12-Laravel-03-Feature-Category.md",
+    "session-12/S12-Laravel-01-Setting-Up.md",
     "session-10/S10-Laravel-BootCamp-Part-2.md",
     "assets/vivaldi_qqHh6J21aQ.gif",
     "assets/S10-Laravel-BootCamp-Part-2-20240920172149440.png",
@@ -192,8 +194,6 @@
     "session-07/S07-Exercises-and-Journal-Entry.md",
     "session-09/ReadMe.md",
     "session-01/ReadMe.md",
-    "session-19/ReadMe.md",
-    "session-01/S01-CLI-Commands.md",
     "session-07/template.php",
     "assets/UserController.php",
     "assets/ProductController.php",
