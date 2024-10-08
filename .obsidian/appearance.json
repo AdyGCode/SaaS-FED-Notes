@@ -1,9 +1,9 @@
 {
   "accentColor": "#007700",
-  "cssTheme": "Atom",
+  "cssTheme": "Things",
   "monospaceFontFamily": "FiraCode Nerd Font",
   "interfaceFontFamily": "Inter",
-  "textFontFamily": "Atkinson Hyperlegible",
+  "textFontFamily": "Trebuchet MS,Atkinson Hyperlegible",
   "baseFontSize": 19,
   "baseFontSizeAction": true,
   "enabledCssSnippets": [
