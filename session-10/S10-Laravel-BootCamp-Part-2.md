@@ -14,7 +14,7 @@ tags:
 date created: 03 July 2024
 date modified: 10 July 2024
 created: 2024-09-20T11:17
-updated: 2024-09-20T18:16
+updated: 2024-10-09T15:50
 ---
 
 # S10 Laravel Bootcamp: Part 2
@@ -326,4 +326,4 @@ TODO: Add Delete
 
 # END
 
-Next up - [LINK TEXT](#)
+

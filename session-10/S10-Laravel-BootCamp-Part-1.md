@@ -14,7 +14,7 @@ tags:
 date created: 03 July 2024
 date modified: 10 July 2024
 created: 2024-09-20T11:17
-updated: 2024-09-20T17:12
+updated: 2024-10-09T15:50
 ---
 
 # S10 Laravel Bootcamp: Part 1
@@ -515,7 +515,7 @@ In part two of our version of the Laravel Boot Camp, we will do the following:
 
 There may even be some other surprises to come as well!
 
-Let's get it done! - [S10-Laravel-BootCamp-Part-2](session-10/S10-Laravel-BootCamp-Part-2.md)
+Let's get it done! - [S10 Laravel BootCamp Part 2](session-10/S10-Laravel-BootCamp-Part-2.md)
 
 
 # END

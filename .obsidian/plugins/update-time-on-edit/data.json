@@ -97,11 +97,12 @@
     "session-14/S14-Exercises-and-Journal-Entry.md": "a6792d02b216cdf78a6ddafe1d626d872ef3c14f44a3766ef1695941d41581eb",
     "session-15/S15-Exercises-and-Journal-Entry.md": "4c756342fb68345d210ad5ed880cbbe88fa2550b675a150a7647f380fe99a964",
     "session-16/S16-Exercises-and-Journal-Entry.md": "e1c10701b5420153ff8ee8c09b194cd8ae8373ae0b7b1ab688069ef04ee0dc6c",
-    "session-10/S10-Introducing-Laravel.md": "e14ac1a04d76142dc20e3d1ad64f02dffad10b700efd33ca1a679b5d8322900e",
-    "session-10/S10-Laravel-BootCamp-Part-2.md": "0bb26de49241c6f19c94f54331d4e8127e3e590424615b32f16d697fb499dc76",
-    "session-10/S10-Laravel-BootCamp-Part-1.md": "040b093673b9f1720a1c95a661774846499c7e223360125745c05e08c6f1cb3a",
-    "session-12/S12-Laravel-01-Setting-Up.md": "712365ca5170b43ff289cd570d4b919fff78147554b5974b5ad744381585e45d",
-    "session-12/S12-Laravel-02-Update-User.md": "fdc71bef42b9e0640759d4af2e58855b86ddba928012381712fbaa101099a8c7",
-    "session-12/S12-Laravel-03-Feature-Category.md": "d20129eda9f28cdaf903d79830e1ad0aff6aeee623763030a2df93b739da444d"
+    "session-10/S10-Introducing-Laravel.md": "569634c430251fb461e4ac48c6fe0714c59654ead94ee403d2dcb5305e8cf52d",
+    "session-10/S10-Laravel-BootCamp-Part-2.md": "647cd89e58aba59a4d49b7907821d6f08d886500bd1bd83d1a887c09d5de1aca",
+    "session-10/S10-Laravel-BootCamp-Part-1.md": "50b99f31364eef42d461d6ad2f6f9292fa6689810f6d773aa0b2c2798cc3a65b",
+    "session-11/S11-Laravel-01-Setting-Up.md": "242302d7cd43aed71c577b04aea7904ae67097a98e232537013cc02aa42d45f3",
+    "session-13/S12-Laravel-02-Update-User.md": "4d2113414953cd43e5e64a046e89a553cd4aeee60a14cc0fa5555435dee36612",
+    "session-12/S12-Laravel-03-Product-Feature.md": "aab508d9587429f7be2a2ca4b0cad75a497d96caceb0b0a440a558626e145ed4",
+    "session-11/S11-Laravel-02-Category-Feature.md": "f92210c63bf15f81e2d834cb8b871edbf11ade894a5b6b274ca6cb70b26d59d5"
   }
 }

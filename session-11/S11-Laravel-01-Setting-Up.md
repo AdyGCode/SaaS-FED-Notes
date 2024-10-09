@@ -14,14 +14,14 @@ tags:
 date created: 03 July 2024
 date modified: 10 July 2024
 created: 2024-10-08T10:54
-updated: 2024-10-08T12:20
+updated: 2024-10-09T15:52
 ---
 
 # Laravel: 01 Setting Up
 
 ## Software as a Service - Front-End Development
 
-### Session 12
+### Session 11
 
 Developed by Adrian Gould
 
@@ -163,4 +163,4 @@ Done, now we continue with the application development.
 
 # END
 
-Next up - [S12 Laravel 02 Update User](session-12/S12-Laravel-02-Update-User.md)
+Next up - [S12 Laravel 02 Update User](session-13/S12-Laravel-02-Update-User.md)
