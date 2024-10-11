@@ -14,7 +14,7 @@ tags:
 date created: 03 July 2024
 date modified: 10 July 2024
 created: 2024-10-08T10:54
-updated: 2024-10-11T13:39
+updated: 2024-10-11T14:06
 ---
 
 # Laravel: 03 Product Feature
@@ -140,26 +140,22 @@ If either of these fail, it returns a false result.
 
 The function requires a header line which matches the field names used in the table.
 
-So the first line that is read is presumed to be the field names, indicating the order the CSV
-contains the data.
+So the first line that is read is presumed to be the field names, indicating the order the CSV contains the data.
 
-With this in mind, the function sets a header flag to false to indicate the header ahsn't been
-read, and creates an empty array.
+With this in mind, the function sets a header flag to false to indicate the header hasn't been read, and creates an empty array.
 
 Next if the file can be opened and an file handle created, it does the following:
 
-- while we have reached the end of the file, read the CSV data in, using the delimiter to
-  indicate the end of each data item
+- while we have reached the end of the file, read the CSV data in, using the delimiter to indicate the end of each data item
 - if we are on the 1st row of data, place these values into the header
-- otherwise add the read data to an associative array formed by combining the header and the row
-  of data
+- otherwise add the read data to an associative array formed by combining the header and the row of data
 
 Once the end of the file has been reached, we close the file, and finally return the data array.
 
 ### The Product Seeder
 
-So the product seeder can use this function to make it easier to get large volumes of data into
-the application when it is set up.
+So the product seeder can use this function to make it easier to get large
+volumes of data into the application when it is set up.
 
 We have added a little more code to the seeder. This code provides a progress bar whilst the seeding takes place.
 
