@@ -558,19 +558,19 @@
       "isCountable": true,
       "isDirectory": false,
       "noteCount": 1,
-      "wordCount": 274,
+      "wordCount": 489,
       "wordCountTowardGoal": 0,
       "wordGoal": null,
-      "pageCount": 0.9133333333333333,
-      "characterCount": 1964,
-      "nonWhitespaceCharacterCount": 1461,
-      "readingTimeInMinutes": 1.0339622641509434,
+      "pageCount": 1.63,
+      "characterCount": 3112,
+      "nonWhitespaceCharacterCount": 2390,
+      "readingTimeInMinutes": 1.8452830188679246,
       "linkCount": 1,
-      "embedCount": 0,
+      "embedCount": 1,
       "aliases": null,
       "createdDate": 1728460001560,
-      "modifiedDate": 1728465750749,
-      "sizeInBytes": 3359,
+      "modifiedDate": 1728625158025,
+      "sizeInBytes": 5357,
       "frontmatter": {
         "theme": "default",
         "paginate": true,
@@ -588,7 +588,7 @@
         "date created": "03 July 2024",
         "date modified": "10 July 2024",
         "created": "2024-10-08T10:54",
-        "updated": "2024-10-09T17:03"
+        "updated": "2024-10-11T13:37"
       }
     },
     "session-12/S12-Exercises-and-Journal-Entry.md": {
@@ -38951,6 +38951,24 @@
       "createdDate": 1728373462901,
       "modifiedDate": 1728463513325,
       "sizeInBytes": 7907
+    },
+    "assets/database-seeder-progress-sample.png": {
+      "isCountable": false,
+      "isDirectory": false,
+      "noteCount": 0,
+      "wordCount": 0,
+      "wordCountTowardGoal": 0,
+      "wordGoal": 0,
+      "pageCount": 0,
+      "characterCount": 0,
+      "nonWhitespaceCharacterCount": 0,
+      "readingTimeInMinutes": 0,
+      "linkCount": 0,
+      "embedCount": 0,
+      "aliases": [],
+      "createdDate": 1728625100010,
+      "modifiedDate": 1728625100127,
+      "sizeInBytes": 112824
     }
   }
 }
