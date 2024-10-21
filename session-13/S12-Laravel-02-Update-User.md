@@ -39,7 +39,8 @@ includeLinks: true
 
 # Updating User Feature
 
-The default user has a few 'restrictions' that are not necessarily the best for a full application.
+The default user has a few 'restrictions' that are not necessarily the best for a full 
+application.
 
 These restrictions include:
 - no separate given and family name
@@ -63,7 +64,8 @@ Back to the CLI and in the top section execute:
 php artisan make:migration update_users_table
 ```
 
-Back in PhpStorm, locate the `database/migrations` folder, and find the file that will be something like `2024_10_08_122518_update_users_table.php`.
+Back in PhpStorm, locate the `database/migrations` folder, and find the file that will be 
+something like `2024_10_08_122518_update_users_table.php`.
 
 Open the file and alter the Up method code to be:
 
@@ -145,13 +147,15 @@ foreach ($seedUsers as $seedUser) {
 }
 ```
 
-Note we have given the Admin user the id of 100 - this is because 1 is often seen as the default for an admin  account, and this will help slow down 'quick hacks'.
+Note we have given the Admin user the id of 100 - this is because 1 is often seen as the 
+default for an admin  account, and this will help slow down 'quick hacks'.
 
 ### Update the Database Seeder
 
 Now we open the `DatabaseSeeder.php` file from the same folder.
 
-Comment out any reference to creating a test user. (Quick hint: CTRL / in PhpStorm comments out a line, or a selected block of code.)
+Comment out any reference to creating a test user. (Quick hint: CTRL / in PhpStorm comments out 
+a line, or a selected block of code.)
 
 In place of the code you have removed, the run method will now read:
 
@@ -200,9 +204,11 @@ php artisan db:seed
 
 **Important**
 
-During development, you may start migrations (and seeding) from scratch. This ensures you see any changes in context of the 'from fresh' database.
+During development, you may start migrations (and seeding) from scratch. This ensures you see 
+any changes in context of the 'from fresh' database.
 
-We would NEVER run a fresh migration on a production database, as **ALL** data is destroyed in the process.
+We would NEVER run a fresh migration on a production database, as **ALL** data is destroyed in 
+the process.
 
 To run a 'fresh migration and seed' we use:
 
@@ -235,7 +241,7 @@ At the top of the file, just before the `<!-- Name -->` comment add the followin
 <!-- Given Name -->  
 <div>  
     <x-input-label for="given_name" 
-			       :value="__Ggiven Name')"/>  
+			       :value="__('Given Name')"/>  
     <x-text-input id="given_name" 
 				  class="block mt-1 w-full" 
 				  type="text" name="given_name"  
@@ -250,7 +256,8 @@ At the top of the file, just before the `<!-- Name -->` comment add the followin
 
 #### 2: Add 'Family Name' Field
 
-Repeat the process and just before the `<!-- Name -->` comment, and after the just completed 'given name', add:
+Repeat the process and just before the `<!-- Name -->` comment, and after the just completed
+'given name', add:
 
 ```php
 <!-- Family Name -->  
@@ -273,7 +280,8 @@ Repeat the process and just before the `<!-- Name -->` comment, and after the ju
 
 #### 3: Update the 'Name' field to 'Nickname'
 
-With the current name field, you will need to change each occurrence of `name` or `Name` to `nickname` and `Nickname or preferred name` respectively.
+With the current name field, you will need to change each occurrence of `name` or `Name` to
+`nickname` and `Nickname or preferred name` respectively.
 
 Also add `class="mt-4"`  to the `<div>`.
 
@@ -287,7 +295,8 @@ In the Store method, we need to add/update to include our new fields.
 
 ### Update the Validation in the Store method
 
-Edit the validation code, by renaming `name` to `nickname`. Then adding the ability to leave the nickname blank.
+Edit the validation code, by renaming `name` to `nickname`. Then adding the ability to leave 
+the nickname blank.
 
 ```php
 'nickname' => ['sometimes', 'nullable', 'string', 'max:255'],
@@ -302,7 +311,8 @@ Now, we will duplicate this line, and make the changes for the given and family 
 
 > **Important:**
 > 
-> We are allowing the user to have one name, but we will not know which field they will enter their name into.
+> We are allowing the user to have one name, but we will not know which field they will 
+> enter their name into.
 > 
 > So, we will handle this in a moment by:
 > 
@@ -311,9 +321,11 @@ Now, we will duplicate this line, and make the changes for the given and family 
 
 ### Making sure the given name always filled
 
-As we are allowing the user to have one name, we will make sure that we always fill in the given name. This is accomplished by the form request validation.
+As we are allowing the user to have one name, we will make sure that we always fill in the 
+given name. This is accomplished by the form request validation.
 
-We can further enhance this mechanism, by adding checks and then copying the data to the correct field.
+We can further enhance this mechanism, by adding checks and then copying the data to the 
+correct field.
 
 ```php
 if ($request->given_name === null && $request->family_name !== null) {  
@@ -324,7 +336,8 @@ if ($request->given_name === null && $request->family_name !== null) {
 
 ### Adding the nickname/preferred name when blank
 
-We have made the design decision that when a user registers, we will copy the given name into the preferred name if the nickname/preferred name is blank.
+We have made the design decision that when a user registers, we will copy the given name into 
+the preferred name if the nickname/preferred name is blank.
 
 After the above code we will add:
 
@@ -375,7 +388,8 @@ Now duplicate this block, and edit Given Name to become Family Name:
 
 Remember, no required for Family Name!
 
-Finally duplicate the family name block, and update the copy to be Nickname in place of Family Name.
+Finally duplicate the family name block, and update the copy to be Nickname in place of 
+Family Name.
 
 ```html
 <div>  
@@ -396,7 +410,8 @@ Also, no required for the Nickname.
 
 Open the `App\Http\Requests` folder and locate and open the `ProfileUpdateRequest.php` file.
 
-Update the file so that the rules array contains the given, family and nicknames, which replace the 'name' field.
+Update the file so that the rules array contains the given, family and nicknames, which replace
+the 'name' field.
 
 ```php
 'given_name' => [
