@@ -41,11 +41,14 @@ includeLinks: true
 
 We will add a category feature to the application.
 
-This section is based on [Laravel Category Treeview Hierarchical Structure Example](https://www.itsolutionstuff.com/post/laravel-5-category-treeview-hierarchical-structure-example-with-demoexample.html), without the jQuery enhancement.
+This section is based on [Laravel Category Treeview Hierarchical Structure Example](https://www.itsolutionstuff.com/post/laravel-5-category-treeview-hierarchical-structure-example-with-demoexample.html), 
+without the jQuery enhancement.
 
-The category feature may be used in many situations. For example, for a market place where it is the product category; or a blog where the category is the general subject of the blog post.
+The category feature may be used in many situations. For example, for a market place where it 
+is the product category; or a blog where the category is the general subject of the blog post.
 
-For the time being our category feature will ONLY display the categories, we will not be adding the create, edit, delete, and show parts of the complete feature until later.
+For the time being our category feature will ONLY display the categories, we will not be adding 
+create, edit, delete, and show parts of the complete feature until later.
 
 
 We will store the following in our category model:
@@ -76,7 +79,8 @@ We will go into modelling "hierarchical data" in a little more depth another tim
 
 ## Model, Migration, Seeder, Controller in one
 
-Let's start by creating the Category model, but also create the migration, seeder, controller and other stubs at the same time.
+Let's start by creating the Category model, but also create the migration, seeder, controller
+and other stubs at the same time.
 
 ```shell
 php artisan make:model Category --all
@@ -109,7 +113,8 @@ Um... what is this? The category is referring to itself!
 
 Yes we can do this with databases.
 
-Another situation that this could be used is with employees, where the manager id of the employee would be stored in a field in the same table.
+Another situation that this could be used is with employees, where the manager id of the 
+employee would be stored in a field in the same table.
 
 ### Add Fillable fields to Model
 
@@ -129,7 +134,8 @@ public $fillable = [
 
 ### Create relationship in Model
 
-Now in the model we add the following that tells the category that it has one or more sub-categories.
+Now in the model we add the following that tells the category that it has one or more 
+sub-categories.
 
 ```php
 public function subCategories() {  
@@ -228,7 +234,9 @@ $this->command->getOutput()->progressFinish();
 ```
 
 
-In the seeder we have added a little "progress bar" to show you the progress of the seeding operation. This can be useful for large seed data sets, such as the countries of the world, the states/countries in countries, and so on.
+In the seeder we have added a little "progress bar" to show you the progress of the seeding 
+operation. This can be useful for large seed data sets, such as the countries of the world, the 
+states/countries in countries, and so on.
 
 ### Add Routes
 
@@ -252,13 +260,15 @@ $allCategories = Category::pluck('name','id')->all();
 return view('categories.index', compact(['categories','allCategories']));
 ```
 
-This gets the "root categories" (eg Vegetables, Hardware, Cleaning), plus all the other categories.
+This gets the "root categories" (eg Vegetables, Hardware, Cleaning), plus all the other
+categories.
 
 It then sends the data to the index view.
 
 ### Add Index View
 
-Create a folder in the `resources\views` folder, and create new index and sub-categories blade files:
+Create a folder in the `resources\views` folder, and create new index and sub-categories 
+blade files:
 
 ```shell
 mkdir -P resources/views/categories
