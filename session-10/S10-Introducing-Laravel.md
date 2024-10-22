@@ -14,7 +14,7 @@ tags:
 date created: 03 July 2024
 date modified: 10 July 2024
 created: 2024-09-20T11:17
-updated: 2024-09-20T16:30
+updated: 2024-10-09T15:49
 ---
 
 # S10 Introducing Laravel
@@ -505,4 +505,4 @@ Program with Gio does a good job at explaining the Folder Structure...
 
 # END
 
-Next up - [LINK TEXT](#)
+Next up - [S10 Laravel BootCamp Part 1](session-10/S10-Laravel-BootCamp-Part-1.md) and [Part 2](session-10/S10-Laravel-BootCamp-Part-2.md)
