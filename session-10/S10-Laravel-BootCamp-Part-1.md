@@ -14,7 +14,7 @@ tags:
 date created: 03 July 2024
 date modified: 10 July 2024
 created: 2024-09-20T11:17
-updated: 2024-10-09T15:50
+updated: 2024-10-22T08:15
 ---
 
 # S10 Laravel Bootcamp: Part 1
@@ -519,4 +519,3 @@ Let's get it done! - [S10 Laravel BootCamp Part 2](session-10/S10-Laravel-BootCa
 
 
 # END
-
