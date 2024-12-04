@@ -61,19 +61,19 @@
       "isCountable": true,
       "isDirectory": false,
       "noteCount": 1,
-      "wordCount": 202,
+      "wordCount": 220,
       "wordCountTowardGoal": 0,
       "wordGoal": null,
-      "pageCount": 0.6733333333333333,
-      "characterCount": 5084,
-      "nonWhitespaceCharacterCount": 2937,
-      "readingTimeInMinutes": 0.7622641509433963,
-      "linkCount": 0,
+      "pageCount": 0.7333333333333333,
+      "characterCount": 5225,
+      "nonWhitespaceCharacterCount": 3055,
+      "readingTimeInMinutes": 0.8301886792452831,
+      "linkCount": 1,
       "embedCount": 0,
       "aliases": null,
       "createdDate": 1733283851502,
-      "modifiedDate": 1733284922556,
-      "sizeInBytes": 5468,
+      "modifiedDate": 1733293525998,
+      "sizeInBytes": 5657,
       "frontmatter": {
         "theme": "default",
         "paginate": true,
@@ -85,7 +85,7 @@
         "backgroundColor": "#060606",
         "tags": "SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testing, PEST",
         "created": "2024-08-27T17:17",
-        "updated": "2024-09-10T16:36"
+        "updated": "2024-12-04T12:02"
       }
     },
     "templates/slides.md": {
@@ -1612,15 +1612,15 @@
       "wordCountTowardGoal": 0,
       "wordGoal": null,
       "pageCount": 5.133333333333334,
-      "characterCount": 10081,
-      "nonWhitespaceCharacterCount": 7665,
+      "characterCount": 10082,
+      "nonWhitespaceCharacterCount": 7666,
       "readingTimeInMinutes": 5.811320754716981,
       "linkCount": 2,
       "embedCount": 6,
       "aliases": null,
       "createdDate": 1733283851490,
-      "modifiedDate": 1733283851490,
-      "sizeInBytes": 14163,
+      "modifiedDate": 1733287826228,
+      "sizeInBytes": 14148,
       "frontmatter": {
         "theme": "default",
         "paginate": true,
@@ -1638,7 +1638,7 @@
         "date created": "03 July 2024",
         "date modified": "10 July 2024",
         "created": "2024-09-20T11:17",
-        "updated": "2024-10-22T08:15"
+        "updated": "2024-12-04T12:50"
       }
     },
     "session-10/S10-Introducing-Laravel.md": {
@@ -1649,15 +1649,15 @@
       "wordCountTowardGoal": 0,
       "wordGoal": null,
       "pageCount": 4.46,
-      "characterCount": 9036,
+      "characterCount": 8697,
       "nonWhitespaceCharacterCount": 7064,
       "readingTimeInMinutes": 5.049056603773585,
       "linkCount": 2,
       "embedCount": 4,
       "aliases": null,
       "createdDate": 1733283851490,
-      "modifiedDate": 1733283851490,
-      "sizeInBytes": 15304,
+      "modifiedDate": 1733287752565,
+      "sizeInBytes": 14796,
       "frontmatter": {
         "theme": "default",
         "paginate": true,
@@ -5173,6 +5173,80 @@
       "createdDate": 1733283851360,
       "modifiedDate": 1733283851360,
       "sizeInBytes": 148773
+    },
+    "session-20/S20-How-To-Test-Your-App-Works.md": {
+      "isCountable": true,
+      "isDirectory": false,
+      "noteCount": 1,
+      "wordCount": 670,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 2.2333333333333334,
+      "characterCount": 4052,
+      "nonWhitespaceCharacterCount": 3262,
+      "readingTimeInMinutes": 2.5283018867924527,
+      "linkCount": 1,
+      "embedCount": 0,
+      "aliases": null,
+      "createdDate": 1733287752471,
+      "modifiedDate": 1733293548957,
+      "sizeInBytes": 5976,
+      "frontmatter": {
+        "theme": "default",
+        "paginate": true,
+        "footer": "© Copyright 2024, Adrian Gould & NM TAFE",
+        "header": "![NMTAFE](../images/Black-Red-Banner.svg)",
+        "auto-scaling": true,
+        "size": "4k",
+        "color": "#ccc",
+        "backgroundColor": "#060606",
+        "tags": [
+          "SaaS",
+          "APIs",
+          "Back-End"
+        ],
+        "date created": "03 July 2024",
+        "date modified": "10 July 2024",
+        "created": "2024-09-20T11:17",
+        "updated": "2024-12-04T14:24"
+      }
+    },
+    "session-20/S20-Deploying-to-TAFE-Services.md": {
+      "isCountable": true,
+      "isDirectory": false,
+      "noteCount": 1,
+      "wordCount": 95,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 0.31666666666666665,
+      "characterCount": 658,
+      "nonWhitespaceCharacterCount": 537,
+      "readingTimeInMinutes": 0.3584905660377358,
+      "linkCount": 1,
+      "embedCount": 0,
+      "aliases": null,
+      "createdDate": 1733293565435,
+      "modifiedDate": 1733293919417,
+      "sizeInBytes": 1161,
+      "frontmatter": {
+        "theme": "default",
+        "paginate": true,
+        "footer": "© Copyright 2024, Adrian Gould & NM TAFE",
+        "header": "![NMTAFE](../images/Black-Red-Banner.svg)",
+        "auto-scaling": true,
+        "size": "4k",
+        "color": "#ccc",
+        "backgroundColor": "#060606",
+        "tags": [
+          "SaaS",
+          "APIs",
+          "Back-End"
+        ],
+        "date created": "03 July 2024",
+        "date modified": "10 July 2024",
+        "created": "2024-09-20T11:17",
+        "updated": "2024-12-04T14:25"
+      }
     }
   }
 }

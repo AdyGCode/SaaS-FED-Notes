@@ -9,15 +9,21 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testing, PEST
 created: 2024-08-27T17:17
-updated: 2024-12-04T12:02
+updated: 2024-12-04T14:25
 ---
 
 # Session 20
 
 - Review of Cluster
+- Testing Your App Works
 - Preparation for SaaS - Back End Development Cluster
 ## Review
 
+
+## Testing your App Works
+
+Check out the notes on testing your application works:
+- [S20-How-To-Test-Your-App-Works](session-20/S20-How-To-Test-Your-App-Works.md)
 
 ## Preparation for Stage 2 of SaaS - Back End Dev
 

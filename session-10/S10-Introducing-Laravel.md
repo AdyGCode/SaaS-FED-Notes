@@ -14,12 +14,12 @@ tags:
 date created: 03 July 2024
 date modified: 10 July 2024
 created: 2024-09-20T11:17
-updated: 2024-10-22T08:14
+updated: 2024-12-04T12:50
 ---
 
 # S10 Introducing Laravel
 
-## Software as a Service - Back-End Development
+## Software as a Service - Front-End Development
 
 Developed by Adrian Gould
 

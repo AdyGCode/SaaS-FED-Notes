@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "session-20/ReadMe.md",
+                "file": "session-20/S20-Deploying-to-TAFE-Services.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "ReadMe"
+              "title": "S20-Deploying-to-TAFE-Services"
             }
           }
         ],
@@ -108,7 +108,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "session-20/ReadMe.md",
+                "file": "session-20/S20-Deploying-to-TAFE-Services.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -118,7 +118,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for ReadMe"
+              "title": "Backlinks for S20-Deploying-to-TAFE-Services"
             }
           },
           {
@@ -127,12 +127,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "session-20/ReadMe.md",
+                "file": "session-20/S20-Deploying-to-TAFE-Services.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from ReadMe"
+              "title": "Outgoing links from S20-Deploying-to-TAFE-Services"
             }
           },
           {
@@ -154,10 +154,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "session-20/ReadMe.md"
+                "file": "session-20/S20-Deploying-to-TAFE-Services.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of ReadMe"
+              "title": "Outline of S20-Deploying-to-TAFE-Services"
             }
           },
           {
@@ -199,6 +199,10 @@
   },
   "active": "063ae0bee08538de",
   "lastOpenFiles": [
+    "session-20/S20-How-To-Test-Your-App-Works.md",
+    "session-20/S20-Deploying-to-TAFE-Services.md",
+    "session-20/ReadMe.md",
+    "session-10/S10-Introducing-Laravel.md",
     "session-12/S12-Laravel-2-Basics-Creating-A-Regions-Feature.md",
     "session-12/S12-Laravel-1-Basics-Planning-A-Feature.md",
     "session-12/S12-Managing-Projects-Using-GitHub-and-Kanban.md",
@@ -210,7 +214,6 @@
     "assets/S10-Laravel-BootCamp-Part-2-20240920172149440.png",
     "session-10/S10-Laravel-BootCamp-Part-1.md",
     "session-10/ReadMe.md",
-    "session-10/S10-Introducing-Laravel.md",
     "assets/S10-Introducing-Laravel-20240920133837144.png",
     "assets/S10-Laravel-BootCamp-20240920160925699.png",
     "assets/S10-Laravel-BootCamp-20240920155634761.png",
@@ -232,9 +235,6 @@
     "session-09/S09-MOngoDB-1-Introduction.md",
     "session-06/S06-TailwindCSS-Intro.md",
     "session-07/S07-Vanilla-PHP-MVC-Pt-00.md",
-    "session-07/S07-Vanilla-PHP-MVC-Pt-01.md",
-    "session-07/S07-Exercises-and-Journal-Entry.md",
-    "session-09/ReadMe.md",
     "session-07/template.php",
     "assets/UserController.php",
     "assets/ProductController.php",
