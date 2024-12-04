@@ -14,7 +14,7 @@ tags:
 date created: 03 July 2024
 date modified: 10 July 2024
 created: 2024-09-20T11:17
-updated: 2024-12-04T14:31
+updated: 2024-12-04T14:40
 ---
 
 # S20 Deploying to TAFE Services
@@ -50,3 +50,13 @@ Before you begin this process make sure you have:
 These notes use GitHub to perform an automated deploy to the ScreenCraft server via a form of Continuous Deployment.
 
 TO BE WRITTEN
+
+
+`.env` changes:
+
+```text
+APP_ENV=production
+APP_KEY=
+APP_DEBUG=false
+```
+

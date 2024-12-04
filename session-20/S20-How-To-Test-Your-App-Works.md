@@ -14,7 +14,7 @@ tags:
 date created: 03 July 2024
 date modified: 10 July 2024
 created: 2024-09-20T11:17
-updated: 2024-12-04T14:25
+updated: 2024-12-04T14:39
 ---
 
 # S20 End of Cluster
@@ -168,9 +168,41 @@ cp .env.dev .env
 ```
 
 
+You must also update the following in the `.env` file (we show only the lines to be checked and changed):
+
+- change `TEST_NAME` to the name of the application
+- change `FOLDER-NAME` to the new folder's name, eg `some-application-main`
+
+```ini
+APP_NAME="TEST_NAME - Test"  
+APP_ENV=local  
+APP_KEY=
+APP_DEBUG=true  
+APP_TIMEZONE=Australia/Perth  
+APP_URL=http://FOLDER_NAME.test  
+  
+APP_LOCALE=en_AU  
+APP_FALLBACK_LOCALE=en  
+APP_FAKER_LOCALE=en_US  
+  
+  
+DB_CONNECTION=sqlite  
+  
+MAIL_MAILER=smtp  
+MAIL_HOST=127.0.0.1  
+MAIL_PORT=2525  
+MAIL_FROM_ADDRESS="no-reply@example.com"  
+  
+```
 ## Artisan Time
 
 Once you have the modules installed and ready we next make sure an empty database is available (for SQLite) and perform the migrations and seeding.
+
+Before this we will generate a new Secret Key for the Application:
+
+```shell
+php artisan generate:key
+```
 
 Remove any existing SQLite database and create an empty file:
 
