@@ -25,6 +25,16 @@ updated: 2024-12-04T14:25
 Check out the notes on testing your application works:
 - [S20-How-To-Test-Your-App-Works](session-20/S20-How-To-Test-Your-App-Works.md)
 
+## Automated Test Installer
+
+The automated test installer is a scipt to ensure that your application is installable on a different computer.
+
+It automatically executes items such as creating a new database, running composer and npm installs, and more.
+
+It is a great way to make sure the application you submit is testable by the assessors.
+
+
+
 ## Preparation for Stage 2 of SaaS - Back End Dev
 
 We highly recommend that you practice the use of Laravel by looking at the following tutorials. Where possible we have selected free tutorials, but when this is not possible we indicate that it is paid access via a $ symbol.

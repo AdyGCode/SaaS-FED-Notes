@@ -47,7 +47,7 @@ So, what do you need to do to make sure everything is correct?
 4) Stop and Start the Laragon services for it to pick up the new test site
 5) Open a CLI and run the `composer` and `npm` install commands (see NPM & Composer)
 6) Run a fresh `artisan migrate` to create and seed the database (see Artisan time)
-7) Open the http://FOLDER_NAME.test URL and 
+7) Open the http://FOLDER_NAME.test URL and test all parts of the application.
 
 ## Setting Up For Testing
 
