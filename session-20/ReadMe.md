@@ -52,7 +52,6 @@ Below the line with `href="https://fonts.bunny.net/` add:
 
 
 ```html
- <!-- Fonts -->
 <!-- Font Awesome Icons -->
 <link rel="stylesheet" href="{{ url('all.css') }}">
 ```

@@ -10,6 +10,8 @@ FAIL_STEP=""
 # Step 1: Clean up existing node_modules and vendor directories
 echo "Removing existing node_modules and vendor directories..."
 rm -rf node_modules vendor
+echo "Removing lock files..."
+rm -rf package-lock.json composer.lock
 
 # Step 2: Remove existing SQLite database
 if [ -f "database/database.sqlite" ]; then
