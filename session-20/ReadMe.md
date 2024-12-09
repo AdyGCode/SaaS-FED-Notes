@@ -46,8 +46,6 @@ Edit your guest.blade.php and app.blade.php layouts and locate the line:
  <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.bunny.net">
 <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-<!-- Font Awesome Icons -->
-<link rel="stylesheet" href="{{ url('all.css') }}">
 ```
 
 Below the line with `href="https://fonts.bunny.net/` add:
@@ -55,8 +53,6 @@ Below the line with `href="https://fonts.bunny.net/` add:
 
 ```html
  <!-- Fonts -->
-<link rel="preconnect" href="https://fonts.bunny.net">
-<link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 <!-- Font Awesome Icons -->
 <link rel="stylesheet" href="{{ url('all.css') }}">
 ```
