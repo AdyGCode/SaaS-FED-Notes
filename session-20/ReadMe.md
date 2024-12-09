@@ -7,7 +7,7 @@ auto-scaling: true
 size: 4k
 color: "#ccc"
 backgroundColor: "#060606"
-tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testing, PEST
+tags: [SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testing, PEST]
 created: 2024-08-27T17:17
 updated: 2024-12-04T14:25
 ---
@@ -17,70 +17,90 @@ updated: 2024-12-04T14:25
 - Review of Cluster
 - Testing Your App Works
 - Preparation for SaaS - Back End Development Cluster
+
 ## Review
 
+TBD
 
 ## Testing your App Works
 
+One of the biggest issues we find is that an application has not been tested on a separate instance of the application
+or computer.
+
+Also, it is often assumed that the configuration you have will be the one used on the "deployed" instance of the
+application.
+
+To help reduce issues, we have a set of notes that outlines steps to take before submitting for assessment or '
+deploying' to a remote system.
+
 Check out the notes on testing your application works:
+
 - [S20-How-To-Test-Your-App-Works](session-20/S20-How-To-Test-Your-App-Works.md)
+
+---
 
 ## Automated Test Installer
 
-The automated test installer is a scipt to ensure that your application is installable on a different computer.
+The [automated test installer](S20-Automated-Test-Installer.md) is a script to ensure that your application is
+installable on a different computer.
 
 It automatically executes items such as creating a new database, running composer and npm installs, and more.
 
 It is a great way to make sure the application you submit is testable by the assessors.
 
+- Script: [student-setup-script.sh](student-setup-script.sh)
+- Details: [S20-Automated-Test-Installer.md](S20-Automated-Test-Installer.md)
 
-## FontAwesome Icons Not Showing 
+---
 
-A common issue with apps is that 3rd party icon fonts etc are not loading.
+## FontAwesome Icons Not Showing
+
+A common issue with apps is that 3rd party icon fonts etc. are not loading.
 
 For FontAwesome, the simplest fix is to refer to their basic CDN and include this as a link.
 
-Edit your guest.blade.php and app.blade.php layouts and locate the line:
+Edit your `guest.blade.php` and `app.blade.php` layouts and locate the line:
 
 ```html
  <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.bunny.net">
-<link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+<link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet"/>
 ```
 
 Below the line with `href="https://fonts.bunny.net/` add:
-
 
 ```html
 <!-- Font Awesome Icons -->
 <link rel="stylesheet" href="{{ url('all.css') }}">
 ```
 
-Now download this small compressed file ([Zip](../assets/font-awesome-v6-free.zip) 
+Now download this small compressed file ([Zip](../assets/font-awesome-v6-free.zip)
 or [7Zip](../assets/font-awesome-v6-free.7z)), and extract the contents.
 
 Move the `webfonts` folder and the `all.css` file into the `public` folder.
 
 On refresh, you should now see the FontAwesome icons.
 
-
 ## Preparation for Stage 2 of SaaS - Back End Dev
 
-We highly recommend that you practice the use of Laravel by looking at the following tutorials. Where possible we have selected free tutorials, but when this is not possible we indicate that it is paid access via a $ symbol.
+We highly recommend that you practice the use of Laravel by looking at the following tutorials. Where possible we have
+selected free tutorials, but when this is not possible we indicate that it is paid access via a $ symbol.
 
-> The college does NOT provide refunds for any courses that are suggested as good resources. They are the responsibility of the individual.
+> The college does NOT provide refunds for any courses that are suggested as good resources. They are the responsibility
+> of the individual.
 
 ### YouTube Channels to Subscribe to
 
 | Name           | Link to Channel                       |
-| -------------- | ------------------------------------- |
+|----------------|---------------------------------------|
 | Laravel Daily  | https://www.youtube.com/@LaravelDaily |
 | Laravel        | https://www.youtube.com/@LaravelPHP   |
 | Code with Dary | https://www.youtube.com/@codewithdary |
+
 ### Laravel
 
 | Title                                                | Link                                                                                             | Cost |
-| ---------------------------------------------------- | ------------------------------------------------------------------------------------------------ | ---- |
+|------------------------------------------------------|--------------------------------------------------------------------------------------------------|------|
 | Laravel 11 CRUD with Image Upload Tutorial<br>       | https://www.itsolutionstuff.com/post/laravel-11-crud-with-image-upload-tutorialexample.html      |      |
 | How to Save JSON Data in Database in Laravel 11?<br> | https://www.itsolutionstuff.com/post/how-to-save-json-data-in-database-in-laravel-11example.html |      |
 |                                                      |                                                                                                  |      |
@@ -89,7 +109,7 @@ We highly recommend that you practice the use of Laravel by looking at the follo
 ### APIs
 
 | Title                                   | Link                                                                                                        | Cost |
-| --------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ---- |
+|-----------------------------------------|-------------------------------------------------------------------------------------------------------------|------|
 | Laravel API Course \| Learn Laravel API | https://www.youtube.com/watch?v=D29sUCaUJg0&list=PLFHz2csJcgk8kvwLWESQcfk1eAivQOjdN&ab_channel=CodeWithDary |      |
 |                                         |                                                                                                             |      |
 |                                         |                                                                                                             |      |
@@ -97,7 +117,7 @@ We highly recommend that you practice the use of Laravel by looking at the follo
 ### Livewire
 
 | Title                                                                  | Link                                                                                                      | Cost |
-| ---------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | ---- |
+|------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|------|
 | Livewire Basics                                                        | https://laracasts.com/series/livewire-basics                                                              | $    |
 | Livewire 3 from Scratch                                                | https://laracasts.com/series/livewire-3-from-scratch                                                      | $    |
 | Using Livewire with Laravel                                            | https://www.slingacademy.com/article/using-livewire-with-laravel-a-developers-guide/                      |      |
@@ -108,9 +128,8 @@ We highly recommend that you practice the use of Laravel by looking at the follo
 
 ### Other
 
-
 | Title                                   | Link                                                                                | Cost |
-| --------------------------------------- | ----------------------------------------------------------------------------------- | ---- |
+|-----------------------------------------|-------------------------------------------------------------------------------------|------|
 | Learn PHP in 2020                       | https://www.youtube.com/watch?v=te3GnuhU6oQ&list=PLFHz2csJcgk_fFEWydZJLiXpc9nB1qfpi |      |
 | Learn Laravel Jetstream                 | https://www.youtube.com/playlist?list=PLFHz2csJcgk8gx6nl6V7JY5eBIO-A6Spx            |      |
 | Mastering Eloquent & Collection Methods | https://www.youtube.com/playlist?list=PLFHz2csJcgk-uM0GcLtuZxN8Myl5Ui1Zf            |      |
