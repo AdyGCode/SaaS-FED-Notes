@@ -34,6 +34,40 @@ It automatically executes items such as creating a new database, running compose
 It is a great way to make sure the application you submit is testable by the assessors.
 
 
+## FontAwesome Icons Not Showing 
+
+A common issue with apps is that 3rd party icon fonts etc are not loading.
+
+For FontAwesome, the simplest fix is to refer to their basic CDN and include this as a link.
+
+Edit your guest.blade.php and app.blade.php layouts and locate the line:
+
+```html
+ <!-- Fonts -->
+<link rel="preconnect" href="https://fonts.bunny.net">
+<link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+<!-- Font Awesome Icons -->
+<link rel="stylesheet" href="{{ url('all.css') }}">
+```
+
+Below the line with `href="https://fonts.bunny.net/` add:
+
+
+```html
+ <!-- Fonts -->
+<link rel="preconnect" href="https://fonts.bunny.net">
+<link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+<!-- Font Awesome Icons -->
+<link rel="stylesheet" href="{{ url('all.css') }}">
+```
+
+Now download this small compressed file ([Zip](../assets/font-awesome-v6-free.zip) 
+or [7Zip](../assets/font-awesome-v6-free.7z)), and extract the contents.
+
+Move the `webfonts` folder and the `all.css` file into the `public` folder.
+
+On refresh, you should now see the FontAwesome icons.
+
 
 ## Preparation for Stage 2 of SaaS - Back End Dev
 
