@@ -35,7 +35,7 @@ deploying' to a remote system.
 
 Check out the notes on testing your application works:
 
-- [S20-How-To-Test-Your-App-Works](session-20/S20-How-To-Test-Your-App-Works.md)
+- [S20-How-To-Test-Your-App-Works](../session-20/S20-How-To-Test-Your-App-Works.md)
 
 ---
 
