@@ -9,7 +9,7 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testng, PEST
 created: 2024-08-01T09:23
-updated: 2024-09-10T16:36
+updated: 2025-01-29T11:37
 ---
 
 # Testing Terminology
@@ -63,3 +63,4 @@ PHP xDebug is a PHP extension that provides debugging and profiling capabilities
 ## Rubber Duck
 
 Rubber Duck Debugging is a method of debugging code by explaining it, line-by-line, to an inanimate object (like a rubber duck) to find errors or understand logic.
+

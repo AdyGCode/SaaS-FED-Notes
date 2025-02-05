@@ -9,7 +9,7 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testng, PEST
 created: 2024-08-01T09:23
-updated: 2024-09-10T16:36
+updated: 2025-01-25T17:34
 ---
 
 # PHP Basics I
@@ -18,8 +18,8 @@ PHP: Hypertext Preprocessor
 [recursive acronym]
 
 Executed:
-- Using a PHP ‘interpreter’ on
-- a web server
+- Using a PHP ‘interpreter’
+- Usually combined with a web or application server
 
 Generates output based on executed code, and data sources as required
 
@@ -40,11 +40,13 @@ https://www.phptutorial.net/php-tutorial/what-is-php/
 
 ---
 
-PHP Interpreter can be executed on most modern web servers, inlcuding:
+PHP Interpreter can be executed in conjunction with most modern web servers, including:
 - Apache
 - NginX
 - IIS
 - etc
+
+It is possible to containerise PHP applications and allow PHP to provide a simple 'web server'.
 
 ---
 
@@ -59,18 +61,25 @@ Supports wide range of databases
 
 # Installing PHP
 
-We recommend using Laragon on Windows machines and Laravel Herd on MacOS.
+There are many options available top you when developing PHP code.
 
-- https://www.phptutorial.net/php-tutorial/install-php/
+These include:
+
+- PHP Locally
 - Laravel Herd
 - Laragon
+- Docker
+
+We recommend using Laragon on Windows machines and Laravel Herd on MacOS.
 
 Updating PHP on Laragon is really simple. Instructions may be found here:
 - 
 
+We will support Laravel Herd and Laragon ONLY.
+
 ---
 
-# Basic PHP Page
+# Basics of PHP
 
 ![duck.svg|142](../assets/duck.svg)
 
@@ -126,19 +135,21 @@ More details:
 
 ---
 
-## Basic Page continued
+## Basics of PHP...
 
-Every PHP Page must have documentation
+Every PHP Page **must** have some initial documentation.
+
+This opening documentation block does the following:
 
 - Indicates what it the code does
-- Indicates who the code is by
+- Indicates who the code is written by
 - Indicates when code was started
 
 ![PHP-Basics-I-20240723160259020.png](../assets/PHP-Basics-I-20240723160259020.png)
 
 ---
 
-## Basic PHP Continued
+## Basics of PHP...
 
 Setting up the template
 
@@ -158,7 +169,7 @@ Copy this code into your clipboard:
  * Date Created:    ${DATE}
  *
  * Author:          YOUR_NAME
- *
+ * 
  */
 ```
 
@@ -187,6 +198,39 @@ For example: `App/Models/`.
 
 Also, make sure the placeholder (All Caps) text is replaced with a one line title and, if required, a short description of the code and its purpose. If no description is needed, then the long text may be removed.
 
+When the file had major updates, we recommend the "Version Summary" is added to the header by:
+
+- Adding `Version Summary`
+- Adding a semantic version number
+- Adding the summary
+
+Each new major update should be added before the previous.
+
+Here is the example template with the possible additional lines:
+
+```php
+/**
+ * FILE TITLE GOES HERE
+ *
+ * DESCRIPTION OF THE PURPOSE AND USE OF THE CODE
+ * MAY BE MORE THAN ONE LINE LONG
+ * KEEP LINE LENGTH TO NO MORE THAN 96 CHARACTERS
+ *
+ * Filename:        ${FILE_NAME}
+ * Location:        FILE_LOCATION
+ * Project:         ${PROJECT_NAME}
+ * Date Created:    ${DATE}
+ *
+ * Author:          YOUR_NAME
+ *
+ * Version Summary
+ * 0.0.0            Summary of what has been added/updated/removed
+ * 
+ */
+```
+
+If you use best practice in your version control then these "Version summary" lines become superfluous and my be removed/ignored.
+
 ---
 
 ## PHP Hello World
@@ -209,7 +253,6 @@ PHP Class Files must be:
 ---
 
 # Basic Syntax & Sensitivity
-
 
 - [PHP Syntax (phptutorial.net)](https://www.phptutorial.net/php-tutorial/php-syntax/)
 
@@ -256,10 +299,10 @@ PHP Class Files must be:
 ## PHP and HTML (et al)
 
 If the PHP has non-PHP after or surrounding it then:
-- Close tag must be present on each PHP block
+- the PHP close tag must be present on each PHP block
 
 If the PHP Code does not have non-PHP after it then:
-- Close tag may be omitted 
+- the PHP close tag may be omitted 
 
 - [PHP Syntax (phptutorial.net)](https://www.phptutorial.net/php-tutorial/php-syntax/)
 

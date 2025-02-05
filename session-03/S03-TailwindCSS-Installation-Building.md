@@ -9,7 +9,7 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testing, PEST
 created: 2024-08-06T15:47
-updated: 2024-09-10T16:36
+updated: 2025-01-29T11:39
 ---
 
 # Installing and Continuously Rebuilding TailwindCSS
@@ -19,19 +19,23 @@ updated: 2024-09-10T16:36
 
 Open the Windows terminal
 
-Make sure in home folder
+Make sure in home folder:
+
 ```bash
 cd ~
 ```
 
-> **_Note in 3-06:_**
-> ```bash
-> cd /c/Users/USERNAME
-> ```
+> **IMPORTANT**
+> 
+> In Room 3-06 we MUST use a slightly different command:
+>
+>  ```bash
+>  cd /c/Users/USERNAME
+>  ```
 
 Create `src` and `assets/css` folders
 ```shell
-mkdir src assets/css
+mkdir -p src assets/css
 ```
 
 Create `.gitignore` files in these folders
