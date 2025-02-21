@@ -9,7 +9,7 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testing, PEST
 created: 2024-09-05T08:58
-updated: 2024-09-10T16:36
+updated: 2025-02-21T16:40
 ---
 
 
@@ -203,6 +203,7 @@ For us it will be something similar to:
 
 ## Next time...
 
-The next session continues the development with the creatoin of an application using our micro-framework code.
+The next session continues the development with the creation of an application using our 
+micro-framework code.
 
 [S08 Vanilla PHP MVC - Pt 5](session-08/S08-Vanilla-PHP-MVC-Pt-05.md)

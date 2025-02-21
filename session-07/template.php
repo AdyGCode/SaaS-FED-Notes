@@ -82,13 +82,15 @@
                         Products:
                     </h4>
                 </header>
-                15            </section>
+                15
+            </section>
             <section class="max-w-96 min-w-64 bg-white shadow rounded p-2 grid grid-cols-3">
                 <h4 class="-ml-2 mr-6 bg-zinc-700 text-zinc-200 text-lg p-4 -my-2 rounded-l col-span-1">
                     Users:
                 </h4>
                 <p class="col-span-2 text-2xl ml-6">
-                    6                </p>
+                    6
+                </p>
             </section>
 
         </section>
@@ -97,14 +99,17 @@
             <article class="max-w-96 min-w-64 bg-white shadow rounded p-2 flex flex-col">
                 <header class="-mx-2 bg-zinc-700 text-zinc-200 text-lg p-4 -mt-2 mb-4 rounded-t flex-0">
                     <h4>
-                        German Shepherd                        </h4>
+                        German Shepherd
+                    </h4>
                 </header>
                 <section class="flex-grow grid grid-cols-5">
                     <p class="ml-4 col-span-2">
                         <img class="w-24 h-24 " src="https://dummyimage.com/200x200/a1a1aa/fff&text=Image+Here"
                              alt="">
                     </p>
-                    <p class="col-span-3 text-zinc-600">BrickHeadz theme: A BrickHeadz pet set featuring a cute German Shepherd and puppy, great for dog lovers.</p>
+                    <p class="col-span-3 text-zinc-600">
+                        BrickHeadz theme: A BrickHeadz pet set featuring a cute German Shepherd and puppy, great for dog lovers.
+                    </p>
                 </section>
                 <footer class="-mx-2 bg-zinc-200 text-zinc-900 text-sm px-4 py-1 mt-4 -mb-2 rounded-b flex-0">
                     <p>Price: $19.99</p>
@@ -119,14 +124,17 @@
             <article class="max-w-96 min-w-64 bg-white shadow rounded p-2 flex flex-col">
                 <header class="-mx-2 bg-zinc-700 text-zinc-200 text-lg p-4 -mt-2 mb-4 rounded-t flex-0">
                     <h4>
-                        The Mandalorian & The Child BrickHeadz                        </h4>
+                        The Mandalorian & The Child BrickHeadz
+                    </h4>
                 </header>
                 <section class="flex-grow grid grid-cols-5">
                     <p class="ml-4 col-span-2">
                         <img class="w-24 h-24 " src="https://dummyimage.com/200x200/a1a1aa/fff&text=Image+Here"
                              alt="">
                     </p>
-                    <p class="col-span-3 text-zinc-600">Star Wars theme: A BrickHeadz double pack featuring The Mandalorian and The Child (Baby Yoda), perfect for fans of the popular Star Wars series.</p>
+                    <p class="col-span-3 text-zinc-600">
+                        Star Wars theme: A BrickHeadz double pack featuring The Mandalorian and The Child (Baby Yoda), perfect for fans of the popular Star Wars series.
+                    </p>
                 </section>
                 <footer class="-mx-2 bg-zinc-200 text-zinc-900 text-sm px-4 py-1 mt-4 -mb-2 rounded-b flex-0">
                     <p>Price: $29.99</p>
@@ -141,14 +149,17 @@
             <article class="max-w-96 min-w-64 bg-white shadow rounded p-2 flex flex-col">
                 <header class="-mx-2 bg-zinc-700 text-zinc-200 text-lg p-4 -mt-2 mb-4 rounded-t flex-0">
                     <h4>
-                        Sheep BrickHeadz                        </h4>
+                        Sheep BrickHeadz
+                    </h4>
                 </header>
                 <section class="flex-grow grid grid-cols-5">
                     <p class="ml-4 col-span-2">
                         <img class="w-24 h-24 " src="https://dummyimage.com/200x200/a1a1aa/fff&text=Image+Here"
                              alt="">
                     </p>
-                    <p class="col-span-3 text-zinc-600">BrickHeadz theme: This set features an adorable sheep with a cute, blocky design, perfect for collectors and fans of the BrickHeadz series.</p>
+                    <p class="col-span-3 text-zinc-600">
+                        BrickHeadz theme: This set features an adorable sheep with a cute, blocky design, perfect for collectors and fans of the BrickHeadz series.
+                    </p>
                 </section>
                 <footer class="-mx-2 bg-zinc-200 text-zinc-900 text-sm px-4 py-1 mt-4 -mb-2 rounded-b flex-0">
                     <p>Price: $19.99</p>
@@ -163,14 +174,17 @@
             <article class="max-w-96 min-w-64 bg-white shadow rounded p-2 flex flex-col">
                 <header class="-mx-2 bg-zinc-700 text-zinc-200 text-lg p-4 -mt-2 mb-4 rounded-t flex-0">
                     <h4>
-                        Valentine's Bear                        </h4>
+                        Valentine's Bear
+                    </h4>
                 </header>
                 <section class="flex-grow grid grid-cols-5">
                     <p class="ml-4 col-span-2">
                         <img class="w-24 h-24 " src="https://dummyimage.com/200x200/a1a1aa/fff&text=Image+Here"
                              alt="">
                     </p>
-                    <p class="col-span-3 text-zinc-600">BrickHeadz theme: A seasonal BrickHeadz set featuring a charming Valentine's Bear holding a heart, ideal for Valentine's Day.</p>
+                    <p class="col-span-3 text-zinc-600">
+                        BrickHeadz theme: A seasonal BrickHeadz set featuring a charming Valentine's Bear holding a heart, ideal for Valentine's Day.
+                    </p>
                 </section>
                 <footer class="-mx-2 bg-zinc-200 text-zinc-900 text-sm px-4 py-1 mt-4 -mb-2 rounded-b flex-0">
                     <p>Price: $19.99</p>
@@ -185,14 +199,17 @@
             <article class="max-w-96 min-w-64 bg-white shadow rounded p-2 flex flex-col">
                 <header class="-mx-2 bg-zinc-700 text-zinc-200 text-lg p-4 -mt-2 mb-4 rounded-t flex-0">
                     <h4>
-                        Dragon Dance                        </h4>
+                        Dragon Dance
+                    </h4>
                 </header>
                 <section class="flex-grow grid grid-cols-5">
                     <p class="ml-4 col-span-2">
                         <img class="w-24 h-24 " src="https://dummyimage.com/200x200/a1a1aa/fff&text=Image+Here"
                              alt="">
                     </p>
-                    <p class="col-span-3 text-zinc-600">Seasonal theme: This Chinese New Year-themed set features a vibrant and detailed dragon dance scene, complete with minifigures and traditional decorations.</p>
+                    <p class="col-span-3 text-zinc-600">
+                        Seasonal theme: This Chinese New Year-themed set features a vibrant and detailed dragon dance scene, complete with minifigures and traditional decorations.
+                    </p>
                 </section>
                 <footer class="-mx-2 bg-zinc-200 text-zinc-900 text-sm px-4 py-1 mt-4 -mb-2 rounded-b flex-0">
                     <p>Price: $89.99</p>
@@ -207,14 +224,17 @@
             <article class="max-w-96 min-w-64 bg-white shadow rounded p-2 flex flex-col">
                 <header class="-mx-2 bg-zinc-700 text-zinc-200 text-lg p-4 -mt-2 mb-4 rounded-t flex-0">
                     <h4>
-                        Naboo Starfighter Microfighter                        </h4>
+                        Naboo Starfighter Microfighter
+                    </h4>
                 </header>
                 <section class="flex-grow grid grid-cols-5">
                     <p class="ml-4 col-span-2">
                         <img class="w-24 h-24 " src="https://dummyimage.com/200x200/a1a1aa/fff&text=Image+Here"
                              alt="">
                     </p>
-                    <p class="col-span-3 text-zinc-600">Star Wars theme: A compact, easy-to-build model of the Naboo Starfighter, perfect for young Star Wars fans.</p>
+                    <p class="col-span-3 text-zinc-600">
+                        Star Wars theme: A compact, easy-to-build model of the Naboo Starfighter, perfect for young Star Wars fans.
+                    </p>
                 </section>
                 <footer class="-mx-2 bg-zinc-200 text-zinc-900 text-sm px-4 py-1 mt-4 -mb-2 rounded-b flex-0">
                     <p>Price: $15.99</p>
@@ -238,4 +258,3 @@
 
 </body>
 </html>
-

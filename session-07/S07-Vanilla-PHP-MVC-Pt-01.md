@@ -9,7 +9,7 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testing, PEST
 created: 2024-09-05T08:58
-updated: 2024-09-10T16:43
+updated: 2025-02-21T16:31
 ---
 
 
@@ -226,7 +226,7 @@ We are almost done...
 
 Now add the following, and then we will execute for the final time, this time seeding the products table...
 
-```sql
+```mysql
 -- ----------------------------------------------------------------------------------------  
 -- Seed Products Table  
 -- ----------------------------------------------------------------------------------------  
@@ -282,4 +282,3 @@ VALUES (40380, 20, 'Sheep BrickHeadz',
 OK, we now have a database with users and products tables.
 
 We are ready to start our PHP... [S07-Vanilla-PHP-MVC-Pt-02](session-07/S07-Vanilla-PHP-MVC-Pt-02.md)
-
