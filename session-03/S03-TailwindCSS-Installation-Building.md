@@ -7,15 +7,28 @@ auto-scaling: true
 size: 4k
 color: "#ccc"
 backgroundColor: "#060606"
-tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testing, PEST
+tags:
+  - SaaS
+  - Front-End
+  - MVC
+  - Laravel
+  - Framework
+  - PHP
+  - MySQL
+  - MariaDB
+  - SQLite
+  - Testing
+  - Unit Testing
+  - Feature Testing
+  - PEST
 created: 2024-08-06T15:47
-updated: 2025-01-29T11:39
+updated: 2025-02-21T15:49
 ---
 
 # Installing and Continuously Rebuilding TailwindCSS
 
 
-# Install TailwindCSS
+# Install TailwindCSS v3
 
 Open the Windows terminal
 
@@ -86,7 +99,7 @@ touch session-03/{form.php,action.php}
 
 Install tailwindcss!
 ```bash
-npm install -D tailwindcss
+npm install -D tailwindcss@3
 ```
 
 Start tailwind watching your code

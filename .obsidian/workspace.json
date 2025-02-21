@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "session-02/S02-Terminology-Web.md",
+                "file": "session-01/S01-Setting-Up-Laragon.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "S02-Terminology-Web"
+              "title": "S01-Setting-Up-Laragon"
             }
           }
         ],
@@ -55,7 +55,8 @@
             "state": {
               "type": "file-explorer",
               "state": {
-                "sortOrder": "alphabetical"
+                "sortOrder": "alphabetical",
+                "autoReveal": false
               },
               "icon": "lucide-folder-closed",
               "title": "Files"
@@ -154,10 +155,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "session-02/S02-Terminology-Web.md"
+                "file": "session-01/S01-Setting-Up-Laragon.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of S02-Terminology-Web"
+              "title": "Outline of S01-Setting-Up-Laragon"
             }
           },
           {
@@ -199,11 +203,12 @@
   },
   "active": "758077b8b3d4a0bd",
   "lastOpenFiles": [
+    "session-01/S01-Journals.md",
+    "session-02/S02-Terminology-Web.md",
     "session-02/S02-Terminology-X-As-A-Service.md",
     "session-02/S02-Terminology-Programming.md",
     "session-10/S10-Exercises-and-Journal-Entry.md",
     "session-02/S02-Terminology-General.md",
-    "session-02/S02-Terminology-Web.md",
     "session-03/S03-Exercises-and-Journal-Entry.md",
     "session-03/S03-TailwindCSS-Installation-Building.md",
     "session-03/S03-Terminology-Database.md",
@@ -225,7 +230,6 @@
     "session-13/S12-Laravel-02-Update-User.md",
     "session-14/S14-Laravel-05-Roles-and-Permissions.md",
     "session-12/S12-Managing-Projects-Using-GitHub-and-Kanban.md",
-    "session-12/S12-Laravel-03-Product-Feature.md",
     "assets/vivaldi_qqHh6J21aQ.gif",
     "assets/S10-Laravel-BootCamp-Part-2-20240920172149440.png",
     "assets/S10-Introducing-Laravel-20240920133837144.png",
