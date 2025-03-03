@@ -9,7 +9,7 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testng, PEST
 created: 2024-09-05T08:58
-updated: 2024-09-10T16:36
+updated: 2025-02-21T17:06
 ---
 
 
@@ -101,7 +101,7 @@ use Framework\Validation;
 
 Now in the class we add a protected property that will hold the database object when instantiated.
 
-```
+```php
 protected $db;
 ```
 
@@ -210,7 +210,7 @@ Inside the form (where the "form fields go here" comment is shown) we need to cr
 
 Each field will have:
 - a section of its own
-- a label to facilitate easier access to each field, inlcuding:
+- a label to facilitate easier access to each field, including:
 	- `for` attribute that will link to the field
 	- `class` to style the label
 - the input (or equivalent) entity to allow data entry, including:
@@ -221,7 +221,7 @@ Each field will have:
 
 So the name field is structured thus:
 
-```php
+```html
 <section class="mb-4">  
     <label for="Name" class="mt-4 pb-1">Name:</label>  
     <input type="text" id="Name"  
@@ -235,7 +235,7 @@ Ok, so let's repeat this for the other fields...
 
 **Email**
 
-```php
+```html
 <section class="mb-4">  
     <label for="Email" class="mt-4 pb-1">Email:</label>  
     <input type="email" id="Email"  
@@ -247,7 +247,7 @@ Ok, so let's repeat this for the other fields...
 
 **City**
 
-```php
+```html
 <section class="mb-4">  
     <label for="City" class="mt-4 pb-1">City:</label>  
     <input type="text" id="City"  
@@ -259,7 +259,7 @@ Ok, so let's repeat this for the other fields...
 
 **State**
 
-```php
+```html
 <section class="mb-4">  
     <label for="State" class="mt-4 pb-1">State:</label>  
     <input type="text" id="State"  
@@ -273,7 +273,7 @@ Ok, so let's repeat this for the other fields...
 
 The password and password confirmation use the 'password' input type. This means the password is not shown as it is typed.
 
-```php
+```html
 <section class="mb-4">  
     <label for="Password" class="mt-4 pb-1">Password:</label>  
     <input type="password" id="Password"  
@@ -284,7 +284,7 @@ The password and password confirmation use the 'password' input type. This means
 
 **Password Confirmation**
 
-```php
+```html
 <section class="mb-4">  
     <label for="PasswordConfirmation" class="mt-4 pb-1">Confirm password:</label>  
     <input type="password" id="PasswordConfirmation"  
@@ -297,7 +297,7 @@ Now onto the submit buttons and a link to login for previously registered users:
 
 **Submit the form**
 
-```php
+```html
 <section class="mb-4">  
     <button type="submit"  
             class="w-full bg-sky-500 hover:bg-sky-600 text-white px-4 py-2 rounded focus:outline-none  
@@ -309,7 +309,7 @@ Now onto the submit buttons and a link to login for previously registered users:
 
 And finally the message for already registered users and login link...
 
-```php
+```html
 <section class="mb-4">  
     <p class="mt-8 text-zinc-700">  
         Already have an account?  
@@ -383,13 +383,15 @@ public function store()
     }  
   
     if (!Validation::match($password, $passwordConfirmation)) {  
-        $errors['password_confirmation'] = 'Passwords do not match';  
+        $errors['password_confirmation'] = 'Password and Confirmation do not match';  
     }  
 ```
 
 **If there are errors, redirect to the registration page...**
 
-```  php
+When we redirect we also snd back the entered data so that it may be displayed in the form.
+
+```php
     if (!empty($errors)) {  
         loadView('users/create', [  
             'errors' => $errors,  
@@ -435,7 +437,10 @@ public function store()
         'password' => password_hash($password, PASSWORD_DEFAULT)  
     ];  
   
-    $this->db->query('INSERT INTO users (name, email, city, state, password) VALUES (:name, :email, :city, :state, :password)', $params);  
+    $this->db->query(
+    	'INSERT INTO users (name, email, city, state, password) 
+    	VALUES (:name, :email, :city, :state, :password)', $params
+    	);  
   
     // Get new user ID  
     $userId = $this->db->conn->lastInsertId();  
@@ -606,7 +611,9 @@ public function authenticate()
         'email' => $email  
     ];  
   
-    $user = $this->db->query('SELECT * FROM users WHERE email = :email', $params)->fetch();  
+    $user = $this->db->query(
+    	'SELECT * FROM users WHERE email = :email', $params
+    	)->fetch();  
 ```
 
 **If the database query returned no user, then the email is not in the database, so redirect with an error...**
@@ -624,7 +631,7 @@ public function authenticate()
 
 **If the passwords do not match then again, we need to redirect with an error...**
 
-We use PHP's built in Password Verification function for this.
+We use PHP's built-in Password Verification function for this.
 
 ```php
     // Check if password is correct  
@@ -637,7 +644,7 @@ We use PHP's built in Password Verification function for this.
     }  
 ```
 
-We got his far, so we now have a registed user, and they uysedf the correct password so...
+We got his far, so we now have a registered user, and they used the correct password so...
 
 **Start the user's authenticated session, and redirect to the home page**
 
@@ -682,4 +689,3 @@ public function logout()
 So that is the User Feature completed.
 
 The final step is the Products Feature which is covered in [S07 Vanilla PHP MVC Pt 8](session-08/S08-Vanilla-PHP-MVC-Pt-08.md)
-

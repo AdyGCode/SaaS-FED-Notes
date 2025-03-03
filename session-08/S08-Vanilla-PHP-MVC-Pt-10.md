@@ -9,14 +9,14 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testng, PEST
 created: 2024-09-03T12:55
-updated: 2024-09-17T14:29
+updated: 2025-02-21T17:13
 ---
 
 
 
 # Testing the whole application
 
-Ok, so  it's time for you test the application.
+OK, so  it's time for you test the application.
 
 This is going to be an exercise as we want you to practice thinking about what tests would be required for an application.
 
@@ -34,5 +34,3 @@ We suggest using a table to help that could be similar to this:
 |          | Logout      |                                                 |                                                             |               |       |
 |          |             |                                                 |                                                             |               |       |
 | Products | ...         |                                                 |                                                             |               |       |
-
-

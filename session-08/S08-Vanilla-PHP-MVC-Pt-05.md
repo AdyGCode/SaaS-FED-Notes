@@ -9,20 +9,20 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testing, PEST
 created: 2024-09-05T08:58
-updated: 2024-09-10T16:36
+updated: 2025-02-21T16:56
 ---
 
 # Continuing to build the Framework
 
 So far we have created the helpers, the routes and the database configuration.
 
-In this section we will look at the `public/index.php` file, and convert it from the current template file into a set of
-partials that will be stored in the `App/views/partials` folder...
+In this section we will look at the `public/index.php` file, and convert it from the current 
+template file into a set of partials that will be stored in the `App/views/partials` folder...
 
 ## Before you continue...
 
-One item to note is that when you restart a project after leaving it for the day, you will need to restart the likes of
-the tailwind CSS compiler.
+One item to note is that when you restart a project after leaving it for the day, you will 
+need to restart the likes of the Tailwind CSS compiler.
 
 It is also a good idea to run the `npm` and `composer` installs/updates.
 
@@ -56,9 +56,11 @@ project:
 $router->get('/', 'HomeController@index');  
 ```
 
-As stated previously, this router call adds a GET method route to the router that looks for the `/` endpoint for the URL.
+As stated previously, this router call adds a GET method route to the router that looks 
+for the `/` endpoint for the URL.
 
-We will add additional routes to this file as needed as we progress through the next parts of the tutorial.
+We will add additional routes to this file as needed as we progress through the next parts of 
+the tutorial.
 
 ## Public `index.php`
 
@@ -103,7 +105,7 @@ Session::start();
 
 require '../helpers.php';
 
-// Instatiate the router
+// Instantiate the router
 $router = new Router();
 
 // Get routes
@@ -256,7 +258,7 @@ Here is an image of the full code as of 3/9/24:
 
 ## New Partials
 
-Ok now we are able to add our two new partials. The Errors partial is used to dispaly error
+Ok now we are able to add our two new partials. The Errors partial is used to display error
 messages suchas 404 on the
 site.
 
