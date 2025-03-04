@@ -58,7 +58,7 @@
     "session-04/S04-PHP-Basics-VI.md": "987859001f40eccca884da147e581128c3cb8c464da8eccdaa91059e4ec84302",
     "session-14/ReadMe.md": "ac6a67141d11dbabdec81663f6da78a33a42bfb1942ca9be8fbe185ab6b6501d",
     "session-07/S07-Vanilla-PHP-MVC-Pt-04.md": "d185771d1abe793c408bafec9dada1e30406f3124777e44c45665aac586a55cd",
-    "session-02/S02-PHP-Basics-I.md": "ebc73899db95cd3e3988329c07e603f8b86599885cbb44aabe8230f52be56cea",
+    "session-02/S02-PHP-Basics-I.md": "6638a030bb5eba9f66ed33b6e66fbbb5cf72c648fd473a26750a65630d5ca611",
     "session-01/S01-JetBrains-Software-Licenses.md": "5b42fb2738343a1e594bc6931350ade22a3667551202e1be8cd5ad75bc585f85",
     "session-02/S02-Terminology-Network-Internet.md": "5b79d333aab1aa4b0a95d4d8edaaf3a218e41a7822449cc6b94f799763023ca4",
     "session-03/S03-Terminology-SQL.md": "b1d02be016db28e48c3a53b049629d83c1dc62e66b0c6a21d8ff67f895b6d224",
@@ -97,11 +97,13 @@
     "session-14/S14-Exercises-and-Journal-Entry.md": "a6792d02b216cdf78a6ddafe1d626d872ef3c14f44a3766ef1695941d41581eb",
     "session-15/S15-Exercises-and-Journal-Entry.md": "4c756342fb68345d210ad5ed880cbbe88fa2550b675a150a7647f380fe99a964",
     "session-16/S16-Exercises-and-Journal-Entry.md": "e1c10701b5420153ff8ee8c09b194cd8ae8373ae0b7b1ab688069ef04ee0dc6c",
-    "session-10/S10-Introducing-Laravel.md": "e14ac1a04d76142dc20e3d1ad64f02dffad10b700efd33ca1a679b5d8322900e",
+    "session-10/S10-Introducing-Laravel.md": "f4d55c0d663d2aa27b8d159d4e3f757d45331ba1996ba6176af4ee79c16611fe",
     "session-10/S10-Laravel-BootCamp-Part-2.md": "0bb26de49241c6f19c94f54331d4e8127e3e590424615b32f16d697fb499dc76",
     "session-10/S10-Laravel-BootCamp-Part-1.md": "040b093673b9f1720a1c95a661774846499c7e223360125745c05e08c6f1cb3a",
-    "session-12/S12-Laravel-1-Basics-Planning-A-Feature.md": "705e1c3db5e0bd86a65253732b5a8df1236346746d09052fb6c68c14c7dead40",
+    "session-12/S12-Laravel-1-Basics-Planning-A-Feature.md": "4c56381b512ef5f3443e239c93a705255eb5ccac3a2b8cbe9f0ef488b3658953",
     "session-12/S12-Managing-Projects-Using-GitHub-and-Kanban.md": "440c569880d95c7403e594dfa71e6ee50bd41ba0d706d3e220948571d3d65804",
-    "session-12/S12-Laravel-2-Basics-Creating-A-Regions-Feature.md": "9bccb48c1ed982ac38374dc2bdd2ed161baaefd904e0a9b4a17edb4fa32301bb"
+    "session-12/S12-Laravel-2-Basics-Creating-A-Regions-Feature.md": "1ee83d115b0a91d35a3a18f95c2ca24578f168bfd4fa5f03474257cf9415a4df",
+    "session-11/S10-Laravel-Basics.md": "df6b4629cf4ea2c047e597205f373e8b20b010e43a9d308affb4d79191abe9a5",
+    "session-11/S11-Laravel-v12-Many-to-Many.md": "b28ba65f29e241c99019dfd6cc7be4b168b4a1ac27de87441595d75a25fea107"
   }
 }

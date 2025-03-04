@@ -61,11 +61,13 @@
       "enabled": false,
       "date-created": true,
       "date-created-key": "date created",
-      "force-retention-of-create-value": false,
       "date-modified": true,
       "date-modified-key": "date modified",
       "format": "dddd, MMMM Do YYYY, h:mm:ss a",
-      "convert-to-utc": false
+      "convert-to-utc": false,
+      "date-created-source-of-truth": "file system",
+      "date-modified-source-of-truth": "file system",
+      "update-on-file-contents-updated": "never"
     },
     "yaml-title": {
       "enabled": false,
@@ -111,7 +113,9 @@
     },
     "auto-correct-common-misspellings": {
       "enabled": false,
-      "ignore-words": ""
+      "ignore-words": "",
+      "skip-words-with-multiple-capitals": false,
+      "extra-auto-correct-files": []
     },
     "blockquote-style": {
       "enabled": false,
@@ -260,6 +264,9 @@
       "enabled": false
     },
     "remove-multiple-blank-lines-on-paste": {
+      "enabled": false
+    },
+    "empty-line-around-horizontal-rules": {
       "enabled": false
     }
   },
