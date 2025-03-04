@@ -1,6 +1,6 @@
 ---
 created: 2025-02-25T14:55
-updated: 2025-03-04T13:51
+updated: 2025-03-04T17:27
 ---
 # S11 Laravel v12: Many-to-Many
 
@@ -9,16 +9,16 @@ This is based on:
 
 - Laravel Daily. (2025). _Laravel Challenge: Many-to-Many Relations - Olympic Medals_. Youtube.com. https://www.youtube.com/watch?v=-WrFxyZXzdE
 
-‌
+
 
 Additional information from:
 - _How to Install Laravel Breeze on Laravel 12_. (2025). Codecourse.com. https://codecourse.com/articles/how-to-install-laravel-breeze-on-laravel-12
 - _barryvdh/laravel-debugbar: Debugbar for Laravel (Integrates PHP Debug Bar)_. (2025, February 25). GitHub. https://github.com/barryvdh/laravel-debugbar
 
-‌
+
 - ...
 
-‌
+
 
 ## Before You Begin
 
@@ -93,7 +93,7 @@ composer require barryvdh/laravel-debugbar --dev
 More details at:
 - _barryvdh/laravel-debugbar: Debugbar for Laravel (Integrates PHP Debug Bar)_. (2025, February 25). GitHub. https://github.com/barryvdh/laravel-debugbar
 
-‌
+
 
 ### Terminal Inception..
 
@@ -142,6 +142,8 @@ php artisan queue:listen
 ## Problem: Store medals won by each country for each sport
 
 The following shows a typical problem where we have a many to many relationship.
+
+##### MEDALS TABLE
 
 | Sport                           | Gold | Silver | Bronze   |
 | ------------------------------- | ---- | ------ | -------- |
@@ -199,25 +201,156 @@ The actual normalisation process can be long winded, but we will simplify it her
 
 This is the raw data, with no changes.
 
+##### MEDALS TABLE
 
-| Sport                           | Gold | Silver | Bronze |
-| ------------------------------- | ---- | ------ | ------ |
-| Hockey (m)                      | IND  | NED    | GER    |
-| Diving - Springboard 3m (w)     | CHN  | JPN    | CHL    |
-| Athletics - 100m (m)            | USA  | JAM    | CAN    |
-| Swimming - 200m Freestyle (w)   | AUS  | SWE    | CAN    |
+| Sport                         | Gold | Silver | Bronze |
+| ----------------------------- | ---- | ------ | ------ |
+| Hockey (m)                    | IND  | NED    | GER    |
+| Diving - Springboard 3m (w)   | CHN  | JPN    | CHL    |
+| Athletics - 100m (m)          | USA  | JAM    | CAN    |
+| Swimming - 200m Freestyle (w) | AUS  | SWE    | CAN    |
 
-1NF (First Normal Form)
+#### 1NF (First Normal Form) to 3NF
 
-Remove Repeated Fields
+> This is not true normalisation. We show a way to attempt to make the overall process a little easier to follow. A better set of notes will be created to assist you to perform Normalisation using each of the 0NF to 3NF rules.
 
+Firstly we remove repeated fields. 
 
+For this we see that the medals are repeated - be it for gold, silver or bronze.
 
+We can alleviate this repetition by duplicating the rows and expanding the data a little...
 
-Many to many relationships are easy to remove by first splitting the data into two sets. In this case Sports and Countries.
+We also add a row ID to each record of the data:
 
-At the same time, you need to uniquely identify the rows of data, so we add an ID field (column) to the data.
+##### MEDALS TABLE
 
+| ID  | Sport                       | Country | Medal  |
+| --- | --------------------------- | ------- | ------ |
+| 1   | Hockey (m)                  | IND     | Gold   |
+| 2   | Hockey (m)                  | NED     | Silver |
+| 3   | Hockey (m)                  | GER     | Bronze |
+| 4   | Diving - Springboard 3m (w) | CHN     | Gold   |
+| 5   | Diving - Springboard 3m (w) | JPN     | Silver |
+| 6   | Diving - Springboard 3m (w) | CHL     | Bronze |
+| ... | ...                         | ...     | ...    |
+
+We still have repetition, but it is now not within each record.
+
+So what to do about this duplicated data?
+
+What we do is first move the Sports into their own table, and we can also give the rows their own ID:
+
+##### SPORTS TABLE
+
+| ID  | Sport                       |
+| --- | --------------------------- |
+| 1   | Hockey (m)                  |
+| 2   | Diving - Springboard 3m (w) |
+| ... | ...                         |
+
+Now where the Sport appeared in the Medals Table, we replace it with the Sport ID, which reduces the redundancy of the data entry...
+
+##### MEDALS TABLE
+
+| ID  | Sport ID | Country | Medal  |
+| --- | -------- | ------- | ------ |
+| 1   | 1        | IND     | Gold   |
+| 2   | 1        | NED     | Silver |
+| 3   | 1        | GER     | Bronze |
+| 4   | 2        | CHN     | Gold   |
+| 5   | 2        | JPN     | Silver |
+| 6   | 2        | CHL     | Bronze |
+| ... | ...      | ...     | ...    |
+
+We still have the Country duplicated, even if only using 3 characters. 
+
+Imagine if we saved the data for the country as its full name... well that means every CHN would become "Peoples Republic of China".
+
+So we move the country into a new table.
+
+##### COUNTRY TABLE
+
+| ID  | ISO 3LC | Name                      |
+| --- | ------- | ------------------------- |
+| 1   | IND     | India                     |
+| 2   | NED     | Netherlands               |
+| 3   | GER     | Germany                   |
+| 4   | CHN     | Peoples Republic of China |
+| 5   | JPN     | Japan                     |
+| 6   | CHL     | Chile                     |
+| 7   | AUS     | Australia                 |
+| 8   | USA     | United States of America  |
+| 9   | CAN     | Canada                    |
+| ... | ...     | ...                       |
+
+We are only showing a few of the actual 200+ countries.
+
+We now are able to use the Medals table, and replace the Three Letter Code with a number:
+
+##### MEDALS TABLE
+
+| ID  | Sport ID | Country ID | Medal  |
+| --- | -------- | ---------- | ------ |
+| 1   | 1        | 1          | Gold   |
+| 2   | 1        | 2          | Silver |
+| 3   | 1        | 3          | Bronze |
+| 4   | 2        | 4          | Gold   |
+| 5   | 2        | 5          | Silver |
+| 6   | 2        | 6          | Bronze |
+| ... | ...      | ...        | ...    |
+
+We still have the Medal Colour  in a column, but the data here could be allowed as it is much shorter than all the data we had previously.
+
+Doing this has created a Intermediary table, or in Laravel terms, a pivot table.
+
+### Laravel and Intermediary (Pivot) Tables
+
+Laravel uses a convention that makes it easy for the framework to pick up the pivot tables by naming them using the names of the tables that use the pivot in alphabetical order.
+
+So our Medals, Countries and Sports would become:
+
+- Countries,
+- Sports, and
+- Country-Sports
+
+It is possible to name a pivot table with a custom name, with the cost of having to define relationships more explicitly.
+
+### Making data storage even cheaper
+
+We have already got a very good table structure.
+
+The only issue with the structure is that we store between 4 or more characters (currently a maximum of 6). What happens if suddenly the Olympic committee decides the medals are going to be *Platinum, Diamond, Gold, Silver and Wood*?
+
+Now we need to update the table to allow for longer names.
+
+What would be a better idea is that we use a placing or position in place of the colour. This would need a "tiny integer" (1 byte). We can then add the colour to a new table for lookup and use in the user interface.
+
+To do this let's use the Medals table as the colours of the medals.
+
+##### MEDALS TABLE
+
+| ID  | Medal  |
+| --- | ------ |
+| 1   | Gold   |
+| 2   | Silver |
+| 3   | Bronze |
+
+And create the pivot table:
+##### COUNTRY-SPORT TABLE
+
+| ID  | Sport ID | Country ID | Position | Year |
+| --- | -------- | ---------- | -------- | ---- |
+| 1   | 1        | 1          | 1        | 1708 |
+| 2   | 1        | 2          | 2        | 1708 |
+| 3   | 1        | 3          | 3        | 1708 |
+| 4   | 2        | 4          | 1        | 1709 |
+| 5   | 2        | 5          | 2        | 1709 |
+| 6   | 2        | 6          | 3        | 1709 |
+| ... | ...      | ...        | ...      |      |
+
+For demonstration purposes we added a new field, Year, which would hold the year of the particular Olympics, to make it easier to filer and use this table.
+
+> Yes, we know that the modern Olympic Games did not start until  1896 (https://en.wikipedia.org/wiki/Summer_Olympic_Games).
 #### Sports
 
 | ID  | Name                            |
@@ -231,6 +364,7 @@ At the same time, you need to uniquely identify the rows of data, so we add an I
 | 7   | Cycling - Road Race (w)         |
 | 8   | Tennis - Singles (m)            |
 | 9   | Volleyball (w)                  |
+| ... | ...                             |
 
 #### Countries
 
@@ -244,31 +378,14 @@ At the same time, you need to uniquely identify the rows of data, so we add an I
 | 6   | JPN     | Japan                     |
 | ... | ...     | ...                       |
 
-We are only showing a few of the actual 200+ countries.
+### Entity-Relationship Diagram (modified)
 
-This now leaves a problem, of how we relate these two tables.
-
-### Create the "Pivot"/"Intermediary" Table
-
-Next we need to create a table that relates these two entities together. This is known as the Pivot Table, or Intermediary Table, or a Joining Table.
-
-| Entity / Table | Fields | --      | --   | --  |
-| -------------- | ------ | ------- | ---- | --- |
-| Countries      | ID     | ISO 3LC | Name |     |
-| Sports         | ID     | Name    |      |     |
-| Country-Sports | ID     |         |      |     |
-
-At the same time we need to include the data that is lost...
-
-We need to use the Countries table's ID and the Sports table's ID to identify each row of data, plus we need to identify the type of medal won (the position or placing).
-
-| Entity / Table | Fields | --         | --       | --               |
-| -------------- | ------ | ---------- | -------- | ---------------- |
-| Countries      | ID     | ISO 3LC    | Name     |                  |
-| Sports         | ID     | Name       |          |                  |
-| Country-Sports | ID     | Country ID | Sport ID | Position/Placing |
+Now we have done this remodelling, we can draw a diagram to assist visualisation. This is the diagram below, a modified form of E-R diagram. Note we also have omitted the Medals table.
 
 ![Many-To-Many Resolved to One-to-Many](assets/Country-Medals-Sports-3NF.png)
+
+
+---
 
 ## Setting Up Models, Migrations and More
 
@@ -277,12 +394,14 @@ Create the model, migrations, factories, and associated classes for Country and 
 ```shell
 php artisan make:model -a Country
 php artisan make:model -a Sport
+php artisan make:model -a MedalColour
 ```
 
-Create the pivot table migration:
+Create the pivot table migration, and a model so we are able to indicate mass assignment as needed. This also allows us to keep a created/updated timestamp if needed:
 
 ```shell
 php artisan make:migration create_country_sport_table
+php artisan make:model CountrySport
 ```
 
 ### Edit the migrations
@@ -302,7 +421,8 @@ The up method will read:
 ```php
 Schema::create('sports', function (Blueprint $table) {
     $table->id();
-    $table->string('name');
+    $table->string('name')->default('Unknown');
+    $table->string('code',6)->default('------');
     $table->timestamps();
 });
 ```
@@ -316,23 +436,40 @@ The up method will read:
 ```php
 Schema::create('countries', function (Blueprint $table) {
 	$table->id();
-	$table->string('name', 192);
-	$table->string('short_code', 3);
+	$table->string('name', 192)->default('Unknown');
+	$table->string('short_code', 3)->default('---');
 	$table->timestamps();
 });
 ```
 
 #### Pivot Table: Country Sport Migration
 
-Example filename: ``
+Example filename: `2025_02_27_052523_create_country_sport_table.php`
 
 The up method now reads:
 
 ```php
 Schema::create('country_sport', function (Blueprint $table) {
-	$table->foreignId('country_id')->constrained();
-	$table->foreignId('sport_id')->constrained();
-	$table->unsignedSmallInteger('position');
+	$table->foreignId('country_id')
+	      ->constrained();
+	$table->foreignId('sport_id')
+	      ->constrained();
+	$table->unsignedSmallInteger('position')
+	      ->default(0);
+	$table->timestamps();
+});
+```
+
+
+### Medal Colour Migration
+
+Example filename: `2025_02_27_052523_create_medal_colour_table.php`
+
+```php
+Schema::create('medal_colours', function (Blueprint $table) {
+	$table->id();
+	$table->string('name', 32)->default('Unknown');
+	$table->timestamps();
 });
 ```
 
@@ -350,6 +487,133 @@ php artisan migrate
 > When you use `php artisan migrate` it does **NOT** run any migrations that have been previously completed. 
 >
 > If you want to alter a table in any way, **ALWAYS** create a new 'update' migration, e.g. `update_users_changing_name_to_nickname` or similar.
+>
+> Likewise, if you want to drop a table, then create a new migration with a name similar to `drop_TABLENAME`, but you will then need to recreate the table in the down method. 
+> 
+> This is cumbersome, and perhaps better to leave the table and rename it with a prefix to signify it is now deleted.
+
+## Update the Models
+
+We now need to update the models to allow for mass assignment. Mass assignment is performed in Create and Update methods.
+
+The models are found in app/Models.
+### User Model
+
+We show the full User Model for reference.
+
+```php
+<?php  
+  
+namespace App\Models;  
+  
+// use Illuminate\Contracts\Auth\MustVerifyEmail;  
+use Illuminate\Database\Eloquent\Factories\HasFactory;  
+use Illuminate\Foundation\Auth\User as Authenticatable;  
+use Illuminate\Notifications\Notifiable;  
+  
+class User extends Authenticatable  
+{  
+    /** @use HasFactory<\Database\Factories\UserFactory> */  
+    use HasFactory, Notifiable;  
+  
+    /**  
+     * The attributes that are mass assignable.
+     *     
+     * @var list<string>  
+     */    
+    protected $fillable = [  
+        'name',  
+        'email',  
+        'password',  
+    ];  
+  
+    /**  
+     * The attributes that should be hidden for serialization.     
+     *     
+     * @var list<string>  
+     */    
+    protected $hidden = [  
+        'password',  
+        'remember_token',  
+    ];  
+  
+    /**  
+     * Get the attributes that should be cast.     
+     *     
+     * @return array<string, string>  
+     */    
+    protected function casts(): array  
+    {  
+        return [  
+            'email_verified_at' => 'datetime',  
+            'password' => 'hashed',  
+        ];  
+    }  
+}
+```
+
+### Country Model
+
+For this we show the `use` and the main code in the class:
+
+```php
+use Illuminate\Database\Eloquent\Factories\HasFactory;  
+use Illuminate\Database\Eloquent\Model;  
+use Illuminate\Notifications\Notifiable;  
+```
+
+Now the fillable, hidden and casts...
+```php  
+    /** @use HasFactory<\Database\Factories\CountryFactory> */  
+    use HasFactory, Notifiable;  
+  
+    /**  
+     * The attributes that are mass assignable.     
+     *     
+     * @var list<string>  
+     */
+    protected $fillable = [  
+        'name',  
+        'short_code'  
+    ];  
+  
+    /**  
+     * The attributes that should be hidden for serialization.
+     *
+	 * @var list<string>  
+     */
+    protected $hidden = [      ];  
+  
+    /**  
+     * Get the attributes that should be cast.     
+     *     
+     * @return array<string, string>  
+     */
+    protected function casts(): array  
+    {  
+        return [          ];  
+    }  
+
+```
+
+### Sport Model
+
+
+```php
+
+```
+
+
+### Country-Sport Model
+
+
+### Medal Model
+
+
+```php
+
+```
+
 
 
 ## Create and Update Seeder Classes
@@ -384,6 +648,15 @@ $users = [
     [  
         'name' => 'Ad Ministrator',  
         'email' => 'admin@example.com',  
+        'email_verified_at' => now(),  
+        'password' => Hash::make('Password1'),  
+        'remember_token' => Str::random(10),  
+        'email_verified_at' => now(),  
+    ],  
+    
+    [  
+        'name' => 'Staff Member',  
+        'email' => 'staff@example.com',  
         'email_verified_at' => now(),  
         'password' => Hash::make('Password1'),  
         'remember_token' => Str::random(10),  

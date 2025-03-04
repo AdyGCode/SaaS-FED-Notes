@@ -217,6 +217,13 @@
   },
   "active": "c913675e2933346e",
   "lastOpenFiles": [
+    "session-11/S11-Laravel-v12-Many-to-Many.md~",
+    "session-20/student-setup-script.sh",
+    "session-20/S20-How-To-Test-Your-App-Works.md",
+    "session-20/S20-Deploying-to-TAFE-Services.md",
+    "session-20/S20-Automated-Test-Installer.md",
+    "assets/font-awesome-v6-free.zip",
+    "assets/font-awesome-v6-free.7z",
     "session-11/S10-Laravel-Basics.md",
     "assets/Country-Medals-Sports-3NF.png",
     "assets/Country-Medals-Sports-0NF.png",
@@ -250,17 +257,11 @@
     "session-15/S15-Exercises-and-Journal-Entry.md",
     "session-12/S12-Exercises-and-Journal-Entry.md",
     "session-13/S13-Exercises-and-Journal-Entry.md",
-    "session-14/S14-Exercises-and-Journal-Entry.md",
-    "session-10/S10-Exercises-and-Journal-Entry 1.md",
-    "session-09/S09-Portfolio-Work.md",
     "session-07/template.php",
     "assets/UserController.php",
     "assets/ProductController.php",
     "assets/HomeController.php",
     "assets/ErrorController.php",
-    "session-07/database.sql",
-    "session-06/gitignore.txt",
-    "session-06/S06-MVC-1.md~",
-    "session-06/mvc/App/controllers/errors/404.php"
+    "session-07/database.sql"
   ]
 }
