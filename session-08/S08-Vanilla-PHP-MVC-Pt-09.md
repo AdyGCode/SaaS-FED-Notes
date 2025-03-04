@@ -9,7 +9,7 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testing, PEST
 created: 2024-09-05T08:58
-updated: 2024-09-10T16:37
+updated: 2025-02-21T17:13
 ---
 
 
@@ -90,7 +90,7 @@ Continuing inside the section we just started, create a form with a POST method 
             <form method="POST" action="/products/<?= $product->id ?>">
                 <input type="hidden" name="_method" value="PUT">
 
-
+<!-- rest of form code here -->
 
             </form>
 
@@ -130,7 +130,7 @@ Again, note that there are NO spaces on the left side of the `<?= $product` and 
 
 Last of the fields (for now) is the Product price:
 
-```php  
+```php
 <div class="mb-4">  
     <input type="text" name="price" placeholder="Price"  
            class="w-full px-4 py-2 border rounded focus:outline-none"  
@@ -143,7 +143,7 @@ That's the fields taken care of, and now the two buttons.
 
 First the Save button...
 
-```php  
+```php
 <button type="submit"  
         class="w-full bg-green-500 hover:bg-green-600 text-white px-4 py-2 my-3 rounded  
            focus:outline-none">  
@@ -154,7 +154,7 @@ First the Save button...
 
 And then the Cancel... which is really just a link back to the details page...
 
-```php  
+```php
 <a href="/products/<?= $product->id ?>"  
    class="block text-center w-full bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded  
       focus:outline-none">  
@@ -177,7 +177,8 @@ Add a new text field for the filename of an image.
 **Important:** We are **NOT** expecting you to create a file upload function.
 
 
-Ok, so the view is complete... next the `edit` method that will show this form and then in part three of this stage, the `update` method that will make the actual changes in the database...
+OK, so the view is complete... next the `edit` method that will show this form and then in 
+part three of this stage, the `update` method that will make the actual changes in the database...
 
 ### Edit Part 2 (Edit method)
 
@@ -634,4 +635,3 @@ Finally set a flash message, and redirect to the products page.
 
 
 So that's the coding done... time to test... [S07 Vanilla PHP MVC Pt 10 (Testing)](../session-08/S08-Vanilla-PHP-MVC-Pt-10.md)
-

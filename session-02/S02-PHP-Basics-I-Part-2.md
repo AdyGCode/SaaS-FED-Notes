@@ -9,7 +9,7 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testing, PEST
 created: 2024-08-09T13:50
-updated: 2024-09-10T16:37
+updated: 2025-01-25T17:43
 ---
 
 # PHP Basics I (Continued)
@@ -118,6 +118,7 @@ try {
 ```
 
 Executing this would give:
+
 ```text
 
 int(3)
@@ -132,9 +133,8 @@ Merchant, A. (2020, June). _Strict typing vs. Weak typing in PHP_. Amit Merchant
 
 
 ---
-\
-## Type Casting and Juggling
 
+## Type Casting and Juggling
 
 - [Type Casting](https://www.phptutorial.net/php-tutorial/php-type-casting/) – learn how to cast a value of one type to another.
 - [Type Juggling](https://www.phptutorial.net/php-tutorial/php-type-juggling/) – explain to you how the type juggling works in PHP.
@@ -163,7 +163,7 @@ Table shows example with integers and floats:
 
 | Operation       | Symbol | Other name | Example  |
 | --------------- | ------ | ---------- | -------- |
-| Plus            | +      | add        | 5 + 4    |
+| Plus            | +      | Add        | 5 + 4    |
 | Minus           | -      | Subtract   | 23.5 – 5 |
 | Times           | *      | Multiply   | 2.1 * 3  |
 | Divide          | /      |            | 5 / 2.5  |
@@ -180,6 +180,7 @@ Normal Maths priorities apply:
 - Add/Subtract
 
 Brackets...
+
 - Round brackets
 - Aka Parentheses
 - Used to prioritised the calculations
@@ -189,14 +190,13 @@ Brackets...
 
 ## Inc/Dec Shortcuts
 
-Increment
+**Inc**rement
 - To increase, enlarge, make bigger
 
-Decrement
+**Dec**rement
 - To decrease, reduce, make smaller
 
-Three ways to do both, depending on if the increment/decrement is 1 or a larger value.
-
+Two or Three ways to do both, depending on if the increment/decrement is by 1 or a larger value.
 
 When incrementing or decrementing by 1, we get three options, when larger values, just two ways.
 ### Increment (by 1) Shortcuts
@@ -231,7 +231,7 @@ $dec -= 1234;
 
 ## String Concatenation
 
-Concatenation (joining) uses the full stop (`.`)
+Concatenation (joining) uses the full stop (`.`) which is different from many other "C-style" languages.
 
 You can “add” or join strings: 
 
@@ -263,12 +263,14 @@ $name = "Fred";
 
 ### Echo Shortcuts
 
-Long hand...
+You note that the above code showed the expected `echo` which is a long-hand way of displaying data:
+
 ```php
 <p>Buonjourno, <?php echo $name; ?></p>  
 ```
 
-Short hand...
+This my be shortened to the short-hand version:
+
 ```php
 <p>Welcome, <?= $name ?></p>
 ```
@@ -293,7 +295,7 @@ $rainfall = [1, 5, 0, 7, 4, 6, 10];
 ### Array of strings
 ```php
 $names = ['Amy', 'Brian', 'Charlie', 'Dave', 'Eva',
-          'Frida', 'Geoff', ‘Marriette‘,'Zara'];
+          'Frida', 'Geoff', ‘Marriette‘, 'Zara'];
 ```
 
 > **Note:** Do you see a problem with the above code?
@@ -312,6 +314,8 @@ $mixed = [1, "Hello", 3.5, true];
 ### Associative
 - Use `“key” => ”value”` pairs
 - Keys may be strings or integers
+- Values may be of any type
+- The `fat arrow` (an `=` and a `>` combined) indicates the relationship between key and value.
 
 ```php
 $associative = [

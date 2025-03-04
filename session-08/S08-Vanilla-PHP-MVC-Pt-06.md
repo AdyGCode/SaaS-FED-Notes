@@ -9,7 +9,7 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testng, PEST
 created: 2024-09-05T08:58
-updated: 2024-09-10T16:36
+updated: 2025-02-21T17:05
 ---
 
 
@@ -163,6 +163,7 @@ protected $db;
 ### Constructor method
 
 The constructor has two steps:
+
 - Store the configuration data in a `$config` variable
 - Instantiate the Database class with the `$config` details.
 
@@ -178,17 +179,24 @@ public function __construct()
 ### Index method
 
 Our index method does the following:
+
 - Retrieve the last 6 added products
 - Retrieve a count of all the products
 - Retrieve a count of all the users
 - Load the home view with the above data for display.
 
 ```php
-$products = $this->db->query('SELECT * FROM products ORDER BY created_at DESC LIMIT 6')->fetchAll();  
+$products = $this->db->query(
+    'SELECT * FROM products ORDER BY created_at DESC LIMIT 6'
+    )->fetchAll();  
   
-$productCount = $this->db->query('SELECT count(id) as total FROM products ')->fetch();  
+$productCount = $this->db->query(
+    'SELECT count(id) as total FROM products '
+    )->fetch();  
   
-$userCount = $this->db->query('SELECT count(id) as total FROM users')->fetch();  
+$userCount = $this->db->query(
+    'SELECT count(id) as total FROM users'
+    )->fetch();  
   
 loadView('home', [  
     'products' => $products,  
@@ -200,7 +208,7 @@ loadView('home', [
 
 That's it for the controller.
 
-Now the view.
+Now onto the Home view.
 
 ### Home View
 
@@ -208,7 +216,7 @@ Like the error view, the home view is a HTML/PHP page that is in the `App/views`
 
 Create a new PHP file in the `App/views` and name it `home.view.php`.
 
-Lets construct it from the top...
+Let's construct it from the top...
 
 First update the DocBlock...
 
@@ -302,7 +310,7 @@ Here is an example of its output:
 
 ![](../assets/Pasted%20image%2020240830180600.png)
 
-Ok, so that is the 'statistics' done.
+OK, so that is the 'statistics' done.
 
 #### Add the Product Cards
 
@@ -316,7 +324,8 @@ Begin by closing the previous section and then creating a new section of the pag
 <section class="flex flex-wrap gap-8 justify-center">
 ```
 
-Now we need to work trhough the list of products that were sent from the controller to this view.
+Now we need to work through the list of products that were sent from the controller to this 
+view.
 
 We use a `foreach` for this purpose.
 

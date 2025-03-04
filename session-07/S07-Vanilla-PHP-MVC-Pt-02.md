@@ -9,7 +9,7 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testng, PEST
 created: 2024-09-05T08:58
-updated: 2024-09-10T16:36
+updated: 2025-02-21T16:38
 ---
 
 
@@ -90,7 +90,7 @@ We need to carefully edit this file and add the following:
 ```
 
 As you enter this, **make sure** that you replace:
-- `YOUR_GITHUB_NAME` with your GitHub user name
+- `YOUR_GITHUB_NAME` with your GitHub username
 - `GITHUB_REPOSITORY_NAME` with your GitHub repository name, in lower case
 - `SAME_EMAIL_AS_GITHUB` with the same email address as your GitHub account.
 - `YOUR_NAME` with your name
@@ -163,11 +163,11 @@ This is the rewrite rule, and it does the following:
 
 The flags in the square brackets, have the following meanings:
 
-| flag  | meaning                                                                                                |
-| ----- | ------------------------------------------------------------------------------------------------------ |
-| `NC`  | No Case.<br>The match is case-insensitive.                                                             |
-| `L`   | Last.<br>If this rule matches, no further rules will be processed.                                     |
-| `QSA` | Query String Append. <br>The query string from the original URL will be appended to the rewritten URL. |
+| flag  | meaning                                                                                                  |
+| ----- |----------------------------------------------------------------------------------------------------------|
+| `NC`  | No Case.<br>*The match is case-insensitive.*                                                             |
+| `L`   | Last.<br>*If this rule matches, no further rules will be processed.*                                     |
+| `QSA` | Query String Append. <br>*The query string from the original URL will be appended to the rewritten URL.* |
 
 
 ## Configuration
@@ -206,7 +206,8 @@ return [
 ];
 ```
 
-This file holds the database details separate from anything we add to the framework, thus making the framework code more transferable to other projects.
+This file holds the database details separate from anything we add to the framework, thus 
+making the framework code more transferable to other projects.
 
 ## Helpers
 
@@ -306,7 +307,7 @@ The `loadView` function is used to load the views we create as part of the appli
 
 The `loadPartial` function is used to load partial views we create as part of the application.
 
-A partial view is a compontent that is used multiple times in the user interface. For example the head part of the HTML page, a footer, and so on.
+A partial view is a component that is used multiple times in the user interface. For example the head part of the HTML page, a footer, and so on.
 
 ```php
 
@@ -436,7 +437,8 @@ dd($name, $values);
 
 The sanitize function is used to apply a filter to the variable sent to it to 'sanitise' the HTML special characters from the content of a variable.
 
-This HTML encodes the `'"<>&` and characters with ASCII value less than 32, optionally strip or encode other special characters.
+This HTML entity encodes the `<'"&>` and characters with ASCII value less than 32, optionally 
+strip or encode other special characters. For example, the `<` becomes `&lt;`.
 
 ```php
 /**
@@ -473,4 +475,3 @@ function redirect($url)
 
 
 next... [S07-Vanilla-PHP-MVC-Pt-03](session-07/S07-Vanilla-PHP-MVC-Pt-03.md)
-

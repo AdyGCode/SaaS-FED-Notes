@@ -9,29 +9,94 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testng, PEST
 created: 2024-08-01T09:23
-updated: 2024-09-10T16:36
+updated: 2025-01-29T08:14
 ---
+# Networking & Internet Terms
 
-# SaaS Related Networking & Internet Terms
-## TCP
+These terms relate to the Internet, networking and SaaS. They are important to know and to be able to identify the differences as needed.
+
+## Network
+
+...
+
+
+## The Internet (upper case 'i')
+
+The Internet is a global network of interconnected computers that communicate through standardised protocols to share information and resources.
+
+## An internet (lower case 'i')
+
+An internet is a smaller, private network of interconnected computers within an organisation that uses Internet protocols. It usually connects servers and services between buildings, and geographically different locations.
+
+## An intranet
+
+An intranet is a private network accessible only to an organisation's staff, used to share information, resources, and communication within the organisation.
+
+## An extranet
+
+An extranet is a private network that allows controlled access to outsiders, such as business partners or clients, to specific internal resources of an organisation.
+
+### WAN
+
+A **==WAN==** or **==Wide Area Network==** is when networks connect to another network. The Internet is the biggest example of a ==WAN==. It is such a big network it is often called the network of networks.
+
+### LAN  
+
+A **==LAN==** or **==Local Area Network==** is a group of devices all connected in the same location. The network you might have at home and at school is an example of a LAN. Colleges, Business and your home will often have LANs.
+
+### PAN
+
+A **==PAN==** or **==Personal Area Network==** is when devices like bluetooth headphones are connected to a smartphone or tablet. When the two devices connect, information can be shared. 
+
+
+> BBC. (n.d.). _What is a computer network?_ BBC Bitesize. https://www.bbc.co.uk/bitesize/articles/z78nydm
+
+
+## Protocols
+
+
+### TCP
 
 TCP stands for Transmission Control Protocol, which is a core protocol of the Internet Protocol (IP) suite that ensures reliable, ordered, and error-checked delivery of data between applications.
 
-## IP
+### IP
 
 IP stands for Internet Protocol, which is a set of rules for routing and addressing packets of data so they can travel across networks and arrive at the correct destination.
 
-## UDP
+### TCP/IP
+
+TCP/IP stands for Transmission Control Protocol/Internet Protocol, which is the suite of communication protocols used to interconnect network devices on the Internet.
+
+### UDP
 
 UDP stands for User Datagram Protocol, which is a communication protocol that allows data to be sent without establishing a connection, making it faster but less reliable than TCP.
 
-## Socket
+### SMTP
+
+SMTP stands for Simple Mail Transfer Protocol, which is a protocol for sending emails across the Internet.
+
+### FTP
+
+FTP stands for File Transfer Protocol, which is a standard network protocol used to transfer files from one host to another over a TCP-based network.
+
+### DHCP
+
+DHCP stands for Dynamic Host Configuration Protocol, which is a network management protocol used to automate the process of configuring devices on IP networks.
+
+
+## Interprocess Communication
+
+...
+
+### Socket
 
 A Socket is an endpoint for sending or receiving data across a computer network, allowing communication between different processes on the same or different machines.
 
-## Named Pipes
+### Named Pipes
 
 Named Pipes are a method for inter-process communication that allows data to be transferred between different processes, even on different computers over a network.
+
+
 
 ## URL
 
@@ -40,10 +105,6 @@ URL stands for Uniform Resource Locator, which is the address used to access res
 ## URI
 
 URI stands for Uniform Resource Identifier, which is a string that identifies a resource either by location (URL) or by name (URN).
-
-## DNS
-
-DNS stands for Domain Name System, which is a system that translates human-readable domain names (like [www.example.com](http://www.example.com)) into IP addresses that computers use to identify each other on the network.
 
 ## cURL
 
@@ -57,18 +118,6 @@ A Proxy is an intermediary server that separates end users from the websites the
 
 A Router is a device that forwards data packets between computer networks, directing the data along the most efficient paths.
 
-## SMTP
-
-SMTP stands for Simple Mail Transfer Protocol, which is a protocol for sending emails across the Internet.
-
-## TCP/IP
-
-TCP/IP stands for Transmission Control Protocol/Internet Protocol, which is the suite of communication protocols used to interconnect network devices on the Internet.
-
-## FTP
-
-FTP stands for File Transfer Protocol, which is a standard network protocol used to transfer files from one host to another over a TCP-based network.
-
 ## VPS
 
 VPS stands for Virtual Private Server, which is a virtual machine provided by an Internet hosting service that runs its own copy of an operating system.
@@ -77,6 +126,3 @@ VPS stands for Virtual Private Server, which is a virtual machine provided by an
 
 VPN stands for Virtual Private Network, which is a service that encrypts your internet connection and hides your online activity, providing privacy and security.
 
-## DHCP
-
-DHCP stands for Dynamic Host Configuration Protocol, which is a network management protocol used to automate the process of configuring devices on IP networks.

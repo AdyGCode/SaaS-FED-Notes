@@ -9,7 +9,7 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testng, PEST
 created: 2024-08-01T09:23
-updated: 2024-09-10T16:36
+updated: 2025-01-29T11:37
 ---
 
 # Database Terminology
@@ -73,3 +73,4 @@ Service Data Objects is a specification for a data programming architecture that
 ## PHP Data Objects (PDO)
 
 PHP Data Objects is a database access layer providing a uniform method of access to multiple databases in PHP, abstracting database operations through a consistent interface.
+

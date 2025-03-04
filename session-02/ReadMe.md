@@ -9,12 +9,12 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testing, PEST
 created: 2024-08-01T09:23
-updated: 2024-09-10T16:37
+updated: 2025-01-29T11:59
 ---
 # Session 02
 
 - [Terminology: General](../session-02/S02-Terminology-General.md)
-- [Terminology: Services](../session-02/S02-Terminology-Services.md)
+- [Terminology: Services](session-02/S02-Terminology-X-As-A-Service.md)
 - [Terminology: Network & Internet](../session-02/S02-Terminology-Network-Internet.md)
 - [Terminology: Programming](../session-02/S02-Terminology-Programming.md)
 - [Terminology: Web](../session-02/S02-Terminology-Web.md)

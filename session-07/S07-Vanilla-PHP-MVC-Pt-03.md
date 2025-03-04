@@ -9,7 +9,7 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testng, PEST
 created: 2024-09-05T08:58
-updated: 2024-09-10T16:36
+updated: 2025-02-21T16:38
 ---
 
 
@@ -107,7 +107,8 @@ Plus the file location will change to: `Framework/`.
 
 ### Required 'use' statements
 
-Before we add any mehtods and propertiues to the class, we need to inlcude a number of `use` lines to import various class defintions before they are used.
+Before we add any methods and properties to the class, we need to inlcude a number of `use` 
+lines to import various class definitions before they are used.
 
 These classes are built into PHP, and not defined by us as coders.
 
@@ -311,7 +312,7 @@ public function registerRoute($method, $uri, $action, $middleware = [])
 
 We will talk about middleware when we come to the Authorize class.
 
-The Register Route is used by each of the Get, Post, Put and Delete methods...
+The `registerRoute` function is used by each of the Get, Post, Put and Delete methods...
 
 ### Get method
 

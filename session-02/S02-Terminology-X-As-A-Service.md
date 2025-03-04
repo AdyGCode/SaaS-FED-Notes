@@ -9,7 +9,7 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testng, PEST
 created: 2024-08-01T09:23
-updated: 2024-09-10T16:36
+updated: 2025-01-29T11:17
 ---
 # Service Types
 
@@ -46,32 +46,6 @@ BaaS stands for Backend as a Service, which is a cloud service model that provid
 9. **XaaS (Anything as a Service or Everything as a Service)**: An umbrella term for the delivery of anything as a service.
 
 These forms of "aaS" represent different layers and services in the cloud computing stack, each providing specific functionalities to meet various needs.
-# Other Service Related Terms
 
-## Monolithic Application
 
-A Monolithic Application is a software application that is designed as a single, cohesive unit where all components are interconnected and interdependent.
 
-## Microservice
-
-A Microservice is an architectural style that structures an application as a collection of loosely coupled, independently deployable services.
-
-## Web Server
-
-A Web Server is a system that delivers web pages to users' browsers by processing HTTP requests.
-
-## Database Server
-
-A Database Server is a server that provides database services to other computer programs or computers using a client-server model.
-
-## Application Server
-
-An Application Server is a server that hosts applications and provides business logic for application programs through various protocols.
-
-## Containerisation
-
-Containerisation is a lightweight form of virtualization that involves packaging an application and its dependencies together in a container to ensure it runs consistently across different environments.
-
-## Virtualisation
-
-Virtualisation is the process of creating virtual versions of physical components, such as servers, storage devices, and network resources, to optimize and manage computing resources.

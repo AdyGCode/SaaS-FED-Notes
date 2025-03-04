@@ -9,7 +9,7 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testng, PEST
 created: 2024-09-05T08:58
-updated: 2024-09-10T16:36
+updated: 2025-02-21T16:31
 ---
 
 
@@ -93,7 +93,7 @@ Locate and then double-click on the new `SaaS-Vanilla-MVC` folder. Click Open to
 Next we install TailwindCSS and its required components...
 
 ```bash
-npm install -D tailwindcss
+npm install -D tailwindcss@3
 ```
 
 Now we can execute the TailwindCSS command to create it's configuration file.
@@ -132,4 +132,3 @@ module.exports = {
 
 
 We are ready to start our PHP... [S07-Vanilla-PHP-MVC-Pt-1](./session-07/S07-Vanilla-PHP-MVC-Pt-1.md)
-
