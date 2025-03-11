@@ -11,7 +11,7 @@ tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Tes
 date created: 03 July 2024
 date modified: 07 July 2024
 created: 2024-08-01T09:23
-updated: 2024-09-10T16:37
+updated: 2025-03-11T16:40
 ---
 
 # Session 01
@@ -20,6 +20,6 @@ updated: 2024-09-10T16:37
 - [Development Environments](../session-01/S01-Development-Environments.md)
 - [CLI Commands](../session-01/S01-CLI-Commands.md)
 - [What are your Journals](../session-01/S01-Journals.md)
-- [Exercises & Journal Entry](../session-01/S01-Exercises-and-Journal-Entry.md)
+- [Exercises & Journal Entry](session-01/S01-Exercises-and-Practice.md)
 
 - [Setting Up Laragon](./S01-Setting-Up-Laragon.md)

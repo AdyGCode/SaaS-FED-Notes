@@ -41,16 +41,30 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "session-11/S11-Laravel-v12-Many-to-Many.md",
+                "file": "session-06/S05-PHP-Basics-VII.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "S11-Laravel-v12-Many-to-Many"
+              "title": "S05-PHP-Basics-VII"
+            }
+          },
+          {
+            "id": "b0d9445fab854295",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "session-01/S01-Exercises-and-Practice.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "S01-Exercises-and-Practice"
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -169,13 +183,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "session-11/S11-Laravel-v12-Many-to-Many.md",
+                "file": "session-01/S01-Exercises-and-Practice.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of S11-Laravel-v12-Many-to-Many"
+              "title": "Outline of S01-Exercises-and-Practice"
             }
           },
           {
@@ -215,53 +229,53 @@
       "mermaid-tools:Open Mermaid Toolbar": false
     }
   },
-  "active": "c913675e2933346e",
+  "active": "b0d9445fab854295",
   "lastOpenFiles": [
+    "session-01/S01-PHP from Scratch-Beginner-to-Advanced-Study-Schedule.md",
+    "session-01/S01-PHP-for-Beginners-Crash-Course-Study-Schedule.md",
+    "session-01/S01-Exercises-and-Practice.md",
+    "session-01/S01-OOP-PHP-MVC-Study-Schedule.md",
+    "session-01/S01-Journals.md",
+    "session-01/S01-PHP-for-Beginners-Study-Schedule.md",
+    "session-07/S07-Exercises-and-Practice.md",
+    "session-06/S06-Exercises-and-Practice.md",
+    "session-06/S05-PHP-Basics-VII.md",
+    "session-06/S05-Terminology-MVC.md",
+    "session-06/S05-MVC-Background.md",
+    "session-07/S07-Vanilla-PHP-MVC-Pt-01.md",
+    "session-07/database-mysql.sql",
+    "session-07/database-mariadb.sql",
+    "session-07/S07-Vanilla-PHP-MVC-Pt-00.md",
+    "session-05/S05-TailwindCSS-Intro.md",
+    "session-08/S08-Vanilla-PHP-MVC-Pt-05.md",
+    "session-08/S08-Vanilla-PHP-MVC-Pt-07.md",
+    "session-08/S08-Vanilla-PHP-MVC-Pt-08.md",
+    "session-08/S08-Vanilla-PHP-MVC-Pt-09.md",
+    "session-08/S08-Vanilla-PHP-MVC-Pt-10.md",
+    "session-08/S08-Vanilla-PHP-MVC-Pt-06.md",
+    "session-07/S07-Vanilla-PHP-MVC-Pt-04.md",
+    "session-07/S07-Vanilla-PHP-MVC-Pt-03.md",
+    "session-07/S07-Vanilla-PHP-MVC-Pt-02.md",
+    "session-04/sample-code",
+    "session-03/sample-code",
+    "session-06/sample-code",
+    "session-11/S11-Laravel-v12-Many-to-Many.md",
     "session-11/S11-Laravel-v12-Many-to-Many.md~",
     "session-20/student-setup-script.sh",
     "session-20/S20-How-To-Test-Your-App-Works.md",
     "session-20/S20-Deploying-to-TAFE-Services.md",
-    "session-20/S20-Automated-Test-Installer.md",
     "assets/font-awesome-v6-free.zip",
     "assets/font-awesome-v6-free.7z",
-    "session-11/S10-Laravel-Basics.md",
     "assets/Country-Medals-Sports-3NF.png",
     "assets/Country-Medals-Sports-0NF.png",
-    "session-11/S11-Laravel-v12-Many-to-Many.md",
-    "session-10/S10-Introducing-Laravel.md",
-    "session-10/S10-Exercises-and-Journal-Entry.md",
-    "session-02/S02-PHP-Basics-I.md",
     "assets/Pasted image 20250225150641.png",
-    "session-11/S11-Laravel-01-Setting-Up.md",
-    "session-11/S11-Terminology-Laravel.md",
     "Previous",
-    "session-03/S03-PHP-Basics-II.md",
-    "session-03/S03-Exercises-and-Journal-Entry.md",
-    "session-12/S12-Laravel-1-Basics-Planning-A-Feature.md",
-    "session-12/S12-Laravel-03-Product-Feature.md",
-    "session-12/S12-Laravel-2-Basics-Creating-A-Regions-Feature.md",
-    "session-12/S12-Managing-Projects-Using-GitHub-and-Kanban.md",
-    "session-12/ReadMe.md",
-    "session-10/S10-Laravel-BootCamp-Part-2.md",
-    "session-11/S11-Exercises-and-Journal-Entry.md",
     "assets/vivaldi_qqHh6J21aQ.gif",
     "assets/S10-Laravel-BootCamp-Part-2-20240920172149440.png",
-    "session-10/S10-Laravel-BootCamp-Part-1.md",
-    "session-10/ReadMe.md",
     "assets/S10-Introducing-Laravel-20240920133837144.png",
     "assets/S10-Laravel-BootCamp-20240920160925699.png",
     "assets/S10-Laravel-BootCamp-20240920155634761.png",
     "assets/S10-Introducing-Laravel-20240920155255149.png",
-    "assets/S10-Laravel-BootCamp-20240920154627366.png",
-    "session-16/S16-Exercises-and-Journal-Entry.md",
-    "session-15/S15-Exercises-and-Journal-Entry.md",
-    "session-12/S12-Exercises-and-Journal-Entry.md",
-    "session-13/S13-Exercises-and-Journal-Entry.md",
-    "session-07/template.php",
-    "assets/UserController.php",
-    "assets/ProductController.php",
-    "assets/HomeController.php",
-    "assets/ErrorController.php",
-    "session-07/database.sql"
+    "assets/S10-Laravel-BootCamp-20240920154627366.png"
   ]
 }

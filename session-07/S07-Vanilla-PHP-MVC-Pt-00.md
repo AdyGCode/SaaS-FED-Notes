@@ -9,7 +9,7 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testng, PEST
 created: 2024-09-05T08:58
-updated: 2025-02-21T16:31
+updated: 2025-03-11T15:47
 ---
 
 
@@ -20,15 +20,15 @@ updated: 2025-02-21T16:31
 
 We will start by creating a project that we will use in the next section on MVC.
 
-Use these BASH  commands in your Source/Repos folder:
+Use these BASH  commands in your Source/Repos folder, replacing `XXX` with YOUR initials, `YYYY` with the year and `N` with the semester number (`1` or `2`):
 
 ```bash
-mkdir -P SaaS-Vanilla-MVC
+mkdir -p XXX-SaaS-Vanilla-MVC-YYYY-SN
 ```
 This creates the new folder.
 
 ```shell
-cd SaaS-Vanilla-MVC
+cd XXX-SaaS-Vanilla-MVC-YYYY-SN
 ```
 This changes the directory (folder) to this new folder.
 
@@ -90,16 +90,18 @@ Locate and then double-click on the new `SaaS-Vanilla-MVC` folder. Click Open to
 
 ## Install TailwindCSS
 
-Next we install TailwindCSS and its required components...
+Next we install TailwindCSS v4 and its required components...
 
 ```bash
-npm install -D tailwindcss@3
+npm install -D tailwindcss@latest @tailwindcss/vite
+npm install @tailwindcss/postcss @tailwindcss/cli
+npm install vite-plugin-live-reload
 ```
 
-Now we can execute the TailwindCSS command to create it's configuration file.
+Now we can create a TailwindCSS configuration file.
 
 ```
-npx tailwindcss init
+touch tailwind.config.js
 ```
 
 Open the `tailwind.config.js` file (it will be in the root of the project) and update it so it contains:
@@ -119,14 +121,43 @@ Open the `tailwind.config.js` file (it will be in the root of the project) and u
 /** @type {import('tailwindcss').Config} */
 module.exports = {
     content: [
-        "./src/**/*.{html,js}",
-        "./**/*.{html,js,php}"
-    ],
+		"./App/views/**/*.php",  
+		"./src/templates/**/*.html",  
+		"./public/**/*.html"
+	],
     theme: {
         extend: {},
-    },
-    plugins: [],
+    }
 }
+```
+
+Create a vite.config.js file
+
+```shell
+touch vite.config.js
+```
+
+Edit this file and add:
+
+```js
+import { defineConfig } from 'vite';  
+import tailwindcss from '@tailwindcss/vite';  
+  
+export default defineConfig({  
+    plugins: [  
+        tailwindcss(),  
+    ],  
+    server: {  
+        watch: {  
+            usePolling: true,  
+        },  
+        hmr: true,  
+        proxy: {  
+            // Proxy PHP backend  
+            '/': 'http://localhost:8000',  
+        }  
+    }  
+});
 ```
 
 

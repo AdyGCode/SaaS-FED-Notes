@@ -7,14 +7,14 @@ auto-scaling: true
 size: 4k
 color: "#ccc"
 backgroundColor: "#060606"
-tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testing, PEST
-created: 2024-08-27T09:41
-updated: 2024-09-10T16:37
+tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testng, PEST
+created: 2024-08-27T09:37
+updated: 2025-03-11T16:31
 ---
 
-# Session 07 Exercises and Journal Entry
+# Session 06 Exercises 
 
-Here are your instructions for this session's Journal and other exercises and practice.
+Here are your instructions for this session's exercises and practice.
 
 ```table-of-contents
 title: # Contents
@@ -24,9 +24,12 @@ maxLevel: 3
 includeLinks: true
 ```
 
-## Journal
+# Exercises and Practice
 
-Review the content so far, and note what has been learned.
+Experiment with the SQL and PHP code from [S05-PHP-Basics-VII](session-06/S05-PHP-Basics-VII.md)
+
+You should also look at the relevant sections of the Brad Traversy Course
+
 
 # External Coursework
 

@@ -9,7 +9,7 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testng, PEST
 created: 2024-08-09T16:11
-updated: 2024-09-10T16:36
+updated: 2025-03-11T13:45
 ---
 
 # PHP Basics VII -  PDO Continues!
@@ -19,6 +19,20 @@ https://www.phptutorial.net/php-pdo/ Section 4
 https://www.phptutorial.net/php-pdo/ Section 5
 https://www.phptutorial.net/php-pdo/ Section 6
 https://www.phptutorial.net/php-pdo/ Section 7
+
+# Required Files
+
+If you have not downloaded it already, obtain copy of the following SQL file that will create and configure a user, database and sample tables for practice.
+
+MySQL/MariaDB: ![](session-04/sample-code/new-database-user.sql)
+We presume you are using MySQL or MariaDB for this session.
+
+Open the file in your editor and follow the instructions:
+
+- Replace **ALL** instances of `YYYY` with the current year (e.g. `2025`)  
+- Replace **ALL** instances of `SN` with `S` followed by the semester number (e.g. `S1` for semster 1)  
+- Replace **ALL** instances of `XXX` with your initials (e.g. `AJG` for Adrian Gould)
+- Save the changed file
 
 
 # BREAD & CRUD
@@ -74,7 +88,7 @@ UPDATE users
 
 ```sql
 INSERT INTO users (name, password) 
-  VALUES ("James", PASSWORD("Some Password"));
+  VALUES ("Ad Ministrator", PASSWORD("Password1234"));
 ```
 
 ## Delete/Delete
@@ -118,10 +132,12 @@ We can do this by having `config.php` file or a `.env` file. The latter will nee
  */  
  
 $dbHost = 'localhost';  
-$dbName = 'XXX_SaaS_FED_2024_S2';  
-$dbUser = 'XXX_SaaS_FED_2024_S2';  
+$dbName = 'XXX_SaaS_FED_YYYY_SN';  
+$dbUser = 'XXX_SaaS_FED_YYYY_SN';  
 $dbPass = 'Password1234';
 ```
+
+> You will need to update the Name and User as required.
 
 ## Database Connection File
 

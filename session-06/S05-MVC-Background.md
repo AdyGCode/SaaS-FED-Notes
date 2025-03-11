@@ -9,14 +9,14 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testing, PEST
 created: 2024-08-01T09:23
-updated: 2024-09-10T16:37
+updated: 2025-03-11T13:25
 ---
 
 # MVC Background
 
 **Model - View - Controller**
 
-> **Note:** Before commencing this section, make sure you have read and understood [S05 Terminology MVC](S05-Terminology-MVC.md)
+> **Note:** Before commencing this section, make sure you have read and understood [S05 Terminology MVC](session-06/S05-Terminology-MVC.md)
 
 ---
 
