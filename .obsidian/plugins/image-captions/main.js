@@ -62,9 +62,9 @@ var ImageCaptions = class extends import_obsidian2.Plugin {
     this.observer = new MutationObserver((mutations) => {
       mutations.forEach((rec) => {
         if (rec.type === "childList") {
-          rec.target.querySelectorAll(".image-embed").forEach(async (imageEmbedContainer) => {
+          rec.target.querySelectorAll(".image-embed, .video-embed").forEach(async (imageEmbedContainer) => {
             var _a, _b;
-            const img = imageEmbedContainer.querySelector("img");
+            const img = imageEmbedContainer.querySelector("img, video");
             const width = imageEmbedContainer.getAttribute("width") || "";
             const captionText = this.getCaptionText(imageEmbedContainer);
             if (!img)
@@ -101,7 +101,8 @@ var ImageCaptions = class extends import_obsidian2.Plugin {
   getCaptionText(img) {
     let captionText = img.getAttribute("alt") || "";
     const src = img.getAttribute("src") || "";
-    if (captionText === src) {
+    const edge = captionText.replace(/ > /, "#");
+    if (captionText === src || edge === src) {
       return "";
     }
     if (this.settings.captionRegex) {
@@ -132,7 +133,7 @@ var ImageCaptions = class extends import_obsidian2.Plugin {
   }
   externalImageProcessor() {
     return (el, ctx) => {
-      el.findAll("img:not(.emoji)").forEach(async (img) => {
+      el.findAll("img:not(.emoji), video").forEach(async (img) => {
         const captionText = this.getCaptionText(img);
         const parent = img.parentElement;
         if (parent && (parent == null ? void 0 : parent.nodeName) !== "FIGURE" && captionText && captionText !== img.getAttribute("src")) {
@@ -170,3 +171,5 @@ async function renderMarkdown(markdown, sourcePath, component) {
     }
   }
 }
+
+/* nosourcemap */
