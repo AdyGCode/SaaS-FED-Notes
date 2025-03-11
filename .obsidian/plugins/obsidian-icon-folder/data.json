@@ -106,7 +106,8 @@
     "iconsInLinksEnabled": true,
     "iconIdentifier": ":",
     "debugMode": false,
-    "lucideIconPackType": "custom"
+    "lucideIconPackType": "custom",
+    "useInternalPlugins": false
   },
   "Session-08/S08-Terminology.md": "FabMarkdown",
   "templates": "FasFolderOpen",

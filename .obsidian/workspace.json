@@ -4,53 +4,39 @@
     "type": "split",
     "children": [
       {
-        "id": "7f4fbf4c4693cce9",
+        "id": "b9ffeb21bcbc9412",
         "type": "tabs",
         "children": [
           {
-            "id": "f3c643941989e2ff",
+            "id": "ef6780b160073958",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "session-02/S02-PHP-Basics-I.md",
+                "file": "session-02/S02-Terminology-Web.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "S02-PHP-Basics-I"
+              "title": "S02-Terminology-Web"
             }
           },
           {
-            "id": "1a3a4558a22d5245",
+            "id": "758077b8b3d4a0bd",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "session-11/S11-Laravel-v12-Many-to-Many.md",
+                "file": "session-01/S01-Setting-Up-Laragon.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "S11-Laravel-v12-Many-to-Many"
-            }
-          },
-          {
-            "id": "c913675e2933346e",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "session-11/S11-Laravel-v12-Many-to-Many.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "S11-Laravel-v12-Many-to-Many"
+              "title": "S01-Setting-Up-Laragon"
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -69,8 +55,7 @@
             "state": {
               "type": "file-explorer",
               "state": {
-                "sortOrder": "alphabetical",
-                "autoReveal": false
+                "sortOrder": "alphabetical"
               },
               "icon": "lucide-folder-closed",
               "title": "Files"
@@ -123,7 +108,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "session-12/S12-Laravel-03-Product-Feature.md",
+                "file": "session-10/S10-Introducing-Laravel.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -133,7 +118,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for S12-Laravel-03-Product-Feature"
+              "title": "Backlinks for S10-Introducing-Laravel"
             }
           },
           {
@@ -142,12 +127,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "session-12/S12-Laravel-03-Product-Feature.md",
+                "file": "session-10/S10-Introducing-Laravel.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from S12-Laravel-03-Product-Feature"
+              "title": "Outgoing links from S10-Introducing-Laravel"
             }
           },
           {
@@ -169,13 +154,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "session-11/S11-Laravel-v12-Many-to-Many.md",
-                "followCursor": false,
-                "showSearch": false,
-                "searchQuery": ""
+                "file": "session-01/S01-Setting-Up-Laragon.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of S11-Laravel-v12-Many-to-Many"
+              "title": "Outline of S01-Setting-Up-Laragon"
             }
           },
           {
@@ -201,7 +183,6 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "obsidian-advanced-slides:Show Slide Preview": false,
       "workspaces:Manage workspace layouts": false,
       "publish:Publish changes...": false,
       "daily-notes:Open today's daily note": false,
@@ -210,58 +191,59 @@
       "canvas:Create new canvas": false,
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
+      "mermaid-tools:Open Mermaid Toolbar": false,
+      "obsidian-advanced-slides:Show Slide Preview": false,
       "table-editor-obsidian:Advanced Tables Toolbar": false,
-      "templater-obsidian:Templater": false,
-      "mermaid-tools:Open Mermaid Toolbar": false
+      "templater-obsidian:Templater": false
     }
   },
-  "active": "c913675e2933346e",
+  "active": "758077b8b3d4a0bd",
   "lastOpenFiles": [
-    "session-11/S11-Laravel-v12-Many-to-Many.md~",
-    "session-20/student-setup-script.sh",
-    "session-20/S20-How-To-Test-Your-App-Works.md",
-    "session-20/S20-Deploying-to-TAFE-Services.md",
-    "session-20/S20-Automated-Test-Installer.md",
-    "assets/font-awesome-v6-free.zip",
-    "assets/font-awesome-v6-free.7z",
-    "session-11/S10-Laravel-Basics.md",
-    "assets/Country-Medals-Sports-3NF.png",
-    "assets/Country-Medals-Sports-0NF.png",
-    "session-11/S11-Laravel-v12-Many-to-Many.md",
-    "session-10/S10-Introducing-Laravel.md",
+    "session-01/S01-Journals.md",
+    "session-02/S02-Terminology-Web.md",
+    "session-02/S02-Terminology-X-As-A-Service.md",
+    "session-02/S02-Terminology-Programming.md",
     "session-10/S10-Exercises-and-Journal-Entry.md",
-    "session-02/S02-PHP-Basics-I.md",
-    "assets/Pasted image 20250225150641.png",
-    "session-11/S11-Laravel-01-Setting-Up.md",
-    "session-11/S11-Terminology-Laravel.md",
-    "Previous",
-    "session-03/S03-PHP-Basics-II.md",
+    "session-02/S02-Terminology-General.md",
     "session-03/S03-Exercises-and-Journal-Entry.md",
-    "session-12/S12-Laravel-1-Basics-Planning-A-Feature.md",
-    "session-12/S12-Laravel-03-Product-Feature.md",
+    "session-03/S03-TailwindCSS-Installation-Building.md",
+    "session-03/S03-Terminology-Database.md",
+    "session-03/S03-Terminology-SQL.md",
+    "session-03/S03-Terminology-Testing-Debugging.md",
+    "session-02/S02-Exercises-and-Journal-Entry.md",
+    "session-02/S02-Terminology-Network-Internet.md",
+    "session-02/Untitled.md",
+    "session-02/S02-Terminology-Business-Domain.md",
+    "session-02/S02-PHP-Basics-I-Part-2.md",
+    "session-02/S02-PHP-Basics-I.md",
     "session-12/S12-Laravel-2-Basics-Creating-A-Regions-Feature.md",
+    "Exports/PDFs/Adding-XDebug.pdf",
+    "session-01/S01-CLI-Commands.md",
+    "session-10/S10-Introducing-Laravel.md",
+    "session-11/S11-Terminology-Laravel.md",
+    "session-11/S11-Laravel-02-Category-Feature.md",
+    "session-11/S11-Laravel-01-Setting-Up.md",
+    "session-13/S12-Laravel-02-Update-User.md",
+    "session-14/S14-Laravel-05-Roles-and-Permissions.md",
     "session-12/S12-Managing-Projects-Using-GitHub-and-Kanban.md",
-    "session-12/ReadMe.md",
-    "session-10/S10-Laravel-BootCamp-Part-2.md",
-    "session-11/S11-Exercises-and-Journal-Entry.md",
     "assets/vivaldi_qqHh6J21aQ.gif",
     "assets/S10-Laravel-BootCamp-Part-2-20240920172149440.png",
-    "session-10/S10-Laravel-BootCamp-Part-1.md",
-    "session-10/ReadMe.md",
     "assets/S10-Introducing-Laravel-20240920133837144.png",
     "assets/S10-Laravel-BootCamp-20240920160925699.png",
     "assets/S10-Laravel-BootCamp-20240920155634761.png",
     "assets/S10-Introducing-Laravel-20240920155255149.png",
     "assets/S10-Laravel-BootCamp-20240920154627366.png",
-    "session-16/S16-Exercises-and-Journal-Entry.md",
-    "session-15/S15-Exercises-and-Journal-Entry.md",
-    "session-12/S12-Exercises-and-Journal-Entry.md",
-    "session-13/S13-Exercises-and-Journal-Entry.md",
+    "assets/S10-Introducing-Laravel-20240920154001603.png",
+    "assets/S10-Introducing-Laravel-20240920153937338.png",
+    "assets/S10-Laravel-BootCamp-20240920151458090.png",
     "session-07/template.php",
     "assets/UserController.php",
     "assets/ProductController.php",
     "assets/HomeController.php",
     "assets/ErrorController.php",
-    "session-07/database.sql"
+    "session-07/database.sql",
+    "session-06/gitignore.txt",
+    "session-06/S06-MVC-1.md~",
+    "session-06/mvc/App/controllers/errors/404.php"
   ]
 }
