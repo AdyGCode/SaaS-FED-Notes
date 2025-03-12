@@ -1603,19 +1603,19 @@
       "isCountable": true,
       "isDirectory": false,
       "noteCount": 1,
-      "wordCount": 253,
+      "wordCount": 256,
       "wordCountTowardGoal": 0,
       "wordGoal": null,
-      "pageCount": 0.8433333333333334,
-      "characterCount": 1616,
-      "nonWhitespaceCharacterCount": 1297,
-      "readingTimeInMinutes": 0.9547169811320755,
-      "linkCount": 1,
-      "embedCount": 3,
+      "pageCount": 0.8533333333333334,
+      "characterCount": 1630,
+      "nonWhitespaceCharacterCount": 1309,
+      "readingTimeInMinutes": 0.9660377358490566,
+      "linkCount": 2,
+      "embedCount": 2,
       "aliases": null,
       "createdDate": 1740707068535,
-      "modifiedDate": 1741747527336,
-      "sizeInBytes": 3875,
+      "modifiedDate": 1741748463841,
+      "sizeInBytes": 3915,
       "frontmatter": {
         "theme": "default",
         "paginate": true,
@@ -1627,7 +1627,7 @@
         "backgroundColor": "#060606",
         "tags": "SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testng, PEST",
         "created": "2024-09-05T08:58",
-        "updated": "2025-03-12T09:29"
+        "updated": "2025-03-12T10:55"
       }
     },
     "session-07/template.php": {
@@ -1687,15 +1687,15 @@
       "wordCountTowardGoal": 0,
       "wordGoal": null,
       "pageCount": 5.85,
-      "characterCount": 10972,
-      "nonWhitespaceCharacterCount": 8584,
+      "characterCount": 10644,
+      "nonWhitespaceCharacterCount": 8594,
       "readingTimeInMinutes": 6.622641509433962,
       "linkCount": 1,
       "embedCount": 2,
       "aliases": null,
       "createdDate": 1740707073269,
-      "modifiedDate": 1739329033554,
-      "sizeInBytes": 18496,
+      "modifiedDate": 1741751271892,
+      "sizeInBytes": 17866,
       "frontmatter": {
         "theme": "default",
         "paginate": true,
@@ -1707,26 +1707,26 @@
         "backgroundColor": "#060606",
         "tags": "SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testng, PEST",
         "created": "2024-09-05T08:58",
-        "updated": "2024-09-10T16:36"
+        "updated": "2025-03-12T08:52"
       }
     },
     "session-07/S07-Vanilla-PHP-MVC-Pt-02.md": {
       "isCountable": true,
       "isDirectory": false,
       "noteCount": 1,
-      "wordCount": 981,
+      "wordCount": 999,
       "wordCountTowardGoal": 0,
       "wordGoal": null,
-      "pageCount": 3.27,
-      "characterCount": 6652,
-      "nonWhitespaceCharacterCount": 5064,
-      "readingTimeInMinutes": 3.70188679245283,
+      "pageCount": 3.33,
+      "characterCount": 6552,
+      "nonWhitespaceCharacterCount": 5161,
+      "readingTimeInMinutes": 3.769811320754717,
       "linkCount": 1,
       "embedCount": 0,
       "aliases": null,
       "createdDate": 1740707071688,
-      "modifiedDate": 1739329033538,
-      "sizeInBytes": 12141,
+      "modifiedDate": 1741752909274,
+      "sizeInBytes": 11808,
       "frontmatter": {
         "theme": "default",
         "paginate": true,
@@ -1738,7 +1738,7 @@
         "backgroundColor": "#060606",
         "tags": "SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testng, PEST",
         "created": "2024-09-05T08:58",
-        "updated": "2024-09-10T16:36"
+        "updated": "2025-03-12T11:47"
       }
     },
     "session-07/S07-Vanilla-PHP-MVC-Pt-01.md": {

@@ -9,7 +9,7 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testng, PEST
 created: 2024-09-05T08:58
-updated: 2025-03-12T08:52
+updated: 2025-03-12T12:15
 ---
 
 
@@ -126,6 +126,14 @@ A common way to start this is to use a 'public' folder in the application. This 
 
 When using the Apache web server, we need to use a `.htaccess` file to manipulate the incoming "obfuscated" URI requests to the application's structure.
 
+Create a file in the public folder:
+
+```shell
+ touch public/.htaccess
+```
+
+Then edit the file and add:
+
 ```apacheconf
 RewriteEngine on  
 RewriteCond %{REQUEST_FILENAME} !-f  
@@ -202,12 +210,11 @@ return [
     'port' => 3306,  
     'dbname' => 'xxx_saas_vanilla_mvc',  
     'username' => 'xxx_saas_vanilla_mvc',  
-    'password' => 'PasswordSecret'  
+    'password' => 'Password1234'  
 ];
 ```
 
-This file holds the database details separate from anything we add to the framework, thus 
-making the framework code more transferable to other projects.
+This file holds the database details separate from anything we add to the framework, thus making the framework code more transferable to other projects.
 
 ## Helpers
 
@@ -225,8 +232,8 @@ Let's start with the header comments:
  * Helper Functions 
  * 
  * Filename:        helpers.php 
- * Location:        ${FILE_LOCATION} 
- * Project:         SaaS-FED-Notes 
+ * Location:        /
+ * Project:         Saas-Vanilla-MVC 
  * Date Created:    DATE_CREATED 
  * 
  * Author:          YOUR NAME  
@@ -237,7 +244,7 @@ Let's start with the header comments:
 We are going to add the following functions:
 - `basePath`
 - `loadView` &  `loadPartial`
-- `inppect` & `dump`
+- `inspect` & `dump`
 - `inspectAndDie` & `dd`
 - `sanitize`
 - `redirect`
@@ -286,9 +293,12 @@ The `loadView` function is used to load the views we create as part of the appli
 ```php
   
 /**  
- * Load a view * * @param string $name  
+ * Load a view 
+ * 
+ * @param string $name  
  * @return void  
- * */function loadView($name, $data = [])  
+ */
+ function loadView($name, $data = [])  
 {  
     $viewPath = basePath("App/views/{$name}.view.php");  
   
