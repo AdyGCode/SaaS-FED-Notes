@@ -9,7 +9,7 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testng, PEST
 created: 2024-08-09T16:11
-updated: 2025-03-11T13:45
+updated: 2025-03-12T10:03
 ---
 
 # PHP Basics VII -  PDO Continues!
@@ -98,9 +98,37 @@ DELETE FROM users WHERE id = 666;
 ```
 
 
+## Multiple Tables
+
+Posts (id, title, content, category_id)
+Categories(id, name, description)
+
+```sql
+SELECT p.id, p.title, p.content, c.name
+FROM posts as p. categories as c
+WHERE p.category_id = c.id;
+```
+
+employees(id, name, manager_id, role)
+
+```sql
+SELECT *
+FROM employees as e
+LEFT JOIN employees as m
+WHERE e.manager_id = m.id
+```
+
+| id  | name  | manager_id | role |
+| --- | ----- | ---------- | ---- |
+| 1   | Irene | null       | CEO  |
+| 2   | Jack  | 1          | CFO  |
+| 3   | Bill  | 1          | PA   |
+| 4   | Olive | 2          | PA   |
+
+
 # PDO and SQL
 
-When using PHP to interact with A database we use PDO, or PHP Data Objects.
+When using PHP to interact with a database we use PDO, or PHP Data Objects.
 
 PDO gives us very robust methods to interact with a database using SQL, and more predictable results by using prepared statements.
 
@@ -180,7 +208,7 @@ Important items in this code:
 - `PDO::ATTR_ERMODE` is the type of errors we want, in this case exceptions (`PDO::ERRMODE_EXCEPTION`)
 - The last line, `return`, calls the `make` method when the file is included and returns the connection details.
 
-The last item is a little strange, but when used int he following manner, will create a connection and store the details in the variable `$pdo` ready for use.
+The last item is a little strange, but when used in the following manner, will create a connection and store the details in the variable `$pdo` ready for use.
 
 ```php
 <?php

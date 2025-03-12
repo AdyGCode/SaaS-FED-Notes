@@ -10,42 +10,46 @@
 
 # ---------------------------------------------------------------------------------------------
 # Clean up existing database and user
-DROP
-DATABASE IF EXISTS XXX_SaaS_FED_YYYY_SN;
-DROP
-USER IF EXISTS 'XXX_SaaS_FED_YYYY_SN'@'localhost';
+DROP DATABASE IF EXISTS XXX_SaaS_FED_YYYY_SN;
+DROP USER IF EXISTS 'XXX_SaaS_FED_YYYY_SN'@'localhost';
+DROP USER IF EXISTS 'XXX_SaaS_FED_YYYY_SN'@'127.0.0.1';
+
+# ---------------------------------------------------------------------------------------------
+# Create Database
+CREATE DATABASE IF NOT EXISTS XXX_SaaS_FED_YYYY_SN;
 
 
 # ---------------------------------------------------------------------------------------------
-# Create
-Database
-CREATE
-DATABASE IF NOT EXISTS XXX_SaaS_FED_YYYY_SN;
-
-
-# ---------------------------------------------------------------------------------------------
-# Create
-User & Grant Permissions
-CREATE
-USER 'XXX_SaaS_FED_YYYY_SN'@'localhost'
+# Create User & Grant Permissions
+CREATE USER 'XXX_SaaS_FED_YYYY_SN'@'localhost'
     IDENTIFIED WITH mysql_native_password
         BY 'Password1234';
 
+CREATE USER 'XXX_SaaS_FED_YYYY_SN'@'127.0.0.1'
+    IDENTIFIED WITH mysql_native_password
+        BY 'Password1234';
+
+
 GRANT USAGE ON *.*
-    TO
-'XXX_SaaS_FED_YYYY_SN'@'localhost';
+    TO 'XXX_SaaS_FED_YYYY_SN'@'localhost';
+
+GRANT USAGE ON *.*
+    TO 'XXX_SaaS_FED_YYYY_SN'@'127.0.0.1';
 
 
 GRANT ALL PRIVILEGES
     ON `XXX\_SaaS\_FED\_YYYY\_SN`.*
-    TO
-'XXX_SaaS_FED_YYYY_SN'@'localhost';
+    TO 'XXX_SaaS_FED_YYYY_SN'@'localhost';
 
+GRANT ALL PRIVILEGES
+    ON `XXX\_SaaS\_FED\_YYYY\_SN`.*
+    TO 'XXX_SaaS_FED_YYYY_SN'@'127.0.0.1';
+
+FLUSH PRIVILEGES;
 
 # ---------------------------------------------------------------------------------------------
 
-## Use the New Database and Create
-a table
+## Use the New Database and Create a table
 USE XXX_SaaS_FED_YYYY_SN;
 
 CREATE TABLE `demo`
