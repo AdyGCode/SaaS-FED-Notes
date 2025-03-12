@@ -41,12 +41,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "session-06/S05-MVC-Background.md",
+                "file": "session-06/S05-PHP-Basics-VII.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "S05-MVC-Background"
+              "title": "S05-PHP-Basics-VII"
             }
           }
         ],
@@ -168,10 +168,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "session-06/S05-MVC-Background.md"
+                "file": "session-06/S05-PHP-Basics-VII.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of S05-MVC-Background"
+              "title": "Outline of S05-PHP-Basics-VII"
             }
           },
           {
@@ -213,6 +213,7 @@
   },
   "active": "8eed6a8985df8444",
   "lastOpenFiles": [
+    "session-06/S05-MVC-Background.md",
     "session-06/S05-Terminology-MVC.md",
     "session-07/S07-Vanilla-PHP-MVC-Pt-00.md",
     "session-02/S02-Terminology-Web.md",
@@ -238,7 +239,6 @@
     "session-04/S04-PHP-Basics-V.md",
     "session-04/S04-PHP-Basics-IV.md",
     "session-04/S04-PHP-Basics-III.md",
-    "session-06/S05-MVC-Background.md",
     "session-06/ReadMe.md",
     "session-05/S05-TailwindCSS-Intro.md",
     "session-04/sample-code/Models/RubberDuck.php",

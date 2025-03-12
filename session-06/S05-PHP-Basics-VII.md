@@ -9,7 +9,7 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testng, PEST
 created: 2024-08-09T16:11
-updated: 2025-03-12T10:03
+updated: 2025-03-12T10:41
 ---
 
 # PHP Basics VII -  PDO Continues!
@@ -24,7 +24,10 @@ https://www.phptutorial.net/php-pdo/ Section 7
 
 If you have not downloaded it already, obtain copy of the following SQL file that will create and configure a user, database and sample tables for practice.
 
-MySQL/MariaDB: ![](session-04/sample-code/new-database-user.sql)
+- MySQL: ![](session-07/database-mysql.sql)
+- MariaDB:![](session-07/database-mariadb.sql)
+
+
 We presume you are using MySQL or MariaDB for this session.
 
 Open the file in your editor and follow the instructions:

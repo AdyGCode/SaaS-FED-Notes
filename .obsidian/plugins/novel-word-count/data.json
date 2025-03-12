@@ -4807,19 +4807,19 @@
       "isCountable": true,
       "isDirectory": false,
       "noteCount": 1,
-      "wordCount": 883,
+      "wordCount": 884,
       "wordCountTowardGoal": 0,
       "wordGoal": null,
-      "pageCount": 2.9433333333333334,
-      "characterCount": 5788,
-      "nonWhitespaceCharacterCount": 4638,
-      "readingTimeInMinutes": 3.332075471698113,
+      "pageCount": 2.9466666666666668,
+      "characterCount": 5796,
+      "nonWhitespaceCharacterCount": 4641,
+      "readingTimeInMinutes": 3.3358490566037737,
       "linkCount": 0,
-      "embedCount": 1,
+      "embedCount": 2,
       "aliases": null,
       "createdDate": 1741740772041,
-      "modifiedDate": 1741745019824,
-      "sizeInBytes": 11383,
+      "modifiedDate": 1741747265255,
+      "sizeInBytes": 11411,
       "frontmatter": {
         "theme": "default",
         "paginate": true,
@@ -4831,7 +4831,7 @@
         "backgroundColor": "#060606",
         "tags": "SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testng, PEST",
         "created": "2024-08-09T16:11",
-        "updated": "2025-03-12T09:28"
+        "updated": "2025-03-12T10:03"
       }
     },
     "session-06/S05-Terminology-MVC.md": {
