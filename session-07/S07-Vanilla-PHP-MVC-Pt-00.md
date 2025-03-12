@@ -9,7 +9,7 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testng, PEST
 created: 2024-09-05T08:58
-updated: 2025-03-12T09:29
+updated: 2025-03-12T10:45
 ---
 
 
@@ -23,13 +23,20 @@ We will start by creating a project that we will use in the next section on MVC.
 Use these BASH  commands in your Source/Repos folder, replacing `XXX` with YOUR initials, `YYYY` with the year and `N` with the semester number (`1` or `2`):
 
 ```bash
+# Open Terminal, make sure you are in your ~/Source/Repos folder
+cd ~/Source/Repos
+
+# Create new project folder
 mkdir -p XXX-SaaS-Vanilla-MVC-YYYY-SN
 ```
+
 This creates the new folder.
 
 ```shell
+# Change into the folder
 cd XXX-SaaS-Vanilla-MVC-YYYY-SN
 ```
+
 This changes the directory (folder) to this new folder.
 
 ## Git: Initialise the Repository

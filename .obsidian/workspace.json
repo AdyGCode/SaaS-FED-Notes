@@ -49,8 +49,7 @@
               "title": "S05-PHP-Basics-VII"
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -168,10 +167,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "session-06/S05-PHP-Basics-VII.md"
+                "file": "session-07/S07-Vanilla-PHP-MVC-Pt-00.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of S05-PHP-Basics-VII"
+              "title": "Outline of S07-Vanilla-PHP-MVC-Pt-00"
             }
           },
           {
@@ -211,10 +210,12 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "8eed6a8985df8444",
+  "active": "758077b8b3d4a0bd",
   "lastOpenFiles": [
-    "session-06/S05-MVC-Background.md",
+    "session-07/gitignore.txt",
     "session-06/S05-Terminology-MVC.md",
+    "session-06/S05-PHP-Basics-VII.md",
+    "session-06/S05-MVC-Background.md",
     "session-07/S07-Vanilla-PHP-MVC-Pt-00.md",
     "session-02/S02-Terminology-Web.md",
     "session-11/S11-Laravel-v12-Many-to-Many.md",
@@ -228,7 +229,6 @@
     "session-01/S01-OOP-PHP-MVC-Study-Schedule.md",
     "session-07/ReadMe.md",
     "session-06/S06-Exercises-and-Practice.md",
-    "session-06/S05-PHP-Basics-VII.md",
     "session-04/S04-Exercises-and-Journal-Entry.md",
     "session-03/S03-PHP-Basics-II.md",
     "session-03/S03-Terminology-Database.md",
@@ -240,7 +240,6 @@
     "session-04/S04-PHP-Basics-IV.md",
     "session-04/S04-PHP-Basics-III.md",
     "session-06/ReadMe.md",
-    "session-05/S05-TailwindCSS-Intro.md",
     "session-04/sample-code/Models/RubberDuck.php",
     "session-04/sample-code/Duck/RubberDuck.php",
     "session-04/sample-code/utilities.php",
