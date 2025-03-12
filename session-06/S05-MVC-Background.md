@@ -9,7 +9,7 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testing, PEST
 created: 2024-08-01T09:23
-updated: 2025-03-12T08:53
+updated: 2025-03-12T10:38
 ---
 
 # MVC Background
@@ -44,13 +44,13 @@ MVC may be:
 - **Controller Heavy:** Most of the business logic is written in the controller
 - **Model Heavy:** Most of the business logic is in the model
 
-![[MVC-Background-20240723154711502.png]]
+![MVC-Background-20240723154711502.png](../assets/MVC-Background-20240723154711502.png)
 
 
 ---
 
 ## The MVC Process Flow
-![[MVC-Background-20240723154733861.png]]
+![MVC-Background-20240723154733861.png](../assets/MVC-Background-20240723154733861.png)
 - User requests
 - Web server directs request to Router
 - Router called required Controller

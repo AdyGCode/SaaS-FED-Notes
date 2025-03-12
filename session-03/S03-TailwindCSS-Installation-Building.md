@@ -22,7 +22,7 @@ tags:
   - Feature Testing
   - PEST
 created: 2024-08-06T15:47
-updated: 2025-02-21T15:49
+updated: 2025-03-12T08:52
 ---
 
 # Installing and Continuously Rebuilding TailwindCSS

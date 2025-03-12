@@ -8,20 +8,6 @@
         "type": "tabs",
         "children": [
           {
-            "id": "ef6780b160073958",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "session-02/S02-Terminology-Web.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "S02-Terminology-Web"
-            }
-          },
-          {
             "id": "758077b8b3d4a0bd",
             "type": "leaf",
             "state": {
@@ -34,9 +20,37 @@
               "icon": "lucide-file",
               "title": "S07-Vanilla-PHP-MVC-Pt-00"
             }
+          },
+          {
+            "id": "5665ac1cac97a5bf",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "session-06/S05-Terminology-MVC.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "S05-Terminology-MVC"
+            }
+          },
+          {
+            "id": "8eed6a8985df8444",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "session-06/S05-MVC-Background.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "S05-MVC-Background"
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -92,7 +106,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 219.5
+    "width": 464.5
   },
   "right": {
     "id": "26a2935f4ff09f9b",
@@ -154,10 +168,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "session-07/S07-Vanilla-PHP-MVC-Pt-00.md"
+                "file": "session-06/S05-MVC-Background.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of S07-Vanilla-PHP-MVC-Pt-00"
+              "title": "Outline of S05-MVC-Background"
             }
           },
           {
@@ -197,18 +211,28 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "758077b8b3d4a0bd",
+  "active": "8eed6a8985df8444",
   "lastOpenFiles": [
+    "session-06/S05-Terminology-MVC.md",
+    "session-07/S07-Vanilla-PHP-MVC-Pt-00.md",
+    "session-02/S02-Terminology-Web.md",
+    "session-11/S11-Laravel-v12-Many-to-Many.md",
+    "session-11/S10-Laravel-Basics.md",
+    "session-07/database-mysql.sql",
+    "session-07/database-mariadb.sql",
+    "session-07/S07-Exercises-and-Practice.md",
+    "session-01/S01-PHP-for-Beginners-Study-Schedule.md",
+    "session-01/S01-PHP-for-Beginners-Crash-Course-Study-Schedule.md",
+    "session-01/S01-PHP from Scratch-Beginner-to-Advanced-Study-Schedule.md",
+    "session-01/S01-OOP-PHP-MVC-Study-Schedule.md",
     "session-07/ReadMe.md",
     "session-06/S06-Exercises-and-Practice.md",
-    "session-06/S05-Terminology-MVC.md",
     "session-06/S05-PHP-Basics-VII.md",
     "session-04/S04-Exercises-and-Journal-Entry.md",
     "session-03/S03-PHP-Basics-II.md",
     "session-03/S03-Terminology-Database.md",
     "session-03/S03-Terminology-SQL.md",
     "session-07/S07-Vanilla-PHP-MVC-Pt-01.md",
-    "session-07/S07-Vanilla-PHP-MVC-Pt-00.md",
     "session-04/S04-Terminology-Security.md",
     "session-04/S04-PHP-Basics-VI.md",
     "session-04/S04-PHP-Basics-V.md",
@@ -217,9 +241,6 @@
     "session-06/S05-MVC-Background.md",
     "session-06/ReadMe.md",
     "session-05/S05-TailwindCSS-Intro.md",
-    "session-05/ReadMe.md",
-    "session-05/S05-Exercises-and-Journal-Entry.md",
-    "session-02/S02-Terminology-Web.md",
     "session-04/sample-code/Models/RubberDuck.php",
     "session-04/sample-code/Duck/RubberDuck.php",
     "session-04/sample-code/utilities.php",
@@ -228,16 +249,9 @@
     "session-04/sample-code/pdo-demo-read.php",
     "session-04/sample-code/pdo-demo-create-v2.php",
     "session-04/sample-code/pdo-basics.php",
-    "session-04/sample-code/new-database-user.sql",
-    "session-04/sample-code/namespace-demo.php",
-    "session-01/S01-Exercises-and-Practice.md",
     "assets/Pasted image 20250225150641.png",
     "assets/Country-Medals-Sports-3NF.png",
     "assets/Country-Medals-Sports-0NF.png",
-    "session-02/S02-Terminology-X-As-A-Service.md",
-    "session-02/S02-Terminology-Programming.md",
-    "session-10/S10-Exercises-and-Journal-Entry.md",
-    "session-02/S02-Terminology-General.md",
     "assets/vivaldi_qqHh6J21aQ.gif",
     "assets/S10-Laravel-BootCamp-Part-2-20240920172149440.png",
     "assets/S10-Introducing-Laravel-20240920133837144.png",
