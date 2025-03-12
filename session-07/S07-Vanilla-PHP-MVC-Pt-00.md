@@ -9,7 +9,7 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testng, PEST
 created: 2024-09-05T08:58
-updated: 2025-03-12T10:45
+updated: 2025-03-12T10:55
 ---
 
 
@@ -54,7 +54,7 @@ This initialises the repository.
 We now need to update the `.gitignore` in the root folder.
 
 Download this file:
-![](../session-06/gitignore.txt)
+![Git Ignore File](../session-06/gitignore.txt)
 
 Use the following command to copy the file, and rename it, into your project's root folder:
 
