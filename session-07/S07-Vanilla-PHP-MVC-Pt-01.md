@@ -9,7 +9,7 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testing, PEST
 created: 2024-09-05T08:58
-updated: 2025-03-13T09:00
+updated: 2025-03-13T16:17
 ---
 
 
@@ -318,13 +318,37 @@ OK, we now have a database with users and products tables.
 
 Note that the file `database-xxxxxx.sql` that you may download from here contains all the above in a single file for the database system indicated by the `xxxxx` section of the name (e.g. MariaDB, MySQL, PostgreSQL, SQLite, etc). 
 
-You may download the file, copy it into the config folder of the application skeleton, and then open it. Next simply copy and paste the commands into the SQL page on PhpMyAdmin (for MySQL/MaraiDB) and use GO to execute them in one step.
+You may download the file, copy it into the config folder of the application skeleton, and then open it. Next simply copy and paste the commands into the SQL page on PhpMyAdmin (for MySQL/MariaDB) and use GO to execute them in one step.
 
-For MariaDB:
-![](session-07/database-mariadb.sql)
+For **MariaDB**:
+![](session-07/sample-code/database-mariadb.sql)
 
-For MySQL:
-![](session-07/database-mysql.sql)
+For **MySQL**:
+![](session-07/sample-code/database-mysql.sql)
+
+# Commit Your Work
+
+Add the changes to the stash and commit them to the repository:
+
+```shell
+git add .
+
+git commit -m "wip: Database creation
+
+MySQL/MariaDB SQL script to:
+
+- remove any existing database that may be from an existing version of this project
+- remove any existing users that may be from a  previous version of this project
+- create the database
+- create the user (with access from localhost and 127.0.0.1)
+- create the tables
+- seed the tables
+"
+
+git push -u origin main
+```
+
+
 
 
 We are ready to start our PHP... [S07-Vanilla-PHP-MVC-Pt-02](session-07/S07-Vanilla-PHP-MVC-Pt-02.md)

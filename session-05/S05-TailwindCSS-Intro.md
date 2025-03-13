@@ -9,7 +9,7 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testing, PEST
 created: 2024-08-20T13:50
-updated: 2024-09-10T16:36
+updated: 2025-03-13T13:53
 ---
 
 
@@ -24,12 +24,12 @@ We will start by creating a project that we will use in the next section on MVC.
 Use these BASH  commands in your Source/Repos folder:
 
 ```bash
-mkdir -P SaaS-Vanilla-MVC
+mkdir -P SaaS-TailwindCSS-Demo
 ```
 This creates the new folder.
 
 ```shell
-cd SaaS-Vanilla-MVC
+cd SaaS-TailwindCSS-Demo
 ```
 This changes the directory (folder) to this new folder.
 
@@ -48,7 +48,7 @@ This initialises the repository.
 We now need to update the `.gitignore` in the root folder.
 
 Download this file:
-![](../session-06/gitignore.txt)
+![](../session-06/sample-code/gitignore.txt)
 
 Use the following command to copy the file, and rename it, into your project's root folder:
 
@@ -89,47 +89,155 @@ Open PhpStorm, and use the "hamburger" menu:
 
 Locate and then double-click on the new `SaaS-Vanilla-MVC` folder. Click Open to open the project.
 
-## Install TailwindCSS
+## Set Up `package.json`
+
+Before we install the TailwindCSS packages we will set up the `package.json` file:
+
+```shell
+npm init
+```
+
+Answer the questions as follows, replacing `YOUR_NAME` , `EMAIL@ADDRESS` and `YOUR_GITHUB_USERNAME` with the relevant details.
+
+| Prompt          | Response                                                                 |
+| --------------- | ------------------------------------------------------------------------ |
+| package name:   | tailwindcss-php-mvc-starter                                              |
+| version:        | <kbd>ENTER</kbd>                                                         |
+| description:    | TailwindCSS V4, plus basic PHP MVC Framework Starter Kit                 |
+| entry point:    | index.php                                                                |
+| test command:   | <kbd>ENTER</kbd>                                                         |
+| git repository: | httpds://github.com/YOUR_GITHUB_USERNAME/tailwindcss-php-mvc-starter.git |
+| keywords:       | tailwindcss,css,html5,nodejs,php,mvc,simple,traversy-media               |
+| author:         | YOUR_NAME <EMAIL@ADDRESS>                                                |
+| license:        | SEE LICENSE IN Licence.md                                                |
+
+It will show you the prepared `package.json` contents and then ask if this looks ok.
+
+Here is an example:
+
+```json
+{
+  "name": "saas-tailwindcss-demo",
+  "version": "1.0.0",
+  "description": "TailwindCSS V4 Demo",
+  "main": "index.php",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adygcode/SaaS-TailwindCSS-Demo.git"
+  },
+  "keywords": [
+    "tailwindcss",
+    "css",
+    "html5",
+    "nodejs",
+    "php",
+    "mvc",
+    "simple",
+    "traversy-media"
+  ],
+  "author": "Adrian Gould <adrian.gould@nmtafe.wa.edu.au>",
+  "license": "SEE LICENSE IN Licence.md",
+  "bugs": {
+    "url": "https://github.com/adygcode/SaaS-TailwindCSS-Demo/issues"
+  },
+  "homepage": "https://github.com/adygcode/SaaS-TailwindCSS-Demo#readme"
+}
+```
+
+Respond <kbd>Y</kbd> if all looks correct.
+
+### Edit the `package.json` to ensure Vite runs as expected
+
+We need to make a change to the `package.json` file to allow NodeJS to run Vite and it's packages as 'modules'.
+
+Locate the section:
+```json
+"main": "index.php",  
+"scripts": {  
+  "test": "echo \"Error: no test specified\" && exit 1",  
+},
+```
+
+and alter it to read:
+```json
+"main": "index.php",  
+"type": "module",  
+"scripts": {  
+  "test": "echo \"Error: no test specified\" && exit 1", 
+},
+```
+
+> Aside: you may add that option at almost any point before the last closing `}` curly bracket.
+>
+> The important thing is that it is the same level as the "author", "keywords", "repository", "main", and other top level fields in the JSON file.
+
+
+## Install TailwindCSS, Vite and Plugins
 
 Next we install TailwindCSS and its required components...
 
 ```bash
-npm install -D tailwindcss
+npm install -D tailwindcss @tailwindcss/vite 
+npm install -D @tailwindcss/postcss @tailwindcss/cli
+npm install -D vite-plugin-php vite-plugin-live-reload
 ```
 
-Now we can execute the TailwindCSS command to create it's configuration file.
+Now we can create a Vite configuration file.
 
 ```
-npx tailwindcss init
+touch vite.config.js
 ```
 
-Open the `tailwind.config.js` file (it will be in the root of the project) and update it so it contains:
+Open the `vite.config.js` file (it will be in the root of the project) and update it so it contains:
 
 ```js
-/**
- * Tailwind Configuration File
- *
- * Filename:        tailwind.config.js
- * Location:        /
- * Project:         SaaS-Vanilla-MVC
- * Date Created:    20/08/2024
- *
- * Author:          Your Name
- */
-
-/** @type {import('tailwindcss').Config} */
-module.exports = {
-    content: [
-        "./src/**/*.{html,js}",
-        "./**/*.{html,js,php}"
-    ],
-    theme: {
-        extend: {},
-    },
-    plugins: [],
-}
+/**  
+ * Vite Configuration File 
+ * 
+ * Filename:        vite.config.js 
+ * Location:        / 
+ * Project:         SaaS-TailwindCSS-Demo 
+ * Date Created:    2025-03-13 
+ * 
+ * Author:          Adrian Gould <adrian.gould@nmtafe.wa.edu.au>  
+ */  
+  
+import {defineConfig} from 'vite'  
+import tailwindcss from '@tailwindcss/vite'  
+import usePHP from 'vite-plugin-php';  
+import liveReload from 'vite-plugin-live-reload'  
+  
+export default defineConfig({  
+    plugins: [  
+        tailwindcss(),  
+        usePHP({  
+            entry: [  
+                'index.{html,php}',  
+                'public/index.{html,php}',  
+                'App/views/**/*.{html,php}'  
+            ],  
+        }),  
+        liveReload([  
+            'index.{html,php}',  
+            'public/index.{html,php}',  
+            'App/views/**/*.{html,php}'  
+            ],  
+            {  
+                alwaysReload: true  
+            }  
+        ),  
+    ],  
+})
 ```
 
+The `vite-plugin-php` allows the Vite package to load PHP files, and interpret them using an installed version of PHP.
+
+The `vite-plugin-live-reload` provides Vite with an automatic reload of pages when their source is changed.
+
+These two combined will mean you can change code and on save  (<kbd>CTRL</kbd>+<kbd>S</kbd>) it will perform the rebuild of the pages live reloading the updates.
 
 ### Git: Commit changes
 
@@ -142,17 +250,17 @@ git add .
 This adds all added and  modified files to the staging area...
 
 ```bash
-git commit -m "init: Start of Vanilla PHP MVC Project"
+git commit -m "init: Start of SaaS-TailwindCSS-Demo"
 ```
 
 We will deal with pushing this to GitHub later...
 
-## Running TailwindCSS' Transpiler
+## Running Vite
 
 Now return to your CLI and run the command:
 
 ```bash
-npx tailwindcss -i src/source.css -o public/assets/css/site.css --watch
+npm run dev
 ```
 
 This will continuously watch whilst we build the interface and code for the MVC application.
@@ -161,15 +269,13 @@ What did the command say to you?
 
 ### Previewing
 
-Open Laragon, make sure that the Site Root is pointing at your `source/repos` folder, and then click Start All.
+#### Option 1: Using Vite
 
-Open a browser and visit: http://SaaS-Vanilla-MVC.test
-
-What did you get?
+Open a browser and visit: http://localhost:5173
 
 ## Creating the Template
 
-Create a new `index.php` file in the public folder.
+Create a new `index.php` file in the root folder.
 
 Make sure the top of the file reads similar to this:
 
@@ -180,7 +286,7 @@ Make sure the top of the file reads similar to this:
  *
  * Filename:        index.php
  * Location:        public/
- * Project:         SaaS-FED-Tailwind-Demo
+ * Project:         SaaS-TailwindCSS-Demo
  * Date Created:    21/08/2024
  *
  * Author:          YOUR NAME
@@ -207,7 +313,7 @@ Modify this template to read:
     <title>Demo!</title>
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="css/site.css">
+    <link rel="stylesheet" href="src/source.css">
 
     <!-- JavaScripts -->
 
@@ -244,6 +350,11 @@ Modify the lines as shown:
     <h1 class="text-3xl">DEMO</h1>
     <nav class="flex-grow ml-8">
         <ul class="flex gap-4">
+			<!-- Nav items here -->
+			
+		</ul>
+	</nav>
+</header>
 ```
 
 What happens when you refresh your preview?
@@ -324,9 +435,10 @@ Go back to your browser and refresh... what is added?
 Start by modifying the main, article and header.
 
 ```html
-<main class="container flex flex-col min-h-screen">
-    <article class="w-8/12 mx-auto bg-white p-4 pb-6 shadow-md shadow-black/30 rounded-lg">
-        <header class="bg-zinc-200 p-4 text-xl -mt-4 -mx-4 mb-2 rounded-t-lg">
+<main class="container flex flex-col min-h-screen">  
+<article class="w-8/12 mx-auto bg-white p-4 pb-6 shadow shadow-black/50 rounded-md  border border-zinc-800">  
+    <header class="bg-zinc-200 p-4 text-xl -mt-4 -mx-4 mb-2 rounded-t-md">  
+            <h2 class="font-medium">Hello!</h2>
 ```
 
 **Question:** What do you think each of these do:

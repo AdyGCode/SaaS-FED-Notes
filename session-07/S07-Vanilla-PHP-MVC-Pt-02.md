@@ -9,10 +9,8 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testng, PEST
 created: 2024-09-05T08:58
-updated: 2025-03-13T09:00
+updated: 2025-03-13T16:27
 ---
-
-
 
 # Starting the PHP Code
 
@@ -50,7 +48,7 @@ We need to carefully edit this file and add the following:
 ```json
 {  
   "name": "YOUR_GITHUB_NAME/GITHUB_REPOSITORY_NAME",  
-  "description": "Vanilla PHP MVC Framework Demo",  
+  "description": "Simple PHP MVC & TailwindCSS Application Template",  
   "type": "project",  
   "version": "0.1",  
   "time": "YYYY-MM-DD",  
@@ -199,7 +197,7 @@ Edit the file and add/update to read (replace with your details as needed):
  * 
  * Filename:        db.php 
  * Location:        config/ 
- * Project:         SaaS-Vanilla-MVC 
+ * Project:         XXX-SaaS-Vanilla-MVC-SN 
  * Date Created:    DATE_CREATED 
  * 
  * Author:          YOUR NAME
@@ -233,7 +231,7 @@ Let's start with the header comments:
  * 
  * Filename:        helpers.php 
  * Location:        /
- * Project:         Saas-Vanilla-MVC 
+ * Project:         XXX-SaaS-Vanilla-MVC-SN 
  * Date Created:    DATE_CREATED 
  * 
  * Author:          YOUR NAME  
@@ -256,7 +254,7 @@ The `basePath` function obtains the base path so as to provide accurate and reli
 For example, if we were to use `basePath('index.php')` from within the `public` folder, then we would get a path of:
 
 ```text
-C:\Users\USERNAME\Source\Repos\SaaS-Vanilla-MVC/index.php
+C:\Users\USERNAME\Source\Repos\XXX-SaaS-Vanilla-MVC-SN/index.php
 ```
 
 This is the absolute path to this file. 
@@ -482,6 +480,25 @@ function redirect($url)
     exit;
 }
 ```
+
+
+
+# Commit Your Work
+
+Add the changes to the stash and commit them to the repository:
+
+```shell
+git add .
+
+git commit -m "wip: Commence Framework
+
+- Create the db.php config file
+- Create helper.php file with functions
+"
+
+git push -u origin main
+```
+
 
 
 next... [S07-Vanilla-PHP-MVC-Pt-03](session-07/S07-Vanilla-PHP-MVC-Pt-03.md)

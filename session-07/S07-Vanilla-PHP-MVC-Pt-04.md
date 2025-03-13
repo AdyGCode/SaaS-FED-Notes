@@ -9,7 +9,7 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testing, PEST
 created: 2024-09-05T08:58
-updated: 2025-03-13T09:00
+updated: 2025-03-13T16:28
 ---
 
 
@@ -199,6 +199,27 @@ For example:
 
 For us it will be something similar to:
 - https://saas-vanilla-mvc.test/
+
+
+
+# Commit Your Work
+
+Add the changes to the stash, commit and push them to the repository:
+
+```shell
+git add .
+
+git commit -m "wip: Commence Framework
+
+- Create Framework/Validation.php class
+- Create Framework/Authorisation.php class
+- Create routes.php file
+"
+
+git push -u origin main
+```
+
+
 
 
 ## Next time...

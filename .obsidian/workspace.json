@@ -4,24 +4,53 @@
     "type": "split",
     "children": [
       {
-        "id": "b9ffeb21bcbc9412",
+        "id": "7f4fbf4c4693cce9",
         "type": "tabs",
         "children": [
           {
-            "id": "758077b8b3d4a0bd",
+            "id": "f3c643941989e2ff",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "session-07/S07-Vanilla-PHP-MVC-Pt-03.md",
+                "file": "session-05/S05-TailwindCSS-Intro.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "S07-Vanilla-PHP-MVC-Pt-03"
+              "title": "S05-TailwindCSS-Intro"
+            }
+          },
+          {
+            "id": "04a217ed49c11563",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "session-07/S07-Vanilla-PHP-MVC-Pt-04.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "S07-Vanilla-PHP-MVC-Pt-04"
+            }
+          },
+          {
+            "id": "5dbc362b93e896e5",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "session-08/S08-Vanilla-PHP-MVC-Pt-05.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "S08-Vanilla-PHP-MVC-Pt-05"
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -40,7 +69,8 @@
             "state": {
               "type": "file-explorer",
               "state": {
-                "sortOrder": "alphabetical"
+                "sortOrder": "alphabetical",
+                "autoReveal": false
               },
               "icon": "lucide-folder-closed",
               "title": "Files"
@@ -77,7 +107,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 464.5
+    "width": 277.5
   },
   "right": {
     "id": "26a2935f4ff09f9b",
@@ -93,7 +123,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "session-10/S10-Introducing-Laravel.md",
+                "file": "session-12/S12-Laravel-03-Product-Feature.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +133,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for S10-Introducing-Laravel"
+              "title": "Backlinks for S12-Laravel-03-Product-Feature"
             }
           },
           {
@@ -112,12 +142,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "session-10/S10-Introducing-Laravel.md",
+                "file": "session-12/S12-Laravel-03-Product-Feature.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from S10-Introducing-Laravel"
+              "title": "Outgoing links from S12-Laravel-03-Product-Feature"
             }
           },
           {
@@ -139,10 +169,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "session-07/S07-Vanilla-PHP-MVC-Pt-03.md"
+                "file": "session-08/S08-Vanilla-PHP-MVC-Pt-05.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of S07-Vanilla-PHP-MVC-Pt-03"
+              "title": "Outline of S08-Vanilla-PHP-MVC-Pt-05"
             }
           },
           {
@@ -168,6 +201,7 @@
   },
   "left-ribbon": {
     "hiddenItems": {
+      "obsidian-advanced-slides:Show Slide Preview": false,
       "workspaces:Manage workspace layouts": false,
       "publish:Publish changes...": false,
       "daily-notes:Open today's daily note": false,
@@ -176,53 +210,91 @@
       "canvas:Create new canvas": false,
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
-      "mermaid-tools:Open Mermaid Toolbar": false,
-      "obsidian-advanced-slides:Show Slide Preview": false,
       "table-editor-obsidian:Advanced Tables Toolbar": false,
-      "templater-obsidian:Templater": false
+      "templater-obsidian:Templater": false,
+      "mermaid-tools:Open Mermaid Toolbar": false
     }
   },
-  "active": "758077b8b3d4a0bd",
+  "floating": {
+    "id": "1884d82971005238",
+    "type": "floating",
+    "children": [
+      {
+        "id": "a26b0f5d64f9a688",
+        "type": "window",
+        "children": [
+          {
+            "id": "f92c718adcd9a167",
+            "type": "tabs",
+            "children": [
+              {
+                "id": "abfa94b67d3b9579",
+                "type": "leaf",
+                "state": {
+                  "type": "markdown",
+                  "state": {
+                    "file": "session-05/S05-TailwindCSS-Intro.md",
+                    "mode": "source",
+                    "source": false
+                  },
+                  "icon": "lucide-file",
+                  "title": "S05-TailwindCSS-Intro"
+                }
+              }
+            ]
+          }
+        ],
+        "direction": "vertical",
+        "x": 660,
+        "y": 216,
+        "width": 600,
+        "height": 600,
+        "maximize": false,
+        "zoom": 0
+      }
+    ]
+  },
+  "active": "5dbc362b93e896e5",
   "lastOpenFiles": [
+    "session-07/S07-Vanilla-PHP-MVC-Pt-04.md",
+    "session-07/S07-Vanilla-PHP-MVC-Pt-03.md",
     "session-07/S07-Vanilla-PHP-MVC-Pt-02.md",
     "session-07/S07-Vanilla-PHP-MVC-Pt-01.md",
-    "session-06/S05-Terminology-MVC.md",
-    "session-06/S05-PHP-Basics-VII.md",
-    "session-07/S07-Vanilla-PHP-MVC-Pt-03.md",
     "session-07/S07-Vanilla-PHP-MVC-Pt-00.md",
-    "session-07/gitignore.txt",
-    "session-06/S05-MVC-Background.md",
-    "session-02/S02-Terminology-Web.md",
+    "session-05/S05-TailwindCSS-Intro.md",
+    "session-02/S02-PHP-Basics-I.md",
     "session-11/S11-Laravel-v12-Many-to-Many.md",
-    "session-11/S10-Laravel-Basics.md",
-    "session-07/database-mysql.sql",
-    "session-07/database-mariadb.sql",
+    "session-06/S05-PHP-Basics-VII.md",
     "session-07/S07-Exercises-and-Practice.md",
-    "session-01/S01-PHP-for-Beginners-Study-Schedule.md",
-    "session-01/S01-PHP-for-Beginners-Crash-Course-Study-Schedule.md",
-    "session-01/S01-PHP from Scratch-Beginner-to-Advanced-Study-Schedule.md",
-    "session-01/S01-OOP-PHP-MVC-Study-Schedule.md",
-    "session-07/ReadMe.md",
-    "session-06/S06-Exercises-and-Practice.md",
-    "session-04/S04-Exercises-and-Journal-Entry.md",
-    "session-03/S03-PHP-Basics-II.md",
-    "session-03/S03-Terminology-Database.md",
-    "session-03/S03-Terminology-SQL.md",
-    "session-04/S04-Terminology-Security.md",
-    "session-04/S04-PHP-Basics-VI.md",
-    "session-04/S04-PHP-Basics-V.md",
-    "session-04/S04-PHP-Basics-IV.md",
-    "session-04/S04-PHP-Basics-III.md",
-    "session-04/sample-code/Models/RubberDuck.php",
-    "session-04/sample-code/Duck/RubberDuck.php",
-    "session-04/sample-code/utilities.php",
-    "session-04/sample-code/pdoConnect.php",
-    "session-04/sample-code/pdo-demo-create.php",
-    "session-04/sample-code/pdo-demo-read.php",
-    "session-04/sample-code/pdo-demo-create-v2.php",
-    "assets/Pasted image 20250225150641.png",
+    "session-05/S05-Exercises-and-Journal-Entry.md",
+    "session-01/S01-Exercises-and-Practice.md",
+    "session-05/sample-code",
+    "session-02/sample-code",
+    "session-01/sample-code",
+    "session-00/sample-code",
+    "session-00",
+    "session-19/sample-code",
+    "session-18/sample-code",
+    "session-17/sample-code",
+    "session-16/sample-code",
+    "session-15/sample-code",
+    "session-20/session-19/ReadMe.md",
+    "session-20/session-18/ReadMe.md",
+    "session-20/session-17/ReadMe.md",
+    "session-20/session-16/S16-Exercises-and-Journal-Entry.md",
+    "session-20/session-16/ReadMe.md",
+    "session-20/session-15/S15-Exercises-and-Journal-Entry.md",
+    "session-20/session-15/ReadMe.md",
+    "session-20/session-14/S14-Laravel-05-Roles-and-Permissions.md",
+    "session-20/session-14/S14-Exercises-and-Journal-Entry.md",
+    "session-20/session-14/ReadMe.md",
+    "session-20/session-13/S13-Exercises-and-Journal-Entry.md",
+    "session-20/session-13/S12-Laravel-02-Update-User.md",
+    "session-20/session-13/ReadMe.md",
+    "session-20/session-12/S12-Laravel-2-Basics-Creating-A-Regions-Feature.md",
     "assets/Country-Medals-Sports-3NF.png",
     "assets/Country-Medals-Sports-0NF.png",
+    "assets/Pasted image 20250225150641.png",
     "assets/vivaldi_qqHh6J21aQ.gif",
     "assets/S10-Laravel-BootCamp-Part-2-20240920172149440.png",
     "assets/S10-Introducing-Laravel-20240920133837144.png",

@@ -9,10 +9,8 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testng, PEST
 created: 2024-09-05T08:58
-updated: 2025-03-13T09:00
+updated: 2025-03-13T16:27
 ---
-
-
 
 # Continuing to build the Framework
 
@@ -635,6 +633,25 @@ public static function getFlashMessage($key, $default = null)
 ### Exercise: Update Header Comments
 
 You are expected to update the header comments to give a title and explain the purpose of this class and its methods to other developers.
+
+
+# Commit Your Work
+
+Add the changes to the stash, commit and push them to the repository:
+
+```shell
+git add .
+
+git commit -m "wip: Commence Framework
+
+- Create Framework/Database.php class
+- Create Framework/Router.php class
+- Create Framework/Session.php class
+"
+
+git push -u origin main
+```
+
 
 
 ---
