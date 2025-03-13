@@ -9,7 +9,7 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testing, PEST
 created: 2024-09-05T08:58
-updated: 2025-03-13T09:00
+updated: 2025-03-13T09:09
 ---
 
 # Continuing to build the Framework
@@ -163,7 +163,7 @@ The flags at the end have the following meanings:
 
 ## Template HTML File
 
-Download the [`template.php`](../session-07/template.php) file we provide.
+Download the [`template.php`](../session-07/sample-code/template.php) file we provide.
 
 Copy/Move this into the `src` folder on the project so you have an easily accessed file.
 
