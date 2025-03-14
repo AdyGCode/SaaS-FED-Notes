@@ -9,58 +9,110 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testing, PEST
 created: 2024-09-05T08:58
-updated: 2025-03-13T09:09
+updated: 2025-03-13T19:08
 ---
 
 # Continuing to build the Framework
 
 So far we have created the helpers, the routes and the database configuration.
 
-In this section we will look at the `public/index.php` file, and convert it from the current 
-template file into a set of partials that will be stored in the `App/views/partials` folder...
+In this section we will look at the `index.php` file, and convert it from the current template file into a set of partials that will be stored in the `App/views/partials` folder...
 
 ## Before you continue...
 
-One item to note is that when you restart a project after leaving it for the day, you will 
-need to restart the likes of the Tailwind CSS compiler.
+One item to note is that when you restart a project after leaving it for the day, you will need to restart the likes of the Tailwind CSS compiler.
 
 It is also a good idea to run the `npm` and `composer` installs/updates.
 
-Also, we need to update the `tailwind.config.js` file a little...
-
-The content section needs to change to:
+Our vite.config.js file should not need any updates, but if you wish you could amend it by adding `js` to the `usePHP` and `liveReload` sections:
 
 ```js
-content: [
-    "./src/**/*.{html,js}",
-    "./{App,public,config,Framework}/*.{html,js,php}"
+plugins: [  
+    tailwindcss(),  
+    usePHP({  
+        entry: [  
+            'index.php',  
+            'public/index.{html,php,js}',  
+            'App/views/**/*.{html,php,js}'  
+        ],  
+    }),  
+    liveReload([  
+            'index.php',  
+            'public/index.{html,php,js}',  
+            'App/views/**/*.{html,php,js}'  
+        ],  
+        {  
+            alwaysReload: true  
+        }  
+    ),  
 ],
 ```
 
-Use the following:
+If you have the `npm run dev` command running, stop it update the composer and other files:
 
 ```shell
 composer install && composer update
 
 npm install && npm update
 
-npx tailwind -i src/source.css -o public/assets/css/site.css --watch
 ```
+
+## Important: Over to a Web Server
+
+We are now at a point where we will need to change our build process.
+
+We will be modifying the index.php file to be a lot more lightweight, and it will use fiules from within the framework.
+
+So it is time to swap to Laragon and run the web and database servers.
+
+### Running Laragon
+
+Check the system tray to see if it is running already, if so you can right click and select Start All. The animated image shows this for you.
+
+![](assets/phpstorm64_yniz8HiIG4.gif)
+
+If it is hidden in the system tray, drag it to the right of the down chevron, so you can quickly verify if it is running. The animated GIF shows this.
+
+![](assets/RRQfhpfbAd.gif)
+
+If showing in the system tray, then simply right mouse click on the icon and select Start All.
+
+![](assets/sXU0htzX1F.gif)
+
+If it is not running then run it using <kbd>WIN</kbd> and then typing Laragon to show it in the search and press <kbd>ENTER</kbd>.
+
+![](assets/explorer_1oX8dmbYNq.gif)
+
+Once Running we need to make sure that we are using the `~/Source/Repos` folder as the Laragon root:
+
+![](assets/PBOQVb3WQz.gif)
+
+### Running the TailwindCSS watch and build
+
+The next step requires you to have a terminal open that can execute `npm`.
+
+In a terminal execute the following:
+
+```shell
+npx @tailwindcss/cli -i src/source.css -o public/assets/css/site.css -m --watch
+```
+
+This will:
+- watch for changes to your source code
+- rebuild or update the `site.css` file in the `/public/assets/css` folder
+- continue to run as you continue to develop code.
 
 ## The Routes File Revisited
 
-At the end of the previous stage, we added a one line `routes.php` file in the root of the
-project:
+At the end of the previous stage, we added a one line `routes.php` file in the root of the project:
 
 ```php
 $router->get('/', 'HomeController@index');  
 ```
 
-As stated previously, this router call adds a GET method route to the router that looks 
-for the `/` endpoint for the URL.
+As stated previously, this router call adds a GET method route to the router that looks for the `/` endpoint for the URL.
 
-We will add additional routes to this file as needed as we progress through the next parts of 
-the tutorial.
+We will add additional routes to this file as needed as we progress through the next parts of the tutorial.
 
 ## Public `index.php`
 
@@ -73,8 +125,7 @@ This file performs the actions of:
 - getting the requested location from the server
 - calling the router to direct the application flow
 
-The file is hidden behind the use of our `.htaccess` file, so as far as the end user is
-concerned they have no idea it exists.
+The file is hidden behind the use of our `.htaccess` file, so as far as the end user is concerned they have no idea it exists.
 
 A request to `http://saas-vanilla-mvc.test/` actually is directed to
 `http://saas-vanilla-mvc.test/index.php` by the
@@ -204,7 +255,7 @@ As with the header, we create a new partial view and name it `navigation.view.ph
 
 Once you have done that, close the `?>` PHP tag, and then copy the section of the template code
 from
-`<header class="bg-black text-white p-4 flex-grow-0 flex flex-row align-middle content-center">`
+`<header class="bg-gray-950 text-gray-200 p-4 flex-grow-0 flex flex-row align-middle content-center">`
 to `</header>`.
 
 Paste this code after the close PHP tag.
@@ -221,40 +272,16 @@ We are on the last bit of the page partials, before we look at two new partials.
 
 As before, create a new partial view and name it `footer.view.php`.
 
-Go back to the template and locate the line `...` and select the code from there to the end of
+Go back to the template and locate the  `<footer>` line and select the code from there to the end of
 the file.
 
 Add this code to the footer partial.
 
-Edit the `<footer>`...`</footer>` content to be:
-
-```html
-
-<section class="w-1/2 p-8">
-    <p>&copy; Copyright 2024 YOUR_NAME. All rights reserved.</p>
-    <p class="text-xs">
-        Based on a <a href="https://github.com/AdyGCode/SaaS-FED-Notes/tree/main/session-07"
-                      class="text-zinc-500 hover:text-white underline">tutorial</a>
-        by <a href="https://adygcode.github.io"
-              class="text-zinc-500 hover:text-white">Adrian Gould</a> &
-        <a href="https://adygcode.github.io"
-           class="text-zinc-500 hover:text-red-700">North Metropolitan TAFE</a>
-    </p>
-    <p>License: MIT Open Source Licensing</p>
-</section>
-<section class="w-1/2 p-8 text-xs">
-    <ul>
-        <li><a href="#" class="text-zinc-500 hover:text-white">link 1</a></li>
-        <li><a href="#" class="text-zinc-500 hover:text-white">link 2</a></li>
-        <li><a href="#" class="text-zinc-500 hover:text-white">link 3</a></li>
-        <li><a href="#" class="text-zinc-500 hover:text-white">link 4</a></li>
-    </ul>
-</section>
-```
-
 Here is an image of the full code as of 3/9/24:
 
 ![](../assets/1r6KVQrJ6b.png)
+
+(this code has been updated, to include a more embellished footer)
 
 ## New Partials
 
@@ -293,8 +320,7 @@ if (isset($errors) && $errors !== null): ?>
 endif;
 ```
 
-This simply processes a list of errors that is sent to the partial, and adds them in an error '
-message box'.
+This simply processes a list of errors that is sent to the partial, and adds them in an error 'message box'.
 
 The error block is based on code from https://tailwindtemplates.io/templates?category=alert.
 
@@ -312,12 +338,9 @@ if (isset($errors) && count($errors)>0): ?>
 
 ### Message Partial
 
-The message partial is similar, but it actually uses the Session class to allow it to retrieve
-any flash messages and
-then display.
+The message partial is similar, but it actually uses the Session class to allow it to retrieve any flash messages and then display.
 
-The code gets any success message from the session, and if one exists it shows the message in a
-green box.
+The code gets any success message from the session, and if one exists it shows the message in a green box.
 
 Likewise for the error message, except a red box.
 
@@ -359,4 +382,31 @@ The code as an image as per 3/9/24:
 
 ![](../assets/wWsoqyF1sX.png)
 
-next... [S07-Vanilla-PHP-MVC-Pt-6](../session-06/S06-Vanilla-PHP-MVC-Pt-6.md)
+
+At this point we will...
+
+
+# Commit Your Work
+
+Add the changes to the stash, commit and push them to the repository:
+
+```shell
+git add .
+
+git commit -m "wip: Route, Partials and .htaccess revisited
+
+Create the partials:
+- header
+- footer
+- navigation
+- error
+
+"
+
+git push -u origin main
+```
+
+
+
+
+next... [S08-Vanilla-PHP-MVC-Pt-06](../session-08/S08-Vanilla-PHP-MVC-Pt-06.md)

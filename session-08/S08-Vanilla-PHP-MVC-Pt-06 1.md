@@ -9,7 +9,7 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testng, PEST
 created: 2024-09-05T08:58
-updated: 2025-03-13T19:05
+updated: 2025-03-13T17:22
 ---
 
 
@@ -69,7 +69,7 @@ Then close the PHP tag and add the following HTML/PHP code:
                     <p>
                         <a class="underline underline-offset-2
                                   hover:text-black transition ease-in-out duration-500"
-                           href="/">Go Back To Home</a>
+                           href="/products">Go Back To Products</a>
                     </p>
                 </div>
             </div>
@@ -128,14 +128,15 @@ public static function unauthorized($message = 'You are not authorized to view t
 As usual you are charged with adding the relevant DocBlocks to the methods and updating the class DocBlock.
 
 
+# Home Page
+
+We are now at the point of creating a home page for the application.
+
+It must be noted that te home page we are creating will rely on 
 
 ## The Home Controller & View
 
 Before we start on the User and Product feature, we will add our home route, home controller and view.
-
-In fact this home page will be a very simple page at this point as we will not enhance it until we have our users and products features completed for this example/template application.
-
-As a result the home page will not show any content, as per the template.
 
 ### Home Route
 
@@ -185,11 +186,29 @@ public function __construct()
 
 Our index method does the following:
 
-- Load the home view.
+- Retrieve the last 6 added products
+- Retrieve a count of all the products
+- Retrieve a count of all the users
+- Load the home view with the above data for display.
 
 ```php
- 
-loadView('home', []);
+$products = $this->db->query(
+    'SELECT * FROM products ORDER BY created_at DESC LIMIT 6'
+    )->fetchAll();  
+  
+$productCount = $this->db->query(
+    'SELECT count(id) as total FROM products '
+    )->fetch();  
+  
+$userCount = $this->db->query(
+    'SELECT count(id) as total FROM users'
+    )->fetch();  
+  
+loadView('home', [  
+    'products' => $products,  
+    'productCount' => $productCount,  
+    'userCount' => $userCount,  
+]);
 ```
 
 
@@ -242,7 +261,8 @@ Now we construct the main element of the page:
         </header>
         <section class="flex flex-row flex-wrap justify-center my-8 gap-8">
 
-<!-- there will be more code here -->
+<!-- there will be approximately 50 lines of code to add here -->
+
 
         </section>  
   

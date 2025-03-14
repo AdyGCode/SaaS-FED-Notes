@@ -9,7 +9,7 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testng, PEST
 created: 2024-09-05T08:58
-updated: 2025-03-13T16:20
+updated: 2025-03-13T17:51
 ---
 
 
@@ -418,7 +418,50 @@ Now create a new `index.php` file and open it to add the following:
 
 ```
 
-NB: We have left a copuple of issues in this code on purpose.
+NB: We have left a couple of issues in this code on purpose.
+
+## Ignoring the `vendor` and `node_modules` folders
+
+It is important we update the `.gitignore` file at this point to remove the `vendor` and `node_modules` folders from version control.
+
+To do so, open the `/.gitignore` file and go to the bottom if it.
+
+The last few linesd will be similar to this:
+
+```text
+    
+!.obsidian  
+/.obsidian/plugins/novel-word-count/data.json  /.obsidian/workspace.json  
+/.obsidian/vault-stats.json
+```
+
+Now add:
+
+```ignore
+  
+# Vendor and Node Modules  
+# Logs  
+logs  
+*.log  
+  
+# Dependency directories  
+node_modules/  
+  
+# Optional npm cache directory  
+.npm  
+  
+# dotenv environment variable files  
+.env  
+.env.development.local  
+.env.test.local  
+.env.production.local  
+.env.local  
+  
+# Composer and Vendor folders  
+composer.phar  
+/vendor/  
+composer.lock
+```
 
 # Commit Your Work
 

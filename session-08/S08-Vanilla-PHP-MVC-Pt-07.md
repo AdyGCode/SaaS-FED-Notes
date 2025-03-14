@@ -9,7 +9,7 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testng, PEST
 created: 2024-09-05T08:58
-updated: 2025-03-13T09:00
+updated: 2025-03-13T17:17
 ---
 
 
@@ -688,4 +688,28 @@ public function logout()
 
 So that is the User Feature completed.
 
-The final step is the Products Feature which is covered in [S07 Vanilla PHP MVC Pt 8](session-08/S08-Vanilla-PHP-MVC-Pt-08.md)
+# Commit Your Work
+
+Add the changes to the stash, commit and push them to the repository:
+
+```shell
+git add .
+
+git commit -m "wip: User feature
+
+Create User feature including:
+- register
+- login
+- logout
+- update routes
+- UserController.php class
+
+"
+
+git push -u origin main
+```
+
+
+
+
+The next step is the Products Feature which is covered in [S07 Vanilla PHP MVC Pt 8](session-08/S08-Vanilla-PHP-MVC-Pt-08.md)

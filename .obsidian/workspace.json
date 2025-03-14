@@ -41,12 +41,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "session-08/S08-Vanilla-PHP-MVC-Pt-05.md",
+                "file": "session-07/S07-Vanilla-PHP-MVC-Pt-03.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "S08-Vanilla-PHP-MVC-Pt-05"
+              "title": "S07-Vanilla-PHP-MVC-Pt-03"
             }
           }
         ],
@@ -169,13 +169,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "session-08/S08-Vanilla-PHP-MVC-Pt-05.md",
+                "file": "session-07/S07-Vanilla-PHP-MVC-Pt-03.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of S08-Vanilla-PHP-MVC-Pt-05"
+              "title": "Outline of S07-Vanilla-PHP-MVC-Pt-03"
             }
           },
           {
@@ -257,10 +257,20 @@
   "active": "5dbc362b93e896e5",
   "lastOpenFiles": [
     "session-07/S07-Vanilla-PHP-MVC-Pt-04.md",
+    "session-08/S08-Vanilla-PHP-MVC-Pt-05.md",
+    "session-08/S08-Vanilla-PHP-MVC-Pt-06.md",
+    "assets/PBOQVb3WQz.gif",
+    "assets/explorer_1oX8dmbYNq.gif",
+    "assets/sXU0htzX1F.gif",
+    "assets/phpstorm64_yniz8HiIG4.gif",
+    "assets/RRQfhpfbAd.gif",
+    "assets/xip4FXUzGB.gif",
     "session-07/S07-Vanilla-PHP-MVC-Pt-03.md",
     "session-07/S07-Vanilla-PHP-MVC-Pt-02.md",
     "session-07/S07-Vanilla-PHP-MVC-Pt-01.md",
     "session-07/S07-Vanilla-PHP-MVC-Pt-00.md",
+    "session-08/S08-Vanilla-PHP-MVC-Pt-06 1.md",
+    "session-08/S08-Vanilla-PHP-MVC-Pt-07.md",
     "session-05/S05-TailwindCSS-Intro.md",
     "session-02/S02-PHP-Basics-I.md",
     "session-11/S11-Laravel-v12-Many-to-Many.md",
@@ -287,20 +297,9 @@
     "session-20/session-15/ReadMe.md",
     "session-20/session-14/S14-Laravel-05-Roles-and-Permissions.md",
     "session-20/session-14/S14-Exercises-and-Journal-Entry.md",
-    "session-20/session-14/ReadMe.md",
-    "session-20/session-13/S13-Exercises-and-Journal-Entry.md",
-    "session-20/session-13/S12-Laravel-02-Update-User.md",
-    "session-20/session-13/ReadMe.md",
-    "session-20/session-12/S12-Laravel-2-Basics-Creating-A-Regions-Feature.md",
     "assets/Country-Medals-Sports-3NF.png",
     "assets/Country-Medals-Sports-0NF.png",
     "assets/Pasted image 20250225150641.png",
-    "assets/vivaldi_qqHh6J21aQ.gif",
-    "assets/S10-Laravel-BootCamp-Part-2-20240920172149440.png",
-    "assets/S10-Introducing-Laravel-20240920133837144.png",
-    "assets/S10-Laravel-BootCamp-20240920160925699.png",
-    "assets/S10-Laravel-BootCamp-20240920155634761.png",
-    "assets/S10-Introducing-Laravel-20240920155255149.png",
-    "assets/S10-Laravel-BootCamp-20240920154627366.png"
+    "assets/vivaldi_qqHh6J21aQ.gif"
   ]
 }
