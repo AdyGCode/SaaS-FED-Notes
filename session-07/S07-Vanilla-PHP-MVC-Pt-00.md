@@ -9,7 +9,7 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testng, PEST
 created: 2024-09-05T08:58
-updated: 2025-03-13T17:51
+updated: 2025-03-19T10:50
 ---
 
 
@@ -67,7 +67,7 @@ cp -f ~/Downloads/gitignore.txt .gitignore
 Now we create the various folders we need for the project:
 ```shell
 mkdir -p {config,src}
-mkdir -p App/{controllers,views}
+mkdir -p App/{controllers,views/partials}
 mkdir -p Framework/middleware
 mkdir -p public/assets/{css,js,img,downloads}
 ```
@@ -82,7 +82,7 @@ Also a `source.css` file is created ready for the TailwindCSS configuration.
 touch public/assets/{css,js,img,downloads}/.gitignore
 touch public/{assets}/.gitignore
 touch {App,Framework,config,src}/.gitignore
-touch App/{controllers,views}/.gitignore
+touch App/{controllers,views,views/partials}/.gitignore
 touch Framework/middleware/.gitignore
 touch src/source.css
 ```
@@ -294,6 +294,7 @@ Here is an example of a completed `package.json` file:
 ## Adding Font Awesome (Free)
 
 Download the Font Awesome Free Package from their web site:
+- https://fontawesome.com/download
 
 Uncompress the file in your downloads folder.
 
@@ -311,7 +312,7 @@ Now use the following commands to copy the required folders/files to the `public
  cp -r ~/Downloads/fontawesome-free/{webfonts,css,js,svgs,sprites} public/assets/
 ```
 
-Now create a new `index.php` file and open it to add the following:
+Now create a new `index.php` file in the ROOT of the application and open it to add the following:
 
 ```php
 <?php  
@@ -427,7 +428,7 @@ It is important we update the `.gitignore` file at this point to remove the `ven
 
 To do so, open the `/.gitignore` file and go to the bottom if it.
 
-The last few linesd will be similar to this:
+The last few lines will be similar to this:
 
 ```text
     
@@ -461,6 +462,7 @@ node_modules/
 # Composer and Vendor folders  
 composer.phar  
 /vendor/  
+/vendor/**/*
 composer.lock
 ```
 

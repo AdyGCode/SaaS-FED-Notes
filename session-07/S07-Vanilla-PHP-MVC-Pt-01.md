@@ -9,7 +9,7 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testing, PEST
 created: 2024-09-05T08:58
-updated: 2025-03-13T16:17
+updated: 2025-03-19T10:57
 ---
 
 
@@ -84,6 +84,24 @@ Click OK to open the administration interface.
 When the interface is open, click on the SQL tab:
 
 ![image: the database and SQL tabs in PhpMyAdmin](../assets/Pasted%20image%2020240827120339.png)
+
+
+### SQL Files
+
+**Important** We have SQL files for different databases that are available within the sample-code folder.
+
+Each file `database-xxxxxx.sql` that you may download from here contains all the following steps in a single file for the database system indicated by the `xxxxx` section of the name (e.g. MariaDB, MySQL, PostgreSQL, SQLite, etc). 
+
+You may download the file, copy it into the config folder of the application skeleton, and then open it. Next simply copy and paste the commands into the SQL page on PhpMyAdmin (for MySQL/MariaDB) and use GO to execute them in one step.
+
+For **MariaDB**:
+![](session-07/sample-code/database-mariadb.sql)
+
+For **MySQL**:
+![](session-07/sample-code/database-mysql.sql)
+
+
+## Create Database and Users (MariaDB)
 
 In the SQL query area you will now enter:
 
@@ -316,15 +334,7 @@ VALUES (40380, 20, 'Sheep BrickHeadz',
 
 OK, we now have a database with users and products tables.
 
-Note that the file `database-xxxxxx.sql` that you may download from here contains all the above in a single file for the database system indicated by the `xxxxx` section of the name (e.g. MariaDB, MySQL, PostgreSQL, SQLite, etc). 
 
-You may download the file, copy it into the config folder of the application skeleton, and then open it. Next simply copy and paste the commands into the SQL page on PhpMyAdmin (for MySQL/MariaDB) and use GO to execute them in one step.
-
-For **MariaDB**:
-![](session-07/sample-code/database-mariadb.sql)
-
-For **MySQL**:
-![](session-07/sample-code/database-mysql.sql)
 
 # Commit Your Work
 
