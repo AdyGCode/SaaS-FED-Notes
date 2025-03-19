@@ -9,7 +9,7 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testng, PEST
 created: 2024-09-05T08:58
-updated: 2025-03-13T17:17
+updated: 2025-03-19T10:11
 ---
 
 
@@ -644,7 +644,7 @@ We use PHP's built-in Password Verification function for this.
     }  
 ```
 
-We got his far, so we now have a registered user, and they used the correct password so...
+We got this far, so we now have a registered user, and they used the correct password so...
 
 **Start the user's authenticated session, and redirect to the home page**
 

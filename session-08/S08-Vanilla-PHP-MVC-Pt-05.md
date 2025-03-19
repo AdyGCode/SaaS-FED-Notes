@@ -9,7 +9,7 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testing, PEST
 created: 2024-09-05T08:58
-updated: 2025-03-13T19:08
+updated: 2025-03-19T11:31
 ---
 
 # Continuing to build the Framework
@@ -24,7 +24,7 @@ One item to note is that when you restart a project after leaving it for the day
 
 It is also a good idea to run the `npm` and `composer` installs/updates.
 
-Our vite.config.js file should not need any updates, but if you wish you could amend it by adding `js` to the `usePHP` and `liveReload` sections:
+Our `vite.config.js` file should not need any updates, but if you wish you could amend it by adding `js` to the `usePHP` and `liveReload` sections:
 
 ```js
 plugins: [  
@@ -48,7 +48,7 @@ plugins: [
 ],
 ```
 
-If you have the `npm run dev` command running, stop it update the composer and other files:
+If you have the `npm run dev` command running, stop it (<kbd>CTRL</kbd>+<kbd>C</kbd>) update the composer and other files:
 
 ```shell
 composer install && composer update
@@ -61,7 +61,7 @@ npm install && npm update
 
 We are now at a point where we will need to change our build process.
 
-We will be modifying the index.php file to be a lot more lightweight, and it will use fiules from within the framework.
+We will be modifying the `index.php` file to be a lot more lightweight, and it will use files from within the framework.
 
 So it is time to swap to Laragon and run the web and database servers.
 
@@ -143,8 +143,9 @@ It grabs the helper functions, and created a router object.
 
 It then loads the routes, as defined in the `routes.php` file.
 
-Next the request's URI is retrieved, before the routers is called to handle the requested URI
-path.
+Next the request's URI is retrieved, before the routers is called to handle the requested URI path.
+
+Create a new PHP file, `public/index.php` and add:
 
 ```php
 require __DIR__ . '/../vendor/autoload.php';
@@ -154,7 +155,7 @@ use Framework\Session;
 
 Session::start();
 
-require '../helpers.php';
+require __DIR__.'/../helpers.php';
 
 // Instantiate the router
 $router = new Router();
@@ -176,17 +177,15 @@ $router->route($uri);
 
 So how about this `.htaccess` file...
 
-This Apache configuration enables URL rewriting and sets up a rule to handle requests for files
-or directories that do not exist.
+This file exists as `/public/.htaccess`.
 
-If a requested URL does not correspond to an existing file or directory, the request is
-rewritten to `/index.php`. This is commonly used in web applications that use a single entry
-point (like `index.php`) to handle all requests, such as in many PHP frameworks.
+This Apache configuration enables URL rewriting and sets up a rule to handle requests for files or directories that do not exist.
+
+If a requested URL does not correspond to an existing file or directory, the request is rewritten to `/index.php`. This is commonly used in web applications that use a single entry point (like `index.php`) to handle all requests, such as in many PHP frameworks.
 
 #### `RewriteEngine on`
 
-This line enables the rewrite engine, which is a module in Apache that allows you to rewrite
-URLs. It's necessary for the following rewrite rules to work.
+This line enables the rewrite engine, which is a module in Apache that allows you to rewrite URLs. It's necessary for the following rewrite rules to work.
 
 #### `RewriteCond %{REQUEST_FILENAME} !-f`
 
