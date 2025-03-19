@@ -9,7 +9,7 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testng, PEST
 created: 2024-09-05T08:58
-updated: 2025-03-19T11:37
+updated: 2025-03-19T11:57
 ---
 
 # Continuing to build the Framework
@@ -293,6 +293,7 @@ This creates a list (array) that includes the controller name and the method fro
 After this, the method adds the various parts of the route to the routes property.
 
 The complete method code:
+
 ```php
 public function registerRoute($method, $uri, $action, $middleware = [])  
 {  
@@ -367,7 +368,9 @@ We are now into the last method, and this is the most complex part of the framew
 Create a new method stub:
 
 ```php
-public function route()
+public function route($uri) {
+
+}
 ```
 
 
