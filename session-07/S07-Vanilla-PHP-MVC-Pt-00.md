@@ -286,7 +286,8 @@ Here is an example of a completed `package.json` file:
     "vite-plugin-php": "^2.0.1"  
   },  
   "dependencies": {  
-  }}
+  }
+}
 ```
 
 

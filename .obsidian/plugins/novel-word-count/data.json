@@ -2790,15 +2790,15 @@
       "wordCountTowardGoal": 0,
       "wordGoal": null,
       "pageCount": 0.6766666666666666,
-      "characterCount": 1287,
+      "characterCount": 1362,
       "nonWhitespaceCharacterCount": 1021,
       "readingTimeInMinutes": 0.7660377358490567,
       "linkCount": 1,
       "embedCount": 0,
       "aliases": null,
       "createdDate": 1722475410793,
-      "modifiedDate": 1741684970016,
-      "sizeInBytes": 1870,
+      "modifiedDate": 1741827646794,
+      "sizeInBytes": 1952,
       "frontmatter": {
         "theme": "default",
         "paginate": true,
@@ -2812,7 +2812,7 @@
         "date created": "03 July 2024",
         "date modified": "07 July 2024",
         "created": "2024-08-01T09:23",
-        "updated": "2025-03-11T16:40"
+        "updated": "2025-03-13T09:00"
       }
     },
     "session-01/S01-Development-Environments.md": {
