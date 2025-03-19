@@ -9,7 +9,7 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testing, PEST
 created: 2024-09-05T08:58
-updated: 2025-03-19T11:31
+updated: 2025-03-19T12:23
 ---
 
 # Continuing to build the Framework
@@ -56,6 +56,8 @@ composer install && composer update
 npm install && npm update
 
 ```
+
+** TO DO ** Fix up how to get vite to watch the PHP and autoreload the 
 
 ## Important: Over to a Web Server
 
