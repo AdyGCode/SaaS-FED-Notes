@@ -9,7 +9,7 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testng, PEST
 created: 2024-09-05T08:58
-updated: 2025-03-19T09:47
+updated: 2025-03-19T12:19
 ---
 
 
@@ -22,7 +22,7 @@ Now we need to add a controller that will handle errors such as 404 not found...
 
 ## The Error Controller
 
-Create  a new PHP Class file in the `App/Controllers` folder called `ErrorController`.
+Create a new PHP Class file in the `App/Controllers` folder called `ErrorController`.
 
 This controller will handle two main errors:
 - 404 Not Found
@@ -31,6 +31,44 @@ This controller will handle two main errors:
 It can easily be extended to include other errors as needed.
 
 Before we create the class and methods we need a generalised error page.
+
+## Not Found
+
+The not found method takes a message string as an argument. 
+
+It then makes the response code for the HTTP response equal to 404 before then loading the error view we created in the previous step.
+
+```php
+public static function notFound($message = 'Resource not found')  
+{  
+    http_response_code(404);  
+  
+    loadView('error', [  
+        'status' => '404',  
+        'message' => $message  
+    ]);  
+}
+```
+
+## Unauthorised
+
+The unauthorised method takes care of showing the 403 page when a user tries to perform an action they are not authorised to do. 
+
+In our little application that is like attempting to create a product when they are not logged in.
+
+```php
+public static function unauthorized($message = 'You are not authorized to view this resource')  
+{  
+    http_response_code(403);  
+  
+    loadView('error', [  
+        'status' => '403',  
+        'message' => $message  
+    ]);  
+}
+```
+
+Now we may create the error view...
 
 ## Error View
 
@@ -85,43 +123,6 @@ loadPartial('footer');
 When used it will display a page similar to this:
 
 ![404 error being shown using the error view](../assets/Pasted%20image%2020240830174221.png)
-
-## Not Found
-
-The not found method takes a message string as an argument. 
-
-It then makes the response code for the HTTP response equal to 404 before then loading the error view we created in the previous step.
-
-```php
-public static function notFound($message = 'Resource not found')  
-{  
-    http_response_code(404);  
-  
-    loadView('error', [  
-        'status' => '404',  
-        'message' => $message  
-    ]);  
-}
-```
-
-## Unauthorised
-
-The unauthorised method takes care of showing the 403 page when a user tries to perform an action they are not authorised to do. 
-
-In our little application that is like attempting to create a product when they are not logged in.
-
-```php
-public static function unauthorized($message = 'You are not authorized to view this resource')  
-{  
-    http_response_code(403);  
-  
-    loadView('error', [  
-        'status' => '403',  
-        'message' => $message  
-    ]);  
-}
-```
-
 
 ### Mini Exercise
 
