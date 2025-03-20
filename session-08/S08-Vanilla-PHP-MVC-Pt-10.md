@@ -12,6 +12,15 @@ created: 2024-09-03T12:55
 updated: 2025-03-13T09:00
 ---
 
+# Source Code for Full Framework
+
+You may find the **latest release** of the source code (complete) here:
+
+- [XXX-SaaS-Vanilla-MVC-YYYY-SN releases][https://github.com/AdyGCode/XXX-SaaS-Vanilla-MVC-YYYY-SN/releases/latest]
+
+Code in development, with fixes is available from:
+
+- [XXX-SaaS-Vanilla-MVC-YYYY-SN][https://github.com/AdyGCode/XXX-SaaS-Vanilla-MVC-YYYY-SN]
 
 
 # Testing the whole application
