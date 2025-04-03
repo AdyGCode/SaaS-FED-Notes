@@ -2394,19 +2394,19 @@
       "isCountable": true,
       "targetNodeType": "file",
       "noteCount": 1,
-      "wordCount": 1427,
+      "wordCount": 1426,
       "wordCountTowardGoal": 0,
       "wordGoal": null,
-      "pageCount": 4.756666666666667,
-      "characterCount": 8952,
-      "nonWhitespaceCharacterCount": 7046,
-      "readingTimeInMinutes": 5.384905660377359,
+      "pageCount": 4.753333333333333,
+      "characterCount": 8659,
+      "nonWhitespaceCharacterCount": 7036,
+      "readingTimeInMinutes": 5.381132075471698,
       "linkCount": 2,
       "embedCount": 11,
       "aliases": null,
       "createdDate": 1725497925098,
-      "modifiedDate": 1742434960384,
-      "sizeInBytes": 14228,
+      "modifiedDate": 1743647735216,
+      "sizeInBytes": 13815,
       "sessionStart": {
         "noteCount": 1,
         "pageCount": 4.756666666666667,
@@ -2425,7 +2425,7 @@
         "backgroundColor": "#060606",
         "tags": "SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testing, PEST",
         "created": "2024-09-05T08:58",
-        "updated": "2025-03-13T19:03"
+        "updated": "2025-03-19T12:23"
       }
     },
     "session-08/S08-Exercises-and-Journal-Entry.md": {
@@ -7514,6 +7514,44 @@
         "wordCount": 0,
         "characterCount": 0,
         "nonWhitespaceCharacterCount": 0
+      }
+    },
+    "session-03/S03-Documenting-Code.md": {
+      "isCountable": true,
+      "targetNodeType": "file",
+      "noteCount": 1,
+      "wordCount": 377,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 1.2566666666666666,
+      "characterCount": 2457,
+      "nonWhitespaceCharacterCount": 2022,
+      "readingTimeInMinutes": 1.4226415094339622,
+      "linkCount": 0,
+      "embedCount": 0,
+      "aliases": null,
+      "createdDate": 1743647735059,
+      "modifiedDate": 1743647785412,
+      "sizeInBytes": 5010,
+      "sessionStart": {
+        "noteCount": 0,
+        "pageCount": 0,
+        "wordCount": 0,
+        "characterCount": 0,
+        "nonWhitespaceCharacterCount": 0
+      },
+      "frontmatter": {
+        "theme": "default",
+        "paginate": true,
+        "footer": "© Copyright 2024, Adrian Gould & NM TAFE",
+        "header": "![NMTAFE](../images/Black-Red-Banner.svg)",
+        "auto-scaling": true,
+        "size": "4k",
+        "color": "#ccc",
+        "backgroundColor": "#060606",
+        "tags": "SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testng, PEST",
+        "created": "2025-04-03T10:10",
+        "updated": "2025-04-03T10:36"
       }
     }
   }
