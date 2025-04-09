@@ -14,7 +14,7 @@ tags:
 date created: 03 July 2024
 date modified: 10 July 2024
 created: 2024-09-20T11:17
-updated: 2024-12-04T12:50
+updated: 2025-04-09T09:50
 ---
 
 # S10 Laravel Bootcamp: Part 1
@@ -41,7 +41,7 @@ The following notes are based on the official Laravel Boot Camp (Build Chirper w
 
 ## Before you start...
 
-Have you gone over the [S10-Introducing-Laravel](session-10/S10-Introducing-Laravel.md) notes and created the "SaaS FED Laravel 11 Demo" starter application?
+Have you gone over the [S10-Introducing-Laravel-11](session-10/S10-Introducing-Laravel-11.md) notes and created the "SaaS FED Laravel 11 Demo" starter application?
 
 No? Well... go do it...
 
