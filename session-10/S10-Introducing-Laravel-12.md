@@ -14,16 +14,12 @@ tags:
 date created: 03 July 2024
 date modified: 10 July 2024
 created: 2024-09-20T11:17
-<<<<<<<< HEAD:session-10/S10-Introducing-Laravel-v11.md
-updated: 2025-04-28T17:53
-========
-updated: 2025-04-09T09:52
->>>>>>>> origin/main:session-10/S10-Introducing-Laravel-11.md
+updated: 2025-04-09T11:39
 ---
 
-# S10 Introducing Laravel v11
+# S10 Introducing Laravel v12
 
-## Software as a Service - Front-End Development
+## Software as a Service - Back-End Development
 
 Developed by Adrian Gould
 
@@ -39,7 +35,7 @@ includeLinks: true
 
 ---
 
-# Introducing Laravel v11
+# Introducing Laravel
 
 https://laravel.com/docs/11.x#meet-laravel
 
@@ -162,7 +158,7 @@ Next stop and start Apache, as a precaution.
 Open a terminal and execute the following:
 
 ```shell
-composer global install laravel/installer
+composer global require laravel/installer
 ```
 
 This makes it available anytime you wish to start a new project.
@@ -187,15 +183,14 @@ $
 Execute the following:
 
 ```shell
-composer create-project --prefer-dist laravel/laravel:^11.0 PROJECT_NAME
+laravel new --git --pest
 ```
 
+> Note:
+> -  `--git` initialises a git repository, 
+> - `--pest` installs the pest testing framework.
 
-NB: This will not give you the same user-friendly interaction.
-
-# TODO: Update these notes give use of composer create-project
-
-You will get a nice welcome and it asking for a project name. As per any 'file name' we do not allow spaces and other special characters, but you may use the letters `a` to `z`, the numbers `0` to `9` and minus `-` and full stop `.`.
+You will get a nice welcome and it asking for a project name. As per any 'file name' we do not allow spaces and other special characters, but you may use the letters `a` to `z`, the numbers `0` to `9` and the minus sign `-`.
 
 ```text
 $ laravel new
@@ -213,7 +208,7 @@ $ laravel new
 
 ### Give the project a name
 
-Enter the name `saas-fed-laravel-11-demo`
+Enter the name `saas-fed-laravel-12-demo`
 
 ### Starter Kits
 
@@ -221,104 +216,20 @@ The installer then asks you for a start kit:
 
 ```text
   Would you like to install a starter kit? [No starter kit]:
-  [none     ] No starter kit
-  [breeze   ] Laravel Breeze
-  [jetstream] Laravel Jetstream
- > breeze
+  [none    ] None
+  [react   ] React
+  [vue     ] Vue
+  [livewire] Livewire
+ > none
 ```
 
-We will use `breeze` for this demo.
+We will use `none` for this demo.
 
-Type in `breeze` and press <kbd>ENTER</kbd>.
+Type in `none` and press <kbd>ENTER</kbd>.
 
-It then asks for the "Stack" to use with Breeze.
+### Selecting the "Development" database
 
-We will be using the Blade templating system for the majority of our work, so we will select the "Blade with Alpine" option:
-
-```text
- Which Breeze stack would you like to install? [Blade with Alpine]:
-  [blade              ] Blade with Alpine
-  [livewire           ] Livewire (Volt Class API) with Alpine
-  [livewire-functional] Livewire (Volt Functional API) with Alpine
-  [react              ] React with Inertia
-  [vue                ] Vue with Inertia
-  [api                ] API only
- > blade
-```
-
-The next step of the UI decisions is if we want to have dark mode enabled. 
-
-We will select the default, `no`, but you are most welcome to enter `yes`. 
-
-```text
- Would you like dark mode support? (yes/no) [no]:
- > no
-```
-
-### Adding a Testing Framework
-
-Even though we are not going to write tests in this example, we will still enable a testing framework.
-
-In this case we will select the Pest testing framework:
-
-```text
- Which testing framework do you prefer? [Pest]:
-  [0] Pest
-  [1] PHPUnit
- > 0
-```
-
-### Start a Repo
-
-Well, this should be a no-brainer... yes!
-
-```text
- Would you like to initialize a Git repository? (yes/no) [no]:
- > yes
-
-```
-
-### Now we wait a while
-
-At this point the installer starts to to its thing...
-
-```text
-    Creating a "laravel/laravel" project at "./saas-fed-laravel-11-demo"
-    Installing laravel/laravel (v11.2.0)
-  - Downloading laravel/laravel (v11.2.0)
-      - Installing laravel/laravel (v11.2.0): Extracting archive
-    Created project in C:\Users\5001775\Source\Repos/saas-fed-laravel-11-demo
-Loading composer repositories with package information
-    Updating dependencies
-    Lock file operations: 106 installs, 0 updates, 0 removals
-  - Locking brick/math (0.12.1)
-...
-...
- 105/106 [===========================>]  99%
- 106/106 [============================] 100%
-    51 package suggestions were added by new dependencies, use `composer suggest` to see details.
-Generating optimized autoload files
-    78 packages you are using are looking for funding.
-Use the `composer fund` command to find out more!
-    No security vulnerability advisories found
-    > @php -r "file_exists('.env') || copy('.env.example', '.env');"
-
-   INFO  Application key set successfully.
-```
-
-Once it gets tot his point, we now make a decision about the Database we will use.
-
-### Select the Database technology to use
-
-Laravel supports a lot of DBMS straight out of the box. If you have enabled the PHP Extensions, then you may select from:
-
-  - SQLite
-  - MySQL
-  - MariaDB
-  - PostgreSQL
-  - SQL Server
-
-We are using SQLite for our learning, development and testing. Deployment to a staging server or to production would require us to use a more robust DBMS such as MariaDB, PostgreSQL or similar.
+The next step asks you to decide on the development database:
 
 ```text
  Which database will your application use? [SQLite]:
@@ -327,68 +238,143 @@ We are using SQLite for our learning, development and testing. Deployment to a s
   [mariadb] MariaDB
   [pgsql  ] PostgreSQL
   [sqlsrv ] SQL Server (Missing PDO extension)
- > sqlite
-```
-
-When you have entered sqlite and pressed <kbd>ENTER</kbd> you will get asked about runnign migrations... say `yes`:
-
-```text
-
- Would you like to run the default database migrations? (yes/no) [yes]:
  >
 ```
 
-If you get asked about creating the SQLite database file, again say `yes`.
+Four our example and for general development we will use SQLite.
 
-```text
+Type `sqlite` and press <kbd>ENTER</kbd>.
 
+Once the database is selected it created a new `database.sqlite` file in a folder called `database`.
 
-   WARN  The SQLite database configured for this application does not exist: C:\Users\5001775\Source\Repos\saas-fed-laravel-11-demo\database\database.sqlite.
+It also runs something called 'migrations' which we will cover later.
 
-  Would you like to create it? (yes/no) [yes]
-❯
-   INFO  Preparing database.
+### Running `npm install` & `npm run build`
 
-  Creating migration table .............................................................................. 30.44ms DONE
+We next answer `yes` to the question on running the `npm install` and the `npm run build` commands.
 
-   INFO  Running migrations.
+The installation will complete.
 
-  0001_01_01_000000_create_users_table     ................................................................. 391.83ms DONE
-  0001_01_01_000001_create_cache_table .................................................................. 26.55ms DONE
-  0001_01_01_000002_create_jobs_table     ................................................................... 61.38ms DONE
+### Quick Test of the application
+
+To test the application we need to be in the folder with the project. This will be the folder `saas-fed-laravel-12-demo`.
+
+Back in the Terminal, use the command:
+```shell
+cd saas-fed-laravel-12-demo
 ```
 
-### And so we continue...
+This places you in the correct folder.
 
-Once the migrations are completed, the installer carries on with adding more components...
-
-```text
-    Using version ^2.2 for laravel/breeze
-./composer.json has been updated
-    Running composer update laravel/breeze
-Loading composer repositories with package information
-    Updating dependencies
-Lock file operations: 1 install, 0 updates, 0 removals
-  - Locking laravel/breeze (v2.2.0)
-...
-...
-...
-
-   INFO  Breeze scaffolding installed successfully.
-
-    warning: in the working copy of 'package.json', CRLF will be replaced by LF the next time Git touches it
-   INFO  Application ready in [saas-fed-laravel-11-demo]. You can start your local development using:
-
-➜ cd saas-fed-laravel-11-demo
-➜ php artisan serve
-
-  New to Laravel? Check out our bootcamp and documentation. Build something amazing!
+Now execute:
+```shell
+composer run dev
 ```
+
+This will do three things:
+1. execute a development web server (`php artisan serve`)
+2. execute the queue listener (`php artisan queue:listen`)
+3. execute the development server for npm (`npm run dev`)
+
+Open a browser and go to: http://localhost:8000 to view the default Laravel installation homepage.
+
+![](assets/laravel-12-image-20250409100429.png)
+
+We are ready to add a few more features ready for work.
+
+## Split your Terminal Console 
+
+Before we go any further we will split the terminal into two parts:
+1. Top part will have the currently running composer command
+2. Bottom part will be for us to execute commands
+
+### To Split Across Horizontally 
+
+Use <kbd>ALT</kbd>+<kbd>SHIFT</kbd>+<kbd>-</kbd>
+
+### To Split Across Vertically
+
+Use <kbd>ALT</kbd>+<kbd>SHIFT</kbd>+<kbd>=</kbd>
+
+We want a HORIZONTAL SPLIT.
+
+![](assets/terminal-split-image%2020250409100830.png)
+
+Once this is done, change into the project folder.
+
+```shell
+cd saas-fed-laravel-12-demo
+```
+
+
+## Extending the base application
+
+You may want to add Laravel's Sanctum or Passport authentication systems or some other packages when creating you application.
+
+Below we show how to add the Sanctum package.
+
+### Installing Laravel Sanctum
+
+Add the package:
+```shell
+composer require laravel/sanctum
+```
+
+"Activate" package:
+
+```shell
+php artisan vendor:publish --provider='Laravel\Sanctum\SanctumServiceProvider'
+```
+
+Run migrations:
+```shell
+php artisan migrate
+```
+
 
 
 ### We're Ready!
 
 At this point we are ready to start our investigation and learning about Laravel.
+
+### Automatically Run MailPit?
+
+MailPit is a testing application for email.
+
+If you have not added it to your Laragon instlalation then you need to do so following the steps
+
+It acts as an SMTP server, and also mail client to allow you to view emails that are sent.
+
+Open the `composer.json` file
+
+Locate the Scripts lines, then find the "dev" script entry:
+
+```json
+"dev": [  
+    "Composer\\Config::disableProcessTimeout",  
+    "npx concurrently -c \"#93c5fd,#c4b5fd,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"npm run dev\" --names='server,queue,vite'"]
+```
+
+You will edit the "npx" line to read:
+
+```json
+"npx concurrently -c \"#93c5fd,#c4b5fd,#fdba74, #9999ff\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"npm run dev\" \"mailpit --smtp=0.0.0.0:2525\" --names='server,queue,vite,mailpit'"
+```
+
+Save the changes.
+
+Go to the top section of your terminal and use <kbd>CTRL</kbd>+<kbd>C</kbd> to stop the composer run dev command.
+
+Now rerun:
+
+```shell
+composer run dev
+```
+
+
+
+Updating composer.packages 
+
 
 But... before we do, we need to run a few commands at the CLI and leave them running as we develop.
 
@@ -514,4 +500,4 @@ Program with Gio does a good job at explaining the Folder Structure...
 
 # END
 
-Next up - [S10 Laravel BootCamp Part 1](session-11/S10-Laravel-BootCamp-Part-1.md) and [Part 2](session-11/S10-Laravel-BootCamp-Part-2.md)
+Next up - [S10 Laravel BootCamp Part 1](session-10/S10-Laravel-BootCamp-Part-1.md) and [Part 2](session-10/S10-Laravel-BootCamp-Part-2.md)
