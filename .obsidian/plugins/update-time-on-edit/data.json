@@ -27,7 +27,7 @@
     "session-07/S07-Vanilla-PHP-MVC-Pt-00.md": "065dd52e46ebcea90d1e41ea60649cf80910ef42716f3b469f201ef793e45880",
     "session-08/S08-Exercises-and-Journal-Entry.md": "a441783833f28b951a72de3029ddb02285c531281b99a6128f01ec3d8d23050f",
     "session-09/S09-Exercises-and-Journal-Entry.md": "ee6ca0d2f0e9726f53f6cd8117c0ce434a1eeb77e771c726eb468efebcb65709",
-    "session-10/ReadMe.md": "958f3d519c1b55c6f229d03f6fa07b7b7430403f0062816a5b2ee2d772b33b72",
+    "session-10/ReadMe.md": "094f8b4f3e9b654d7540c6a6c1450e79b12514a8a18fe470139b1a5c674e7bb1",
     "session-10/S10-Exercises-and-Journal-Entry.md": "ac0c04671c56b6318b0ef1f376364a5f147c2863e863f496a728a67e75a5de84",
     "session-06/ReadMe.md": "cf315d328d4d961631c7ff810579f6610c62f3669690e30d5ed70c19e11d0df6",
     "session-02/ReadMe.md": "2176b2db3ab1a36882e516667b1469f3269b315240f4564eefca44cfa3528201",
@@ -89,13 +89,9 @@
     "session-14/S14-Exercises-and-Journal-Entry.md": "a6792d02b216cdf78a6ddafe1d626d872ef3c14f44a3766ef1695941d41581eb",
     "session-15/S15-Exercises-and-Journal-Entry.md": "4c756342fb68345d210ad5ed880cbbe88fa2550b675a150a7647f380fe99a964",
     "session-16/S16-Exercises-and-Journal-Entry.md": "e1c10701b5420153ff8ee8c09b194cd8ae8373ae0b7b1ab688069ef04ee0dc6c",
-    "session-10/S10-Introducing-Laravel.md": "6fa7d952e817abf28b41ebf260df28201cffe53460e63f34c1193faa98ccb877",
-    "session-10/S10-Laravel-BootCamp-Part-2.md": "0bb26de49241c6f19c94f54331d4e8127e3e590424615b32f16d697fb499dc76",
-    "session-10/S10-Laravel-BootCamp-Part-1.md": "040b093673b9f1720a1c95a661774846499c7e223360125745c05e08c6f1cb3a",
     "session-12/S12-Laravel-1-Basics-Planning-A-Feature.md": "332ac11f82b615dda917130985e1794039bac3dcf9a1d04696d1226b3a65a70a",
     "session-12/S12-Managing-Projects-Using-GitHub-and-Kanban.md": "440c569880d95c7403e594dfa71e6ee50bd41ba0d706d3e220948571d3d65804",
     "session-12/S12-Laravel-2-Basics-Creating-A-Regions-Feature.md": "93d7134ef42965de242e0a015357474915099f3fa4183e00537d78ca85e4f86e",
-    "session-11/S10-Laravel-Basics.md": "df6b4629cf4ea2c047e597205f373e8b20b010e43a9d308affb4d79191abe9a5",
     "session-11/S11-Laravel-v12-Many-to-Many.md": "eaf8651fce99a3742205c94ec32acab97b388beb4a792b64dfea351f4aadfc47",
     "templates/sessions.md": "cfd17610c8324a42ce1d2dd83d95e54067e4463287bc6151b5209c019af379cd",
     "templates/slides.md": "c847baee288b4cca84ed1040d01c79619d7da6894cd9e3927c0e1fbab93bfd39",
@@ -110,6 +106,13 @@
     "session-01/S01-PHP-for-Beginners-Study-Schedule.md": "25775ed25af7d17cd2ac5657d93f47c24f4462b89109c89ae607a704a9372278",
     "session-01/S01-PHP-for-Beginners-Crash-Course-Study-Schedule.md": "0d0ce1d0c4a495bd0026b343ef049387958d525fa98003fab02dd74b046b3650",
     "session-01/S01-PHP from Scratch-Beginner-to-Advanced-Study-Schedule.md": "1e6a7a960628993ec6e67dc38ee072e1eb0cd92c05c925559fb3e6c9d60f441f",
-    "session-03/S03-Documenting-Code.md": "4a0230f72651f37baf57dc002f6de56299dc9dae40b5345d5aa44329b80e7c31"
+    "session-03/S03-Documenting-Code.md": "4a0230f72651f37baf57dc002f6de56299dc9dae40b5345d5aa44329b80e7c31",
+    "session-10/S10-Introducing-Laravel-v11.md": "473e086b2a6a3e34e608e93350c071f4a7db2f376a3de1c63abc4a693a595647",
+    "session-11/S10-Laravel-Basics-OLD.md": "df6b4629cf4ea2c047e597205f373e8b20b010e43a9d308affb4d79191abe9a5",
+    "session-11/S10-Introducing-Laravel-v12.md": "ddb5ca77833a9bccfad2afb2a1f07aeacdab29bbd31a447beb0f41589832314a",
+    "session-11/S10-Laravel-BootCamp-Part-1.md": "0f3922bd02b1335a7f4db3664cbe153e59ea8d0cd771cfd026a65ef8928bb4d5",
+    "session-11/S10-Laravel-BootCamp-Part-2.md": "26ff012e07346efa720affa3564a3a7770ee3527fa75b4371fd56c00d76d998e",
+    "session-10/S10-Laravel-BootCamp-Part-1-v11.md": "c18c2a923f93b334cfb07b6b3716159b90efb8f7783bed3c1cce0be0cd9ac606",
+    "session-10/S10-Laravel-BootCamp-Part-2-v111.md": "26ff012e07346efa720affa3564a3a7770ee3527fa75b4371fd56c00d76d998e"
   }
 }

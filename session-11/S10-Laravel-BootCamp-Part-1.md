@@ -14,10 +14,10 @@ tags:
 date created: 03 July 2024
 date modified: 10 July 2024
 created: 2024-09-20T11:17
-updated: 2024-12-04T12:50
+updated: 2025-04-28T17:58
 ---
 
-# S10 Laravel Bootcamp: Part 1
+# Laravel Bootcamp: Chirper Part 1
 
 ## Software as a Service - Front-End Development
 
@@ -37,19 +37,19 @@ includeLinks: true
 
 # Laravel Bootcamp
 
-The following notes are based on the official Laravel Boot Camp (Build Chirper with Blade https://bootcamp.laravel.com) with Adrian's shortened explanations.
+The following notes are based on the official Laravel 11 Boot Camp (Build Chirper with Blade) with Adrian's shortened explanations.
 
 ## Before you start...
 
-Have you gone over the [S10-Introducing-Laravel](session-10/S10-Introducing-Laravel.md) notes and created the "SaaS FED Laravel 11 Demo" starter application?
+Ensure you have completed the [Introducing Laravel v12](session-11/S10-Introducing-Laravel-v12.md) notes and created the base code for the "Chirper Application" via the Retro Starer Kit.
 
 No? Well... go do it...
 
 We will wait here until you are ready.
 
-Make sure that you have a Windows Terminal screen that looks like this, and the each of the shells is in the correct folder!
+Make sure that you have a Windows Terminal screen that looks similar to this, and the each of the shells is in the correct folder!
 
-![](../assets/S10-Laravel-BootCamp-20240920154627366.png)
+![](assets/Pasted%20image%2020250428175603.png)
 
 # Chirper: Move over X, the bird is back!
 
@@ -76,7 +76,7 @@ OK, let's carry on with the development.
 
 To be able to work with Chirper we need an account so... open your home page:
 
-- http://saas-fed-laravel-11-demo.test
+- http://chirper-2025-s1
 
 Click on Register, and add a new user with the details below. We are doing this so it is easy to go back and repeat later.
 
@@ -515,7 +515,7 @@ In part two of our version of the Laravel Boot Camp, we will do the following:
 
 There may even be some other surprises to come as well!
 
-Let's get it done! - [S10 Laravel BootCamp Part 2](session-10/S10-Laravel-BootCamp-Part-2.md)
+Let's get it done! - [S10 Laravel BootCamp Part 2](session-11/S10-Laravel-BootCamp-Part-2.md)
 
 
 # END

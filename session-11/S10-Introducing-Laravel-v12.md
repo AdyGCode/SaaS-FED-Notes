@@ -14,12 +14,12 @@ tags:
 date created: 03 July 2024
 date modified: 10 July 2024
 created: 2024-09-20T11:17
-updated: 2025-03-13T09:00
+updated: 2025-04-28T17:53
 ---
 
-# S10 Introducing Laravel
+# S10 Introducing Laravel v12
 
-## Software as a Service - Back-End Development
+## Software as a Service - Front-End Development
 
 Developed by Adrian Gould
 
@@ -35,13 +35,13 @@ includeLinks: true
 
 ---
 
-# Introducing Laravel
+# Introducing Laravel v12
 
-https://laravel.com/docs/11.x#meet-laravel
+https://laravel.com/docs
 
-For those who missed the in class tutorial, follow the Laravel Bootcamp:
-- Build Chirper with Blade https://bootcamp.laravel.com
+As Laravel 12's documentation does not include a bootcamp, we will take the Laravel 11 Bootcamp and use this as a basis for this introduction.
 
+For this we will create an application called Chirper. A basic Twitter, now X, clone.
 
 ## How to Use Laravel
 
@@ -49,7 +49,7 @@ We can develop and run Laravel applications in a number of ways:
 - Local PHP & Composer installation (eg via Laragon, Xampp, Mamp, Herd, etc)
 - Docker based installer
 - Valet
-- ...
+- and more...
 
 ## Before you Begin
 
@@ -57,12 +57,16 @@ Make sure you have the following installed:
 
 - Laragon 6 with updates to:
 	- Apache 2.4.62 or later (very important)
-	- PHP 8.2 or later (8.3 preferred)
+	- PHP 8.3 or later (8.4 preferred)
 	- NodeJS 18 or later (Node 20 LTS, or Node 22 or later preferred)
 	- Composer 2.4 or later
 	- NPM 8.18 or later
 - MailPit  (for mail debugging)
 - Windows Terminal (for CLI) with the BASH CLI
+
+> Note: Laragon 7 and after require a license to be used. Laravel 6 is no longer supported by the author.
+
+### Updating Laragon's Software
 
 Information on updating Laragon to these versions is available at the:
 
@@ -153,6 +157,7 @@ After removing the `;` semi-colons from these lines (if they have them), make su
 
 Next stop and start Apache, as a precaution.
 
+
 # Installing the Laravel Installer
 
 Open a terminal and execute the following:
@@ -162,6 +167,13 @@ composer global install laravel/installer
 ```
 
 This makes it available anytime you wish to start a new project.
+
+
+> ### ⚠️ Important:
+>
+> Adrian has created a starter kit for Laravel 12, and is awaiting it to be added to the "custom starter kits" list.
+> 
+> This means that the following may not work at time of writing, but the alternative method is provided using a clone of the original GitHub repository (See ... [Setting Up from the Retro Blade Starter Kit](#Setting%20up%20from%20the%20Retro%20Blade%20Starter%20Kit%20Repo)).
 
 
 # Creating your First App
@@ -183,7 +195,7 @@ $
 Execute the following:
 
 ```shell
-laravel new
+laravel new --using=adygcode/retro-blade-kit
 ```
 
 You will get a nice welcome and it asking for a project name. As per any 'file name' we do not allow spaces and other special characters, but you may use the letters `a` to `z`, the numbers `0` to `9` and minus `-` and full stop `.`.
@@ -204,9 +216,28 @@ $ laravel new
 
 ### Give the project a name
 
-Enter the name `saas-fed-laravel-11-demo`
+Enter the name `chirper-2025-s1`
 
 ### Starter Kits
+
+As we gave the CLI a starter kit we will not need to select a kit from the default Laravel 12 options.
+
+The starter kit contains:
+  
+- Blade Templates circa Laravel 11  
+- Navigation bar on guest and app layouts  
+- Footer in guest and app layouts  
+- [Laravel Sanctum](https://laravel.com/docs/sanctum) authentication  
+- Email Verification enabled  
+- [Laravel Debug Bar](https://laraveldebugbar.com)  
+- [Laravel Telescope](https://laravel.com/docs/telescope)  
+- [Laravel Livewire](https://livewire.laravel.com)  
+- [Font Awesome 6 (Free)](https://fontawesom.com)
+
+Jump to [Setting Up from the Retro Blade Starter Kit](#Setting%20up%20from%20the%20Retro%20Blade%20Starter%20Kit%20Repo)
+
+---
+## TODO: Update this section
 
 The installer then asks you for a start kit:
 
@@ -274,11 +305,11 @@ Well, this should be a no-brainer... yes!
 At this point the installer starts to to its thing...
 
 ```text
-    Creating a "laravel/laravel" project at "./saas-fed-laravel-11-demo"
+    Creating a "laravel/laravel" project at "./chirper-2025-s1"
     Installing laravel/laravel (v11.2.0)
   - Downloading laravel/laravel (v11.2.0)
       - Installing laravel/laravel (v11.2.0): Extracting archive
-    Created project in C:\Users\5001775\Source\Repos/saas-fed-laravel-11-demo
+    Created project in C:\Users\5001775\Source\Repos/chirper-2025-s1
 Loading composer repositories with package information
     Updating dependencies
     Lock file operations: 106 installs, 0 updates, 0 removals
@@ -297,7 +328,7 @@ Use the `composer fund` command to find out more!
    INFO  Application key set successfully.
 ```
 
-Once it gets tot his point, we now make a decision about the Database we will use.
+Once it gets to this point, we now make a decision about the Database we will use.
 
 ### Select the Database technology to use
 
@@ -321,7 +352,7 @@ We are using SQLite for our learning, development and testing. Deployment to a s
  > sqlite
 ```
 
-When you have entered sqlite and pressed <kbd>ENTER</kbd> you will get asked about runnign migrations... say `yes`:
+When you have entered SQLite and pressed <kbd>ENTER</kbd> you will get asked about running migrations... say `yes`:
 
 ```text
 
@@ -334,7 +365,7 @@ If you get asked about creating the SQLite database file, again say `yes`.
 ```text
 
 
-   WARN  The SQLite database configured for this application does not exist: C:\Users\5001775\Source\Repos\saas-fed-laravel-11-demo\database\database.sqlite.
+   WARN  The SQLite database configured for this application does not exist: C:\Users\5001775\Source\Repos\chirper-2025-s1\database\database.sqlite.
 
   Would you like to create it? (yes/no) [yes]
 ❯
@@ -368,16 +399,126 @@ Lock file operations: 1 install, 0 updates, 0 removals
    INFO  Breeze scaffolding installed successfully.
 
     warning: in the working copy of 'package.json', CRLF will be replaced by LF the next time Git touches it
-   INFO  Application ready in [saas-fed-laravel-11-demo]. You can start your local development using:
+   INFO  Application ready in [chirper-2025-s1]. You can start your local development using:
 
-➜ cd saas-fed-laravel-11-demo
+➜ cd chirper-2025-s1
 ➜ php artisan serve
 
   New to Laravel? Check out our bootcamp and documentation. Build something amazing!
 ```
+## END TODO: Update this section
+
+## Setting up from the Retro Blade Starter Kit Repo
+
+If you are unable to use the `laravel new` command to create a new application using the Retro Blade starter kit then the following steps need to be followed...
+
+1. Open Terminal with Bash Shell
+2. Ensure you are in the Source/Repos folder
+3. Decide on application name
+4. Clone the repository
+5. Change into the repo and install requirements
+
+So lets complete these steps:
+
+### Open Terminal with Bash Shell
+
+Open the MS Windows Terminal - making sure you have the "Bash" shell from the git installation running.
+
+### Ensure you are in the Source/Repos folder
+
+Make sure that you are in your `Source/Repos` folder. If not use:
+
+```shell
+cd ~/Source/Repos`
+```
+
+### Decide on application name
+
+Decide on the name for the application. This will be needed in two or three places, one of which will be for the cloning of the repository.
+
+We suggest you fill out a little table similar to this one to help your documentation:
+
+|                      | Application Name          | Repository Folder Name | Alternative Folder Name   |
+| -------------------- | ------------------------- | ---------------------- | ------------------------- |
+| **Example 1**        | Lego Masters Brick System | lmbs                   | lego-masters-brick-system |
+| **Example 2**        | Chirper                   | chirper                | twitter-clone             |
+| **Your Application** |                           |                        |                           |
+
+We will use `chirper-2025-s1` for the rest of these steps.
+
+### Clone the repository
+
+Next we clone the repository, and we will do this into the correct folder at the same time as making the clone:
+
+```shell
+git clone https://github.com/adygcode/retro-blade-kit chirper-2025-s1
+```
+
+### Install requirements
+
+We now have a new folder, `chirper-2025-s1`, which we are ready to work with.
+
+```shell
+cd chirper-2025-s1
+```
+
+Now we install the requirements:
+
+```shell
+touch database/database.sqlite
+composer install
+npm install
+```
+
+In most cases when starting a new application it is always a good idea to update the packages used:
+
+```shell
+composer update
+npm update
+```
+
+For example, at time of writing there had been a minor update to the Laravel framework:
+```text
+Package operations: 0 installs, 1 update, 0 removals
+  - Downloading laravel/framework (v12.10.2)
+  - Upgrading laravel/framework (v12.10.0 => v12.10.2): Extracting archive
+```
+
+### Create your GitHub repository
+
+Before continuing we need to create a GitHub repository. 
+
+Go to your GitHub account and create a new repository using the same name as you application.
+
+Make sure that the repository is **TOTALLY EMPTY**. 
+- No `ReadMe`, 
+- No `License`, and
+- No `.gitignore`.
+
+![New GitHUb Repo](../assets/Pasted%20image%2020250428171521.png)
+
+### Update Remote and Push
+
+We now need to update where the remote is and push our changes.
+
+Update the URI to suit your personal GitHub account and repository details by:
+
+1. removing the origin as being Adrian's original repository
+2. attaching your new repository as the remote
+3. pushing the code to the remote
+
+```shell
+git remote remove origin
+git remote add origin https://github.com/AdyGCode/chirper-2025-s1.git
+git push -u origin main
+```
+
+Check that your remote has the required files.
+
+![](assets/Pasted%20image%2020250428171915.png)
 
 
-### We're Ready!
+## We're Ready!
 
 At this point we are ready to start our investigation and learning about Laravel.
 
@@ -389,33 +530,15 @@ When you are working with Laravel for a web application you will need a number o
 
 - TailwindCSS builder
 - MailPit
-- A spare Bash shell 
+- The Laravel Queue Worker
 
-There are a couple more items that will be introduced later. They include:
+Thankfully at least two of these is now handled by Laravel via Composer and NPM.
 
-- The Artisan Queue Worker
-
-Go back to your CLI and do the following:
-
-Click on the Bash CLI you have open.
-
-Press:
+Go back to your CLI and press:
 
 - <kbd>ALT</kbd>+<kbd>SHIFT</kbd>+<kbd>-</kbd>
 
 This splits the screen in half vertically
-
-Click in the bottom half and press:
-
-- <kbd>ALT</kbd>+<kbd>SHIFT</kbd>+<kbd>+</kbd>
-
-This will split the lower half of the screen vertically.
-
-Repeat this in the bottom right hand of the CLI.
-
-You should end up with a screen similar to this:
-
-![](../assets/S10-Introducing-Laravel-20240920153937338.png)
 
 ### Resizing the sections
 
@@ -430,25 +553,53 @@ To move between sections use the <kbd>ALT</kbd>+<kbd>&larr;</kbd>, <kbd>ALT</kbd
 In each window you will need to change into your application's folder:
 
 ```shell
-cd saas-fed-laravel-11-demo
+cd chirper-2025-s1
 ```
 
 
-### Tailwind Watch and Build
+### Copy the `.env.example`  & Generate App Key
 
-In one of the shells, start the TailwindCSS watch and build action:
+We need to duplicate the `.env.example` file and rename it. Use the command:
+
+```shell
+cp .env.example .env
+php artisan key:generate
+```
+
+### Edit the .env File & Update
+
+Now open your IDE (e.g. PhpStorm) and edit the .env file.
+
+For our Chirper Application we will make the following changes to the lines shown (DO NOT delete any lines):
+
+```ini
+APP_NAME="Chirper 2025/S1"  
+APP_URL=http://localhost:8000
+
+MAIL_MAILER=smtp  
+MAIL_HOST=127.0.0.1  
+MAIL_PORT=2525  
+MAIL_FROM_ADDRESS="chirper@example.com"  
+```
+
+### Composer Run to the Rescue!
+
+In the top shell area run the following command:
 
 ```bash
- npm run dev
+composer run dev
 ```
 
-This tells NPM to execute the vite command with the "dev" action.
-
-The command is contained in the `package.json` file.
+This tells composer to execute (via NPM) the following:
+- Vite to compile any JS and CSS
+- PHP's Development web server on port 8000
+- Laravel's queue watcher
 
 ### Mail Pit Watcher
 
-In a second window start your Mail Pit application:
+We also need the Mail Pit command to be executed so we are able to intercept email whilst we are developing.
+
+Click on the bottom WindowIn a second window start your Mail Pit application:
 
 ```bash
 /c/Laragon/bin/mailpit/mailpit.exe --smtp 0.0.0.0:2525
@@ -459,6 +610,7 @@ At TAFE this will be:
 ```bash
 /c/ProgramData/Laragon/bin/mailpit/mailpit.exe --smtp 0.0.0.0:2525
 ```
+
 If you have created the aliases defined in the FAQs then the last command may be shortened to:
 
 ```
@@ -467,42 +619,77 @@ mp2525
 
 The command tells Mail Pit to listen to port 2525 on all network interfaces for SMTP commands.
 
-### Example of Mail Pit and Tailwind running
+### Adding Mail Pit to the Composer Run Dev
 
-Here are the two sections of the terminal with these running:
+It is possible to add Mail Pit to the composer run dev.
 
-![](../assets/S10-Introducing-Laravel-20240920155255149.png)
+Open the `composer.json` file in the root of the application's code folder.
 
+Locate the lines:
 
+```json
+"dev": [  
+    "Composer\\Config::disableProcessTimeout",  
+    "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"npm run dev\" --names=server,queue,vite"],
+```
+
+Update it to read:
+
+```json
+"dev": [  
+    "Composer\\Config::disableProcessTimeout",  
+    "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"npm run dev\" \"c:\\ProgramData\\Laragon\\bin\\mailpit\\mailpit --smtp 0.0.0.0:2525\" --names=server,queue,vite,mailpit"],
+```
+
+Once you have done this, stop the current composer run dev using <key>CTRL</key>+<key>C</key> and then re-running the command:
+
+```shell
+composer run dev
+```
+
+### Running the Migrations
+
+Because the starter kit comes with a variety of compoents already installed, we also need to run the migrations by hand.
+
+Perform the following:
+
+```shell
+php artisan migrate:fresh --seed
+```
+
+This creates a number of tables for the starter kit, and some starter data (for example 3 sample users).
 ## A Quick Check on our Application
 
 Now, go back to Laragon and stop and start Apache. Always look out for the Windows Security prompt, as it will not let you do the next step without acknowledging it...
 
-Open a web browser and enter: `http://saas-fed-laravel-11-demo.test` and press <kbd>ENTER</kbd>.
+Open a web browser and enter: `http://127.0.0.1:8000` and press <kbd>ENTER</kbd>.
+
+If you have Laragon's Apache server running you may also visit: `http://chirper-2025-s1.test`.
+
 
 In the browser you will now see:
 
-![Laravel Initial Web Site](../assets/S10-Introducing-Laravel-20240920133837144.png)
+![Laravel Initial Web Site](assets/Pasted%20image%2020250428175052.png)
 
 We are now ready to find out a bit more...
 
 ### Open PhpStorm and Open the Project
 
-Before we start coding, open PhpStorm (or your preferred editor), and the use the usual method to open the `saas-fed-laravel-11-demo` folder.
+If you have not done so before, open PhpStorm (or your preferred editor), and the use the usual method to open the `chirper-2025-s1` folder.
 
-Click on the Hamburger Icon, Click File, Click Open, Select the `Source/Repos` folder, then select the `saas-fed-laravel-11-demo` folder, and click Open.
+Click on the Hamburger Icon, Click File, Click Open, Select the `Source/Repos` folder, then select the `chirper-2025-s1` folder, and click Open. (The animation shows a different application, but the process is the same)
 
 ![](../assets/phpstorm64_NPKG6zDBWm%201.gif)
 
 # Folder Structure
 
-Program with Gio does a good job at explaining the Folder Structure...
+***Program with Gio*** does a good job at explaining the Folder Structure...
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/KzyMmRVRInM?si=ExHjcgQS6IOE-t4q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 
-
+You are ready to carry on with the Boot Camp.
 
 # END
 
-Next up - [S10 Laravel BootCamp Part 1](session-10/S10-Laravel-BootCamp-Part-1.md) and [Part 2](session-10/S10-Laravel-BootCamp-Part-2.md)
+Next up - [S10 Laravel BootCamp Part 1](session-11/S10-Laravel-BootCamp-Part-1.md) and [Part 2](session-11/S10-Laravel-BootCamp-Part-2.md)

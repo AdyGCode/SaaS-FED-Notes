@@ -14,7 +14,7 @@ tags:
 date created: 03 July 2024
 date modified: 10 July 2024
 created: 2024-09-20T11:17
-updated: 2024-12-04T12:50
+updated: 2025-04-28T17:53
 ---
 
 # S10 Laravel Bootcamp: Part 2
@@ -41,7 +41,7 @@ The following notes are based on the official Laravel Boot Camp (Build Chirper w
 
 ## Before you start...
 
-Have you gone over the [S10 Introducing Laravel](session-10/S10-Introducing-Laravel.md) and then [S10 Laravel Boot Camp Part 1](session-10/S10-Laravel-BootCamp-Part-1.md) ?
+Have you gone over the [S10 Introducing Laravel](session-10/S10-Introducing-Laravel-v11.md) and then [S10 Laravel Boot Camp Part 1](session-11/S10-Laravel-BootCamp-Part-1.md) ?
 
 No? Well... go do it...
 
