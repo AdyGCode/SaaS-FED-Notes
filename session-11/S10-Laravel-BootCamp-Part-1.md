@@ -14,7 +14,7 @@ tags:
 date created: 03 July 2024
 date modified: 10 July 2024
 created: 2024-09-20T11:17
-updated: 2025-04-28T18:02
+updated: 2025-04-29T14:16
 ---
 
 # Laravel Bootcamp: Chirper Part 1
@@ -35,13 +35,13 @@ includeLinks: true
 
 ---
 
-# Laravel Bootcamp
+# Laravel Bootcamp: Part 1
 
 The following notes are based on the official Laravel 11 Boot Camp (Build Chirper with Blade) with Adrian's shortened explanations.
 
 ## Before you start...
 
-Ensure you have completed the [Introducing Laravel v12](session-11/S10-Introducing-Laravel-v12.md) notes and created the base code for the "Chirper Application" via the Retro Starer Kit.
+Ensure you have completed the [Introducing Laravel v12](session-11/S10-Introducing-Laravel-v12.md) notes and created the base code for the "Chirper Application" via the Retro Starter Kit.
 
 No? Well... go do it...
 
@@ -115,20 +115,28 @@ Time to start coding.
 
 ## Creating the Chirp Models & More
 
-In your Bash CLI, make sure you are in the `/Source/Repos/saas-fed-laravel-11-demo` folder, then use:
+In your Bash CLI, make sure you are in the `/Source/Repos/chirper-2025-s1 folder, then use:
 
 ```shell
-php artisan make:model Chirp --model --controller --resource --seed
+php artisan make:model Chirp --all --resource --seed
 ```
 
 OK, so that is long winded, we can reduce this to:
 
 ```shell
-php artisan make:model Chirp -mcrs
+php artisan make:model Chirp -acs
 ```
 
 
-This will make a Model called `Chirp`, a Resourceful Controller named `ChirpController`, an a Seeder called `ChirpSeeder`.
+This will make:
+
+- Model `app/Models/Chirp.php`
+- Factory `database/factories/ChirpFactory.php`
+- Migration `database/migrations/2025_04_29_044425_create_chirps_table.php`
+- Seeder `database/seeders/ChirpSeeder.php`
+- Two Requests `app/Http/Requests/StoreChirpRequest.php` and  `app/Http/Requests/UpdateChirpRequest.php`
+- Controller `app/Http/Controllers/ChirpController.php`
+- Policy `app/Policies/ChirpPolicy.php`
 
 > **Note** that the seeder is an item not in the official BootCamp.
 
@@ -241,10 +249,15 @@ Save the file and we will head to our Controller...
 
 Try visiting the following URL:
 
-http://saas-fed-laravel-11-demo.text/chirps
+http://chirper-2025-s1.text/chirps
 
-If all is well then you should get a bank web browser...
+If you have not registered & logged into the application yet, because of the starter kit, you will be presented with the "login" page displayed:
 
+![](assets/Pasted%20image%2020250429125738.png)
+
+If you have registered and logged in then you will see a blank page...
+
+![](assets/Pasted%20image%2020250429130532.png)
 
 ### Listing Routes
 
@@ -309,6 +322,7 @@ Add the following:
 			<textarea
 				name="message"
 				placeholder="{{ __('What\'s on your mind?') }}"
+				rows="3"
 				class="block w-full 
 				       border-gray-300 focus:border-indigo-300 
 				       focus:ring focus:ring-indigo-200 focus:ring-opacity-50 
@@ -408,6 +422,14 @@ $validated = $request->validate([
 	]);
 ```
 
+> **Aside**: You may replace the above with Adrian's preferred "array" based equivalent:
+> ```php
+> $validated = $request->validate([  
+>    'message' => ['required', 'string', 'max:255',],  
+> ]);
+> ```
+
+
 - Creates a chirp and associates it with the logged in user
 
 ```php
@@ -447,9 +469,9 @@ So it is time to delve into the models, starting with the User model.
 
 Use the double <kbd>SHIFT</kbd> method to search for the `User.php` PHP class file.
 
-We are going to tell Laravel that a User has zero or many Chirps...
+We are going to tell Laravel that a User **has zero or many** Chirps...
 
-To do this we go to the bottom of the User model file, and before the LAST closing curly bracket (`}`) we add:
+To do this we go to the bottom of the User model file, and before the **LAST** closing curly bracket (`}`) we add:
 
 ```php
     /**
@@ -470,7 +492,9 @@ But we are not quite ready to save our Chirps...
 
 ### Chirp belongs to A User
 
-Ok, let's add the reverse relationship... a Chirp belongs to a User...
+Ok, let's add the reverse relationship... 
+
+- a Chirp **belongs to** a User...
 
 Open the `Chirp.php` Model class and add:
 

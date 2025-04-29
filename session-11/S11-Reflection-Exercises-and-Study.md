@@ -9,7 +9,7 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testing, PEST
 created: 2024-09-10T15:54
-updated: 2024-09-19T10:22
+updated: 2025-04-29T15:21
 ---
 
 # Session 11 Exercises and Journal Entry
@@ -28,7 +28,7 @@ includeLinks: true
 
 Review the content for this session.
 
-
+composer require --dev roave/security-advisories
 # External Coursework
 
 The following external coursework is part of your learning activities.
