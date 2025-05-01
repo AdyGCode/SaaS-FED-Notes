@@ -3,6 +3,7 @@ created: 2025-04-29T17:28:12 (UTC +08:00)
 tags: []
 source: https://web.archive.org/web/20240927001916/https://bootcamp.laravel.com/deploying
 author: 
+updated: 2025-05-01T11:53
 ---
 
 # Laravel Bootcamp
@@ -117,7 +118,47 @@ On the _App_ tab for your site, you may review the deploy script that Forge crea
 Our application is using Node dependencies and Vite, so we'll need to add steps to install the dependencies and build our assets:
 
 ```
-<!-- Syntax highlighted by torchlight.dev --><p><span> </span><span>cd /home/forge/default</span></p><p><span> </span><span>git pull origin $FORGE_SITE_BRANCH</span></p><p><span> </span><span>$FORGE_COMPOSER install --no-interaction --prefer-dist --optimize-autoloader</span></p><p><span>+</span><span>npm ci</span></p><p><span>+</span><span>npm run build</span></p><p><span> </span><span>( flock -w 10 9 || exit 1</span></p><p><span> </span><span>    echo 'Restarting FPM...'; sudo -S service $FORGE_PHP_FPM reload ) 9&gt;/tmp/fpmlock</span></p><p><span> </span><span>if [ -f artisan ]; then</span></p><p><span> </span><span>    $FORGE_PHP artisan migrate --force</span></p><p><span> </span><span>fi</span></p>
+<!-- Syntax highlighted by torchlight.dev --><p> 
+  
+ 
+cd /home/forge/default 
+</p><p> 
+  
+ 
+git pull origin $FORGE_SITE_BRANCH 
+</p><p> 
+  
+ 
+$FORGE_COMPOSER install --no-interaction --prefer-dist --optimize-autoloader 
+</p><p> 
++ 
+ 
+npm ci 
+</p><p> 
++ 
+ 
+npm run build 
+</p><p> 
+  
+ 
+( flock -w 10 9 || exit 1 
+</p><p> 
+  
+ 
+    echo 'Restarting FPM...'; sudo -S service $FORGE_PHP_FPM reload ) 9>/tmp/fpmlock 
+</p><p> 
+  
+ 
+if [ -f artisan ]; then 
+</p><p> 
+  
+ 
+    $FORGE_PHP artisan migrate --force 
+</p><p> 
+  
+ 
+fi 
+</p>
 ```
 
 ## Running a queue worker (optional)

@@ -14,7 +14,7 @@ tags:
 date created: 03 July 2024
 date modified: 10 July 2024
 created: 2024-09-20T11:17
-updated: 2025-04-09T12:26
+updated: 2025-05-01T13:54
 ---
 
 # S10 Laravel v12 and imacrayon/blade-starter-kit
@@ -172,7 +172,7 @@ This will do three things:
 
 Open a browser and go to: http://localhost:8000 to view the starter kit homepage.... complete with login and register buttons!
 
-![](assets/Pasted%20image%2020250409121645.png)
+![](../assets/Pasted%20image%2020250409121645.png)
 
 We are ready to add a few more features ready for work.
 
@@ -192,7 +192,7 @@ Use <kbd>ALT</kbd>+<kbd>SHIFT</kbd>+<kbd>=</kbd>
 
 We want a HORIZONTAL SPLIT.
 
-![](assets/terminal-split-image%2020250409100830.png)
+![](../assets/terminal-split-image%2020250409100830.png)
 
 Once this is done, change into the project folder.
 
@@ -215,26 +215,26 @@ The Composer run dev does most of these for you.
 We can modify the `composer.json` file to add the MailPit listener as part of this command.
 
 
-![](assets/Pasted%20image%2020250409122307.png)
+![](../assets/Pasted%20image%2020250409122307.png)
 
 
-![](assets/Pasted%20image%2020250409122340.png)
+![](../assets/Pasted%20image%2020250409122340.png)
 
 
-![](assets/Pasted%20image%2020250409122353.png)
+![](../assets/Pasted%20image%2020250409122353.png)
 
 
-![](assets/Pasted%20image%2020250409122407.png)
+![](../assets/Pasted%20image%2020250409122407.png)
 
 
 C:\ProgramData\Laragon\bin\mailpit
 
 
-![](assets/Pasted%20image%2020250409122454.png)
+![](../assets/Pasted%20image%2020250409122454.png)
 
-![](assets/Pasted%20image%2020250409122501.png)
+![](../assets/Pasted%20image%2020250409122501.png)
 
-![](assets/Pasted%20image%2020250409122513.png)
+![](../assets/Pasted%20image%2020250409122513.png)
 
 
 Close terminal and repoen it

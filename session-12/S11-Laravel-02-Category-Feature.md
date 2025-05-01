@@ -14,7 +14,7 @@ tags:
 date created: 03 July 2024
 date modified: 10 July 2024
 created: 2024-10-08T10:54
-updated: 2024-10-09T16:45
+updated: 2025-05-01T13:54
 ---
 
 # Laravel: 02 Category Feature
@@ -327,7 +327,7 @@ Now try accessing the categories page:
 
 You should see something like this:
 
-![Categories List](assets/msedge_PqpOzAigNe.png)
+![Categories List](../assets/msedge_PqpOzAigNe.png)
 
 
 # END

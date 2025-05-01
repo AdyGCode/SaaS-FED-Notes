@@ -14,7 +14,7 @@ tags:
 date created: 03 July 2024
 date modified: 10 July 2024
 created: 2024-09-20T11:17
-updated: 2025-04-29T17:19
+updated: 2025-05-01T13:54
 ---
 
 # S10 Laravel Bootcamp: Part 3
@@ -98,7 +98,7 @@ Before this we will make the Chirp index page a bit more semantic.
 
 ## Making things Semantic
 
-Use the SHIFT-SHIFT technique to find the `chirps/index.blade.php` file.
+Use the <kbd>SHIFT</kbd>-<kbd>SHIFT</kbd> technique to find the `chirps/index.blade.php` file.
 
 Update the following code:
 
@@ -247,13 +247,13 @@ In this case we only (currently) have the "Edit" Action.
 
 If you save the file and refresh the browser, we get an error:
 
-![](assets/Pasted%20image%2020250429145616.png)
+![](../assets/Pasted%20image%2020250429145616.png)
 
 Oops! We have a problem with the routes.
 
 ### Add "edit" action to the Web Routes
 
-Use SHIFT-SHIFT and find the `web.php` routes file.
+Use <kbd>SHIFT</kbd>-<kbd>SHIFT</kbd> and find the `web.php` routes file.
 
 Locate the `Route::resource('chirps')` code…
 
@@ -275,13 +275,13 @@ This tells the router that we want to also allow the *edit* and *update* methods
 
 Refreshing the page should now remove the error we had and we get "Action" being shown:
 
-![](assets/Pasted%20image%2020250429151804.png)
+![](../assets/Pasted%20image%2020250429151804.png)
 
 In the image above, you can see the action in the Staff User chirp, but not in the Administrator chirp. This is because the Staff User is logged in, not the Administrator.
 
 Clicking onthe word "Action" pops up a menu:
 
-![](assets/Pasted%20image%2020250429151936.png)
+![](../assets/Pasted%20image%2020250429151936.png)
 
 But clicking edit gives us a blank screen… :-(
 
@@ -290,7 +290,7 @@ So close…
 
 ### Add the Edit Method
 
-Using SHIFT-SHIFT locate the `ChirpController` and open it.
+Using <kbd>SHIFT</kbd>-<kbd>SHIFT</kbd> locate the `ChirpController` and open it.
 
 Now scroll to find the `edit` method and update it as follows:
 
@@ -324,7 +324,7 @@ Let's start by adding a new view to the chirps by using the `touch` command…
 touch resources/views/chirps/edit.blade.php
 ```
 
-Use the SHIFT-SHIFT method to locate the file and open it.
+Use the <kbd>SHIFT</kbd>-<kbd>SHIFT</kbd> method to locate the file and open it.
 
 To this blank file we now add (keep the blank lines for readability):
 
@@ -408,11 +408,11 @@ Note how the Cancel button is in fact just a hyperlink back to the index page fo
 
 Refreshing the browser will now show something similar to:
 
-![](assets/Pasted%20image%2020250429160908.png)
+![](../assets/Pasted%20image%2020250429160908.png)
 
 We are getting closer, but if we click the Save after making changes, we will get nothing except an error!
 
-![](assets/Pasted%20image%2020250429161011.png)
+![](../assets/Pasted%20image%2020250429161011.png)
 
 We will fix this in the next step, when we (a) add the update method, and (b) edit the `UpdateChirpRequest`.
 ### Update Method & Update Chirp Request time
@@ -436,7 +436,7 @@ Before we look at the update Method, we want to remove the two requests that we 
 
 Navigate to the `/app/Http/Requests` folder and delete the `Create` and `Update` requests as we are not using them in this application.
 
-![](assets/phpstorm64_L3BQMctt98.gif)
+![](../assets/phpstorm64_L3BQMctt98.gif)
 
 #### Update the Chirp Controller's update method
 
@@ -482,7 +482,7 @@ The `$chirp->update(…)` performs the update based on the validated data that i
 
 We then send the browser back to the chirps index page.
 
-![](assets/vivaldi_a7LJoWDDza.gif)
+![](../assets/vivaldi_a7LJoWDDza.gif)
 
 
 Excellent the update is completed.
@@ -516,11 +516,11 @@ Adding this creates the delete option int he droip down.
 
 Immediately on saving the file you will find that if you refresh the browser there will be an error:
 
-![](assets/Pasted%20image%2020250429163914.png)
+![](../assets/Pasted%20image%2020250429163914.png)
 
 So let's fox this by adding the required route to the `web.php` routes file.
 
-Use SHIFT-SHIFT and open the web routes file.
+Use <kbd>SHIFT</kbd>-<kbd>SHIFT</kbd> and open the web routes file.
 
 In the chirps resourceful route, we will update the only to add `destroy`:
 
@@ -534,7 +534,7 @@ Refresh and everything is back. Clicking the action will now show the delete opt
 
 Now we need to add the destroy code tot he Chirps Controller.
 
-SHIFT-SHIFT and open the Chirps Controller.
+<kbd>SHIFT</kbd>-<kbd>SHIFT</kbd> and open the Chirps Controller.
 
 Find the `destroy` method:
 
@@ -562,7 +562,7 @@ Ok, so the warning has been issued, so let's try deleting a chirp…
 
 > You may want to create a test chirp and delete it, as shown in the animation below:
 
-![](assets/vivaldi_RLbZay8OW4.gif)
+![](../assets/vivaldi_RLbZay8OW4.gif)
 
 
 Woohoo! We have a basic Twitter clone.
@@ -575,7 +575,7 @@ Just as a way to make sure you are working through these notes, we have a couple
 
 ### 1. Update the Application Logo
 
-Locate the "Application Logo" blade file (Remember SHIFT-SHIFT).
+Locate the "Application Logo" blade file (Remember <kbd>SHIFT</kbd>-<kbd>SHIFT</kbd>).
 
 Delete the SVG code.
 
@@ -589,7 +589,7 @@ Save the file and close.
 
 Refreshing should now give a Kiwi in place of the Laravel logo:
 
-![](assets/Pasted%20image%2020250429165905.png)
+![](../assets/Pasted%20image%2020250429165905.png)
 
 Work out how to make the logo "brown" rather than grey, and update the application logo as required.
 
@@ -606,11 +606,11 @@ Find the locations where the text "Action" is shown as a drop down button, and r
 - fa-pen-to-square
 - fa-keyboard
 
-![](assets/Pasted%20image%2020250429171417.png)
+![](../assets/Pasted%20image%2020250429171417.png)
 
 Also, make the icon have some padding either side to make it easier to click, and when hovered it needs to change colou8r and background. Here is an example using a 'plaster'. 
 
-![](assets/vivaldi_yaqh6lditp.gif)
+![](../assets/vivaldi_yaqh6lditp.gif)
 
 
 

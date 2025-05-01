@@ -1,6 +1,6 @@
 ---
 created: 2025-02-25T14:55
-updated: 2025-02-27T13:58
+updated: 2025-05-01T13:54
 ---
 # S10 Laravel 12: Basics
 
@@ -83,7 +83,7 @@ You may resize using the `ALT`+`SHIFT`+ arrow keys
 
 Result:
 
-![](assets/Pasted%20image%2020250225150641.png)
+![](../assets/Pasted%20image%2020250225150641.png)
 
 In the three new sections, use the previous cd command:
 

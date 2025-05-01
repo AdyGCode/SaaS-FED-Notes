@@ -1,6 +1,6 @@
 ---
 created: 2025-02-25T14:55
-updated: 2025-03-04T17:27
+updated: 2025-05-01T13:54
 ---
 # S11 Laravel v12: Many-to-Many
 
@@ -109,7 +109,7 @@ You may resize using the `ALT`+`SHIFT`+ arrow keys
 
 Result:
 
-![](assets/Pasted%20image%2020250225150641.png)
+![](../assets/Pasted%20image%2020250225150641.png)
 
 In the three new sections, use the previous cd command:
 
@@ -189,7 +189,7 @@ It is possible that a sport awards two of the same medal for a 'draw' or similar
 
 This is known as a Many to Many relationship:
 
-![Country and Sports - Many to Many](assets/Country-Medals-Sports-0NF.png)
+![Country and Sports - Many to Many](../assets/Country-Medals-Sports-0NF.png)
 
 ### Quick Normalisation
 
@@ -382,7 +382,7 @@ For demonstration purposes we added a new field, Year, which would hold the year
 
 Now we have done this remodelling, we can draw a diagram to assist visualisation. This is the diagram below, a modified form of E-R diagram. Note we also have omitted the Medals table.
 
-![Many-To-Many Resolved to One-to-Many](assets/Country-Medals-Sports-3NF.png)
+![Many-To-Many Resolved to One-to-Many](../assets/Country-Medals-Sports-3NF.png)
 
 
 ---

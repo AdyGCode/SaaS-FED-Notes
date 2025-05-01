@@ -3,6 +3,7 @@ created: 2025-04-29T17:25:39 (UTC +08:00)
 tags: []
 source: https://web.archive.org/web/20250103202752/https://bootcamp.laravel.com/blade/installation
 author: 
+updated: 2025-05-01T11:50
 ---
 
 # Laravel Bootcamp
@@ -20,13 +21,29 @@ author:
 If you have already [installed PHP and Composer on your local machine](https://web.archive.org/web/20250103202752/https://herd.laravel.com/), you may create a new Laravel project via Composer:
 
 ```
-<!-- Syntax highlighted by torchlight.dev --><p><span>composer </span><span>create-project</span><span> </span><span>laravel/laravel</span><span> </span><span>chirper</span></p>
+<!-- Syntax highlighted by torchlight.dev --><p> 
+composer  
+ 
+create-project 
+ 
+  
+ 
+laravel/laravel 
+ 
+  
+ 
+chirper 
+</p>
 ```
 
 For simplicity, Composer's `create-project` command will automatically create a new SQLite database at `database/database.sqlite` to store your application's data. After the project has been created, start Laravel's local development server using Laravel Artisan's `serve` command:
 
 ```
-<!-- Syntax highlighted by torchlight.dev --><p><span>cd chirper</span></p><p><span>php artisan serve</span></p>
+<!-- Syntax highlighted by torchlight.dev --><p> 
+cd chirper 
+</p><p> 
+php artisan serve 
+</p>
 ```
 
 Once you have started the Artisan development server, your application will be accessible in your web browser at [http://localhost:8000](https://web.archive.org/web/20250103202752/http://localhost:8000/).
@@ -40,7 +57,25 @@ If you do not have PHP installed locally, you may develop your application using
 The easiest way to install Laravel is using our `laravel.build` service, which will download and create a fresh Laravel application for you. Launch a terminal and run the following command:
 
 ```
-<!-- Syntax highlighted by torchlight.dev --><p><span>curl </span><span>-s</span><span> </span><span>"</span><span>https://laravel.build/chirper</span><span>"</span><span> </span><span>|</span><span> bash</span></p>
+<!-- Syntax highlighted by torchlight.dev --><p> 
+curl  
+ 
+-s 
+ 
+  
+ 
+" 
+ 
+https://laravel.build/chirper 
+ 
+" 
+ 
+  
+ 
+| 
+ 
+ bash 
+</p>
 ```
 
 Sail installation may take several minutes while Sail's application containers are built on your local machine.
@@ -50,19 +85,57 @@ By default, the installer will pre-configure Laravel Sail with a number of usefu
 After the project has been created, you can navigate to the application directory and start Laravel Sail:
 
 ```
-<!-- Syntax highlighted by torchlight.dev --><p><span>cd</span><span> </span><span>chirper</span></p><p><span>./vendor/bin/sail </span><span>up</span></p>
+<!-- Syntax highlighted by torchlight.dev --><p> 
+cd 
+ 
+  
+ 
+chirper 
+</p><p> 
+./vendor/bin/sail  
+ 
+up 
+</p>
 ```
 
 When developing applications using Sail, you may execute Artisan, NPM, and Composer commands via the Sail CLI instead of invoking them directly:
 
 ```
-<!-- Syntax highlighted by torchlight.dev --><p><span>./vendor/bin/sail </span><span>php</span><span> </span><span>--version</span></p><p><span>./vendor/bin/sail </span><span>artisan</span><span> </span><span>--version</span></p><p><span>./vendor/bin/sail </span><span>composer</span><span> </span><span>--version</span></p><p><span>./vendor/bin/sail </span><span>npm</span><span> </span><span>--version</span></p>
+<!-- Syntax highlighted by torchlight.dev --><p> 
+./vendor/bin/sail  
+ 
+php 
+ 
+  
+ 
+--version 
+</p><p> 
+./vendor/bin/sail  
+ 
+artisan 
+ 
+  
+ 
+--version 
+</p><p> 
+./vendor/bin/sail </span> 
+composer</span> 
+ </span> 
+--version</span></p><p> 
+./vendor/bin/sail </span> 
+npm</span> 
+ </span> 
+--version</span></p>
 ```
 
 Once the application's Docker containers have started, you should run your application's [database migrations](https://web.archive.org/web/20250103202752/https://laravel.com/docs/migrations):
 
 ```
-<!-- Syntax highlighted by torchlight.dev --><p><span>./vendor/bin/sail </span><span>artisan</span><span> </span><span>migrate</span></p>
+<!-- Syntax highlighted by torchlight.dev --><p> 
+./vendor/bin/sail </span> 
+artisan</span> 
+ </span> 
+migrate</span></p>
 ```
 
 Finally, you can access the application in your web browser at: [http://localhost](https://web.archive.org/web/20250103202752/http://localhost/).
@@ -78,7 +151,19 @@ Laravel Breeze offers several options for your view layer, including Blade templ
 Open a new terminal in your `chirper` project directory and install your chosen stack with the given commands:
 
 ```
-<!-- Syntax highlighted by torchlight.dev --><p><span>composer </span><span>require</span><span> </span><span>laravel/breeze</span><span> </span><span>--dev</span></p><p><span>php </span><span>artisan</span><span> </span><span>breeze:install</span><span> </span><span>blade</span></p>
+<!-- Syntax highlighted by torchlight.dev --><p> 
+composer </span> 
+require</span> 
+ </span> 
+laravel/breeze</span> 
+ </span> 
+--dev</span></p><p> 
+php </span> 
+artisan</span> 
+ </span> 
+breeze:install</span> 
+ </span> 
+blade</span></p>
 ```
 
 Breeze will install and configure your front-end dependencies for you, so we just need to start the Vite development server to automatically recompile our CSS and refresh the browser when we make changes to our Blade templates:

@@ -9,7 +9,7 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testing, PEST
 created: 2024-09-05T08:58
-updated: 2025-04-03T10:35
+updated: 2025-05-01T13:54
 ---
 
 # Continuing to build the Framework
@@ -71,23 +71,23 @@ So it is time to swap to Laragon and run the web and database servers.
 
 Check the system tray to see if it is running already, if so you can right click and select Start All. The animated image shows this for you.
 
-![](assets/phpstorm64_yniz8HiIG4.gif)
+![](../assets/phpstorm64_yniz8HiIG4.gif)
 
 If it is hidden in the system tray, drag it to the right of the down chevron, so you can quickly verify if it is running. The animated GIF shows this.
 
-![](assets/RRQfhpfbAd.gif)
+![](../assets/RRQfhpfbAd.gif)
 
 If showing in the system tray, then simply right mouse click on the icon and select Start All.
 
-![](assets/sXU0htzX1F.gif)
+![](../assets/sXU0htzX1F.gif)
 
 If it is not running then run it using <kbd>WIN</kbd> and then typing Laragon to show it in the search and press <kbd>ENTER</kbd>.
 
-![](assets/explorer_1oX8dmbYNq.gif)
+![](../assets/explorer_1oX8dmbYNq.gif)
 
 Once Running we need to make sure that we are using the `~/Source/Repos` folder as the Laragon root:
 
-![](assets/PBOQVb3WQz.gif)
+![](../assets/PBOQVb3WQz.gif)
 
 ### Running the TailwindCSS watch and build
 

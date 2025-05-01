@@ -14,7 +14,7 @@ tags:
 date created: 03 July 2024
 date modified: 10 July 2024
 created: 2024-09-20T11:17
-updated: 2025-04-29T14:16
+updated: 2025-05-01T13:54
 ---
 
 # Laravel Bootcamp: Chirper Part 1
@@ -49,7 +49,7 @@ We will wait here until you are ready.
 
 Make sure that you have a Windows Terminal screen that looks similar to this, and the each of the shells is in the correct folder!
 
-![](assets/Pasted%20image%2020250428175603.png)
+![](../assets/Pasted%20image%2020250428175603.png)
 
 # Chirper: Move over X, the bird is back!
 
@@ -253,11 +253,11 @@ http://chirper-2025-s1.text/chirps
 
 If you have not registered & logged into the application yet, because of the starter kit, you will be presented with the "login" page displayed:
 
-![](assets/Pasted%20image%2020250429125738.png)
+![](../assets/Pasted%20image%2020250429125738.png)
 
 If you have registered and logged in then you will see a blank page...
 
-![](assets/Pasted%20image%2020250429130532.png)
+![](../assets/Pasted%20image%2020250429130532.png)
 
 ### Listing Routes
 
