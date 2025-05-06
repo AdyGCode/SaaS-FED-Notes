@@ -3,7 +3,7 @@ created: 2025-04-29T17:27:03 (UTC +08:00)
 tags: []
 source: https://web.archive.org/web/20240926170349/https://bootcamp.laravel.com/blade/deleting-chirps
 author: 
-updated: 2025-05-01T11:58
+updated: 2025-05-06T13:09
 ---
 
 # Laravel Bootcamp
@@ -23,50 +23,36 @@ quickly we can add this feature.
 
 ## Routing
 
-We'll start again by updating our routes to enable the `chirps.destroy` route:
+We'll start again by updating our routes to enable the `chirps.destroy` route. 
 
-routes/web.php
+> We have abbreviated the code using `...`
+
+### routes/web.php
 
 ```php
 <?php 
 use  App\Http\Controllers\ChirpController; 
 use App\Http\Controllers\ProfileController ; 
-use Illuminate\Support\Facades\Route ;  Route::get('/'  ,   function     ()   {
+use Illuminate\Support\Facades\Route ;  
+
+Route::get('/', function(){
+    return view('welcome');
+});
  
-           return     view  (  '  welcome  '  );
+...
  
-     });
- 
-     Route  ::  get  (  '  /dashboard  '  ,   function     ()   {
- 
-           return     view  (  '  dashboard  '  );
- 
-     })  ->  middleware  ([  '  auth  '  ])  ->  name  (  '  dashboard  '  );
- 
-     Route  ::  middleware  (  '  auth  '  )  ->  group  (  function     ()   {
- 
-           Route  ::  get  (  '  /profile  '  , [  ProfileController  ::  class  ,   '  edit  '  ])  ->  name  (  '  profile.edit  '  );
- 
-           Route  ::  patch  (  '  /profile  '  , [  ProfileController  ::  class  ,   '  update  '  ])  ->  name  (  '  profile.update  '  );
- 
-           Route  ::  delete  (  '  /profile  '  , [  ProfileController  ::  class  ,   '  destroy  '  ])  ->  name  (  '  profile.destroy  '  );
- 
-     });
+	Route::delete('/profile', [ProfileController::class, 'destroy'])
+	->name('profile.destroy');
+});
 
 
-     Route  ::  resource  (  '  chirps  '  ,   ChirpController  ::  class  )
- 
--          ->  only  ([  '  index  '  ,   '  store  '  ,   '  edit  '  ,   '  update  '  ])
- 
-+          ->  only  ([  '  index  '  ,   '  store  '  ,   '  edit  '  ,   '  update  '  ,   '  destroy  '  ])
- 
-           ->  middleware  ([  '  auth  '  ,   '  verified  '  ]);
- 
-    
-  
+	Route::resource('chirps', ChirpController::class)
+		->only(['index', 'store', 'edit', 'update', 'destroy'])
+		->middleware(['auth', 'verified']);
+
 ...
 
-     require     __DIR__  .  '  /auth.php  '  ;
+     require     __DIR__  .'/auth.php';
 
 ```
 
@@ -82,186 +68,110 @@ Our route table for this controller now looks like this:
 
 ## Updating our controller
 
-Now we can update the `destroy` method on our `ChirpController` class to perform the deletion
-and return to the Chirp index:
+Now we can update the `destroy` method on our `ChirpController` class to perform the deletion and return to the Chirp index:
 
-app/Http/Controllers/ChirpController.php
+### app/Http/Controllers/ChirpController.php
 
 ```php
-
-
       <?php
- 
-    
   
 ...
 
-     namespace   App\Http\Controllers; 
+namespace App\Http\Controllers; 
 
-     use   App\Models\  Chirp  ;
- 
-     use   Illuminate\Http\  RedirectResponse  ;
- 
-     use   Illuminate\Http\  Request  ;
- 
-     use   Illuminate\Http\  Response  ;
- 
-     use   Illuminate\Support\Facades\  Gate  ;
- 
-     use   Illuminate\View\  View  ;
+use App\Models\Chirp;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\View\View;
 
 
-     class     ChirpController     extends     Controller
- 
-     {
- 
-    
+class ChirpController extends Controller
+{
   
 ...
 
-           /**
-          * Display a listing of the resource.
-            */
+/**
+ * Display a listing of the resource.
+ */
+public     function     index()  : view
+{
+	$chirps = Chirp::with('user')->latest()->get();
+	return view('chirps.index', compact(['chirps']));
+}
  
-           public     function     index  ()  :     View
-         {
-               return     view  (  '  chirps.index  '  ,     [
-                   '  chirps  '     =>     Chirp  ::  with  (  '  user  '  )  ->  latest  ()  ->  get  (),
-               ]);
+/**
+ * Show the form for creating a new resource.
+ */
+public     function     create()
+{
+//
+}
  
-         }
+/**
+* Store a newly created resource in storage.
+*/
  
-           /**
+public     function     store(  Request     $request  )  :     RedirectResponse
+{
+$validated     =     $request->validate([
+'message'   =>   'required|string|max:255',
+]);
+$request->user()->chirps()->create(  $validated  );
+return     redirect(  route('chirps.index'));
+}
  
-          * Show the form for creating a new resource.
- 
-            */
- 
-           public     function     create  ()
- 
-         {
- 
-               //
- 
-         }
- 
-           /**
- 
-          * Store a newly created resource in storage.
- 
-            */
- 
-           public     function     store  (  Request     $request  )  :     RedirectResponse
- 
-         {
- 
-               $validated     =     $request  ->  validate  ([
- 
-                   '  message  '     =>     '  required|string|max:255  '  ,
- 
-             ]);
- 
-               $request  ->  user  ()  ->  chirps  ()  ->  create  (  $validated  );
- 
-               return     redirect  (  route  (  '  chirps.index  '  ));
- 
-         }
- 
-           /**
- 
-          * Display the specified resource.
- 
-            */
- 
-           public     function     show  (  Chirp     $chirp  )
- 
-         {
- 
-               //
- 
-         }
- 
-           /**
- 
-          * Show the form for editing the specified resource.
- 
-            */
- 
-           public     function     edit  (  Chirp     $chirp  )  :     View
- 
-         {
- 
-               Gate  ::  authorize  (  '  update  '  ,   $chirp  );
- 
-               return     view  (  '  chirps.edit  '  ,     [
- 
-                   '  chirp  '     =>     $  chirp  ,
- 
-               ]);
- 
-         }
- 
-           /**
- 
-          * Update the specified resource in storage.
- 
-            */
- 
-           public     function     update  (  Request     $request  ,   Chirp     $chirp  )  :     RedirectResponse
- 
-         {
- 
-               Gate  ::  authorize  (  '  update  '  ,   $chirp  );
- 
-               $validated     =     $request  ->  validate  ([
- 
-                   '  message  '     =>     '  required|string|max:255  '  ,
- 
-             ]);
- 
-               $chirp  ->  update  (  $validated  );
- 
-               return     redirect  (  route  (  '  chirps.index  '  ));
- 
-         }
+/**
+* Display the specified resource.
+*/
+public     function     show(  Chirp     $chirp  )
+{
+//
+}
 
+/**
+ * Show the form for editing the specified resource.
+ */
+public     function     edit(  Chirp     $chirp  )  : view
+{
+Gate::authorize('update', $chirp  );
+return view('chirps.edit',   [
+'chirp'   =>     $  chirp  ,
+]);
+}
+/**
+* Update the specified resource in storage.
+*/
+public     function     update(  Request     $request, Chirp     $chirp  )  :     RedirectResponse
+ {
+ Gate::authorize('update', $chirp  );
+   $validated     =     $request->validate([
+ 'message'   =>   'required|string|max:255',
+    ]);
+ $chirp->update(  $validated  );
+ return     redirect(  route('chirps.index'));
+ 
+  }
+/**
+   * Remove the specified resource from storage.
+  */
+ 
+public     function     destroy(  Chirp     $chirp  )  :     RedirectResponse
+{
+Gate::authorize('delete', $chirp  );
+$chirp->delete();
+return     redirect(  route('chirps.index'));
+}
+} 
 
-           /**
- 
-          * Remove the specified resource from storage.
- 
-            */
- 
--          public     function     destroy  (  Chirp     $chirp  )
- 
-+          public     function     destroy  (  Chirp     $chirp  )  :     RedirectResponse
- 
-         {
- 
--              //
- 
-+              Gate  ::  authorize  (  '  delete  '  ,   $chirp  );
- 
-+   
- 
-+              $chirp  ->  delete  ();
- 
-+   
- 
-+              return     redirect  (  route  (  '  chirps.index  '  ));
- 
-         }
- 
-     } 
-</p>
 ```
 
 ## Authorization
 
-As with editing, we only want our Chirp authors to be able to delete their Chirps, so let's
-update the `delete` method in our `ChirpPolicy` class:
+As with editing, we only want our Chirp authors to be able to delete their Chirps, so let's update the `delete` method in our `ChirpPolicy` class:
 
-app/Policies/ChirpPolicy.php
+### app/Policies/ChirpPolicy.php
 
 ```php
 
@@ -274,22 +184,22 @@ app/Policies/ChirpPolicy.php
 
      namespace   App\Policies;
  
-     use   App\Models\  Chirp  ;
+     {use App\Models\Chirp;
  
-     use   App\Models\  User  ;
+     {use App\Models\User;
  
-     use   Illuminate\Auth\Access\  HandlesAuthorization  ;
+     {use Illuminate\Auth\Access\HandlesAuthorization;
 
 
      class     ChirpPolicy
  
-     {
+  {
  
     
   
 ...
 
-           use     HandlesAuthorization  ;
+           {use   HandlesAuthorization;
  
            /**
  
@@ -297,9 +207,9 @@ app/Policies/ChirpPolicy.php
  
             */
  
-           public     function     viewAny  (  User     $user  )  :     bool
+           public     function viewAny(  User     $user  )  :     bool
  
-         {
+      {
  
                //
  
@@ -311,9 +221,9 @@ app/Policies/ChirpPolicy.php
  
             */
  
-           public     function     view  (  User     $user  ,   Chirp     $chirp  )  :     bool
+           public     function view(  User     $user, Chirp     $chirp  )  :     bool
  
-         {
+      {
  
                //
  
@@ -325,9 +235,9 @@ app/Policies/ChirpPolicy.php
  
             */
  
-           public     function     create  (  User     $user  )  :     bool
+           public     function     create(  User     $user  )  :     bool
  
-         {
+      {
  
                //
  
@@ -339,11 +249,11 @@ app/Policies/ChirpPolicy.php
  
             */
  
-           public     function     update  (  User     $user  ,   Chirp     $chirp  )  :     bool
+           public     function     update(  User     $user, Chirp     $chirp  )  :     bool
  
-         {
+      {
  
-               return     $chirp  ->  user  ()  ->  is  (  $user  );
+               return     $chirp->user()->is(  $user  );
  
          }
 
@@ -354,13 +264,13 @@ app/Policies/ChirpPolicy.php
  
             */
  
-           public     function     delete  (  User     $user  ,   Chirp     $chirp  )  :     bool
+           public     function     delete(  User     $user, Chirp     $chirp  )  :     bool
  
-         {
+      {
  
 -              //
  
-+              return     $this  ->  update  (  $user  ,   $chirp  );
++              return     $this->update(  $user, $chirp  );
  
          }
  
@@ -374,9 +284,9 @@ app/Policies/ChirpPolicy.php
  
             */
  
-           public     function     restore  (  User     $user  ,   Chirp     $chirp  )  :     bool
+           public     function     restore(  User     $user, Chirp     $chirp  )  :     bool
  
-         {
+      {
  
                //
  
@@ -388,9 +298,9 @@ app/Policies/ChirpPolicy.php
  
             */
  
-           public     function     forceDelete  (  User     $user  ,   Chirp     $chirp  )  :     bool
+           public     function     forceDelete(  User     $user, Chirp     $chirp  )  :     bool
  
-         {
+      {
  
                //
  
@@ -419,7 +329,7 @@ resources/views/chirps/index.blade.php
  
           <  div     class  =  "  max-w-2xl mx-auto p-4 sm:p-6 lg:p-8  "  >
  
-              <  form     method  =  "  POST  "     action  =  "  {{     route  (  '  chirps.store  '  )     }}  "  >
+              <  form     method  =  "  POST  "     action  =  "  {{     route('chirps.store')     }}  "  >
  
                  @csrf
  
@@ -427,25 +337,25 @@ resources/views/chirps/index.blade.php
  
                      name  =  "  message  "
  
-                     placeholder  =  "  {{     __  (  '  What  \'  s on your mind?  '  )     }}  "
+                     placeholder  =  "  {{     __('What  \'s on your mind?')     }}  "
  
                      class  =  "  block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm  "
  
-               >{{     old  (  '  message  '  )   }} </  textarea  >
+               >{{     old('message')   }} </  textarea  >
  
                   <  x-input-error     :messages  =  "  $errors->get('message')  "     class  =  "  mt-2  "   />
  
-                  <  x-primary-button     class  =  "  mt-4  "  >{{     __  (  '  Chirp  '  )   }} </  x-primary-button  >
+                  <  x-primary-button     class  =  "  mt-4  "  >{{     __('Chirp')   }} </  x-primary-button  >
  
               </  form  >
  
               <  div     class  =  "  mt-6 bg-white shadow-sm rounded-lg divide-y  "  >
  
-                 @foreach   (  $chirps     as     $chirp  )
+                 @foreach (  $chirps     as     $chirp  )
  
                       <  div     class  =  "  p-6 flex space-x-2  "  >
  
-                          <  svg     xmlns  =  "  http://www.w3.org/2000/svg  "     class  =  "  h-6 w-6 text-gray-600 -scale-x-100  "     fill  =  "  none  "     viewBox  =  "  0 0 24 24  "     stroke  =  "  currentColor  "     stroke-width  =  "  2  "  >
+                          <  svg     xmlns  =  "  http://www.w3.org/2000/svg  "     class  =  "  h-6 w-6 text-gray-600 -scale-x-100  "     fill  =  "  none  " viewBox  =  "  0 0 24 24  "     stroke  =  "  currentColor  "     stroke-width  =  "  2  "  >
  
                               <  path     stroke-linecap  =  "  round  "     stroke-linejoin  =  "  round  "     d  =  "  M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z  "     />
  
@@ -459,17 +369,17 @@ resources/views/chirps/index.blade.php
  
                                       <  span     class  =  "  text-gray-800  "  >{{     $chirp  ->user->name     }} </  span  >
  
-                                      <  small     class  =  "  ml-2 text-sm text-gray-600  "  >{{     $chirp  ->created_at->  format  (  '  j M Y, g:i a  '  )   }} </  small  >
+                                      <  small     class  =  "  ml-2 text-sm text-gray-600  "  >{{     $chirp  ->created_at->  format('j M Y, g:i a')   }} </  small  >
  
-                                     @unless   (  $chirp  ->created_at->  eq  (  $chirp  ->updated_at  ))
+                                     @unless (  $chirp  ->created_at->  eq(  $chirp  ->updated_at  ))
  
-                                          <  small     class  =  "  text-sm text-gray-600  "  >     &amp;middot;     {{     __  (  '  edited  '  )   }} </  small  >
+                                          <  small     class  =  "  text-sm text-gray-600  "  >     &amp;middot;  {{     __('edited')   }} </  small  >
  
                                      @endunless
  
                                   </  div  >
  
-                                 @if   (  $chirp  ->user->  is  (  auth  ()  ->  user  ()))
+                                 @if (  $chirp  ->user->  is(  auth()->user()))
  
                                       <  x-dropdown  >
  
@@ -477,7 +387,7 @@ resources/views/chirps/index.blade.php
  
                                               <  button  >
  
-                                                  <  svg     xmlns  =  "  http://www.w3.org/2000/svg  "     class  =  "  h-4 w-4 text-gray-400  "     viewBox  =  "  0 0 20 20  "     fill  =  "  currentColor  "  >
+                                                  <  svg     xmlns  =  "  http://www.w3.org/2000/svg  "     class  =  "  h-4 w-4 text-gray-400  " viewBox  =  "  0 0 20 20  "     fill  =  "  currentColor  "  >
  
                                                       <  path     d  =  "  M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z  "     />
  
@@ -491,19 +401,19 @@ resources/views/chirps/index.blade.php
  
                                               <  x-dropdown-link     :href  =  "  route('chirps.edit', $chirp)  "  >
  
-                                                 {{     __  (  '  Edit  '  )   }}
+                                              {{     __('Edit')   }}
  
                                               </  x-dropdown-link  >
  
-+                                             <  form     method  =  "  POST  "     action  =  "  {{     route  (  '  chirps.destroy  '  ,     $  chirp  )     }}  "  >
++                                             <  form     method  =  "  POST  "     action  =  "  {{     route('chirps.destroy',   $  chirp  )     }}  "  >
  
 +                                                @csrf
  
-+                                                @method  (  '  delete  '  )
++                                                @method('delete')
  
-+                                                 <  x-dropdown-link     :href  =  "  route('chirps.destroy', $chirp)  "     onclick  =  "  event  .  preventDefault  ()  ;   this  .  closest  (  '  form  '  )  .  submit  ()  ;  "  >
++                                                 <  x-dropdown-link     :href  =  "  route('chirps.destroy', $chirp)  "     onclick  =  "  event  .  preventDefault();   this  .  closest('form')  .  submit();  "  >
  
-+                                                    {{     __  (  '  Delete  '  )   }}
++                                                 {{     __('Delete')   }}
  
 +                                                 </  x-dropdown-link  >
  

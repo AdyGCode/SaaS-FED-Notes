@@ -14,7 +14,7 @@ tags:
 date created: 03 July 2024
 date modified: 10 July 2024
 created: 2024-09-20T11:17
-updated: 2025-05-01T13:54
+updated: 2025-05-07T09:09
 ---
 
 # S10 Laravel Bootcamp: Part 4
@@ -59,6 +59,9 @@ You will need these to be able to continue…
 
 There are ways that our current code will allow hackers circumvent the lack of an action button to let them delete or edit another user's chirp.
 
+e.g. http://domainname/chirps/3/edit
+
+
 So how may we prevent this?
 
 We use authorisation and policies to dictate who may edit and delete chirps.
@@ -67,7 +70,7 @@ Before we look at this we will need a few terms.
 
 | Term           | Meaning                                                                                                                                                                                                                                                                                                                                                    |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Authentication | Is the process of verifying credentials of a user against those stored in the application.<br><br>Authorisation DOES NOT require Authorisation.<br>                                                                                                                                                                                                        |
+| Authentication | Is the process of verifying credentials of a user against those stored in the application.<br><br>Authentication DOES NOT require Authorisation.<br>                                                                                                                                                                                                       |
 | Authorisation  | Is the process of giving a "user" permission to perform actions.<br><br>We verify that the "user" has access to specific features, data and other aspects of the application.<br><br>The usual form of authorisation in the software industry is the through the use of policies, roles and permissions.<br><br>Authorisation REQUIRES Authentication.<br> |
 | Policy         | Determines what actions a "user" may perform with a model.<br>                                                                                                                                                                                                                                                                                             |
 | Gate           | Similar to a bouncer on the door of a concert or such, it applies a policy to the active "user" and allows or prevents them performing the action.<br>                                                                                                                                                                                                     |
