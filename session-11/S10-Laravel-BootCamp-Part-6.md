@@ -745,20 +745,28 @@ Here is a demonstration.
 
 ### Add Edit method to user management controller
 
+TODO: Explain written code
 
 ### Create `resources/views/users/edit.blade.php`
+TODO: Explain written code
 
 
 ### Add Update method to user management controller
+TODO: Explain written code
 
 
 ### Test Update Action
 
+TODO: Explain 
 
 
 
 ### Add Delete method to user management controller
 
+
+The delete funcitonality of the user management is not the same as the delete a chirp. We are going to provide a safety net and have the user confirmt hey want to sdelete the user fromt eh system.
+
+To do so we need to add a "delete" method and a new "delete" route to the controller and route respectively.
 
 ### Create `resources/views/users/delete.blade.php`
 
@@ -778,7 +786,7 @@ Here is a demonstration.
 
 # Up Next
 
-- [Laravel Boot Camp - Part 6](session-11/S10-Laravel-BootCamp-Part-6.md)
+- [Laravel Boot Camp - Part 7](session-11/S10-Laravel-BootCamp-Part-7.md)
 - [Session 11 ReadMe](session-11/ReadMe.md)
 - [Session 11 Reflection Exercises & Study](session-11/S11-Reflection-Exercises-and-Study.md)
 
