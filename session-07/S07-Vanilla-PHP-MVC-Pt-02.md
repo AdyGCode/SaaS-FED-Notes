@@ -9,10 +9,8 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testng, PEST
 created: 2024-09-05T08:58
-updated: 2024-09-10T16:36
+updated: 2025-03-19T11:01
 ---
-
-
 
 # Starting the PHP Code
 
@@ -50,7 +48,7 @@ We need to carefully edit this file and add the following:
 ```json
 {  
   "name": "YOUR_GITHUB_NAME/GITHUB_REPOSITORY_NAME",  
-  "description": "Vanilla PHP MVC Framework Demo",  
+  "description": "Simple PHP MVC & TailwindCSS Application Template",  
   "type": "project",  
   "version": "0.1",  
   "time": "YYYY-MM-DD",  
@@ -90,7 +88,7 @@ We need to carefully edit this file and add the following:
 ```
 
 As you enter this, **make sure** that you replace:
-- `YOUR_GITHUB_NAME` with your GitHub user name
+- `YOUR_GITHUB_NAME` with your GitHub username
 - `GITHUB_REPOSITORY_NAME` with your GitHub repository name, in lower case
 - `SAME_EMAIL_AS_GITHUB` with the same email address as your GitHub account.
 - `YOUR_NAME` with your name
@@ -125,6 +123,14 @@ When using a web server, we often have to reformat a request as we attempt to gi
 A common way to start this is to use a 'public' folder in the application. This public folder is then pointed to by the web server as the default location for files to be served.
 
 When using the Apache web server, we need to use a `.htaccess` file to manipulate the incoming "obfuscated" URI requests to the application's structure.
+
+Create a file in the public folder:
+
+```shell
+ touch public/.htaccess
+```
+
+Then edit the file and add:
 
 ```apacheconf
 RewriteEngine on  
@@ -163,11 +169,11 @@ This is the rewrite rule, and it does the following:
 
 The flags in the square brackets, have the following meanings:
 
-| flag  | meaning                                                                                                |
-| ----- | ------------------------------------------------------------------------------------------------------ |
-| `NC`  | No Case.<br>The match is case-insensitive.                                                             |
-| `L`   | Last.<br>If this rule matches, no further rules will be processed.                                     |
-| `QSA` | Query String Append. <br>The query string from the original URL will be appended to the rewritten URL. |
+| flag  | meaning                                                                                                  |
+| ----- |----------------------------------------------------------------------------------------------------------|
+| `NC`  | No Case.<br>*The match is case-insensitive.*                                                             |
+| `L`   | Last.<br>*If this rule matches, no further rules will be processed.*                                     |
+| `QSA` | Query String Append. <br>*The query string from the original URL will be appended to the rewritten URL.* |
 
 
 ## Configuration
@@ -191,7 +197,7 @@ Edit the file and add/update to read (replace with your details as needed):
  * 
  * Filename:        db.php 
  * Location:        config/ 
- * Project:         SaaS-Vanilla-MVC 
+ * Project:         XXX-SaaS-Vanilla-MVC-SN 
  * Date Created:    DATE_CREATED 
  * 
  * Author:          YOUR NAME
@@ -202,7 +208,7 @@ return [
     'port' => 3306,  
     'dbname' => 'xxx_saas_vanilla_mvc',  
     'username' => 'xxx_saas_vanilla_mvc',  
-    'password' => 'PasswordSecret'  
+    'password' => 'Password1234'  
 ];
 ```
 
@@ -224,8 +230,8 @@ Let's start with the header comments:
  * Helper Functions 
  * 
  * Filename:        helpers.php 
- * Location:        ${FILE_LOCATION} 
- * Project:         SaaS-FED-Notes 
+ * Location:        /
+ * Project:         XXX-SaaS-Vanilla-MVC-SN 
  * Date Created:    DATE_CREATED 
  * 
  * Author:          YOUR NAME  
@@ -236,7 +242,7 @@ Let's start with the header comments:
 We are going to add the following functions:
 - `basePath`
 - `loadView` &  `loadPartial`
-- `inppect` & `dump`
+- `inspect` & `dump`
 - `inspectAndDie` & `dd`
 - `sanitize`
 - `redirect`
@@ -248,7 +254,7 @@ The `basePath` function obtains the base path so as to provide accurate and reli
 For example, if we were to use `basePath('index.php')` from within the `public` folder, then we would get a path of:
 
 ```text
-C:\Users\USERNAME\Source\Repos\SaaS-Vanilla-MVC/index.php
+C:\Users\USERNAME\Source\Repos\XXX-SaaS-Vanilla-MVC-SN/index.php
 ```
 
 This is the absolute path to this file. 
@@ -285,9 +291,12 @@ The `loadView` function is used to load the views we create as part of the appli
 ```php
   
 /**  
- * Load a view * * @param string $name  
+ * Load a view 
+ * 
+ * @param string $name  
  * @return void  
- * */function loadView($name, $data = [])  
+ */
+ function loadView($name, $data = [])  
 {  
     $viewPath = basePath("App/views/{$name}.view.php");  
   
@@ -306,7 +315,7 @@ The `loadView` function is used to load the views we create as part of the appli
 
 The `loadPartial` function is used to load partial views we create as part of the application.
 
-A partial view is a compontent that is used multiple times in the user interface. For example the head part of the HTML page, a footer, and so on.
+A partial view is a component that is used multiple times in the user interface. For example the head part of the HTML page, a footer, and so on.
 
 ```php
 
@@ -436,7 +445,8 @@ dd($name, $values);
 
 The sanitize function is used to apply a filter to the variable sent to it to 'sanitise' the HTML special characters from the content of a variable.
 
-This HTML encodes the `'"<>&` and characters with ASCII value less than 32, optionally strip or encode other special characters.
+This HTML entity encodes the `<'"&>` and characters with ASCII value less than 32, optionally 
+strip or encode other special characters. For example, the `<` becomes `&lt;`.
 
 ```php
 /**
@@ -472,5 +482,23 @@ function redirect($url)
 ```
 
 
-next... [S07-Vanilla-PHP-MVC-Pt-03](session-07/S07-Vanilla-PHP-MVC-Pt-03.md)
 
+# Commit Your Work
+
+Add the changes to the stash and commit them to the repository:
+
+```shell
+git add .
+
+git commit -m "wip: Commence Framework
+
+- Create the db.php config file
+- Create helper.php file with functions
+"
+
+git push -u origin main
+```
+
+
+
+next... [S07-Vanilla-PHP-MVC-Pt-03](session-07/S07-Vanilla-PHP-MVC-Pt-03.md)

@@ -9,7 +9,7 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testing, PEST
 created: 2024-09-05T08:58
-updated: 2024-09-10T16:37
+updated: 2025-03-13T09:00
 ---
 
 
@@ -54,7 +54,7 @@ TODO: Add details for above
 
 ### Create the Product Controller Class
 
-To start, we need to create the class for the Prodcut Controller.
+To start, we need to create the class for the Product Controller.
 
 We create the class `ProductController` in the `App/Controllers/` folder, as we did for the `UsersController`.
 
@@ -186,11 +186,13 @@ Let's add the start of the page content - that is the main and the article plus 
 
 ```php
 <main class="container mx-auto bg-zinc-50 py-8 px-4 shadow shadow-black/25 rounded-b-lg flex flex-col flex-grow">  
-    <article>        <header class="bg-zinc-700 text-zinc-200 -mx-4 -mt-8 p-8 mb-8 flex">  
+    <article>        
+        <header class="bg-zinc-700 text-zinc-200 -mx-4 -mt-8 p-8 mb-8 flex">  
             <h1 class="grow text-2xl font-bold ">Products</h1>  
             <p class="text-md flex-0 px-8 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded transition ease-in-out duration-500">  
                 <a href="/products/create">Add Product</a>  
-            </p>        </header>
+            </p>        
+        </header>
 ```
 
 Now we add a section containing a grid of products:
@@ -203,7 +205,8 @@ Now we add a section containing a grid of products:
  
         <article class="max-w-96 min-w-64 bg-white shadow rounded flex flex-col">  
             <header class="bg-zinc-700 text-zinc-200 text-lg p-4 -mt-2 mb-4 rounded-t flex-0">  
-                <h4>                    <?= $product->name ?>  
+                <h4>
+                                    <?= $product->name ?>  
                 </h4>  
             </header>
             
@@ -211,7 +214,8 @@ Now we add a section containing a grid of products:
                 <p class="col-span-2 p-0 pt-2">  
                     <img class="w-24 h-24 " src="https://dummyimage.com/200x200/a1a1aa/fff&text=Image+Here"  
                          alt="">  
-                </p>                <p class="col-span-3 text-zinc-600 p-0">
+                </p>                
+                <p class="col-span-3 text-zinc-600 p-0">
                 <?= $product->description ?>
                 </p>  
             </section>
@@ -237,7 +241,7 @@ We will not go over how this works as we did this for the home page already.
 
 ### Retrieve Part 1 (Show view)
 
-Ok, so that was the index page, now onto the show page.
+OK, so that was the index page, now onto the show page.
 
 ![Image: The show page layout](../assets/vivaldi_N1eHQIsXhb.png)
 
@@ -264,7 +268,8 @@ loadPartial('navigation');
         <section class="grid grid-cols-3 gap-8 ">  
         </section>  
   
-    </article></main>  
+    </article>
+</main>  
   
   
 <?php  
@@ -274,7 +279,7 @@ loadPartial("footer");
 Update the `h`  element to read:
 
 ```php
-            <h1 class="grow text-2xl font-bold ">Products - Details</h1> 
+<h1 class="grow text-2xl font-bold ">Products - Details</h1> 
 ```
 
 Modify the `<section class="grid...` to read:
@@ -287,7 +292,7 @@ Inside this we add a new `h4` element:
 
 ```php
 <h4 class="-mx-4 bg-zinc-700 text-zinc-200 text-2xl p-4 -mt-4 mb-4 rounded-t flex-0 flex justify-between">  
-        <?= $product->name ?>  
+    <?= $product->name ?>  
 </h4>
 ```
 
@@ -296,7 +301,7 @@ After the `h4`, but still in the main section we are creating we add a new secti
 ```php
 <section class="flex-grow flex flex-row">  
     <!-- Image section -->
-    </section>  
+</section>  
   
 <section class="flex-grow flex flex-row">  
     <!-- Description section -->

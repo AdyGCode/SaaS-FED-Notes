@@ -9,20 +9,24 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testing, PEST
 created: 2024-09-05T08:58
-updated: 2024-09-10T16:43
+updated: 2025-03-19T10:57
 ---
 
 
 
 # Creating a Vanilla PHP MVC Application
 
-It is important to note that we are basing this MVC application on the work from the previous week ([S06 TailwindCSS Intro](../session-06/S06-TailwindCSS-Intro.md)) and Brad Traversy's PHP from Scratch course.
+It is important to note that we are basing this MVC application on the work from the [TailwindCSS Intro](session-05/S05-TailwindCSS-Intro.md) and Brad Traversy's PHP from Scratch course. 
+
+You may also use Brad Traversy's OOP and MVC course that is on the O'Reilly web site. 
+
+If you are a North Metro TAFE student by logging into the O'Reilly site via the NM TAFE library site ([O'Reilly for Higher Education > NMT](https://guides.dtwd.wa.gov.au/az/oreilly-for-higher-education-nmt?ref=az/northmetro)). Instructions on how to do this are found at [O'Reilly for Higher Education > NMT - How to use logon](https://northmetrotafe.libanswers.com/faq/271042).
 
 To understand how he developed this basic framework concept, the process of refactoring from very 'wet' code, and the use of OOP it is important you follow his course through.
 
-Check the exercises from the previous sessions for details of what should be covered per session.
+Follow the instructions in the [S07-Vanilla-PHP-MVC-Pt-00](session-07/S07-Vanilla-PHP-MVC-Pt-00.md) to create the required folder structure if you have not done so already.
 
-At this point you will have a folder (and file) structure similar to this:
+At this point you will have a folder (and file) structure *similar* to this:
 
 ![image: Folder structure of project](../assets/Pasted%20image%2020240827114631.png)
 
@@ -32,11 +36,13 @@ We will be creating a demo application that uses MVC. To do this, we will create
 
 The project is a simple "product" list, with users.
 
+This product list could easily be modified to be Jokes, Categories, Books or any other collection of items.
+
 ## Database Structure
 
-We are going to use MySQL (or MariaDB) for this project.
+We are going to use MariaDB (or MySQL) for this project.
 
-The SQL below will use the SQL dialect for MySQL 8+.
+The SQL below will use the SQL dialect for MariaDB 10+ (and also for MySQL 8+).
 
 Open Laragon, if you have not done so, and make sure that Apache and MySQL are running.
 
@@ -68,7 +74,7 @@ it will then go and download and install PhpMyAdmin for you.
 
 Click on the database button to open PhpMyAdmin in your browser.
 
-Once the page has opened, enter `root` fopr the username, and leave the password blank.
+Once the page has opened, enter `root` for the username, and leave the password blank.
 
 ![](../assets/Pasted%20image%2020240827120045.png)
 Click OK to open the administration interface.
@@ -79,32 +85,79 @@ When the interface is open, click on the SQL tab:
 
 ![image: the database and SQL tabs in PhpMyAdmin](../assets/Pasted%20image%2020240827120339.png)
 
+
+### SQL Files
+
+**Important** We have SQL files for different databases that are available within the sample-code folder.
+
+Each file `database-xxxxxx.sql` that you may download from here contains all the following steps in a single file for the database system indicated by the `xxxxx` section of the name (e.g. MariaDB, MySQL, PostgreSQL, SQLite, etc). 
+
+You may download the file, copy it into the config folder of the application skeleton, and then open it. Next simply copy and paste the commands into the SQL page on PhpMyAdmin (for MySQL/MariaDB) and use GO to execute them in one step.
+
+For **MariaDB**:
+![](session-07/sample-code/database-mariadb.sql)
+
+For **MySQL**:
+![](session-07/sample-code/database-mysql.sql)
+
+
+## Create Database and Users (MariaDB)
+
 In the SQL query area you will now enter:
 
 ```sql
--- ----------------------------------------------------------------------------------------  
--- Clear up previous versions of the Database and User  
--- ----------------------------------------------------------------------------------------  
-DROP DATABASE IF EXISTS `xxx_saas_vanilla_mvc`;  
-DROP USER IF EXISTS 'xxx_saas_vanilla_mvc'@'127.0.0.1';  
+-- ---------------------------------------------------------------------------------------------  
+--  
+-- BEFORE COMMENCING:  
+--  
+-- - Replace all instances of YYYY with the current year (e.g. 2025)  
+-- - Replace all instances of SN with S followed by the semester number (e.g. S1 for semester 1)  
+-- - Replace ALL instances of XXX with your initials (e.g. AJG for Adrian Gould)  
+--  
+-- ---------------------------------------------------------------------------------------------  
   
--- ----------------------------------------------------------------------------------------  
--- Create the 'SaaS Vanilla MVC' Database & User  
--- ATTENTION: Replace xxx with YOUR INITIALS  
--- ----------------------------------------------------------------------------------------  
-CREATE USER IF NOT EXISTS 'xxx_saas_vanilla_mvc'@'127.0.0.1'  
-    IDENTIFIED WITH mysql_native_password BY 'PasswordSecret';  
+-- ---------------------------------------------------------------------------------------------  
+-- Clean up existing database and user  
   
-GRANT USAGE ON *.* TO 'xxx_saas_vanilla_mvc'@'127.0.0.1';  
+DROP DATABASE IF EXISTS XXX_SaaS_FED_YYYY_SN;  
+DROP USER IF EXISTS 'XXX_SaaS_FED_YYYY_SN'@'localhost';  
+DROP USER IF EXISTS 'XXX_SaaS_FED_YYYY_SN'@'127.0.0.1';  
   
-CREATE DATABASE IF NOT EXISTS `xxx_saas_vanilla_mvc`;  
   
-GRANT ALL PRIVILEGES ON `xxx_saas_vanilla_mvc`.* TO 'xxx_saas_vanilla_mvc'@'127.0.0.1';  
+-- ---------------------------------------------------------------------------------------------  
+-- Create Database  
   
--- ----------------------------------------------------------------------------------------  
--- Make the DB active for commands  
--- ----------------------------------------------------------------------------------------  
-USE xxx_saas_vanilla_mvc;
+CREATE DATABASE IF NOT EXISTS XXX_SaaS_FED_YYYY_SN;  
+  
+  
+-- ---------------------------------------------------------------------------------------------  
+-- Create User & Grant Permissions  
+-- We create localhost and 127.0.0.1 users just in case IPv6 is detected.  
+  
+  
+CREATE USER 'XXX_SaaS_FED_YYYY_SN'@'localhost'  
+    IDENTIFIED WITH mysql_native_password  
+    USING PASSWORD('Password1234');  
+  
+CREATE USER 'XXX_SaaS_FED_YYYY_SN'@'127.0.0.1'  
+    IDENTIFIED WITH mysql_native_password  
+    USING PASSWORD('Password1234');  
+  
+GRANT USAGE ON *.*  
+    TO 'XXX_SaaS_FED_YYYY_SN'@'localhost';  
+  
+GRANT USAGE ON *.*  
+    TO 'XXX_SaaS_FED_YYYY_SN'@'127.0.0.1';  
+  
+GRANT ALL PRIVILEGES  
+    ON `XXX_SaaS_FED_YYYY_SN`.*  
+    TO 'XXX_SaaS_FED_YYYY_SN'@'localhost';  
+  
+GRANT ALL PRIVILEGES  
+    ON `XXX_SaaS_FED_YYYY_SN`.*  
+    TO 'XXX_SaaS_FED_YYYY_SN'@'127.0.0.1';  
+  
+FLUSH PRIVILEGES;
 ```
 
 > **Important:** Before proceeding:
@@ -226,7 +279,7 @@ We are almost done...
 
 Now add the following, and then we will execute for the final time, this time seeding the products table...
 
-```sql
+```mysql
 -- ----------------------------------------------------------------------------------------  
 -- Seed Products Table  
 -- ----------------------------------------------------------------------------------------  
@@ -281,5 +334,31 @@ VALUES (40380, 20, 'Sheep BrickHeadz',
 
 OK, we now have a database with users and products tables.
 
-We are ready to start our PHP... [S07-Vanilla-PHP-MVC-Pt-02](session-07/S07-Vanilla-PHP-MVC-Pt-02.md)
 
+
+# Commit Your Work
+
+Add the changes to the stash and commit them to the repository:
+
+```shell
+git add .
+
+git commit -m "wip: Database creation
+
+MySQL/MariaDB SQL script to:
+
+- remove any existing database that may be from an existing version of this project
+- remove any existing users that may be from a  previous version of this project
+- create the database
+- create the user (with access from localhost and 127.0.0.1)
+- create the tables
+- seed the tables
+"
+
+git push -u origin main
+```
+
+
+
+
+We are ready to start our PHP... [S07-Vanilla-PHP-MVC-Pt-02](session-07/S07-Vanilla-PHP-MVC-Pt-02.md)

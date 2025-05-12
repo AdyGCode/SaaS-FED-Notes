@@ -1,0 +1,475 @@
+---
+theme: default
+paginate: true
+footer: © Copyright 2024, Adrian Gould & NM TAFE
+header: "![NMTAFE](../images/Black-Red-Banner.svg)"
+auto-scaling: true
+size: 4k
+color: "#ccc"
+backgroundColor: "#060606"
+tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testing, PEST
+date created: 03 July 2024
+date modified: 07 July 2024
+created: 2024-08-01T09:23
+updated: 2025-03-11T16:58
+---
+
+# PHP for Beginners Study Schedule
+
+https://laracasts.com/series/php-for-beginners-2023-edition
+
+1. ### //The Fundamentals
+    
+    1. 01
+        
+        #### [How to Choose a Programming Language](https://laracasts.com/episodes/2551 "How to Choose a Programming Language")
+        
+        How exactly do you choose a first programming to learn? Why PHP, and not Ruby? And what about JavaScript or Python? How can you possibly be expected to make an educated decision at this early stage of your learning?
+        
+        1m 21s
+        
+        Completed
+        
+    2. 02
+        
+        #### [Tools of the Trade](https://laracasts.com/episodes/2552 "Tools of the Trade")
+        
+        Before we can dig in, we must first create the world, so to speak. To follow along with this series, you'll need to install a handful of essential tools. Let's go over them in this episode.
+        
+        8m 37s
+        
+        Completed
+        
+    3. 03
+        
+        #### [Your First PHP Tag](https://laracasts.com/episodes/2554 "Your First PHP Tag")
+        
+        Our first order of business is to prepare some basic HTML, boot a PHP server, and view it in the browser.
+        
+        8m 09s
+        
+        Completed
+        
+    4. 04
+        
+        #### [Variables](https://laracasts.com/episodes/2555 "Variables")
+        
+        Okay, let's move on and review basic concatenation and variables. The first time I learned about variables, my first thought was, "But why?". Let's talk about it!
+        
+        7m 18s
+        
+        Completed
+        
+        [Take Exam](https://laracasts.com/episodes/2555?exam=1)
+        
+    5. 05
+        
+        #### [Conditionals and Booleans](https://laracasts.com/episodes/2556 "Conditionals and Booleans")
+        
+        For this next episode, we'll build a quick webpage that displays a dynamic message based upon whether or not you've read a particular book. This will give us the opportunity to review both conditionals and booleans.
+        
+        11m 06s
+        
+        Completed
+        
+        [Take Exam](https://laracasts.com/episodes/2556?exam=1)
+        
+    6. 06
+        
+        #### [Arrays](https://laracasts.com/episodes/2559 "Arrays")
+        
+        At this point, you know how to create a variable for a primitive string or number. But what about situations when we want to declare a collection, or list of things? A list of usernames, or book titles, or tweets? In these situations, we can reach for arrays.
+        
+        8m 37s
+        
+        Completed
+        
+        [Take Exam](https://laracasts.com/episodes/2559?exam=1)
+        
+    7. 07
+        
+        #### [Associative Arrays](https://laracasts.com/episodes/2561 "Associative Arrays")
+        
+        Let's stick with arrays just a little longer. In this episode, you'll learn the syntax for accessing individual items within an array. You'll also learn about associative arrays, which allow you to associate a key with each value.
+        
+        7m 19s
+        
+        Completed
+        
+        [Take Exam](https://laracasts.com/episodes/2561?exam=1)
+        
+    8. 08
+        
+        #### [Functions and Filters](https://laracasts.com/episodes/2562 "Functions and Filters")
+        
+        Congratulations for making it this far! Let's take things a step further now and review functions. You can think of functions as the verbs of the programming world.
+        
+        12m 20s
+        
+        Completed
+        
+        [Take Exam](https://laracasts.com/episodes/2562?exam=1)
+        
+    9. 09
+        
+        #### [Lambda Functions](https://laracasts.com/episodes/2564 "Lambda Functions")
+        
+        Buckle up, because we have a lot to cover in this episode! As part of our first code refactor, we'll discuss what lambda functions are, as well as when and why you might reach for them.
+        
+        12m 08s
+        
+        Completed
+        
+        [Take Exam](https://laracasts.com/episodes/2564?exam=1)
+        
+    10. 10
+        
+        #### [Separate Logic From the Template](https://laracasts.com/episodes/2565 "Separate Logic From the Template")
+        
+        Before we move on to the technical check-in for this chapter, let's set aside a bit of time to discuss code organization and why we might want to separate our PHP logic from the view, or HTML.
+        
+        8m 35s
+        
+        Completed
+        
+    11. 11
+        
+        #### [Technical Check-in #1 (With Exam)](https://laracasts.com/episodes/2567 "Technical Check-in #1 (With Exam)")
+        
+        Before we move on to section two, let's do a quick technical check-in to ensure that everything you've learned so far has been committed to memory. And don't forget to complete the quiz before continuing.
+        
+        4m 53s
+        
+        Completed
+        
+        [Take Exam](https://laracasts.com/episodes/2567?exam=1)
+        
+2. ### //Dynamic Web Applications
+    
+    12. 12
+        
+        #### [Page Links](https://laracasts.com/episodes/2569 "Page Links")
+        
+        Welcome to section two! While section one focused entirely on the initial fundamentals of PHP, now, we'll move on and learn what it looks like to build a typical PHP application with a MySQL database.
+        
+        11m 01s
+        
+    13. 13
+        
+        #### [PHP Partials](https://laracasts.com/episodes/2571 "PHP Partials")
+        
+        In the previous episode, we begrudgingly duplicated the same HTML for every PHP view. Let's fix that now by reaching for PHP partials.
+        
+        9m 10s
+        
+    14. 14
+        
+        #### [Superglobals and Current Page Styling](https://laracasts.com/episodes/2573 "Superglobals and Current Page Styling")
+        
+        Often, you'll need to apply styles or trigger certain logic based upon the current page. Luckily, we can use PHP's `$_SERVER` superglobal array to dynamically determine the current page.
+        
+        12m 57s
+        
+    15. 15
+        
+        #### [Make a PHP Router](https://laracasts.com/episodes/2576 "Make a PHP Router")
+        
+        I think your PHP skills have now matured to the point that you're ready to build a custom PHP router from scratch. This will give us the chance to discuss code organization, response codes, and more.
+        
+        18m 02s
+        
+    16. 16
+        
+        #### [Create a MySQL Database](https://laracasts.com/episodes/2577 "Create a MySQL Database")
+        
+        We're now ready to begin interacting with a MySQL database. Before we write any PHP, let's first review how to connect to MySQL, and then create a database and table.
+        
+        6m 10s
+        
+    17. 17
+        
+        #### [PDO First Steps](https://laracasts.com/episodes/2578 "PDO First Steps")
+        
+        The next step on our journey is to figure out how to connect to MySQL from PHP and execute a simple SELECT query. We'll of course reach for PHP Data Objects, or PDO, to orchestrate this task securely.
+        
+        14m 24s
+        
+    18. 18
+        
+        #### [Extract a PHP Database Class](https://laracasts.com/episodes/2580 "Extract a PHP Database Class")
+        
+        Now that we understand the basic logic for initializing a PDO instance and executing a prepared query, let's clean things up a bit by extracting a dedicated `Database` class.
+        
+        10m 34s
+        
+    19. 19
+        
+        #### [Environments and Configuration Flexibility](https://laracasts.com/episodes/2582 "Environments and Configuration Flexibility")
+        
+        We have one glaring issue with our `Database` class right now. The connection values have been hard-coded. So what happens when we push the project to production, where the host and port are entirely different?
+        
+        12m 59s
+        
+    20. 20
+        
+        #### [SQL Injection Vulnerabilities Explained](https://laracasts.com/episodes/2585 "SQL Injection Vulnerabilities Explained")
+        
+        In this episode, we'll review some examples of SQL injection and discuss why it's so important that you always assume that, on the web, a person is guilty until proven innocent.
+        
+        10m 56s
+        
+3. ### //Notes Mini-Project
+    
+    1. 21
+        
+        #### [Database Tables and Indexes](https://laracasts.com/episodes/2608 "Database Tables and Indexes")
+        
+        You've learned enough of the fundamentals at this point to begin working on your first mini-project. Let's make a notes app! We'll begin with the initial database structure, which will give us the opportunity to review MySQL indexes.
+        
+        7m 52s
+        
+    2. 22
+        
+        #### [Render the Notes and Note Page](https://laracasts.com/episodes/2609 "Render the Notes and Note Page")
+        
+        Now that we have the initial database structure in place, let's create one page to display all of John Doe's notes, and then another page for each individual note.
+        
+        14m 27s
+        
+    3. 23
+        
+        #### [Introduction to Authorization](https://laracasts.com/episodes/2619 "Introduction to Authorization")
+        
+        In the previous episode, we added support for reading all notes that were created by a particular user. But, in doing so, we unwittingly introduced a major security concern. In this lesson, we'll discuss authorization, status codes, and magic numbers.
+        
+        14m 27s
+        
+    4. 24
+        
+        #### [Programming is Rewriting](https://laracasts.com/episodes/2620 "Programming is Rewriting")
+        
+        Before we move on to building a form to persist new notes to the database, let's take ten minutes to refactor our current code and discuss wrapping up APIs you don't own.
+        
+        12m 17s
+        
+    5. 25
+        
+        #### [Intro to Forms and Request Methods](https://laracasts.com/episodes/2622 "Intro to Forms and Request Methods")
+        
+        We're overdue, but it's finally time to dig into forms. In this lesson, we'll learn how to submit a form using two different request methods. Next, we'll discuss how our controller might detect whether a POST submission has occurred.
+        
+        18m 06s
+        
+    6. 26
+        
+        #### [Always Escape Untrusted Input](https://laracasts.com/episodes/2626 "Always Escape Untrusted Input")
+        
+        In this lesson, we'll finally persist a new note to the database. But, in doing so, you'll be introduced to a new security concern that requires us to always escape user-provided input.
+        
+        8m 21s
+        
+    7. 27
+        
+        #### [Intro to Form Validation](https://laracasts.com/episodes/2629 "Intro to Form Validation")
+        
+        In this lesson, we'll review two layers of form validation: browser and server-side. We can use validation to ensure and confirm that the user submits their data in the exact format that we require.
+        
+        12m 50s
+        
+    8. 28
+        
+        #### [Extract a Simple Validator Class](https://laracasts.com/episodes/2633 "Extract a Simple Validator Class")
+        
+        To make for a more flexible and readable experience, let's extract the basic validation rules we wrote in the previous episode into a dedicated Validator class.
+        
+        11m 43s
+        
+4. ### //Project Organization
+    
+    1. 29
+        
+        #### [Resourceful Naming Conventions](https://laracasts.com/episodes/2634 "Resourceful Naming Conventions")
+        
+        Let's take a short pause on the notes exercise, and instead switch our attention to general code organization. We'll start by switching to a common naming convention for resources.
+        
+        6m 36s
+        
+    2. 30
+        
+        #### [PHP Autoloading and Extraction](https://laracasts.com/episodes/2635 "PHP Autoloading and Extraction")
+        
+        Okay, buckle up. This will be the most dense episode yet, as we discuss a variety of topics related to project organization. We'll touch on document roots, helper functions, constants, PHP autoloading, and more.
+        
+        19m 36s
+        
+    3. 31
+        
+        #### [Namespacing: What, Why, How?](https://laracasts.com/episodes/2646 "Namespacing: What, Why, How?")
+        
+        It's time to discuss PHP namespacing, but don't worry: I'm going to make this incredibly easy to understand. If you can remember the days of storing your entire music collection locally, you'll grasp namespacing in seconds.
+        
+        12m 08s
+        
+        [Take Exam](https://laracasts.com/episodes/2646?exam=1)
+        
+    4. 32
+        
+        #### [Handle Multiple Request Methods From a Controller Action?](https://laracasts.com/episodes/2649 "Handle Multiple Request Methods From a Controller Action?")
+        
+        Over the next three episodes, we'll review a number of refactors that are a bit more advanced. But first, we need to encounter a situation that necessitates the refactors. We'll use the example of a messy controller action that can respond to multiple request types.
+        
+        12m 11s
+        
+    5. 33
+        
+        #### [Build a Better Router](https://laracasts.com/episodes/2654 "Build a Better Router")
+        
+        In this episode, we'll build a better router that can handle and respond to any form request type. However, because forms only natively support GET and POST, we'll need to use a hidden input field to spoof the request type.
+        
+        20m 45s
+        
+    6. 34
+        
+        #### [One Request, One Controller](https://laracasts.com/episodes/2657 "One Request, One Controller")
+        
+        With an improved router that can respond to multiple form request types, we can now refactor our controller actions to be more focused. We'll also discuss the importance of keeping your controller actions as simple as possible.
+        
+        7m 07s
+        
+    7. 35
+        
+        #### [Make Your First Service Container](https://laracasts.com/episodes/2660 "Make Your First Service Container")
+        
+        In this episode, we'll discuss the concept of a service container, and how it can help us organize our code and remove the need to manually construct the same dependencies over and over again.
+        
+        19m 22s
+        
+    8. 36
+        
+        #### [Updating With PATCH Requests](https://laracasts.com/episodes/2675 "Updating With PATCH Requests")
+        
+        The only remaining step for our first resource is to support editing notes. Luckily, most of the legwork has been completed at this point. We only need to create the form, and register a corresponding route and controller.
+        
+        21m 14s
+        
+5. ### //Sessions and Authentication
+    
+    1. 37
+        
+        #### [PHP Sessions 101](https://laracasts.com/episodes/2679 "PHP Sessions 101")
+        
+        Welcome to a new chapter! We'll now begin to explore the world of PHP sessions. We'll start by discussing the concept of sessions, and how they can be used to persist data across multiple requests.
+        
+        13m 56s
+        
+    2. 38
+        
+        #### [Register a New User](https://laracasts.com/episodes/2702 "Register a New User")
+        
+        Now that we understand the basics of PHP session handling, we can build our first registration form. Once filled, we can create a new user in the database and then update the session to "mark" them as signed in.
+        
+        18m 59s
+        
+    3. 39
+        
+        #### [Introduction to Middleware](https://laracasts.com/episodes/2708 "Introduction to Middleware")
+        
+        In this episode, we'll discuss the concept of middleware, and how it can be used as a bridge between an incoming request and the core of your application. We'll create two middleware classes to handle route authorization for guests and authenticated users.
+        
+        22m 04s
+        
+    4. 40
+        
+        #### [Manage Passwords Like This For The Remainder of Your Career](https://laracasts.com/episodes/2713 "Manage Passwords Like This For The Remainder of Your Career")
+        
+        Up until this point, we've been storing passwords in clear text (gasp)! Let's fix that. In this episode, we'll discuss the importance of password hashing, and why it's necessary to protect your users' sensitive data. We'll also discuss the Bcrypt algorithm, and how it can be used to generate secure hashes.
+        
+        4m 49s
+        
+    5. 41
+        
+        #### [Log In and Log Out](https://laracasts.com/episodes/2714 "Log In and Log Out")
+        
+        Now that we have a functioning registration form, we can finally build out the login system. As you'll see, there's a small handful of confusing, low-level steps that we need to follow - particularly when logging a user out.
+        
+        25m 45s
+        
+6. ### //Refactoring Techniques
+    
+    6. 42
+        
+        #### [Extract a Form Validation Object](https://laracasts.com/episodes/2729 "Extract a Form Validation Object")
+        
+        For our first refactoring exercise, we'll extract a login form validation object. This approach will allow us to keep our controllers lean, clear, and easier to potentially reuse in other places.
+        
+        13m 28s
+        
+    7. 43
+        
+        #### [Extract an Authenticator Class](https://laracasts.com/episodes/2730 "Extract an Authenticator Class")
+        
+        Next up, we can further clean up our controller and improve clarity by extracting an `Authenticator` class. This new class can then be responsible for handling the actual authentication logic.
+        
+        13m 21s
+        
+    8. 44
+        
+        #### [The PRG Pattern (and Session Flashing)](https://laracasts.com/episodes/2734 "The PRG Pattern (and Session Flashing)")
+        
+        In this episode, we'll discuss the PRG (Post-Redirect-Get) pattern, and how it can be used to prevent duplicate form submissions. Currently, we're returning a view directly from the `POST` request in the event of failed validation, however, this is far from ideal. Let's review the problem, and then seek a solution.
+        
+        21m 17s
+        
+    9. 45
+        
+        #### [Flash Old Form Data to the Session](https://laracasts.com/episodes/2737 "Flash Old Form Data to the Session")
+        
+        Now that we understand how to temporarily "flash" data to the session, we can now return to the topic of displaying "old" form data to the user.
+        
+        5m 57s
+        
+    10. 46
+        
+        #### [Automatically Redirect Back Upon Failed Validation](https://laracasts.com/episodes/2738 "Automatically Redirect Back Upon Failed Validation")
+        
+        Next up, we'll learn how to automatically redirect back to the form upon failed validation. If we can manage to get this to work, we'll remove a significant amount of duplication and clutter from our various controllers.
+        
+        26m 07s
+        
+7. ### //Meet Composer
+    
+    1. 47
+        
+        #### [Composer and Free Autoloading](https://laracasts.com/episodes/2744 "Composer and Free Autoloading")
+        
+        I think it's time to move on to a new chapter and finally discuss Composer. Composer is a world-class dependency manager that allows us to declare any and all libraries or packages that our project requires. Then, with a single command, we can install them in seconds. Even better, it ships with an excellent autoloader.
+        
+        13m 12s
+        
+    2. 48
+        
+        #### [Install Two Composer Packages: Collections and PestPHP](https://laracasts.com/episodes/2746 "Install Two Composer Packages: Collections and PestPHP")
+        
+        Now that we've learned how to install Composer, itself, the next step is to pull in some packages! For demonstration purposes, we'll install two separate packages.
+        
+        15m 35s
+        
+8. ### //Testing
+    
+    1. 49
+        
+        #### [Testing Approaches, Terms, and Considerations](https://laracasts.com/episodes/2946 "Testing Approaches, Terms, and Considerations")
+        
+        Let's dedicate one episode to discussing the different styles of testing, such as unit testing and feature testing. As part of this, we'll also touch on general workflow, common terms, and whether to follow test-first development.
+        
+        18m 06s
+        
+9. ### //Wrapping Up
+    
+    1. 50
+        
+        #### [The Next Step in Your PHP Journey](https://laracasts.com/episodes/2955 "The Next Step in Your PHP Journey")
+        
+        It's time to wrap up this series, but there's of course more to learn. In this episode, we will switch from our micro-framework to a fresh install of Laravel. We'll then review how many of its various features and components should be instantly familiar to you.
+        
+        16m 27s

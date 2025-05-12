@@ -9,10 +9,8 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testng, PEST
 created: 2024-09-05T08:58
-updated: 2024-09-10T16:36
+updated: 2025-03-19T11:57
 ---
-
-
 
 # Continuing to build the Framework
 
@@ -107,7 +105,8 @@ Plus the file location will change to: `Framework/`.
 
 ### Required 'use' statements
 
-Before we add any mehtods and propertiues to the class, we need to inlcude a number of `use` lines to import various class defintions before they are used.
+Before we add any methods and properties to the class, we need to inlcude a number of `use` 
+lines to import various class definitions before they are used.
 
 These classes are built into PHP, and not defined by us as coders.
 
@@ -257,7 +256,7 @@ Here are more complete DocBlocks, but we are not indicating which one belongs to
 
 The router is fairly complex, but it is the workhorse of the framework as it directs the incoming requests to the correct location.
 
-Create a new  class "Router" in the Framework folder.
+Create a new class "Router" in the Framework folder.
 
 Add the following two `use` lines immediately after the namespace:
 
@@ -294,6 +293,7 @@ This creates a list (array) that includes the controller name and the method fro
 After this, the method adds the various parts of the route to the routes property.
 
 The complete method code:
+
 ```php
 public function registerRoute($method, $uri, $action, $middleware = [])  
 {  
@@ -311,7 +311,7 @@ public function registerRoute($method, $uri, $action, $middleware = [])
 
 We will talk about middleware when we come to the Authorize class.
 
-The Register Route is used by each of the Get, Post, Put and Delete methods...
+The `registerRoute` function is used by each of the Get, Post, Put and Delete methods...
 
 ### Get method
 
@@ -364,6 +364,15 @@ public function delete($uri, $controller, $middleware = [])
 ### Route method
 
 We are now into the last method, and this is the most complex part of the framework.
+
+Create a new method stub:
+
+```php
+public function route($uri) {
+
+}
+```
+
 
 The reason is that the Route method has to handle each request, deconstruct the requested URI,  identify which controller is being requested, make sure that any middleware is applied, and then instantiate the required called and call the method (action) that is being requested.
 
@@ -469,6 +478,83 @@ It then instantiates a copy of the controller and calls the method with the para
 
 If, after all that, the route was not found, then an error is created using the ErrorController's static not found method.
 
+Here is the complete route method:
+
+
+```php
+
+class Router
+{
+
+/** Other methods have been removed for brevity **/
+
+
+    /**
+     * Route the request
+     *
+     * @param string $uri
+     * @param string $method
+     * @return void
+     */
+    public function route($uri)
+    {
+        $requestMethod = $_SERVER['REQUEST_METHOD'];
+
+        // Check for _method input
+        if ($requestMethod === 'POST' && isset($_POST['_method'])) {
+            // Override the request method with the value of _method
+            $requestMethod = strtoupper($_POST['_method']);
+        }
+
+        foreach ($this->routes as $route) {
+
+            // Split the current URI into segments
+            $uriSegments = explode('/', trim($uri, '/'));
+
+            // Split the route URI into segments
+            $routeSegments = explode('/', trim($route['uri'], '/'));
+
+            $match = true;
+
+            // Check if the number of segments matches
+            if (count($uriSegments) === count($routeSegments) && strtoupper($route['method'] === $requestMethod)) {
+                $params = [];
+
+                $match = true;
+                $segments = count($uriSegments);
+                for ($i = 0; $i < $segments; $i++) {
+                    // If the uri's do not match and there is no param
+                    if ($routeSegments[$i] !== $uriSegments[$i] && !preg_match('/\{(.+?)}/', $routeSegments[$i])) {
+                        $match = false;
+                        break;
+                    }
+
+                    // Check for the param and add to $params array
+                    if (preg_match('/\{(.+?)}/', $routeSegments[$i], $matches)) {
+                        $params[$matches[1]] = $uriSegments[$i];
+                    }
+                }
+
+                if ($match) {
+                    foreach ($route['Middleware'] as $middleware) {
+                        (new Authorise())->handle($middleware);
+                    }
+
+                    $controller = 'App\\Controllers\\' . $route['controller'];
+                    $controllerMethod = $route['controllerMethod'];
+
+                    // Instantiate the controller and call the method
+                    $controllerInstance = new $controller();
+                    $controllerInstance->$controllerMethod($params);
+                    return;
+                }
+            }
+        }
+
+        ErrorController::notFound();
+    }
+}
+```
 
 ### Exercise: Update Header Comments
 
@@ -634,6 +720,25 @@ public static function getFlashMessage($key, $default = null)
 ### Exercise: Update Header Comments
 
 You are expected to update the header comments to give a title and explain the purpose of this class and its methods to other developers.
+
+
+# Commit Your Work
+
+Add the changes to the stash, commit and push them to the repository:
+
+```shell
+git add .
+
+git commit -m "wip: Commence Framework
+
+- Create Framework/Database.php class
+- Create Framework/Router.php class
+- Create Framework/Session.php class
+"
+
+git push -u origin main
+```
+
 
 
 ---

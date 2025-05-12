@@ -11,7 +11,7 @@ tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Tes
 date created: 03 July 2024
 date modified: 07 July 2024
 created: 2024-08-01T09:23
-updated: 2024-09-10T16:36
+updated: 2025-03-13T09:00
 ---
 
 # Course Journals
@@ -44,31 +44,18 @@ Journals are:
 - your way of showing active participation
 - your way to reflect on the content
 
-They *are* a part of the assessed work you will complete for the cluster.
+They *are not* a part of the assessed work.
 
 ---
 
-# Why we are using them
+# Why you may use a journal
 
-We are using the journals as a way to:
+Yu may use a journal as a way to:
 
 - prove you are involved in your learning
 - provide a way for you to ask yourself questions
 - develop your research and documentation skills
 - develop an investigative mindset
-
----
-
-# Your Commitments
-
-You are required to:
-
-- Check the Journals Activity 
-- Create a new journal page/entry for each session, unless otherwise indicated
-- Check the 
-- Add meaningful content
-
-There are no length requirements, but a blank or very short journal may be looked at negatively.
 
 ---
 
@@ -105,4 +92,4 @@ All entries should:
 
 # END
 
-Next up - [Session 01 Journal Activity](../session-01/S01-Exercises-and-Journal-Entry.md)
+Next up - [Session 01 Journal Activity](session-01/S01-Exercises-and-Practice.md)

@@ -14,7 +14,7 @@ tags:
 date created: 03 July 2024
 date modified: 10 July 2024
 created: 2024-10-05T15:41
-updated: 2024-10-05T17:19
+updated: 2025-03-13T09:00
 ---
 
 # S12 Laravel 1 - Basics - Planning a Feature
@@ -40,7 +40,7 @@ includeLinks: true
 # Terms
 
 | Term                                 | Meaning                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|--------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Authentication                       | The process of verifying the identity of a user. <br>In Laravel, this is handled by the `Auth` facade, which manages user login and registration.                                                                                                                                                                                                                                                                                                                             |
 | Authorisation                        | The permission to perform an action. Requires authentication to be completed before then checking for the authority to perform an action. <br>The process of granting or denying access to resources based on user roles and permissions. <br>Laravel uses *gates* and *policies* for authorisation.                                                                                                                                                                          |
 | BREAD                                | *Browse*, *Read*, *Edit*, *Add*, *Delete*. Alternative term for CRUD. <br>Often used in the context of administrative interfaces. <br>Laravel's Nova package supports BREAD operations.                                                                                                                                                                                                                                                                                       |
@@ -64,16 +64,20 @@ includeLinks: true
 | Artisan                              | Laravel's command-line interface tool. <br>Used for various tasks like running migrations, seeding the database, and generating boilerplate code. <br>Example: `php artisan migrate`.                                                                                                                                                                                                                                                                                         |
 | Middleware                           | Software that acts as a bridge between the request and the response. <br>In Laravel, middleware can be used to handle tasks like authentication, logging, and more. <br>Defined in the `app/Http/Middleware` directory.                                                                                                                                                                                                                                                       |
 
-
 # Overview
 
-The steps outlined in this set of notes could be repeated until a **Minimal Viable Product** is completed. At this point each new feature, or group of related features, is then a 'new release' for the application.
+The steps outlined in this set of notes could be repeated until a **Minimal Viable Product** is
+completed. At this point each new feature, or group of related features, is then a 'new release'
+for the application.
 
-It is important to have a broad concept of the project, and from there, identify the key features.
+It is important to have a broad concept of the project, and from there, identify the key
+features.
 
-This may be achieved in many ways, but the key is to gather details from the application's stakeholders.
+This may be achieved in many ways, but the key is to gather details from the application's
+stakeholders.
 
 These include:
+
 - The Client
 - The End Users
 - Other Similar Applications
@@ -81,23 +85,29 @@ These include:
 - and more.
 
 The details could gathered by using one or more techniques including:
+
 - interview
 - workshops
 - documents
 - current systems
 - ...
 
-Also part of this is the identification of the features and their importance. This will be driven by the stakeholders.
+Also part of this is the identification of the features and their importance. This will be
+driven by the stakeholders.
 
 There are many ways to do this, but they are not within the scope of this cluster.
 
-Saying this, we tend to use the "*Must have, Should have, Could have, Won't have*" method (MoSCoW).
+Saying this, we tend to use the "*Must have, Should have, Could have, Won't have*" method (
+MoSCoW).
 
-Using sticky notes, or flash cards with the features, allows them to be organised into these four categories by each of the different stakeholder groups.
+Using sticky notes, or flash cards with the features, allows them to be organised into these
+four categories by each of the different stakeholder groups.
 
 These then could be added to a spreadsheet, or other document or system.
 
-One good way to keep track of them is to use some form of project management application, or, in some cases, use a feature of another application to do this. For example GitHub Projects and Issues.
+One good way to keep track of them is to use some form of project management application, or, in
+some cases, use a feature of another application to do this. For example GitHub Projects and
+Issues.
 
 # Feature Development Overview
 
@@ -110,37 +120,51 @@ The phases **may** be similar to:
 - Develop and test the feature
 - Release the feature
 
-## I - Identify the requirements for the feature. 
+## I - Identify the requirements for the feature.
 
-We already know that gathering data to enable the development of a feature's overview is important.
+We already know that gathering data to enable the development of a feature's overview is
+important.
 
-We use any of the methods identified previously, and must also emphasise the identification of the criteria for completion of the feature.
+We use any of the methods identified previously, and must also emphasise the identification of
+the criteria for completion of the feature.
 
-Many companies will take the details from the various sources and distill these into "stories" that outline each feature and the criterial that must be met. These are usually called "user stories".
+Many companies will take the details from the various sources and distill these into "stories"
+that outline each feature and the criterial that must be met. These are usually called "user
+stories".
 
 ## II - Add Stories to Project Planning
 
-Using something like GitHub projects, you are able to create a project and then bind an issue (a user story) to the project.
+Using something like GitHub projects, you are able to create a project and then bind an issue (a
+user story) to the project.
 
 This gives you a very healthy way of tracking you work, and how the project is progressing.
 
-For example, these could be the user stories for the ability to register and authenticate with a site:
+For example, these could be the user stories for the ability to register and authenticate with a
+site:
 
-- As a visitor to the site I must be able to register to create and account, so that I may use the features that require authentication.
+- As a visitor to the site I must be able to register to create and account, so that I may use
+  the features that require authentication.
 
-- As a visitor I must be able to verify my email address after creating an account, so that I may be able to login and access the site's features.
+- As a visitor I must be able to verify my email address after creating an account, so that I
+  may be able to login and access the site's features.
 
-- As a visitor I must be able to log into the application to enable me to use it's features that require authentication.
+- As a visitor I must be able to log into the application to enable me to use it's features that
+  require authentication.
 
 - As a user I must be able to log out, to prevent others using my account.
 
-- As a user I must be able to reset my password via a reset email that provides a one time usage link.
+- As a user I must be able to reset my password via a reset email that provides a one time usage
+  link.
 
-We could add each of the above as individual issues on Github, or an 'epic story' that covers all these, and then add issues for each part of the epic. These could then be marked as required by the epic for it to be completed as a 'milestone' within the project.
+We could add each of the above as individual issues on Github, or an 'epic story' that covers
+all these, and then add issues for each part of the epic. These could then be marked as required
+by the epic for it to be completed as a 'milestone' within the project.
 
-Please read the following set of notes on how to create a Project, Automate adding Issues, Adding Sub Issues and Setting up a 'KANBAN' board.
+Please read the following set of notes on how to create a Project, Automate adding Issues,
+Adding Sub Issues and Setting up a 'KANBAN' board.
 
-- [S12-Managing-Projects-Using-GitHub-and-Kanban](S12-Managing-Projects-Using-GitHub-and-Kanban.md) **TBW**
+- [S12-Managing-Projects-Using-GitHub-and-Kanban](S12-Managing-Projects-Using-GitHub-and-Kanban.md)
+  **TBW**
 
 ## III - Develop Feature
 
@@ -154,34 +178,37 @@ We are now ready to develop the feature.
 - Create Controller, Methods and Views
 
 The Controller, Methods and Views are often completed one by one:
+
 - Create Tests
 - Create Method
 - Create View
 
 The Methods are often known by the acronym, "CRUD" or, my personal preference, "BREAD".
 
-**BREAD**
-- Browse, Read, Edit, Add, Delete
-**CRUD**
-- Create, Read, Update, Delete
+| Acronym   | Full Text                       |
+|-----------|---------------------------------|
+| **BREAD** | Browse, Read, Edit, Add, Delete |
+| **CRUD**  | Create, Read, Update, Delete    |
 
 The Laravel Method names are not quite the same, but they are still easy to remember.
 
-| **Action** |        | **Controller<br>Method** | **HTTP VERB**    | **Notes**                                         |
-| ---------- | ------ | ------------------------ | ---------------- | ------------------------------------------------- |
-| BROWSE     | READ   | index                    | GET              | Shows "all" records                               |
-| READ       | READ   | show                     | GET              | Shows one record                                  |
-| EDIT       | UPDATE | edit<br>update           | GET<br>PUT/PATCH | retrieves the record & view<br>updates the record |
-| ADD        | CREATE | create<br>store          | GET<br>POST      | retrieves view<br>saves the new record            |
-| DELETE     | DELETE | destroy                  | DELETE           | destroys the record                               |
+| **Action** |             | **Controller<br>Method** | **HTTP VERB**    | **Notes**                                              |
+|------------|-------------|--------------------------|------------------|--------------------------------------------------------|
+| BROWSE     | READ (Many) | index                    | GET              | Shows "all" records                                    |
+| READ       | READ (1)    | show                     | GET              | Shows one record     <br/>                             |
+| EDIT       | UPDATE      | edit<br>update           | GET<br>PUT/PATCH | Retrieves the record & edit view<br>updates the record |
+| ADD        | CREATE      | create<br>store          | GET<br>POST      | Retrieves the create view<br>saves the new record      |
+| DELETE     | DELETE      | destroy                  | DELETE           | Destroys the record                                    |
+
+* Aside: Possible Laravel Acronym could be DICES (Destroy, Index, Create, Edit, Show) *
 
 ## IV - User Acceptance test
 
-
+**TBW**
 
 ## V - Release
 
-
+**TBW**
 
 # END
 

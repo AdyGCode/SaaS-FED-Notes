@@ -14,7 +14,7 @@ tags:
 date created: 03 July 2024
 date modified: 10 July 2024
 created: 2024-10-08T10:54
-updated: 2024-10-09T17:00
+updated: 2025-04-29T16:53
 ---
 
 # Laravel: 02 Update User
@@ -449,5 +449,5 @@ Modify the update method, so the original line:
 
 # END
 
-Next up - [S12 Laravel 03 Feature Country](session-11/S11-Laravel-02-Category-Feature.md)
+Next up - [S12 Laravel 03 Feature Country](session-12/S11-Laravel-02-Category-Feature.md)
 

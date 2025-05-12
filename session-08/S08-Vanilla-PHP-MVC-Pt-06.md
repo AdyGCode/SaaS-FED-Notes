@@ -9,7 +9,7 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testng, PEST
 created: 2024-09-05T08:58
-updated: 2024-09-10T16:36
+updated: 2025-03-19T12:19
 ---
 
 
@@ -22,7 +22,7 @@ Now we need to add a controller that will handle errors such as 404 not found...
 
 ## The Error Controller
 
-Create  a new PHP Class file in the `App/Controllers` folder called `ErrorController`.
+Create a new PHP Class file in the `App/Controllers` folder called `ErrorController`.
 
 This controller will handle two main errors:
 - 404 Not Found
@@ -31,6 +31,44 @@ This controller will handle two main errors:
 It can easily be extended to include other errors as needed.
 
 Before we create the class and methods we need a generalised error page.
+
+## Not Found
+
+The not found method takes a message string as an argument. 
+
+It then makes the response code for the HTTP response equal to 404 before then loading the error view we created in the previous step.
+
+```php
+public static function notFound($message = 'Resource not found')  
+{  
+    http_response_code(404);  
+  
+    loadView('error', [  
+        'status' => '404',  
+        'message' => $message  
+    ]);  
+}
+```
+
+## Unauthorised
+
+The unauthorised method takes care of showing the 403 page when a user tries to perform an action they are not authorised to do. 
+
+In our little application that is like attempting to create a product when they are not logged in.
+
+```php
+public static function unauthorized($message = 'You are not authorized to view this resource')  
+{  
+    http_response_code(403);  
+  
+    loadView('error', [  
+        'status' => '403',  
+        'message' => $message  
+    ]);  
+}
+```
+
+Now we may create the error view...
 
 ## Error View
 
@@ -69,7 +107,7 @@ Then close the PHP tag and add the following HTML/PHP code:
                     <p>
                         <a class="underline underline-offset-2
                                   hover:text-black transition ease-in-out duration-500"
-                           href="/products">Go Back To Products</a>
+                           href="/">Go Back To Home</a>
                     </p>
                 </div>
             </div>
@@ -86,51 +124,19 @@ When used it will display a page similar to this:
 
 ![404 error being shown using the error view](../assets/Pasted%20image%2020240830174221.png)
 
-## Not Found
-
-The not found method takes a message string as an argument. 
-
-It then makes the response code for the HTTP response equal to 404 before then loading the error view we created in the previous step.
-
-```php
-public static function notFound($message = 'Resource not found')  
-{  
-    http_response_code(404);  
-  
-    loadView('error', [  
-        'status' => '404',  
-        'message' => $message  
-    ]);  
-}
-```
-
-## Unauthorised
-
-The unauthorised method takes care of showing the 403 page when a user tries to perform an action they are not authorised to do. 
-
-In our little application that is like attempting to create a product when they are not logged in.
-
-```php
-public static function unauthorized($message = 'You are not authorized to view this resource')  
-{  
-    http_response_code(403);  
-  
-    loadView('error', [  
-        'status' => '403',  
-        'message' => $message  
-    ]);  
-}
-```
-
-
 ### Mini Exercise
 
 As usual you are charged with adding the relevant DocBlocks to the methods and updating the class DocBlock.
 
 
+
 ## The Home Controller & View
 
 Before we start on the User and Product feature, we will add our home route, home controller and view.
+
+In fact this home page will be a very simple page at this point as we will not enhance it until we have our users and products features completed for this example/template application.
+
+As a result the home page will not show any content, as per the template.
 
 ### Home Route
 
@@ -163,6 +169,7 @@ protected $db;
 ### Constructor method
 
 The constructor has two steps:
+
 - Store the configuration data in a `$config` variable
 - Instantiate the Database class with the `$config` details.
 
@@ -178,29 +185,18 @@ public function __construct()
 ### Index method
 
 Our index method does the following:
-- Retrieve the last 6 added products
-- Retrieve a count of all the products
-- Retrieve a count of all the users
-- Load the home view with the above data for display.
+
+- Load the home view.
 
 ```php
-$products = $this->db->query('SELECT * FROM products ORDER BY created_at DESC LIMIT 6')->fetchAll();  
-  
-$productCount = $this->db->query('SELECT count(id) as total FROM products ')->fetch();  
-  
-$userCount = $this->db->query('SELECT count(id) as total FROM users')->fetch();  
-  
-loadView('home', [  
-    'products' => $products,  
-    'productCount' => $productCount,  
-    'userCount' => $userCount,  
-]);
+ 
+loadView('home', []);
 ```
 
 
 That's it for the controller.
 
-Now the view.
+Now onto the Home view.
 
 ### Home View
 
@@ -208,7 +204,7 @@ Like the error view, the home view is a HTML/PHP page that is in the `App/views`
 
 Create a new PHP file in the `App/views` and name it `home.view.php`.
 
-Lets construct it from the top...
+Let's construct it from the top...
 
 First update the DocBlock...
 
@@ -247,8 +243,7 @@ Now we construct the main element of the page:
         </header>
         <section class="flex flex-row flex-wrap justify-center my-8 gap-8">
 
-<!-- there will be approximately 50 lines of code to add here -->
-
+<!-- there will be more code here -->
 
         </section>  
   
@@ -302,7 +297,7 @@ Here is an example of its output:
 
 ![](../assets/Pasted%20image%2020240830180600.png)
 
-Ok, so that is the 'statistics' done.
+OK, so that is the 'statistics' done.
 
 #### Add the Product Cards
 
@@ -316,7 +311,8 @@ Begin by closing the previous section and then creating a new section of the pag
 <section class="flex flex-wrap gap-8 justify-center">
 ```
 
-Now we need to work trhough the list of products that were sent from the controller to this view.
+Now we need to work through the list of products that were sent from the controller to this 
+view.
 
 We use a `foreach` for this purpose.
 
@@ -395,6 +391,23 @@ How do you think you fix this?
 Try fixing it to match this (one product shown):
 
 ![](../assets/Pasted%20image%2020240830182226.png)
+
+
+# Commit Your Work
+
+Add the changes to the stash, commit and push them to the repository:
+
+```shell
+git add .
+
+git commit -m "wip: Home page
+
+"
+
+git push -u origin main
+```
+
+
 
 
 and finally ... [S08-Vanilla-PHP-MVC-Pt-07](session-08/S08-Vanilla-PHP-MVC-Pt-07.md)

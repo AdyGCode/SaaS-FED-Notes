@@ -14973,14 +14973,14 @@ var parameters = /* @__PURE__ */ new Map([
   ["Z", 0],
   ["z", 0]
 ]);
-var parse = function(path2) {
+var parse = function(path3) {
   var cmd;
   var ret = [];
   var args = [];
   var curArg = "";
   var foundDecimal = false;
   var params = 0;
-  for (var _i = 0, path_1 = path2; _i < path_1.length; _i++) {
+  for (var _i = 0, path_1 = path3; _i < path_1.length; _i++) {
     var c = path_1[_i];
     if (parameters.has(c)) {
       params = parameters.get(c);
@@ -15294,8 +15294,8 @@ var segmentToBezier = function(cx1, cy1, th0, th1, rx, ry, sinTh, cosTh) {
   ];
   return result;
 };
-var svgPathToOperators = function(path2) {
-  return apply(parse(path2));
+var svgPathToOperators = function(path3) {
+  return apply(parse(path3));
 };
 
 // node_modules/.pnpm/pdf-lib@1.17.1/node_modules/pdf-lib/es/api/operations.js
@@ -15452,7 +15452,7 @@ var drawEllipse = function(options) {
     popGraphicsState()
   ]).filter(Boolean);
 };
-var drawSvgPath = function(path2, options) {
+var drawSvgPath = function(path3, options) {
   var _a, _b, _c;
   return __spreadArrays([
     pushGraphicsState(),
@@ -15466,7 +15466,7 @@ var drawSvgPath = function(path2, options) {
     options.borderWidth && setLineWidth(options.borderWidth),
     options.borderLineCap && setLineCap(options.borderLineCap),
     setDashPattern((_b = options.borderDashArray) !== null && _b !== void 0 ? _b : [], (_c = options.borderDashPhase) !== null && _c !== void 0 ? _c : 0)
-  ], svgPathToOperators(path2), [
+  ], svgPathToOperators(path3), [
     // prettier-ignore
     options.color && options.borderWidth ? fillAndStroke() : options.color ? fill() : options.borderColor ? stroke() : closePath(),
     popGraphicsState()
@@ -19448,12 +19448,12 @@ var PDFPage = (
         graphicsState: graphicsStateKey
       }));
     };
-    PDFPage2.prototype.drawSvgPath = function(path2, options) {
+    PDFPage2.prototype.drawSvgPath = function(path3, options) {
       var _a, _b, _c, _d, _e, _f, _g, _h, _j;
       if (options === void 0) {
         options = {};
       }
-      assertIs(path2, "path", ["string"]);
+      assertIs(path3, "path", ["string"]);
       assertOrUndefined(options.x, "options.x", ["number"]);
       assertOrUndefined(options.y, "options.y", ["number"]);
       assertOrUndefined(options.scale, "options.scale", ["number"]);
@@ -19482,7 +19482,7 @@ var PDFPage = (
         options.borderColor = rgb(0, 0, 0);
       }
       var contentStream = this.getContentStream();
-      contentStream.push.apply(contentStream, drawSvgPath(path2, {
+      contentStream.push.apply(contentStream, drawSvgPath(path3, {
         x: (_a = options.x) !== null && _a !== void 0 ? _a : this.x,
         y: (_b = options.y) !== null && _b !== void 0 ? _b : this.y,
         scale: options.scale,
@@ -19909,16 +19909,16 @@ var px2mm = (px2) => {
 var mm2px = (mm) => {
   return Math.round(mm * 3.779527559);
 };
-function traverseFolder(path2) {
-  if (path2 instanceof import_obsidian.TFile) {
-    if (path2.extension == "md") {
-      return [path2];
+function traverseFolder(path3) {
+  if (path3 instanceof import_obsidian.TFile) {
+    if (path3.extension == "md") {
+      return [path3];
     } else {
       return [];
     }
   }
   const arr = [];
-  for (const item of path2.children) {
+  for (const item of path3.children) {
     arr.push(...traverseFolder(item));
   }
   return arr;
@@ -19927,6 +19927,9 @@ function copyAttributes(node, attributes) {
   Array.from(attributes).forEach((attr) => {
     node.setAttribute(attr.name, attr.value);
   });
+}
+function isNumber(str) {
+  return !isNaN(parseFloat(str));
 }
 
 // src/pdf.ts
@@ -20136,7 +20139,11 @@ function setMetadata(pdfDoc, { title, author, keywords, subject, creator, create
     pdfDoc.setTitle(title, { showInWindowTitleBar: true });
   }
   if (author) {
-    pdfDoc.setAuthor(author);
+    if (Array.isArray(author)) {
+      pdfDoc.setAuthor(author.join(", "));
+    } else {
+      pdfDoc.setAuthor(author.toString());
+    }
   }
   if (keywords) {
     pdfDoc.setKeywords(typeof keywords == "string" ? [keywords] : keywords);
@@ -20150,27 +20157,31 @@ function setMetadata(pdfDoc, { title, author, keywords, subject, creator, create
   pdfDoc.setModificationDate(new Date(updated_at != null ? updated_at : /* @__PURE__ */ new Date()));
 }
 async function exportToPDF(outputFile, config, w, { doc, frontMatter }) {
-  var _a, _b, _c, _d, _e, _f, _g, _h, _i;
+  var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j;
   console.log("output pdf:", outputFile);
   let pageSize = config["pageSize"];
   if (config["pageSize"] == "Custom" && config["pageWidth"] && config["pageHeight"]) {
     pageSize = {
-      width: parseFloat((_a = config["pageWidth"]) != null ? _a : "0") / 25.4,
-      height: parseFloat((_b = config["pageHeight"]) != null ? _b : "0") / 25.4
+      width: parseFloat((_a = config["pageWidth"]) != null ? _a : "210") / 25.4,
+      height: parseFloat((_b = config["pageHeight"]) != null ? _b : "297") / 25.4
     };
+  }
+  let scale2 = (_c = config == null ? void 0 : config["scale"]) != null ? _c : 100;
+  if (scale2 > 200 || scale2 < 10) {
+    scale2 = 100;
   }
   const printOptions = {
     landscape: config == null ? void 0 : config["landscape"],
     printBackground: config == null ? void 0 : config["printBackground"],
     generateTaggedPDF: config == null ? void 0 : config["generateTaggedPDF"],
     pageSize,
-    scale: config["scale"] / 100,
+    scale: scale2 / 100,
     margins: {
       marginType: "default"
     },
     displayHeaderFooter: config["displayHeader"] || config["displayFooter"],
-    headerTemplate: config["displayHeader"] ? (_c = frontMatter == null ? void 0 : frontMatter["headerTemplate"]) != null ? _c : config["headerTemplate"] : "<span></span>",
-    footerTemplate: config["displayFooter"] ? (_d = frontMatter == null ? void 0 : frontMatter["footerTemplate"]) != null ? _d : config["footerTemplate"] : "<span></span>"
+    headerTemplate: config["displayHeader"] ? (_d = frontMatter == null ? void 0 : frontMatter["headerTemplate"]) != null ? _d : config["headerTemplate"] : "<span></span>",
+    footerTemplate: config["displayFooter"] ? (_e = frontMatter == null ? void 0 : frontMatter["footerTemplate"]) != null ? _e : config["footerTemplate"] : "<span></span>"
   };
   if (config.marginType == "0") {
     printOptions["margins"] = {
@@ -20195,10 +20206,10 @@ async function exportToPDF(outputFile, config, w, { doc, frontMatter }) {
   } else if (config.marginType == "3") {
     printOptions["margins"] = {
       marginType: "custom",
-      top: parseFloat((_e = config["marginTop"]) != null ? _e : "0") / 25.4,
-      bottom: parseFloat((_f = config["marginBottom"]) != null ? _f : "0") / 25.4,
-      left: parseFloat((_g = config["marginLeft"]) != null ? _g : "0") / 25.4,
-      right: parseFloat((_h = config["marginRight"]) != null ? _h : "0") / 25.4
+      top: parseFloat((_f = config["marginTop"]) != null ? _f : "0") / 25.4,
+      bottom: parseFloat((_g = config["marginBottom"]) != null ? _g : "0") / 25.4,
+      left: parseFloat((_h = config["marginLeft"]) != null ? _h : "0") / 25.4,
+      right: parseFloat((_i = config["marginRight"]) != null ? _i : "0") / 25.4
     };
   }
   try {
@@ -20207,7 +20218,7 @@ async function exportToPDF(outputFile, config, w, { doc, frontMatter }) {
       headings: getHeadingTree(doc),
       frontMatter,
       displayMetadata: config == null ? void 0 : config.displayMetadata,
-      maxLevel: parseInt((_i = config == null ? void 0 : config.maxLevel) != null ? _i : "6")
+      maxLevel: parseInt((_j = config == null ? void 0 : config.maxLevel) != null ? _j : "6")
     });
     await fs.writeFile(outputFile, data);
     if (config.open) {
@@ -20304,6 +20315,11 @@ body {
     break-after: auto;
   }
 }
+
+img.__canvas__ {
+  width: 100% !important;
+  height: 100% !important;
+}
 `;
 function getPatchStyle() {
   return [CSS_PATCH, ...getPrintStyle()];
@@ -20337,7 +20353,7 @@ function getFrontMatter(app, file) {
   return (_a = cache == null ? void 0 : cache.frontmatter) != null ? _a : {};
 }
 async function renderMarkdown(app, file, config, extra) {
-  var _a, _b, _c, _d, _e, _f, _g, _h;
+  var _a, _b, _c, _d, _e, _f, _g, _h, _i;
   const startTime = (/* @__PURE__ */ new Date()).getTime();
   const ws = app.workspace;
   if (((_a = ws.getActiveFile()) == null ? void 0 : _a.path) != file.path) {
@@ -20369,7 +20385,7 @@ async function renderMarkdown(app, file, config, extra) {
   app.vault.cachedRead(file);
   viewEl.toggleClass("rtl", app.vault.getConfig("rightToLeft"));
   viewEl.toggleClass("show-properties", "hidden" !== app.vault.getConfig("propertiesInDocument"));
-  const title = (_f = extra == null ? void 0 : extra.title) != null ? _f : file.basename;
+  const title = (_g = (_f = extra == null ? void 0 : extra.title) != null ? _f : frontMatter == null ? void 0 : frontMatter.title) != null ? _g : file.basename;
   viewEl.createEl("h1", { text: title }, (e) => {
     var _a2;
     e.addClass("__title__");
@@ -20377,8 +20393,8 @@ async function renderMarkdown(app, file, config, extra) {
     e.id = (_a2 = extra == null ? void 0 : extra.id) != null ? _a2 : "";
   });
   const cache = app.metadataCache.getFileCache(file);
-  const blocks = new Map(Object.entries((_g = cache == null ? void 0 : cache.blocks) != null ? _g : {}));
-  const lines = ((_h = data == null ? void 0 : data.split("\n")) != null ? _h : []).map((line, i) => {
+  const blocks = new Map(Object.entries((_h = cache == null ? void 0 : cache.blocks) != null ? _h : {}));
+  const lines = ((_i = data == null ? void 0 : data.split("\n")) != null ? _i : []).map((line, i) => {
     for (const {
       id,
       position: { start, end }
@@ -20566,7 +20582,7 @@ var ExportConfigModal = class extends import_obsidian3.Modal {
   async renderFiles() {
     var _a, _b;
     const app = this.plugin.app;
-    const docs = [];
+    let docs = [];
     if (this.file instanceof import_obsidian3.TFolder) {
       const files = traverseFolder(this.file);
       for (const file of files) {
@@ -20597,7 +20613,7 @@ var ExportConfigModal = class extends import_obsidian3.Modal {
       }
     }
     if (!this.multiplePdf) {
-      this.mergeDoc(docs);
+      docs = this.mergeDoc(docs);
     }
     this.docs = docs.map(({ doc, ...rest }) => {
       return { ...rest, doc: fixDoc(doc, doc.title) };
@@ -20623,7 +20639,7 @@ var ExportConfigModal = class extends import_obsidian3.Modal {
     sections.forEach((section) => {
       root == null ? void 0 : root.appendChild(section);
     });
-    this.docs = [{ doc: doc0, frontMatter, file }];
+    return [{ doc: doc0, frontMatter, file }];
   }
   calcPageSize(element, config) {
     var _a, _b, _c;
@@ -20756,8 +20772,7 @@ ${px2mm(width)}\xD7${px2mm(height)}mm`;
       await this.appendWebviews(el);
       this.togglePrintSize();
     });
-    const contentEl = wrapper.createDiv();
-    contentEl.setAttribute("style", "width:320px;margin-left:16px;");
+    const contentEl = wrapper.createDiv({ attr: { class: "setting-wrapper" } });
     contentEl.addEventListener("keyup", (event) => {
       if (event.key === "Enter") {
         handleExport();
@@ -20765,8 +20780,15 @@ ${px2mm(width)}\xD7${px2mm(height)}mm`;
     });
     this.generateForm(contentEl);
     const handleExport = async () => {
+      var _a2, _b2;
       this.plugin.settings.prevConfig = this.config;
       await this.plugin.saveSettings();
+      if (this.config["pageSize"] == "Custom") {
+        if (!isNumber((_a2 = this.config["pageWidth"]) != null ? _a2 : "") || !isNumber((_b2 = this.config["pageHeight"]) != null ? _b2 : "")) {
+          alert("When the page size is Custom, the Width/Height cannot be empty.");
+          return;
+        }
+      }
       if (this.multiplePdf) {
         const outputPath = await getOutputPath(title);
         console.log("output:", outputPath);
@@ -21089,6 +21111,8 @@ var ConfigSettingTab = class extends import_obsidian4.PluginSettingTab {
 };
 
 // src/main.ts
+var fs3 = __toESM(require("fs/promises"));
+var import_path2 = __toESM(require("path"));
 var isDev = false;
 var DEFAULT_SETTINGS = {
   showTitle: true,
@@ -21153,18 +21177,47 @@ var BetterExportPdfPlugin = class extends import_obsidian5.Plugin {
     this.registerEvent(
       this.app.workspace.on("file-menu", (menu, file) => {
         if (file instanceof import_obsidian5.TFolder) {
-          let title = "Export each file to PDF";
+          let title = "Export to PDF...";
           if (isDev) {
             title = `${title} (dev)`;
           }
           menu.addItem((item) => {
-            item.setTitle(title).setIcon("download").setSection("action").onClick(async () => {
-              new ExportConfigModal(this, file, true).open();
-            });
+            item.setTitle(title).setIcon("lucide-folder-down").setSection("action");
+            const subMenu = item.setSubmenu();
+            subMenu.addItem(
+              (item2) => item2.setTitle("Export each file to PDF").setIcon("lucide-file-stack").onClick(async () => {
+                new ExportConfigModal(this, file, true).open();
+              })
+            );
+            subMenu.addItem(
+              (item2) => item2.setTitle("Generate TOC.md file").setIcon("lucide-file-text").onClick(async () => {
+                await this.generateToc(file);
+              })
+            );
           });
         }
       })
     );
+  }
+  async generateToc(root) {
+    const basePath = this.app.vault.adapter.basePath;
+    const toc = import_path2.default.join(basePath, root.path, "_TOC_.md");
+    const content = `---
+toc: true
+title: ${root.name}
+---
+`;
+    await fs3.writeFile(toc, content);
+    if (root instanceof import_obsidian5.TFolder) {
+      const files = traverseFolder(root);
+      for (const file of files) {
+        if (file.name == "_TOC_.md") {
+          continue;
+        }
+        await fs3.appendFile(toc, `[[${file.path}]]
+`);
+      }
+    }
   }
   onunload() {
   }
@@ -21219,3 +21272,5 @@ tslib/tslib.es6.js:
   PERFORMANCE OF THIS SOFTWARE.
   ***************************************************************************** *)
 */
+
+/* nosourcemap */

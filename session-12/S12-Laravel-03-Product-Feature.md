@@ -14,7 +14,7 @@ tags:
 date created: 03 July 2024
 date modified: 10 July 2024
 created: 2024-10-08T10:54
-updated: 2024-10-11T14:06
+updated: 2025-04-29T16:53
 ---
 
 # Laravel: 03 Product Feature
@@ -53,7 +53,7 @@ We will create the category model, migration and seeder so we have data for use 
 ## Before beginning
 
 Before you begin, check you have
-completed [S11 Laravel 02 Category Feature](session-11/S11-Laravel-02-Category-Feature.md).
+completed [S11 Laravel 02 Category Feature](session-12/S11-Laravel-02-Category-Feature.md).
 
 ## Create stubs
 

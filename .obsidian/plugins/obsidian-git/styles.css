@@ -39,6 +39,10 @@
     margin-right: auto;
 }
 
+.obsidian-git-disabled {
+    opacity: 0.5;
+}
+
 .obsidian-git-center-button {
     display: block;
     margin: 20px auto;
@@ -559,4 +563,14 @@
     .cm-gutterElement.obs-git-blame-gutter {
         display: none;
     }
+}
+
+.git-unified-diff-view,
+.git-split-diff-view .cm-deletedLine .cm-changedText {
+    background-color: #ee443330;
+}
+
+.git-unified-diff-view,
+.git-split-diff-view .cm-insertedLine .cm-changedText {
+    background-color: #22bb2230;
 }

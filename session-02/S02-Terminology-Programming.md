@@ -9,59 +9,126 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testing, PEST
 created: 2024-08-01T09:23
-updated: 2024-09-10T16:37
+updated: 2025-03-12T08:52
 ---
 
 # Programming Terminology
 
-## Stateful programming
+Our first set of terms relates to general concepts within programming.
 
-Stateful programming is a programming paradigm where the system or application retains information about previous interactions and can change its behavior based on that information.
+### WET
 
-## Stateless programming
+Write everything twice.
 
-Stateless programming is a programming paradigm where each request or interaction is independent and does not rely on previous interactions or stored state.
+### DRY
 
-## Idempotency
+Don't Repeat Yourself
 
-Idempotency is a property of certain operations in which performing the same operation multiple times results in the same outcome as performing it once.
+### KISS
 
-## Version Control
+Keep It Simple Stupid
 
-Version Control is a system that records changes to a file or set of files over time so that you can recall specific versions later.
 
-## CLI
-
-CLI stands for Command Line Interface, which is a text-based interface used to interact with software and operating systems by typing commands.
-
-## Convention vs Configuration
+### Convention vs Configuration
 
 Convention vs Configuration is a design philosophy where software defaults to standard conventions to reduce the need for custom configurations, making it easier to use out of the box.
 
-## OOP
+### Idempotence
+
+A property of (certain) operations in which performing the same operation multiple times results in the same outcome as performing it once is known as **idempotence**. That is, if you have the number 1 and 3 and add them then the result is 4. No matter how many times you do the same calculation, the results will always be the tame.
+
+
+### Stateful programming
+
+Stateful programming is a programming paradigm where the system or application retains information about previous interactions and can change its behaviour based on that information.
+
+### Stateless programming
+
+Stateless programming is a programming paradigm where each request or interaction is independent and does not rely on previous interactions or stored state.
+
+
+## Object Oriented Programming
+
+
+
+### Modularisation
+
+**Modularisation** is the process of dividing a program into separate modules that can be developed, tested, and maintained independently but function together as a whole.
+
+### OOP
 
 OOP stands for Object-Oriented Programming, which is a programming paradigm based on the concept of "objects" that contain data and methods.
 
-## Method
+### Class
 
-A Method is a function defined within a class in object-oriented programming that operates on objects of that class.
+A **Class** is a blueprint in object-oriented programming for creating objects, providing initial values for state and implementations of behavior.
 
-## Class
+### Object
 
-A Class is a blueprint in object-oriented programming for creating objects, providing initial values for state and implementations of behavior.
+An **Object** is an instance of a class in object-oriented programming that encapsulates data and behavior related to that data.
 
-## Object
+### Method
 
-An Object is an instance of a class in object-oriented programming that encapsulates data and behavior related to that data.
+A **Method** is a function defined within a class in object-oriented programming that operates on objects of that class.
 
-## Modularisation
 
-Modularisation is the process of dividing a program into separate modules that can be developed, tested, and maintained independently but function together as a whole.
 
-## CRUD
+## Database Programming
 
-CRUD stands for Create, Read, Update, Delete, which are the four basic operations for managing data in a database or a data store.
+There are many terms relating to Databases. They indude general terms such as CRUD and ACID, as wellas morespcific terms such as 
 
-## BREAD
 
-BREAD stands for Browse, Read, Edit, Add, Delete, which are five standard operations used in user interfaces to manage data.
+### CRUD
+
+**CRUD** (Acronym) stands for Create, Read, Update, Delete, which are the four basic operations for managing data in a database or a data store.
+
+### BREAD
+
+**BREAD** (Acronym) stands for Browse, Read, Edit, Add, Delete, which are five standard operations used in user interfaces to manage data.
+
+
+### ORM 
+
+ORM (Initialism) stands for Object-Relational Mapping. It is a layer in software development that makes it easier to interact between databases and the data they hold, and the code you are writing. They often provide a structured and easy to read syntax that (almost) removes the need to have a full understanding of the datavnbase's query syntax.
+
+
+ACID
+
+
+### DAL
+
+
+### Query Language
+
+
+### Relational Database
+
+
+### No SQL Database
+
+
+### Hybrid Databases
+
+
+### Table of Database Terms and Types
+
+| Initialism/Terms | Meaning / Notes                                                                                |
+| ---------------- | ---------------------------------------------------------------------------------------------- |
+| SQL              | Structured Query Language - The primary language used to interaction with Relational Databases |
+| DML              | Data Manipulation Language                                                                     |
+| DDL              | Data Definition Language                                                                       |
+| DQL              |                                                                                                |
+| DCL              | Data Control Language                                                                          |
+| TCL              | Transaction Control Language                                                                   |
+|                  |                                                                                                |
+|                  |                                                                                                |
+| Key-Value Store  |                                                                                                |
+| Document Store   |                                                                                                |
+| Graph Store      |                                                                                                |
+| Object Store     |                                                                                                |
+|                  |                                                                                                |
+|                  |                                                                                                |
+
+Geek for geeks reference
+
+
