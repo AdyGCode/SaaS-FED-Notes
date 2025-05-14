@@ -220,7 +220,6 @@ Open the user model from the `App\Models` folder.
 Make the following changes:
 
 - Add the `first_name` and `last_name` to the fillable fields,
-- Rename `name` to `name` in the same area
 
 ## Update the Register User Form
 
@@ -292,7 +291,7 @@ In the Store method, we need to add/update to include our new fields.
 
 ### Update the Validation in the Store method
 
-Edit the validation code, by renaming `name` to `name`. Then adding the ability to leave 
+Edit the validation code, adding the ability to leave 
 the name blank.
 
 ```php
@@ -313,7 +312,7 @@ Now, we will duplicate this line, and make the changes for the given and family 
 > 
 > So, we will handle this in a moment by:
 > 
-> - moving the family name into the given name, - if the given name is left blank, and
+> - moving the family name into the given name, if the given name is left blank, and
 > - making the family name blank/null.
 
 ### Making sure the given name always filled
@@ -438,10 +437,37 @@ We also will need to make sure that the preferred name uses the given name if it
 
 Open the `App\Http\Controllers` folder and locate and open the `ProfileController.php` file.
 
-Modify the update method, so the original line:
+Modify the update method, to include the new checks for the given and family names and name:
 
-```phpo
+```php
+        $validated = $request->validated();
+
+        if ($validated["given_name"] === null && $validated["family_name"] !== null) {
+            $validated["given_name"] = $validated["family_name"];
+            $validated["family_name"] = null;
+        }
+
+        if ($validated["name"] === null) {
+            $validated["name"] = $validated["given_name"];
+        }
+
+        $request->user()->fill($validated);
+
+        if ($request->user()->isDirty('email')) {
+            $request->user()->email_verified_at = null;
+        }
+
+        $request->user()->save();
+
+        return Redirect::route('profile.edit')->with('status', 'profile-updated');
 ```
+
+## Test
+
+This should now provide teh user with the ability to register with a full name, and 'nickname', and also update their profile.
+
+
+Can you see a problem with this when working with exising users?
 
 
 # END
