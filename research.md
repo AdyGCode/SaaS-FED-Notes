@@ -116,3 +116,89 @@ https://laracasts.com/series/how-to-contribute-to-open-source
 
 https://laracasts.com/series/how-to-contribute-to-open-source
 
+--- 2025-05-24
+
+https://medium.com/@digital_39945/mastering-laravel-migrations-tips-tricks-fixes-f94a44324fda
+https://medium.com/@dev.muhammadazeem/laravel-database-migrations-tips-for-managing-schema-changes-be3bad9c8e81
+https://medium.com/@laravelprotips/the-art-of-naming-in-laravel-a-simple-guide-c4e2dffd14df
+https://dev.to/adebayo_olukunle_06daa4ec/database-migrations-in-laravel-4nib
+https://dev.to/varzoeaa/the-art-of-database-migrations-in-laravel-common-mistakes-3kkc
+https://dev.to/mshsayket/how-to-create-like-and-dislike-system-in-laravel-11-5aj3
+https://www.itsolutionstuff.com/post/php-laravel-5-like-dislike-system-tutorialexample.html
+https://www.itsolutionstuff.com/post/laravel-10-generate-test-or-dummy-data-using-factory-tinkerexample.html
+https://medium.com/@cubettech11/search-functionality-in-laravel-9faeeee63766
+https://medium.com/@gromret/laravel-scopes-a-powerful-feature-for-query-filtering-90905ed0e033
+https://medium.com/@taraqr9/efficiently-filtering-queries-in-laravel-a-practical-guide-to-dynamic-request-based-filtering-8d10d026c092
+https://devdojo.com/bobbyiliev/how-to-add-simple-search-to-your-laravel-blogwebsite
+https://inyomanjyotisa.medium.com/simplified-guide-to-laravel-migrations-step-by-step-instructions-ea60dc12881a
+https://benjamincrozat.com/laravel-migrations
+https://www.itsolutionstuff.com/post/laravel-11-like-dislike-system-tutorial-exampleexample.html
+
+---
+
+To migrate the name column in your users table into separate given_name and family_name columns while keeping the existing data intact and allowing for reversibility, you can follow these steps:
+
+1. Create a Migration
+
+Generate a new migration file to modify the users table:
+
+php artisan make:migration split_name_column_in_users_table
+
+2. Update the Migration File
+
+Edit the generated migration file to include the logic for splitting the name column. Here's an example:
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class SplitNameColumnInUsersTable extends Migration
+{
+public function up()
+{
+Schema::table('users', function (Blueprint $table) {
+$table->string('given_name')->nullable();
+$table->string('family_name')->nullable();
+});
+
+        // Populate the new columns with data from the existing 'name' column
+        \DB::table('users')->get()->each(function ($user) {
+            $names = explode(' ', $user->name, 2); // Split into first and last name
+            \DB::table('users')
+                ->where('id', $user->id)
+                ->update([
+                    'given_name' => $names[0] ?? null,
+                    'family_name' => $names[1] ?? null,
+                ]);
+        });
+
+        // Optionally, keep the 'name' column for reversibility
+    }
+
+    public function down()
+    {
+        // Reverse the changes
+        \DB::table('users')->get()->each(function ($user) {
+            $fullName = trim($user->given_name . ' ' . $user->family_name);
+            \DB::table('users')
+                ->where('id', $user->id)
+                ->update(['name' => $fullName]);
+        });
+
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn(['given_name', 'family_name']);
+        });
+    }
+}
+
+3. Run the Migration
+
+Run the migration to apply the changes:
+
+php artisan migrate
+
+Explanation
+up Method: Adds given_name and family_name columns, splits the name column into these two, and populates the new columns.
+down Method: Combines given_name and family_name back into the name column and removes the new columns, ensuring reversibility.
+
+This approach ensures your data is preserved and can be reverted if needed.

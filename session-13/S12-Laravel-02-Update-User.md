@@ -51,9 +51,8 @@ We are going to:
 - Add `given_name` and `family_name` fields to the User model
 - We will allow the `family_name` to be empty.
 - Create an update user migration to add given and family name fields and rename the name field
-- Rename `name` to `nickname` in the User model
 - Update the registration form to include the given and family name
-- Update the user (profile) edit form to include the given and family name (and nickname)
+- Update the user (profile) edit form to include the given and family name (and name)
 - Update the user profile to include the new fields
 
 ## Create Update User Migration
@@ -75,7 +74,6 @@ public function up(): void
     Schema::table('users', function (Blueprint $table) {  
         $table->string('given_name');  
         $table->string('family_name')->nullable();  
-        $table->renameColumn('name', 'nickname');  
     });  
 }  
 
@@ -89,7 +87,6 @@ public function down(): void
     Schema::table('users', function (Blueprint $table) {  
         $table->dropColumn('given_name');  
         $table->dropColumn('family_name');  
-        $table->renameColumn('nickname', 'name');  
     });  
 }
 ```
@@ -119,7 +116,7 @@ $seedUsers = [
         'id'=>100  
         'given_name' => 'Admin',  
         'family_name' => 'Istrator',  
-        'nickname' => 'Admin',  
+        'name' => 'Admin',  
         'email' => 'admin@example.com',  
         'password' => 'Password1',  
     ],  
@@ -127,7 +124,7 @@ $seedUsers = [
         'id'=>500  
         'given_name' => 'Staff',  
         'family_name' => 'Member',  
-        'nickname' => 'Staff',  
+        'name' => 'Staff',  
         'email' => 'staff@example.com',  
         'password' => 'Password1',  
     ],  
@@ -135,7 +132,7 @@ $seedUsers = [
         'id'=>1000  
         'given_name' => 'Eileen',  
         'family_name' => 'Dover',  
-        'nickname' => 'Cliffwalker',  
+        'name' => 'Cliffwalker',  
         'email' => 'eileen@example.com',  
         'password' => 'Password1',  
     ],  
@@ -223,7 +220,6 @@ Open the user model from the `App\Models` folder.
 Make the following changes:
 
 - Add the `first_name` and `last_name` to the fillable fields,
-- Rename `name` to `nickname` in the same area
 
 ## Update the Register User Form
 
@@ -278,10 +274,10 @@ Repeat the process and just before the `<!-- Name -->` comment, and after the ju
 
 > Code shown on multiple lines for readability. 
 
-#### 3: Update the 'Name' field to 'Nickname'
+#### 3: Update the 'Name' field to 'name'
 
 With the current name field, you will need to change each occurrence of `name` or `Name` to
-`nickname` and `Nickname or preferred name` respectively.
+`name` and `name or preferred name` respectively.
 
 Also add `class="mt-4"`  to the `<div>`.
 
@@ -295,11 +291,11 @@ In the Store method, we need to add/update to include our new fields.
 
 ### Update the Validation in the Store method
 
-Edit the validation code, by renaming `name` to `nickname`. Then adding the ability to leave 
-the nickname blank.
+Edit the validation code, adding the ability to leave 
+the name blank.
 
 ```php
-'nickname' => ['sometimes', 'nullable', 'string', 'max:255'],
+'name' => ['sometimes', 'nullable', 'string', 'max:255'],
 ```
 
 Now, we will duplicate this line, and make the changes for the given and family name:
@@ -316,7 +312,7 @@ Now, we will duplicate this line, and make the changes for the given and family 
 > 
 > So, we will handle this in a moment by:
 > 
-> - moving the family name into the given name, - if the given name is left blank, and
+> - moving the family name into the given name, if the given name is left blank, and
 > - making the family name blank/null.
 
 ### Making sure the given name always filled
@@ -334,16 +330,16 @@ if ($request->given_name === null && $request->family_name !== null) {
 }  
 ```
 
-### Adding the nickname/preferred name when blank
+### Adding the name/preferred name when blank
 
 We have made the design decision that when a user registers, we will copy the given name into 
-the preferred name if the nickname/preferred name is blank.
+the preferred name if the name/preferred name is blank.
 
 After the above code we will add:
 
 ```php 
-if ($request->nickname === null) {  
-    $request->nickname = $request->given_name;
+if ($request->name === null) {  
+    $request->name = $request->given_name;
 }
 ```
 
@@ -388,29 +384,29 @@ Now duplicate this block, and edit Given Name to become Family Name:
 
 Remember, no required for Family Name!
 
-Finally duplicate the family name block, and update the copy to be Nickname in place of 
+Finally duplicate the family name block, and update the copy to be name in place of 
 Family Name.
 
 ```html
 <div>  
-    <x-input-label for="nickname" 
-         :value="__('Preferred Name/Nickname (Default: Given Name)')" />  
-    <x-text-input id="nickname" name="nickname" 
+    <x-input-label for="name" 
+         :value="__('Preferred Name/name (Default: Given Name)')" />  
+    <x-text-input id="name" name="name" 
          type="text" class="mt-1 block w-full"  
-         :value="old('nickname', $user->nickname)"  
-         autofocus autocomplete="nickname" />  
+         :value="old('name', $user->name)"  
+         autofocus autocomplete="name" />  
     <x-input-error class="mt-2" 
-         :messages="$errors->get('nickname')" />  
+         :messages="$errors->get('name')" />  
 </div>
 ```
 
-Also, no required for the Nickname.
+Also, no required for the name.
 
 ### Update the Update Profile Request
 
 Open the `App\Http\Requests` folder and locate and open the `ProfileUpdateRequest.php` file.
 
-Update the file so that the rules array contains the given, family and nicknames, which replace
+Update the file so that the rules array contains the given, family and names, which replace
 the 'name' field.
 
 ```php
@@ -425,7 +421,7 @@ the 'name' field.
 	'string', 
 	'max:255'
 	],  
-'nickname' => [
+'name' => [
 	'sometimes',
 	'nullable', 
 	'string', 
@@ -441,10 +437,37 @@ We also will need to make sure that the preferred name uses the given name if it
 
 Open the `App\Http\Controllers` folder and locate and open the `ProfileController.php` file.
 
-Modify the update method, so the original line:
+Modify the update method, to include the new checks for the given and family names and name:
 
-```phpo
+```php
+        $validated = $request->validated();
+
+        if ($validated["given_name"] === null && $validated["family_name"] !== null) {
+            $validated["given_name"] = $validated["family_name"];
+            $validated["family_name"] = null;
+        }
+
+        if ($validated["name"] === null) {
+            $validated["name"] = $validated["given_name"];
+        }
+
+        $request->user()->fill($validated);
+
+        if ($request->user()->isDirty('email')) {
+            $request->user()->email_verified_at = null;
+        }
+
+        $request->user()->save();
+
+        return Redirect::route('profile.edit')->with('status', 'profile-updated');
 ```
+
+## Test
+
+This should now provide teh user with the ability to register with a full name, and 'nickname', and also update their profile.
+
+
+Can you see a problem with this when working with exising users?
 
 
 # END
