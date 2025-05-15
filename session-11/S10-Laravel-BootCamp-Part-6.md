@@ -14,13 +14,11 @@ tags:
 date created: 03 July 2024
 date modified: 10 July 2024
 created: 2024-09-20T11:17
-updated: 2025-05-07T12:11
+updated: 2025-05-15T18:14
 ---
 
 
-# INCOMPLETE
-
-**Code has issues**
+# INCOMPLETE - Updates 15/5/25
 
 # S10 Laravel Bootcamp: Part 6
 
@@ -42,15 +40,70 @@ includeLinks: true
 
 # Laravel Bootcamp: Part 6
 
-## Administration Front End
+## Chirper Administration Front End
 
-In this section we will start to add an administration/mangement front-end that allows users with particular rights to perform management actions on data in the Chirp system.
+In this section we will start to add an administration/management front-end that allows users with particular rights to perform management actions on data in the Chirp system.
 
 We will:
 - Build User Management Interface
 - Determine Roles to use in Application
 - Determine Permissions each Role will have
 - Apply Roles & Permissions to Application (User Management)
+
+## Important Thoughts
+
+Before we launch into the main content of this set of notes we would like to remind you of a very important factor in software development...
+
+Working Code is more important than Optimised Code...
+
+This may sound strange, but when creating a solution to an opportunity, it is more important to get something working first.
+
+Delaying production of the product will lead to delays or even not achieving "profit" for a business, or even individual. (Profit may be measured in many ways including social benefit and financial benefit. It is up to you to determine the more important of these.)
+
+Optimisation may occur after release when you see an uptake in the solution that leads to people asking for new features, and even feedback about responsiveness...
+
+## Minimal Viable Product
+
+When developing software, it is important to start by identifying the MVP, or Minimum Viable Product.
+
+The MVP is:
+
+- The simplest version of a product that you need to build to sell it to a market.
+- Eric Ries said in his book "The Lean Startup": 
+	- “*The version of a new product which allows a team to collect the maximum amount of validated learning about customers with the least effort.*”
+
+### Further reading on MVP
+- lssdefinition. (2020, April 2). _Lean Startup_. Lean Manufacturing and Six Sigma Definitions - Glossary Terms, History, People and Definitions about Lean and Six Sigma. https://www.leansixsigmadefinition.com/glossary/lean-startup/#:~:text=Minimum%20viable%20product%20(MVP)%20%E2%80%93,similar%20to%20a%20pilot%20experiment).
+- _Minimum Viable Product (MVP)_. (2024, November 22). ProductPlan. https://www.productplan.com/glossary/minimum-viable-product/
+- Atlassian. (2023). _Minimum Viable Product (MVP): What is it & Why it Matters_. Atlassian. https://www.atlassian.com/agile/product-management/minimum-viable-product
+- Tan, P. (2020, September 18). _11 Minimum Viable Product Examples (With Actionable Tips)_. Appsumo.com; AppSumo. https://appsumo.com/blog/minimum-viable-product-examples?utm_source=google&utm_medium=cpc&utm_campaign=SH-Buy-Prospect-Evergreen-Mix-Dynamic-WorldWide-Null-PMax&utm_adset=&utm_content=&utm_term=&loc_i=1009317&loc_p=1009309&network=x&dvc=c&utm_placement=))&gad_source=5&gad_campaignid=22208046847&gclid=EAIaIQobChMI6s2p6oKljQMVoE9HAR3K5C-JEAAYASAAEgKfKfD_BwE
+
+
+## Chirper MVP
+
+For us, the Chirper App has a set of key needs:
+- To Register as a Chirper User
+- To Create, Edit and Delete Chirps
+- To Follow and Unfollow other Chirpers
+- To Like and Dislike Chirps
+
+But this then also leads us into what is needed for administration of this application? 
+
+The admin needs stretch beyond the needs above.
+
+For this example application we need Super Admin, Admin, Staff and Client roles who will have varying levels of permission to "abilities" or features:
+- Browse, read, edit, add and delete chirpers
+- Browse, read, edit, add and delete chirps
+- Browse, read, edit, add and delete likes/dislikes
+- Browse, read, edit, add and delete followers
+
+This is just a start, but this provides a good way to begin the MVP and admin of the MVP.
+
+This set of notes looks at *Administration of users*.
+
+In subsequent notes we look at Roles and Permissions, Likes and Dislikes.
+
+Other notes will be added over time to illustrate various features of the Laravel framework using Chirper as the base.
 
 
 ## Before you start…
@@ -122,8 +175,11 @@ In the case of the Users, we will name this `UserManager` just in case we may wa
 php artisan make:controller UserManagementController --resource 
 ```
 
-The `--resource` will automatically add the index, store, edit and other method stubs fort us to fill out.
+The `--resource` will automatically add the index, store, edit and other method stubs for us to fill out.
 
+## Browse Users
+
+We start by building the "browse users" sub-feature. This is usually known as the "index" view.
 
 ### Add index method to user management controller
 
@@ -328,6 +384,12 @@ Note that the role and pagination are not showing read details as we have to yet
 Check the page works as expected.
 
 The "New User" button will be placed on the right side of the header area. We leave that as an exercise.
+
+## Read a User
+
+Our next item in the CRUD / BREAD journey is the "read" sub-feature.
+
+This is where we are shown just ONE user's "full" details.
 
 ### Add Show method to user management controller
 
@@ -555,6 +617,12 @@ If all works as expected you should be able to click on a user in the index page
 
 ![](assets/vivaldi_LTZ7aCBugA.gif)
 
+## Add User
+
+So that is **B**rowse and **R**ead complete... next is **A**dd.
+
+OK, so we are skipping Edit for now... there are reasons...
+
 ### Add Create method to user management controller
 
 Ok, so we now have the show page, we next need to add the "Create and Store" to be able to add a new user to the system.
@@ -741,30 +809,222 @@ Here is a demonstration.
 
 ![](assets/vivaldi_yYBUqIS4VM.gif)
 
-# TODO: Finish these notes
+
+## Edit the User
+
+We just got Add completed, so we are ready for Edit.
+
+The reason we did it this way around was so you could understand the basic process of validating data and ensuring you were redirected accordingly.
+
+### Code Duplication... sometimes a good thing
+
+One of the nice parts of the process we are following is that once we have a set of working code, it provides us with a template for other features.
+
+As we stated earlier, it is more important to get code working and then at a later date optimise.
+
+Even in developing this user management feature we can see that code can be repurposed.
+
+We definitely see this in the Edit User "sub-feature".
 
 ### Add Edit method to user management controller
 
-TODO: Explain written code
+Open the User Management Controller and locate the edit and update methods.
 
-### Create `resources/views/users/edit.blade.php`
-TODO: Explain written code
+Change the edit method to read:
 
+```php
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(User $user)
+    {
+        // TODO: Update when we add Roles & Permissions
+        $roles = Collection::empty();
+
+        return view('users.edit', compact(['roles', 'user',]));
+    }
+```
+
+This looks almost identical to the Add, except:
+- The method expects the user details to be given to it... the user that will be edited
+- The view call puts the roles and the user data into the packet that is sent to the view.
+
+### Create the Edit Blade File
+
+To create the edit view, we will duplicate the create view and rename it to `edit.blade.php`.
+
+Once duplicated we need to edit the code.
+
+There is a lot of basically repeated edits, so we will show just one or two here.
+
+Start by editing the article header, to show it is editing a user...
+
+```php
+<header class="bg-gray-500 text-gray-50 text-lg px-4 py-2">
+    <h5>
+    {{ __('Edit User') }}
+    </h5>
+</header>
+```
+
+Now edit the form by changing the route that will be called:
+
+```php
+<form method="POST"
+      class="my-4 px-4 gap-4 flex flex-col text-gray-800"
+      action="{{ route('users.update', $user) }}">
+```
+
+Now, for the name, and otehr text-input fields we need to add a key aspect of the edit... the original information from the User's model must be shown when we open the file...
+
+Locate the `x-text-input` for the name, and update the value to read:
+
+```php
+<x-text-input id="name" class="block mt-1 w-full"
+              type="text"
+              name="name"
+              :value="old('name')??$user->name"
+              required autofocus autocomplete="name"/>
+
+```
+
+The key change is adding a null coalesce (`??`) that says "if the old name is empty, then use the user model's name". 
+
+This change will need to be completed for each of:
+- name
+- email
+- role
+
+The passwords do not take the old value, so we make sure there is no `:value` entry.
+
+Once the changes are done, save and we can next look at the update method in the user management controller.
 
 ### Add Update method to user management controller
-TODO: Explain written code
 
 
 ### Test Update Action
 
-TODO: Explain 
+The definiton of the method should not change from the default that was created by the artisan command.
 
+```php
+public function update(Request $request, User $user)  
+{  
+    // TODO: Update when we add Roles & Permissions  
+  
 
+```
+
+Next we need toa dd the validation to make sure the user is following our rules for data in the application.
+
+The validation looks dramatically similar to the store method's... with one or two small changes...
+
+```php
+$validated = $request->validate([  
+    'name' => ['required', 'min:2', 'max:192',],  
+    'email' => [  
+        'required',  
+        'string',  
+        'email',  
+        'max:255',  
+```
+
+This section is the same, but the email validation rule gets altered when it comes to being unique...
+
+```php     
+        Rule::unique(User::class)->ignore($user),  
+```
+
+This change in the rule tells Laravel to check that the email is not used elsewhere in the applications user data, *except for the user you are editing*!
+
+This means you can leave the user's email address alone unless it is being changed.
+
+The rest of the validation rules code is again, untouched.
+
+```php
+    ],  
+    'password' => [  
+        'sometimes',  
+        'nullable',  
+        'confirmed',  
+        Rules\Password::defaults()  
+    ],  
+    'role' => ['nullable',],  
+]);  
+```
+
+Now we need to work with two things... the passwords and the emails.
+
+Let's start with the passwords.
+
+If the user's data does not include a password change we need to remove it from the data being updated by a "patch".
+
+To do this we check to see if the validated password is null, and if so remove the array key so it does not violate the "required" and "not null" data requirements in the model.
+
+```php
+    // Remove password if null  
+    if (isNull($validated['password'])) {  
+        unset($validated['password']);  
+    }  
+
+```
+
+Next we tell Laravel to fill the changed fields with the validated data...
+
+```php
+    $user->fill($validated);  
+```
+
+The next step checks to see if the email has changed... that is "is the data dirty". If it is then we force the user to verify the new email address...
+
+```php
+    if ($user->isDirty('email')) {  
+        $user->email_verified_at = null;  
+    }  
+
+```
+
+Once this is set we save the updated user data.
+
+```php
+    $user->save();  
+
+```
+
+Finally the redirect back to the user index view.
+
+```php
+    return redirect(route('users.index'));  
+}
+```
+
+And we are done.
+
+#### Test! 
+
+Test the edit to make sure it works.
+
+### Notify User to Verify New Email
+
+If we are editing the user's email address, we want them to be notified, so we need to add three lines of code just before redirecting...
+
+```php
+if (isNull($user->email_verified_at)) {  
+    $user->sendEmailVerificationNotification();  
+}
+```
+
+This code checks to see if the email has had its verified at date and time reset to null, and if so force the system to send an email.
+
+👍 Nice!
+
+## Delete User
+
+Ok, so we like "Dr Who". If we were a fan of the doctor, we would expect the delete method to be called "Exterminate"... 
 
 ### Add Delete method to user management controller
 
 
-The delete funcitonality of the user management is not the same as the delete a chirp. We are going to provide a safety net and have the user confirmt hey want to sdelete the user fromt eh system.
+The delete functionality of the user management is not the same as the delete a chirp. We are going to provide a safety net and have the user confirm they want to delete the user from the system.
 
 To do so we need to add a "delete" method and a new "delete" route to the controller and route respectively.
 
@@ -775,6 +1035,120 @@ To do so we need to add a "delete" method and a new "delete" route to the contro
 
 
 ### Test Delete Action
+
+
+
+## Small UI Fixes
+
+Ok, we have noted a few small UI abhorrations that may be fixed.
+
+### Index View - Edit and Show Buttons
+
+The index and show buttons are not well aligned, so we found that a a padding of 1.5 on the y axis seems to do the job.
+
+Locate the Edit and Show buttons (approximately lines 65 to 85 in the code) and update the following:
+
+```php
+grow px-2
+```
+
+to become:
+
+```php
+grow px-2 py-1.5
+```
+
+### Fix the "header" for Index, Edit, Show, Delete, and Add views
+
+This needs two things to be completed.
+
+First we need to change the "app.blade.php" layout, and then we need to update the headers on each of the above views.
+
+#### App Blade Update
+
+Open the `app.blade.php` file and locate the section that reads:
+
+```php
+@isset($header)
+    <header class="bg-white shadow">
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            {{ $header }}
+        </div>
+    </header>
+@endisset
+```
+
+The `div` will be updated to read:
+
+```php
+<div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex flex-row space-x-2">
+```
+
+This will then place the title on the left, the add and search on the right.
+#### User Views Updates
+
+The user's views `<x-slot>` for the header all need to have updates.
+
+These updates ensure that the layout is correct and also that there is a search box added ready for later.
+
+Open your code and update the sections shown.
+
+Opening of the header should NOT contain a class...:
+
+```php
+<x-slot name="header">
+```
+
+On the `h2` we need to add a `grow` class to the current list.
+
+```php
+<h2 class="font-semibold text-xl text-gray-800 leading-tight grow">
+```
+
+Immediately before the  `</x-slot>` we are adding the search box:
+
+```php
+<form action="{{ route('users.index') }}" method="GET" class="flex flex-row gap-0">
+
+    <x-text-input id="search"
+                  type="text"
+                  name="search"
+                  class="border border-gray-200 rounded-r-none shadow-transparent"
+                  :value="$search??''"
+    />
+
+    <button type="submit"
+            class="text-gray-800
+                   bg-gray-100
+                   border border-gray-300
+                   rounded-lg
+                   px-4 py-1
+                   rounded-l-none">
+        <i class="fa-solid "></i>
+        Search
+    </button>
+
+</form>
+```
+
+
+These changes result in:
+
+![](assets/Pasted%20image%2020250515180411.png)
+
+Well, they will when you complete the exercise below to add icons and a few other fixes...
+## Exercise
+
+Oh, you should work out for yourselves how to make the buttons for search and "New User" look better than they currently are...
+
+Improvements include:
+- Wrap the `h2` in an anchor element that links to the user's index page - this makes it easier to navigate back to this page.
+- Move the `grow` class from the `h2` and add a new `class=""` attribute with the value of `grow` class to the new anchor.
+- Add a user icon to the Add button.
+- Add a magnifying glass icon to the Search button.
+- Add hover effects by changing the font and background colours to be similar to the other buttons (as in they go dark background and light text).
+
+We have made the search and its button look like they are a single item already for you.
 
 
 

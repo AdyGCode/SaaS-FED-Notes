@@ -30,7 +30,7 @@
       "synonymApiName": null
     },
     "en_GB": {
-      "definitionApiName": "Free Dictionary API",
+      "definitionApiName": "Offline Dictionary",
       "synonymApiName": null
     },
     "de": {
@@ -64,11 +64,11 @@
   },
   "partOfSpeechApiName": "Systran API",
   "advancedSynonymAnalysis": false,
-  "useCaching": false,
+  "useCaching": true,
   "folder": "",
   "capitalizedFileName": true,
   "prefix": "",
   "suffix": " ({{lang}})",
   "template": "---\n# {{notice}}\naliases: [\"{{word}}\"]\n---\n\n# {{word}}\n\n## {{pronunciationHeader}}\n\n{{phoneticList}}\n\n## {{meaningHeader}}\n\n{{meanings}}\n\n## {{originHeader}}\n\n{{origin}}\n",
-  "languageSpecificSubFolders": false
+  "languageSpecificSubFolders": true
 }
