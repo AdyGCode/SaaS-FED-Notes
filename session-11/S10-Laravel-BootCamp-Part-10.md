@@ -36,11 +36,17 @@ includeLinks: true
 
 ---
 
-# Laravel Bootcamp: Part 8
+# Laravel Bootcamp: Part 10
 
-There are a couple of minor issues to fix from [the previous part of this tutorial](../session-11/S10-Laravel-BootCamp-part-7).
+## Roles and Permissions
 
-This short set of notes helps provide solutions.
+In this section we will start to add an administration/management front-end that allows users with particular rights to perform management actions on data in the Chirp system.
+
+We will:
+- Build User Management Interface
+- Determine Roles to use in Application
+- Determine Permissions each Role will have
+- Apply Roles & Permissions to Application (User Management)
 
 
 ## Before you start…

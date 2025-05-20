@@ -116,7 +116,7 @@ First we need to pass the Request into the method:
 public function index(Request $request)
 ```
 
-Next, it is an exceptionally good idea (make that a **MUST**) to validate any input that comes from the user...
+Next, it is extremely important (make that a **MUST**) to validate any input that comes from the user...
 
 After the opening brackets we will add:
 
