@@ -14,7 +14,7 @@ tags:
 date created: 03 July 2024
 date modified: 10 July 2024
 created: 2024-09-20T11:17
-updated: 2025-04-29T16:48
+updated: 2025-05-23T11:13
 ---
 
 # Laravel Bootcamp: Part 2
@@ -37,11 +37,11 @@ includeLinks: true
 
 # Laravel Bootcamp Part 2
 
-The following notes are based on the official Laravel Boot Camp (Build Chirper with Blade https://bootcamp.laravel.com) with Adrian's shortened explanations.
+The following notes are based on the official Laravel v12 Bootcamp(Build Chirper with Blade https://bootcamp.laravel.com) with Adrian's shortened explanations.
 
 ## Before you start...
 
-Have you gone over the [Introducing Laravel](session-10/S10-Introducing-Laravel-v11.md) and then [Laravel Boot Camp Part 1](session-11/S10-Laravel-BootCamp-Part-1.md) ?
+Have you gone over the [Laravel v12 Bootcamp - Introducing Laravel](session-11/S11-Introducing-Laravel-v12.md) and then [Laravel v12 BootcampPart 1](session-11/S10-Laravel-v12-BootCamp-Part-1.md) ?
 
 No? Well... go do it...
 
@@ -113,7 +113,7 @@ Duplicate these lines, and do the same edits...
 
 If you refresh your browser and also shrink it down, you will see the mobile navigation appear, and then using the hamburger, it will expand to show the Chirps entry, again highlighted as active.
 
-![](../assets/S10-Laravel-BootCamp-Part-2-20240920172149440.png)
+![](../assets/S10-Laravel-v12-BootCamp-Part-2-20240920172149440.png)
 
 # Display our Chirps
 
@@ -261,8 +261,8 @@ This displays an animated (shake) comment bubble, in blue, that shakes twice and
 
 In the next part of the bootcamp we will add "Edit" and "Delete" chirp capability.
 
-- [Laravel Boot Camp - Part 3](session-11/S10-Laravel-BootCamp-Part-3.md)
-- [Session 11 ReadMe](session-11/ReadMe.md)
+- [Laravel v12 Bootcamp - Part 3](session-11/S10-Laravel-v12-BootCamp-Part-3.md)
+- [Session 11 ReadMe](session-10/ReadMe%201.md)
 - [Session 11 Reflection Exercises & Study](session-11/S11-Reflection-Exercises-and-Study.md)
 
 

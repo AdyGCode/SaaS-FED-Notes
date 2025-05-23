@@ -14,7 +14,7 @@ tags:
 date created: 03 July 2024
 date modified: 10 July 2024
 created: 2024-09-20T11:17
-updated: 2025-05-07T11:12
+updated: 2025-05-23T11:13
 ---
 
 # S10 Laravel Bootcamp: Part 5
@@ -45,11 +45,11 @@ Blade https://bootcamp.laravel.com) with Adrian's shortened explanations.
 
 Have you completed (not just read):
 
-- [Introducing Laravel](session-10/S10-Introducing-Laravel-v11.md),
-- [Laravel Boot Camp - Part 1](session-11/S10-Laravel-BootCamp-Part-1.md),
-- [Laravel Boot Camp - Part 2](session-11/S10-Laravel-BootCamp-Part-2.md)
-- [Laravel Boot Camp - Part 3](session-11/S10-Laravel-BootCamp-Part-3.md)
-- [Laravel Boot Camp - Part 4](session-11/S10-Laravel-BootCamp-Part-4.md)
+- [Laravel v12 Bootcamp - Introducing Laravel](session-11/S11-Introducing-Laravel-v12.md),
+- [Laravel v12 Bootcamp - Part 1](session-11/S10-Laravel-v12-BootCamp-Part-1.md),
+- [Laravel v12 Bootcamp - Part 2](session-11/S10-Laravel-v12-BootCamp-Part-2.md)
+- [Laravel v12 Bootcamp - Part 3](session-11/S10-Laravel-v12-BootCamp-Part-3.md)
+- [Laravel v12 Bootcamp - Part 4](session-11/S10-Laravel-v12-BootCamp-Part-4.md)
 
 No? Well… go do it…
 
@@ -327,8 +327,8 @@ And here is MailPit with the mails sent to the users of the application, except 
 
 # Up Next
 
-- [Laravel Boot Camp - Part 6](session-11/S10-Laravel-BootCamp-Part-6.md)
-- [Session 11 ReadMe](session-11/ReadMe.md)
+- [Laravel v12 Bootcamp - Part 6](session-11/S10-Laravel-v12-BootCamp-Part-6.md)
+- [Session 11 ReadMe](session-10/ReadMe%201.md)
 - [Session 11 Reflection Exercises & Study](session-11/S11-Reflection-Exercises-and-Study.md)
 
 # END

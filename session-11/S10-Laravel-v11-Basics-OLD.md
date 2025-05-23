@@ -1,6 +1,6 @@
 ---
 created: 2025-02-25T14:55
-updated: 2025-05-01T13:54
+updated: 2025-05-23T11:10
 ---
 # S10 Laravel 12: Basics
 

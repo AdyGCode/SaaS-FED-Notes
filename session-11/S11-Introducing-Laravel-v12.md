@@ -14,10 +14,10 @@ tags:
 date created: 03 July 2024
 date modified: 10 July 2024
 created: 2024-09-20T11:17
-updated: 2025-04-30T08:54
+updated: 2025-05-23T11:12
 ---
 
-# Introducing Laravel v12
+# Laravel Bootcamp: Introducing Laravel v12
 
 ## Software as a Service - Front-End Development
 
@@ -692,4 +692,4 @@ You are ready to carry on with the Boot Camp.
 
 # END
 
-Next up - [S10 Laravel BootCamp Part 1](session-11/S10-Laravel-BootCamp-Part-1.md) and [Part 2](session-11/S10-Laravel-BootCamp-Part-2.md)
+Next up - [S10 Laravel BootCamp Part 1](session-11/S10-Laravel-v12-BootCamp-Part-1.md) and [Part 2](session-11/S10-Laravel-v12-BootCamp-Part-2.md)

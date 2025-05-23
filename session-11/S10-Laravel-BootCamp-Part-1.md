@@ -14,7 +14,7 @@ tags:
 date created: 03 July 2024
 date modified: 10 July 2024
 created: 2024-09-20T11:17
-updated: 2025-05-01T13:54
+updated: 2025-05-23T11:12
 ---
 
 # Laravel Bootcamp: Chirper Part 1
@@ -41,7 +41,7 @@ The following notes are based on the official Laravel 11 Boot Camp (Build Chirpe
 
 ## Before you start...
 
-Ensure you have completed the [Introducing Laravel v12](session-11/S10-Introducing-Laravel-v12.md) notes and created the base code for the "Chirper Application" via the Retro Starter Kit.
+Ensure you have completed the [Introducing Laravel v12](session-10/S10-Introducing-Laravel-v12.md) notes and created the base code for the "Chirper Application" via the Retro Starter Kit.
 
 No? Well... go do it...
 
@@ -89,12 +89,12 @@ Click on Register, and add a new user with the details below. We are doing this 
 
 Here is an image of the registration form - with the above entered./
 
-![](../assets/S10-Laravel-BootCamp-20240920143515412.png)
+![](../assets/S10-Laravel-v12-BootCamp-20240920143515412.png)
 
 Once you have registered, you will get the dashboard.
 
 
-![](../assets/S10-Laravel-BootCamp-20240920143536181.png)
+![](../assets/S10-Laravel-v12-BootCamp-20240920143536181.png)
 
 
 #### Add a second user
@@ -298,7 +298,7 @@ This is Laravel's way of telling itself to load the `chirps/index.blade.php` vie
 
 The problem is, when you refresh your browser it will tell you it is missing... 
 
-![](../assets/S10-Laravel-BootCamp-20240920151458090.png)
+![](../assets/S10-Laravel-v12-BootCamp-20240920151458090.png)
 
 This is good, as we have been told that there is a problem, and at least Laravel's error pages look nice...
 
@@ -378,7 +378,7 @@ This last one will become more obvious when we complete the store method.
 
 We should now see a menu with the user's name (logged in), an area to enter a Chirp and a button to Chirp to the world.
 
-![](../assets/S10-Laravel-BootCamp-20240920155634761.png)
+![](../assets/S10-Laravel-v12-BootCamp-20240920155634761.png)
 
 Ok... that's great but the chirps are not going anywhere...
 
@@ -452,7 +452,7 @@ use Illuminate\Http\RedirectResponse;
 
 You could try making a chirp but we will get the following:
 
-![](../assets/S10-Laravel-BootCamp-20240920160925699.png)
+![](../assets/S10-Laravel-v12-BootCamp-20240920160925699.png)
 
 
 # Relationships are Important
@@ -539,7 +539,7 @@ In part two of our version of the Laravel Boot Camp, we will do the following:
 
 There may even be some other surprises to come as well!
 
-Let's get it done! - [S10 Laravel BootCamp Part 2](session-11/S10-Laravel-BootCamp-Part-2.md)
+Let's get it done! - [S10 Laravel BootCamp Part 2](session-11/S10-Laravel-v12-BootCamp-Part-2.md)
 
 
 # END

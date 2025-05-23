@@ -14,10 +14,10 @@ tags:
 date created: 03 July 2024
 date modified: 10 July 2024
 created: 2024-09-20T11:17
-updated: 2025-05-15T20:52
+updated: 2025-05-23T11:13
 ---
 
-# S10 Laravel Bootcamp: Part 8
+# S10 Laravel Bootcamp: Part 9
 
 ## Software as a Service - Front-End Development
 
@@ -45,14 +45,14 @@ In this section we add a Like/Dislike feature to the application.
 
 Have you completed (not just read):
 
-- [Introducing Laravel](session-10/S10-Introducing-Laravel-v11.md),
-- [Laravel Boot Camp - Part 1](session-11/S10-Laravel-BootCamp-Part-1.md),
-- [Laravel Boot Camp - Part 2](session-11/S10-Laravel-BootCamp-Part-2.md)
-- [Laravel Boot Camp - Part 3](session-11/S10-Laravel-BootCamp-Part-3.md)
-- [Laravel Boot Camp - Part 4](session-11/S10-Laravel-BootCamp-Part-4.md)
-- [Laravel Boot Camp - Part 5](session-11/S10-Laravel-BootCamp-Part-5.md)
-- [Laravel Boot Camp - Part 6](session-11/S10-Laravel-BootCamp-Part-6.md)
-- [Laravel Boot Camp - Part 7](session-11/S10-Laravel-BootCamp-Part-7.md)
+- [Laravel v12 Bootcamp - Introducing Laravel](session-11/S11-Introducing-Laravel-v12.md),
+- [Laravel v12 Bootcamp - Part 1](session-11/S10-Laravel-v12-BootCamp-Part-1.md),
+- [Laravel v12 Bootcamp - Part 2](session-11/S10-Laravel-v12-BootCamp-Part-2.md)
+- [Laravel v12 Bootcamp - Part 3](session-11/S10-Laravel-v12-BootCamp-Part-3.md)
+- [Laravel v12 Bootcamp - Part 4](session-11/S10-Laravel-v12-BootCamp-Part-4.md)
+- [Laravel v12 Bootcamp - Part 5](session-11/S10-Laravel-v12-BootCamp-Part-5.md)
+- [Laravel v12 Bootcamp - Part 6](session-11/S10-Laravel-v12-BootCamp-Part-6.md)
+- [Laravel v12 Bootcamp - Part 7](session-11/S10-Laravel-v12-BootCamp-Part-7.md)
 
 No? Well… go do it…
 
@@ -133,9 +133,7 @@ $table->smallInteger('vote');
 
 > #### Note:
 >
-> The constrained ensures that the two foreign IDs exist before they may be used, and cascade on delete means that if
-> the user is deleted then all votes are deleted that they make, and likewise if the chirp is deleted then the votes
-> for it are also deleted.
+> The constrained ensures that the two foreign IDs exist before they may be used, and cascade on delete means that if the user is deleted then all votes are deleted that they make, and likewise if the chirp is deleted then the votes for it are also deleted.
 
 Edit the model (`app/Models/Vote.php`) and add the fillable fields:
 
@@ -156,7 +154,7 @@ php artisan migrate
 
 ## Create the Relationships
 
-Ok, so we have the Vote table created, now lets tell Laravel how the models are related.
+Ok, so we have the Vote table created, now let us tell Laravel how the models are related.
 
 ### Chirp Model
 
@@ -186,8 +184,7 @@ public function userVotes(): HasOne
 ```
 
 The return says: "For this **Chirp**, look at its **votes**, and retrieve **one vote** where the **User** has the **same
-ID** as the
-currently **logged-in User**".
+ID** as the currently **logged-in User**".
 
 Very nice!
 
@@ -195,10 +192,11 @@ Very nice!
 
 To make this voting dynamic we are going to introduce a Livewire component.
 
-The Retro Blade Starter Kit has included Livewire capabilities so we do nto have to use composer to add and then publish
-the required parts. It also has enabled the required items in the two layouts.
+The Retro Blade Starter Kit has included Livewire capabilities so we do not have to use composer to add and then publish the required parts.
 
-### Create LikeDislike Component
+It also has enabled the required items in the two layouts.
+
+### Create Like-Dislike Component
 
 Run the command:
 
@@ -252,11 +250,11 @@ Between the closing `p` and `div` tags insert :
     </div>
 ```
 
-![Like/Dislike View Code](chirp-like-dislike-view-code.png)
+![Like/Dislike View Code](assets/chirp-like-dislike-view-code.png)
 
 When you go back to the browser and view the Chirps you should now see (without colour) something like this:
 
-![Example fo how the like/dislike is shown on screen](chirp-like-dislike-sample.png)
+![Example fo how the like/dislike is shown on screen](assets/chirp-like-dislike-sample.png)
 
 ### Create the Like-Dislike Livewire Code
 
@@ -268,7 +266,7 @@ The Like-Dislike component's code that makes it perform the action of voting, is
 
 Open the `LikeDislike.php` file ready to edit.
 
-Built into the file is the `render` method. This does exactly what it says, renders teh component on the page.
+Built into the file is the `render` method. This does exactly what it says, renders the component on the page.
 
 We need to add a new method, one which activates when the component is added to the page... the `mount` method:
 
@@ -279,14 +277,13 @@ public function mount(Chirp $chirp): void
 {
     $this->chirp = $chirp;
 } 
- 
 ```
 
 ### Saving Like/Dislike
 
 So, at the moment we can click the like/dislike, but nothing will happen. In fact, we will get an error:
 
-![chirp like dislike missing method error](chirp-like-dislike-missing-method-error.png)
+![chirp like dislike missing method error](../assets/chirp-like-dislike-missing-method-error.png)
 
 This is not good. How to fix this?
 
@@ -346,10 +343,11 @@ The has voted method determines if the user has voted, and if note makes the vot
 The method's code to do this is:
 
 ```php
-    private function hasVoted(int $val): bool 
-    {
-        return $this->userVote && $this->userVote->vote === $val;
-    } 
+private function hasVoted(int $val): bool 
+{
+    return $this->userVote && 
+	    $this->userVote->vote === $val;
+} 
 ```
 
 
@@ -456,8 +454,8 @@ In the Chirp Controller we need to update the index method.
 
 # Up Next
 
-- [Laravel Boot Camp - Part 9](session-11/S10-Laravel-BootCamp-Part-9.md)
-- [Session 11 ReadMe](session-11/ReadMe.md)
+- [Laravel v12 Bootcamp - Part 9](session-11/S10-Laravel-v12-BootCamp-Part-9.md)
+- [Session 11 ReadMe](session-10/ReadMe%201.md)
 - [Session 11 Reflection Exercises & Study](session-11/S11-Reflection-Exercises-and-Study.md)
 
 # END

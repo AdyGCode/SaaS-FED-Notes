@@ -14,7 +14,7 @@ tags:
 date created: 03 July 2024
 date modified: 10 July 2024
 created: 2024-10-08T10:54
-updated: 2024-10-09T15:52
+updated: 2025-05-23T11:05
 ---
 
 # Laravel: 01 Setting Up
