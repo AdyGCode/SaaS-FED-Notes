@@ -11,10 +11,12 @@
             "id": "ecb11b667ed346cf",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
+              "type": "image",
+              "state": {
+                "file": "session-11/chirp-like-dislike-missing-method-error.png"
+              },
+              "icon": "lucide-image",
+              "title": "chirp-like-dislike-missing-method-error"
             }
           }
         ]
@@ -136,12 +138,13 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "session-11/chirp-like-dislike-missing-method-error.png",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline"
+              "title": "Outline of chirp-like-dislike-missing-method-error"
             }
           },
           {
