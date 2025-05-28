@@ -151,7 +151,8 @@ The installation will complete.
 
 ### Quick Test of the application
 
-To test the application we need to be in the folder with the project. This will be the folder `saas-fed-l12-blade-demo`.
+To test the application, we need to be in the folder with the project. This will be the 
+folder `saas-fed-l12-blade-demo`.
 
 Back in the Terminal, use the command:
 ```shell

@@ -641,7 +641,7 @@ Update it to read:
     "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"npm run dev\" \"c:\\ProgramData\\Laragon\\bin\\mailpit\\mailpit --smtp 0.0.0.0:2525\" --names=server,queue,vite,mailpit"],
 ```
 
-Once you have done this, stop the current composer run dev using <key>CTRL</key>+<key>C</key> and then re-running the command:
+Once you have done this, stop the current `composer run dev` using <key>CTRL</key>+<key>C</key> and then re-running the command:
 
 ```shell
 composer run dev
