@@ -24,8 +24,8 @@ https://www.phptutorial.net/php-pdo/ Section 7
 
 If you have not downloaded it already, obtain copy of the following SQL file that will create and configure a user, database and sample tables for practice.
 
-- MySQL: ![](session-07/database-mysql.sql)
-- MariaDB:![](session-07/database-mariadb.sql)
+- MySQL: ![](../session-07/database-mysql.sql)
+- MariaDB:![](../session-07/database-mariadb.sql)
 
 
 We presume you are using MySQL or MariaDB for this session.
@@ -453,5 +453,3 @@ $statement->execute();
   
 $records = $statement->fetchAll(PDO::FETCH_ASSOC);
 ```
-
-

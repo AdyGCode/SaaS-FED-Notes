@@ -35,24 +35,28 @@ includeLinks: true
 
 ---
 
-# Laravel Bootcamp: Part 8
+# Laravel Bootcamp: Part 9
 
 ## Like / Dislike Feature
 
-In this section we add a Like/Dislike feature to the application.
+In this section, we add a Like/Dislike feature to the application.
+
+To make it "dynamic" in nature, we use Laravel's LiveWire package so we are able to write
+over 99.99% of the code in PHP, and only a touch of "pseudo-JavaScript" in the shape of the "
+wire" attribute.
 
 ## Before you start…
 
 Have you completed (not just read):
 
-- [Laravel v12 Bootcamp - Introducing Laravel](session-11/S11-Introducing-Laravel-v12.md),
-- [Laravel v12 Bootcamp - Part 1](session-11/S10-Laravel-v12-BootCamp-Part-1.md),
-- [Laravel v12 Bootcamp - Part 2](session-11/S10-Laravel-v12-BootCamp-Part-2.md)
-- [Laravel v12 Bootcamp - Part 3](session-11/S10-Laravel-v12-BootCamp-Part-3.md)
-- [Laravel v12 Bootcamp - Part 4](session-11/S10-Laravel-v12-BootCamp-Part-4.md)
-- [Laravel v12 Bootcamp - Part 5](session-11/S10-Laravel-v12-BootCamp-Part-5.md)
-- [Laravel v12 Bootcamp - Part 6](session-11/S10-Laravel-v12-BootCamp-Part-6.md)
-- [Laravel v12 Bootcamp - Part 7](session-11/S10-Laravel-v12-BootCamp-Part-7.md)
+- [Laravel v12 Bootcamp - Introducing Laravel](../session-11/S11-Introducing-Laravel-v12.md),
+- [Laravel v12 Bootcamp - Part 1](../session-11/S10-Laravel-v12-BootCamp-Part-1.md),
+- [Laravel v12 Bootcamp - Part 2](../session-11/S10-Laravel-v12-BootCamp-Part-2.md)
+- [Laravel v12 Bootcamp - Part 3](../session-11/S10-Laravel-v12-BootCamp-Part-3.md)
+- [Laravel v12 Bootcamp - Part 4](../session-11/S10-Laravel-v12-BootCamp-Part-4.md)
+- [Laravel v12 Bootcamp - Part 5](../session-11/S10-Laravel-v12-BootCamp-Part-5.md)
+- [Laravel v12 Bootcamp - Part 6](../session-11/S10-Laravel-v12-BootCamp-Part-6.md)
+- [Laravel v12 Bootcamp - Part 7](../session-11/S10-Laravel-v12-BootCamp-Part-7.md)
 
 No? Well… go do it…
 
@@ -65,15 +69,17 @@ You will need these to be able to continue…
 
 # Like & Dislike
 
-Common on may social media systems, but also on other sites is the ability to like or dislike a chirp, item or such.
+Common on may social media systems, but also on other sites is the ability to like or dislike a
+chirp, item or such.
 
-We delve into creating the Like/Dislike whilst also looking at other parts of the Laravel ecosystem.
+We delve into creating the Like/Dislike whilst also looking at other parts of the Laravel
+ecosystem.
 
 We already have a good layout for the Chirps, so let's start on adding our new feature.
 
 ## The Voting Problem
 
-Before we go any further we need to look at the problem of Chirps, Votes and Users.
+Before we go any further, we need to look at the problem of Chirps, Votes and Users.
 
 In the crudest form:
 
@@ -86,19 +92,26 @@ As an Entity-Relationship (E-R) diagram:
 
 ```mermaid
 erDiagram
-    User }o..o{ Chirp: "votes on/is voted on"
+    User }o--o{ Chirp: "votes on/is voted on"
 ```
 
 The only way we could then use this would be to:
 
 - In the Chirp table, have a field that gives an array of votes and who voted for the chirp
-- In the User table, have a field that gives an array of the votes and which Chirps they voted for
+- In the User table, have a field that gives an array of the votes and which Chirps they voted
+  for
 
-That is just unmanageable (from storage and responsiveness) when you get 1,000s or even 1,000,000,000s of users.
+That is just unmanageable (from storage and responsiveness) when you get thousands, or even
+millions of users.
 
-So we remove this problem by using Normalisation and transform the relationship from:
+So we remove this problem by using normalisation and transform the relationship from:
 
 - `User -m---m- Chirp`
+
+```mermaid
+erDiagram
+    User }o--o{ Chirp: "has/makes votes"
+```
 
 into
 
@@ -108,11 +121,11 @@ This is expressed as an E-R Diagram, thus:
 
 ```mermaid
 erDiagram
-    User ||..o{ Vote: "makes a"
+    User ||--o{ Vote: "makes a"
     Chirp ||--o{ Vote: "has"
 ```
 
-With this in mind we can now proceed.
+With this in mind, we can now proceed.
 
 ### Create Model and Migration
 
@@ -122,8 +135,8 @@ Begin by creating the `Vote` model with a migration.
 php artisan make:model Vote -m
 ```
 
-Edit the migration (`database/migrations/YYYY_MM_DD_HHMMSS_create_votes_table.php`) and add between the ID and
-Timestamps:
+Edit the migration (`database/migrations/YYYY_MM_DD_HHMMSS_create_votes_table.php`) and add
+between the ID and Timestamps:
 
 ```php
 $table->foreignId('chirp_id')->constrained()->cascadeOnDelete();
@@ -133,7 +146,9 @@ $table->smallInteger('vote');
 
 > #### Note:
 >
-> The constrained ensures that the two foreign IDs exist before they may be used, and cascade on delete means that if the user is deleted then all votes are deleted that they make, and likewise if the chirp is deleted then the votes for it are also deleted.
+> The constrained ensures that the two foreign IDs exist before they may be used, and cascade on
+> delete means that if the user is deleted, then all votes are deleted that they make, and
+> likewise if the chirp is deleted, then the votes for it are also deleted.
 
 Edit the model (`app/Models/Vote.php`) and add the fillable fields:
 
@@ -151,14 +166,13 @@ Run the migration...
 php artisan migrate
 ```
 
-
 ## Create the Relationships
 
 Ok, so we have the Vote table created, now let us tell Laravel how the models are related.
 
 ### Chirp Model
 
-In the chirp model we need to add the following relationships:
+In the chirp model, we need to add the following relationships:
 
 - has many votes
 - has one vote
@@ -183,16 +197,19 @@ public function userVotes(): HasOne
 } 
 ```
 
-The return says: "For this **Chirp**, look at its **votes**, and retrieve **one vote** where the **User** has the **same
+The return says: "For this **Chirp**, look at its **votes**, and retrieve **one vote** where the
+**User** has the **same
 ID** as the currently **logged-in User**".
 
 Very nice!
 
-## Livewire Component
+## LiveWire Component
 
-To make this voting dynamic we are going to introduce a Livewire component.
+To make this voting dynamic, we are going to introduce a LiveWire component.
 
-The Retro Blade Starter Kit has included Livewire capabilities so we do not have to use composer to add and then publish the required parts.
+The Retro Blade Starter Kit has included LiveWire capabilities, so we do not have to use
+composer
+to add and then publish the required parts.
 
 It also has enabled the required items in the two layouts.
 
@@ -201,10 +218,10 @@ It also has enabled the required items in the two layouts.
 Run the command:
 
 ```shell
-php artisan make:livewire LikeDislike
+php artisan make:LiveWire LikeDislike
 ```
 
-This creates the `resources/views/livewire/like-dislike.blade.php` file.
+This creates the `resources/views/LiveWire/like-dislike.blade.php` file.
 
 Before we add it to the chirp card, we will edit the component and provide its layout.
 
@@ -246,29 +263,33 @@ Between the closing `p` and `div` tags insert :
 
 ```php
     <div class="text-right">
-    @livewire('like-dislike', [$chirp])
+    @LiveWire('like-dislike', [$chirp])
     </div>
 ```
 
-![Like/Dislike View Code](assets/chirp-like-dislike-view-code.png)
+![Like/Dislike View Code](../assets/chirp-like-dislike-view-code.png)
 
-When you go back to the browser and view the Chirps you should now see (without colour) something like this:
+When you go back to the browser and view the Chirps you should now see (without colour)
+something like this:
 
-![Example fo how the like/dislike is shown on screen](assets/chirp-like-dislike-sample.png)
+![Example fo how the like/dislike is shown on screen](../assets/chirp-like-dislike-sample.png)
 
-### Create the Like-Dislike Livewire Code
+### Create the Like-Dislike LiveWire Code
 
 Ok, so we have a layout, and it looks pretty good, but we now need to make it do something.
 
-This is where the Livewire component comes into its own. No JavaScript, just PHP.
+This is where the LiveWire component comes into its own. No JavaScript, just PHP.
 
-The Like-Dislike component's code that makes it perform the action of voting, is found in the `App/Livewire` folder.
+The Like-Dislike component's code that makes it perform the action of voting, is found in the
+`App/LiveWire` folder.
 
 Open the `LikeDislike.php` file ready to edit.
 
-Built into the file is the `render` method. This does exactly what it says, renders the component on the page.
+Built into the file is the `render` method. This does exactly what it says, renders the
+component on the page.
 
-We need to add a new method, one which activates when the component is added to the page... the `mount` method:
+We need to add a new method, one which activates when the component is added to the page... the
+`mount` method:
 
 ```php
 public Chirp $chirp; 
@@ -281,7 +302,8 @@ public function mount(Chirp $chirp): void
 
 ### Saving Like/Dislike
 
-So, at the moment we can click the like/dislike, but nothing will happen. In fact, we will get an error:
+So, at the moment we can click the like/dislike, but nothing will happen. In fact, we will get
+an error:
 
 ![chirp like dislike missing method error](../assets/chirp-like-dislike-missing-method-error.png)
 
@@ -294,13 +316,14 @@ Start by adding some properties to the component:
     public int $lastUserVote = 0;
 ```
 
-The `?Vote $userVote` indicates that the property `$userVote` is nullable. That is it will hold the current user's vote
-from the model's `userVoates` relationship when it exists, and null when there is no vote.
+The `?Vote $userVote` indicates that the property `$userVote` is nullable. That is it will hold
+the current user's vote from the model's `userVoates` relationship when it exists, and null when
+there is no vote.
 
 The `lastuserVote` is the value taken from the `userVotes` relationship we have in the model.
 
-Now we need to update the mount method to request the user vote for the chirp, and default the last user vote to zero if
-the user has not voted on the chirp.
+Now we need to update the mount method to request the user vote for the chirp, and default the
+last user vote to zero if the user has not voted on the chirp.
 
 ```php
 $this->userVote = $chirp->userVotes; 
@@ -308,7 +331,6 @@ $this->lastUserVote = $this->userVote->vote ?? 0;
 ```
 
 Ok, so we have default values... there is a problem though... which we will look at later.
-
 
 Let's head back into the component code and add the two methods as stubs.
 
@@ -338,7 +360,8 @@ But what is this `hasVoted` method?
 
 #### Has Voted
 
-The has voted method determines if the user has voted, and if note makes the vote equal to the value that is passed as a anrgument.
+The "has voted" method determines if the user has voted, and if note makes the vote equal to the
+value that is passed as an argument.
 
 The method's code to do this is:
 
@@ -350,10 +373,10 @@ private function hasVoted(int $val): bool
 } 
 ```
 
-
 #### Update Vote
 
-Ok, so we have a new method to write, so we do not reproduce the code every time we need to update a vote.
+Ok, so we have a new method to write, so we do not reproduce the code every time we need to
+update a vote.
 
 Before the `has voted` mthod we will add the following:
 
@@ -368,9 +391,11 @@ private function updateVote(int $value): void
 }
 ```
 
-The method checks to see if there is a vote by this user for this chirp. If there is then the vote is updated, otherwise the vote is created.
+The method checks to see if there is a vote by this user for this chirp. If there is then the
+vote is updated, otherwise the vote is created.
 
-This is called to set the value to -1, 0 or 1, depending on if the chirp is disliked (-1) or liked (1). If the user clicks 'like' or 'dislike' twice then the vote is set to 0.
+This is called to set the value to -1, 0 or 1, depending on if the chirp is disliked (-1) or
+liked (1). If the user clicks 'like' or 'dislike' twice then the vote is set to 0.
 
 To enable the like and dislike methods to do this we need to modify their code a little.
 
@@ -389,11 +414,15 @@ $this->updateVote(1);
 
 Ok, now onto the total likes and dislikes.
 
-One of the problems with this form of feature is that we run into a problem with the number of queries being made.
+One of the problems with this form of feature is that we run into a problem with the number of
+queries being made.
 
-We could ask the component to count the number of likes and dislikes for each chirp. This would mean that we would have two more queried per chirp retrieved. That's going to add up very quickly.
+We could ask the component to count the number of likes and dislikes for each chirp. This would
+mean that we would have two more queried per chirp retrieved. That's going to add up very
+quickly.
 
-So what we need to do is retrieve the data once, and combine this with the number of likes and dislikes in the Chirps.
+So what we need to do is retrieve the data once, and combine this with the number of likes and
+dislikes in the Chirps.
 
 To start, in the properties area of the `LikeDislike` component, add the following properties:
 
@@ -416,7 +445,7 @@ This is so the counts are available to be displayed in the component's blade fil
 
 Now we need to turn our attention back to the Chirp Controller.
 
-In the Chirp Controller we need to update the index method. 
+In the Chirp Controller we need to update the index method.
 
 ```php
     public function index(): View
@@ -434,28 +463,21 @@ In the Chirp Controller we need to update the index method.
 
 # TODO: Explain code
 
-
-
-
-
 #### Dislike Code
 
 > Exercise 🫨
 >
 > You can add the dislike code, but make the value `-1` in place of `1`.
- 
-
-
 
 # References
 
-- Livewire Like/Dislike Component for Social Networks: Step-by-Step. (2023). Laravel
+- LiveWire Like/Dislike Component for Social Networks: Step-by-Step. (2023). Laravel
   Daily. https://laraveldaily.com/post/livewire-like-dislike-component
 
 # Up Next
 
-- [Laravel v12 Bootcamp - Part 9](session-11/S10-Laravel-v12-BootCamp-Part-9.md)
-- [Session 11 ReadMe](session-10/ReadMe%201.md)
-- [Session 11 Reflection Exercises & Study](session-11/S11-Reflection-Exercises-and-Study.md)
+- [Laravel v12 Bootcamp - Part 9](../session-11/S10-Laravel-v12-BootCamp-Part-9.md)
+- [Session 11 ReadMe](../session-10/ReadMe.md)
+- [Session 11 Reflection Exercises & Study](../session-11/S11-Reflection-Exercises-and-Study.md)
 
 # END

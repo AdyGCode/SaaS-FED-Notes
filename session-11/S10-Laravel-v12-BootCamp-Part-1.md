@@ -41,7 +41,7 @@ The following notes are based on the official Laravel 11 Boot Camp (Build Chirpe
 
 ## Before you start...
 
-Ensure you have completed the [Introducing Laravel v12](session-10/S10-Introducing-Laravel-v12.md) notes and created the base code for the "Chirper Application" via the Retro Starter Kit.
+Ensure you have completed the [Introducing Laravel v12](../session-10/S10-Introducing-Laravel-v12.md) notes and created the base code for the "Chirper Application" via the Retro Starter Kit.
 
 No? Well... go do it...
 
@@ -539,7 +539,7 @@ In part two of our version of the Laravel Boot Camp, we will do the following:
 
 There may even be some other surprises to come as well!
 
-Let's get it done! - [S10 Laravel BootCamp Part 2](session-11/S10-Laravel-v12-BootCamp-Part-2.md)
+Let's get it done! - [S10 Laravel BootCamp Part 2](../session-11/S10-Laravel-v12-BootCamp-Part-2.md)
 
 
 # END

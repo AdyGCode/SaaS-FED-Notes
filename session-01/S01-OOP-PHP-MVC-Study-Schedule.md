@@ -34,15 +34,8 @@ This is a previous version of the Traversy Course. See
 If you have no PHP experience then we recommend checking out 
 
 
-[S01-PHP-for-Beginners-Study-Schedule](session-01/S01-PHP-for-Beginners-Study-Schedule.md)
+[S01-PHP-for-Beginners-Study-Schedule](../session-01/S01-PHP-for-Beginners-Study-Schedule.md)
 
 or
 
-[S01-PHP-for-Beginners-Crash-Course-Study-Schedule](session-01/S01-PHP-for-Beginners-Crash-Course-Study-Schedule.md)
-
-
-
-
-
-
-
+[S01-PHP-for-Beginners-Crash-Course-Study-Schedule](../session-01/S01-PHP-for-Beginners-Crash-Course-Study-Schedule.md)

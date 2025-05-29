@@ -515,7 +515,7 @@ git push -u origin main
 
 Check that your remote has the required files.
 
-![](assets/Pasted%20image%2020250428171915.png)
+![](../assets/Pasted%20image%2020250428171915.png)
 
 
 ## We're Ready!
@@ -669,7 +669,7 @@ If you have Laragon's Apache server running you may also visit: `http://chirper-
 
 In the browser you will now see:
 
-![Laravel Initial Web Site](assets/Pasted%20image%2020250428175052.png)
+![Laravel Initial Web Site](../assets/Pasted%20image%2020250428175052.png)
 
 We are now ready to find out a bit more...
 
@@ -692,4 +692,4 @@ You are ready to carry on with the Boot Camp.
 
 # END
 
-Next up - [S10 Laravel BootCamp Part 1](session-11/S10-Laravel-v12-BootCamp-Part-1.md) and [Part 2](session-11/S10-Laravel-v12-BootCamp-Part-2.md)
+Next up - [S10 Laravel BootCamp Part 1](../session-11/S10-Laravel-v12-BootCamp-Part-1.md) and [Part 2](../session-11/S10-Laravel-v12-BootCamp-Part-2.md)

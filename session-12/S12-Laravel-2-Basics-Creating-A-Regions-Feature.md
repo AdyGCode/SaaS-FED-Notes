@@ -39,7 +39,7 @@ includeLinks: true
 
 # Terms
 
-Please refer to the terms in [S12-Laravel-1-Basics-Planning-A-Feature](session-12/S12-Laravel-1-Basics-Planning-A-Feature.md)
+Please refer to the terms in [S12-Laravel-1-Basics-Planning-A-Feature](../session-12/S12-Laravel-1-Basics-Planning-A-Feature.md)
 
 # Overview
 

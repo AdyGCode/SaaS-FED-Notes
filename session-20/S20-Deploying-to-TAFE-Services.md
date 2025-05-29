@@ -39,7 +39,7 @@ includeLinks: true
 
 
 Before you begin this process make sure you have:
-- [Tested your application in a fresh installation](session-20/S20-How-To-Test-Your-App-Works.md)
+- [Tested your application in a fresh installation](../session-20/S20-How-To-Test-Your-App-Works.md)
 - Had suitable a subdomain created on ScreenCraft
 - Familiarised yourself with the ScreenCraft Control Panel for your (sub)domain
 
@@ -59,4 +59,3 @@ APP_ENV=production
 APP_KEY=
 APP_DEBUG=false
 ```
-

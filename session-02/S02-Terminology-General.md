@@ -18,7 +18,7 @@ updated: 2025-03-12T08:52
 
 The business domain is the specific area of expertise or industry that a business operates within.
 
-Additional information in [S02 Terminology - Business Domain](session-02/S02-Terminology-Business-Domain).
+Additional information in [S02 Terminology - Business Domain](../session-02/S02-Terminology-Business-Domain).
 
 
 ## Design and Development Terminology
@@ -74,7 +74,7 @@ You Ain't Gonna Need It.
 
 ## Network & Systems
 
-There are a number of network and systems related terms that include Client, Server, Network, LAN, PAN, WAN, and many more. See the [S02 Terminology - Network and Internet](session-02/S02-Terminology-Network-Internet.md) article for details on terms not shown below.
+There are a number of network and systems related terms that include Client, Server, Network, LAN, PAN, WAN, and many more. See the [S02 Terminology - Network and Internet](../session-02/S02-Terminology-Network-Internet.md) article for details on terms not shown below.
 
 ### Client
 
@@ -150,4 +150,3 @@ A microservice is an architectural style that structures an application as a col
 
 
 Hybrid Applications
-

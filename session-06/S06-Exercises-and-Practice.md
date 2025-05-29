@@ -26,7 +26,7 @@ includeLinks: true
 
 # Exercises and Practice
 
-Experiment with the SQL and PHP code from [S05-PHP-Basics-VII](session-06/S05-PHP-Basics-VII.md)
+Experiment with the SQL and PHP code from [S05-PHP-Basics-VII](../session-06/S05-PHP-Basics-VII.md)
 
 You should also look at the relevant sections of the Brad Traversy Course
 

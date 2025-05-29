@@ -61,12 +61,12 @@ This is OPTIONAL, as there are a number of techniques that are more advanced tha
 
 Have you completed (not just read):
 
-- [Laravel v12 Bootcamp - Introducing Laravel](session-11/S11-Introducing-Laravel-v12.md),
-- [Laravel v12 Bootcamp - Part 1](session-11/S10-Laravel-v12-BootCamp-Part-1.md),
-- [Laravel v12 Bootcamp - Part 2](session-11/S10-Laravel-v12-BootCamp-Part-2.md)
-- [Laravel v12 Bootcamp - Part 3](session-11/S10-Laravel-v12-BootCamp-Part-3.md)
-- [Laravel v12 Bootcamp - Part 4](session-11/S10-Laravel-v12-BootCamp-Part-4.md)
-- [Laravel v12 Bootcamp - Part 5](session-11/S10-Laravel-v12-BootCamp-Part-5.md)
+- [Laravel v12 Bootcamp - Introducing Laravel](../session-11/S11-Introducing-Laravel-v12.md),
+- [Laravel v12 Bootcamp - Part 1](../session-11/S10-Laravel-v12-BootCamp-Part-1.md),
+- [Laravel v12 Bootcamp - Part 2](../session-11/S10-Laravel-v12-BootCamp-Part-2.md)
+- [Laravel v12 Bootcamp - Part 3](../session-11/S10-Laravel-v12-BootCamp-Part-3.md)
+- [Laravel v12 Bootcamp - Part 4](../session-11/S10-Laravel-v12-BootCamp-Part-4.md)
+- [Laravel v12 Bootcamp - Part 5](../session-11/S10-Laravel-v12-BootCamp-Part-5.md)
 
 No? Well… go do it…
 
@@ -174,8 +174,8 @@ Registers the batch service as a singleton in the application container
 
 # Up Next
 
-- [Laravel v12 Bootcamp - Part 6](session-11/S10-Laravel-v12-BootCamp-Part-6.md)
-- [Session 11 ReadMe](session-10/ReadMe%201.md)
-- [Session 11 Reflection Exercises & Study](session-11/S11-Reflection-Exercises-and-Study.md)
+- [Laravel v12 Bootcamp - Part 6](../session-11/S10-Laravel-v12-BootCamp-Part-6.md)
+- [Session 11 ReadMe](../session-10/ReadMe%201.md)
+- [Session 11 Reflection Exercises & Study](../session-11/S11-Reflection-Exercises-and-Study.md)
 
 # END

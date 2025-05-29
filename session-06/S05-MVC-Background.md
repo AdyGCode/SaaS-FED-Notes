@@ -16,7 +16,7 @@ updated: 2025-03-12T10:38
 
 **Model - View - Controller**
 
-> **Note:** Before commencing this section, make sure you have read and understood [S05 Terminology MVC](session-06/S05-Terminology-MVC.md)
+> **Note:** Before commencing this section, make sure you have read and understood [S05 Terminology MVC](../session-06/S05-Terminology-MVC.md)
 
 ---
 

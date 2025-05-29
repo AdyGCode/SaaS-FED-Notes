@@ -743,4 +743,4 @@ git push -u origin main
 
 ---
 
-next... [S07 Vanilla PHP MVC Pt 4](session-07/S07-Vanilla-PHP-MVC-Pt-04.md)
+next... [S07 Vanilla PHP MVC Pt 4](../session-07/S07-Vanilla-PHP-MVC-Pt-04.md)

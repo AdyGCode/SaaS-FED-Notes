@@ -163,4 +163,4 @@ Done, now we continue with the application development.
 
 # END
 
-Next up - [S12 Laravel 02 Update User](session-13/S12-Laravel-02-Update-User.md)
+Next up - [S12 Laravel 02 Update User](../session-13/S12-Laravel-02-Update-User.md)

@@ -216,7 +216,7 @@ class StoreProjectRequest extends FormRequest
 
 ## Policies
 
-Model based set of permissions
+Model-based set of permissions
 
 When used:
 
@@ -225,16 +225,16 @@ Able to attach permission to model?
 Create a Policy using:
 
 ```shell
-php artisan make:policy MODELNAMEPolicy –model=MODELNAME
+php artisan make:policy MODELNAMEPolicy --model=MODELNAME
 ```
 
 Example:
 
 ```shell
-php artisan make:policy ProductPolicy –model=Product
+php artisan make:policy ProductPolicy --model=Product
 ```
 
-Policy file will contain stubs.
+The Policy file will contain stubs.
 
 You define the condition for true/false result, e.g.:
 
@@ -380,7 +380,7 @@ npm i && npm run dev
 In middle panel execute:
 
 ```shell
-mailpit –smtp=0.0.0.0:2525
+mailpit --smtp=0.0.0.0:2525
 ```
 
 In the right panel execute:
@@ -837,7 +837,7 @@ $userAdmin->assignRole([$roleSuperAdmin]);
 As we are in Development we can re-run the Migrations and Seed the Database
 
 ```php
-php artisan migrate:fresh –seed
+php artisan migrate:fresh --seed
 ```
 
 Remember:
@@ -868,4 +868,3 @@ What are you able to view/do?
 # END
 
 Next up - []()
-

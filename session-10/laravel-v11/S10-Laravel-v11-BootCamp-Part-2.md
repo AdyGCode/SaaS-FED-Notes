@@ -41,7 +41,7 @@ The following notes are based on the official Laravel v12 Bootcamp(Build Chirper
 
 ## Before you start...
 
-Have you gone over the [S10 Introducing Laravel](session-10/laravel-v11/S10-Introducing-Laravel-v11.md) and then [S10 Laravel v12 BootcampPart 1](session-11/S10-Laravel-v12-BootCamp-Part-1.md) ?
+Have you gone over the [S10 Introducing Laravel](../session-10/laravel-v11/S10-Introducing-Laravel-v11.md) and then [S10 Laravel v12 BootcampPart 1](../session-11/S10-Laravel-v12-BootCamp-Part-1.md) ?
 
 No? Well... go do it...
 
@@ -107,7 +107,7 @@ Duplicate these lines, and do the same edits...
 
 If you refresh your browser and also shrink it down, you will see the mobile navigation appear, and then using the hamburger, it will expand to show the Chirps entry, again highlighted as active.
 
-![](assets/S10-Laravel-v12-BootCamp-Part-2-20240920172149440.png)
+![](../assets/S10-Laravel-v12-BootCamp-Part-2-20240920172149440.png)
 
 # Display our Chirps
 
@@ -310,7 +310,7 @@ And then there is the Font Awesome icon...
 
 This displays an animated (shake) comment bubble, in blue, that shakes twice and takes two seconds to do the shake.
 
-![](assets/vivaldi_qqHh6J21aQ.gif)
+![](../assets/vivaldi_qqHh6J21aQ.gif)
 
 # Coming Up
 

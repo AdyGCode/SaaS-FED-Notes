@@ -424,7 +424,7 @@ Repeat this in the bottom right hand of the CLI.
 
 You should end up with a screen similar to this:
 
-![](assets/S10-Introducing-Laravel-20240920153937338.png)
+![](../assets/S10-Introducing-Laravel-20240920153937338.png)
 
 ### Resizing the sections
 
@@ -480,7 +480,7 @@ The command tells Mail Pit to listen to port 2525 on all network interfaces for 
 
 Here are the two sections of the terminal with these running:
 
-![](assets/S10-Introducing-Laravel-20240920155255149.png)
+![](../assets/S10-Introducing-Laravel-20240920155255149.png)
 
 
 ## A Quick Check on our Application
@@ -491,7 +491,7 @@ Open a web browser and enter: `http://saas-fed-laravel-11-demo.test` and press <
 
 In the browser you will now see:
 
-![Laravel Initial Web Site](assets/S10-Introducing-Laravel-20240920133837144.png)
+![Laravel Initial Web Site](../assets/S10-Introducing-Laravel-20240920133837144.png)
 
 We are now ready to find out a bit more...
 
@@ -501,7 +501,7 @@ Before we start coding, open PhpStorm (or your preferred editor), and the use th
 
 Click on the Hamburger Icon, Click File, Click Open, Select the `Source/Repos` folder, then select the `saas-fed-laravel-11-demo` folder, and click Open.
 
-![](assets/phpstorm64_NPKG6zDBWm%201.gif)
+![](../assets/phpstorm64_NPKG6zDBWm%201.gif)
 
 # Folder Structure
 
@@ -514,4 +514,4 @@ Program with Gio does a good job at explaining the Folder Structure...
 
 # END
 
-Next up - [S10 Laravel BootCamp Part 1](session-11/S10-Laravel-v12-BootCamp-Part-1.md) and [Part 2](session-11/S10-Laravel-v12-BootCamp-Part-2.md)
+Next up - [S10 Laravel BootCamp Part 1](../session-11/S10-Laravel-v12-BootCamp-Part-1.md) and [Part 2](../session-11/S10-Laravel-v12-BootCamp-Part-2.md)

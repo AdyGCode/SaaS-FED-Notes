@@ -41,7 +41,7 @@ The following notes are based on the official Laravel v12 Bootcamp(Build Chirper
 
 ## Before you start...
 
-Have you gone over the [Laravel v12 Bootcamp - Introducing Laravel](session-11/S11-Introducing-Laravel-v12.md) and then [Laravel v12 BootcampPart 1](session-11/S10-Laravel-v12-BootCamp-Part-1.md) ?
+Have you gone over the [Laravel v12 Bootcamp - Introducing Laravel](../session-11/S11-Introducing-Laravel-v12.md) and then [Laravel v12 BootcampPart 1](../session-11/S10-Laravel-v12-BootCamp-Part-1.md) ?
 
 No? Well... go do it...
 
@@ -261,9 +261,9 @@ This displays an animated (shake) comment bubble, in blue, that shakes twice and
 
 In the next part of the bootcamp we will add "Edit" and "Delete" chirp capability.
 
-- [Laravel v12 Bootcamp - Part 3](session-11/S10-Laravel-v12-BootCamp-Part-3.md)
-- [Session 11 ReadMe](session-10/ReadMe%201.md)
-- [Session 11 Reflection Exercises & Study](session-11/S11-Reflection-Exercises-and-Study.md)
+- [Laravel v12 Bootcamp - Part 3](../session-11/S10-Laravel-v12-BootCamp-Part-3.md)
+- [Session 11 ReadMe](../session-10/ReadMe%201.md)
+- [Session 11 Reflection Exercises & Study](../session-11/S11-Reflection-Exercises-and-Study.md)
 
 
 # END
