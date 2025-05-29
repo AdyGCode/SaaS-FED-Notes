@@ -876,7 +876,7 @@ $userAdmin = User::create([
 $userAdmin->assignRole([$roleSuperAdmin]);
 ```
 
-As we are in **development**, we can re-run the migrations and seed the database
+As   we are in **development**, we can re-run the migrations and seed the database
 
 ```php
 php artisan migrate:fresh --seed
