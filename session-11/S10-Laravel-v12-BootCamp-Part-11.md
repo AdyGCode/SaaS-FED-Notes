@@ -94,56 +94,85 @@ host the application.
 
 ## GitHub Workflows
 
-TODO: Explain how what they are
-TODO: Explain how to create a workflow
-TODO: What can trigger a workflow
-TODO: Explain how to trigger a workflow
+### TODO: Explain how what they are
+### TODO: Explain how to create a workflow
+### TODO: What can trigger a workflow
+### TODO: Explain how to trigger a workflow
 
 ## SSH What is it?
 
-TODO: Explain what SSH is
-TODO: Why it is useful
-TODO: Fingerprints
+### TODO: Explain what SSH is
+### TODO: Why it is useful
+### TODO: Fingerprints
 
 ## cPanel 
 
-TODO: What is it
-TODO: cPanel and ScreenCraft
+### TODO: What is it
+### TODO: cPanel and ScreenCraft
 
 ## ScreenCraft
 
-TODO: What is ScreenCraft
-TODO: Facilities of the server
-TODO: How to request hosting on ScreenCraft
+ScreenCraft is a service provided to **Students** and **Staff** from North Metropolitan 
+TAFE. 
+
+We provide hosting facilities for students who are studying a number of different 
+qualifications that develop skills in technologies related to Web design and development, and 
+Software as a Service design and development.
+
+We also provide hosting for sites that are part of the teaching within other areas including 
+[Boom Radio](https://boomradio.com.au) which is used for skills development within courses 
+such as the [Diploma of Screen and Media (Broadcast Radio and Podcasting)
+](https://www.northmetrotafe.wa.edu.au/courses/diploma-screen-and-media-broadcast-radio-and-podcasting).
+
+During the various courses, we also provide development and testing facilities for students 
+as they design and develop solutions for projects which are part of our LiveWorks industrial 
+experience concept. 
+
+These projects provide real-life experience to the students in working with real 
+clients, and on real problems. All work is NOT FOR PROFIT and at the end of the project, a 
+prototype or proof of concept is provided to the client.
+
+We have a number of recurring clients, who are deeply appreciated for their ongoing support 
+with this endeavour.
+
+### How may I Host with You?
+
+Hosting is ONLY available to staff and students of North Metropolitan TAFE.
+
+Requesting hosting on ScreenCraft is done via your lecturer.
+
+### Period of Hosting
+
+Students are provided with hosting for the period of study within a related course, plus a 
+maximum of 180 days after their last enrolment period.
+
+
 
 ## Deployment to a VPS with cPanel
 
-TODO: Explain what is needed
-TODO: Explain Process
-TODO: Provide Sample Workflows
+### TODO: Explain what is needed
+### TODO: Explain Process
+### TODO: Provide Sample Workflows
 
 ## Example Workflows
 
-TODO: Testing
-TODO: Asset Building
-TODO: Deployment to UAT 
-TODO: Deployment to Production
+### TODO: Testing
+### TODO: Asset Building
+### TODO: Deployment to UAT 
+### TODO: Deployment to Production
 
-
-## 
 
 
 
 # References
 
-- Laravel Bootcamp - Learn the PHP Framework for Web Artisans - 07 Notifications & Events. (
-  2025). Archive.org. 
-  https://web.archive.org/web/20240927152838/https://bootcamp.laravel.com/blade/notifications-and-events
+- ...
+- 
 
 # Up Next
 
-- [Laravel v12 Bootcamp - Part 9](../session-11/S10-Laravel-v12-BootCamp-Part-9.md)
-- [Session 11 ReadMe](../session-10/ReadMe%201.md)
+- [Laravel v12 Bootcamp - Part ?](../session-11/S10-Laravel-v12-BootCamp-Part-x.md)
+- [Session 11 ReadMe](../session-10/ReadMe.md)
 - [Session 11 Reflection Exercises & Study](../session-11/S11-Reflection-Exercises-and-Study.md)
 
 # END

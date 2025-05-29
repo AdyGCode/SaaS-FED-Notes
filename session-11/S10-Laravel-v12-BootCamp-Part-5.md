@@ -328,7 +328,7 @@ And here is MailPit with the mails sent to the users of the application, except 
 # Up Next
 
 - [Laravel v12 Bootcamp - Part 6](../session-11/S10-Laravel-v12-BootCamp-Part-6.md)
-- [Session 11 ReadMe](../session-10/ReadMe%201.md)
+- [Session 11 ReadMe](../session-10/ReadMe.md)
 - [Session 11 Reflection Exercises & Study](../session-11/S11-Reflection-Exercises-and-Study.md)
 
 # END
