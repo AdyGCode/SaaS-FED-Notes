@@ -37,11 +37,12 @@ includeLinks: true
 
 # Laravel Bootcamp Part 2
 
-The following notes are based on the official Laravel v12 Bootcamp(Build Chirper with Blade https://bootcamp.laravel.com) with Adrian's shortened explanations.
+The following notes are based on the official Laravel v12 Bootcamp 
+([Build Chirper with Blade](https://bootcamp.laravel.com)) with Adrian's shortened explanations.
 
 ## Before you start...
 
-Have you gone over the [Laravel v12 Bootcamp - Introducing Laravel](../session-11/S11-Introducing-Laravel-v12.md) and then [Laravel v12 BootcampPart 1](../session-11/S10-Laravel-v12-BootCamp-Part-1.md) ?
+Have you gone over the [Laravel v12 Bootcamp - Introducing Laravel](../session-11/S11-Introducing-Laravel-v12.md) and then [Laravel v12 BootcampPart 1](../session-11/S10-Laravel-v12-BootCamp-Part-1.md)?
 
 No? Well... go do it...
 
@@ -60,7 +61,7 @@ The default Laravel Blade template for the navigation has both a desktop and res
 
 Let's get started...
 
-Use the, by now familiar, Double SHIFT to open the file find dialog, and enter navigation.
+Use the by now familiar, Double SHIFT to open the file find `dialog`, and enter navigation.
 
 This should highlight the `navigation.blade.php` file
 
@@ -77,7 +78,7 @@ This is the desktop navigation link.
 
 We are going to cheat dramatically here and select these lines and use the CTRL+D shortcut in PhpStorm to duplicate the lines.
 
-Now we need to edit this to have "Chirps" and to route to the chirps index page.
+Now we need to edit this to have "Chirps" and to route to the chirps' index page.
 
 ```php
 <x-nav-link :href="route('chirps.index')" 
@@ -90,7 +91,7 @@ Refreshing your browser page will give the Chirps menu item, and even better it 
 
 Now to do the mobile/responsive menu.
 
-in the same file search for the code that says:
+in the same file, search for the code that says:
 
 ```php
   
@@ -117,7 +118,8 @@ If you refresh your browser and also shrink it down, you will see the mobile nav
 
 # Display our Chirps
 
-Ok, so we can chirp, and we can navigate to the chirps when we log in... but what about seeing them?
+OK, so we can chirp, and we can navigate to the chirps when we log in... but what about 
+seeing them?
 
 Well, it's that time.
 
@@ -128,7 +130,7 @@ Locate the Chirp Controller and edit the index method as we need to do two thing
 
 ## Getting all the Chirps
 
-To collect all the chirps we use the following:
+To collect all the chirps, we use the following:
 
 ```php
 $chirps = Chirp::with('user')->latest()->get();
@@ -159,9 +161,10 @@ One of the parts of our Starter Kit is that we have access to some rather cool i
 > - https://fontawesome.com/search?o=r&m=free
 
 
-Because these have been added (in the form of web fonts) we do not need to do any additional installation.
+Because these have been added (in the form of web fonts), we do not need to do any 
+additional installation.
 
-Ok, now we may continue to work on our Chirps in the Chirp Index Page.
+OK, now we may continue to work on our Chirps in the Chirp Index Page.
 
 ## Updating the Chirps Index page
 
@@ -220,7 +223,7 @@ This iterates through each of the chirps that have been retrieved... placing the
 {{ $chirp->user->name }}
 ```
 
-This tells the blade file to output the result of an expression, in this case, look at the current chirp, and find out the user;s name for the user who wrote that chirp.
+This tells the blade file to output the result of an expression, in this case, look at the current chirp, and find out the user's name for the user who wrote that chirp.
 
 ```php
 {{ $chirp->created_at->format('j M Y, g:i a')
@@ -259,7 +262,7 @@ This displays an animated (shake) comment bubble, in blue, that shakes twice and
 
 # Coming Up
 
-In the next part of the bootcamp we will add "Edit" and "Delete" chirp capability.
+In the next part of the bootcamp, we will add "Edit" and "Delete" chirp capability.
 
 - [Laravel v12 Bootcamp - Part 3](../session-11/S10-Laravel-v12-BootCamp-Part-3.md)
 - [Session 11 ReadMe](../session-10/ReadMe.md)

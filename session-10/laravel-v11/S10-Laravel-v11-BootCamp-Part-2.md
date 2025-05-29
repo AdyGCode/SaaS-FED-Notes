@@ -41,7 +41,7 @@ The following notes are based on the official Laravel v12 Bootcamp(Build Chirper
 
 ## Before you start...
 
-Have you gone over the [S10 Introducing Laravel](../session-10/laravel-v11/S10-Introducing-Laravel-v11.md) and then [S10 Laravel v12 BootcampPart 1](../session-11/S10-Laravel-v12-BootCamp-Part-1.md) ?
+Have you gone over the [S10 Introducing Laravel](../session-10/laravel-v11/S10-Introducing-Laravel-v11.md) and then [S10 Laravel v12 BootcampPart 1](../session-11/S10-Laravel-v12-BootCamp-Part-1.md)?
 
 No? Well... go do it...
 
