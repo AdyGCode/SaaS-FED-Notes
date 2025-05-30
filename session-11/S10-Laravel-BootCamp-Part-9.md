@@ -14,7 +14,7 @@ tags:
 date created: 03 July 2024
 date modified: 10 July 2024
 created: 2024-09-20T11:17
-updated: 2025-05-15T20:52
+updated: 2025-05-30T08:50
 ---
 
 # S10 Laravel Bootcamp: Part 8
@@ -252,11 +252,11 @@ Between the closing `p` and `div` tags insert :
     </div>
 ```
 
-![Like/Dislike View Code](chirp-like-dislike-view-code.png)
+![Like/Dislike View Code](../assets/chirp-like-dislike-view-code.png)
 
 When you go back to the browser and view the Chirps you should now see (without colour) something like this:
 
-![Example fo how the like/dislike is shown on screen](chirp-like-dislike-sample.png)
+![Example of how the like/dislike is shown on screen](../assets/chirp-like-dislike-sample.png)
 
 ### Create the Like-Dislike Livewire Code
 
@@ -286,7 +286,7 @@ public function mount(Chirp $chirp): void
 
 So, at the moment we can click the like/dislike, but nothing will happen. In fact, we will get an error:
 
-![chirp like dislike missing method error](chirp-like-dislike-missing-method-error.png)
+![chirp like dislike missing method error](../assets/chirp-like-dislike-missing-method-error.png)
 
 This is not good. How to fix this?
 

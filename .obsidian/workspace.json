@@ -11,10 +11,14 @@
             "id": "ecb11b667ed346cf",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "session-11/S10-Laravel-BootCamp-Part-9.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "S10-Laravel-BootCamp-Part-9"
             }
           }
         ]
@@ -136,12 +140,13 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "session-11/S10-Laravel-BootCamp-Part-9.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline"
+              "title": "Outline of S10-Laravel-BootCamp-Part-9"
             }
           },
           {
@@ -183,8 +188,15 @@
   },
   "active": "ecb11b667ed346cf",
   "lastOpenFiles": [
-    "session-11/S10-Laravel-BootCamp-Part-7.md",
+    "assets/chirp-like-dislike-view-code.png",
+    "assets/chirp-like-dislike-sample.png",
+    "assets/chirp-like-dislike-missing-method-error.png",
+    "session-11/chirp-like-dislike-view-code.png",
+    "session-11/chirp-like-dislike-sample.png",
+    "session-11/chirp-like-dislike-missing-method-error.png",
+    "session-11/S10-Laravel-BootCamp-Part-9.md",
     "session-11/S10-Laravel-BootCamp-Part-8.md",
+    "session-11/S10-Laravel-BootCamp-Part-7.md",
     "assets/vivaldi_nEooqBqPmC.gif",
     "session-12/ReadMe.md",
     "assets/vivaldi_YBcbXR0jam.gif",
@@ -204,15 +216,9 @@
     "session-11/sample-code/1dd68e0a-82be-4331-bfad-4cddf246558c.md",
     "session-11/sample-code/38359863-bf5a-4527-9433-323ade3b9bed.md",
     "session-11/sample-code/12cdb35a-d728-4365-8d12-f9e81c6807c1.png",
-    "session-11/sample-code/9dd8441c-4d16-4548-b076-70b0115149d8.png",
-    "session-11/sample-code/9a860285-797d-48da-a7fb-ae796cff51fe.png",
     "session-11/sample-code/f3ebdc0f-e25a-41ca-817d-a6ccc086755b",
     "session-11/sample-code/38359863-bf5a-4527-9433-323ade3b9bed",
-    "session-11/sample-code/128e1a23-7ed2-4e83-978e-ea9fd80e7c4b.png",
-    "session-11/sample-code/84a66e87-8df2-4751-adfe-425bac341a33.png",
     "session-11/sample-code/ebbf0d6f-1d30-4892-9fb2-2291e470141d",
-    "session-11/sample-code/33ea873a-ceae-4e28-90aa-1323eb269fb4.png",
-    "session-11/sample-code/1cd57fa8-a91f-45f0-8a6e-5635b24decb9.png",
     "session-11/sample-code/1dd68e0a-82be-4331-bfad-4cddf246558c",
     "session-11/sample-code/e9268626-3554-41cd-9f58-61750dae073e",
     "session-11/sample-code/26ee9c71-f2e0-4ee5-9d59-1c52ec87a425",
@@ -225,8 +231,6 @@
     "session-10/S10-Laravel-BootCamp-Part-2-v111.md",
     "session-10/S10-Exercises-and-Journal-Entry.md",
     "session-10/S10-Introducing-Laravel-12.md",
-    "session-11/S10-Introducing-Laravel-v12.md",
-    "session-10/S10-Laravel-12-and-ImACrayon-Blade-Starter-Kit.md",
     "session-05/sample-code",
     "session-02/sample-code"
   ]
