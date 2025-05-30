@@ -13,15 +13,14 @@ tags:
   - Back-End
 date created: 03 July 2024
 date modified: 10 July 2024
-created: 2024-10-08T10:54
-updated: 2024-10-09T17:00
+created: 2024-09-20T11:17
+updated: 2025-05-23T11:13
 ---
 
-# Laravel: Roles and Permissions
+
+# S10 Laravel Bootcamp: Part 8
 
 ## Software as a Service - Front-End Development
-
-### Session 14
 
 Developed by Adrian Gould
 
@@ -36,6 +35,49 @@ includeLinks: true
 ```
 
 ---
+
+# Laravel Bootcamp: Part 10
+
+# TODO: NOT WRITTEN
+
+## Roles and Permissions
+
+In this section, we will start to add an administration/management front-end that allows 
+users with particular rights to perform management actions on data in the Chirp system.
+
+We will:
+- Build User Management Interface
+- Determine Roles to use in Application
+- Determine Permissions each Role will have
+- Apply Roles & Permissions to Application (User Management)
+
+
+## Before you start…
+
+Have you completed (not just read):
+
+- [Laravel v12 Bootcamp - Introducing Laravel](../session-11/S11-Introducing-Laravel-v12.md),
+- [Laravel v12 Bootcamp - Part 1](../session-11/S10-Laravel-v12-BootCamp-Part-1.md),
+- [Laravel v12 Bootcamp - Part 2](../session-11/S10-Laravel-v12-BootCamp-Part-2.md)
+- [Laravel v12 Bootcamp - Part 3](../session-11/S10-Laravel-v12-BootCamp-Part-3.md)
+- [Laravel v12 Bootcamp - Part 4](../session-11/S10-Laravel-v12-BootCamp-Part-4.md)
+- [Laravel v12 Bootcamp - Part 5](../session-11/S10-Laravel-v12-BootCamp-Part-5.md)
+- [Laravel v12 Bootcamp - Part 6](../session-11/S10-Laravel-v12-BootCamp-Part-6.md)
+- [Laravel v12 Bootcamp - Part 7](../session-11/S10-Laravel-v12-BootCamp-Part-7.md)
+- [Laravel v12 Bootcamp - Part 8](../session-11/S10-Laravel-v12-BootCamp-Part-8.md)
+- [Laravel v12 Bootcamp - Part 9](../session-11/S10-Laravel-v12-BootCamp-Part-9.md)
+
+
+No? Well… go do it…
+
+You will need these to be able to continue…
+
+> **Important:** You should understand that whilst you are completing this tutorial, you will
+> only see parts of the application working when a stage is complete.
+>
+> So if you get an error in the browser, it may be because there is something missing.
+
+
 
 # Roles & Permissions
 
@@ -628,10 +670,10 @@ Update the render method to return: `layouts.admin` in place of
 
 Also, the render method will return a View only.
 
-Locate the `resources/views/components` folder and move the `admin-layout.blade.php` file from 
+Locate the `resources/views/components` folder and move the `admin-layout.blade.php` file from
 here to the `resources/views/layouts` folder, and then rename the file to `admin.blade.php`.
 
-The code for the admin layout may be copied from the GitHub repository into 
+The code for the admin layout may be copied from the GitHub repository into
 the `admin.blade.php` file.
 
 ### Views
@@ -834,7 +876,7 @@ $userAdmin = User::create([
 $userAdmin->assignRole([$roleSuperAdmin]);
 ```
 
-As we are in Development we can re-run the Migrations and Seed the Database
+As   we are in **development**, we can re-run the migrations and seed the database
 
 ```php
 php artisan migrate:fresh --seed
@@ -846,7 +888,7 @@ Remember:
 
 ## Testing
 
-Open the site using http://laravel-11-roles-permissions.test
+Open the site using http://localhost:8000
 - Click on Login
 - Enter `admin@example.com and` `Password1`
 - Navigate around the Roles and Users pages
@@ -857,14 +899,18 @@ Open the site using http://laravel-11-roles-permissions.test
 
 What are you able to view/do?
 
-## Exercise
 
-- Create a new controller: `StaticPageController`
-- Add a new ‘index’ method that shows a ‘User Home’ page (`static.user-home`)
-- Create a new folder `/resources/views/static`
-- Add a new `user-home.blade.php` page
-- Add the code from the next slide to the file
+
+# References
+
+- Laravel Bootcamp - Learn the PHP Framework for Web Artisans - 07 Notifications & Events. (
+  2025).
+  Archive.org. https://web.archive.org/web/20240927152838/https://bootcamp.laravel.com/blade/notifications-and-events
+
+# Up Next
+
+- [Laravel v12 Bootcamp - Part 9](../session-11/S10-Laravel-v12-BootCamp-Part-9.md)
+- [Session 11 ReadMe](../session-10/ReadMe.md)
+- [Session 11 Reflection Exercises & Study](../session-11/S11-Reflection-Exercises-and-Study.md)
 
 # END
-
-Next up - []()

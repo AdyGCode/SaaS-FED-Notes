@@ -14,7 +14,7 @@ tags:
 date created: 03 July 2024
 date modified: 10 July 2024
 created: 2024-09-20T11:17
-updated: 2025-05-01T13:54
+updated: 2025-05-23T11:12
 ---
 
 # S10 Laravel v12 and imacrayon/blade-starter-kit
@@ -151,7 +151,8 @@ The installation will complete.
 
 ### Quick Test of the application
 
-To test the application we need to be in the folder with the project. This will be the folder `saas-fed-l12-blade-demo`.
+To test the application, we need to be in the folder with the project. This will be the 
+folder `saas-fed-l12-blade-demo`.
 
 Back in the Terminal, use the command:
 ```shell
@@ -358,4 +359,4 @@ Program with Gio does a good job at explaining the Folder Structure...
 
 # END
 
-Next up - [S10 Laravel BootCamp Part 1](session-10/S10-Laravel-BootCamp-Part-1.md) and [Part 2](session-10/S10-Laravel-BootCamp-Part-2.md)
+Next up - [S10 Laravel BootCamp Part 1](../session-11/S10-Laravel-v12-BootCamp-Part-1.md) and [Part 2](../session-11/S10-Laravel-v12-BootCamp-Part-2.md)

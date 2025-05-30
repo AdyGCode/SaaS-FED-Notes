@@ -53,7 +53,7 @@ We will create the category model, migration and seeder so we have data for use 
 ## Before beginning
 
 Before you begin, check you have
-completed [S11 Laravel 02 Category Feature](session-12/S11-Laravel-02-Category-Feature.md).
+completed [S11 Laravel 02 Category Feature](../session-12/S11-Laravel-02-Category-Feature.md).
 
 ## Create stubs
 

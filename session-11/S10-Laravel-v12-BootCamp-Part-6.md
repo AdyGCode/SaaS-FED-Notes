@@ -14,7 +14,7 @@ tags:
 date created: 03 July 2024
 date modified: 10 July 2024
 created: 2024-09-20T11:17
-updated: 2025-05-15T18:14
+updated: 2025-05-23T11:13
 ---
 
 
@@ -110,12 +110,12 @@ Other notes will be added over time to illustrate various features of the Larave
 
 Have you completed (not just read):
 
-- [Introducing Laravel](session-10/S10-Introducing-Laravel-v11.md),
-- [Laravel Boot Camp - Part 1](session-11/S10-Laravel-BootCamp-Part-1.md),
-- [Laravel Boot Camp - Part 2](session-11/S10-Laravel-BootCamp-Part-2.md)
-- [Laravel Boot Camp - Part 3](session-11/S10-Laravel-BootCamp-Part-3.md)
-- [Laravel Boot Camp - Part 4](session-11/S10-Laravel-BootCamp-Part-4.md)
-- [Laravel Boot Camp - Part 5](session-11/S10-Laravel-BootCamp-Part-5.md)
+- [Laravel v12 Bootcamp - Introducing Laravel](../session-11/S11-Introducing-Laravel-v12.md),
+- [Laravel v12 Bootcamp - Part 1](../session-11/S10-Laravel-v12-BootCamp-Part-1.md),
+- [Laravel v12 Bootcamp - Part 2](../session-11/S10-Laravel-v12-BootCamp-Part-2.md)
+- [Laravel v12 Bootcamp - Part 3](../session-11/S10-Laravel-v12-BootCamp-Part-3.md)
+- [Laravel v12 Bootcamp - Part 4](../session-11/S10-Laravel-v12-BootCamp-Part-4.md)
+- [Laravel v12 Bootcamp - Part 5](../session-11/S10-Laravel-v12-BootCamp-Part-5.md)
 
 No? Well… go do it…
 
@@ -153,7 +153,7 @@ use App\Http\Controllers\UserManagementController;
 
 If you try visiting `http://localhost:8000/users` it should give an error.
 
-![](assets/Pasted%20image%2020250506134848.png)
+![](../assets/Pasted%20image%2020250506134848.png)
 
 
 ### Create views/users` folder
@@ -206,7 +206,7 @@ use App\Models\User;
 
 Refreshing will give a different error - no users index view found.
 
-![](assets/Pasted%20image%2020250506135347.png)
+![](../assets/Pasted%20image%2020250506135347.png)
 
 ### Create `users/index.blade.php`
 
@@ -242,7 +242,7 @@ Start by adding the `x-app-layout`, with the header slot and a wrapper for the m
 
 Refreshing will show:
 
-![](assets/Pasted%20image%2020250506152133.png)
+![](../assets/Pasted%20image%2020250506152133.png)
 
 Next replace the `<!-- main page content here -->` comment with the space for a 'table' of users, plus the header for the data:
 
@@ -273,7 +273,7 @@ Next replace the `<!-- main page content here -->` comment with the space for a 
 
 Refreshing we see:
 
-![](assets/Pasted%20image%2020250506152834.png)
+![](../assets/Pasted%20image%2020250506152834.png)
 
 Now we add the loop for the users, that will show a row number, the user name, date they were added/joined, a role, and actions for each user.
 
@@ -313,7 +313,7 @@ The code will look like this, replacing the `<!-- loop for users here -->`:
 
 We now should see:
 
-![](assets/Pasted%20image%2020250506153402.png)
+![](../assets/Pasted%20image%2020250506153402.png)
 
 Now we need the form to go where we have the `<!-- Only Admin and Staff access these options -->`:
 
@@ -360,7 +360,7 @@ Now we need the form to go where we have the `<!-- Only Admin and Staff access t
 
 This gives:
 
-![](assets/Pasted%20image%2020250506153327.png)
+![](../assets/Pasted%20image%2020250506153327.png)
 
 After the `@endforeach` and before the `</article>` we need to add the footer for the "table". It is a placeholder for the time being:
 
@@ -375,7 +375,7 @@ After the `@endforeach` and before the `</article>` we need to add the footer fo
 The final result:
 
 
-![](assets/Pasted%20image%2020250506152736.png)
+![](../assets/Pasted%20image%2020250506152736.png)
 
 Note that the role and pagination are not showing read details as we have to yet implement them.
 
@@ -420,7 +420,7 @@ The Show page will be a good start as we then duplicate and update it to become 
 
 This is the final layout:
 
-![](assets/Pasted%20image%2020250506161021.png)
+![](../assets/Pasted%20image%2020250506161021.png)
 
 
 In PhpStorm, click on the `users/index.blade.php` file and then use CTRL+C followed by CTRL+V
@@ -615,7 +615,7 @@ Make sure that everything is correctly entered, and you have your HTML balanced 
 
 If all works as expected you should be able to click on a user in the index page and it will jump to the users details.
 
-![](assets/vivaldi_LTZ7aCBugA.gif)
+![](../assets/vivaldi_LTZ7aCBugA.gif)
 
 ## Add User
 
@@ -807,7 +807,7 @@ Test the action to see it works.
 
 Here is a demonstration.
 
-![](assets/vivaldi_yYBUqIS4VM.gif)
+![](../assets/vivaldi_yYBUqIS4VM.gif)
 
 
 ## Edit the User
@@ -1134,7 +1134,7 @@ Immediately before the  `</x-slot>` we are adding the search box:
 
 These changes result in:
 
-![](assets/Pasted%20image%2020250515180411.png)
+![](../assets/Pasted%20image%2020250515180411.png)
 
 Well, they will when you complete the exercise below to add icons and a few other fixes...
 ## Exercise
@@ -1160,8 +1160,8 @@ We have made the search and its button look like they are a single item already 
 
 # Up Next
 
-- [Laravel Boot Camp - Part 7](session-11/S10-Laravel-BootCamp-Part-7.md)
-- [Session 11 ReadMe](session-11/ReadMe.md)
-- [Session 11 Reflection Exercises & Study](session-11/S11-Reflection-Exercises-and-Study.md)
+- [Laravel v12 Bootcamp - Part 7](../session-11/S10-Laravel-v12-BootCamp-Part-7.md)
+- [Session 11 ReadMe](../session-10/ReadMe.md)
+- [Session 11 Reflection Exercises & Study](../session-11/S11-Reflection-Exercises-and-Study.md)
 
 # END

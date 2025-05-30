@@ -514,4 +514,4 @@ Program with Gio does a good job at explaining the Folder Structure...
 
 # END
 
-Next up - [S10 Laravel BootCamp Part 1](session-11/S10-Laravel-BootCamp-Part-1.md) and [Part 2](session-11/S10-Laravel-BootCamp-Part-2.md)
+Next up - [S10 Laravel BootCamp Part 1](../session-11/S10-Laravel-v12-BootCamp-Part-1.md) and [Part 2](../session-11/S10-Laravel-v12-BootCamp-Part-2.md)

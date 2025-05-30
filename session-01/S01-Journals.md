@@ -92,4 +92,4 @@ All entries should:
 
 # END
 
-Next up - [Session 01 Journal Activity](session-01/S01-Exercises-and-Practice.md)
+Next up - [Session 01 Journal Activity](../session-01/S01-Exercises-and-Practice.md)

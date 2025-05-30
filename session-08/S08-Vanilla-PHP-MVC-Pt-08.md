@@ -470,4 +470,4 @@ And that is the Show done!
 
 
 
-There is still a bit more to do so onto part 9... [S07 Vanilla PHP MVC Pt 9](session-08/S08-Vanilla-PHP-MVC-Pt-09.md)
+There is still a bit more to do so onto part 9... [S07 Vanilla PHP MVC Pt 9](../session-08/S08-Vanilla-PHP-MVC-Pt-09.md)

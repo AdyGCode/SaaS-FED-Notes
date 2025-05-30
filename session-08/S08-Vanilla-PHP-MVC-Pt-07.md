@@ -712,4 +712,4 @@ git push -u origin main
 
 
 
-The next step is the Products Feature which is covered in [S07 Vanilla PHP MVC Pt 8](session-08/S08-Vanilla-PHP-MVC-Pt-08.md)
+The next step is the Products Feature which is covered in [S07 Vanilla PHP MVC Pt 8](../session-08/S08-Vanilla-PHP-MVC-Pt-08.md)

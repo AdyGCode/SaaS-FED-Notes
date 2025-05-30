@@ -35,7 +35,7 @@ A Session by Session study plan is given on separate pages. Select one of the co
 They all vary in length of time.
 
 The options we provide (you may find alternatives and recommend to the lecturers to add):
-- [S01-OOP-PHP-MVC-Study-Schedule](session-01/S01-OOP-PHP-MVC-Study-Schedule.md)
-- [S01-PHP from Scratch-Beginner-to-Advanced-Study-Schedule](session-01/S01-PHP%20from%20Scratch-Beginner-to-Advanced-Study-Schedule.md)
-- [S01-PHP-for-Beginners-Study-Schedule](session-01/S01-PHP-for-Beginners-Study-Schedule.md)
-- [S01-PHP-for-Beginners-Crash-Course-Study-Schedule](session-01/S01-PHP-for-Beginners-Crash-Course-Study-Schedule.md)
+- [S01-OOP-PHP-MVC-Study-Schedule](../session-01/S01-OOP-PHP-MVC-Study-Schedule.md)
+- [S01-PHP from Scratch-Beginner-to-Advanced-Study-Schedule](../session-01/S01-PHP%20from%20Scratch-Beginner-to-Advanced-Study-Schedule.md)
+- [S01-PHP-for-Beginners-Study-Schedule](../session-01/S01-PHP-for-Beginners-Study-Schedule.md)
+- [S01-PHP-for-Beginners-Crash-Course-Study-Schedule](../session-01/S01-PHP-for-Beginners-Crash-Course-Study-Schedule.md)

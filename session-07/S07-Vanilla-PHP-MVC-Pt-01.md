@@ -16,7 +16,7 @@ updated: 2025-03-19T10:57
 
 # Creating a Vanilla PHP MVC Application
 
-It is important to note that we are basing this MVC application on the work from the [TailwindCSS Intro](session-05/S05-TailwindCSS-Intro.md) and Brad Traversy's PHP from Scratch course. 
+It is important to note that we are basing this MVC application on the work from the [TailwindCSS Intro](../session-05/S05-TailwindCSS-Intro.md) and Brad Traversy's PHP from Scratch course. 
 
 You may also use Brad Traversy's OOP and MVC course that is on the O'Reilly web site. 
 
@@ -24,7 +24,7 @@ If you are a North Metro TAFE student by logging into the O'Reilly site via the 
 
 To understand how he developed this basic framework concept, the process of refactoring from very 'wet' code, and the use of OOP it is important you follow his course through.
 
-Follow the instructions in the [S07-Vanilla-PHP-MVC-Pt-00](session-07/S07-Vanilla-PHP-MVC-Pt-00.md) to create the required folder structure if you have not done so already.
+Follow the instructions in the [S07-Vanilla-PHP-MVC-Pt-00](../session-07/S07-Vanilla-PHP-MVC-Pt-00.md) to create the required folder structure if you have not done so already.
 
 At this point you will have a folder (and file) structure *similar* to this:
 
@@ -95,10 +95,10 @@ Each file `database-xxxxxx.sql` that you may download from here contains all the
 You may download the file, copy it into the config folder of the application skeleton, and then open it. Next simply copy and paste the commands into the SQL page on PhpMyAdmin (for MySQL/MariaDB) and use GO to execute them in one step.
 
 For **MariaDB**:
-![](session-07/sample-code/database-mariadb.sql)
+![](../session-07/sample-code/database-mariadb.sql)
 
 For **MySQL**:
-![](session-07/sample-code/database-mysql.sql)
+![](../session-07/sample-code/database-mysql.sql)
 
 
 ## Create Database and Users (MariaDB)
@@ -361,4 +361,4 @@ git push -u origin main
 
 
 
-We are ready to start our PHP... [S07-Vanilla-PHP-MVC-Pt-02](session-07/S07-Vanilla-PHP-MVC-Pt-02.md)
+We are ready to start our PHP... [S07-Vanilla-PHP-MVC-Pt-02](../session-07/S07-Vanilla-PHP-MVC-Pt-02.md)

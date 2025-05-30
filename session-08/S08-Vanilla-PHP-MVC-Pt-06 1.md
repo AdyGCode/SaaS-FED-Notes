@@ -429,4 +429,4 @@ git push -u origin main
 
 
 
-and finally ... [S08-Vanilla-PHP-MVC-Pt-07](session-08/S08-Vanilla-PHP-MVC-Pt-07.md)
+and finally ... [S08-Vanilla-PHP-MVC-Pt-07](../session-08/S08-Vanilla-PHP-MVC-Pt-07.md)

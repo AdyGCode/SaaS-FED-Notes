@@ -472,5 +472,4 @@ Can you see a problem with this when working with exising users?
 
 # END
 
-Next up - [S12 Laravel 03 Feature Country](session-12/S11-Laravel-02-Category-Feature.md)
-
+Next up - [S12 Laravel 03 Feature Country](../session-12/S11-Laravel-02-Category-Feature.md)

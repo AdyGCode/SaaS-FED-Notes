@@ -14,10 +14,10 @@ tags:
 date created: 03 July 2024
 date modified: 10 July 2024
 created: 2024-09-20T11:17
-updated: 2025-04-30T08:54
+updated: 2025-05-23T11:12
 ---
 
-# Introducing Laravel v12
+# Laravel Bootcamp: Introducing Laravel v12
 
 ## Software as a Service - Front-End Development
 
@@ -515,7 +515,7 @@ git push -u origin main
 
 Check that your remote has the required files.
 
-![](assets/Pasted%20image%2020250428171915.png)
+![](../assets/Pasted%20image%2020250428171915.png)
 
 
 ## We're Ready!
@@ -641,7 +641,7 @@ Update it to read:
     "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"npm run dev\" \"c:\\ProgramData\\Laragon\\bin\\mailpit\\mailpit --smtp 0.0.0.0:2525\" --names=server,queue,vite,mailpit"],
 ```
 
-Once you have done this, stop the current composer run dev using <key>CTRL</key>+<key>C</key> and then re-running the command:
+Once you have done this, stop the current `composer run dev` using <key>CTRL</key>+<key>C</key> and then re-running the command:
 
 ```shell
 composer run dev
@@ -669,7 +669,7 @@ If you have Laragon's Apache server running you may also visit: `http://chirper-
 
 In the browser you will now see:
 
-![Laravel Initial Web Site](assets/Pasted%20image%2020250428175052.png)
+![Laravel Initial Web Site](../assets/Pasted%20image%2020250428175052.png)
 
 We are now ready to find out a bit more...
 
@@ -692,4 +692,4 @@ You are ready to carry on with the Boot Camp.
 
 # END
 
-Next up - [S10 Laravel BootCamp Part 1](session-11/S10-Laravel-BootCamp-Part-1.md) and [Part 2](session-11/S10-Laravel-BootCamp-Part-2.md)
+Next up - [S10 Laravel BootCamp Part 1](../session-11/S10-Laravel-v12-BootCamp-Part-1.md) and [Part 2](../session-11/S10-Laravel-v12-BootCamp-Part-2.md)

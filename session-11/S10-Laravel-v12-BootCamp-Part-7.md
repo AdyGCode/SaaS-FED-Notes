@@ -14,7 +14,7 @@ tags:
 date created: 03 July 2024
 date modified: 10 July 2024
 created: 2024-09-20T11:17
-updated: 2025-05-15T20:19
+updated: 2025-05-23T11:13
 ---
 
 # S10 Laravel Bootcamp: Part 7
@@ -52,13 +52,13 @@ We will:
 
 Have you completed (not just read):
 
-- [Introducing Laravel](session-10/S10-Introducing-Laravel-v11.md),
-- [Laravel Boot Camp - Part 1](session-11/S10-Laravel-BootCamp-Part-1.md),
-- [Laravel Boot Camp - Part 2](session-11/S10-Laravel-BootCamp-Part-2.md)
-- [Laravel Boot Camp - Part 3](session-11/S10-Laravel-BootCamp-Part-3.md)
-- [Laravel Boot Camp - Part 4](session-11/S10-Laravel-BootCamp-Part-4.md)
-- [Laravel Boot Camp - Part 5](session-11/S10-Laravel-BootCamp-Part-5.md)
-- [Laravel Boot Camp - Part 6](session-11/S10-Laravel-BootCamp-Part-6.md)
+- [Laravel v12 Bootcamp - Introducing Laravel](../session-11/S11-Introducing-Laravel-v12.md),
+- [Laravel v12 Bootcamp - Part 1](../session-11/S10-Laravel-v12-BootCamp-Part-1.md),
+- [Laravel v12 Bootcamp - Part 2](../session-11/S10-Laravel-v12-BootCamp-Part-2.md)
+- [Laravel v12 Bootcamp - Part 3](../session-11/S10-Laravel-v12-BootCamp-Part-3.md)
+- [Laravel v12 Bootcamp - Part 4](../session-11/S10-Laravel-v12-BootCamp-Part-4.md)
+- [Laravel v12 Bootcamp - Part 5](../session-11/S10-Laravel-v12-BootCamp-Part-5.md)
+- [Laravel v12 Bootcamp - Part 6](../session-11/S10-Laravel-v12-BootCamp-Part-6.md)
 
 No? Well… go do it…
 
@@ -104,7 +104,7 @@ We are even giving you the icon, hover and other effects from the exercises 😁
 
 Animated Screenshot:
 
-![](assets/vivaldi_YBcbXR0jam.gif)
+![](../assets/vivaldi_YBcbXR0jam.gif)
 
 #### Implementing the Controller Changes
 
@@ -422,7 +422,7 @@ flash()
 ```
 
 
-![](assets/vivaldi_nEooqBqPmC.gif)
+![](../assets/vivaldi_nEooqBqPmC.gif)
 
 To change the title of the message, keeping the same options as before we write the following:
 
@@ -538,8 +538,8 @@ Add flash messages to Edit and Delete.
 
 # Up Next
 
-- [Laravel Boot Camp - Part 8](session-11/S10-Laravel-BootCamp-Part-8.md)
-- [Session 11 ReadMe](session-11/ReadMe.md)
-- [Session 11 Reflection Exercises & Study](session-11/S11-Reflection-Exercises-and-Study.md)
+- [Laravel v12 Bootcamp - Part 8](../session-11/S10-Laravel-v12-BootCamp-Part-8.md)
+- [Session 11 ReadMe](../session-10/ReadMe.md)
+- [Session 11 Reflection Exercises & Study](../session-11/S11-Reflection-Exercises-and-Study.md)
 
 # END

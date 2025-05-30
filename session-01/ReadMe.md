@@ -20,6 +20,6 @@ updated: 2025-03-13T09:00
 - [Development Environments](../session-01/S01-Development-Environments.md)
 - [CLI Commands](../session-01/S01-CLI-Commands.md)
 - [What are your Journals](../session-01/S01-Journals.md)
-- [Exercises & Journal Entry](session-01/S01-Exercises-and-Practice.md)
+- [Exercises & Journal Entry](../session-01/S01-Exercises-and-Practice.md)
 
 - [Setting Up Laragon](./S01-Setting-Up-Laragon.md)
