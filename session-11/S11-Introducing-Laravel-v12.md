@@ -14,7 +14,7 @@ tags:
 date created: 03 July 2024
 date modified: 10 July 2024
 created: 2024-09-20T11:17
-updated: 2025-05-23T11:12
+updated: 2025-05-30T08:51
 ---
 
 # Laravel Bootcamp: Introducing Laravel v12

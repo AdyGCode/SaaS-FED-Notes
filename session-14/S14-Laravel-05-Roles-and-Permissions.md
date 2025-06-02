@@ -14,7 +14,7 @@ tags:
 date created: 03 July 2024
 date modified: 10 July 2024
 created: 2024-10-08T10:54
-updated: 2024-10-09T17:00
+updated: 2025-05-30T08:51
 ---
 
 # Laravel: Roles and Permissions

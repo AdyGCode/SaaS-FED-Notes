@@ -14,7 +14,7 @@ tags:
 date created: 03 July 2024
 date modified: 10 July 2024
 created: 2024-09-20T11:17
-updated: 2025-05-23T11:13
+updated: 2025-05-30T08:53
 ---
 
 # S10 Laravel Bootcamp: Part 9
@@ -272,7 +272,7 @@ Between the closing `p` and `div` tags insert :
 When you go back to the browser and view the Chirps you should now see (without colour)
 something like this:
 
-![Example fo how the like/dislike is shown on screen](../assets/chirp-like-dislike-sample.png)
+![Example of how the like/dislike is shown on screen](../assets/chirp-like-dislike-sample.png)
 
 ### Create the Like-Dislike LiveWire Code
 
@@ -372,6 +372,7 @@ private function hasVoted(int $val): bool
 	    $this->userVote->vote === $val;
 } 
 ```
+
 
 #### Update Vote
 
