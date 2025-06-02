@@ -158,7 +158,6 @@ And the `Resources/views/navigation.blade.php` file:
 ```php
 Route::post('users', [UserController::class, 'store’])
     ->middleware('can:create_users');
-
 ```
 
 ```php
@@ -336,21 +335,21 @@ $user->can('edit articles');
 
 ```
 
-## Creating a Demo App
+# Creating a Demo App
 
 Using Roles and Permissions in a small demo application
 
-Code is available on GitHub: https://github.com/AdyGCode/laravel-11-roles-permissions-demo
+Code is available on GitHub: https://github.com/AdyGCode/roles-permissions-2025-s1
 
 We STRONGLY suggest you complete this tutorial from scratch
 
 This will assist your understanding and ability to apply to other projects
 
-### Starting Off
+## Create Base Code using Laravel installer
 
-We presume you are using the bash terminal
+We presume you are using the bash terminal.
 
-For details on setting this up check the https://help.screencraft.net.au FAQs
+For details on setting this up, check the https://help.screencraft.net.au FAQs
 
 Change into your Source/Repos folder:
 
@@ -358,533 +357,857 @@ Change into your Source/Repos folder:
 cd /c/Users/USERID
 cd Source/Repos
 ```
+Update the Laravel Installer
 
-Create a new Laravel Application
-
-```shell
-laravel new laravel-11-roles-permissions
-```
-
-Use the following settings:
-
-| Prompt             | Response |
-|--------------------|----------|
-| Starter Kit:       | Breeze   |
-| Stack:             | Blade    |
-| Dark Mode:         | No       |
-| Testing Framework: | Pest     |
-| Git Repo:          | Yes      |
-| Database:          | SQLite   |
-
-Change into your new project
+It is always a good idea to see if the Laravel installer and its required packages have been 
+updated so... run the composer update in the global context to do this.
 
 ```shell
-cd laravel-11-roles-permissions
+composer global update
 ```
 
-Install Spatie Permissions
+### Create a new Demo Application
+
+> This section is based on the video series Spatie Laravel Permission by Tony Xhepa. The sries 
+> was created three or so years ago, and as a result, some of the information is outdated. 
+> These notes aim to update to Laravel 12, and provide code that works with this version fo 
+> the framework.
+> 
+> - Xhepa, T. (2022, March 1). Spatie Laravel Permission. 
+>   YouTube. http://www.youtube.com/playlist?list=PL6tf8fRbavl3xuFIe4_i3TB4PZbtbx3Js
+
+
+Now we are ready to create a new Laravel Application for the purpose of demonstrating how to 
+add roles and permissions to an application.
+
+```shell
+laravel new roles-permissions-2025-s1 --using-adygcode/retro-blade-kit
+```
+
+Change into your new project:
+
+```shell
+cd roles-permissions-2025-s1
+```
+
+### Install Spatie Permissions
+
+Now we can add the Spatie Permissions package:
 
 ```shell
 composer require spatie/laravel-permission
 ```
 
-Publish the Laravel Permission migrations etc:
+Install the migrations and settings for the Roles/Permissions package:
 
 ```shell
 php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider" 
 ```
 
-Split the terminal into 5 panels:
+### Running our Dev Server
 
-- <kbd>ALT</kbd>+<kbd>SHIFT</kbd>+➖
+Split the terminal into two panels:
 
-Select the lower panel and use:
-
-- <kbd>ALT</kbd>+<kbd>SHIFT</kbd>+➕
-- <kbd>ALT</kbd>+<kbd>SHIFT</kbd>+➕
+- <kbd>ALT</kbd>+<kbd>SHIFT</kbd>+<kbd>-</kbd>
 
 Remember that resizing panels is easy:
 
 Click in the panel and use: <kbd>ALT</kbd>+<kbd>SHIFT</kbd>+ ⬅️➡️⬆️⬇️ (arrow keys)
 
-In each of the three panels execute:
+In the bottom panel, execute:
 
 ```shell
-cd laravel-11-roles-permissions
+cd roles-permissions-2025-s1
 ```
 
-Click back in left-most panel and execute:
+Now in this bottom panel execute
 
 ```shell
-npm i && npm run dev
+composer run dev
 ```
 
-In middle panel execute:
+> Remember: you may want to modify the composer dev script (in `composer.json`) to also 
+> execute MailPit. See [Introducing Laravel v12](./S11-Introducing-Laravel-v12.md) for 
+> details on adding "MailPit" to the `composer run dev` command.
 
-```shell
-mailpit --smtp=0.0.0.0:2525
-```
 
-In the right panel execute:
+## Adding "Roles" Trait to the User Model
 
-```shell
-php artisan queue:listen --verbose
-```
+Adding the Roles and Permissions to the User model is a matter of adding a couple of lines 
+to the `User` model.
 
-You are ready to continue…
+This trait is then available when we need by checking if a user `can` or 
+`cannot` do an operation via checking the permission.
 
-### Bootstrapping the App
-
-Bootstrap in this case means:
-
-- To load more complex code within the application using a smaller and simpler piece of code.
-
-Edit the `bootstrap/app.php` file, and update the ‘use’ lines by adding:
+Open the `User` model and add the `HasRoles` after `Notifiable`:
 
 ```php
-use Spatie\Permission\Middleware\PermissionMiddleware;
-use Spatie\Permission\Middleware\RoleMiddleware;
-use Spatie\Permission\Middleware\RoleOrPermissionMiddleware;
+    use HasFactory, Notifiable, HasRoles;
 ```
 
-Update the ‘middleware’ section, to load the Spatie Permissions Role, Permission and Role or
-Permission middleware
+Remember that you will need to `use` the class just after the namespace to import it:
 
 ```php
-->withMiddleware(function (Middleware $middleware) {
-    //
-    $middleware->alias([
-        'role' => RoleMiddleware::class,
-        'permission' => PermissionMiddleware::class,
-        'role_or_permission' => RoleOrPermissionMiddleware::class,
-    ]);
-})
+use Spatie\Permission\Traits\HasRoles;
 ```
 
-Use the command below to create a new Roles and Permissions Controller:
+### Applying Role Middleware
+
+To make it easier to use aliases like 'role', 'permission' and 'role_or_permission' we will 
+update the `bootstrap/app.php` file.
+
+Now locate the line `->withMiddleware(function (Middleware $middleware) {` and add:
+
+```php
+$middleware->alias([
+    'role' => \Spatie\Permission\Middleware\RoleMiddleware::class,
+    'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
+    'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
+]);
+```
+
+> ### Aside:
+> 
+> One advantage of this is that we can then, if we wish, apply `role`, `permission` or 
+> the `role_or_permission` to check at the route stage. For example:
+> 
+> ```php
+> Route::group(['middleware' => ['role:manager']], function () { ... });
+> Route::group(['middleware' => ['permission:publish articles']], function () { ... });
+> Route::group(['middleware' => ['role_or_permission:publish articles']], function () { ... });
+> ```
+> [For more information, always read the
+> documentation for the package.](https://spatie.be/docs/laravel-permission/v6/basic-usage/middleware)
+
+
+OK, let's continue...
+
+
+## Creating an Admin Role and Assigning it
+
+We are now ready to begin the next stage of our development. In this step we will be:
+
+- Creating an `admin` role
+- Assigning the role to an `admin` user
+
+We will use a seeder to do this as it is reproducible and allows us to vary depending on the 
+requirements of the project.
+
+### Role seeder
+
+Let us start by first visiting th Role Seeder... ok, so we need to create one first... so:
 
 ```shell
-php artisan make:controller RolesAndPermissionsController
+php artisan RoleSeeder
 ```
 
-Open the new file from the `app/Http/Controllers` folder
+Open the Role Seeder file (in `database/seeders`).
 
-Edit the use lines to include:
+After the namespace, add:
 
 ```php
-use App\Models\User;
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Auth\Middleware\Authorize;
-use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
-use Illuminate\Support\Facades\Gate;
-use Spatie\Permission\Middleware\PermissionMiddleware;
-use Spatie\Permission\Middleware\RoleMiddleware;
 use Spatie\Permission\Models\Role;
 
 ```
 
-Note the inclusion of the Spatie Permissions middleware, models and more.
-
-We are now going to add a middleware, instantiation, index, store and destroy methods.
-
-### Roles And Permissions Controller
-
-#### Middleware method
-
-Returns a list of valid ‘roles’ that have access to the controller
+In the `run` method we will now add:
 
 ```php
-    public static function middleware(): array
-    {
-        return [
-            // examples with aliases, pipe-separated names, guards, etc:
-            'role:Super-Admin|Admin',
-        ];
-    }
+$roleAdmin = Role::create(['name' => 'admin']);
 ```
 
-# Instantiation
+This will create the `admin` role.
+
+You could easily add the `staff` and `client` roles at this point if you wish.
+
+
+### Admin User Seeder
+
+As part of the "Retro Blade Kit" we have a seeder already created for users.
+
+The seeder creates the users:
+- admin
+- staff
+- client
+
+So that is a chunk of what is needed already done for us.
+
+But, we are going to make some changes.
+
+- Duplicate the user Seeder and rename this to `AdminSeeder`
+- Remove the client and staff from this new seeder
+- Update to add the `admin` role to the Admin User.
+
+Start by removing most of the current code, and remove the list of users, and make it a 
+single `seedUser`:
 
 ```php
-function __construct()
-{
-    // ensure admin has recently logged in, so it's not 
-    // an unattended admin console being used
-    $this->middleware('password.confirm');
-
-    Gate::define('can delete admins', function ($user) {
-        return $user->hasAnyRole('Super-Admin', 'Admin');
-    });
-    Gate::define('can delete super-admins', function ($user) {
-        return $user->hasRole('Super-Admin');
-    });
-}
+$seedUser = [
+    'id' => 100,
+    'name' => 'Ad Ministrator',
+    'email' => 'admin@example.com',
+    'password' => 'Password1',
+    'email_verified_at' => now(),
+];
 ```
 
-### Index
+Remove the foreach loop and reduce the code to:
 
 ```php
-public function index()
-{
-    // build the user-selector dropdown array for the view
-    $select = new User;
-    $select->id = 0;
-    $select->name = ' Please select';
+$adminUser = User::updateOrCreate(
+    ['id' => $seedUser['id']],
+    $seedUser
+);
+```
 
-    $excludeRoles = [];
-    // don't allow super-admins to be deleted unless pass the 
-    // rule defined earlier
-    if (!auth()->user()->can('can delete super-admins')) {
-        $excludeRoles[] = 'Super-Admin';
-    }
+Now we are able to assign the role to the Admin user:
 
-    // build a list of roles for dropdown
-    $roles = Role::whereNotIn('name', $excludeRoles) 
-             // ALERT: agnostic of guard_name here!
-        ->with('users')
-        ->get();
+```php
+$adminUser->assignRole('admin');  
+```
 
-    // build a list of users for the dropdown
-    $users = User::query()
-        ->with('roles')
-        ->get();
+Let's take this a step further by adding the Admin and Staff roles:
 
-    return view('admin.roles_editor',
-        [
-            'roles' => $roles,
-            'users' => $users->prepend($select),
-            'canEdit' => auth()->user()->can('assign roles'),
-            'canDeleteAdmins' => auth()->user()->can('can delete admins'),
-            'canDeleteSuperAdmins' => auth()->user()
-                                            ->can('can delete super-admins'),
+```php
+$adminUser->assignRole([
+    'admin',
+    'staff',
+]);
+```
+
+
+That makes our AdminSeeder's run method much shorter.
+
+Now we need to update the Database Seeder and add the RoleSeeder **BEFORE** the UserSeeder and 
+AdminSeeder...
+
+```php
+
+        $this->call([
+            RoleSeeder::class,
+            
+            AdminUserSeeder::class,
+            UserSeeder::class,
+
         ]);
-}
+
 ```
 
-### Store
-
-Adding a role to a user
-
-```php
-public function store(Request $request)
-{
-    \abort_unless($request->user()->can('assign roles'), '403',
-        'You do not have permission to make Role assignments.');
-
-    $rules = [
-        'member_id' => 'exists:users,id',
-        'role_id' => 'exists:roles,id',
-    ];
-    
-    $request->validate($rules);
-
-    $member = User::find($request->input('member_id'));
-    $role = Role::findById($request->input('role_id'));
-
-    // if member already has the role, flash message and return
-    if ($member->hasRole($role)) {
-        //optionally flash a session error message
-        // flash()->warning('Note: Member already has the selected role. No action taken.');
-
-        return redirect(route('admin.permissions'));
-    }
-
-    // do the assignment
-    $member->assignRole($role);
-
-    // optionally flash a success message
-    // flash()->success($role->name . ' role assigned to ' . $member->name . '.');
-
-    return redirect(route('admin.permissions'))
-        ->with('success', 'Role Created/Updated successfully');
-}
-```
-
-### Destroy
-
-```php
-public function destroy(Request $request)
-{
-    \abort_unless($request->user()->can('assign roles'), '403',
-        'You do not have permission to change Role assignments.');
-
-    $rules = [
-        'member_id' => 'exists:users,id',
-        'role_id' => 'exists:roles,id',
-    ];
-
-    $request->validate($rules);
-
-    $member = User::find($request->input('member_id'));
-    $role = Role::findById($request->input('role_id'));
-    
-
-    // cannot remove if doesn't already have it
-    if (!$member->hasRole($role)) {
-        // flash a session error message
-        // flash()->warning('Note: Member does not have the 
-                             selected role. No action taken.');
-
-        return redirect(route('admin.permissions'));
-    }
-
-    // Prevent tampering with admins
-    if ($role->name === 'Admin' && 
-        $request->user()->cannot('can delete admins')) {
-        // flash()->warning('Action could not be taken.');
-
-        return redirect(route('admin.permissions'));
-    }
-
-    if ($role->name === 'Super-Admin' && 
-        $request->user()->cannot('can delete super-admins')) {
-        // flash()->warning('Action could not be taken.');
-
-        return redirect(route('admin.permissions'));
-    }
-
-    // do the actual removal.
-    $member->removeRole($role);
-
-    return redirect(route('admin.permissions'))
-        ->with('success', 'Role deleted successfully');
-}
-```
-
-### Admin Layout Component
-
-Create a new layout component...
-
-Use:
+As we are working in development, we can apply these changes from fresh:
 
 ```shell
-php artisan make:component AdminLayout
+php artisan migrate:fresh --seed
 ```
 
-Open the new file from the `app/view/components` folder.
+If you have [DBBrowser](https://sqlitebrowser.org/) then you can check what has been created by the migrations and seeds 
+in the SQLite database:
 
-Update the render method to return: `layouts.admin` in place of
-`components.administration-layout`.
 
-Also, the render method will return a View only.
+#### Users Table
+![Users Table](../assets/sqlite-users-data-1.png)
 
-Locate the `resources/views/components` folder and move the `admin-layout.blade.php` file from
-here to the `resources/views/layouts` folder, and then rename the file to `admin.blade.php`.
+#### Roles Table
+![Roles Table](../assets/sqlite-roles-table-1.png)
 
-The code for the admin layout may be copied from the GitHub repository into
-the `admin.blade.php` file.
+#### Model Has Roles Table
 
-### Views
+This is the Spatie Permission table that links the Role to the required model, in our case 
+the User model. It indicates that the User model (Users table) with an ID of 100 is linked 
+to a role number of 1.
 
-Create a folder `/resources/views/admin`.
+![Model has Roles Table](../assets/sqlite-role-model-data-1.png)
 
-Create two view files: `_member_selector.blade.php` and `roles_editor.blade.php`.
+Yes, it's the Many-to-Many relationship in a normalised form!
 
-Copy the source code from the GitHub Repository
+```mermaid
+erDiagram
+  User ||--o{ Model-has-Role : "Has many"
+  Model-has-Roles }|--|| Role : "Belongs to Many"
+```
 
-#### _member_selector.blade.php
+### Staff Role and User
+
+Exercise: Repeat the above but for the Staff user and role. Assign only the staff role to 
+the staff member.
+
+
+### User Seeder Update
+
+Finally, we will assign the client role to the client user.
+
+In doing this we will add two users, only one of which will have the role assigned.
+
+Update the `UserSeeder` file so the `$seedUsers` is as shown below:
 
 ```php
-<select name="{{ $fieldname ?? 'member_id'}}"
-        class="w-full grow rounded-md {{ !empty($class) ? ' ' . $class : '' }}"
-        {{ !empty($autofocus) ? ' autofocus' : '' }} 
-        id="{{ $field_id ?? $fieldname }}">
-    @foreach ($users as $u)
-        <option value="{{ $u->id }}“
-                {{ $u->id == ($current ?? null) ? ' selected' : '' }}>
-            {{ $u->name }}
-        </option>
-    @endforeach
-</select>
+$seedUsers = [
+    [
+        'id' => 201,
+        'name' => 'Client User',
+        'email' => 'client@example.com',
+        'password' => 'Password1',
+        'email_verified_at' => null,
+        'role' => 'client',
+    ],
+
+    [
+        'id' => 202,
+        'name' => 'Another User',
+        'email' => 'another@example.com',
+        'password' => 'Password1',
+        'email_verified_at' => null,
+    ],
+];
 ```
 
-#### roles_editor.blade.php
-
-Full code on Github.
+Now the `foreach` will become:
 
 ```php
-@foreach ($role->users as $user)
-    @if( ($role->name !== 'Admin' && $canEdit) ||
-         ($role->name === 'Admin' && $canDeleteAdmins) ||
-         ($role->name === 'Super-Admin' && $canDeleteSuperAdmins) )
-        <form class="flex flex-row items-center
-                     hover:bg-neutral-100
-                     px-4 py-1
-                     group transition-all duration-500 ease-in-out"
-              role="form"
-              method="POST"
-              action="{{ route('admin.revoke-role') }}">
+foreach ($seedUsers as $user) {
+    $role = $user['role']??null;
+    unset($user['role']);
 
-            @csrf
-            @method('delete')
-        
-            <input type="hidden" name="role_id" value="{{ $role->id }}">
-            <input type="hidden" name="member_id" value="{{ $user->id }}">
-        
-            <a href="{{ route('users.show', $user->id ) }}"
-               class="grow text-neutral-600 hover:text-neutral-200">
-                {{ $user->name }}
-            </a>
-        
-            <button type="submit"
-                    class="align-middle text-center select-none
-                          rounded
-                          py-1 px-4
-                          no-underline text-xs
-                          text-red-800 hover:text-red-100
-                          border border-1 border-neutral-400 hover:border-red-100
-                          group-hover:border-red-500
-                          bg-neutral-200 hover:bg-red-500
-                          transition-all duration-500 ease-in-out
-                          print:hidden"
-                    value=" X " title="Revoke">
-                <i class="fa fa-times text-lg" title="X Symbol for deletion"></i>
-            </button>
-        </form>
-    @else
-        <a href="{{ route('users.show', $user->id ) }}"
-           class="bg-neutral-200 text-neutral-800">
-            {{ $user->name }}
-        </a>
-    @endif
+    $clientUser = User::updateOrCreate(
+        ['id' => $user['id']],
+        $user
+    );
+
+    if ($role === 'client') {
+        $clientUser->assignRole('client');
+    }
+}
 ```
+
+The code grabs the role from the data (if one exists) and then creates the user.
+
+After the user is created, if the role is `client` then the role is assigned to the user.
+
+
+## Creating the Admin Interface
+
+We will, in this step:
+
+- update the web routes
+- ...
 
 ### Routes
 
-We will be protecting the area that deals with assigning roles to users.
-
-Actions are:
-
-- Permissions: Show roles and users with that role
-- Assign Role: Add role to the user
-- Revoke Role: Remove role from the user
-
-Important items:
-
-- Group applies ‘middleware’ etc to multiple routes
-- Prefix adds a prefix in the URI for the group
-- Middleware applies the specified middleware
+Open the `web.php` file in the `routes` folder and, immediately after the dashboard entry, add:
 
 ```php
-// role-assignment screen
-Route::group(['prefix' => 'admin',
-              'middleware' => ['auth','verified','role:Admin|Super-Admin']], function () {
-	…
+Route::middleware(['auth', 'verified', 'role:admin'])
+    ->group(function () {
+        Route::get('/admin', function () {
+            return view('admin.index');
+    })->name('admin.index');
 });
 ```
 
-Before the `require` line add:
+This will verify that the user is:
+- logged in
+- verified, and
+- a member of the admin group (role))
+
+This provides the first level of protection from a "bad" user trying to access a section 
+of the system when they do not have permission to do so.
+
+Obviously, at the moment, when the page refreshes, this will cause an error.
+
+### Create Admin View(s)
+
+Create a new folder, `admin` in the `resources/views` folder.
+
+Copy the `dashboard.blade.php` file into this new folder and rename it to `index.blade.php`.
+
+Update the new `admin/index.balde.php` file to read:
 
 ```php
-// role-assignment screen
-Route::group(['prefix' => 'admin',
-              'middleware' => ['auth','verified','role:Admin|Super-Admin']], function () {
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('System Administration') }}
+        </h2>
+    </x-slot>
 
-    Route::get('/permissions', [RolesAndPermissionsController::class, 'index'])
-        ->name('admin.permissions');
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900">
+                    {{ __("You're logged in!") }}
+                </div>
+            </div>
+        </div>
+    </div>
+</x-app-layout>
+```
 
-    Route::post('/assign_role', [RolesAndPermissionsController::class, 'store'])
-        ->name('admin.assign-role');
+Try accessing https://localhost:8000/admin ... you should be challenged to log into the site 
+(`admin@example.com` and `Password1`).
 
-    Route::delete('/revoke_role', [RolesAndPermissionsController::class, 'destroy'])
-        ->name('admin.revoke-role');
+Once logged in, you should now be presented with a page like this:
 
-    Route::resource('/users',UserController::class);
+![Admin Page after Logging in as the admin user](../assets/admin-page-1.png)
+
+We will look at creating a Layout specific for Admin later.
+
+
+### Update Navigation to Show Admin
+
+One problem you now have, is that you cannot get to the Admin area if you log in via the 
+main page. So we need to update the navigation.
+
+We are going to see our first use of the `can` blade directive to check if the current user 
+is an `admin` user or not.
+
+> #### Important:
+> 
+> We would usually check at the _permission_ level to make sure that the
+> user is allowed to do 
+ 
+Open the `navigation.blade.php` file from the `resources/views/layouts` folder.
+
+We will ahve to make two sets of changes as the navigation is responsive, so let's start with...
+
+#### Desktop Navigation
+
+Locate the code:
+
+```php
+<x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+    <i class="fa-solid fa-laptop mr-1"></i>
+    {{ __('Dashboard') }}
+</x-nav-link>
+```
+
+We are going to add a new entry after the `</x-nav-link>`:
+
+
+```php
+@role('admin')
+    <x-nav-link :href="route('admin.index')" 
+                :active="request()->routeIs('admin.*')">
+        <i class="fa-solid fa-user-tie mr-1"></i>
+        {{ __('Admin') }}
+    </x-nav-link>
+@endrole
+```
+
+On refreshing the page you will now see the `Admin` option if you are the admin user.
+
+![Admin shown in the Navigation](../assets/admin-page-2.png)
+
+> _We have updated the icon to a user with a tie in the code._
+
+#### Mobile Navigation
+
+The mobile navigation is going to be very similar to the desktop version.
+
+Locate the lines:
+
+```php
+<x-responsive-nav-link :href="route('dashboard')" 
+                       :active="request()->routeIs('dashboard')">
+    <i class="fa-solid fa-laptop mr-1"></i>
+    {{ __('Dashboard') }}
+</x-responsive-nav-link>
+```
+
+Duplicate these lines, and modify to read:
+
+```php
+@role('admin')
+<x-responsive-nav-link :href="route('admin.index')"
+            :active="request()->routeIs('admin.*')">
+    <i class="fa-solid fa-user-tie mr-1"></i>
+    {{ __('Admin') }}
+</x-responsive-nav-link>
+@endrole
+```
+
+And yes, there is only one real change - adding `responsive` to the tags.
+
+![Mobile friendly menu showing Admin link](../assets/admin-page-3.png)
+
+
+When a user without the required rights logs in - the option is missing:
+
+![Non Admin user - No Link](../assets/admin-page-4.png)
+
+
+Plus, if they try going to the route directly...
+
+![Attempt to access directly - 403 Error](../assets/admin-page-5.png)
+
+### Further Development
+
+At some point in the future, the layout we are using would benefit from being updated to a 
+sidebar rather than a header, and also remove the footer, or at least make it minimal.
+
+Administration needs to focus on the maintenance of the site's data.
+
+## Role and Permission Management
+
+We are now ready to add the management of the Roles and Permissions. This is basically CRUD 
+for these two parts of the application.
+
+Start by creating a Role Controller and a Permission Controller.
+
+```shell
+php artisan make:controller PermissionController
+php artisan make:contreoller RoleController
+```
+
+Next add the required Routes to the `web.php` routes file.
+
+Locate the middleware for the admin section:
+
+```php
+Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
+    Route::get('/admin', function () {
+        return view('admin.index');
+    })->name('admin.index');    
 });
 ```
 
-## Migration and Seeders
-
-When you published the Spatie Permission 'tag' it generated a migration automatically.
-
-Simply execute: `php artisan migrate` to run the new migrations
-
-We will create some sample users plus the Roles for this demo application
-```php
-php artisan make:seeder UserSeeder
-php artisan make:seeder RoleSeeder
-```
-
-The Role Seeder must be executed before the User Seeder.
-
-Open the Database Seeder file, and change the run method to read:
+We will modify this as we are going to be adding administration routes:
 
 ```php
-public function run(): void
-{
-    $this->call([
-       RoleSeeder::class,
-       UserSeeder::class,
-    ]);
+Route::name('admin.')
+    ->prefix('admin')
+    ->middleware(['auth', 'verified', 'role:admin'])
+    ->group(function () {
 
-    User::factory()->create([
-        'name' => 'Test User',
-        'email' => 'test@example.com',
-    ]); // bonus dummy user, no roles
-}
+        Route::get('/', [StaticPageController::class, 'admin'])
+            ->name('index');
+
+        Route::resource('/roles', RoleController::class);
+        Route::resource('/permissions', PermissionController::class);
+    });
 ```
 
-Find the code for the RoleSeeder in this slide’s notes or on the GitHub repository
-We create three roles:
+> Remember to import the two classes (use lines)
+
+The modifications mean we are able to still visit the `http://localhost:8000/admin` route, 
+as the following is performed for us...
+
+- `name('admin.')` - named routes within the closure will seen as `admin.xxxx`, where xxxx 
+  is the name associated with the inner route.
+- `prefix('admin')` will add the `admin/` part of the URI automatically. 
+
+So, in the case of the `get('/')...->name('index')` the route will be known as `admin.index` 
+and the URI will be `/admin`, that is `http://localhost:8000/admin`... cool eh?
+
+We will also use a static page controller to show the admin page... so...
+
+
+
+### Add static folder to views
+
+Use the IDE or use the command line to add a new static folder to the `resources/views` folder.
+
+```shell
+mkdir -p resources/views/static
+```
+
+We need to move the welcome and dashboard views into that nice and new static page folder.
+
+The admin index page will stay where it is.
+
+```shell
+mv resources/views/welcome.blade.php resources/views/static/
+mv resources/views/dashboard.blade.php resources/views/static/
+```
+
+Also you will now need to update the routes in the `navigation.blade.php` and also the 
+`footer.blade.php` as needed:
+
+| Original Name        | New Route Name              | New RouteIs Name              |
+|----------------------|-----------------------------|-------------------------------|
+| `route('home')`      | `route('static.home')`      | `routeIs('static.home')`      |
+| `route('dashboard')` | `route('static.dashboard')` | `routeIs('static.dashboard')` |
+
+You can always check the [Roles and permissions 2025 
+S1 Repository](https://github.com/AdyGCode/roles-permissions-2025-s1) and 
+check your code.
+
+
+### Add a Static Page Controller
+
+Create the `StaticPageController`:
+
+```shell
+php artisan make:controller StaticPageController
+```
+
+Once created, open the file and add methods for:
+
+- home
+- dashboard
+- admin index
+
+
+#### Home Method
 
 ```php
-'name' => 'Super-Admin'
-'name' => 'Admin'
-'name' => ‘User’
+    function index(){
+        return view('static.welcome');
+    }
 ```
 
-Also, in the RoleSeeder we add the permissions we will use:
+
+#### Dashboard method
+
 
 ```php
-'role-list’,    'role-show’,    'role-create',    'role-edit’,    'role-delete’, 
-'product-list’, 'product-show', 'product-create’, 'product-edit’, 'product-delete’,  
-'user-list’,    'user-show',    'user-create’,    'user-edit’,    'user-delete',
+    function dashboard(){
+        return view('static.dashboard');
+    }
 ```
 
-Find the code for the UserSeeder in this slide’s notes or on the GitHub repository
-We create 4 users:
+#### Admin Index Method
 
 ```php
-'name' => 'Administrator',
-‘name' => ‘Adrian Gould',
-'name' => 'STUDENT NAME',
-'name' => 'Dee Mouser',
+    function admin(){
+            return view('admin.index');
+    }
 ```
 
-The steps for the users are:
-- Get the Super Admin, Admin and User roles collections
-- Create the User
-- Assign role to the user
 
-Repeat ‘Create User’ and ‘Assign Role’ for other seed users.
+#### Update the static page routes
+
+Modify the welcome and dashboard routes to become:
 
 ```php
-$roleSuperAdmin = Role::whereName('Super-Admin’)
-                         ->get();
-$roleAdmin = Role::whereName('Admin')->get();
-$roleUser = Role::whereName('User')->get();
 
-$userAdmin = User::create([
-    'id' => 111,
-    'name' => 'Administrator',
-    'email' => 'admin@example.com',
-    'password' => Hash::make('Password1')
-]);
+Route::name('static.')->group(function () {
 
-$userAdmin->assignRole([$roleSuperAdmin]);
+    Route::get('/', [StaticPageController::class, 'index'])
+        ->name('home');
+
+    Route::get('/dashboard', [StaticPageController::class, 'dashboard'])
+        ->middleware(['auth', 'verified'])
+        ->name('dashboard');
+        
+});
+
 ```
 
-As   we are in **development**, we can re-run the migrations and seed the database
+We are again making use of the ability to name groups of routes.
+
+### Add Links to the Admin Page
+
+For the time being, we will be using the admin page as a switchboard. To do so we will add 
+cards' that link to other parts of the Admin.
+
+Eventually, these could become a sidebar menu.
+
+Open the `admin/index.blade.php` file and update the code that is nestled inside 
+`<div class="bg-white overflow-hidden shadow-sm sm:rounded-lg ... gap-8 p-8">` and `</div>`:
+
+```php
+<div class="bg-white overflow-hidden shadow-sm sm:rounded-lg grid grid-cols-3 gap-8 p-8">
+
+    <a href="{{ route('admin.roles.index') }}"
+       class="border p-6 hover:bg-blue-500 hover:text-white grow">
+        <h3 class="text-xl">Roles</h3>
+        <p>This could be a card with statistics about Roles</p>
+    </a>
+    
+    <a href="{{ route('admin.permissions.index') }}"
+       class="border p-6 hover:bg-blue-500 hover:text-white grow">
+        <h3 class="text-xl">Permissions</h3>
+        <p>This could be a card with statistics about Permissions</p>
+    </a>
+    
+    <a href="{{ route('admin.index') }}"
+       class="border p-6 hover:bg-blue-500 hover:text-white grow">
+        <h3 class="text-xl">Another Admin Link</h3>
+        <p>This could be a card with statistics about Permissions</p>
+    </a>
+    
+    <a href="{{ route('admin.index') }}"
+       class="border p-6 hover:bg-blue-500 hover:text-white grow">
+        <h3 class="text-xl">Another Admin Link</h3>
+        <p>This could be a card with statistics about Permissions</p>
+    </a>
+
+</div>
+```
+
+
+### Verify Working
+
+Make sure that the pages are now displaying as expected... 
+
+Well, all except the roles and permissions pages.
+
+
+## Role & Permission (R&P) Management Pages
+
+Start by creating folders for the roles and permissions admin pages:
+
+```shell
+mkdir -p resources/views/admin/{roles,permissions}
+```
+
+We will place the CRUD pages into these folders. It keeps admin-related views together and 
+less likly to confuse with views that may have the same name for ordinary client type users.
+
+### Index methods
+
+Let's now start getting our teeth into the R&P admin.
+
+Open the `RoleController` you created earlier.
+
+Add a new `index` method:
+
+```php
+    public function index()
+    {
+        return view('admin.roles.index');
+    }
+```
+
+Likewise for the `PermissionController`:
+
+```php
+    public function index()
+    {
+        return view('admin.permissions.index');
+    }
+```
+
+
+### Add index pages
+
+Copy the admin/index.blade.php page into the roles fodler and update th code to be:
+
+```php
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('System Administration') }}
+        </h2>
+    </x-slot>
+
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-8">
+
+                Roles Administration
+
+            </div>
+        </div>
+    </div>
+</x-app-layout>
+```
+
+Repeat for the permissions, changing 'Roles' to 'Permissions'.
+
+### Display the Roles & Permisions
+
+We can use tables or grids or even flex boxes to didplay our list of roles, but for now we 
+will utilise a good old table.
+
+Open the `roles/index.blade.php` file and:
+
+- Replace `__('System Administration')` with `__('Roles Administration')`
+
+Repeat for the Permission Administration `permissions/index.blade.php` file.
+
+### Display Roles
+
+Now let us concentrate on the Roles index page.
+
+> The table layout is from https://www.hyperui.dev/components/application/tables
+
+Replace the text `Roles Administrsation` that is not in the header, with the following:
+
+```php
+<div class="overflow-x-auto rounded border border-gray-300 shadow-sm">
+    <table class="min-w-full divide-y-2 divide-gray-200">
+        
+        <thead class="ltr:text-left rtl:text-right">
+        <tr class="*:font-medium *:text-gray-900">
+            <th class="px-3 py-2 whitespace-nowrap">Role Name</th>
+            <th class="px-3 py-2 whitespace-nowrap">Actions</th>
+
+        </tr>
+        </thead>
+
+        <tbody class="divide-y divide-gray-200">
+        @foreach($roles as $role)
+            <tr class="*:text-gray-900 *:first:font-medium">
+                <td class="px-3 py-2 whitespace-nowrap">{{ $role->name }}</td>
+                <td class="px-3 py-2 whitespace-nowrap">
+                    Details
+                    Edit
+                    Remove
+                </td>
+
+            </tr>
+        @endforeach
+        </tbody>
+
+        <tfoot>
+        <tr>
+            <td colspan="2" class="p-3">
+                @if( $roles->hasPages())
+                    {{ $roles->links() }}
+                @else
+                    <p class="text-sm text-gray-500">
+                        All Roles shown
+                    </p>
+                @endif
+            </td>
+        </tr>
+        </tfoot>
+
+    </table>
+</div>
+```
+
+If you refresh, then there will be a problem with the view as we have not got the roles from 
+the database.
+
+Open the `RolesController` and update the index method:
+
+```php
+        $roles = Role::paginate(15);
+
+        return view('admin.roles.index')
+            ->with('roles', $roles);
+```
+
+That's the basic layout.
+
+> ### Exercise: 
+> Repeat this for the permissions
+
+
+
+
+### Display the Permissions as a table
+
+
+
+We already have the dashboard as the basis, so we will use this as a start.
+
+First let's create a `users` folder in the `resources/views` folder.
+
+
+
+## Development Only: Starting the Database From Fresh
+
+As we are in **development**, we can re-run the migrations and seed the database
 
 ```php
 php artisan migrate:fresh --seed
 ```
 
-Remember:
-- This MUST NOT be used on a production database
-- This command DROPS all existing tables and data
+> ### Remember:
+> - This MUST NOT be used on a production database
+> - This command DROPS all existing tables and data
 
 ## Testing
 
