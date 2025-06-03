@@ -14,7 +14,7 @@ tags:
 date created: 03 July 2024
 date modified: 10 July 2024
 created: 2024-09-20T11:17
-updated: 2025-05-23T11:13
+updated: 2025-06-03T12:50
 ---
 
 
@@ -38,7 +38,7 @@ includeLinks: true
 
 # Laravel Bootcamp: Part 10
 
-# TODO: NOT WRITTEN
+# TODO: IN PROGRESS
 
 ## Roles and Permissions
 
@@ -104,9 +104,11 @@ Policies are…
 
 Identify the typical actions needing permission:
 
-- Define the permission: E.g. "manage_users"
-- Check the permission on the front-end: E.g. show/hide the button
-- Check the permission on the back-end: E.g. can/can't update the data
+- Define the permission: E.g. "`manage users`"
+- Check the permission on the front-end:
+  E.g. show/hide the button
+- Check the permission on the back-end: 
+  E.g. can/can't update the data
 
 ### Laravel Example
 
@@ -121,7 +123,7 @@ class AppServiceProvider extends ServiceProvider
   public function boot()
   {
     // Should return TRUE or FALSE
-    Gate::define('manage_users', function(User $user) {
+    Gate::define('manage users', function(User $user) {
       return $user->is_admin == 1;
     });
   }
@@ -133,14 +135,17 @@ And the `Resources/views/navigation.blade.php` file:
 
 ```php
 <ul>
+
 	<li>
 		<a href="{{ route('projects.index') }}">Projects</a>
 	</li>
-	@can('manage_users’)
+	
+	@can('manage users’)
 	<li>
 		<a href="{{ route('users.index') }}">Users</a>
 	</li>
 	@endcan
+	
 </ul>
 
 ```
@@ -249,7 +254,7 @@ class StoreProjectRequest extends FormRequest
     public function rules()
     {
         return [
-            // ...
+            // …
         ];
     }
 }
@@ -287,7 +292,7 @@ class ProductPolicy
         return $user->is_admin == 1;
     }
 
-/* ... snipped out code ... */
+/* … snipped out code … */
 
 }
 ```
@@ -360,7 +365,7 @@ cd Source/Repos
 Update the Laravel Installer
 
 It is always a good idea to see if the Laravel installer and its required packages have been 
-updated so... run the composer update in the global context to do this.
+updated so… run the composer update in the global context to do this.
 
 ```shell
 composer global update
@@ -472,15 +477,15 @@ $middleware->alias([
 > the `role_or_permission` to check at the route stage. For example:
 > 
 > ```php
-> Route::group(['middleware' => ['role:manager']], function () { ... });
-> Route::group(['middleware' => ['permission:publish articles']], function () { ... });
-> Route::group(['middleware' => ['role_or_permission:publish articles']], function () { ... });
+> Route::group(['middleware' => ['role:manager']], function () { … });
+> Route::group(['middleware' => ['permission:publish articles']], function () { … });
+> Route::group(['middleware' => ['role_or_permission:publish articles']], function () { … });
 > ```
 > [For more information, always read the
 > documentation for the package.](https://spatie.be/docs/laravel-permission/v6/basic-usage/middleware)
 
 
-OK, let's continue...
+OK, let's continue…
 
 
 ## Creating an Admin Role and Assigning it
@@ -495,7 +500,7 @@ requirements of the project.
 
 ### Role seeder
 
-Let us start by first visiting th Role Seeder... ok, so we need to create one first... so:
+Let us start by first visiting th Role Seeder… ok, so we need to create one first… so:
 
 ```shell
 php artisan RoleSeeder
@@ -579,7 +584,7 @@ $adminUser->assignRole([
 That makes our AdminSeeder's run method much shorter.
 
 Now we need to update the Database Seeder and add the RoleSeeder **BEFORE** the UserSeeder and 
-AdminSeeder...
+AdminSeeder…
 
 ```php
 
@@ -688,7 +693,14 @@ After the user is created, if the role is `client` then the role is assigned to 
 We will, in this step:
 
 - update the web routes
-- ...
+- create folders for the admin of Roles & Pages
+- create index pages for Roles & Permissions
+- create the index methods 
+- repeat for:
+	- create
+	- update
+	- delete
+	- read 1 (show)
 
 ### Routes
 
@@ -719,7 +731,7 @@ Create a new folder, `admin` in the `resources/views` folder.
 
 Copy the `dashboard.blade.php` file into this new folder and rename it to `index.blade.php`.
 
-Update the new `admin/index.balde.php` file to read:
+Update the new `admin/index.blade.php` file to read:
 
 ```php
 <x-app-layout>
@@ -741,7 +753,7 @@ Update the new `admin/index.balde.php` file to read:
 </x-app-layout>
 ```
 
-Try accessing https://localhost:8000/admin ... you should be challenged to log into the site 
+Try accessing https://localhost:8000/admin … you should be challenged to log into the site 
 (`admin@example.com` and `Password1`).
 
 Once logged in, you should now be presented with a page like this:
@@ -761,12 +773,11 @@ is an `admin` user or not.
 
 > #### Important:
 > 
-> We would usually check at the _permission_ level to make sure that the
-> user is allowed to do 
+> We would usually check at the _permission_ level to make sure that the user is allowed to do 
  
 Open the `navigation.blade.php` file from the `resources/views/layouts` folder.
 
-We will ahve to make two sets of changes as the navigation is responsive, so let's start with...
+We will have to make two sets of changes as the navigation is responsive, so let's start with…
 
 #### Desktop Navigation
 
@@ -780,7 +791,6 @@ Locate the code:
 ```
 
 We are going to add a new entry after the `</x-nav-link>`:
-
 
 ```php
 @role('admin')
@@ -828,13 +838,11 @@ And yes, there is only one real change - adding `responsive` to the tags.
 
 ![Mobile friendly menu showing Admin link](../assets/admin-page-3.png)
 
-
 When a user without the required rights logs in - the option is missing:
 
 ![Non Admin user - No Link](../assets/admin-page-4.png)
 
-
-Plus, if they try going to the route directly...
+Plus, if they try going to the route directly…
 
 ![Attempt to access directly - 403 Error](../assets/admin-page-5.png)
 
@@ -869,7 +877,7 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
 });
 ```
 
-We will modify this as we are going to be adding administration routes:
+We will modify this as we are going to be adding more administration routes:
 
 ```php
 Route::name('admin.')
@@ -885,21 +893,19 @@ Route::name('admin.')
     });
 ```
 
-> Remember to import the two classes (use lines)
+> Remember to import the Role and Permission Controller classes (use lines)
 
 The modifications mean we are able to still visit the `http://localhost:8000/admin` route, 
-as the following is performed for us...
+as the following is performed for us…
 
-- `name('admin.')` - named routes within the closure will seen as `admin.xxxx`, where xxxx 
-  is the name associated with the inner route.
+- `name('admin.')` - named routes within the closure will seen as `admin.xxxx`, where`xxxx` is the name associated with the inner route (e.g. index).
 - `prefix('admin')` will add the `admin/` part of the URI automatically. 
 
-So, in the case of the `get('/')...->name('index')` the route will be known as `admin.index` 
-and the URI will be `/admin`, that is `http://localhost:8000/admin`... cool eh?
+So, in the case of the `get('/')…->name('index')` the route will be known as `admin.index` 
+and the URI will be `/admin`, that is `http://localhost:8000/admin`
+and even better is that we will be able to refer to the roles route by name as well… `admin.roles.index` … cool eh?
 
-We will also use a static page controller to show the admin page... so...
-
-
+We will also use a static page controller to show the admin page… so…
 
 ### Add static folder to views
 
@@ -911,24 +917,33 @@ mkdir -p resources/views/static
 
 We need to move the welcome and dashboard views into that nice and new static page folder.
 
-The admin index page will stay where it is.
+The admin index page will stay where it is in the `admin` folder.
 
 ```shell
 mv resources/views/welcome.blade.php resources/views/static/
 mv resources/views/dashboard.blade.php resources/views/static/
 ```
 
-Also you will now need to update the routes in the `navigation.blade.php` and also the 
-`footer.blade.php` as needed:
+Also you will now need to update the routes in the `navigation.blade.php` and also the `footer.blade.php` as needed.
 
 | Original Name        | New Route Name              | New RouteIs Name              |
 |----------------------|-----------------------------|-------------------------------|
 | `route('home')`      | `route('static.home')`      | `routeIs('static.home')`      |
 | `route('dashboard')` | `route('static.dashboard')` | `routeIs('static.dashboard')` |
 
-You can always check the [Roles and permissions 2025 
-S1 Repository](https://github.com/AdyGCode/roles-permissions-2025-s1) and 
-check your code.
+Also, these controllers will need to be updated to point at the correct route names:
+
+- `AuthenticatedSessionController.php`
+- `ConfirmablePasswordController.php`
+- `EmailVerificationNotificationController.php`
+- `EmailVerificationPromptController.php`
+- `RegisteredUserController.php`
+- `VerifyEmailController.php`
+
+These are all within the `app/Http/Controllers/Auth` folder.
+
+You can always check the [Roles and permissions 2025 S1 Repository](https://github.com/AdyGCode/roles-permissions-2025-s1) and check your code.
+
 
 
 ### Add a Static Page Controller
@@ -1002,7 +1017,7 @@ cards' that link to other parts of the Admin.
 Eventually, these could become a sidebar menu.
 
 Open the `admin/index.blade.php` file and update the code that is nestled inside 
-`<div class="bg-white overflow-hidden shadow-sm sm:rounded-lg ... gap-8 p-8">` and `</div>`:
+`<div class="bg-white overflow-hidden shadow-sm sm:rounded-lg … gap-8 p-8">` and `</div>`:
 
 ```php
 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg grid grid-cols-3 gap-8 p-8">
@@ -1037,12 +1052,16 @@ Open the `admin/index.blade.php` file and update the code that is nestled inside
 
 ### Verify Working
 
-Make sure that the pages are now displaying as expected... 
+Make sure that the pages are now displaying as expected… 
 
 Well, all except the roles and permissions pages.
 
 
 ## Role & Permission (R&P) Management Pages
+
+We need to create the CRUD pages for the Roles and Permissions.
+
+### Create View Folders
 
 Start by creating folders for the roles and permissions admin pages:
 
@@ -1080,7 +1099,7 @@ Likewise for the `PermissionController`:
 
 ### Add index pages
 
-Copy the admin/index.blade.php page into the roles fodler and update th code to be:
+Copy the `admin/index.blade.php page` into the `roles` folder and update the code to be:
 
 ```php
 <x-app-layout>
@@ -1102,26 +1121,26 @@ Copy the admin/index.blade.php page into the roles fodler and update th code to 
 </x-app-layout>
 ```
 
-Repeat for the permissions, changing 'Roles' to 'Permissions'.
+### Permissions Index Page
 
-### Display the Roles & Permisions
+Exercise:
 
-We can use tables or grids or even flex boxes to didplay our list of roles, but for now we 
+Repeat the above for the permissions, changing 'Roles' to 'Permissions'.
+
+### Display the Roles
+
+We can use tables or grids or even flex boxes to display our list of roles, but for now we 
 will utilise a good old table.
 
 Open the `roles/index.blade.php` file and:
 
 - Replace `__('System Administration')` with `__('Roles Administration')`
 
-Repeat for the Permission Administration `permissions/index.blade.php` file.
-
-### Display Roles
-
-Now let us concentrate on the Roles index page.
+Let us concentrate on the Roles index page.
 
 > The table layout is from https://www.hyperui.dev/components/application/tables
 
-Replace the text `Roles Administrsation` that is not in the header, with the following:
+Replace the text `Roles Administration` that is not in the header, with the following:
 
 ```php
 <div class="overflow-x-auto rounded border border-gray-300 shadow-sm">
@@ -1181,19 +1200,357 @@ Open the `RolesController` and update the index method:
 
 That's the basic layout.
 
-> ### Exercise: 
-> Repeat this for the permissions
-
-
-
-
 ### Display the Permissions as a table
-
-
 
 We already have the dashboard as the basis, so we will use this as a start.
 
-First let's create a `users` folder in the `resources/views` folder.
+Exercise: Do the same process for the permissions to be displayed in a table.
+
+### Create the Add Role page
+
+The easiest way to do this is to duplicate the index, and remove anything we do not want, to leave us with:
+
+```php
+<x-app-layout>  
+    <x-slot name="header">  
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">  
+            {{ __('Roles Administration') }}  
+        </h2>  
+    </x-slot>  
+    <div class="py-12">  
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">  
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-8">  
+  
+                <div class="overflow-x-auto rounded border border-gray-300 shadow-sm">  
+  
+                    <div class="flex flex-1 justify-between p-2 items-end bg-gray-200">  
+                        <h2 class="text-2xl ">
+                        Create New Role
+                        </h2>  
+
+                        <a href="{{ route('admin.roles.index') }}"  
+                           class="rounded bg-green-500 text-white hover:bg-white hover:text-green-500 border-green-500 px-4 py-2">  
+                            All Roles  
+                        </a> 
+                        
+						<a href="{{ route('admin.roles.create') }}"  
+                           class="rounded bg-green-500 text-white hover:bg-white hover:text-green-500 border-green-500 px-4 py-2">  
+                            New Role  
+                        </a>  
+                    </div>  
+                    
+					<!-- Rest of page here -->
+					  
+                </div>  
+            </div>
+                    
+        </div>    
+    </div>
+</x-app-layout>
+```
+
+Before we continue, we need to add a way to easily go back to the list of Roles, so let's add a button.
+
+Locate the: `<h2>` for the `Create new Role`, and modify the code after that, and up to the first `</div>`:
+
+```php
+<h2 class="text-2xl ">Create New Role</h2>  
+  
+<div class="space-x-4 py-2">  
+    <a href="{{ route('admin.roles.index') }}"  
+       class="rounded bg-blue-500 text-white hover:bg-white hover:text-blue-500 border-blue-500 px-4 py-2">  
+        All Roles  
+    </a>  
+  
+    <a href="{{ route('admin.roles.create') }}"  
+       class="rounded bg-green-500 text-white hover:bg-white hover:text-green-500 border-green-500 px-4 py-2">  
+        New Role  
+    </a>  
+</div>
+```
+
+In the space represented by `<!-- Rest of page here -->` we will now add:
+
+```php
+<form action="{{ route('admin.roles.index') }}"  
+      method="POST"  
+      class="p-6 flex flex-col space-y-4">  
+
+	@csrf
+
+	<div>  
+    <x-input-label 
+	    for="name" 
+	    :value="__('Role Name')"/>  
+  
+    <x-text-input 
+	    id="name" 
+	    class="block mt-1 w-full" 
+	    type="name" 
+	    name="name"  
+        :value="old('name')" 
+        required/>  
+  
+    <x-input-error 
+	    :messages="$errors->get('name')" 
+	    class="mt-2"/>  
+</div>
+      
+    <div class="flex flex-row space-x-4">  
+        <x-primary-button>
+	        Save
+        </x-primary-button>  
+        <x-link-button href="{{route('admin.roles.index')}}">  
+            Cancel  
+        </x-link-button>  
+    </div>
+    
+</form>
+```
+
+We do not have a `x-link-button` so we create a file `limnk-button.blade.php` in the `resources/views/components` folder  and add the content:
+
+```php
+<a {{ $attributes->merge([  
+    'class' => 'inline-flex items-center px-4 py-2 bg-gray-300 border border-transparent  
+                rounded-md font-semibold text-xs text-gray-800 uppercase tracking-widest                hover:bg-gray-400 hover:text-white focus:bg-gray-400 active:bg-gray-400 focus:outline-none                focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2                transition ease-in-out duration-150']) }}>  
+    {{ $slot }}  
+</a>
+```
+
+The page should look similar to this:
+
+![Roles Admin - New Role ](../assets/Screenshot%202025-06-03%20105955.png)
+
+### Add the Store action
+
+Now we have a form we need to store the new role in the system.
+
+Go back to the `RoleController` and add a new method `store`:
+
+```php
+public function store(Request $request)  
+{  
+  
+    $validated = $request->validate([  
+       'name'=>[  
+           'required',  
+           'min:5',  
+           'max:64',  
+           'unique:roles'  
+       ]  
+    ]);  
+```
+
+The validation should be familiar by now. The name is required, between 5 and 64 characters in length (inclusive), and unique.
+
+```php
+    $validated['name']=Str::lower($validated['name']);  
+```
+
+We force the role to all lower case.
+
+```php
+    Role::create($validated);  
+```
+
+Then create the role in the database, before returning to the roles index page.
+
+```php  
+    return to_route('admin.roles.index');  
+
+}
+```
+
+### Repeat for the Permissions!
+
+Exercise:
+
+Do the permissions create page, as we have done for the Roles. The permission's name, though, needs to be up to 128 characters.
+
+
+## Edit Roles & Permissions
+
+The Index and Create are done.
+
+Now onto Edit.
+
+### Create the Edit Role page
+
+Easiest way is to duplicate the `create.blade.php` file and rename it `edit.blade.php`.
+
+Then edit the page, making the following changes:
+
+- update the `<h2 class="text-2xl ">Create New Role</h2>` text to be `Edit Role`.
+
+- change the form route to be `route('admin.roles.update', $role)`
+ 
+- Add a `@method('patch')` immediately after the CSRF.
+  
+- Update the `x-test-input` control to have the `:value` be  `old('name')??$role->name` to allow the role to be filled in from the database, or if edited the value it was changed to.
+
+
+### Add Update Method to RoleController
+
+Now edit the role controller.
+
+We need to add an update method, immediately after the `edit` method.
+
+```php
+public function update(Role $role, Request $request)  
+{  
+    $validated = $request->validate([  
+        'name' => [  
+            'required',  
+            'min:5',  
+            'max:64',  
+            'unique:roles'  
+        ]  
+    ]);  
+  
+    $validated['name'] = Str::lower($validated['name']);  
+  
+    $role->update($validated);  
+  
+    return to_route('admin.roles.index');  
+}
+```
+
+As you can see, it is dramatically similar to the store method...
+
+
+### Add "Confirm delete" View
+
+Duplicate the Edit, and then change the content as needed:
+
+- `<h2 class="text-2xl ">Edit Role</h2>` becomes `<h2 class="text-2xl ">Delete Role</h2>`.
+
+- the form's action becomes `{{ route('admin.roles.destroy', $role) }}`.
+
+- the `@method` becomes a `delete` in place of `patch` (or `put`).
+
+- In the input label, the value`:value="__('Role Name')"/>` becomes `:value="__('Confirm Role Name')"/>`.
+
+- change the text input by removing the `:value="old('name')??$role->name"`.
+
+Also, immediately after the `@method` and just before the form field's div, add:
+
+```php
+<div>  
+    <p>Please confirm you wish to delete the role:  
+        <code class="text-red-500 font-semibold">{{$role->name}}</code>  
+        by entering it below:</p>  
+</div>
+```
+
+
+
+### Add Destroy Method to the RoleController
+
+The final step, well almost, is to add the destroy method to remove the role that is identified to be deleted.
+
+Create the destroy method immediately after the delete method.
+
+Change the method's parameter list to be: `Role $role, Request $request`.
+
+Now in the method add:
+```php
+$roleName = $role->name;  
+  
+$validated = $request->validate([  
+    'name' => [  
+        'required',  
+        'exists:roles,name'  
+    ]  
+]);  
+```
+
+We are using the form's submitted name field to verify that this is the role we wish to delete, just like GitHub's danger zone confirmations.
+
+Now we can go ahead and delete the role.
+
+```php
+$role->delete();  
+  
+return to_route('admin.roles.index');
+```
+
+
+### Exercise: Complete the Permission Delete & Destroy
+
+Ok, (almost) last step, repeat the above but for the Permissions.
+
+
+## Adding Feedback to Add, Edit an Delete
+
+Finally we want to give the user confirmation about the actions being completed.
+
+To do so we will use the Flasher module.
+
+Install using composer:
+
+```shell
+composer require php-flasher/flasher-laravel
+```
+
+Finish the installation using artisan:
+
+```shell
+php artisan flasher:install
+```
+
+and we are ready to go.
+
+### Update store to include flash messages
+
+We are going to refactor the store method to use the flasher module...
+
+To begin we will wrap the validation 
+
+
+```php
+$role = null;  
+  
+try {  
+  
+    $validated = $request->validate([  
+        'name' => [  
+            'required',  
+            'min:5',  
+            'max:64',  
+            'unique:roles'  
+        ]  
+    ]);  
+  
+    $validated['name'] = Str::lower($validated['name']);  
+  
+    $role = Role::create($validated);  
+  
+} catch (ValidationException $e) {  
+  
+    flash()->error('Please fix the errors in the form.',  
+        [  
+            'position' => 'top-center',  
+            'timeout' => 5000,  
+        ],  
+        'Role Creation Failed');  
+  
+    return back()->withErrors($e->validator)->withInput();  
+  
+} catch (RoleAlreadyExists $e) {  
+  
+    flash()->error('The role already exists.',  
+        [  
+            'position' => 'top-center',  
+            'timeout' => 5000,  
+        ],  
+        'Role Creation Failed');  
+  
+    return back()->withErrors($e->getMessage())->withInput();  
+  
+}
+```
+
 
 
 
