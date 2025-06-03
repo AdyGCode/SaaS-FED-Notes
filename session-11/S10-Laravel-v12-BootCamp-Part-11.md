@@ -166,9 +166,11 @@ After this line add the following:
 This will loop through each of the permissions and display them in a little 'pill'. Once the line is full, the next pill will start on the next line.
 
 Ok, so that is the first of the changes... next...
+
 ### Step 2: Add Assign Permissions
 
-For this we need to do two parts:
+For this, we need to do two parts:
+
 - Add the "add permission" form
 - Add the assign permission method to the Role Controller
 
@@ -204,11 +206,13 @@ This code is a bit longer. We are adding a form with a select element and button
 	            name="permission" 
 	            autocomplete="permission-name"  
 	            class="mt-1 mb-4 block w-full py-1 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">  
+                
                 @foreach ($permissions as $permission)  
                     <option value="{{ $permission->name }}">
 	                    {{ $permission->name }}
 	                </option>  
-                @endforeach  
+                @endforeach
+                  
             </select>  
             
             <x-input-error 
@@ -224,7 +228,8 @@ This code is a bit longer. We are adding a form with a select element and button
     </form>  
 </div>
 ```
-We believe that by this point the code used should be pretty clear.
+
+We believe that by this point, the code used should be pretty clear.
 
 Now we need to add the code that performs the `admin.roles.permissions` and add a route to enable this action.
 
@@ -237,6 +242,20 @@ Route::post('/roles/{role}/permissions',
 			[RoleController::class, 'givePermission'])
 	->name('roles.permissions');
 ```
+
+> ### Important:
+>  
+> One problem that you may encounter is when routes are ordered incorrectly.
+>  
+> This occurs when wildcards intercept parts of the URI incorrectly. 
+>  
+> For example, the route`/users/{user}` will accept anything at the `{user}` part of the URI. 
+> So this means that `/users/3`, `/users/edit/` and so on would be accepted. The `edit` 
+> would fail as we expect an integer in the `{user}` position.
+>  
+> This is why we placed our `delete` routes before the resourceful ones, thus enforcing they 
+> are added to the internal routing tables before the more general wildcard routes.
+
 
 #### Role Controller Updates
 
@@ -261,6 +280,7 @@ public function givePermission(Request $request, Role $role)
 You may be able to test this is working, but to do so you would need to add some permissions to begin with.
 
 Now onto the revoke...
+
 ### Step 3: Add Revoke Permissions
 
 Again we will split this into parts to complete.
@@ -274,22 +294,26 @@ Add a blank line, if there is not one, before the tag and then add the following
 
 ```php
 @if ($role->permissions)  
-    <div class="mt-2 mb-6 bg-gray-100 shadow border border-gray-300 rounded px-4 pt-2">  
-        <h3 class="mb-2 bg-gray-300 text-gray-800 px-4 py-1 -mt-2 -mx-4">Revoke Permissions</h3>  
+    <div class="mt-2 mb-6 bg-gray-100 shadow 
+                border border-gray-300 rounded px-4 pt-2">  
+        <h3 class="mb-2 bg-gray-300 text-gray-800 px-4 py-1 -mt-2 -mx-4">
+            Revoke Permissions
+        </h3>  
         <div class="flex space-x-4 flex-wrap">  
         
-            @foreach ($role->permissions as $role_permission)  
+            @foreach ($role->permissions as $rolePermission)  
             
                 <form class="px-0 py-1 text-white rounded-md"  
                        method="POST"  
-                       action="{{ route('admin.roles.permissions.revoke', [$role->id, $role_permission->id]) }}"  
+                       action="{{ route('admin.roles.permissions.revoke',
+                                    [$role->id, $rolePermission->id]) }}"  
                        onsubmit="return confirm('Are you sure?');">  
                        
 	                @csrf  
                     @method('DELETE')  
                        
                     <x-danger-button type="submit">  
-                        {{ $role_permission->name }}  
+                        {{ $rolePermission->name }}  
                     </x-danger-button>  
                 </form>  
                 
