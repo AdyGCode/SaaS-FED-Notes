@@ -129,9 +129,9 @@ With this data, we are now ready to update the edit form.
 
 The edit page will look something similar to this when completed:
 
-![Picture: Role Administration Edit Form with Permission assign and revoke](assets/Pasted%20image%2020250603170956.png)
+![Picture: Role Administration Edit Form with Permission assign and revoke](../assets/Pasted%20image%2020250603170956.png)
 
-We will update this form, and the Roles Controller in steps.
+We will update this form and the Role Controller in steps.
 
 ### Step 1: Add Display Current Permissions
 
@@ -331,6 +331,7 @@ This means we can click the button which then triggers a "submit" for the permis
 But... as the button is clicked we show a JavaScript pop-up dialog to confirm the action. If the cancel button is pressed then the revoke will be terminated.
 
 The revoke makes use of a new route `admin.roles.permissions.revoke`... so time to add this to the web routes.
+
 #### Web Routes Update
 
 Open the web routes and **immediately** before the `delete` route,  add the route to revoke a permission:
@@ -363,9 +364,33 @@ public function revokePermission(
 }
 ```
 
-Here the code accepts the Role and Permission and if the role has the permission then it is revoked. If not then an error is shown.
+Here the code accepts the Role and Permission, and if the role has the permission, then it is 
+revoked. If not, then an error is shown.
 
-Well it would be, but we need to change this to use the Flasher.
+Well, it would be, but we need to change this to use the Flasher.
+
+> ### Important
+>  
+> If you have added a composer-based package to a project and pushed the changes to teh 
+> repository, then when editing on a different PC, or a team member is working on the 
+> application, then when the new code is pulled you must do the following:
+>  
+> - run `composer install` _or_ `composer update`
+> - run any additional installation routines
+> - clear caches, routes and compiled views:
+>   - `php artisan cache:clear`
+>   - `php artisan view:clear`
+>   - `php artisan route:clear`
+> - commit the updates so you have a 'roll back' point
+
+It is a good idea at this point to make sure that you have the flasher package installed and 
+are ready to continue using:
+
+```shell
+composer require php-flasher/flasher-laravel
+```
+
+
 
 ### Update the Assign and Revoke messages to add Flasher
 
@@ -387,10 +412,10 @@ return back();
 ```
 
 
-Change the permission added line  into the following lines:
+Change the permission added line into the following lines:
 
 ```php
-flash()->success('Role has been granted the permission.',  
+flash()->success('Permission has been addd to the Role.',  
     [  
         'position' => 'top-center',  
         'timeout' => 5000,  
@@ -400,10 +425,10 @@ flash()->success('Role has been granted the permission.',
 return back();
 ```
 
-Change the  permission revoked line  into the following lines:
+Change the permission revoked line into the following lines:
 
 ```php
-flash()->success('Permission has been removed from the role.',  
+flash()->success('Permission has been removed from the Role.',  
     [  
         'position' => 'top-center',  
         'timeout' => 5000,  
@@ -421,7 +446,7 @@ flash()->warning('Role did not have this permission.',
         'position' => 'top-center',  
         'timeout' => 5000,  
     ],  
-    'Permission Did Not Exist');  
+    'Permission not present');  
   
 return back();
 ```
