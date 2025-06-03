@@ -14,11 +14,11 @@ tags:
 date created: 03 July 2024
 date modified: 10 July 2024
 created: 2024-09-20T11:17
-updated: 2025-06-03T12:50
+updated: 2025-06-03T15:56
 ---
 
 
-# S10 Laravel Bootcamp: Part 8
+# S10 Laravel Bootcamp: Part 10
 
 ## Software as a Service - Front-End Development
 
@@ -38,9 +38,7 @@ includeLinks: true
 
 # Laravel Bootcamp: Part 10
 
-# TODO: IN PROGRESS
-
-## Roles and Permissions
+## Roles and Permissions Part 1
 
 In this section, we will start to add an administration/management front-end that allows 
 users with particular rights to perform management actions on data in the Chirp system.
@@ -123,12 +121,12 @@ class AppServiceProvider extends ServiceProvider
   public function boot()
   {
     // Should return TRUE or FALSE
-    Gate::define('manage users', function(User $user) {
+    Gate::define('manage users', 
+                 function(User $user) {
       return $user->is_admin == 1;
     });
   }
 }
-
 ```
 
 And the `Resources/views/navigation.blade.php` file:
@@ -136,15 +134,17 @@ And the `Resources/views/navigation.blade.php` file:
 ```php
 <ul>
 
-	<li>
-		<a href="{{ route('projects.index') }}">Projects</a>
-	</li>
+  <li>
+    <a href="{{ route('projects.index') }}">
+        Projects
+    </a>
+  </li>
 	
-	@can('manage users’)
-	<li>
-		<a href="{{ route('users.index') }}">Users</a>
+  @can('manage users’)
+    <li>
+	  <a href="{{ route('users.index') }}">Users</a>
 	</li>
-	@endcan
+  @endcan
 	
 </ul>
 
@@ -166,8 +166,10 @@ Route::post('users', [UserController::class, 'store’])
 ```
 
 ```php
-Route::middleware(‘can:create-users')->group(function () {
-    Route::post(‘users’, [UserController::class, ‘store',]
+Route::middleware(‘can:create-users')
+    ->group(function () {
+        Route::post(‘users’, 
+              [UserController::class, ‘store']);
 });
 ```
 
@@ -262,16 +264,17 @@ class StoreProjectRequest extends FormRequest
 
 ## Policies
 
-Model-based set of permissions
+Model-based set of permissions.
 
 When used:
 
 Able to attach permission to model?
 
-Create a Policy using:
+Create a Policy using (one line):
 
 ```shell
-php artisan make:policy MODELNAMEPolicy --model=MODELNAME
+php artisan make:policy MODELNAMEPolicy 
+                             --model=MODELNAME
 ```
 
 Example:
@@ -312,15 +315,44 @@ public function store(Request $request)
 
 Universal set of Permissions
 
-Not part of the framework
+Not part of the Laravel framework.
+
 - ‘Human readable’ term
-- Group Permissions
+- Groups Permissions into more 'human friendly' concepts
 
 Examples include:
+
 - Product Manager
 - User Administrator
 - Editor
 - Author
+- Staff Member
+
+Permissions are what should be checked, as roles encompass many permissions. Plus a single permission may be granted to a user, thus given very precise control.
+
+---
+
+
+
+## Development Only: Starting the Database From Fresh
+
+Remember that the `local` value for `APP_ENV` in the `.ennv` file tells Laravel that this application is in  **development**.
+
+When this is the case, we are working with a database that is able to be destroyed and rebuilt as it is **NOT** live data.
+
+To destroy the database tables, we re-run the migrations and seed the database using:
+
+```php
+php artisan migrate:fresh --seed
+```
+
+> ### Remember:
+> 
+> - This MUST NOT be used on a production database
+> 
+> - This command DROPS all existing tables and data
+
+
 
 # Spatie Permissions
 
@@ -344,9 +376,10 @@ $user->can('edit articles');
 
 Using Roles and Permissions in a small demo application
 
-Code is available on GitHub: https://github.com/AdyGCode/roles-permissions-2025-s1
+Code is available on GitHub:
+- https://github.com/AdyGCode/roles-permissions-2025-s1
 
-We STRONGLY suggest you complete this tutorial from scratch
+We **STRONGLY** suggest you complete this tutorial from scratch.
 
 This will assist your understanding and ability to apply to other projects
 
@@ -354,7 +387,7 @@ This will assist your understanding and ability to apply to other projects
 
 We presume you are using the bash terminal.
 
-For details on setting this up, check the https://help.screencraft.net.au FAQs
+For details on setting this up, check the https://help.screencraft.net.au FAQs.
 
 Change into your Source/Repos folder:
 
@@ -362,10 +395,10 @@ Change into your Source/Repos folder:
 cd /c/Users/USERID
 cd Source/Repos
 ```
-Update the Laravel Installer
 
-It is always a good idea to see if the Laravel installer and its required packages have been 
-updated so… run the composer update in the global context to do this.
+### Update the Laravel Installer
+
+It is always a good idea to see if the Laravel installer and its required packages have been updated so… run the composer update in the global context to do this.
 
 ```shell
 composer global update
@@ -373,8 +406,8 @@ composer global update
 
 ### Create a new Demo Application
 
-> This section is based on the video series Spatie Laravel Permission by Tony Xhepa. The sries 
-> was created three or so years ago, and as a result, some of the information is outdated. 
+> This section is based on the video series Spatie Laravel Permission by Tony Xhepa. The series > was created three or so years ago, and as a result, some of the information is outdated. 
+> 
 > These notes aim to update to Laravel 12, and provide code that works with this version fo 
 > the framework.
 > 
@@ -403,7 +436,7 @@ Now we can add the Spatie Permissions package:
 composer require spatie/laravel-permission
 ```
 
-Install the migrations and settings for the Roles/Permissions package:
+Install the migrations and settings for the Roles/Permissions package (one line):
 
 ```shell
 php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider" 
@@ -432,14 +465,15 @@ composer run dev
 ```
 
 > Remember: you may want to modify the composer dev script (in `composer.json`) to also 
-> execute MailPit. See [Introducing Laravel v12](./S11-Introducing-Laravel-v12.md) for 
+> execute MailPit. 
+> 
+> See [Introducing Laravel v12](./S11-Introducing-Laravel-v12.md) for 
 > details on adding "MailPit" to the `composer run dev` command.
 
 
 ## Adding "Roles" Trait to the User Model
 
-Adding the Roles and Permissions to the User model is a matter of adding a couple of lines 
-to the `User` model.
+Adding the Roles and Permissions to the User model is a matter of adding a couple of lines to the `User` model.
 
 This trait is then available when we need by checking if a user `can` or 
 `cannot` do an operation via checking the permission.
@@ -495,15 +529,19 @@ We are now ready to begin the next stage of our development. In this step we wil
 - Creating an `admin` role
 - Assigning the role to an `admin` user
 
-We will use a seeder to do this as it is reproducible and allows us to vary depending on the 
+We will use a seeder to do this as it is reproducible and allows us to vary what we want to do depending on the 
 requirements of the project.
+
+> Note:
+> 
+> It is possible to also create an "installer" that runs the migrations etc, and asks for the admin user's email and a password, but this is beyond the needs of this tutorial.
 
 ### Role seeder
 
-Let us start by first visiting th Role Seeder… ok, so we need to create one first… so:
+Let us start by first visiting the Role Seeder… ok, so we need to create one first… so:
 
 ```shell
-php artisan RoleSeeder
+php artisan make:seeder RoleSeeder
 ```
 
 Open the Role Seeder file (in `database/seeders`).
@@ -512,7 +550,6 @@ After the namespace, add:
 
 ```php
 use Spatie\Permission\Models\Role;
-
 ```
 
 In the `run` method we will now add:
@@ -523,8 +560,11 @@ $roleAdmin = Role::create(['name' => 'admin']);
 
 This will create the `admin` role.
 
-You could easily add the `staff` and `client` roles at this point if you wish.
+### Exercise: Staff and Client Roles
 
+You could easily add the `staff` and `client` roles at this point if you wish. 
+
+In fact go ahead and do so as you will need them as you progress through this tutorial.
 
 ### Admin User Seeder
 
@@ -540,11 +580,12 @@ So that is a chunk of what is needed already done for us.
 But, we are going to make some changes.
 
 - Duplicate the user Seeder and rename this to `AdminSeeder`
-- Remove the client and staff from this new seeder
+- Remove the client and staff from this new `AdminSeeder`
 - Update to add the `admin` role to the Admin User.
 
-Start by removing most of the current code, and remove the list of users, and make it a 
-single `seedUser`:
+As we are creating a SINGLE user, we can reduce the current code.
+
+Start by removing most of the current code, and remove the list of users, and make it a single `seedUser`:
 
 ```php
 $seedUser = [
@@ -571,7 +612,7 @@ Now we are able to assign the role to the Admin user:
 $adminUser->assignRole('admin');  
 ```
 
-Let's take this a step further by adding the Admin and Staff roles:
+Let's take this a step further by adding the Admin and Staff roles to this user:
 
 ```php
 $adminUser->assignRole([
@@ -583,8 +624,7 @@ $adminUser->assignRole([
 
 That makes our AdminSeeder's run method much shorter.
 
-Now we need to update the Database Seeder and add the RoleSeeder **BEFORE** the UserSeeder and 
-AdminSeeder…
+Now we need to update the Database Seeder and add the `RoleSeeder` **BEFORE** the `UserSeeder` and `AdminSeeder`…
 
 ```php
 
@@ -604,9 +644,7 @@ As we are working in development, we can apply these changes from fresh:
 php artisan migrate:fresh --seed
 ```
 
-If you have [DBBrowser](https://sqlitebrowser.org/) then you can check what has been created by the migrations and seeds 
-in the SQLite database:
-
+If you have [DB Browser for SQLite](https://sqlitebrowser.org/) then you can check what has been created by the migrations and seeds in the SQLite database.
 
 #### Users Table
 ![Users Table](../assets/sqlite-users-data-1.png)
@@ -630,11 +668,11 @@ erDiagram
   Model-has-Roles }|--|| Role : "Belongs to Many"
 ```
 
-### Staff Role and User
+### Exercise: Staff Role and User
 
-Exercise: Repeat the above but for the Staff user and role. Assign only the staff role to 
-the staff member.
+Exercise to do...
 
+Repeat the above but for the Staff user and role. Assign only the staff role to the staff member.
 
 ### User Seeder Update
 
@@ -669,6 +707,7 @@ Now the `foreach` will become:
 
 ```php
 foreach ($seedUsers as $user) {
+
     $role = $user['role']??null;
     unset($user['role']);
 
@@ -678,12 +717,15 @@ foreach ($seedUsers as $user) {
     );
 
     if ($role === 'client') {
-        $clientUser->assignRole('client');
+        $clientUser->assignRole($role$);
     }
+    
 }
 ```
 
-The code grabs the role from the data (if one exists) and then creates the user.
+The code grabs the role from the data (if one exists).
+
+It then creates the user.
 
 After the user is created, if the role is `client` then the role is assigned to the user.
 
@@ -700,7 +742,6 @@ We will, in this step:
 	- create
 	- update
 	- delete
-	- read 1 (show)
 
 ### Routes
 
@@ -720,8 +761,9 @@ This will verify that the user is:
 - verified, and
 - a member of the admin group (role))
 
-This provides the first level of protection from a "bad" user trying to access a section 
-of the system when they do not have permission to do so.
+This provides the first level of protection from a "bad" user trying to access a section of the system when they do not have permission to do so.
+
+It also is based on the Role, so is less precise than specific Permissions.
 
 Obviously, at the moment, when the page refreshes, this will cause an error.
 
@@ -761,7 +803,6 @@ Once logged in, you should now be presented with a page like this:
 ![Admin Page after Logging in as the admin user](../assets/admin-page-1.png)
 
 We will look at creating a Layout specific for Admin later.
-
 
 ### Update Navigation to Show Admin
 
@@ -889,7 +930,9 @@ Route::name('admin.')
             ->name('index');
 
         Route::resource('/roles', RoleController::class);
+        
         Route::resource('/permissions', PermissionController::class);
+        
     });
 ```
 
@@ -942,9 +985,7 @@ Also, these controllers will need to be updated to point at the correct route na
 
 These are all within the `app/Http/Controllers/Auth` folder.
 
-You can always check the [Roles and permissions 2025 S1 Repository](https://github.com/AdyGCode/roles-permissions-2025-s1) and check your code.
-
-
+You may always check the [Roles and permissions 2025 S1 Repository](https://github.com/AdyGCode/roles-permissions-2025-s1) and check your code.
 
 ### Add a Static Page Controller
 
@@ -960,7 +1001,6 @@ Once created, open the file and add methods for:
 - dashboard
 - admin index
 
-
 #### Home Method
 
 ```php
@@ -968,7 +1008,6 @@ Once created, open the file and add methods for:
         return view('static.welcome');
     }
 ```
-
 
 #### Dashboard method
 
@@ -986,7 +1025,6 @@ Once created, open the file and add methods for:
             return view('admin.index');
     }
 ```
-
 
 #### Update the static page routes
 
@@ -1011,8 +1049,7 @@ We are again making use of the ability to name groups of routes.
 
 ### Add Links to the Admin Page
 
-For the time being, we will be using the admin page as a switchboard. To do so we will add 
-cards' that link to other parts of the Admin.
+For the time being, we will be using the admin page as a switchboard. To do so we will add cards that link to other parts of the admin area.
 
 Eventually, these could become a sidebar menu.
 
@@ -1121,11 +1158,9 @@ Copy the `admin/index.blade.php page` into the `roles` folder and update the cod
 </x-app-layout>
 ```
 
-### Permissions Index Page
+### Exercise: Permissions Index Page
 
-Exercise:
-
-Repeat the above for the permissions, changing 'Roles' to 'Permissions'.
+To help you practice and learn the skills, repeat the above for the permissions, changing 'Roles' to 'Permissions'.
 
 ### Display the Roles
 
@@ -1138,7 +1173,7 @@ Open the `roles/index.blade.php` file and:
 
 Let us concentrate on the Roles index page.
 
-> The table layout is from https://www.hyperui.dev/components/application/tables
+> The table layout is based on one from https://www.hyperui.dev/components/application/tables
 
 Replace the text `Roles Administration` that is not in the header, with the following:
 
@@ -1148,16 +1183,22 @@ Replace the text `Roles Administration` that is not in the header, with the foll
         
         <thead class="ltr:text-left rtl:text-right">
         <tr class="*:font-medium *:text-gray-900">
-            <th class="px-3 py-2 whitespace-nowrap">Role Name</th>
-            <th class="px-3 py-2 whitespace-nowrap">Actions</th>
-
+            <th class="px-3 py-2 whitespace-nowrap">
+	            Role Name
+	        </th>
+            <th class="px-3 py-2 whitespace-nowrap">
+	            Actions
+	        </th>
         </tr>
         </thead>
 
         <tbody class="divide-y divide-gray-200">
+        
         @foreach($roles as $role)
             <tr class="*:text-gray-900 *:first:font-medium">
-                <td class="px-3 py-2 whitespace-nowrap">{{ $role->name }}</td>
+                <td class="px-3 py-2 whitespace-nowrap">
+	                {{ $role->name }}
+                </td>
                 <td class="px-3 py-2 whitespace-nowrap">
                     Details
                     Edit
@@ -1166,6 +1207,7 @@ Replace the text `Roles Administration` that is not in the header, with the foll
 
             </tr>
         @endforeach
+        
         </tbody>
 
         <tfoot>
@@ -1186,8 +1228,7 @@ Replace the text `Roles Administration` that is not in the header, with the foll
 </div>
 ```
 
-If you refresh, then there will be a problem with the view as we have not got the roles from 
-the database.
+If you refresh, then there will be a problem with the view as we have not got the roles from the database.
 
 Open the `RolesController` and update the index method:
 
@@ -1200,11 +1241,11 @@ Open the `RolesController` and update the index method:
 
 That's the basic layout.
 
-### Display the Permissions as a table
+### Exercise: Display the Permissions as a Table
 
 We already have the dashboard as the basis, so we will use this as a start.
 
-Exercise: Do the same process for the permissions to be displayed in a table.
+For practice, you now will do the same as above so the permissions to be displayed in a table.
 
 ### Create the Add Role page
 
@@ -1279,22 +1320,22 @@ In the space represented by `<!-- Rest of page here -->` we will now add:
 	@csrf
 
 	<div>  
-    <x-input-label 
-	    for="name" 
-	    :value="__('Role Name')"/>  
-  
-    <x-text-input 
-	    id="name" 
-	    class="block mt-1 w-full" 
-	    type="name" 
-	    name="name"  
-        :value="old('name')" 
-        required/>  
-  
-    <x-input-error 
-	    :messages="$errors->get('name')" 
-	    class="mt-2"/>  
-</div>
+	    <x-input-label 
+		    for="name" 
+		    :value="__('Role Name')"/>  
+	  
+	    <x-text-input 
+		    id="name" 
+		    class="block mt-1 w-full" 
+		    type="name" 
+		    name="name"  
+	        :value="old('name')" 
+	        required/>  
+	  
+	    <x-input-error 
+		    :messages="$errors->get('name')" 
+		    class="mt-2"/>  
+	</div>
       
     <div class="flex flex-row space-x-4">  
         <x-primary-button>
@@ -1308,12 +1349,15 @@ In the space represented by `<!-- Rest of page here -->` we will now add:
 </form>
 ```
 
-We do not have a `x-link-button` so we create a file `limnk-button.blade.php` in the `resources/views/components` folder  and add the content:
+We do not have a `x-link-button` so we create a file `link-button.blade.php` in the `resources/views/components` folder  and add the content:
 
 ```php
 <a {{ $attributes->merge([  
     'class' => 'inline-flex items-center px-4 py-2 bg-gray-300 border border-transparent  
-                rounded-md font-semibold text-xs text-gray-800 uppercase tracking-widest                hover:bg-gray-400 hover:text-white focus:bg-gray-400 active:bg-gray-400 focus:outline-none                focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2                transition ease-in-out duration-150']) }}>  
+                rounded-md font-semibold text-xs text-gray-800 uppercase tracking-widest
+                hover:bg-gray-400 hover:text-white focus:bg-gray-400 active:bg-gray-400 focus:outline-none
+				focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2
+				transition ease-in-out duration-150']) }}>  
     {{ $slot }}  
 </a>
 ```
@@ -1362,12 +1406,9 @@ Then create the role in the database, before returning to the roles index page.
 }
 ```
 
-### Repeat for the Permissions!
+### Exercise: Build the Create actions for Permissions!
 
-Exercise:
-
-Do the permissions create page, as we have done for the Roles. The permission's name, though, needs to be up to 128 characters.
-
+It is time for you to practice by making the pages and methods for the permissions create page, as we have done for the Roles. The permission's name, when validating the data, needs to be between 4 and to 128 characters, inclusive.
 
 ## Edit Roles & Permissions
 
@@ -1388,7 +1429,6 @@ Then edit the page, making the following changes:
 - Add a `@method('patch')` immediately after the CSRF.
   
 - Update the `x-test-input` control to have the `:value` be  `old('name')??$role->name` to allow the role to be filled in from the database, or if edited the value it was changed to.
-
 
 ### Add Update Method to RoleController
 
@@ -1418,6 +1458,12 @@ public function update(Role $role, Request $request)
 
 As you can see, it is dramatically similar to the store method...
 
+
+### Exercise: Build the Edit and Update Pages and Actions for Permissions
+
+It is time for you to practice by making the pages and methods for the permissions edit page, as we have done for the Roles. Also create the required edit and update methods for the permissions.
+
+When editing the permission's name, needs to be between 4 and to 128 characters, inclusive.
 
 ### Add "Confirm delete" View
 
@@ -1501,33 +1547,37 @@ php artisan flasher:install
 
 and we are ready to go.
 
-### Update store to include flash messages
+### Update store method to include flash messages
 
 We are going to refactor the store method to use the flasher module...
 
-To begin we will wrap the validation 
+What we are going to do is wrap the validation in a `try`...`catch` and the role creation in a separate `try`...`catch` so we can deal with the different errors that are generated.
 
+#### Wrap the validation in a Try ... Catch
+
+Let's first wrap the validation in a try...catch:
 
 ```php
 $role = null;  
   
-try {  
   
+try {  
     $validated = $request->validate([  
         'name' => [  
             'required',  
             'min:5',  
             'max:64',  
             'unique:roles'  
-        ]  
+        ]    
     ]);  
-  
-    $validated['name'] = Str::lower($validated['name']);  
-  
-    $role = Role::create($validated);  
-  
 } catch (ValidationException $e) {  
-  
+// Flash message here 
+}
+```
+
+Here we are now going to add in the Flash Message:
+
+```php
     flash()->error('Please fix the errors in the form.',  
         [  
             'position' => 'top-center',  
@@ -1535,10 +1585,19 @@ try {
         ],  
         'Role Creation Failed');  
   
-    return back()->withErrors($e->validator)->withInput();  
-  
+    return back()->withErrors($e->validator)->withInput(); 
+```
+
+#### Wrap the role creation in a Try ... Catch
+
+Now we can do the same to the role create call. This is because sometimes the validation rules may miss a check (is this a Laravel bug?), and we end up getting a `Role Alreadyt Exists` error being raised.
+
+So, after the `}` that ends the previous try catch, add:
+
+```php
+try {  
+    $role = Role::create($validated);  
 } catch (RoleAlreadyExists $e) {  
-  
     flash()->error('The role already exists.',  
         [  
             'position' => 'top-center',  
@@ -1547,49 +1606,184 @@ try {
         'Role Creation Failed');  
   
     return back()->withErrors($e->getMessage())->withInput();  
-  
 }
 ```
 
+Excellent - we now have 'toast'' error messages when validation fails.
+
+![Picture: Roles Admin interface with role to be saved](assets/Pasted%20image%2020250603145324.png)
+
+And the errors...
+
+![Picture: Role already exists error and flash message](assets/Pasted%20image%2020250603145357.png)
+
+![Picture: Other validation errors being shown with the inputs](assets/Pasted%20image%2020250603145538.png)
 
 
+### Update edit method to include flash messages
 
-## Development Only: Starting the Database From Fresh
+Next, we are going to refactor the edit method to use the flasher module...
 
-As we are in **development**, we can re-run the migrations and seed the database
+It looks almost identical to the store method, with only small changes.
 
+First the field validation:
 ```php
-php artisan migrate:fresh --seed
+try {  
+    $validated = $request->validate([  
+        'name' => [  
+            'required',  
+            'min:5',  
+            'max:64',  
+            'unique:roles'  
+        ]    
+    ]);  
+  
+    $validated['name'] = Str::lower($validated['name']);  
+} catch (ValidationException $e) {  
+    flash()->error('Please fix the errors in the form.',  
+        [  
+            'position' => 'top-center',  
+            'timeout' => 5000,  
+        ],  
+        'Role Update Failed');  
+  
+    return back()->withErrors($e->validator)->withInput();  
+}  
 ```
 
-> ### Remember:
-> - This MUST NOT be used on a production database
-> - This command DROPS all existing tables and data
+Now the update call:
+
+```php
+try {  
+ 
+    $role->update($validated);  
+} catch (RoleAlreadyExists $e) {  
+    flash()->error('The role already exists.',  
+        [  
+            'position' => 'top-center',  
+            'timeout' => 5000,  
+        ],  
+        'Role Creation Failed');  
+  
+    return back()->withErrors($e->getMessage())->withInput();  
+}  
+  
+$roleName = $role->name;  
+  
+flash()->success("Role $roleName updated successfully!",  
+    [  
+        'position' => 'top-center',  
+        'timeout' => 5000,  
+    ],  
+    "Role Added");  
+  
+return to_route('admin.roles.index');
+```
+#### Debugging Time
+
+Ok, so what happens if you make no changes to a role name and click save?
+
+Yes, you guessed it correctly... we get an error "The name already exists". This is not what we expected, so we need to fix the issue.
+
+The problem is that when we validate we do not ignore the current role's details. So `save` will try saving the updates, but the name already exists so it throws the error.
+
+Let us fix the `unique` section of the validation in the edit.
+
+```php
+    $validated = $request->validate([  
+        'name' => [  
+            'required',  
+            'min:5',  
+            'max:64',  
+			Rule::unique(Role::class)->ignore($role->id),
+        ]    
+    ]);  
+```
+
+The `Rule::unique(Role::class)->ignore($role->id)` literally says "search in the roles making sure the new name is unique, but ignore the current role we are editing's data."
+
+### Delete Confirmation
+
+The final in the roles is the delete confirmation.
+
+This is again just like the others. The change comes in when confirming that the role exists AND if it does, the id for the role matches the one we are trying to delete.
+
+Here is the updated code (we are being generous by not splitting it up):
+
+```php
+  
+$roleName = $role->name;  
+$roleId = $role->id;  
+  
+try {  
+  
+    $validated = $request->validate([  
+        'name' => [  
+            'required',  
+            'exists:roles,name,id,' . $roleId,  
+        ],  
+    ]);  
+} catch (ValidationException $e) {  
+    flash()->error(__("To delete, please enter the role's name."),  
+        [  
+            'position' => 'top-center',  
+            'timeout' => 5000,  
+        ],  
+        __('Role Delete Failed'));  
+  
+    return back()->withErrors($e->validator)->withInput();  
+}  
+  
+try {  
+    $role->delete();  
+} catch (RoleDoesNotExist $e) {  
+    flash()->error('Could not delete the role.',  
+        [  
+            'position' => 'top-center',  
+            'timeout' => 5000,  
+        ],  
+        'Role Delete Failed');  
+  
+    return back()->withErrors($e->getMessage())->withInput();  
+}  
+  
+  
+flash()->success("Role $roleName successfully deleted!",  
+    [  
+        'position' => 'top-center',  
+        'timeout' => 5000,  
+    ],  
+    "Role Added");  
+  
+return to_route('admin.roles.index');
+
+```
+
+
+### Exercise: Complete the Flash Messages for Permisisons
+
+Ok, so to make sure you are able to understand and apply the principles we have so far, add the flash messages to the Permission create, update and delete.
+
 
 ## Testing
 
-Open the site using http://localhost:8000
-- Click on Login
-- Enter `admin@example.com and` `Password1`
-- Navigate around the Roles and Users pages
-- Try allocating a new role to the Test User
-- Try removing the role from the test user
-- Logout
-- Log in as the Dee Mouser user
+Make sure you try out the various methods to ensure your code is correct.
 
-What are you able to view/do?
+## Wrapping Up
 
+OK, so that turned into a long tutorial, but we have now got CRUD for the Roles and Permissions, so we are able to dynamically update them when needed.
 
+Next we will continue onto the ability to modify a role's permissions, as well as other tasks.
 
 # References
 
-- Laravel Bootcamp - Learn the PHP Framework for Web Artisans - 07 Notifications & Events. (
-  2025).
-  Archive.org. https://web.archive.org/web/20240927152838/https://bootcamp.laravel.com/blade/notifications-and-events
+- Xhepa, T. (2022, March 1). Spatie Laravel Permission. 
+>   YouTube. http://www.youtube.com/playlist?list=PL6tf8fRbavl3xuFIe4_i3TB4PZbtbx3Js
+
 
 # Up Next
 
-- [Laravel v12 Bootcamp - Part 9](../session-11/S10-Laravel-v12-BootCamp-Part-9.md)
+- [Laravel v12 Bootcamp - Part 11](../session-11/S10-Laravel-v12-BootCamp-Part-11.md)
 - [Session 11 ReadMe](../session-10/ReadMe.md)
 - [Session 11 Reflection Exercises & Study](../session-11/S11-Reflection-Exercises-and-Study.md)
 
