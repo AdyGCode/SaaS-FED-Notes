@@ -967,7 +967,7 @@ mv resources/views/welcome.blade.php resources/views/static/
 mv resources/views/dashboard.blade.php resources/views/static/
 ```
 
-Also you will now need to update the routes in the `navigation.blade.php` and also the `footer.blade.php` as needed.
+Also, you will now need to update the routes in the `navigation.blade.php` and also the `footer.blade.php` as needed.
 
 | Original Name        | New Route Name              | New RouteIs Name              |
 |----------------------|-----------------------------|-------------------------------|

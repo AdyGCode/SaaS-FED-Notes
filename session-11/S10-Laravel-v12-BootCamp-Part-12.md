@@ -17,7 +17,6 @@ created: 2024-09-20T11:17
 updated: 2025-06-03T17:56
 ---
 
-
 # S10 Laravel Bootcamp: Part 12
 
 ## Software as a Service - Front-End Development
@@ -42,15 +41,15 @@ includeLinks: true
 
 ## Roles and Permissions Part 3
 
-In this section, we continue with the administration/management front-end that allows 
+In this section, we continue with the administration/management front-end that allows
 users with particular rights to perform management actions on data in the Chirp system.
 
 We will:
+
 - Build User Management Interface
 - Determine Roles to use in Application
 - Determine Permissions each Role will have
 - Apply Roles & Permissions to Application (User Management)
-
 
 ## Before you start…
 
@@ -69,21 +68,21 @@ Have you completed (not just read):
 - [Laravel v12 Bootcamp - Part 10](../session-11/S10-Laravel-v12-BootCamp-Part-10.md)
 - [Laravel v12 Bootcamp - Part 11](../session-11/S10-Laravel-v12-BootCamp-Part-11.md)
 
-
 No? Well… go do it…
 
 You will need these to be able to continue…
 
-> **Important:** You should understand that whilst you are completing this tutorial, you may only see parts of the application working.
+> **Important:** You should understand that whilst you are completing this tutorial, you may only see parts of the
+> application working.
 >
 > So if you get an error in the browser, it may be because there is something missing.
-> 
+>
 > Remember that code is available from the GitHub repository.
-
 
 # Manage User Roles (and Permissions)
 
 Remember the most up-to-date code is available on GitHub:
+
 - https://github.com/AdyGCode/roles-permissions-2025-s1
 
 Even though we give you this code, we **STRONGLY** suggest you complete this tutorial from scratch.
@@ -92,9 +91,11 @@ This will assist your understanding and ability to apply to other projects
 
 ## Organising our Code
 
-Up to this point we had not been organising our code very well. This was especially true with the Roles and Permissions controllers.
+Up to this point we had not been organising our code very well. This was especially true with the Roles and Permissions
+controllers.
 
-So we are going to tidy up by adding an `Admin` folder to the `App/Http/Controllers` folder and moving our code to this folder.
+So we are going to tidy up by adding an `Admin` folder to the `App/Http/Controllers` folder and moving our code to this
+folder.
 
 When we do this, we need to then update any references to the controllers (e.g. in the `web.php` routes file).
 
@@ -112,9 +113,9 @@ Click Refactor to apply the changes.
 
 Here is an animation of the process:
 
-- Original Screen Recording: [phpstorm-refactor-role-permission-admin-folder.mp4](../assets/phpstorm-refactor-role-permission-admin-folder.mp4)
+- Original Screen
+  Recording: [phpstorm-refactor-role-permission-admin-folder.mp4](../assets/phpstorm-refactor-role-permission-admin-folder.mp4)
 - Animated GIF: ![phpstorm-roles-perms-refactor.gif](../assets/phpstorm-roles-perms-refactor.gif)
-
 
 ## Adding Roles to Users
 
@@ -136,8 +137,7 @@ Edit the web.php file and add the admin route for users
 
 We put these in the `admin` block after the permissions routes.
 
-
-### Create the User Admin Controller 
+### Create the User Admin Controller
 
 As with the roles and permissions, we will put the admin controller for the users in the Controllers/Admin folder.
 
@@ -145,7 +145,8 @@ As with the roles and permissions, we will put the admin controller for the user
 php artisan make:controller Admin/UserController -r
 ```
 
-To make things easier, we will give you the starting code for the User admin controller... it is in fact the code from the Chirper tutorial, so you will be able tos ee how to modify and update Chirper to have these new features.
+To make things easier, we will give you the starting code for the User admin controller... it is in fact the code from
+the Chirper tutorial, so you will be able tos ee how to modify and update Chirper to have these new features.
 
 ```php
     /**
@@ -372,7 +373,6 @@ To make things easier, we will give you the starting code for the User admin con
 
 In this newly added code, search and replace the `route('users` with `route('admin.users`.
 
-
 ### CRUD views
 
 Create a new folder in the `resources/views/admin` folder, called `users`.
@@ -389,7 +389,8 @@ Download each file and move into the users admin views folder.
 
 #### Update the Routes!
 
-In these files, you will then need to replace every occurrence of `route('users` with `route('admin.users` as you did with the controller code.
+In these files, you will then need to replace every occurrence of `route('users` with `route('admin.users` as you did
+with the controller code.
 
 Going to http://localhost:8000/users should now show the list of users.
 
@@ -399,17 +400,213 @@ Going to http://localhost:8000/users should now show the list of users.
 Excellent - we are ready to continue!
 
 > ### redirect route or to_route
-> 
+>
 > You may use `to_route(...)` to replace the `redirect(route(...))` combination.
 
-### 
+### Update the User Index (Show Roles)
+
+Edit the admin/users/index.blade.php file and alter the current code:
+
+```php
+<p class="col-span-1 space-x-1 ">
+    <span class="text-xs bg-gray-800 text-gray-100 rounded-full px-2 py-0.5">
+        Role
+    </span>
+</p>
+
+```
+
+to show the role names using the following code:
+
+```php
+<p class="col-span-1 space-x-1 ">
+    @foreach($user->roles as $role)
+        <span 
+            class="text-xs bg-gray-800 text-gray-100 rounded-full px-2 py-0.5"
+        >{{ $role->name }}</span>
+    @endforeach
+</p>                            
+```
+
+When the page refreshes you should see the role names in "pills".
+
+## Adding Roles to Add User
+
+Ok, so we are ready to start changing the code for the Add User form and method.
+
+Let's begin with the method:
+
+### Edit the Create User method
+
+Open the create user method and update where we had a placeholder collection:
+
+```php
+$roles= Collection::create();
+```
+
+Chenge this to:
+
+```php
+$roles = Role::orderBy('name')->get();
+```
+
+This will give the list of the roles.
+
+Remember that you will need the line `use Spatie\Permission\Models\Role;` after the namespace declaration.
+
+Now we can update the store method.
+
+### Edit the Store User method
+
+Locate the `store` method in the `admin/UserController` file.
+
+First change the role validation from being nullable to:
+
+```php
+                'role' => ['required','int','exists:roles,id',],
+```
+
+This ensures the role is provided, and it is an integer, and it exists in the roles table from the Spatie package.
+
+Next, after the user is created we need to attach the role to the user...
+
+Just before the catch add:
+
+```php
+$user->roles()->attach($validated['role']);
+```
+
+### Test the Add User
+
+Try adding a new user to see if we now get the roles shown and when selected the role is automatically allocated to the
+new user.
+
+Updated Add User form:
+
+![Picture: administration - user create with single (primary) role](../assets/admin-user-create-with-role-1.png)
+
+Results of Update Store Method:
+
+![Picture: administration - user list showing new user with single role](../assets/admin-user-create-with-role-2.png)
+
+## Edit user
+
+Edit user will be a bit more of a challenge as we need to:
+
+- Get the user details
+- Get the user's current roles
+- Get a list of all available roles
+- Remove the current "add role" select box
+- Show the current roles on the page
+- Show "Add Role" section on page
+- Show "Revoke Role" section on page
+
+We will use the same principle as the adding permissions to the role... put the add and remove into separate forms after
+the main editing for the user.
+
+### Modify the `User Controller`'s `edit` method
+
+Locate the edit method in the `Admin/UserController.php` file.
+
+Where we currently have the $roles=Collection::create(), replace with the following:
+
+```php
+// TODO: Update when we add Roles & Permissions
+
+$roles = Role::all();
+$permissions = Permission::all();
+$userRoles = $user->roles()->get();
+
+$roles  = $roles->diffUsing($userRoles, function ($a, $b) {
+    return $a->id <=> $b->id; // Compare by 'id'
+});
+
+return view('admin.users.edit', compact(['roles', 'user','userRoles','permissions',]));
+```
+
+> We included the comment and the return view for you.
+>
+> At the moment, we pass everything including the permissions, but they are not yet implemented.
+
+This code presents a beautiful way of "removing" the role or roles the user already has from the list of roles they can
+be given...
+
+```php
+$roles  = $roles->diffUsing($userRoles, function ($a, $b) {
+    return $a->id <=> $b->id; // Compare by 'id'
+});
+```
+
+What we have here is a collection operation "difference using" that allows us to provide a collection of models (in this
+case the collection of Roles the user currently has)
+then using a closure (aka anonymous function) which compares the ID in the full list of Roles with the ID in the
+currently allocated roles, it removes the current user roles if it in the Roles list.
+
+It's a beautiful little bit of code!
+
+Ok, so armed with the available roles, the current user's roles (and permissions), we are able to now show the edit form.  
+
+### Modify the Edit Form
+
+First, let's add summary details of what role, or roles, the user current has:
+
+Open the `admin/users/edit.blade.php` file and locate the lines:
+
+```php
+            <i class="fa-solid fa-save text-sm"></i>
+            {{ __('Save') }}
+        </button>
+    </div>
+</form>
+```
+
+After the close form tag (`</form>`) we now add:
+
+```php
+<section class="grid grid-cols-2 space-y-2 mt-4 px-6  space-x-8">
+
+    <div class="-mx-6 bg-gray-100 col-span-2 px-6 pb-2">
+
+        <h3 class="-mx-6 px-6 py-2 text-lg font-semibold col-span-2 bg-gray-100">
+            Current Role(s)
+        </h3>
+
+        <div class="flex flex-row gap-1 flex-wrap pb-2">
+
+            @forelse($userRoles as $role)
+                <p class="text-xs bg-gray-700 text-gray-100 p-1 px-2 rounded-full whitespace-nowrap">{{ $role->name }}</p>
+            @empty
+                <p class="text-gray-600 text-sm">
+                    No Roles
+                </p>
+            @endforelse
+
+        </div>
+    </div>
+```
+
+This will show the current roles.
+
+
+Next we are going to add the "add and revoke" roles sections, immediately after the code we have above.
+
+### Add Roles
+
+In a small departure from the create form, and also taking inspiration from the "revoke" part, we are going to present the user with buttons for the roles. They then can click a button and see the role added tot he list, and be also added tot he revokable roles list.
+
+Add the following code for "Add Roles":
+
+
+
+
+
 
 
 # References
 
-- Xhepa, T. (2022, March 1). Spatie Laravel Permission. 
->   YouTube. http://www.youtube.com/playlist?list=PL6tf8fRbavl3xuFIe4_i3TB4PZbtbx3Js
+- Xhepa, T. (2022, March 1). Spatie Laravel Permission.
 
+> YouTube. http://www.youtube.com/playlist?list=PL6tf8fRbavl3xuFIe4_i3TB4PZbtbx3Js
 
 # Up Next
 
