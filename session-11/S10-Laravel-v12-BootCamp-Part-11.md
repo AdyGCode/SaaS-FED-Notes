@@ -14,7 +14,7 @@ tags:
 date created: 03 July 2024
 date modified: 10 July 2024
 created: 2024-09-20T11:17
-updated: 2025-06-03T17:55
+updated: 2025-06-05T14:15
 ---
 
 
@@ -37,8 +37,6 @@ includeLinks: true
 ---
 
 # Laravel Bootcamp: Part 11
-
-# TODO: IN PROGRESS
 
 ## Roles and Permissions Part 2
 

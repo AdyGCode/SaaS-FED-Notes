@@ -61,7 +61,7 @@
     "session-01/S01-Journals.md": "5de68ef46769ead40f3e027d280b4320e577547416dad0432e7e151a5ab6fe0e",
     "session-02/S02-Terminology-Programming.md": "3563dcdf7a69a9db734ad087efa67974742f796515864fb22fc9dd3fe6acb9e2",
     "session-02/S02-Terminology-Business-Domain.md": "a7d2788246335d50945e0ced893ca2878f283b5bf89e03e354e91ea1dbf14a26",
-    "session-08/S08-Vanilla-PHP-MVC-Pt-06.md": "2f4eca74463a180e919df0535275a58336593e0eecae437dc22de602d77b44fd",
+    "session-08/S08-Vanilla-PHP-MVC-Pt-06.md": "e46a95ff1af752fb822238795eeb5ebeb74769878ae2c2e48b9731b34fec1c8d",
     "session-07/S07-Vanilla-PHP-MVC-Pt-01.md": "ad2580e0bdf8daa9504ba2c619e62b5f80daa750e9ba33e9f0e85bcf307f4743",
     "session-08/S08-Vanilla-PHP-MVC-Pt-08.md": "35e80fa30ddb3950e6f1320cc4e224925cb79c9b47908eb9a35e0e3297d17c93",
     "session-04/S04-PHP-Basics-III.md": "78c4bd5789f3a8328b26fe2270efe9abc48d5578c8a39d6c8052ba19e97014f0",
@@ -106,7 +106,7 @@
     "session-03/S03-Documenting-Code.md": "fcd07feaf1f97df4ecf3c456e39cb7a8b31c5ba5270c75f83ff8a4b5005fbfcb",
     "session-11/S10-Introducing-Laravel-v12.md": "ddb5ca77833a9bccfad2afb2a1f07aeacdab29bbd31a447beb0f41589832314a",
     "session-11/S11-Reflection-Exercises-and-Study.md": "420edaee82854d177f8bc5db6f9a645157eb621a070e4eeafbdce589166866fe",
-    "session-12/S11-Laravel-v12-Many-to-Many.md": "eaf8651fce99a3742205c94ec32acab97b388beb4a792b64dfea351f4aadfc47",
+    "session-12/S11-Laravel-v12-Many-to-Many.md": "39c2fe0db240fbc0eec4bd8e533e86e1276b19929213d2f060966c03cace111d",
     "session-12/S12-Laravel-03-Product-Feature.md": "32776e3785fb29c872f3ae1308aeddbfb39344b4f30f826e8b82ade6581c4fa6",
     "session-13/S12-Laravel-02-Update-User.md": "1bfa4cf060835f6db4deb56d6ce4d40ea005d9c5240cb3b7be06641842eddc5b",
     "ReadMe.md": "77de4231cf18ac536db408666ee47297e688112ad0a8a3e261c2de917f9311c0",
@@ -115,9 +115,13 @@
     "session-14/S14-Laravel-05-Roles-and-Permissions.md": "21031d6f2dcd9dcff08743983da3f0ccaa649accd4a827e192944fd13842be33",
     "session-20/S20-Deploying-to-TAFE-Services.md": "e7ec95f1f0525a1539e71527356ed7bc0d4ad96cc7ea7b46250b3900aaced456",
     "session-11/S10-Laravel-v12-BootCamp-Part-9.md": "e17da0293ad3022d5199814319faf90c61d3b230672402d0e7a8bbac25ced943",
-    "session-11/S10-Laravel-v12-BootCamp-Part-10.md": "ca61d6ee2915a95bcecd4887c35dc9e3bd6ad68053a62d288b67d524e5a35a39",
-    "session-11/S10-Laravel-v12-BootCamp-Part-11.md": "7a56f54ba2246183b31a4b2bdd1f995db3a07df9dd70a8eddce8c038e84a6bdd",
-    "session-11/S10-Laravel-v12-BootCamp-Part-13.md": "501726cac5729ce9cefaaafb44a29ec089ac23446f0efc139455741edc70dc88",
-    "session-11/S10-Laravel-v12-BootCamp-Part-12.md": "9c97d7e5eb661651e4395f668ad5825836528d49a227eed419b43cc8a0bf7a0b"
+    "session-11/S10-Laravel-v12-BootCamp-Part-10.md": "427271bbb919534db20d67140e3d327aa539a45db01dd6c66fba084cdf43418e",
+    "session-11/S10-Laravel-v12-BootCamp-Part-11.md": "eb7412712fa2ea61de4271f3abb5946daae8fd00e3ad5d9afa86d6d968d47669",
+    "session-11/S10-Laravel-v12-BootCamp-Part-12.md": "23f5ce14001ece764826861de3142282bf586ebd845d9d37a12dcb8fa6834187",
+    "session-08/S08-Vanilla-PHP-MVC-Pt-06 1.md": "95bec823d0c5c45d9e2feba5bac774fe3a1b67fed55ac4c244e44a2a1f4a0c5f",
+    "session-11/S10-Laravel-v12-BootCamp-Part-3.md": "6dfe177e44f188097543d3f7451cf8b3a0d3f62a06f61c7591b9091db5fbbf2d",
+    "session-11/S10-Laravel-v12-BootCamp-Part-99.md": "501726cac5729ce9cefaaafb44a29ec089ac23446f0efc139455741edc70dc88",
+    "session-11/S10-Laravel-v12-BootCamp-Part-13.md": "26c8a38b2d25000a7ca7b05941e29efbd23eb0e652cf16427fab4c5066d1d4a9",
+    "session-11/S10-Laravel-BootCamp-Part-X-Batch-Notifications.md": "44b10e0a9d55358c00d0b5fed6157d4e8479c41b57dfdd57da8c937164b98c08"
   }
 }

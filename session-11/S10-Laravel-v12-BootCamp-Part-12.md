@@ -14,7 +14,7 @@ tags:
 date created: 03 July 2024
 date modified: 10 July 2024
 created: 2024-09-20T11:17
-updated: 2025-06-03T17:56
+updated: 2025-06-05T14:15
 ---
 
 # S10 Laravel Bootcamp: Part 12
@@ -36,8 +36,6 @@ includeLinks: true
 ---
 
 # Laravel Bootcamp: Part 12
-
-# TODO: IN PROGRESS
 
 ## Roles and Permissions Part 3
 
@@ -587,18 +585,273 @@ After the close form tag (`</form>`) we now add:
 
 This will show the current roles.
 
-
 Next we are going to add the "add and revoke" roles sections, immediately after the code we have above.
 
 ### Add Roles
 
-In a small departure from the create form, and also taking inspiration from the "revoke" part, we are going to present the user with buttons for the roles. They then can click a button and see the role added tot he list, and be also added tot he revokable roles list.
+In a small departure from the create form, and also taking inspiration from the "revoke" part, we are going to present the user with buttons for the roles. 
+
+They then can click a button and see the role added to the list, and be also added to the revokable roles list.
 
 Add the following code for "Add Roles":
 
+```php
+<div class="mt-2 mb-6 bg-gray-100 shadow border border-gray-300 rounded p-4 pt-2">  
+  
+    <h3 class="mb-2 bg-gray-300 text-gray-800 px-4 py-1 -mt-2 -mx-4 text-semibold">Add roles</h3>  
+  
+    <div class="flex space-x-4 flex-wrap">  
+  
+    @foreach ($roles as $role)  
+  
+        <form class="px-0 py-1 text-white rounded-md"  
+              method="POST"  
+              action="{{ route('admin.users.roles',  
+                                [$user]) }}"  
+              onsubmit="return confirm('Are you sure?');">  
+  
+            @csrf  
+  
+            <input type="hidden" name="role" value="{{$role->id}}"/>  
+  
+            <x-primary-button type="submit" class="bg-green-600">  
+                {{ $role->name }}  
+            </x-primary-button>  
+  
+        </form>  
+  
+    @endforeach  
+  
+    </div>  
+</div>
+```
+
+Ok so this will then present the roles that the user has not been given.
+
+![](assets/Pasted%20image%2020250605133756.png)
+
+### Add the "admin users roles revoke" route and name
+
+Head back to the `web.php` route file, and locate the code:
+
+```php
+  
+Route::post('users/{user}/delete', [UserController::class, "delete"])  
+    ->name('users.delete');  
+  
+Route::resource('users',  
+    UserController::class);
+```
+
+Update this block by adding the required extra lines so it now reads, 
+
+```php
+Route::post('users/{user}/roles', [UserController::class, 'giveRole'])  
+    ->name('users.roles');  
+Route::delete('users/{user}/roles', [UserController::class, 'revokeRole'])  
+    ->name('users.roles.revoke');  
+  
+Route::post('users/{user}/delete', [UserController::class, "delete"])  
+    ->name('users.delete');  
+  
+Route::resource('users',  
+    UserController::class);
+
+```
+
+This adds the `admin/users/USERID/roles` URI path, which is actioned by `POST` and `DELETE` HTTP Methods. The two routes have names `users.roles` and `users.roles.revoke`.
+
+### Add `giveRole` to the UserController.
+
+Ok, so we have the form, and we have the routes, we now need the method to give the role to the user.
+
+Open teh `UserController`, and move your cursor to the last `}` curly brace.
+
+Immediately before this last closing brace, add:
+
+```php
+public function giveRole(Request $request, User $user)  
+{  
+    if ($user->hasRole($request->role)) {  
+  
+        flash()->warning('User already has this role.',  
+            [  
+                'position' => 'top-center',  
+                'timeout' => 5000,  
+            ],  
+            'Role Exists');  
+  
+        return back();  
+    }  
+    
+    $user->roles()->attach($request->role);  
+  
+    flash()->success('User has been granted the role.',  
+        [  
+            'position' => 'top-center',  
+            'timeout' => 5000,  
+        ],  
+        'Role Added');  
+  
+	return back();  
+}
+```
+This will attach the role to the user. Even id the role is there already it will ensure the user has that role.
+
+BUT... we have not validated the data... which we MUST.
+
+Before the `if( $user->hasRole...` line, we need to validate the role id.
+
+Because we are doing this, it would also be a good idea to provide a warning flash message... so let's update the code.
+
+We are using the same base code as the store and edit methods:
+
+```php
+try {  
+  
+    $validated = $request->validate([  
+        'role' => ['required','exists:roles,id'],  
+    ]);  
+  
+  
+} catch (ValidationException $e) {  
+  
+    flash()->error('The role you attempted to add does not exist.',  
+        [  
+            'position' => 'top-center',  
+            'timeout' => 5000,  
+        ],  
+        'Add Role Failed');  
+  
+    return back()->withErrors($e->validator)->withInput();  
+  
+}  
+
+if ($user->hasRole($validated['role'])) {  
+  
+    flash()->warning('User already has this role.',  
+        [  
+           'position' => 'top-center',  
+           'timeout' => 5000,  
+        ],  
+        'Role Exists');  
+  
+        return back();  
+    }  
+  
+    $user->roles()->attach($validated['role']);  
+  
+flash()->success('User has been granted the role.',  
+    [  
+        'position' => 'top-center',  
+        'timeout' => 5000,  
+    ],  
+    'Role Added');  
+  
+return back();
+```
+
+#### Test!
+
+OK, try the add role to see if it works.
+
+
+### Revoke Role from User
+
+Ok, next we will do the revoke method in the controller.
+
+We are keeping the "positive test" rather than using a not, so if the user has the role then it is removed from the list of roles the user has.
+
+```php
+public function revokeRole(Request $request, User $user)  
+{  
+    $roleId = Role::whereId($request->role)->get();  
+  
+    if ($user->hasRole($roleId)) {  
+  
+        $user->roles()->detach($roleId);  
+  
+        flash()->success('Role has been removed from the user.',  
+            [  
+                'position' => 'top-center',  
+                'timeout' => 5000,  
+            ],  
+            'Role Revoked');  
+  
+        return back();  
+    }  
+    flash()->warning('User did not have this role.',  
+        [  
+            'position' => 'top-center',  
+            'timeout' => 5000,  
+        ],  
+        'Role Did Not Exist');  
+  
+    return back();  
+}
+```
+
+
+### Revoke Role section of the View
+
+Now for the revoke role section of the edit view.
+
+It is remarkably similar to the "add role" section... and it sits immediately before the `</article>` tag.
+
+We check to see if the user has any roles, and display them for revoking.
+
+```php
+    @if ($userRoles)  
+  
+        <div class="mt-2 mb-6 bg-gray-100 shadow border border-gray-300 rounded px-4 pt-2">  
+            <h3 class="mb-2 bg-gray-300 text-gray-800 px-4 py-1 -mt-2 -mx-4  font-semibold">  
+                {{__("Revoke Role(s)")}}  
+            </h3>  
+            <div class="flex space-x-6 flex-wrap">  
+  
+                @foreach ($userRoles as $currentRole)  
+  
+                    <form class="px-0 py-1 text-white rounded-md"  
+                          method="POST"  
+                          action="{{ route('admin.users.roles.revoke',$user) }}"  
+                          onsubmit="return confirm('Are you sure?');">  
+  
+                        @csrf  
+                        @method('DELETE')  
+  
+                        <input type="hidden" name="role" value="{{  $currentRole->id }}"/>  
+  
+                        <x-danger-button type="submit" class="px-2! py-1!">  
+                            {{ $currentRole->name }}  
+                        </x-danger-button>  
+  
+                    </form>  
+  
+                @endforeach  
+  
+            </div>  
+        </div>  
+  
+    @endif  
+  
+```
+
+### Exercise: No user roles and no roles to add?
+
+Now add some extra code to the view that:
+
+- if there are no roles to be added then a "No Roles available" is shown
+- if there are no roles allocated to the user, then "No roles available" is shown
+
+Here is an example of the possible output:
+
+![](assets/Pasted%20image%2020250605141328.png)
 
 
 
+Excellent work.
+
+We are now ready to look at using these roles and permissions to restrict access to actions.
 
 
 
@@ -610,7 +863,7 @@ Add the following code for "Add Roles":
 
 # Up Next
 
-- [Laravel v12 Bootcamp - Part 13](../session-11/S10-Laravel-v12-BootCamp-Part-13.md)
+- [Laravel v12 Bootcamp - Part 13](session-11/S10-Laravel-v12-BootCamp-Part-13.md)
 - [Session 11 ReadMe](../session-10/ReadMe.md)
 - [Session 11 Reflection Exercises & Study](../session-11/S11-Reflection-Exercises-and-Study.md)
 

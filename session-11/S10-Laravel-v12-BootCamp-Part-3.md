@@ -14,7 +14,7 @@ tags:
 date created: 03 July 2024
 date modified: 10 July 2024
 created: 2024-09-20T11:17
-updated: 2025-05-23T11:13
+updated: 2025-06-05T13:33
 ---
 
 # S10 Laravel Bootcamp: Part 3
@@ -532,7 +532,7 @@ Save the file.
 
 Refresh and everything is back. Clicking the action will now show the delete option.
 
-Now we need to add the destroy code tot he Chirps Controller.
+Now we need to add the destroy code to the Chirps Controller.
 
 <kbd>SHIFT</kbd>-<kbd>SHIFT</kbd> and open the Chirps Controller.
 

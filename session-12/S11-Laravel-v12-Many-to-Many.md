@@ -1,6 +1,6 @@
 ---
 created: 2025-02-25T14:55
-updated: 2025-05-01T13:54
+updated: 2025-06-05T13:33
 ---
 # S11 Laravel v12: Many-to-Many
 
@@ -1020,7 +1020,7 @@ It is important to create and seed databases from the outside in. That is, make 
 php artisan db:seed
 ```
 
-Remember that if you run the above command again, it will *add* the same data tot he database, and if any conflicts occur (e.g. unique email addresses) it will bomb out.
+Remember that if you run the above command again, it will *add* the same data to the database, and if any conflicts occur (e.g. unique email addresses) it will bomb out.
 
 To execute a particular seeder use:
 
