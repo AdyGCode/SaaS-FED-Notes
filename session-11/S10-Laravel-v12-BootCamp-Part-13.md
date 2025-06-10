@@ -14,7 +14,7 @@ tags:
 date created: 03 July 2024
 date modified: 10 July 2024
 created: 2024-09-20T11:17
-updated: 2025-06-10T17:59
+updated: 2025-06-10T18:08
 ---
 
 # S10 Laravel Bootcamp: Part 13
@@ -863,14 +863,39 @@ Route::name('admin.')
     });
 ```
 
-# TODO: App and Guest Template Fix
+# App and Guest Template Fix
+
+You may have noticed a problem with the icons on the admin pages. 
+
+They are missing.
+
+That is because we made a newbie error and forgot to load them from assets.
+
+The `assets` function gives the full URL to the file you are wanting to add when it is stored in the `public` folder.
+
+So in our case we are wanting the `css/all.css` file so we make sure the file is in the `public/css/` folder then use `asset` to create the correct URL.
+
+```php
+<link rel="stylesheet" href="{{ asset('css/all.css') }}">
+```
+
+Fix the appropriate line in the App and Guest blade template files.
+
+# TODO: Using can and role with controllers
 
 
 
 
+# Conclusion
+
+That's it, an example of applying roles and permissions to an application.
+
+Hopefully you have enough information to be able to apply the principles to your code.
+
+The last parts in this series will be adding our own 'twist' to the error pages, and other random ideas, hints and tips.
 
 
-
+# TODO: Update Useful References and Tutorials
 
 # References
 
@@ -878,7 +903,7 @@ Route::name('admin.')
 
 # Up Next
 
-- [Laravel v12 Bootcamp - Part 13](session-11/S10-Laravel-v12-BootCamp-Part-99.md)
+- [Laravel v12 Bootcamp - Part 14](session-11/S10-Laravel-v12-BootCamp-Part-14.md)
 - [Session 11 ReadMe](../session-10/ReadMe.md)
 - [Session 11 Reflection Exercises & Study](../session-11/S11-Reflection-Exercises-and-Study.md)
 
