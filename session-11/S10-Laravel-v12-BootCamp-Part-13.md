@@ -14,7 +14,7 @@ tags:
 date created: 03 July 2024
 date modified: 10 July 2024
 created: 2024-09-20T11:17
-updated: 2025-06-11T12:17
+updated: 2025-06-11T12:20
 ---
 
 # S10 Laravel Bootcamp: Part 13
@@ -1098,6 +1098,7 @@ https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/stats
 
 https://www.youtube.com/watch?v=cNrMdCXNml8&list=PL6tf8fRbavl3xuFIe4_i3TB4PZbtbx3Js&index=15
 
+https://spatie.be/docs/laravel-permission/v6/basic-usage/blade-directives
 
 
 
