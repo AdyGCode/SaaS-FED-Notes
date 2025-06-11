@@ -14,7 +14,7 @@ tags:
 date created: 03 July 2024
 date modified: 10 July 2024
 created: 2024-09-20T11:17
-updated: 2025-06-10T18:08
+updated: 2025-06-11T12:17
 ---
 
 # S10 Laravel Bootcamp: Part 13
@@ -92,7 +92,7 @@ This will assist your understanding and ability to apply to other projects
 
 ## Planning
 
-It is always a good idea to carefully play your Role Based Access Control.
+It is always a good idea to carefully plan your Role Based Access Control.
 
 Ideally a table showing the Role (horizontally) and the Permissions (vertically) with an indicator if the role has the permission or not.
 
@@ -105,12 +105,12 @@ Here we have named the actions based on the BREAD acronym, and kept the resource
 | Actions ⬇️        | Super Admin | Admin | Staff | Client |
 | ----------------- | :---------: | :---: | :---: | :----: |
 | browse user       |      Y      |   Y   |   Y   |        |
-| read user         |             |       |       |        |
+| read user         |      Y      |   Y   |   Y   |        |
 | add user          |      Y      |   Y   |   Y   |        |
 | edit user         |      Y      |   Y   |   Y   |        |
 | delete user       |      Y      |   Y   |       |        |
 | ...               |             |       |       |        |
-| browse Roles      |      Y      |   Y   |   Y   |        |
+| browse roles      |      Y      |   Y   |   Y   |        |
 | read role         |      Y      |   Y   |       |        |
 | edit role         |      Y      |   Y   |       |        |
 | add role          |      Y      |   Y   |       |        |
@@ -120,14 +120,14 @@ Here we have named the actions based on the BREAD acronym, and kept the resource
 | read permission   |      Y      |   Y   |       |        |
 | edit permission   |      Y      |       |       |        |
 | add permission    |      Y      |       |       |        |
-| delete permission |             |       |       |        |
+| delete permission |      Y      |       |       |        |
 | ...               |             |       |       |        |
 | browse post       |      Y      |   Y   |   Y   |   Y    |
 | read post         |      Y      |   Y   |   Y   |   Y    |
 | edit post         |      Y      |       |       |   Y    |
 | add post          |      Y      |       |       |   Y    |
 | delete post       |      Y      |   Y   |   Y   |   Y    |
-| publish post      |             |       |   Y   |   Y    |
+| publish post      |      Y      |       |   Y   |   Y    |
 | ...               |             |       |       |        |
 
 We obviously will have issues where a Staff user must not be able to change the role of an admin user, and so on... these sort of items we can look at once the basic permissions are applied.
@@ -145,6 +145,7 @@ php artisan make:seeder RoleAndPermissionSeeder
 ```
 
 Once created it's time to unify the two existing seeders into one.
+
 Open the `RoleAndPermissionSeeder` from the database migrations folder.
 
 We are going to add the parts one by one, with details on what each is doing.
@@ -185,11 +186,11 @@ $seedPermissions = [
 
 Nothing difficult about this list of strings.
 
-Next we will do somethign a little different. We are going to add a CLI "progress" meter to this seeder.
+Next we will do something a little different. We are going to add a CLI "progress" meter to this seeder.
 
-We create a new `ConsoleOutoput` object taht allows data to be sent to the command line output.
+We create a new `ConsoleOutput` object that allows data to be sent to the command line output.
 
-Nect a progress bar is created, linked to the output 'cahnnel', with a count of the seed permissions. This allows the progress bar to step aloing as it performs the seeding.
+Next a progress bar is created, linked to the output 'channel', with a count of the seed permissions. This allows the progress bar to step along as it performs the seeding.
 
 ```php
 $output = new ConsoleOutput();  
@@ -210,7 +211,7 @@ foreach ($seedPermissions as $newPermission) {
 }
 ```
 
-After the seeding is completed, we tell the progress bart o finish and then output a blank line.
+After the seeding is completed, we tell the progress bar to finish and then output a blank line.
 
 ```php
 $progress->finish();  
@@ -248,7 +249,7 @@ $progress->advance();
 ```
 
 
-It is interesting to see we have not allocated all the permissions to the super-admin. This is because we will use a "gate" top apply an all access pass later in this stage.
+It is interesting to see we have not allocated all the permissions to the super-admin. This is because we will use a "gate" to apply an all access pass later in this stage.
 
 #### Admin Role
 
@@ -881,7 +882,164 @@ So in our case we are wanting the `css/all.css` file so we make sure the file is
 
 Fix the appropriate line in the App and Guest blade template files.
 
-# TODO: Using can and role with controllers
+# Using roles and permissions with controllers or policies
+
+The next level of security is applied at the 'controller' level.
+
+There are various ways to apply the policies or roles, we will show you some alternatives.
+
+
+## Option 1: 
+
+
+## Option 2: Controller Constructor & Middleware
+
+The first option is to use middleware in the controller's constructor method.
+
+For example, here we show the constructor for the `RoleController`:
+
+*The `__construct()` usually is placed as the first of the methods within the controller class.*
+
+```php
+/**  
+ * Role Constructor
+ *     
+ * Apply permissions to the methods before they are 'called'     
+ */
+public function __construct()  
+{  
+    $this->middleware('permission:browse role', ['only' => ['index',]]);  
+    
+    $this->middleware('permission:read role', ['only' => ['show',]]);  
+    
+    $this->middleware('permission:edit role', ['only' => ['update', 'edit', 'givePermission', 'revokePermission']]);  
+    
+    $this->middleware('permission:add role', ['only' => ['create', 'store', 'givePermission', 'revokePermission']]);  
+    
+    $this->middleware('permission:delete role', ['only' => ['delete', 'destroy']]);  
+    }
+```
+
+The "only" tells the middleware to *only allow the following methods to be executed*. 
+
+So for the "add role" permission the actions that are allowed to be performed are the `create`, `store`, `givePermission`,  and `revokePermission` methods.
+
+
+## Option 3: Model Policies
+
+- https://spatie.be/docs/laravel-permission/v6/best-practices/using-policies
+
+The third option is to use Model Policies.
+
+We will do this with a `Post` model.
+
+### Create Post Model et al
+
+To do this we need to add the model (we already have the permissions added in previous steps).
+
+```shell
+php artisan make:model Post --controller --resource --migration --seed --factory
+```
+
+> #### Exercise time...
+> 
+> Yes this is the long hand version of the model creation... 
+>  
+>  As an exercise, what would a short-hand version of the same command?
+>  
+>  Hint: use `php artisan make:model --help` for assistance.
+
+
+### Post Migration
+
+Now edit the migration to have the following:
+
+```php
+public function up(): void  
+{  
+    Schema::create('posts', function (Blueprint $table) {  
+        $table->id();  
+        $table->foreignId('user_id');  
+        $table->string('title');  
+        $table->text('content');  
+        $table->timestamps();  
+    });  
+}
+```
+
+### Post Factory
+
+We are going to use a factory to mock our posts for this exercise.
+
+```php
+public function definition(): array  
+{  
+    return [  
+        'title'=> $this->faker->sentence(),  
+        'content'=> $this->faker->paragraph(),  
+        'user_id'=> \App\Models\User::inRandomOrder()->first()->id,  
+    ];  
+}
+```
+
+The `user_id`  is created by randomly selecting an existing user from the User model. Nice trick for use when testing as well.
+
+### Post Seeder
+
+Next, update the `PostSeeder` by adding the following code:
+
+```php
+public function run(): void  
+{  
+  
+        Post::factory(20)->create();  
+  
+}
+```
+
+Run the migration and perform the seeding of the Post model using:
+
+```shell
+php artisan migrate 
+php artisan db:seed PostSeeder
+```
+
+
+### Post Policy - **Best Practice* 
+
+- https://spatie.be/docs/laravel-permission/v6/best-practices/using-policies
+
+
+The post policy will be applied to the Post model, and in this instance the web routes. 
+
+The guard could be `web`, `api` or `command` depending on what routes this policy is being applied to.
+
+```shell
+php artisan make:policy PostPolicy --model=Post --guard=web
+```
+
+Now we will edit the policy (`App/Policies/PostPolicy.php`).
+
+By default the policies are "false", but we need to allow them given the ability to do something.
+
+We use the `can` method on the logged in user. 
+
+**Note: We have added further permissions to the role and permission seeder, to provide a more granular list of permissions.**
+
+```php
+
+```
+
+#### Applying Policies
+
+- https://laravel.com/docs/12.x/authorization#creating-policies
+- 
+To use a policy there are some different methods.
+
+We are able to:
+
+- apply the policy in the 
+- add the policy to the model
 
 
 
@@ -908,3 +1066,41 @@ The last parts in this series will be adding our own 'twist' to the error pages,
 - [Session 11 Reflection Exercises & Study](../session-11/S11-Reflection-Exercises-and-Study.md)
 
 # END
+
+
+
+Research
+https://www.youtube.com/@codingoblin
+
+https://spatie.be/docs/laravel-permission/v6/best-practices/using-policies
+
+https://laravel.com/docs/12.x/authorization#via-the-user-model
+
+https://spatie.be/docs/laravel-permission/v6/best-practices/using-policies
+
+https://medium.com/@codeaxion77/supercharge-your-laravel-app-with-spatie-roles-and-permissions-f20fe02a8c75
+
+https://spatie.be/docs/laravel-permission/v6/best-practices/using-policies
+
+https://laravel.io/forum/set-permission-in-controller-when-using-spatiepermission
+
+https://www.fundaofwebit.com/post/laravel-10-spatie-user-roles-and-permissions-tutorial
+
+https://dev.to/varzoeaa/spatie-permissions-vs-laravel-policies-and-gates-handling-role-based-access-1bdn
+
+https://magecomp.com/blog/manage-role-in-laravel-using-spatie-laravel-permission/
+
+https://devpishon.hashnode.dev/streamline-role-based-access-control-with-spatie-laravel-permission
+
+https://www.creative-tim.com/twcomponents/component/card-stats
+
+https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/stats
+
+https://www.youtube.com/watch?v=cNrMdCXNml8&list=PL6tf8fRbavl3xuFIe4_i3TB4PZbtbx3Js&index=15
+
+
+
+
+
+https://www.fundaofwebit.com/post/laravel-policy-using-spatie-roles-and-permission-tutorial-step-by-step
+
