@@ -9,7 +9,7 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testing, PEST
 created: 2024-08-09T14:27
-updated: 2024-09-10T16:36
+updated: 2025-07-22T17:04
 ---
 
 # Session 05 Exercises and Journal Entry
@@ -43,8 +43,8 @@ On Windows devices you will need to install and run the Windows Terminal applica
 Useful links for this:
 
 - [Windows terminal on Microsoft Store](https://apps.microsoft.com/detail/9n0dx20hk701?hl=en-gb&gl=AU)
-- [Setting up Git bash on Windows Terminal](https://help.screencraft.net.au/hc/2680392001/65/add-git-bash-to-microsoft-terminal?category_id=35)
-- [Adding Command Line Aliases to make you life easier](https://help.screencraft.net.au/hc/2680392001/66/add-bash-command-line-aliases-for-git?category_id=35)
+- [Setting up Git bash on Windows Terminal](https://help.screencraft.net.au/hc/1299211922/65/add-git-bash-to-microsoft-terminal?category_id=35)
+- [Adding Command Line Aliases to make you life easier](https://help.screencraft.net.au/hc/1299211922/66/add-bash-command-line-aliases-for-git?category_id=35)
 
 ## Exercises Preparation
 

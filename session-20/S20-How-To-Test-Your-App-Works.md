@@ -12,9 +12,8 @@ tags:
   - APIs
   - Back-End
 date created: 03 July 2024
-date modified: 10 July 2024
 created: 2024-09-20T11:17
-updated: 2024-12-04T14:39
+updated: 2025-07-22T17:04
 ---
 
 # S20 End of Cluster
@@ -63,18 +62,18 @@ Make sure you have the following installed:
 - Windows Terminal (for CLI) with the BASH CLI
 
 The following direct links will assist you:
-- [Add a new version of PHP to Laragon](https://help.screencraft.net.au/hc/2680392001/67/add-a-new-version-of-php-to-laragon) 
-- [Update the Apache web server in Laragon](https://help.screencraft.net.au/hc/2680392001/68/update-the-apache-web-server-in-laragon)
-- [Install and Run MailPit](https://help.screencraft.net.au/hc/2680392001/69/install-and-run-mailpit)
-- [Update NodeJS (and NPM) in Laragon](https://help.screencraft.net.au/hc/2680392001/84/update-nodejs-and-npm-in-laragon)
-- [Add Git Bash to Microsoft Terminal](https://help.screencraft.net.au/hc/2680392001/65/add-git-bash-to-microsoft-terminal)
-- [Add or Update Bash Command Line Aliases for Git, Laravel, and more](https://help.screencraft.net.au/hc/2680392001/66/add-bash-command-line-aliases-for-git)
+- [Add a new version of PHP to Laragon](https://help.screencraft.net.au/hc/1299211922/67/add-a-new-version-of-php-to-laragon) 
+- [Update the Apache web server in Laragon](https://help.screencraft.net.au/hc/1299211922/68/update-the-apache-web-server-in-laragon)
+- [Install and Run MailPit](https://help.screencraft.net.au/hc/1299211922/69/install-and-run-mailpit)
+- [Update NodeJS (and NPM) in Laragon](https://help.screencraft.net.au/hc/1299211922/84/update-nodejs-and-npm-in-laragon)
+- [Add Git Bash to Microsoft Terminal](https://help.screencraft.net.au/hc/1299211922/65/add-git-bash-to-microsoft-terminal)
+- [Add or Update Bash Command Line Aliases for Git, Laravel, and more](https://help.screencraft.net.au/hc/1299211922/66/add-bash-command-line-aliases-for-git)
 
 Point Laragon "Root Path" to `Source/Repos` folder:
-- [Change the Laragon Web Root Folder](https://help.screencraft.net.au/hc/2680392001/61/change-the-laragon-web-root-folder)
+- [Change the Laragon Web Root Folder](https://help.screencraft.net.au/hc/1299211922/61/change-the-laragon-web-root-folder)
 
 Make PHP, Composer and NPM available from the CLI
-- [Adding Laragon to the System Path](https://help.screencraft.net.au/hc/2680392001/36/adding-laragon-to-the-system-path)
+- [Adding Laragon to the System Path](https://help.screencraft.net.au/hc/1299211922/36/adding-laragon-to-the-system-path)
 
 Restart the Laragon services to make sure that the correct version of PHP is selected.
 
@@ -129,7 +128,7 @@ npm --version
 composer --version
 ```
 
-If you get an error it is because you have not **[Added/Updated Laragon in the System Path](https://help.screencraft.net.au/hc/2680392001/36/adding-laragon-to-the-system-path)**. You need to do this if you change versions of **ANY** of the services!
+If you get an error it is because you have not **[Added/Updated Laragon in the System Path](https://help.screencraft.net.au/hc/1299211922/36/adding-laragon-to-the-system-path)**. You need to do this if you change versions of **ANY** of the services!
 
 You may be given a prompt to update NPM or Composer or both. To do so use:
 

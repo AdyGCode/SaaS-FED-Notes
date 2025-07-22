@@ -8,10 +8,8 @@ size: 4k
 color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testng, PEST
-date created: 03 July 2024
-date modified: 07 July 2024
 created: 2024-08-01T09:23
-updated: 2025-03-13T09:00
+updated: 2025-07-22T17:12
 ---
 
 # Development Environments
@@ -42,8 +40,10 @@ developments are**
 ### BYOD
 
 > We **do not** officially support your BYOD even if they are Windows based systems.
+> 
 > Any member of staff *has the right to refuse* to assist you with your personal devices during
 > and after class time.
+> 
 > If you are experiencing issues, then it is best to ask nicely and see if they are able to
 > assist you **outside** of class time.
 
@@ -56,7 +56,9 @@ developments are**
 
 > We are not responsible for any cybersecurity issues that may be on external sites.
 >
-> Links to external sites are used by lecturers and staff. We attempt to prevent sites with
+> Links to external sites are used by lecturers and staff. 
+> 
+> We attempt to prevent sites with
 > malicious code, scam and phishing, and other cybersecurity issues being linked.
 
 ### Product & Service Disclaimer
@@ -69,6 +71,9 @@ developments are**
 
 ## NM TAFE Standard Development Environment
 
+> Key: {SC} indicates a link to https://help.screencraft.net.au and the Knowledge Base/FAQs that are hosted on this server.
+
+
 Our preferred standard development environment at TAFE is:
 
 - Windows 10/11
@@ -78,14 +83,14 @@ Our preferred standard development environment at TAFE is:
       NodeJS
     - It is important to update the default software to at least: Apache 2.4.59, Node 20, PHP
       8.2,
-        - [Apache 2.4.59+](https://help.screencraft.net.au/hc/2680392001/68/update-the-apache-web-server-in-laragon?category_id=29)
+        - [Apache 2.4.59+](https://help.screencraft.net.au/hc/1299211922/68/update-the-apache-web-server-in-laragon?category_id=29)
           {SC}
-        - [PHP 8.2+](https://help.screencraft.net.au/hc/2680392001/67/add-a-new-version-of-php-to-laragon?category_id=29)
+        - [PHP 8.2+](https://help.screencraft.net.au/hc/1299211922/67/add-a-new-version-of-php-to-laragon?category_id=29)
           {SC}
-        - [NodeJS 20+](https://help.screencraft.net.au/hc/2680392001/84/update-nodejs-and-npm-in-laragon?category_id=35)
+        - [NodeJS 20+](https://help.screencraft.net.au/hc/1299211922/84/update-nodejs-and-npm-in-laragon?category_id=35)
           {SC}
-        - [MySQL 8+]() or [MariaDB 10+]() or [PostgreSQL]()
-        - MongoDB {TO ADD DETAILS}
+        - [MySQL 8+]() or [MariaDB 10+]() or [PostgreSQL]() {TO ADD DETAILS}
+        - [MongoDB]() {TO ADD DETAILS}
 
 - IDEs
     - PhpStorm {TO ADD DETAILS}
@@ -101,21 +106,21 @@ Our preferred standard development environment at TAFE is:
 
 - Programming Languages
     - Python 3.10+ {TO ADD DETAILS}
+    - PHP 8.2+ [PHP 8.2+](https://help.screencraft.net.au/hc/1299211922/67/add-a-new-version-of-php-to-laragon?category_id=29) {SC}
     - Dart & Flutter {TO ADD DETAILS}
 
 - CLI Tools
     - Windows Terminal
-    - Bash (Installed as part of Laragon's Git)
+    - [Bash](https://help.screencraft.net.au/hc/1299211922/65/add-git-bash-to-microsoft-terminal?category_id=35) (Installed as part of Laragon's Git) {SC}
 
 - Version Control
     - Git SCM {SC} (Installed with Laragon)
 
 - Debugging tools
-    - xdebug (for PHP)
+    - [xDebug](https://help.screencraft.net.au/hc/1299211922/91/php-and-xdebug-windowslaragon) (for PHP) {SC}
 
 - eMail Testing
-    - [MailPit](https://help.screencraft.net.au/hc/2680392001/69/install-and-run-mailpit?category_id=29)
-      {SC}
+    - [MailPit](https://help.screencraft.net.au/hc/1299211922/69/install-and-run-mailpit?category_id=29) {SC}
 
 ## Command Line Tools
 
@@ -125,10 +130,8 @@ install these below:
 
 - [Windows Terminal (MS Store)](https://apps.microsoft.com/detail/9n0dx20hk701?hl=en-us&gl=US)
 - [Setting Terminal as default CLI](https://learn.microsoft.com/en-us/windows/terminal/install)
-- [Git Bash in Windows Terminal](https://help.screencraft.net.au/hc/2680392001/65/add-git-bash-to-microsoft-terminal?category_id=35)
-  {SC}
-- [Bash aliases for increased productivity](https://help.screencraft.net.au/hc/2680392001/66/add-bash-command-line-aliases-for-git?category_id=35)
-  {SC}
+- [Git Bash in Windows Terminal](https://help.screencraft.net.au/hc/1299211922/65/add-git-bash-to-microsoft-terminal?category_id=35) {SC}
+- [Bash aliases for increased productivity](https://help.screencraft.net.au/hc/1299211922/66/add-bash-command-line-aliases-for-git?category_id=35) {SC}
 - [Windows Terminal Themes](https://windowsterminalthemes.dev)
 
 # Other Recommended Tools
@@ -148,14 +151,18 @@ them.
 
 ## IDEs
 
-- PhpStorm - Professional only
-    - Professional free whilst studying
+- PhpStorm 
+    - Professional only (free whilst studying)
     - Platform(s): Windows, Linux, MacOS
-- Visual Studio Code (VSCode) - Free
+- Visual Studio Code (VSCode) 
+	- Free
     - Platform(s): Windows, Linux, MacOS
-- PyCharm - Community or Professional free whilst studying
+- PyCharm 
+	- Community (Free)
+	- Professional (free whilst studying)
     - Platform(s): Windows, Linux, MacOS
-- CLion - Professional free whilst studying
+- CLion 
+	- Professional (free whilst studying)
     - Platform(s): Windows, Linux, MacOS
 - Arduino -
     - Platform(s): Windows, Linux, MacOS
@@ -219,7 +226,7 @@ issues when doing so.
 - [iTerm]()
     - Platform(s): MacOS
 - [Warp]()
-    - Platform(s): MacOS
+    - Platform(s): MacOS, Windows
 - [Windows Terminal]()
     - Platform(s): Windows
 
@@ -227,24 +234,26 @@ More options in the [S01 CLI Commands](./S01-CLI-Commands.md) document.
 
 ## Debugging Tools
 
-- Xdebug
+- xDebug
     - is a useful debugging extension that may be integrated into PhpStorm and VSCode.
     - Platform(s): Windows, MacOS, Linux
-    - Installation details - [Adding-XDebug](..\Session-02\Adding-XDebug.md)
+    - Installation details - [Adding XDebug](..\Session-02\Adding-XDebug.md)
 
 # FAQs
 
 Other useful FAQs are found here:
 
-- [Laragon FAQs on ScreenCraft Helpdesk](https://help.screencraft.net.au/hc/2680392001/search?q=laragon)
+- [Laragon FAQs on ScreenCraft Helpdesk](https://help.screencraft.net.au/hc/1299211922/search?q=laragon)
   {SC}
 - …
 
 # Other Development Configurations
 
-There are many other ways to develop with PHP, MySQL/MariaDB, NodeJS and associated tools. The
-details below are some of the options, and may be used at your own discretion. Support from 
-staff members **cannot** be guaranteed.
+There are many other ways to develop with PHP, MySQL/MariaDB, NodeJS and associated tools. 
+
+The details below are some of the options, and may be used at your own discretion. 
+
+Support from staff members **cannot** be guaranteed.
 
 | Configuration         |   Windows   | MacOS | Linux |
 |-----------------------|:-----------:|:-----:|:-----:|
@@ -256,5 +265,4 @@ staff members **cannot** be guaranteed.
 | MAMP/MAMP Pro         |             |   Y   |       |
 | …                     |             |       |       |
 
-- *If using Laravel herd on PC, then you will need to install MariaDB, MySQl or
-  Postgres on your system using an installer.*
+- *If using Laravel herd on PC, then you will need to install MariaDB, MySQL or PostgreSQL on your system using an installer.*

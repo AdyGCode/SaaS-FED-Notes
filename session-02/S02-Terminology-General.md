@@ -9,7 +9,7 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testng, PEST
 created: 2024-08-01T09:23
-updated: 2025-03-12T08:52
+updated: 2025-07-22T16:41
 ---
 
 # General Terms
@@ -38,14 +38,18 @@ There are many types of command shells, and they depend, for the most part, on t
 
 From experience, many lecturers will use the Bash, Z-Shell or similar, even with Windows.
 
-Adrian Gould's Diigo account contains many links that will provide options, plus also he has a MyBib account with many references in APA v6+.
+Adrian Gould's Diigo account contains many links that will provide options, plus also he has a MyBib account with many references in APA v6+. He uses the latter as a storage for references to insert into code, notes such as these, and presentations as needed.
 
 - [Adrian's Diigo Account](https://diigo.com/user/Ady_Gould)
-- Details of the MyBib Collections are to come
+
 
 ### Version Control
 
 Version Control is a system that records changes to a file or set of files over time so that you can recall specific versions later.
+
+> #### Important:
+> 
+> We will be using version control EXTENSIVELY during this course. If you have not used git then we are recommending you study how to sue git as soon as possible.
 
 ### CI/CD
 
@@ -104,7 +108,7 @@ Refers to the *actual physical hardware* that a system is running on. In most ca
 
 ## Servers
 
-Web and other types of applicaitons often rely on a variety of server systems. These range from Database Servers to Web Severs to Mail servers and beyond.
+Web and other types of applications often rely on a variety of server systems. These range from Database Servers to Web Severs to Mail servers and beyond.
 
 ### Web Server
 

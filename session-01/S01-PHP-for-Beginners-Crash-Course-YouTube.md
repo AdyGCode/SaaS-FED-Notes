@@ -7,14 +7,30 @@ auto-scaling: true
 size: 4k
 color: "#ccc"
 backgroundColor: "#060606"
-tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testing, PEST
-date created: 03 July 2024
-date modified: 07 July 2024
+tags:
+  - SaaS
+  - Front-End
+  - MVC
+  - Laravel
+  - Framework
+  - PHP
+  - MySQL
+  - MariaDB
+  - SQLite
+  - Testing
+  - Unit
+  - Testing
+  - Feature
+  - Testing
+  - PEST
 created: 2024-08-01T09:23
-updated: 2025-03-11T17:06
+updated: 2025-07-22T16:23
 ---
 
-# PHP for Beginners Crash Course Study Schedule
+# PHP for Beginners Crash Course
+
+### Course Type: Free / You Tube
+
 
 https://www.youtube.com/watch?v=BUCiSSyIGGU
 

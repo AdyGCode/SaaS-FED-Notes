@@ -9,7 +9,7 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testing, PEST
 created: 2024-08-01T09:23
-updated: 2025-03-12T08:52
+updated: 2025-07-22T16:57
 ---
 
 # Programming Terminology
@@ -17,25 +17,32 @@ updated: 2025-03-12T08:52
 Our first set of terms relates to general concepts within programming.
 
 ### WET
-
-Write everything twice.
+- Write everything twice.
 
 ### DRY
-
-Don't Repeat Yourself
+- Don't Repeat Yourself
 
 ### KISS
-
-Keep It Simple Stupid
+- Keep It Simple Stupid
 
 
 ### Convention vs Configuration
 
 Convention vs Configuration is a design philosophy where software defaults to standard conventions to reduce the need for custom configurations, making it easier to use out of the box.
 
+[Convention over configuration](https://en.wikipedia.org/wiki/Convention_over_configuration) is a simple concept that is primarily used in programming. It means that the environment in which you work (systems, libraries, language…) assumes many logical situations by default, so if you adapt to them rather than creating your own rules each time, programming becomes an easier and more productive task.
+
+The goal is to **decrease the number of decisions** the programmer has to make and **eliminate the complexity** of having to configure all and each of the areas of application development. The immediate result is that you can create many more things in less time.
+
+- Sáez, F. (2015, August 31). _Convention Over Configuration_. Facilethings.com; FacileThings. https://facilethings.com/blog/en/convention-over-configuration
+- kexugit. (2015, August 17). _Patterns in Practice - Convention Over Configuration_. Microsoft.com. https://learn.microsoft.com/en-us/archive/msdn-magazine/2009/february/patterns-in-practice-convention-over-configuration
+
+
 ### Idempotence
 
-A property of (certain) operations in which performing the same operation multiple times results in the same outcome as performing it once is known as **idempotence**. That is, if you have the number 1 and 3 and add them then the result is 4. No matter how many times you do the same calculation, the results will always be the tame.
+A property of (certain) operations, where performing the same operation multiple times results in the same outcome as performing it once. 
+
+That is, if you have the number 1 and 3 and add them then the result is 4. No matter how many times you do the same calculation, the results will always be the same.
 
 
 ### Stateful programming

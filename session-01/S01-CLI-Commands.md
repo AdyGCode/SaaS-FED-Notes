@@ -8,17 +8,15 @@ size: 4k
 color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testing, PEST
-date created: 03 July 2024
-date modified: 07 July 2024
 created: 2024-08-01T09:23
-updated: 2025-03-13T09:00
+updated: 2025-07-22T16:25
 ---
 
 # The CLI
 
 Many people will not be familiar with the CLI, or Command Line Interface.
 
-This is a disadvantage to any developer, be they a web, software or other area of IT.
+This is a disadvantage to any developer, be they a web developer, software engineer or other area of IT.
 
 We recommend becoming familiar with some of the basic commands, and some extra commands.
 
@@ -34,7 +32,7 @@ Possible ways to get a `*nix` type prompt:
 
 1. Install Git from the https://git-scm.com and use the `git/bin/bash.exe` file for the command
    prompt
-2. Install Laragon and use the `Laragon\bin\gity\bin\bash.exe` file as the command prompt
+2. Install Laragon and use the `Laragon\bin\git\bin\bash.exe` file as the command prompt
 3. Install WSL (Windows Subsystem for Linux) and use a co-hosted copy of Linux on your PC
    (Advanced users)
 
@@ -86,13 +84,13 @@ both for SaaS and for other clusters.
 | `mkdir FOLDER_NAME`                                       | Create a new folder/directory `FOLDER_NAME` within the current folder                                                                                                                                                                        |
 | `rmdir FOLDER_NAME`                                       | Remove the empty folder `FOLDER_NAME`<br>**IMPORTANT: There is NO undo in bash**                                                                                                                                                             |
 | `mkdir -p FOLDER_NAME/SUB_FOLDER`                         |                                                                                                                                                                                                                                              |
-| `mkdir -p FOLDER_NAME/{SUB_FOLDER_1,SUB_FOLDER_2}`        | Create a new folder `FOLDER_NAME` and then two folders within it called `SUB_FOLDER_1` and `SUB_FOLDER_2`.                                                                                                                                   |
+| `mkdir -p FOLDER/{SUB_1,SUB_2}`                           | Create a new folder `FOLDER` and then two folders within it called `SUB_1` and `SUB_2`.                                                                                                                                                      |
 | `touch FILE_NAME`                                         | Create a new empty file called `FILE_NAME`, or if it exists, update the last accessed time to the current date and time.<br>**IMPORTANT: Files need to have their extension added, and any file with . at the front is "hidden" by default** |
-| `touch FOLDER_NAME\{FILE_1,FILE_2,FILE3}`                 | As before, but for multiple files within the folder `FOLDER_NAME`.                                                                                                                                                                           |
-| `rm -Rf FOLDER_NAME`                                      | Remove all files and folders and the named folder `FOLDER-NAME`<br>**IMPORTANT: There is NO undo in bash... Only do this when you are certain**                                                                                              |
+| `touch FOLDER\{FILE_1,FILE_2,FILE3}`                      | As before, but for multiple files within the folder `FOLDER`.                                                                                                                                                                                |
+| `rm -Rf FOLDER`                                           | Remove all files and folders and the named folder `FOLDER`<br>**IMPORTANT: There is NO undo in bash... Only do this when you are certain**                                                                                                   |
 | `mkdir -P database/data`                                  | Create a folder called `database` with a folder called `data` within it                                                                                                                                                                      |
 | `cp FILE_NAME NEW_FILE_NAME`                              | Copy the file `FILE_NAME` into a new copy called `NEW_FILE_NAME`                                                                                                                                                                             |
-| `cp FILE_NAME NEW_FOLDER_LOCATION`                        | Copy the file `FILE_NAME` into the folder `NEW_FOLDER_LOCATION`                                                                                                                                                                              |
+| `cp FILE_NAME NEW_FOLDER_LOCATION/`                       | Copy the file `FILE_NAME` into the folder `NEW_FOLDER_LOCATION`                                                                                                                                                                              |
 | `cp FOLDER_NAME NEW_FOLDER_NAME`                          | As before, but a folder                                                                                                                                                                                                                      |
 | `mv FILE_NAME NEW_FILE_NAME`                              | Rename the file `FILE_NAME` to `NEW_FILE_NAME`<br>Also applies to folders                                                                                                                                                                    |
 | `mv FILE_NAME FOLDER_NAME`                                | Move the file `FILE_NAME` into the folder `FOLDER_NAME`                                                                                                                                                                                      |
@@ -104,10 +102,10 @@ both for SaaS and for other clusters.
 | `history \| tail`                                         | Shows the last ten commands<br>**Note: the \ is not needed, it is due to Markdown using \| to separate columns in tables**                                                                                                                   |
 | `history \| grep XXX`                                     | As above, but also filter the history to show only the commands containing `XXX`                                                                                                                                                             |
 | `composer global require laravel/installer`               | Install or update the `laravel new` command                                                                                                                                                                                                  |
-| `php -v`                                                  | Display the current version of PHP that is in the system path                                                                                                                                                                                |
-| `node -v`                                                 | Display the version of Node that is being used                                                                                                                                                                                               |
-| `npm -v`                                                  | Display the version of NPM being used.                                                                                                                                                                                                       |
-| `composer -V`                                             | Display the version of Composer being used (**Note: capital V)**                                                                                                                                                                             |
+| `php --version`                                           | Display the current version of PHP that is in the system path                                                                                                                                                                                |
+| `node --version`                                          | Display the version of Node that is being used                                                                                                                                                                                               |
+| `npm --version`                                           | Display the version of NPM being used.                                                                                                                                                                                                       |
+| `composer --version`                                      | Display the version of Composer being used (**Note: capital V)**                                                                                                                                                                             |
 |                                                           |                                                                                                                                                                                                                                              |
 | `laravel new`                                             | Interactive command that starts a new Laravel application. The name you give it will be the name of the folder created.                                                                                                                      |
 | `laravel new APP_NAME`                                    | as above but creates the folder `APP_NAME`. We seriously suggest using the previous command as it provides better overall control.                                                                                                           |

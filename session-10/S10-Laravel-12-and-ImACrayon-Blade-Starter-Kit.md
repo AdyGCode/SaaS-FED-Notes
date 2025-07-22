@@ -12,9 +12,8 @@ tags:
   - APIs
   - Back-End
 date created: 03 July 2024
-date modified: 10 July 2024
 created: 2024-09-20T11:17
-updated: 2025-05-23T11:12
+updated: 2025-07-22T17:04
 ---
 
 # S10 Laravel v12 and imacrayon/blade-starter-kit
@@ -66,17 +65,17 @@ Make sure you have the following installed:
 
 Information on adding and/or updating components and configurations for the likes of the Laragon Paths, Bash and MailPit is available from:
 
-- [ScreenCraft Help Desk](https://help.screencraft.net.au/hc/2680392001) 
--  [Search for Laragon Articles](https://help.screencraft.net.au/hc/2680392001/search?q=laragon)
-- [Add a new version of PHP to Laragon?](https://help.screencraft.net.au/hc/2680392001/67/add-a-new-version-of-php-to-laragon) 
-- [Update the Apache web server in Laragon](https://help.screencraft.net.au/hc/2680392001/68/update-the-apache-web-server-in-laragon)
-- [Install and Run MailPit?](https://help.screencraft.net.au/hc/2680392001/69/install-and-run-mailpit)
-- [Update NodeJS (and NPM) in Laragon](https://help.screencraft.net.au/hc/2680392001/84/update-nodejs-and-npm-in-laragon)
+- [ScreenCraft Help Desk](https://help.screencraft.net.au/hc/1299211922) 
+-  [Search for Laragon Articles](https://help.screencraft.net.au/hc/1299211922/search?q=laragon)
+- [Add a new version of PHP to Laragon?](https://help.screencraft.net.au/hc/1299211922/67/add-a-new-version-of-php-to-laragon) 
+- [Update the Apache web server in Laragon](https://help.screencraft.net.au/hc/1299211922/68/update-the-apache-web-server-in-laragon)
+- [Install and Run MailPit?](https://help.screencraft.net.au/hc/1299211922/69/install-and-run-mailpit)
+- [Update NodeJS (and NPM) in Laragon](https://help.screencraft.net.au/hc/1299211922/84/update-nodejs-and-npm-in-laragon)
 - Adding xDebug to PHP
-- [Add Git Bash to Microsoft Terminal](https://help.screencraft.net.au/hc/2680392001/65/add-git-bash-to-microsoft-terminal)
-- [Add or Update Bash Command Line Aliases for Git, Laravel, and more](https://help.screencraft.net.au/hc/2680392001/66/add-bash-command-line-aliases-for-git)
-- - [Change the Laragon Web Root Folder](https://help.screencraft.net.au/hc/2680392001/61/change-the-laragon-web-root-folder)
-- [Adding Laragon to the System Path](https://help.screencraft.net.au/hc/2680392001/36/adding-laragon-to-the-system-path)
+- [Add Git Bash to Microsoft Terminal](https://help.screencraft.net.au/hc/1299211922/65/add-git-bash-to-microsoft-terminal)
+- [Add or Update Bash Command Line Aliases for Git, Laravel, and more](https://help.screencraft.net.au/hc/1299211922/66/add-bash-command-line-aliases-for-git)
+- - [Change the Laragon Web Root Folder](https://help.screencraft.net.au/hc/1299211922/61/change-the-laragon-web-root-folder)
+- [Adding Laragon to the System Path](https://help.screencraft.net.au/hc/1299211922/36/adding-laragon-to-the-system-path)
 
 ## Installing/Updating the Laravel Installer
 

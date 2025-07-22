@@ -9,7 +9,7 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testing, PEST
 created: 2024-08-01T09:23
-updated: 2025-03-12T08:52
+updated: 2025-07-22T17:13
 ---
 # Session 02
 
@@ -20,7 +20,7 @@ updated: 2025-03-12T08:52
 - [Terminology: Web](../session-02/S02-Terminology-Web.md)
 - [PHP Basics I: About, 'Tags', PHP & HTML](../session-02/S02-PHP-Basics-I.md)
 - [PHP Basics I - Part 2: Variables, Types, Arrays, Decisions and Loops](S02-PHP-Basics-I-Part-2.md)
-- [Exercises and Journal Entry](../session-02/S02-Exercises-and-Journal-Entry.md)
+- [Exercises and Journal Entry](session-02/S02-Practice-Exercises-and-Recap.md)
 
 ### Note
 

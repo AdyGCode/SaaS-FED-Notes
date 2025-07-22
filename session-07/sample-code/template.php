@@ -255,7 +255,7 @@
             <a class="my-1 block" href="https://help.screencraft.net.au">Help Center <span
                         class="text-gray-600 text-xs p-1">New</span>
             </a>
-            <a class="my-1 block" href="https://help.screencraft.net.au/hc/2680392001">FAQs <span
+            <a class="my-1 block" href="https://help.screencraft.net.au/hc/1299211922">FAQs <span
                         class="text-gray-600 text-xs p-1">New</span>
             </a>
             <a class="my-1 block" href="/#">Privacy Policy <span class="text-gray-600 text-xs p-1">TBA</span>

@@ -12,7 +12,7 @@ tags:
   - APIs
   - Back-End
 date created: 03 July 2024
-date modified: 10 July 2024
+
 created: 2024-09-20T11:17
 <<<<<<<< HEAD:session-10/S10-Introducing-Laravel-v11.md
 updated: 2025-04-28T17:53
@@ -70,18 +70,18 @@ Make sure you have the following installed:
 
 Information on updating Laragon to these versions is available at the:
 
-- [ScreenCraft Help Desk](https://help.screencraft.net.au/hc/2680392001) 
+- [ScreenCraft Help Desk](https://help.screencraft.net.au/hc/1299211922) 
 
 Any FAQs that refer to Laragon may be found using this HelpDesk link to
 
-- [Search for Laragon Articles](https://help.screencraft.net.au/hc/2680392001/search?q=laragon)
+- [Search for Laragon Articles](https://help.screencraft.net.au/hc/1299211922/search?q=laragon)
 
 Some useful Direct Links:
 
-- [Add a new version of PHP to Laragon?](https://help.screencraft.net.au/hc/2680392001/67/add-a-new-version-of-php-to-laragon) 
-- [Update the Apache web server in Laragon](https://help.screencraft.net.au/hc/2680392001/68/update-the-apache-web-server-in-laragon)
-- [Install and Run MailPit?](https://help.screencraft.net.au/hc/2680392001/69/install-and-run-mailpit)
-- [Update NodeJS (and NPM) in Laragon](https://help.screencraft.net.au/hc/2680392001/84/update-nodejs-and-npm-in-laragon)
+- [Add a new version of PHP to Laragon?](https://help.screencraft.net.au/hc/1299211922/67/add-a-new-version-of-php-to-laragon) 
+- [Update the Apache web server in Laragon](https://help.screencraft.net.au/hc/1299211922/68/update-the-apache-web-server-in-laragon)
+- [Install and Run MailPit?](https://help.screencraft.net.au/hc/1299211922/69/install-and-run-mailpit)
+- [Update NodeJS (and NPM) in Laragon](https://help.screencraft.net.au/hc/1299211922/84/update-nodejs-and-npm-in-laragon)
 - Adding xDebug to PHP
 
 ### Use Bash CLI
@@ -90,15 +90,15 @@ We also **strongly** recommend using the Git **Bash Shell** with the MS Terminal
 
 For details on configuring this, and adding some CLI shortcut aliases see:
 
-- [Add Git Bash to Microsoft Terminal](https://help.screencraft.net.au/hc/2680392001/65/add-git-bash-to-microsoft-terminal)
-- [Add or Update Bash Command Line Aliases for Git, Laravel, and more](https://help.screencraft.net.au/hc/2680392001/66/add-bash-command-line-aliases-for-git)
+- [Add Git Bash to Microsoft Terminal](https://help.screencraft.net.au/hc/1299211922/65/add-git-bash-to-microsoft-terminal)
+- [Add or Update Bash Command Line Aliases for Git, Laravel, and more](https://help.screencraft.net.au/hc/1299211922/66/add-bash-command-line-aliases-for-git)
 
 
 ### Point Laragon "Root Path" to Source Repos
 
 You will also be working in a Source Repos folder, so we recommend pointing Laragon's web services to this folder.
 
-- [Change the Laragon Web Root Folder](https://help.screencraft.net.au/hc/2680392001/61/change-the-laragon-web-root-folder)
+- [Change the Laragon Web Root Folder](https://help.screencraft.net.au/hc/1299211922/61/change-the-laragon-web-root-folder)
 
 We will be using SQLite for the majority of the time when developing and testing. This is because it will interact with the system faster, and we do not need to have all the power of a full DBMS like MySQL, MariaDB or PostgreSQL.
 
@@ -107,7 +107,7 @@ We will be using SQLite for the majority of the time when developing and testing
 
 One thing that is important to dop whenever you update or change a version of the above tools is to remove and add the Laragon components from the system path. For details see here:
 
-- [Adding Laragon to the System Path](https://help.screencraft.net.au/hc/2680392001/36/adding-laragon-to-the-system-path)
+- [Adding Laragon to the System Path](https://help.screencraft.net.au/hc/1299211922/36/adding-laragon-to-the-system-path)
 
 
 ### PHP extensions

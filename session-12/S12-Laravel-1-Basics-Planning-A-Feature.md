@@ -12,9 +12,8 @@ tags:
   - APIs
   - Back-End
 date created: 03 July 2024
-date modified: 10 July 2024
 created: 2024-10-05T15:41
-updated: 2025-03-13T09:00
+updated: 2025-07-22T16:25
 ---
 
 # S12 Laravel 1 - Basics - Planning a Feature

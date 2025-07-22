@@ -12,9 +12,8 @@ tags:
   - APIs
   - Back-End
 date created: 03 July 2024
-date modified: 10 July 2024
 created: 2024-10-08T10:54
-updated: 2025-05-30T08:51
+updated: 2025-07-22T16:25
 ---
 
 # Laravel: 01 Setting Up

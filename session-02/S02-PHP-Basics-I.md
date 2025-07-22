@@ -9,13 +9,13 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testng, PEST
 created: 2024-08-01T09:23
-updated: 2025-03-13T13:47
+updated: 2025-07-22T17:01
 ---
 
 # PHP Basics I
 
 PHP: Hypertext Preprocessor
-[recursive acronym]
+- a recursive acronym
 
 Executed:
 - Using a PHP ‘interpreter’ on
@@ -128,7 +128,7 @@ More details:
 
 ## Basic Page continued
 
-Every PHP Page must have documentation
+Every PHP File must have documentation
 
 - Indicates what it the code does
 - Indicates who the code is by
@@ -157,7 +157,7 @@ Copy this code into your clipboard:
  * Project:         ${PROJECT_NAME}
  * Date Created:    ${DATE}
  *
- * Author:          YOUR_NAME
+ * Author:          YOUR_NAME (YOUR GITHUB ACCOUNT LINK)
  *
  */
 ```
@@ -185,7 +185,7 @@ When you create the file, you will need to replace the `FILE_LOCATION` with the 
 
 For example: `App/Models/`. 
 
-Also, make sure the placeholder (All Caps) text is replaced with a one line title and, if required, a short description of the code and its purpose. If no description is needed, then the long text may be removed.
+Also, make sure the placeholder (IN ALL CAPS) text is replaced with a one line title and, if required, a short description of the code and its purpose. If no description is needed, then the long text may be removed.
 
 ---
 
@@ -203,7 +203,7 @@ Filenames must:
 
 PHP Class Files must be:
 - Pascal Case (`PascalCase`), 
-- Have dashes `-` (or underscores `_`) between words
+- MAY Have dashes `-` (or underscores `_`) between words
 
 
 ---
@@ -241,9 +241,9 @@ PHP Class Files must be:
 
 #### Method Three - The Keyboard Junkie
 
-- Press ALT + 1
-- Use UP/DOWN to highlight the relevant folder
-- Press ALT + INSERT
+- Press <kbd>ALT</kbd> + <kbd>1</kbd>
+- Use <kbd>UP</kbd>/<kbd>DOWN</kbd> to highlight the relevant folder
+- Press <kbd>ALT</kbd> +<kbd>INSERT</kbd>
 - Select PHP File
 - Type in the name of the file
 	- Use only a-z, A-Z, 0-9, full stops (.) and dashes (-)
@@ -283,7 +283,7 @@ If you create a new PHP file it contains (with our new template):
  * Project:         SaaS-FED-Notes 
  * Date Created:    9/08/2024
  * 
- * Author:          YOUR_NAME <YOUR_EMAIL_ADDRESS>  
+ * Author:          YOUR_NAME <YOUR_GITHUB_ADDRESS>  
  *  
  */
 ```
