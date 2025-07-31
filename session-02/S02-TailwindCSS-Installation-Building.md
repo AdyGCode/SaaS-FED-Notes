@@ -22,7 +22,7 @@ tags:
   - Feature Testing
   - PEST
 created: 2024-08-06T15:47
-updated: 2025-07-31T19:02
+updated: 2025-07-31T19:05
 ---
 
 # Installing and Continuously Rebuilding TailwindCSS
@@ -356,31 +356,32 @@ Visit the web page and see the changes take effect.
 Edit the code, and replace the `<!-- TODO: Footer Left Side -->` with:
 
 ```html
-        <nav>
-            <h5 class="text-left font-medium tracking-widest text-gray-500 uppercase title-font text-xs">
-                Terms & Conditions
-            </h5>
 
-            <a class="my-1 block" href="/#">
-                Privacy Policy
-                <span class="text-sky-600 text-xs p-1">TBA</span>
-            </a>
+<nav>
+    <h5 class="text-left font-medium tracking-widest text-gray-500 uppercase title-font text-xs">
+        Terms & Conditions
+    </h5>
 
-            <a class="my-1 block" href="/#">
-                Terms & Conditions
-                <span class="text-sky-600 text-xs p-1">TBA</span>
-            </a>
+    <a class="my-1 block" href="/#">
+        Privacy Policy
+        <span class="text-sky-600 text-xs p-1">TBA</span>
+    </a>
 
-            <p class="mt-4 text-sm capitalize text-gray-400">
-                © Copyright 2025 NAME/COMPANY. All rights reserved
-            </p>
-        </nav>
+    <a class="my-1 block" href="/#">
+        Terms & Conditions
+        <span class="text-sky-600 text-xs p-1">TBA</span>
+    </a>
 
-        <!-- TODO: Footer Middle -->
-        
-        <!-- TODO: Footer Right Side -->
+    <p class="mt-4 text-sm capitalize text-gray-400">
+        © Copyright 2025 NAME/COMPANY. All rights reserved
+    </p>
+</nav>
 
-    </footer>
+<!-- TODO: Footer Middle -->
+
+<!-- TODO: Footer Right Side -->
+
+</footer>
 ```
 
 

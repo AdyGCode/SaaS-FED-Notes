@@ -9,9 +9,8 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testing, PEST
 created: 2024-08-01T09:23
-updated: 2025-07-31T19:06
+updated: 2025-07-22T17:14
 ---
-
 # Session 02 Practice Exercises and Recap
 
 Here are your instructions for this session's exercises and practice.
@@ -20,24 +19,21 @@ Here are your instructions for this session's exercises and practice.
 
 Make sure you have read through the following sections from PHP Tutorial (https://phptutorial.net):
 
-- **Sections 6 - 8** if not already completed
-- **Sections 9 - 14**
+- **Sections 1 - 8**
 
 ## Exercises
 
-Research and explain in your own words the following terms related to software development, software as a service and web application development.
+Research and explain in your own words the following terms from Software Development.
 
 Remember that you must include a reference for each term using [MyBib](https://mybib.com) to create the reference.
 
-- CRUD
-- BREAD
-- HTTP
-- Session Management
-- Stateless Programming
+- KISS
+- WET
+- DRY
+- YAGNI
+
+
 
 # External Coursework
 
-Continue your study of your selected PHP tutorial/course.
-
-
-
+Work on one of the external PHP courses.

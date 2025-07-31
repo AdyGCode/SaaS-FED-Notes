@@ -30,7 +30,7 @@
     "session-10/ReadMe.md": "d60ffb98f1bfa090f68f1926fdc23343b948b3de048452c11c0ab53ec204339d",
     "session-10/S10-Exercises-and-Journal-Entry.md": "ac0c04671c56b6318b0ef1f376364a5f147c2863e863f496a728a67e75a5de84",
     "session-06/ReadMe.md": "cf315d328d4d961631c7ff810579f6610c62f3669690e30d5ed70c19e11d0df6",
-    "session-02/ReadMe.md": "7e9f299bd53f5e038ae4d3ef5cac522cf4a9898f0b458b4158acbc7cf331e554",
+    "session-02/ReadMe.md": "a19fde0dc085afe8866a7f77513207b123c9e7f8713543d1ea4caa3be20708bb",
     "session-02/S02-Terminology-Web.md": "994721693b0b85f24018764392fde43dfe0ea76ac0fdb52d0803795d48f564b2",
     "session-01/S01-Development-Environments.md": "74c393247a82b0260863096fe6388e20a82740d88fd4a6d1d5b123b1614cb7f3",
     "session-04/S04-PHP-Basics-IV.md": "98f6eea99520b262d45eb00fe182bc73c69dff4229b3a16e9426a085707addc4",
@@ -43,8 +43,6 @@
     "session-01/S01-Setting-Up-Laragon.md": "7ffa2c799deebad1c29fb4e99a8b5c2531ce1860176f0b73626a70f7d83ee86e",
     "session-04/S04-Terminology-Security.md": "38dbe67f32e78346e6fe677bc61e83a26078478b7517da8e6217fb318db56747",
     "session-13/ReadMe.md": "316b70f9948cec90a3a212d642cab2bf6f78f88315961f696d2ec9c76485c2e4",
-    "session-02/S02-PHP-Basics-I-Part-2.md": "ed8f24387b4924bb5323d4b01a84f0bbc379f64789569bcab6700087d1909174",
-    "session-03/S03-TailwindCSS-Installation-Building.md": "f3f46a2e019adb1875eae65c30bbbf25e98ea06cbb77b96baf29ca1659dbdd5b",
     "session-07/S07-Vanilla-PHP-MVC-Pt-02.md": "56cc889c1d8c0f202713a9f6b42e2054b5165450265436f5cccc4618ef8a7467",
     "session-03/S03-Terminology-Database.md": "c06cf3d19c670741536a7629c4e14daf9bc3d77799ca10307de70e695a118c97",
     "session-05/S05-Exercises-and-Journal-Entry.md": "7343f8bb492c427b571e37154f2db3d1ead6886c5a7e673fdf495b3f27bbda68",
@@ -53,7 +51,6 @@
     "session-04/S04-PHP-Basics-VI.md": "987859001f40eccca884da147e581128c3cb8c464da8eccdaa91059e4ec84302",
     "session-14/ReadMe.md": "ac6a67141d11dbabdec81663f6da78a33a42bfb1942ca9be8fbe185ab6b6501d",
     "session-07/S07-Vanilla-PHP-MVC-Pt-04.md": "cd2222b42827a7c210a531992eafacf6741e86110ec38509c89ceaf85057f023",
-    "session-02/S02-PHP-Basics-I.md": "20932aac8aae9c36f44791bbcad5257a00850d7375bb1c7c4887886f947720bf",
     "session-01/S01-JetBrains-Software-Licenses.md": "d7edde15aed28568975d4667a7a9a0229372f97a8dd04a10be709b3e6df4f61b",
     "session-02/S02-Terminology-Network-Internet.md": "7dedb703ff3237e020e4060fffe91ff2d7c083afee10187187916736335603a1",
     "session-03/S03-Terminology-SQL.md": "b1d02be016db28e48c3a53b049629d83c1dc62e66b0c6a21d8ff67f895b6d224",
@@ -72,7 +69,6 @@
     "session-08/S08-Vanilla-PHP-MVC-Pt-09.md": "49c61a17702a4e681ce0ecfe5d289ac839f13bd9009a679514afeec9fd521569",
     "session-01/S01-CLI-Commands.md": "9ce2337f657b8d469f3911c9a199538adc99252262b70ed791fa9f24cd9eba20",
     "session-03/S03-PHP-Basics-II.md": "a260ae6533055e6b570461a10d545d3757d78990a6ac20a89c7babac1def4acc",
-    "session-03/S03-Exercises-and-Journal-Entry.md": "af78609db0d5708c302a84f4646c528ad36494c3e796e1bbf0d2a55656cf5ca1",
     "session-03/S03-Terminology-Testing-Debugging.md": "f653cc0d3c3515e766c0cf60ae1383c5b836c4bce061eb2aa047c1b5fcb4c14c",
     "session-17/ReadMe.md": "7fef9640c4f2b849e88d94b0076af629670b280ba8ea4edf721db6da4f87be1b",
     "session-04/ReadMe.md": "eb7337e7192d5f5edc49c26114eaabb5fdb8af01c073a05858ad71264efa68c2",
@@ -136,6 +132,7 @@
     "session-10/laravel-v11/S10-Laravel-v11-BootCamp-Part-1.md": "cf619d418ce4916e15562299f9d17be8fca3349e365f998903745830c577fd70",
     "session-20/S20-Automated-Test-Installer.md": "44f518eb0cf99cdbc5228b0d35a4ee9dbd6fbca70649edde88f2e657805e3f0a",
     "session-11/S10-Laravel-v12-BootCamp-Part-10-old.md": "4e056d55c447513ec5f82f754e327640353bcd24548420dfe36ba2e38bd16018",
-    "session-02/S02-Practice-Exercises-and-Recap.md": "51f808e61c86b4d18c9e03c5e8ea8fe66780fe5a471e20c287675e10fafe9bf5"
+    "session-02/S02-TailwindCSS-Installation-Building.md": "8214b1353a7ecc096ccd91424e9418ac859206eda826ded3f1e4ad985870efcd",
+    "session-02/S02-Practice-Exercises-and-Recap.md": "b93b034f1a776c2f0e1e1730962dffd5f9fd3561de796e79efb7d9cac712f31e"
   }
 }
