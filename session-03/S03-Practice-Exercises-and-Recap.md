@@ -585,3 +585,63 @@ var_dump([1, 2, 3, 10, 32]);
 var_dump(sortNum([7, 5, 6, 2, 99], false));
 var_dump([99, 7, 6, 5, 2]);
 ```
+
+
+
+## PHP Exercise 12
+
+| Item        | Value                    |
+|-------------|--------------------------|
+| Folder name | arrays                   |
+| File name   | array-utils.php          |
+| File name   | array-utils-sum-test.php |
+
+Add a new function to the array-utils file that does the following:
+
+- adds all the **INTEGERS** in an array and returns the total
+- if the array contains any **NON-INTEGER** values, then **raise an exception**
+- if the array contains nested arrays, then these must be exploded and also totalled
+
+Ensure you add the required PhpDoc docblock that explains the function in your own words and gives examples of its use.
+
+```php
+<?php
+function sumIntegerInArray($array)
+{
+  // TODO...
+}
+```
+
+In the `array-utils-sum-test.php` file add the following to be used for your testing of the function:
+
+```php
+<?php
+require __DIR__ . '/array-utils.php';
+
+// the sum of a regular array
+$regularArray = [1, 2, 3, 20];
+var_dump(sumIntegerInArray(regularArray)); 
+// 26, which is (1 + 2 + 3 + 20)
+
+// an array with 2 dimensions (2d)
+$array2d = [[1, 3], [2, 2]];
+var_dump(sumIntegerInArray(array2d)); 
+// 8, which is (1 + 3 + 2 + 2);
+
+// with a totally random array of arrays
+$randomArray = [2, [3, 4], [3, 1]];
+var_dump(sumIntegerInArray(randomArray)); 
+// 13, which is (2 + 3 + 4 + 3 + 1)
+
+// with empty arrays
+$arrayWithEmptyArrays = [1, 3, [3, 2, []], [3], []];
+var_dump(sumIntegerInArray(arrayWithEmptyArrays)); 
+// 12, which is (1 + 3 + 3 + 2 + 3)
+
+// with non-integer values
+$arrayWithEmptyArrays = [1, 3.7, "123"];
+var_dump(sumIntegerInArray(arrayWithEmptyArrays)); 
+// Exception
+
+
+```
