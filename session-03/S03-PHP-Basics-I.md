@@ -66,7 +66,14 @@ We recommend using Laragon on Windows machines and Laravel Herd on MacOS.
 - Laragon
 
 Updating PHP on Laragon is really simple. Instructions may be found here:
-- 
+
+- https://help.screencraft.net.au/
+- Then in the FAQs search for:
+  - Update PHP in Laragon 
+  - Add a new version of PHP to Laragon
+
+Other useful articles relating to PHP, Python, Jetbrains, Node.js and more you may use in this course may also be fou8nd on SQuASH.
+
 
 ---
 
@@ -91,7 +98,9 @@ There are **three** ways to comment in PHP:
 
 ### Single Line
 
-Start the comment with  `//`, all text on the same line after this is part of the comment.
+Start the comment with  `//` or with a `#`.
+
+All text on the same line after this is part of the comment.
 
 ```php
 $table->rememberToken(); // Remember user previously logged in
@@ -128,9 +137,11 @@ More details:
 
 ## Basic Page continued
 
-Every PHP File must have documentation
+Every PHP File should have documentation.
 
-- Indicates what it the code does
+It should include:
+
+- Indicates what the code does
 - Indicates who the code is by
 - Indicates when code was started
 
@@ -166,19 +177,19 @@ Open PHP Storm settings
 <kbd>CTRL</kbd> + <kbd>ALT</kbd> + <kbd>S</kbd> (PC)
 <kbd>CTRL</kbd> + <kbd>,</kbd> (MAC)
 
-Locate “Editor” Option
-Locate “File and Code Templates”
-Click on the “Includes” tab in new dialog
+- Locate “Editor” Option
+  - Locate “File and Code Templates”
+    - Click on the “Includes” tab in new dialog
 
 
 ---
 
-Locate and click on “PHP File Header”
-Click in the editor (right hand side)
-Paste the code into this space (<kbd>CTRL</kbd> + <kbd>V</kbd>)
-Edit `YOUR_NAME` and `YOUR_EMAIL_ADDRESS` to show your name ONLY
-Click OK
-Click OK to close settings
+- Locate and click on “PHP File Header”
+  - Click in the editor (right hand side)
+    - Paste the code into this space (<kbd>CTRL</kbd> + <kbd>V</kbd>)
+      - Edit `YOUR_NAME` and `YOUR_EMAIL_ADDRESS` to show your name ONLY
+        - Click OK
+          - Click OK to close settings
 
 
 When you create the file, you will need to replace the `FILE_LOCATION` with the folder path the file is in. 
@@ -193,15 +204,20 @@ Also, make sure the placeholder (IN ALL CAPS) text is replaced with a one line t
 
 https://www.phptutorial.net/php-tutorial/php-hello-world/
 
+```php
+<?php
+	echo “Hello world!”;
+```
+
 ---
 
 ## Naming Conventions: Files
 
-Filenames must:
+**Filenames** must:
 - Start with a letter
 - Use only `A`-`Z`, `a`-`z`, `0`-`9`, or the dash `-`
 
-PHP Class Files must be:
+PHP **Class Files** must be:
 - Pascal Case (`PascalCase`), 
 - MAY Have dashes `-` (or underscores `_`) between words
 
@@ -322,9 +338,13 @@ The following will be added to the file:
 <html lang="en">  
 <head>  
     <meta charset="UTF-8">  
-    <meta name="viewport"          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">  
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">  
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">  
+    <meta http-equiv="X-UA-Compatible" 
+          content="ie=edge">  
+          
     <title>PHP with HTML</title>  
+    
 </head>  
 <body>  
 <?php    

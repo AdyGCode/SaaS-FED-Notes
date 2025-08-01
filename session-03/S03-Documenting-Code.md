@@ -47,15 +47,15 @@ This shows the details of the file and a brief (one or two sentence) explanation
 ```php
 ​<?php
 /**
- * Database Access Class
+ * Database Access Class
  *
- * Provides the database access tools used by our micro-framework 
+ * Provides the database access tools used by our micro-framework 
  * 
- * Filename:        Database.php 
- * Location:        /Framework/ 
- * Project:         XXX-SaaS-Vanilla-MVC-YYYY-SN 
- * Date Created:    13/03/2025 
- * Author:          Adrian Gould <Adrian.Gould@nmtafe.wa.edu.au>
+ * Filename:        Database.php 
+ * Location:        /Framework/ 
+ * Project:         XXX-SaaS-Vanilla-MVC-YYYY-SN 
+ * Date Created:    13/03/2025 
+ * Author:          Adrian Gould <Adrian.Gould@nmtafe.wa.edu.au>
  */ 
 ```
 
@@ -65,7 +65,7 @@ The example below shows how the properties section may be started.
 
 ```php
 /**
- * Property Definitions 
+ * Property Definitions 
  */
 ```
 
@@ -75,18 +75,18 @@ The example below shows how a property may be commented.
 
 ```php
 /** 
- * Connection property
+ * Connection property
  *
- * @var PDO 
+ * @var PDO 
  */
-public $conn;
+public $conn;
 ```
 
 ### Method Section header (optional)
 
 ```php
 ​/**
- * Method Definitions 
+ * Method Definitions 
  */ 
 ```
 
@@ -94,44 +94,44 @@ public $conn;
 
 ```php
 ​/** 
- * Constructor for Database class 
+ * Constructor for Database class 
  * 
- * @param array $config 
- * @return void  
- * @throws Exception 
+ * @param array $config 
+ * @return void  
+ * @throws Exception 
  */
-public function __construct($config){   
-    $host = $config['host'];
-    $port = $config['port'];    
-    $dbName = $config['dbname'];
+public function __construct($config){   
+    $host = $config['host'];
+    $port = $config['port'];    
+    $dbName = $config['dbname'];
 ```
 
 Another example, including example use code:
 
 ```php
-/** 
- * Query the database 
- * 
- * The SQL to execute and an optional array of named 
- * parameters and values are required. 
- * 
- * Use: 
- * <code> 
- *   $sql = "SELECT name, description from products WHERE name like '%:name%'"; 
- *   $filter = ['name'=>'ian',]; 
- *   $results = $dbConn->query($sql,$filter); 
- * </code> 
- * 
- * @param string $query 
- * @param array $params []|[associative array of parameter names and values] 
- * 
- * @return PDOStatement 
- * @throws PDOException|Exception 
+/** 
+ * Query the database 
+ * 
+ * The SQL to execute and an optional array of named 
+ * parameters and values are required. 
+ * 
+ * Use: 
+ * <code> 
+ *   $sql = "SELECT name, description from products WHERE name like '%:name%'"; 
+ *   $filter = ['name'=>'ian',]; 
+ *   $results = $dbConn->query($sql,$filter); 
+ * </code> 
+ * 
+ * @param string $query 
+ * @param array $params []|[associative array of parameter names and values] 
+ * 
+ * @return PDOStatement 
+ * @throws PDOException|Exception 
  */
-public function query($query, $params = [])
+public function query($query, $params = [])
 {
-    try {
-        $sth = $this->conn->prepare($query);
+    try {
+        $sth = $this->conn->prepare($query);
 ```
 
 PHP file with Majority HTML (e.g. a view)
@@ -139,19 +139,19 @@ PHP file with Majority HTML (e.g. a view)
 ```php
 ​<?php
 /** 
- * Home Page View 
+ * Home Page View 
  * 
- * Filename:        home.view.php 
- * Location:        /App/views 
- * Project:         XXX-SaaS-Vanilla-MVC-YYYY-SN 
- * Date Created:    23/08/2024 
+ * Filename:        home.view.php 
+ * Location:        /App/views 
+ * Project:         XXX-SaaS-Vanilla-MVC-YYYY-SN 
+ * Date Created:    23/08/2024 
  * 
- * Author:          Adrian Gould <Adrian.Gould@nmtafe.wa.edu.au> 
+ * Author:          Adrian Gould <Adrian.Gould@nmtafe.wa.edu.au> 
  * 
  */
 loadPartial('header');
 loadPartial('navigation');
-?> 
+?> 
 ```
 
 

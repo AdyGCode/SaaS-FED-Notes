@@ -56,7 +56,7 @@ This is our preferred method as we are able to see how many students and staff a
 ### Creating a JetBrains Account 
 
 
-Head to [https://jetbrains.com](https://jetbrains.com/) 
+Head to [https://jetbrains.com](https://jetbrains.com/) 
 
 Click Store to show the drop down
 

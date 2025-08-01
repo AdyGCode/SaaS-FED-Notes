@@ -44,18 +44,18 @@ An extranet is a private network that allows controlled access to outsiders, suc
 
 ### WAN
 
-A **==WAN==** or **==Wide Area Network==** is when networks connect to another network. The Internet is the biggest example of a ==WAN==. It is such a big network it is often called the network of networks.
+A **==WAN==** or **==Wide Area Network==** is when networks connect to another network. The Internet is the biggest example of a ==WAN==. It is such a big network it is often called the network of networks.
 
 ### LAN  
 
-A **==LAN==** or **==Local Area Network==** is a group of devices all connected in the same location. The network you might have at home and at school is an example of a LAN. Colleges, Business and your home will often have LANs.
+A **==LAN==** or **==Local Area Network==** is a group of devices all connected in the same location. The network you might have at home and at school is an example of a LAN. Colleges, Business and your home will often have LANs.
 
 ### PAN
 
-A **==PAN==** or **==Personal Area Network==** is when devices like bluetooth headphones are connected to a smartphone or tablet. When the two devices connect, information can be shared. 
+A **==PAN==** or **==Personal Area Network==** is when devices like bluetooth headphones are connected to a smartphone or tablet. When the two devices connect, information can be shared. 
 
 
-> BBC. (n.d.). _What is a computer network?_ BBC Bitesize. https://www.bbc.co.uk/bitesize/articles/z78nydm
+> BBC. (n.d.). _What is a computer network?_ BBC Bitesize. https://www.bbc.co.uk/bitesize/articles/z78nydm
 
 
 ## Protocols
@@ -94,7 +94,7 @@ DHCP stands for Dynamic Host Configuration Protocol, which is a network manageme
 
 > The Windows operating system provides mechanisms for facilitating communications and data sharing between applications. 
 >  
->  Collectively, the activities enabled by these mechanisms are called _interprocess communications_ (IPC). 
+>  Collectively, the activities enabled by these mechanisms are called _interprocess communications_ (IPC). 
 >   
 >   Some forms of IPC facilitate the division of labour among several specialized processes. 
 >   

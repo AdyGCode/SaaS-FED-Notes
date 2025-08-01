@@ -72,10 +72,10 @@ The MVP is:
 	- “*The version of a new product which allows a team to collect the maximum amount of validated learning about customers with the least effort.*”
 
 ### Further reading on MVP
-- lssdefinition. (2020, April 2). _Lean Startup_. Lean Manufacturing and Six Sigma Definitions - Glossary Terms, History, People and Definitions about Lean and Six Sigma. https://www.leansixsigmadefinition.com/glossary/lean-startup/#:~:text=Minimum%20viable%20product%20(MVP)%20%E2%80%93,similar%20to%20a%20pilot%20experiment).
+- lssdefinition. (2020, April 2). _Lean Startup_. Lean Manufacturing and Six Sigma Definitions - Glossary Terms, History, People and Definitions about Lean and Six Sigma. https://www.leansixsigmadefinition.com/glossary/lean-startup/#:~:text=Minimum%20viable%20product%20(MVP)%20%E2%80%93,similar%20to%20a%20pilot%20experiment).
 - _Minimum Viable Product (MVP)_. (2024, November 22). ProductPlan. https://www.productplan.com/glossary/minimum-viable-product/
-- Atlassian. (2023). _Minimum Viable Product (MVP): What is it & Why it Matters_. Atlassian. https://www.atlassian.com/agile/product-management/minimum-viable-product
-- Tan, P. (2020, September 18). _11 Minimum Viable Product Examples (With Actionable Tips)_. Appsumo.com; AppSumo. https://appsumo.com/blog/minimum-viable-product-examples?utm_source=google&utm_medium=cpc&utm_campaign=SH-Buy-Prospect-Evergreen-Mix-Dynamic-WorldWide-Null-PMax&utm_adset=&utm_content=&utm_term=&loc_i=1009317&loc_p=1009309&network=x&dvc=c&utm_placement=))&gad_source=5&gad_campaignid=22208046847&gclid=EAIaIQobChMI6s2p6oKljQMVoE9HAR3K5C-JEAAYASAAEgKfKfD_BwE
+- Atlassian. (2023). _Minimum Viable Product (MVP): What is it & Why it Matters_. Atlassian. https://www.atlassian.com/agile/product-management/minimum-viable-product
+- Tan, P. (2020, September 18). _11 Minimum Viable Product Examples (With Actionable Tips)_. Appsumo.com; AppSumo. https://appsumo.com/blog/minimum-viable-product-examples?utm_source=google&utm_medium=cpc&utm_campaign=SH-Buy-Prospect-Evergreen-Mix-Dynamic-WorldWide-Null-PMax&utm_adset=&utm_content=&utm_term=&loc_i=1009317&loc_p=1009309&network=x&dvc=c&utm_placement=))&gad_source=5&gad_campaignid=22208046847&gclid=EAIaIQobChMI6s2p6oKljQMVoE9HAR3K5C-JEAAYASAAEgKfKfD_BwE
 
 
 ## Chirper MVP

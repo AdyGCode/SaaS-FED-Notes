@@ -53,7 +53,7 @@ require_once 'functions.php';
 
 `__DIR__` is technically the same as writing `dirname(__FILE__)`.
 
-`__FILE__` gives the full path and filename of the file or [include](https://www.phptutorial.net/php-tutorial/php-include-file/)
+`__FILE__` gives the full path and filename of the file or [include](https://www.phptutorial.net/php-tutorial/php-include-file/)
 
 This means we may use this to help locate files within the folder structure.
 
@@ -189,7 +189,7 @@ cp file-includes-demo/index.php file-includes-demo/public
 mv file-includes-demo/index.php file-includes-demo/admin/dashboard
 ```
 
-The `config/app.php` contains the application’s configuration:
+The `config/app.php` contains the application’s configuration:
 
 ```php
 define('APP_NAME', '__DIR__ Demo Version 2');
@@ -302,9 +302,9 @@ When you navigate to/open the `public/index.php` file you should get content sim
 ```text
 Home Page
 
-Index __DIR__ : `C:\Users\xxxxxx\Source\Repos\SaaS-FED\SaaS-FED-Notes\session-03\file-includes-demo\public`
+Index __DIR__ : `C:\Users\xxxxxx\Source\Repos\SaaS-FED\SaaS-FED-Notes\session-03\file-includes-demo\public`
 
-Footer __DIR__ : `C:\Users\xxxxxx\Source\Repos\SaaS-FED\SaaS-FED-Notes\session-03\file-includes-demo\includes`
+Footer __DIR__ : `C:\Users\xxxxxx\Source\Repos\SaaS-FED\SaaS-FED-Notes\session-03\file-includes-demo\includes`
 ```
 
 
@@ -313,13 +313,12 @@ But when you open the `dashboard/admin/index.php`.
 ![](../assets/msedge_wVAmLh0GTC.png)
 
 ```text
+**Warning**: require(../includes/header.php): Failed to open stream: No such file or directory in **C:\Users\xxxxxx\Source\Repos\SaaS-FED\SaaS-FED-Notes\session-03\file-includes-demo\admin\dashboard\index.php** on line **17**  
   
-**Warning**: require(../includes/header.php): Failed to open stream: No such file or directory in **C:\Users\xxxxxx\Source\Repos\SaaS-FED\SaaS-FED-Notes\session-03\file-includes-demo\admin\dashboard\index.php** on line **17**  
-  
-**Fatal error**: Uncaught Error: Failed opening required '../includes/header.php' (include_path='.;C:/ProgramData/Laragon/etc/php/pear') in C:\Users\xxxxxx\Source\Repos\SaaS-FED\SaaS-FED-Notes\session-03\file-includes-demo\admin\dashboard\index.php:17 Stack trace: #0 {main} thrown in **C:\Users\xxxxxx\Source\Repos\SaaS-FED\SaaS-FED-Notes\session-03\file-includes-demo\admin\dashboard\index.php** on line **17**
+**Fatal error**: Uncaught Error: Failed opening required '../includes/header.php' (include_path='.;C:/ProgramData/Laragon/etc/php/pear') in C:\Users\xxxxxx\Source\Repos\SaaS-FED\SaaS-FED-Notes\session-03\file-includes-demo\admin\dashboard\index.php:17 Stack trace: #0 {main} thrown in **C:\Users\xxxxxx\Source\Repos\SaaS-FED\SaaS-FED-Notes\session-03\file-includes-demo\admin\dashboard\index.php** on line **17**
 ```
 
-This error is generated because the require lines in the `header.php` file do not navigate back up the file system tree enough (change the `../` to `../../`).
+This error is generated because the `require` lines in the `header.php` file do not navigate back up the file system tree enough (change the `../` to `../../`).
 
 If you refresh you will still see an error.
 
