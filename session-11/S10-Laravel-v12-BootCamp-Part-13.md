@@ -11,7 +11,6 @@ tags:
   - SaaS
   - APIs
   - Back-End
-date created: 03 July 2024
 created: 2024-09-20T11:17
 updated: 2025-07-22T16:25
 ---
@@ -72,8 +71,8 @@ No? Well… go do it…
 
 You will need these to be able to continue…
 
-> **Important:** You should understand that whilst you are completing this tutorial, you may only see parts of the
-> application working.
+> **Important:** You should understand that whilst you are completing this tutorial, you may
+> only see parts of the application working.
 >
 > So if you get an error in the browser, it may be because there is something missing.
 >
@@ -85,7 +84,8 @@ Remember the most up-to-date code is available on GitHub:
 
 - https://github.com/AdyGCode/roles-permissions-2025-s1
 
-Even though we give you this code, we **STRONGLY** suggest you complete this tutorial from scratch.
+Even though we give you this code, we **STRONGLY** suggest you complete this tutorial from
+scratch.
 
 This will assist your understanding and ability to apply to other projects
 
@@ -93,9 +93,11 @@ This will assist your understanding and ability to apply to other projects
 
 It is always a good idea to carefully plan your Role Based Access Control.
 
-Ideally a table showing the Role (horizontally) and the Permissions (vertically) with an indicator if the role has the permission or not.
+Ideally, a table showing the Role (horizontally) and the Permissions (vertically) with an
+indicator if the role has the permission or not.
 
-Here is a basic example. Across the top are the Roles, and down the side are the actions that may be performed.
+Here is a basic example. Across the top are the Roles, and down the side are the actions that
+may be performed.
 
 A `Y` means they are authorised to perform the action, a `blank` means they are not authorised to perform the action.
 
@@ -143,11 +145,11 @@ As we do this, we will use the table we created as the start point.
 php artisan make:seeder RoleAndPermissionSeeder
 ```
 
-Once created it's time to unify the two existing seeders into one.
+Once created, it's time to unify the two existing seeders into one.
 
 Open the `RoleAndPermissionSeeder` from the database migrations folder.
 
-We are going to add the parts one by one, with details on what each is doing.
+We are going to implement the permissions, one by one, with details on what each is doing.
 
 #### Add List of Permissions
 
@@ -199,9 +201,9 @@ $output->writeln('Seed Permissions');
 $progress->start();
 ```
 
-Next we loop over the seed permissions creating each one in turn.
+Next we loop over the seed permissions, creating each one in turn.
 
-After creating the permission we tell the progress bar to advance...
+After creating the permission, we tell the progress bar to advance...
 
 ```php
 foreach ($seedPermissions as $newPermission) {  
@@ -217,7 +219,7 @@ $progress->finish();
 $output->writeln('');
 ```
 
-OK, so that  is the permissions seeded, now we are able to work with the roles and add the permissions as needed.
+OK, so that is the permissions seeded, now we are able to work with the roles and add the permissions as needed.
 
 #### Create Super-Admin Role
 
@@ -324,7 +326,6 @@ $progress->finish();
 $output->writeln("");
 ```
 
-
 > ### Important: 
 > 
 > Make sure you check the table against this list of permissions. Make sure you fix any errors.
@@ -333,7 +334,7 @@ That's the seeder completed.
 
 > ### Error?
 > 
->Did you spot the error in the client role seeder code?
+> Did you spot the error in the client role seeder code?
 
 
 #### Forgetting Cached Permissions
@@ -1103,4 +1104,3 @@ https://spatie.be/docs/laravel-permission/v6/basic-usage/blade-directives
 
 
 https://www.fundaofwebit.com/post/laravel-policy-using-spatie-roles-and-permission-tutorial-step-by-step
-
