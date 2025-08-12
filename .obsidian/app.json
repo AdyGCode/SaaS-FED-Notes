@@ -11,7 +11,7 @@
     "margin": "0",
     "downscalePercent": 70
   },
-  "newLinkFormat": "absolute",
+  "newLinkFormat": "relative",
   "newFileLocation": "current",
   "showUnsupportedFiles": true,
   "trashOption": "local"

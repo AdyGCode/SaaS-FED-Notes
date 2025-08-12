@@ -9,14 +9,14 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testing, PEST
 created: 2024-09-05T08:58
-updated: 2025-03-19T10:57
+updated: 2025-08-12T18:02
 ---
 
 
 
 # Creating a Vanilla PHP MVC Application
 
-It is important to note that we are basing this MVC application on the work from the [TailwindCSS Intro](../session-05/S05-TailwindCSS-Intro.md) and Brad Traversy's PHP from Scratch course. 
+It is important to note that we are basing this MVC application on the work from the [TailwindCSS Intro](../Previous/S05-TailwindCSS-Intro.md) and Brad Traversy's PHP from Scratch course. 
 
 You may also use Brad Traversy's OOP and MVC course that is on the O'Reilly web site. 
 

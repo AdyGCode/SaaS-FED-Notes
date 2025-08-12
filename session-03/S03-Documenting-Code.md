@@ -9,7 +9,7 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testng, PEST
 created: 2025-04-03T10:10
-updated: 2025-04-28T18:00
+updated: 2025-08-12T17:26
 ---
 
 # Documenting Code
@@ -53,7 +53,6 @@ This shows the details of the file and a brief (one or two sentence) explanation
  * 
  * Filename:        Database.php 
  * Location:        /Framework/ 
- * Project:         XXX-SaaS-Vanilla-MVC-YYYY-SN 
  * Date Created:    13/03/2025 
  * Author:          Adrian Gould <Adrian.Gould@nmtafe.wa.edu.au>
  */ 

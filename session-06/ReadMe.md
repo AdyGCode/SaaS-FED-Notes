@@ -9,11 +9,11 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testng, PEST
 created: 2024-08-27T09:37
-updated: 2025-03-12T08:52
+updated: 2025-08-12T18:02
 ---
 # Session 06
 
-- [S05-TailwindCSS-Intro](../session-05/S05-TailwindCSS-Intro.md)
+- [S05-TailwindCSS-Intro](../Previous/S05-TailwindCSS-Intro.md)
 - [Exercises and Journal Entry](../session-05-Exercises-and-Journal-Entry.md)
 ### Note
 

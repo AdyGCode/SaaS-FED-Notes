@@ -9,7 +9,7 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testing, PEST
 created: 2024-08-01T09:23
-updated: 2025-07-31T19:05
+updated: 2025-08-12T17:24
 ---
 # Session 02
 
@@ -18,9 +18,14 @@ updated: 2025-07-31T19:05
 - [Terminology: Network & Internet](../session-02/S02-Terminology-Network-Internet.md)
 - [Terminology: Programming](../session-02/S02-Terminology-Programming.md)
 - [Terminology: Web](../session-02/S02-Terminology-Web.md)
-- [PHP Basics I: About, 'Tags', PHP & HTML](../session-03/S03-PHP-Basics-I.md)
-- [PHP Basics I - Part 2: Variables, Types, Arrays, Decisions and Loops](../session-03/S03-PHP-Basics-I-Part-2.md)
-- [Exercises and Journal Entry](session-02/S02-Practice-Exercises-and-Recap.md)
+
+- [TailwindCSS - Installation](S02-TailwindCSS-Installation.md)
+- [TailwindCSS - Building a Layout](S02-TailwindCSS-Building-A-Layout.md)
+- [TailwindCSS - Customisation](S02-TailwindCSS-Customisation.md)
+
+- [PHP Basics I: Part 1 - About, 'Tags', PHP & HTML](../session-03/S03-PHP-Basics-I.md)
+- [PHP Basics I: Part 2 - Variables, Types, Arrays, Decisions and Loops](../session-03/S03-PHP-Basics-I-Part-2.md)
+- [Practice Exercises and Recap](session-02/S02-Practice-Exercises-and-Recap.md)
 
 ### Note
 

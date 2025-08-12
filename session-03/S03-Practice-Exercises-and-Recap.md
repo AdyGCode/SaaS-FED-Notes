@@ -9,7 +9,7 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testing, PEST
 created: 2024-08-01T09:23
-updated: 2025-07-22T17:14
+updated: 2025-08-12T17:28
 ---
 
 # Session 02 Practice Exercises and Recap
@@ -645,3 +645,4 @@ var_dump(sumIntegerInArray(arrayWithEmptyArrays));
 
 
 ```
+
