@@ -1,12 +1,31 @@
-# ---------------------------------------------------------------------------------------------
-#
-# BEFORE COMMENCING:
-#
-# - Replace all instances of YYYY with the current year (eg 2025)
-# - Replace all instances of SN with S followed by the semester number (eg S1 for semster 1)
-# - Replace ALL instances of XXX with your initials (eg AJG for Adrian Gould)
-#
-# ---------------------------------------------------------------------------------------------
+-- ======================================> BEGIN SECTION <=====================================
+-- BEFORE COMMENCING:
+--
+-- - Replace all instances of YYYY with the current year
+--   For example, 2025
+-- - Replace all instances of SN with S followed by the semester number
+--   For example, S1 for semester 1
+-- - Replace ALL instances of XXX with your initials
+--   For example, AJG for Adrian Gould
+--
+-- We have split the file into sections each surrounded with a BEGIN SECTION and END SECTION
+-- comment line. These sections may be copied and pasted into the SQL interface for the RDBMS
+-- and executed to perform the steps.
+--
+-- Alternatively, copy the whole file and paste into the SQL command interface provided for/by
+-- your GUI based RDBMS management software.
+-- ======================================> BEGIN SECTION <=====================================
+
+
+
+-- ======================================> BEGIN SECTION <=====================================
+-- USER & DATABASE REMOVAL
+-- In this section we perform a clean-up of any existing database and user(s) associated with
+-- this database.
+--
+-- It is important to understand that this DESTROYS all data associated with the database and
+-- the database user(s) and CANNOT be recovered.
+-- --------------------------------------------------------------------------------------------
 
 # ---------------------------------------------------------------------------------------------
 # Clean up existing database and user

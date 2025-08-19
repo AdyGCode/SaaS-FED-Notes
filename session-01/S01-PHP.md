@@ -34,9 +34,8 @@ If you have no PHP experience then we recommend checking out the schedules outli
 We are going to be using PHP v8.2 or higher, most PHP courses covering v7.4 and above are still relevant, but PHP v8 introduced some really nice features and improvements over the previous iteration.
 
 1. [PHP for Beginners (Laracasts, Free)](session-01/S01-PHP-for-Beginners-Laracasts.md)
-2. [PHP for Beginners - Crash Course (YouTube, Free)](S01-PHP-for-Beginners-Crash-Course-YouTube.md)
-3. [Object Oriented PHP and MVC (O'Reilly, Free as a student)](./S01-Object-Oriented-PHP-and-MVC-OReilly.md)
-4. [S01-PHP-from-Scratch-Beginner-to-Advanced (Traversy Media, Paid)](session-01/S01-PHP-from-Scratch-Beginner-to-Advanced.md)
+2. [PHP for Beginners: Crash Course (YouTube, Free)](S01-PHP-for-Beginners-Crash-Course-YouTube.md)
+3. [Object-Oriented PHP and MVC (O'Reilly, Free as a student)](./S01-Object-Oriented-PHP-and-MVC-OReilly.md)
+4. [PHP from Scratch: Beginner to Advanced (Traversy Media, Paid)](session-01/S01-PHP-from-Scratch-Beginner-to-Advanced.md)
 
 There are other options also in the O'Reilly books collection, including books and video based courses.
-

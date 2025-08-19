@@ -16,11 +16,10 @@ updated: 2025-03-12T09:28
 
 References
 
-https://bagor.tech/php-oop/
-
-https://www.phptutorial.net/php-oop/ Section 1
-https://www.phptutorial.net/php-oop/ Section 2
-https://www.phptutorial.net/php-oop/ Section 3
+- https://bagor.tech/php-oop/
+  - https://www.phptutorial.net/php-oop/ Section 1
+  - https://www.phptutorial.net/php-oop/ Section 2
+  - https://www.phptutorial.net/php-oop/ Section 3
 
 
 
@@ -43,8 +42,8 @@ The four main principles of OOP are:
 
 Classes should be:
 - defined in a standalone PHP file
-- filename must match the class
-- PascalCase for classname and filename
+- file name must match the class' name
+- PascalCase for class and file name
 
 ```php
 /**
@@ -90,7 +89,8 @@ Properties and Methods may be:
 
 ## Object Constructors
 
-PHP has the `__constrcut()` method that allows actions to be performed when the object is created.
+PHP has the `__construct()` method that allows actions to be performed when the object is 
+created.
 
 ```php
 class Game {
@@ -138,4 +138,3 @@ class Game {
     }
 }
 ```
-

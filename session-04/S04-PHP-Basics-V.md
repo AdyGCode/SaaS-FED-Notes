@@ -17,12 +17,11 @@ updated: 2025-03-12T09:28
 
 # Namespaces and Autoloading
 
-https://www.phptutorial.net/php-oop/ Section 12
-https://www.phptutorial.net/php-oop/ Section 13
+- https://www.phptutorial.net/php-oop/ Section 12
+- https://www.phptutorial.net/php-oop/ Section 13
 
 
 
 # PHP and Errors / Exceptions
 
-https://www.phptutorial.net/php-oop/ Section 14
-
+- https://www.phptutorial.net/php-oop/ Section 14

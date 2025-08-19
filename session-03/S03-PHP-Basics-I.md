@@ -36,7 +36,7 @@ Runs on many ‘platforms’:
 - Mac OS 
 - etc
 
-https://www.phptutorial.net/php-tutorial/what-is-php/
+- https://www.phptutorial.net/php-tutorial/what-is-php/
 
 ---
 
@@ -67,12 +67,12 @@ We recommend using Laragon on Windows machines and Laravel Herd on MacOS.
 
 Updating PHP on Laragon is really simple. Instructions may be found here:
 
-- https://help.screencraft.net.au/
+- https://help.screencraft.net.au/ (SQuASH)
 - Then in the FAQs search for:
   - Update PHP in Laragon 
   - Add a new version of PHP to Laragon
 
-Other useful articles relating to PHP, Python, Jetbrains, Node.js and more you may use in this course may also be fou8nd on SQuASH.
+Other useful articles relating to PHP, Python, Jetbrains, Node.js and more you may use in this course may also be found on SQuASH.
 
 
 ---
@@ -206,7 +206,8 @@ https://www.phptutorial.net/php-tutorial/php-hello-world/
 
 ```php
 <?php
-	echo “Hello world!”;
+
+echo “Hello world!”;
 ```
 
 ---
@@ -271,10 +272,10 @@ PHP **Class Files** must be:
 
 ## PHP and HTML (et al)
 
-If the PHP has non-PHP after or surrounding it then:
+If the PHP has non-PHP after or surrounding it, then:
 - Close tag must be present on each PHP block
 
-If the PHP Code does not have non-PHP after it then:
+If the PHP Code does not have non-PHP after it, then:
 - Close tag may be omitted 
 
 - [PHP Syntax (phptutorial.net)](https://www.phptutorial.net/php-tutorial/php-syntax/)
@@ -304,13 +305,13 @@ If you create a new PHP file it contains (with our new template):
  */
 ```
 
-To add the base HTML to this file we do the following:
+To add the base HTML to this file, we do the following:
 
 Close the PHP element using `?>`.
 
 Press <kbd>ENTER</kbd>
 
-Now type in `html:5` and press the TAB key...
+Now type in `html:5` (or `!`) and press the TAB key...
 
 The following will be added to the file:
 ```html

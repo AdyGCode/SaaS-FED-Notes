@@ -24,9 +24,31 @@ maxLevel: 3
 includeLinks: true
 ```
 
-## Journal
+# Session 05 Practice Exercises and Recap
 
-Review the content so far, and note what has been learned.
+Here are your instructions for this session's exercises and practice.
+
+Remember to use [MyBib](https://mybib.com) to add links/references to your research.
+
+
+## Readings and Study
+
+Make sure you have read through the following sections from PHP
+Tutorial (https://phptutorial.net):
+
+- **Sections 1–11** (To be completed before S03)
+- **Sections 12–20** (To be completed before S05)
+
+ake sure you have read through the following sections from PHP PDO Tutorial
+(https://www.phptutorial.net/php-pdo/):
+
+- **Sections 1–6** (To be completed before S05)
+
+ake sure you have read through the following sections from PHP OOP Tutorial
+(https://www.phptutorial.net/php-oop/):
+
+- **Sections 1–7** (To be completed before S06)
+- **Sections 8–15** (To be completed before S07)
 
 # External Coursework
 
@@ -36,7 +58,7 @@ PHP From Scratch
 
 # Exercises
 
-Remember we use the bash (git-bash) terminal for our command line work.
+Remember, we use the bash (git-bash) terminal for our command line work.
 
 On Windows devices you will need to install and run the Windows Terminal application, then configure it to use the `git-bash` CLI.
 
@@ -482,5 +504,3 @@ You will need to do the following:
 - retrieve the user to be edited
 - place the current data into the form fields
 - 
-
-
