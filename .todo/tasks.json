@@ -1,0 +1,23 @@
+[
+  {
+    "id": "TASK_1",
+    "priority": "LOW",
+    "tags": [],
+    "description": "Test",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 8,
+        "day": 2
+      },
+      "time": {
+        "hour": 12,
+        "minute": 54,
+        "second": 46,
+        "nano": 799276000
+      }
+    },
+    "isImported": false
+  }
+]
