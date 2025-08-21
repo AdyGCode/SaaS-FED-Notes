@@ -13,13 +13,13 @@ tags:
   - Back-End
 date created: 03 July 2024
 created: 2024-09-20T11:17
-updated: 2025-07-22T16:25
+updated: 2025-08-21T17:39
 ---
 
 
 # INCOMPLETE - Updates 15/5/25
 
-# S10 Laravel Bootcamp: Part 6
+# S11 Laravel Bootcamp: Part 6
 
 ## Software as a Service - Front-End Development
 
@@ -109,12 +109,12 @@ Other notes will be added over time to illustrate various features of the Larave
 
 Have you completed (not just read):
 
-- [Laravel v12 Bootcamp - Introducing Laravel](../session-11/S11-Introducing-Laravel-v12.md),
-- [Laravel v12 Bootcamp - Part 1](../session-11/S10-Laravel-v12-BootCamp-Part-1.md),
-- [Laravel v12 Bootcamp - Part 2](../session-11/S10-Laravel-v12-BootCamp-Part-2.md)
-- [Laravel v12 Bootcamp - Part 3](../session-11/S10-Laravel-v12-BootCamp-Part-3.md)
-- [Laravel v12 Bootcamp - Part 4](../session-11/S10-Laravel-v12-BootCamp-Part-4.md)
-- [Laravel v12 Bootcamp - Part 5](../session-11/S10-Laravel-v12-BootCamp-Part-5.md)
+- [Laravel v12 Bootcamp - Introducing Laravel](S11-Laravel-v12-Bootcamp-Part-00-Introducing-Laravel.md),
+- [Laravel v12 Bootcamp - Part 1](S11-Laravel-v12-BootCamp-Part-01.md),
+- [Laravel v12 Bootcamp - Part 2](S11-Laravel-v12-BootCamp-Part-02.md)
+- [Laravel v12 Bootcamp - Part 3](S11-Laravel-v12-BootCamp-Part-03.md)
+- [Laravel v12 Bootcamp - Part 4](S11-Laravel-v12-BootCamp-Part-04.md)
+- [Laravel v12 Bootcamp - Part 5](S11-Laravel-v12-BootCamp-Part-05.md)
 
 No? Well… go do it…
 
@@ -171,7 +171,7 @@ Next we will create our management controller.
 In the case of the Users, we will name this `UserManager` just in case we may want to have a different "User" controller for another purpose. It also makes it obvious the purpose of said controller.
 
 ```shell
-php artisan make:controller UserManagementController --resource 
+php artisan make:controller Admin/UserManagementController --resource 
 ```
 
 The `--resource` will automatically add the index, store, edit and other method stubs for us to fill out.
@@ -207,19 +207,19 @@ Refreshing will give a different error - no users index view found.
 
 ![](../assets/Pasted%20image%2020250506135347.png)
 
-### Create `users/index.blade.php`
+### Create `admin/users/index.blade.php`
 
 Use the touch command to create the index blade fle for the users:
 
 ```shell
-touch resources/views/users/index.blade.php
+touch resources/views/admin/users/index.blade.php
 ```
 
 The browser, when refreshed will now show a blank page.
 
 Let's code the view.
 
-Start by adding the `x-app-layout`, with the header slot and a wrapper for the main page content:
+Start by adding the `x-admin-layout`, with the header slot and a wrapper for the main page content:
 
 ```php
 <x-app-layout>  
@@ -1159,7 +1159,7 @@ We have made the search and its button look like they are a single item already 
 
 # Up Next
 
-- [Laravel v12 Bootcamp - Part 7](../session-11/S10-Laravel-v12-BootCamp-Part-7.md)
+- [Laravel v12 Bootcamp - Part 7](S11-Laravel-v12-BootCamp-Part-07.md)
 - [Session 11 ReadMe](../session-10/ReadMe.md)
 - [Session 11 Reflection Exercises & Study](../session-11/S11-Reflection-Exercises-and-Study.md)
 

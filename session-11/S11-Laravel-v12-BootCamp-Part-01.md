@@ -13,7 +13,7 @@ tags:
   - Back-End
 date created: 03 July 2024
 created: 2024-09-20T11:17
-updated: 2025-07-22T16:25
+updated: 2025-08-21T15:59
 ---
 
 # Laravel Bootcamp: Chirper Part 1
@@ -40,7 +40,7 @@ The following notes are based on the official Laravel 11 Boot Camp (Build Chirpe
 
 ## Before you start...
 
-Ensure you have completed the [Introducing Laravel v12](../session-10/S10-Introducing-Laravel-v12.md) notes and created the base code for the "Chirper Application" via the Retro Starter Kit.
+Ensure you have completed the [Introducing Laravel v12](S11-Laravel-v12-Bootcamp-Part-00-Introducing-Laravel.md) notes and created the base code for the "Chirper Application" via Adrian's Base Starter Kit.
 
 No? Well... go do it...
 
@@ -52,7 +52,7 @@ Make sure that you have a Windows Terminal screen that looks similar to this, an
 
 # Chirper: Move over X, the bird is back!
 
-We will be creating a very basic X style micro-blogging application, but keeping it to the basics... text only!
+We will be creating a very basic X (formerly twitter) style micro-blogging application, but keeping it to the basics... text only!
 
 Because we used the Laravel installer, we have already got a basic Laravel application running.
 
@@ -75,7 +75,7 @@ OK, let's carry on with the development.
 
 To be able to work with Chirper we need an account so... open your home page:
 
-- http://chirper-2025-s1
+- http://localhost:8000
 
 Click on Register, and add a new user with the details below. We are doing this so it is easy to go back and repeat later.
 
@@ -86,7 +86,7 @@ Click on Register, and add a new user with the details below. We are doing this 
 | Password         | Password1           |
 | Confirm Password | Password1           |
 
-Here is an image of the registration form - with the above entered./
+Here is an image of the registration form - with the above entered.
 
 ![](../assets/S10-Laravel-v12-BootCamp-20240920143515412.png)
 
@@ -114,7 +114,7 @@ Time to start coding.
 
 ## Creating the Chirp Models & More
 
-In your Bash CLI, make sure you are in the `/Source/Repos/chirper-2025-s1 folder, then use:
+In your Bash CLI, make sure you are in the `/Source/Repos/xxx-chirper-2025-s2 folder, then use:
 
 ```shell
 php artisan make:model Chirp --all --resource --seed
@@ -248,7 +248,7 @@ Save the file and we will head to our Controller...
 
 Try visiting the following URL:
 
-http://chirper-2025-s1.text/chirps
+http://localhost:8000/chirps
 
 If you have not registered & logged into the application yet, because of the starter kit, you will be presented with the "login" page displayed:
 
@@ -538,7 +538,7 @@ In part two of our version of the Laravel Boot Camp, we will do the following:
 
 There may even be some other surprises to come as well!
 
-Let's get it done! - [S10 Laravel BootCamp Part 2](../session-11/S10-Laravel-v12-BootCamp-Part-2.md)
+Let's get it done! - [S11 Laravel Bootcamp Part 2](S11-Laravel-v12-BootCamp-Part-02.md)
 
 
 # END

@@ -9,15 +9,15 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testing, PEST
 created: 2024-08-27T17:11
-updated: 2025-05-23T11:12
+updated: 2025-08-21T15:59
 ---
 # Session 10
 
 - Portfolio Work
 - Demonstrations
 - [S10 Introducing Laravel](../session-10/laravel-v11/S10-Introducing-Laravel-v11.md)
-- [S10 Laravel v12 Bootcamp Part 1](../session-11/S10-Laravel-v12-BootCamp-Part-1.md)
-- [S10 Laravel v12 Bootcamp Part 2](../session-11/S10-Laravel-v12-BootCamp-Part-2.md)
+- [S10 Laravel v12 Bootcamp Part 1](../session-11/S11-Laravel-v12-BootCamp-Part-01.md)
+- [S10 Laravel v12 Bootcamp Part 2](../session-11/S11-Laravel-v12-BootCamp-Part-02.md)
 - [Exercises and Journal Entry](./session-10/Session-10-Exercises-and-Journal-Entry.md)
 
 

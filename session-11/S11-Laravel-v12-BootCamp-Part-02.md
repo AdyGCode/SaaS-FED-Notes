@@ -13,7 +13,7 @@ tags:
   - Back-End
 date created: 03 July 2024
 created: 2024-09-20T11:17
-updated: 2025-07-22T16:25
+updated: 2025-08-21T15:59
 ---
 
 # Laravel Bootcamp: Part 2
@@ -41,7 +41,7 @@ The following notes are based on the official Laravel v12 Bootcamp
 
 ## Before you start...
 
-Have you gone over the [Laravel v12 Bootcamp - Introducing Laravel](../session-11/S11-Introducing-Laravel-v12.md) and then [Laravel v12 BootcampPart 1](../session-11/S10-Laravel-v12-BootCamp-Part-1.md)?
+Have you gone over the [Laravel v12 Bootcamp - Introducing Laravel](S11-Laravel-v12-Bootcamp-Part-00-Introducing-Laravel.md) and then [Laravel v12 BootcampPart 1](S11-Laravel-v12-BootCamp-Part-01.md)?
 
 No? Well... go do it...
 
@@ -263,7 +263,7 @@ This displays an animated (shake) comment bubble, in blue, that shakes twice and
 
 In the next part of the bootcamp, we will add "Edit" and "Delete" chirp capability.
 
-- [Laravel v12 Bootcamp - Part 3](../session-11/S10-Laravel-v12-BootCamp-Part-3.md)
+- [Laravel v12 Bootcamp - Part 3](S11-Laravel-v12-BootCamp-Part-03.md)
 - [Session 11 ReadMe](../session-10/ReadMe.md)
 - [Session 11 Reflection Exercises & Study](../session-11/S11-Reflection-Exercises-and-Study.md)
 
