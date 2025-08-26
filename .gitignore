@@ -458,4 +458,4 @@ dist
 /.obsidian/snippets/
 /.obsidian/themes/
 
-/.obsidian/plugins/
+!/.obsidian/plugins/obsidian-minimal-settings/data.json

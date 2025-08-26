@@ -9,7 +9,7 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testng, PEST
 created: 2024-08-06T15:28
-updated: 2025-03-12T09:28
+updated: 2025-08-26T14:39
 ---
 
 # PHP Basics V - Namespaces, Autoloading & Errors
