@@ -45,7 +45,7 @@ All the examples below are in the ⁠[XXX-SaaS-Vanilla-MVC-YYYY-SN](https://gith
 This shows the details of the file and a brief (one or two sentence) explanation of it's purpose.
 
 ```php
-​<?php
+<?php
 /**
  * Database Access Class
  *
@@ -84,7 +84,7 @@ public $conn;
 ### Method Section header (optional)
 
 ```php
-​/**
+/**
  * Method Definitions 
  */ 
 ```
@@ -92,7 +92,7 @@ public $conn;
 ### Method definitions
 
 ```php
-​/** 
+/** 
  * Constructor for Database class 
  * 
  * @param array $config 
@@ -136,7 +136,7 @@ public function query($query, $params = [])
 PHP file with Majority HTML (e.g. a view)
 
 ```php
-​<?php
+<?php
 /** 
  * Home Page View 
  * 

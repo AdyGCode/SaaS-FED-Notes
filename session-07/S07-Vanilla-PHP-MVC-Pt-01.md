@@ -95,10 +95,10 @@ Each file `database-xxxxxx.sql` that you may download from here contains all the
 You may download the file, copy it into the config folder of the application skeleton, and then open it. Next simply copy and paste the commands into the SQL page on PhpMyAdmin (for MySQL/MariaDB) and use GO to execute them in one step.
 
 For **MariaDB**:
-![](../session-07/sample-code/database-mariadb.sql)
+![](../session-04/sample-code/database-mariadb.sql)
 
 For **MySQL**:
-![](../session-07/sample-code/database-mysql.sql)
+![](../session-04/sample-code/database-mysql.sql)
 
 
 ## Create Database and Users (MariaDB)

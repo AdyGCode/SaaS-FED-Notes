@@ -16,14 +16,49 @@ updated: 2025-08-12T17:28
 
 Here are your instructions for this session's exercises and practice.
 
-## Study
+## Readings and Study
 
 Make sure you have read through the following sections from PHP
 Tutorial (https://phptutorial.net):
 
-- **Sections 1 - 8**
+- **Sections 1–11** (To be completed before S03)
+- **Sections 12–20** (To be completed before S05)
 
-## Reading
+Make sure you have read through the following sections from PHP PDO Tutorial
+(https://www.phptutorial.net/php-pdo/):
+
+- **Sections 1–6** (To be completed before S05)
+
+ake sure you have read through the following sections from PHP OOP Tutorial
+(https://www.phptutorial.net/php-oop/)
+
+- **Sections 1–7** (To be completed before S06)
+- **Sections 8–15** (To be completed before S07)
+
+
+
+## Exercises
+
+Before you start the exercises, you will need to have PhpStorm installed and configured, 
+with a source/repos folder in your user profile folder.
+
+See [Creating a Source Repos folder]() on the HelpDesk for details.
+
+### Checklist
+
+Make sure you have completed these steps:
+
+- [ ] Create the Source/Repos folder (see session 01).
+- [ ] Create the "Exercises project" (see session 01).
+- [ ] Start learning PHP ahead of each session (see session 01).
+ 
+
+### Research
+
+In the "`Research.md`" file, you will complete the following tasks.
+
+> 🚫 **DO NOT USE AI**
+
 
 Read these articles:
 
@@ -33,9 +68,8 @@ https://azure.microsoft.com/en-us/overview/what-are-private-public-hybrid-clouds
 
 https://www.dummies.com/programming/networking/comparing-public-private-and-hybrid-cloud-computing-options/
 
-## Exercises
-
-Research and explain in your own words the following terms from Software Development.
+If required, perform additional research, and then explain, in your own words, the following 
+terms from Software Development.
 
 Remember that you must include a reference for each term using [MyBib](https://mybib.com) to
 create the reference.
@@ -62,19 +96,23 @@ create the reference.
 Your references should be different to those included in notes, presentations or other in class
 sources.
 
+
 # External Coursework
 
-Work on one of the external PHP courses.
+Continue your study of your selected PHP tutorial/course.
+
+
+See [Recap Exercises and Practice from Session 01](../session-01/S01-Recap-Exercises-and-Practice.md)
+for more details.
 
 # PHP Exercises
 
 Complete the following PHP Exercises.
 
-We suggest creating a new Project using PHP Storm to do this.
+Create the files and folders as required in your Exercises project.
 
-Name the project `SaaS-FED-S03-Exercises`.
 
-At the start of each exercise you will see a table giving:
+At the start of each exercise, you will see a table giving:
 
 - folder name
 - file name
@@ -645,4 +683,3 @@ var_dump(sumIntegerInArray(arrayWithEmptyArrays));
 
 
 ```
-

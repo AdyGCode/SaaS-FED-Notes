@@ -13,10 +13,10 @@ tags:
   - Back-End
 date created: 03 July 2024
 created: 2024-09-20T11:17
-updated: 2025-07-22T16:25
+updated: 2025-08-21T17:37
 ---
 
-# S10 Laravel Bootcamp: Part 5
+# S11 Laravel Bootcamp: Part 5
 
 ## Software as a Service - Front-End Development
 
@@ -44,11 +44,11 @@ Blade https://bootcamp.laravel.com) with Adrian's shortened explanations.
 
 Have you completed (not just read):
 
-- [Laravel v12 Bootcamp - Introducing Laravel](../session-11/S11-Introducing-Laravel-v12.md),
-- [Laravel v12 Bootcamp - Part 1](../session-11/S10-Laravel-v12-BootCamp-Part-1.md),
-- [Laravel v12 Bootcamp - Part 2](../session-11/S10-Laravel-v12-BootCamp-Part-2.md)
-- [Laravel v12 Bootcamp - Part 3](../session-11/S10-Laravel-v12-BootCamp-Part-3.md)
-- [Laravel v12 Bootcamp - Part 4](../session-11/S10-Laravel-v12-BootCamp-Part-4.md)
+- [Laravel v12 Bootcamp - Introducing Laravel](S11-Laravel-v12-Bootcamp-Part-00-Introducing-Laravel.md),
+- [Laravel v12 Bootcamp - Part 1](S11-Laravel-v12-BootCamp-Part-01.md),
+- [Laravel v12 Bootcamp - Part 2](S11-Laravel-v12-BootCamp-Part-02.md)
+- [Laravel v12 Bootcamp - Part 3](S11-Laravel-v12-BootCamp-Part-03.md)
+- [Laravel v12 Bootcamp - Part 4](S11-Laravel-v12-BootCamp-Part-04.md)
 
 No? Well… go do it…
 
@@ -155,7 +155,9 @@ return (new MailMessage)
     ->line('Thank you for using our application!');
 ```
 
-What does this do? Well to start it tells Laravel to send a Mail Message by creating a new
+What does this do? 
+
+Well to start it tells Laravel to send a Mail Message by creating a new
 instance of the `MailMessaghe` class.
 
 Then we construct the parts of the email by...
@@ -178,8 +180,9 @@ And Laravel provides one, Events.
 
 #### Create an Event
 
-To do thsi we need to create an event. Again artisan rescues us from doign a lot of extra
-coding.
+To do this we need to create an event. 
+
+Again `artisan` rescues us from doing a lot of extra coding.
 
 The general command structure is:
 
@@ -197,10 +200,10 @@ php artisan make:event ChirpCreated
 
 This will be found in the `app/Events` Folder.
 
-Now open this file and update thje constructor method:
+Now open this file and update the constructor method:
 
 ```php
-    public function __construct(public Chirp $chirp)
+public function __construct(public Chirp $chirp)
 ```
 
 ### Dispatching the Event
@@ -222,7 +225,7 @@ protected $dispatchesEvents = [
     ];
 ```
 
-Remember that you will need to `use App\Events\ChirpCreated;`.
+Remember that you will need to add the line `use App\Events\ChirpCreated;`.
 
 ### Listening for Events
 
@@ -242,7 +245,7 @@ locate and open it.
 
 #### Edit the Listener
 
-Ok, now we need to update the listener
+Ok, now we need to update the listener...
 
 Add the required use lines:
 
@@ -254,8 +257,11 @@ use App\Notifications\NewChirp;
 We need to mark the listener so that Laravel understand that the listener events should be
 queued.
 
-By default, this uses the database to queue events asynchronously. This queue is processed by
-the `artisan queue:work` command. Whilst we are using the `composer run dev` command, this is
+By default, this uses the database to queue events asynchronously. 
+
+This queue is processed by the `artisan queue:work` command. 
+
+Whilst we are using the `composer run dev` command, this is
 automatically running.
 
 So, update the class declaration to show that the notification should be queued:
@@ -275,21 +281,20 @@ foreach (User::whereNot('id', $event->chirp->user_id)->cursor() as $user) {
 }
 ```
 
-One interesting part of this notification sending is that we are using a "cursor" to progress
-though the users rather than loading them all into memory at once. Even if "Chirper" had just
-10,000 users, we could experience issues of running out of memory if we loaded all the users at
-once and processed them.
+One interesting part of this notification sending is that we are using a "cursor" to progress though the users rather than loading them all into memory at once. 
+
+Even if "Chirper" had just 10,000 users, we could experience issues of running out of memory if we loaded all the users at once and processed them.
 
 
 > #### Aside:
+> 
 > This sending to all users would be very annoying, especially if you had 1000 users, each
 > sending 10 new Chirps a day. This would mean each user would get 9990 emails a day!
 >
 > Because of this, it may be a good idea to add a "followers" feature to reduce the amount of
 > emails.
 >
-> Another option would be to only send a notification for every 10 new chirps, or even a summary
-> of all the chirps at the end of the day.
+> Another option would be to only send a notification for every 10 new chirps, or even a summary of all the chirps at the end of the day.
 >
 
 Make sure you test the functionality by:
@@ -326,7 +331,7 @@ And here is MailPit with the mails sent to the users of the application, except 
 
 # Up Next
 
-- [Laravel v12 Bootcamp - Part 6](../session-11/S10-Laravel-v12-BootCamp-Part-6.md)
+- [Laravel v12 Bootcamp - Part 6](S11-Laravel-v12-BootCamp-Part-06.md)
 - [Session 11 ReadMe](../session-10/ReadMe.md)
 - [Session 11 Reflection Exercises & Study](../session-11/S11-Reflection-Exercises-and-Study.md)
 

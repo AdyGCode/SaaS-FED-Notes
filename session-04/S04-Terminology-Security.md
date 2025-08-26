@@ -9,7 +9,7 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testng, PEST
 created: 2024-08-01T09:23
-updated: 2025-03-12T09:29
+updated: 2025-08-20T09:14
 ---
 
 # Security Related
@@ -69,3 +69,5 @@ OAuth stands for Open Authorization, which is a protocol for token-based authent
 ## 2FA
 
 2FA stands for Two-Factor Authentication, which is a security process that requires two different forms of identification to access an account or system.
+
+[Back to S04 Home](./ReadMe.md)

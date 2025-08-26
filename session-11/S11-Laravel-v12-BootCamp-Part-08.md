@@ -13,11 +13,11 @@ tags:
   - Back-End
 date created: 03 July 2024
 created: 2024-09-20T11:17
-updated: 2025-07-22T16:25
+updated: 2025-08-21T15:59
 ---
 
 
-# S10 Laravel Bootcamp: Part 8
+# S11 Laravel Bootcamp: Part 8
 
 ## Software as a Service - Front-End Development
 
@@ -37,7 +37,7 @@ includeLinks: true
 
 # Laravel Bootcamp: Part 8
 
-There are a couple of minor issues to fix from [the previous part of this tutorial](../session-11/S10-Laravel-v12-BootCamp-part-7).
+There are a couple of minor issues to fix from [the previous part of this tutorial](S11-Laravel-v12-BootCamp-Part-07.md).
 
 This short set of notes helps provide solutions.
 
@@ -46,14 +46,14 @@ This short set of notes helps provide solutions.
 
 Have you completed (not just read):
 
-- [Laravel v12 Bootcamp - Introducing Laravel](../session-11/S11-Introducing-Laravel-v12.md),
-- [Laravel v12 Bootcamp - Part 1](../session-11/S10-Laravel-v12-BootCamp-Part-1.md),
-- [Laravel v12 Bootcamp - Part 2](../session-11/S10-Laravel-v12-BootCamp-Part-2.md)
-- [Laravel v12 Bootcamp - Part 3](../session-11/S10-Laravel-v12-BootCamp-Part-3.md)
-- [Laravel v12 Bootcamp - Part 4](../session-11/S10-Laravel-v12-BootCamp-Part-4.md)
-- [Laravel v12 Bootcamp - Part 5](../session-11/S10-Laravel-v12-BootCamp-Part-5.md)
-- [Laravel v12 Bootcamp - Part 6](../session-11/S10-Laravel-v12-BootCamp-Part-6.md)
-- [Laravel v12 Bootcamp - Part 7](../session-11/S10-Laravel-v12-BootCamp-Part-7.md)
+- [Laravel v12 Bootcamp - Introducing Laravel](S11-Laravel-v12-Bootcamp-Part-00-Introducing-Laravel.md),
+- [Laravel v12 Bootcamp - Part 1](S11-Laravel-v12-BootCamp-Part-01.md),
+- [Laravel v12 Bootcamp - Part 2](S11-Laravel-v12-BootCamp-Part-02.md)
+- [Laravel v12 Bootcamp - Part 3](S11-Laravel-v12-BootCamp-Part-03.md)
+- [Laravel v12 Bootcamp - Part 4](S11-Laravel-v12-BootCamp-Part-04.md)
+- [Laravel v12 Bootcamp - Part 5](S11-Laravel-v12-BootCamp-Part-05.md)
+- [Laravel v12 Bootcamp - Part 6](S11-Laravel-v12-BootCamp-Part-06.md)
+- [Laravel v12 Bootcamp - Part 7](S11-Laravel-v12-BootCamp-Part-07.md)
 
 No? Well… go do it…
 
@@ -129,7 +129,7 @@ A much lesser part of the fix is making sure you pass the search term onto the p
 
 # Up Next
 
-- [Laravel v12 Bootcamp - Part 9](../session-11/S10-Laravel-v12-BootCamp-Part-9.md)
+- [Laravel v12 Bootcamp - Part 9](S11-Laravel-v12-BootCamp-Part-09.md)
 - [Session 11 ReadMe](../session-10/ReadMe.md)
 - [Session 11 Reflection Exercises & Study](../session-11/S11-Reflection-Exercises-and-Study.md)
 
