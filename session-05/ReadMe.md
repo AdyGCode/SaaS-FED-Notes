@@ -9,16 +9,24 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testing, PEST
 created: 2024-08-01T09:23
-updated: 2025-08-26T14:27
+updated: 2025-08-26T17:45
 ---
 
 # Session 05
 
-- [S05-PHP-Basics-VII](../session-06/S05-PHP-Basics-VII.md)
-- [Terminology: MVC](../session-06/S05-Terminology-MVC.md)
-- [Terminology: Laravel](../session-05/S05-Terminology-Laravel.md)
-- [More on MVC](../session-06/S05-MVC-Background.md)
-- [Practice Exercises an Recap](../session-05-Exercises-and-Journal-Entry.md)
-### Note
+- Catch Up with Learning PHP
+- Possible short insight into Laravel
 
-...
+You should be almost done with your PHP basics Learning.
+
+## Materials
+
+[S05-PHP-Basics-VII.md](../session-06/S06-PHP-Basics-VII.md)
+
+[S05-Terminology-MVC.md](../session-06/S06-Terminology-MVC.md)
+
+[S05-MVC-Background.md](../session-06/S06-MVC-Background.md)
+
+[Practice Exercises and Recap.md](../session-06/S06-Practice-Exercises-and-Recap.md)
+
+

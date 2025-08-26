@@ -9,10 +9,10 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testing, PEST
 created: 2024-08-02T13:12
-updated: 2025-08-26T17:36
+updated: 2025-08-26T17:45
 ---
 
-# Session 04 Practice Exercises and Recap
+# Session 05 Practice Exercises and Recap
 
 Here are your instructions for this session's Journal and other exercises and practice.
 
@@ -44,6 +44,9 @@ ake sure you have read through the following sections from PHP OOP Tutorial
 - **Sections 8–15** (To be completed before S07)
 
 ## Exercises
+
+> For these exercises you should use the template code provided here...
+> - [template.php](../session-07/sample-code/template.php)
 
 ### Exercise 1 - Contact Form
 

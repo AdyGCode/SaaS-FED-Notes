@@ -9,7 +9,7 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testing, PEST
 created: 2024-08-09T14:27
-updated: 2025-08-26T14:39
+updated: 2025-08-26T17:41
 ---
 
 # Session 05 Exercises and Journal Entry
@@ -243,18 +243,18 @@ This file is to:
 
 Create a basic HTML5 web page in the templates folder and name it `template.html`.
 
-Edit the template file and update the required parts to include tghe new lines from below 
+Edit the template file and update the required parts to include tghe new lines from below
 
 ```html
-    <!-- Stylesheets and Fonts -->  
-    <link rel="stylesheet" href="/assets/css/site.css">  
-          
-<!-- Pre-page load and deferred JavaScript -->  
+    <!-- Stylesheets and Fonts -->
+<link rel="stylesheet" href="/assets/css/site.css">
 
-</head>  
-<body>  
-  
-  
+<!-- Pre-page load and deferred JavaScript -->
+
+</head>
+<body>
+
+
 <!-- Post Page load JavaScript -->
 </body>
 ```
