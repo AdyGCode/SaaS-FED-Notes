@@ -71,6 +71,14 @@ OK, let's carry on with the development.
 > 
 > So if you get an error in the browser, it may be because there is something missing.
 
+### Run Sample User Seeder
+
+Before continuing, in the command line execute:
+
+```shell
+php artisan db:seed UserSeeder
+```
+
 ### Register an account
 
 To be able to work with Chirper we need an account so... open your home page:
@@ -88,12 +96,12 @@ Click on Register, and add a new user with the details below. We are doing this 
 
 Here is an image of the registration form - with the above entered.
 
-![](../assets/S10-Laravel-v12-BootCamp-20240920143515412.png)
+![](../assets/S10-Laravel-BootCamp-20240920143515412.png)
 
 Once you have registered, you will get the dashboard.
 
 
-![](../assets/S10-Laravel-v12-BootCamp-20240920143536181.png)
+![](../assets/S10-Laravel-BootCamp-20240920143536181.png)
 
 
 #### Add a second user
@@ -297,7 +305,7 @@ This is Laravel's way of telling itself to load the `chirps/index.blade.php` vie
 
 The problem is, when you refresh your browser it will tell you it is missing... 
 
-![](../assets/S10-Laravel-v12-BootCamp-20240920151458090.png)
+![](../assets/S10-Laravel-BootCamp-20240920151458090.png)
 
 This is good, as we have been told that there is a problem, and at least Laravel's error pages look nice...
 
@@ -377,13 +385,63 @@ This last one will become more obvious when we complete the store method.
 
 We should now see a menu with the user's name (logged in), an area to enter a Chirp and a button to Chirp to the world.
 
-![](../assets/S10-Laravel-v12-BootCamp-20240920155634761.png)
+![](../assets/S10-Laravel-BootCamp-20240920155634761.png)
 
 Ok... that's great but the chirps are not going anywhere...
 
 ## Save the Chirp!
 
 This almost sounds like a charity, but it's not... we need to store the chirps when the CHIRP button is pressed.
+
+There are several things we need to do with the Save:
+
+1. Test to see if the user is logged in
+2. Validate the user's submitted chirp
+3. If problem with chirp go back to form
+4. Otherwise save the chirp 
+
+Before we write the save code, we need to check the user is logged in.
+
+
+When we created the Chirp model it added the following files/classes:
+
+- `\app\Models\Chirp.php`
+- `\database\factories\ChirpFactory.php`
+- `\database\migrations\2025_09_17_063309_create_chirps_table.php`
+- `\database\seeders\ChirpSeeder.php`
+- `\app\Http\Requests\StoreChirpRequest.php`
+- `\app\Http\Requests\UpdateChirpRequest.php`
+- `\app\Http\Controllers\ChirpController.php`
+- `\app\Policies\ChirpPolicy.php`
+
+We have already worked with the Migration and the ChirpController.
+
+What we now need to do is work with the Requests to verify the user is logged in...
+
+### Checking User is Authenticated
+
+Open the  StoreChirpRequest.php file (`\app\Http\Requests\StoreChirpRequest.php`).
+
+In this file you will find two methods. We are going to be updating the authorize method.
+
+By default the authorize method returns false... which means the user is never going to be able to store their chirp messages.
+
+Let's fix that by updating the `return false` to become:
+
+```php
+return auth()->check();
+```
+
+This verifies if the users is authenticated, and if so returns a true, otherwise a false is given.
+
+Great, now when we press the Chirp button it will attempt to save the message...
+
+But we know that isn't happening.
+
+It's time to create the Store method!
+
+### Creating the Store Chirp Method
+
 
 Time to head back to the Chirp Controller...
 
@@ -435,7 +493,7 @@ $validated = $request->validate([
 $request->user()->chirps()->create($validated);
 ```
 
-Redirects the browser to the chirps page
+- Redirects the browser to the chirps page
 
 ```php
 redirect(route('chirps.index'))
@@ -451,7 +509,7 @@ use Illuminate\Http\RedirectResponse;
 
 You could try making a chirp but we will get the following:
 
-![](../assets/S10-Laravel-v12-BootCamp-20240920160925699.png)
+![](../assets/S10-Laravel-BootCamp-20240920160925699.png)
 
 
 # Relationships are Important
@@ -526,6 +584,58 @@ protected $fillable = [
 
 
 Ok, try the Chirp out!
+
+> ## Important Notes About Seeding
+> 
+> Laravel has a wonderful way to create tables in a database and then seed the tables with default data.
+> 
+> These are the migrations and seeder files that are contained in the database folder.
+>
+> Adrian Gould's Base Blade Kit provides some seed users to start your development and testing off.
+> 
+> There are different ways to execute the seeder process, depending on if you are restarting the database definition from scratch, re-running the seeder, or running it for the first time.
+> 
+> One thing to note is the re-running a seeder may re-add the data to the database, depending on how you have structured the seeder file.
+> 
+> For the time being you do not need to worry about this, but it will be looked at in other parts of this course (SaaS-FED-Notes).
+> 
+> ### Clear the data from a Table
+> 
+> There may be occasions that you will want to clear the data from a table and re-run the seeder.
+> 
+> If you want to clear the data from a table before executing the seeder then we modify the seeder to truncate the table first.
+> 
+> An example of this is shown in the `UserSeeder` in the Base-Blade-Kit that we used (look in `Database\Seeders\UserSeeder.php`).
+> 
+> ### Running an Individual Seeder
+> 
+> To run a seeder called `DemoSeeder` we use:
+> 
+> ```shell
+> php artisan db:seed DemoSeeder
+> ```
+> 
+> This will execute the seeder, repeating any previous execution of the seeder.
+> 
+> ### Run Outstanding Migrations and all the Seeders
+> 
+> To run an migrations that have not been executed so far and then all the seeders we use:
+> 
+> ```shell
+> php artisan migrate --seed
+> ```
+> 
+> ### Starting the Database from Fresh and Run the Seeders
+> 
+> This is the <span style="background:#FFChirp; padding:0.125 0.5rem">DANGER ZONE</span> and must not be executed on a LIVE/PRODUCTION system:
+> 
+> ```shell
+> php artisan migrate:fresh --seed
+> ```
+> 
+> This **WIPES** the database of tables and data, and rebuilds using the migrations and the seed data.
+
+
 
 # Coming up...
 
