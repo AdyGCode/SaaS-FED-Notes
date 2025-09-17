@@ -41,7 +41,7 @@ The following notes are based on the official Laravel v12 Bootcamp
 
 ## Before you start...
 
-Have you gone over the [Laravel v12 Bootcamp - Introducing Laravel](S11-Laravel-v12-Bootcamp-Part-00-Introducing-Laravel.md) and then [Laravel v12 BootcampPart 1](S11-Laravel-v12-BootCamp-Part-01.md)?
+Have you gone over the [Laravel v12 Bootcamp - Introducing Laravel](S11-Laravel-BootCamp-Part-00-Introducing-Laravel.md) and then [Laravel v12 BootcampPart 1](S11-Laravel-BootCamp-Part-01.md)?
 
 No? Well... go do it...
 
@@ -113,7 +113,7 @@ Duplicate these lines, and do the same edits...
 
 If you refresh your browser and also shrink it down, you will see the mobile navigation appear, and then using the hamburger, it will expand to show the Chirps entry, again highlighted as active.
 
-![](../assets/S10-Laravel-v12-BootCamp-Part-2-20240920172149440.png)
+![](../assets/S10-Laravel-BootCamp-Part-2-20240920172149440.png)
 
 # Display our Chirps
 
