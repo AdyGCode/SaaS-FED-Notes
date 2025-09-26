@@ -53,11 +53,13 @@ We will:
 
 Before we launch into the main content of this set of notes we would like to remind you of a very important factor in software development...
 
-Working Code is more important than Optimised Code...
+*Working Code is more important than Optimised Code...*
 
 This may sound strange, but when creating a solution to an opportunity, it is more important to get something working first.
 
-Delaying production of the product will lead to delays or even not achieving "profit" for a business, or even individual. (Profit may be measured in many ways including social benefit and financial benefit. It is up to you to determine the more important of these.)
+Delaying production of the product will lead to delays or even not achieving "profit" for a business, or even individual. 
+
+> **Profit** may be measured in many ways including social benefit and financial benefit. It is up to you to determine the more important of these.
 
 Optimisation may occur after release when you see an uptake in the solution that leads to people asking for new features, and even feedback about responsiveness...
 
@@ -72,10 +74,11 @@ The MVP is:
 	- “*The version of a new product which allows a team to collect the maximum amount of validated learning about customers with the least effort.*”
 
 ### Further reading on MVP
-- lssdefinition. (2020, April 2). _Lean Startup_. Lean Manufacturing and Six Sigma Definitions - Glossary Terms, History, People and Definitions about Lean and Six Sigma. https://www.leansixsigmadefinition.com/glossary/lean-startup/#:~:text=Minimum%20viable%20product%20(MVP)%20%E2%80%93,similar%20to%20a%20pilot%20experiment).
+
+- lssdefinition. (2020, April 2). _Lean Startup_. Lean Manufacturing and Six Sigma Definitions - Glossary Terms, History, People and Definitions about Lean and Six Sigma. https://www.leansixsigmadefinition.com/glossary/lean-startup).
 - _Minimum Viable Product (MVP)_. (2024, November 22). ProductPlan. https://www.productplan.com/glossary/minimum-viable-product/
 - Atlassian. (2023). _Minimum Viable Product (MVP): What is it & Why it Matters_. Atlassian. https://www.atlassian.com/agile/product-management/minimum-viable-product
-- Tan, P. (2020, September 18). _11 Minimum Viable Product Examples (With Actionable Tips)_. Appsumo.com; AppSumo. https://appsumo.com/blog/minimum-viable-product-examples?utm_source=google&utm_medium=cpc&utm_campaign=SH-Buy-Prospect-Evergreen-Mix-Dynamic-WorldWide-Null-PMax&utm_adset=&utm_content=&utm_term=&loc_i=1009317&loc_p=1009309&network=x&dvc=c&utm_placement=))&gad_source=5&gad_campaignid=22208046847&gclid=EAIaIQobChMI6s2p6oKljQMVoE9HAR3K5C-JEAAYASAAEgKfKfD_BwE
+- Tan, P. (2020, September 18). _11 Minimum Viable Product Examples (With Actionable Tips)_. Appsumo.com; AppSumo. https://appsumo.com/blog/minimum-viable-product-examples
 
 
 ## Chirper MVP
@@ -91,12 +94,12 @@ But this then also leads us into what is needed for administration of this appli
 The admin needs stretch beyond the needs above.
 
 For this example application we need Super Admin, Admin, Staff and Client roles who will have varying levels of permission to "abilities" or features:
-- Browse, read, edit, add and delete chirpers
+- Browse, read, edit, add and delete Chirpers (Users)
 - Browse, read, edit, add and delete chirps
 - Browse, read, edit, add and delete likes/dislikes
 - Browse, read, edit, add and delete followers
 
-This is just a start, but this provides a good way to begin the MVP and admin of the MVP.
+This is just a start, but this provides a good way to begin the MVP and Admin front end of the MVP.
 
 This set of notes looks at *Administration of users*.
 
@@ -127,15 +130,20 @@ You will need these to be able to continue…
 
 ## User Management Interface
 
-So, so we have chirps, we have notifications being sent to users, but we do not have any way to manage these users. So let's start to build an interface to do this.
+So, so we have chirps, we have notifications being sent to users, but we do not have any way to manage these users. 
+
+So let's start to build an interface to do this.
 
 We are going to create each part of the Management interface in turn, so that CRUD (or BREAD) actions are completed.
+
+To make it obvious that this is an "administration" area we will be using the "admin" blade template.
 
 ### Create User Resourceful Routes
 
 Open the `routes/web.php` file and add a new set of routes before the `require __DIR__.'/auth.php';` line.
 
 ```php
+
 Route::resource('users',
 			UserManagementController::class)
 	->middleware(['auth',]);
@@ -146,11 +154,11 @@ We will add the "`verified`" middleware to this later.
 At the top of the file add to the list of use lines the following:
 
 ```php
-use App\Http\Controllers\UserManagementController;
+use App\Http\Controllers\Admin\UserManagementController;
 ```
 
 
-If you try visiting `http://localhost:8000/users` it should give an error.
+If you try visiting `http://localhost:8000/admin/users` it should give an error.
 
 ![](../assets/Pasted%20image%2020250506134848.png)
 
@@ -160,7 +168,7 @@ If you try visiting `http://localhost:8000/users` it should give an error.
 Use the command line to quickly create the required folder:
 
 ```shell
-mkdir -p resources/views/users
+mkdir -p resources/views/admin/users
 ```
 
 
@@ -171,10 +179,14 @@ Next we will create our management controller.
 In the case of the Users, we will name this `UserManager` just in case we may want to have a different "User" controller for another purpose. It also makes it obvious the purpose of said controller.
 
 ```shell
-php artisan make:controller Admin/UserManagementController --resource 
+hp artisan make:Controller UserManagementController --model=User --requests --pest
 ```
 
-The `--resource` will automatically add the index, store, edit and other method stubs for us to fill out.
+What do the `--` switches do?
+
+- `--resource` will automatically add the index, store, edit and other method stubs for us to fill out.
+- `--pest` adds Pest testing stubs (more on that another time)
+- `--requests` adds the Store and Update User requests.
 
 ## Browse Users
 
@@ -182,7 +194,7 @@ We start by building the "browse users" sub-feature. This is usually known as th
 
 ### Add index method to user management controller
 
-Use the SHIFT-SHIFT method to open the `UserManagementController`.
+Use the <kbd>SHIFT</kbd>-<kbd>SHIFT</kbd> method to open the `UserManagementController`.
 
 The index method will initially retrieve all users and display them on a page. 
 
@@ -194,7 +206,7 @@ Edit the `public function index()` method and add:
 
 ```php
 $users = User::all();
-return view('users.index', compact(['users',]))
+return view('admin.users.index', compact(['users',]))
 ```
 
 Remember to import the User class in the "use" area:
@@ -222,7 +234,7 @@ Let's code the view.
 Start by adding the `x-admin-layout`, with the header slot and a wrapper for the main page content:
 
 ```php
-<x-app-layout>  
+<x-admin-layout>  
   
     <x-slot name="header" class="flex flex-row flex-between">  
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">  
@@ -235,7 +247,7 @@ Start by adding the `x-admin-layout`, with the header slot and a wrapper for the
 	<!-- main page cntent here -->
 
 	</div>  
-</x-app-layout>
+</x-admin-layout>
 
 ```
 

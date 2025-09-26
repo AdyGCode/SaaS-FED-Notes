@@ -61,8 +61,8 @@ You will need these to be able to continue…
 
 # Notifications & Events
 
-So we have Chirper working in a base form. It is very reminicent of the original SMS/Twitter,
-but without iamges/media.
+So we have Chirper working in a base form. It is very reminiscent of the original SMS/Twitter,
+but without images/media.
 
 This is great but how about notifying other users when you create a new chirp?
 
@@ -158,7 +158,7 @@ return (new MailMessage)
 What does this do? 
 
 Well to start it tells Laravel to send a Mail Message by creating a new
-instance of the `MailMessaghe` class.
+instance of the `MailMessage` class.
 
 Then we construct the parts of the email by...
 
@@ -206,6 +206,8 @@ Now open this file and update the constructor method:
 public function __construct(public Chirp $chirp)
 ```
 
+Remember that you will need to add the `use App\Models\Chirp;` line to the file.
+
 ### Dispatching the Event
 
 So now we have an event that can be activated, but how do we get the event to trigger?
@@ -225,7 +227,7 @@ protected $dispatchesEvents = [
     ];
 ```
 
-Remember that you will need to add the line `use App\Events\ChirpCreated;`.
+Remember that you will need to add the line `use App\Events\ChirpCreated;` at the top of the file.
 
 ### Listening for Events
 
@@ -273,11 +275,13 @@ class SendChirpCreatedNotifications implements ShouldQueue
 Next we are going to tell Laravel that we want to send the notification to every user that is on
 our Chirper platform... except for the user who wrote the new Chirp.
 
-Locate and update the code that handles the queuing of the notifications:
+Locate and update the code that handles the queuing of the notifications (the `handle()` method):
 
 ```php
 foreach (User::whereNot('id', $event->chirp->user_id)->cursor() as $user) {
+
     $user->notify(new NewChirp($event->chirp));
+
 }
 ```
 
@@ -296,6 +300,31 @@ Even if "Chirper" had just 10,000 users, we could experience issues of running o
 >
 > Another option would be to only send a notification for every 10 new chirps, or even a summary of all the chirps at the end of the day.
 >
+
+### Servicing the Notifications
+
+Before we are able to test our new notification system, we need to let Laravel about this new 'service'.
+
+To do so we need to register the listeners.
+
+Open the `AppServiceProvider.php` file (found in the `App\Providers folder`).
+
+After the class is defines, and before the `boot` method we add:
+
+```php
+protected $listen = [  
+    ChirpCreated::class => [  
+        SendChirpCreatedNotifications::class,  
+    ],  
+    // Other event listeners...  
+];
+```
+When we do this we must remember to add the relevant `use` lines as well, so make sure you add a use line for both of the following:
+
+- `App\Events\ChirpCreated`
+- `App\Listeners\SendChirpCreatedNotifications`
+
+
 
 Make sure you test the functionality by:
 
@@ -322,6 +351,21 @@ And here is MailPit with the mails sent to the users of the application, except 
 >
 > After that they *stopped* the `composer run dev` using CTRL+C and restarting the command
 > again.
+
+> #### Aside II: Executing Fresh Migrations and Notifications
+>  
+>  One thing to be aware of, if you have a chirp seeder ([Find one here](./sample-code/ChirpSeeder.php)) then if you have the application running and execute:
+>  
+>```shell
+>php artisan db:seed ChirpSeeder
+>```
+>
+>Then each new chirp will trigger a notification. 
+>
+>With the default 6 users from the user seeder, that means it will generate 140 email notifications!
+> 
+> Do not say we didn't warn you!
+
 
 # References
 

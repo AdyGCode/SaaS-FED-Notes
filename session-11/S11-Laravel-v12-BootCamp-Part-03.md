@@ -40,7 +40,7 @@ The following notes are based on the official Laravel 11 Boot Camp (Build Chirpe
 
 ## Before you start…
 
-Have you gone over the [Laravel v12 Bootcamp - Introducing Laravel](S11-Laravel-v12-Bootcamp-Part-00-Introducing-Laravel.md) and then [Laravel v12 BootcampPart 1](S11-Laravel-v12-BootCamp-Part-01.md) and  [ Laravel v12 BootcampPart-2](S11-Laravel-v12-BootCamp-Part-02.md)?
+Have you gone over the [Laravel v12 Bootcamp - Introducing Laravel](S11-Laravel-v12-Bootcamp-Part-00-Introducing-Laravel.md) and then [Laravel v12 Bootcamp Part 1](S11-Laravel-v12-BootCamp-Part-01.md) and  [Laravel v12 Bootcamp Part-2](S11-Laravel-v12-BootCamp-Part-02.md)?
 
 No? Well… go do it…
 
@@ -170,7 +170,12 @@ to become:
 
 These changes will NOT change the look of the page, but adds extra meaning to the content.
 
-> TODO: Add link to Semantic Markup for Web Pages
+> Useful Refresher References on Semantic HTML
+> 
+> - Joshi, Mohit. “A Detailed Guide on HTML Semantics | BrowserStack.” _BrowserStack_, 19 Dec. 2024, www.browserstack.com/guide/html-semantic. Accessed 25 Sept. 2025.
+> - Pavlik, Vlado, et al. “What Is Semantic HTML? And How to Use It Correctly.” _Semrush Blog_, Semrush, 25 Sept. 2017, www.semrush.com/blog/semantic-html5-guide/. Accessed 25 Sept. 2025.
+> - Penland, Jon. “What on Earth Is Semantic Markup? (and Why Should You Learn to Write It).” _Html.com_, 18 Nov. 2019, html.com/semantic-markup/. Accessed 25 Sept. 2025.
+> - “Semantic HTML  |  Web.dev.” _Web.dev_, 2022, web.dev/learn/html/semantic-html. Accessed 25 Sept. 2025.
 
 Refreshing the page should show no changes.
 
@@ -202,7 +207,7 @@ Then in this space we will add:
 
 What does this do?
 
-> Remember we use `…` to hide code that we are not discussing.
+> **Remember we use `…` to hide code that we are not discussing.**
 
 ```php
 @if($chirp->user->is(auth()->user()))  
@@ -278,11 +283,11 @@ Refreshing the page should now remove the error we had and we get "Action" being
 
 In the image above, you can see the action in the Staff User chirp, but not in the Administrator chirp. This is because the Staff User is logged in, not the Administrator.
 
-Clicking onthe word "Action" pops up a menu:
+Clicking on the word "Action" pops up a menu:
 
 ![](../assets/Pasted%20image%2020250429151936.png)
 
-But clicking edit gives us a blank screen… :-(
+But clicking edit gives us a blank screen… 😞
 
 So close…
 
