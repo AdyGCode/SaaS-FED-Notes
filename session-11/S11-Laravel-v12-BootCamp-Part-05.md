@@ -124,9 +124,9 @@ customize the message to include the author's name and a snippet from the messag
 
 > Remember the <kbd>SHIFT</kbd>-<kbd>SHIFT</kbd> technique!
 
-### Add use lines
+### Add `use` lines
 
-Add the following to the use lines, so that we can access the Chirps, plus give an extract of
+Add the following to the `use` lines, so that we can access the Chirps, plus give an extract of
 the chirp in the email.
 
 ```php
@@ -214,7 +214,7 @@ So now we have an event that can be activated, but how do we get the event to tr
 
 We dispatch it.
 
-What we do, is ask Laravel to trigger the event when a Chirp is created. The actual saving
+What we do is ask Laravel to trigger the event when a Chirp is created. The actual saving
 happens in the Chirp Model, so we will listen for this Model event and trigger the dispatch.
 
 Open the `Chirp.php` model class.
@@ -287,7 +287,7 @@ foreach (User::whereNot('id', $event->chirp->user_id)->cursor() as $user) {
 
 One interesting part of this notification sending is that we are using a "cursor" to progress though the users rather than loading them all into memory at once. 
 
-Even if "Chirper" had just 10,000 users, we could experience issues of running out of memory if we loaded all the users at once and processed them.
+This is because even if "Chirper" had just 10,000 users, we could experience issues of running out of memory if we loaded all the users at once and processed them.
 
 
 > #### Aside:
@@ -309,7 +309,7 @@ To do so we need to register the listeners.
 
 Open the `AppServiceProvider.php` file (found in the `App\Providers folder`).
 
-After the class is defines, and before the `boot` method we add:
+After the class is defined, and before the `boot` method we add:
 
 ```php
 protected $listen = [  

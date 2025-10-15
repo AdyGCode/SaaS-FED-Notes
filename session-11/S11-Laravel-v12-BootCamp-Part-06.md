@@ -91,7 +91,7 @@ For us, the Chirper App has a set of key needs:
 
 But this then also leads us into what is needed for administration of this application? 
 
-The admin needs stretch beyond the needs above.
+The administration user's needs stretch beyond the general user's needs above.
 
 For this example application we need Super Admin, Admin, Staff and Client roles who will have varying levels of permission to "abilities" or features:
 - Browse, read, edit, add and delete Chirpers (Users)
@@ -140,16 +140,31 @@ To make it obvious that this is an "administration" area we will be using the "a
 
 ### Create User Resourceful Routes
 
-Open the `routes/web.php` file and add a new set of routes before the `require __DIR__.'/auth.php';` line.
+Open the `routes/web.php` file.
+
+As you used Adrian Gould's Base Blade template kit, you will find the following route definition:
 
 ```php
+Route::middleware(['auth', 'verified'])  
+    ->prefix('admin')  
+    ->name('admin.')  
+    ->group(function () {  
+        Route::get('/', [AdminController::class, 'index'])  
+            ->name('index');  
 
+    });
+```
+
+You may remove the `verified` from the middleware list for the time being, but it will be added back into the code at a later point.
+
+We need to add a new Route to this "admin" routing for the users:
+
+```php
+        
 Route::resource('users',
 			UserManagementController::class)
 	->middleware(['auth',]);
 ```
-
-We will add the "`verified`" middleware to this later.
 
 At the top of the file add to the list of use lines the following:
 
@@ -179,7 +194,7 @@ Next we will create our management controller.
 In the case of the Users, we will name this `UserManager` just in case we may want to have a different "User" controller for another purpose. It also makes it obvious the purpose of said controller.
 
 ```shell
-hp artisan make:Controller UserManagementController --model=User --requests --pest
+php artisan make:Controller Admin/UserManagementController --model=User --requests --pest
 ```
 
 What do the `--` switches do?
@@ -206,7 +221,10 @@ Edit the `public function index()` method and add:
 
 ```php
 $users = User::all();
-return view('admin.users.index', compact(['users',]))
+
+return view('admin.users.index')
+           ->with('users',$users);
+
 ```
 
 Remember to import the User class in the "use" area:
@@ -235,160 +253,151 @@ Start by adding the `x-admin-layout`, with the header slot and a wrapper for the
 
 ```php
 <x-admin-layout>  
-  
-    <x-slot name="header" class="flex flex-row flex-between">  
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">  
-            {{ __('Users') }}  
-        </h2>        <p><a href="{{ route('users.create') }}">New User</a></p>  
+    <x-slot name="header">  
+        <h2 class="font-semibold text-xl text-white leading-tight">  
+            {{ __('User Admin') }}  
+        </h2>  
     </x-slot>  
+    
+    <section class="py-4 mx-8 space-y-4 ">  
+        <header>          
+          <h3 class="text-2xl font-bold text-zinc-700">  
+                Users  
+            </h3>  
+            <p>            
+                <a href="{{ route('admin.users.create') }}">  
+                    New User  
+                </a>  
+            </p>  
+        </header>
   
-    <div class="py-12">  
+	<!-- main page content here -->
 
-	<!-- main page cntent here -->
-
-	</div>  
+</div>
+</section>
 </x-admin-layout>
 
 ```
 
 Refreshing will show:
 
-![](../assets/Pasted%20image%2020250506152133.png)
+![](../assets/Pasted%20image%2020251015132702.png)
 
 Next replace the `<!-- main page content here -->` comment with the space for a 'table' of users, plus the header for the data:
 
 ```php
 
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">  
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">  
-  
-                <article class="my-0">  
-  
-                    <header class="grid grid-cols-10 bg-gray-500 text-gray-50 text-lg px-4 py-2">  
-                        <span class="col-span-1">#</span>  
-                        <span class="col-span-4">User</span>  
-                        <span class="col-span-1">Added</span>  
-                        <span class="col-span-1">Role</span>  
-                        <span class="col-span-1">Actions</span>  
-                    </header>  
+ <div class="flex flex-1 w-full max-h-min overflow-x-auto">  
+    <table class="min-w-full divide-y-2 divide-gray-200 bg-gray-50">  
+        <thead class="sticky top-0 bg-zinc-700 ltr:text-left rtl:text-right">  
+        <tr class="*:font-medium *:text-white">  
+            <th class="px-3 py-2 whitespace-nowrap">User</th>  
+            <th class="px-3 py-2 whitespace-nowrap">Role</th>  
+            <th class="px-3 py-2 whitespace-nowrap">Status</th>  
+            <th class="px-3 py-2 whitespace-nowrap">Actions</th>  
+        </tr>       
+         </thead>
 
   <!-- loop for users here -->
 
-                </article>  
-  
-            </div>  
-        </div>  
+ <tfoot>  
+	<tr>               
+		<td colspan="4" class="p-3">  
+		</td>  
+	</tr>                
+</tfoot>            
 
+</table> 
 
 ```
 
 Refreshing we see:
 
-![](../assets/Pasted%20image%2020250506152834.png)
+![](../assets/Pasted%20image%2020251015132630.png)
 
 Now we add the loop for the users, that will show a row number, the user name, date they were added/joined, a role, and actions for each user.
 
 The code will look like this, replacing the `<!-- loop for users here -->`:
 
 ```php
-
- @foreach ($users as $user)  
- 
-     <section class="px-4 grid grid-cols-10 py-1 hover:bg-gray-100 border-b border-b-gray-300 transition duration-150">
-	 
-          <p class="col-span-1">{{ $loop->index + 1 }}</p>  
+<tbody class="divide-y divide-gray-200">  
+@foreach($users as $user)  
   
-          <h5 class="flex flex-col col-span-4 text-gray-800">  
-              {{ $user->name }}  
-          </h5>  
-  
-          <p class="text-xs text-gray-400 col-span-1 p-1">  
-              {{ $user->created_at->format('j M Y') }}  
-           </p>  
-  
-           <p class="col-span-1">  
-               <span class="text-xs bg-gray-800 text-gray-100 rounded-full px-2 py-0.5">  
-                   Role  
-               </span>  
-           </p>  
+    <tr class="*:text-gray-900 *:first:font-medium hover:bg-white">  
+        <td class="px-3 py-1 whitespace-nowrap flex flex-col min-w-1/3">  
+            <span class="">{{ $user->name }}</span>  
+            <span class="text-sm text-gray-500">{{ $user->email }}</span>  
+        </td>        
+        <td class="px-3 py-1 whitespace-nowrap w-auto">  
+            <span class="text-xs rounded-full bg-gray-700 p-0.5 px-2 text-gray-200">  
+                role  
+            </span>  
+        </td>       
+         <td class="px-3 py-1 whitespace-nowrap w-1/6">  
+            <span class="text-xs rounded-full bg-gray-700 p-0.5 px-2 text-gray-200">  
+                suspended  
+            </span>  
+        </td>       
+         <td class="px-3 py-1 whitespace-nowrap w-1/4">
            
            <!-- Only Admin and Staff access these options -->  
                             
-           <!-- /End Form -->  
   
-       </section>  
-   @endforeach  
+ </td>  
+    </tr>@endforeach  
+  
+</tbody>
 
 
 ```
 
 We now should see:
 
-![](../assets/Pasted%20image%2020250506153402.png)
+![](../assets/Pasted%20image%2020251015133215.png)
 
 Now we need the form to go where we have the `<!-- Only Admin and Staff access these options -->`:
 
 ```php
-<form method="POST"  
-      class="col-span-2 flex border border-gray-300 rounded-full px-0 overflow-hidden"  
-      action="{{ route('users.destroy', $user) }}">  
+<form action="{{ route('admin.users.index', $user) }}"  
+      method="post"  
+      class="grid grid-cols-3 gap-2 w-full">  
+    @csrf  
+    @method('delete')  
   
-      @csrf  
-      @method('delete')  
-  
-      <a href="{{ route('users.show', $user) }}"  
-         class="bg-gray-100 hover:bg-blue-500  
-                text-blue-800 hover:text-gray-100 text-center
-                border-r border-r-gray-300 
-                transition ease-in-out duration-300             
-				grow px-2                                          rounded-l">  
-	      <i class="fa-solid fa-user text-sm"></i> 
-	      {{ __('Show') }}  
-      </a>  
-      
-      <a href="{{ route('users.edit', $user) }}"  
-         class="bg-gray-100 hover:bg-amber-500
-				text-amber-800 hover:text-gray-100  text-center    
-				border-x border-x-gray-300         
-				transition ease-in-out duration-300             
-				grow px-2 ">  
-	      <i class="fa-solid fa-user-edit  text-sm"></i>  
-          {{ __('Edit') }}  
-      </a>  
-      
-      <button type="submit"  
-              class="bg-gray-100 hover:bg-red-500
-					 text-red-800 hover:text-gray-100 text-center      
-					 border-l border-l-gray-300
-					 transition ease-in-out duration-300
-					 grow px-2                                          rounded-r ">  
-	       <i class="fa-solid fa-user-minus  text-sm"></i>
-		   {{ __('Delete') }}  
-      </button>  
-      
-</form>  
+    <a href="{{ route('admin.users.index', $user) }}"  
+       class="hover:text-green-500 transition border p-2 text-center rounded">  
+        <i class="fa-solid fa-user-tag"></i>  
+    </a>  
+    <a href="{{ route('admin.users.index', $user) }}"  
+       class="hover:text-blue-500 transition border p-2 text-center rounded">  
+        <i class="fa-solid fa-user-cog"></i>  
+    </a>    <button type="submit"  
+            class="hover:text-red-500 transition border p-2 text-center rounded">  
+        <i class="fa-solid fa-user-slash"></i>  
+    </button></form> 
 ```
 
 This gives:
 
-![](../assets/Pasted%20image%2020250506153327.png)
+![](../assets/Pasted%20image%2020251015133443.png)
 
-After the `@endforeach` and before the `</article>` we need to add the footer for the "table". It is a placeholder for the time being:
+After the `@endforeach` and `</tbody>` and before the `</table>` we need to add the footer for the "table". It is a placeholder for the time being:
 
 ```php
-
-                    <footer class="px-4 pb-2 pt-4 ">  
-                        Pagination Navigation here  
-                    </footer>  
-
+                <tfoot>  
+                <tr>
+                <td colspan="4" class="p-3">  
+                        Pagination here...  
+                </td>  
+                </tr>
+                </tfoot>
 ```
 
-The final result:
+The final result (showing end of page):
 
+![](../assets/Pasted%20image%2020251015133327.png)
 
-![](../assets/Pasted%20image%2020250506152736.png)
-
-Note that the role and pagination are not showing read details as we have to yet implement them.
+Note that the role, status and pagination are not showing real details as we have to yet implement them.
 
 ### Test Browse/Index Action
 
@@ -406,12 +415,12 @@ This is where we are shown just ONE user's "full" details.
 
 Our next step is to update the show method to give the user's details that we want to view.
 
-The button on the Index page calls the `users.show` route with the user (we have removed the CSS for brevity):
+The button on the Index page calls the `admin.users.show` route with the user (make sure you change the `href`):
 
 ```php
-<a href="{{ route('users.show', $user) }}">  
-    <i class="fa-solid fa-user  text-sm"></i>  
-    {{ __('Show') }}  
+<a href="{{ route('admin.users.show', $user) }}"  
+   class="hover:text-green-500 transition border p-2 text-center rounded">  
+    <i class="fa-solid fa-user-tag"></i>  
 </a>
 ```
 
@@ -420,21 +429,76 @@ In the `UserMangementController` find the `show` method.
 Add the following code:
 
 ```php
-        return view('users.show', compact(['user']));
+        return view('admin.users.show')
+            ->with('user', $user);
 ```
 
 This uses the Route-Model binding that we have seen previously.
 
-### Create `users/show.blade.php`
+### Create a `resources/views/components/primary-link-button-blade.php` file
+
+We will add a new component to simplify the creation of link based buttons.
+
+Create a new file using:
+
+```shell
+touch resources/views/components/primary-link-button.blade.php
+```
+
+Open the file and add:
+
+```php
+<a {{ $attributes->merge([  
+        'class' => 'inline-flex items-center
+			        px-4 py-2
+			        bg-gray-800 hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 
+			        focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2
+					border border-transparent rounded-md
+					font-semibold text-xs uppercase tracking-widest
+					text-white
+					transition ease-in-out duration-150',  
+        ])   
+    }}>  
+    {{ $slot }}  
+</a>
+```
+
+This will be display buttons like this:
+
+![](../assets/Pasted%20image%2020251015150355.png)
+
+when using the following code:
+
+```html
+<x-primary-link-button href="#">  
+    All Users  
+</x-primary-link-button>
+```
+
+If you want to change the hover, or background effects then add them by updating the class in the `<x-primary-button-link`>:
+
+```html
+<x-primary-link-button 
+	class="bg-rose-500 hover:bg-green-800"  
+    href="#">  
+    All Users  
+</x-primary-link-button>
+```
+
+This will show a green background on hover, and a rose background by default:
+
+![](../assets/vivaldi_yiyZKNoOkm.gif)
+
+### Create `admin/users/show.blade.php`
 
 The Show page will be a good start as we then duplicate and update it to become the Create page, and from that the Edit page.
 
 This is the final layout:
 
-![](../assets/Pasted%20image%2020250506161021.png)
+![](../assets/Pasted%20image%2020251015150806.png)
 
 
-In PhpStorm, click on the `users/index.blade.php` file and then use CTRL+C followed by CTRL+V
+In PhpStorm, click on the `admin/users/index.blade.php` file and then use CTRL+C followed by CTRL+V
 
 Rename the file to `show.blade.php`.
 
@@ -442,78 +506,104 @@ Rename the file to `show.blade.php`.
 OR...
 
 ```shell
-cp resources/views/users/index.blade.php resources/views/users/show.blade.php
+cp resources/views/admin/users/index.blade.php resources/views/admin/users/show.blade.php
 ```
 
 Open the new file and start the editing.
 
-Delete everything from ` <article class="my-0">` to `</article>` (approximately lines `xxx` to `yyy`).
+Delete everything from ` <table>` to `</table>` inclusive (approximately lines `21` to `84`).
 
 This leaves a smaller base file to use:
 
-
 ```php
-<x-app-layout>  
-  
-    <x-slot name="header" class="flex flex-row flex-between">  
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">  
-            {{ __('Users') }}  
-        </h2>
-        <p>
-            <a href="{{ route('users.create') }}">New User</a>
-        </p>  
+<x-admin-layout>  
+    <x-slot name="header">  
+        <h2 class="font-semibold text-xl text-white leading-tight">  
+            {{ __('User Admin') }}  
+        </h2>  
     </x-slot>  
+    
+    <section class="py-4 mx-8 space-y-4 ">  
+        <header>            
+        <h3 class="text-2xl font-bold text-zinc-700">  
+                Users  
+            </h3>  
+            <p>              
+              <a href="{{ route('admin.users.create') }}">  
+                    New User  
+                </a>  
+            </p>  
+        </header>  
+    
+    </section>  
   
-    <div class="py-12">  
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">  
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">  
-  
-                <article class="my-0">  
-
-
-                </article>  
-  
-            </div>  
-        </div>  
-    </div>  
-</x-app-layout>
+</x-admin-layout>
 ```
 
 
-Now we add code into the space we just created (between the start and end article tags).
+Now we add code into the space we just created (between the `</header>` and `</section>` tags).
 
 We will show each new section as a separate block of code. 
 
-Inside the article we first add the header:
+Inside the section we first add the header:
 
 ```php
-<header class="bg-gray-500 text-gray-50 text-lg px-4 py-2">  
-    <h5>  
-        {{ __('Details for') }}  
-        <em>{{ $user->name }}</em>  
-    </h5>  
-</header>
+<article class="flex flex-col text-neutral-800 block border border-neutral-300 shadow-sm">  
+    <header class="bg-neutral-800 text-neutral-50 text-lg px-4 py-2">  
+        <h5>
+            {{ __('Details for') }}  
+            <em>{{ $user->name }}</em>  
+        </h5>    
+        </header>
+
+</article>
 ```
 
 Add a section immediately after the header:
 
 ```php
-<section class="px-4 flex flex-col text-gray-800">  
+<section class="px-4">  
   
 </section>    
 ```
 
 Inside the section we now add a block for each part of the information we will display.
 
-Name part:
+##### User Photo
+
+We will use Unsplash to create an image for the user as we are not focussing on file uploads etc.:
 
 ```php
-<div class="grid grid-rows-3 mt-6 ">  
-    <p class="text-gray-500 text-sm ">Name:</p>  
-    <p class="w-full ml-4">  
-        {{ $user->name ?? "No Name provided" }}  
-    </p>
-</div>
+<div class="sm:flex sm:justify-between sm:gap-4 lg:gap-6">  
+  
+    <div class="sm:order-last sm:shrink-0">  
+        <img            alt=""  
+            src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80"  
+            class="size-16 rounded-full object-cover sm:size-[72px]"  
+        />  
+    </div>
+```
+
+After the `</div` we next add a definition list for the other user details:
+
+```php
+<dl class="mt-4 sm:mt-0 grid grid-cols-4 gap-2 text-neutral-700">  
+
+
+</dl>
+```
+
+Between the `<dl>` and `</dl>` you will now add name, email and other details:
+##### Name:
+
+```php
+
+    <dt class="col-span-1">  
+        {{__("Name")}}:  
+    </dt>  
+    <dd class="col-span-3 font-medium text-pretty text-neutral-900">  
+        {{ $user->name ?? __("No Name provided") }}  
+    </dd>
 ```
 
 
@@ -522,101 +612,80 @@ This basic layout will now be reproduced for each of the items of detail we will
 Email part:
 
 ```php
-<div class="grid grid-rows-3  ">  
-    <p class="text-gray-500 text-sm ">Email:</p>  
-    <p class="w-full ml-4">  
-        {{ $user->email ?? "No Email Provided" }}  
-    </p>
-</div>
+<dt class="col-span-1">  
+    {{__("Email")}}  
+    <i class="fa-solid fa-email"></i>  
+</dt>  
+<dd class="col-span-3 font-medium text-pretty text-neutral-900">  
+    {{ $user->email ?? __("No Email provided") }}  
+</dd>
 ```
 
 Role part:
 
 ```php
-  
-<div class="grid grid-rows-3  ">  
-    <p class="text-gray-500 text-sm ">Role:</p>  
-    <p class="w-full ml-4">  
-        {{ $user->role ?? "No Role Provided" }}  
-    </p>
-</div>
+<dt class="col-span-1">  
+    {{__("Role")}}:  
+    <i class="fa-solid fa-user-friends"></i>  
+</dt>  
+<dd class="col-span-3">  
+    {{ $user->role ?? __("No Role") }}  
+</dd>
 ```
 
-Added and Last Updated:
+Status:
 
 ```php
-<div class="grid grid-rows-3  ">  
-    <p class="text-gray-500 text-sm ">Added:</p>  
-    <p class="w-full ml-4">  
-        {{ $user->created_at->format('j M Y') }}  
-    </p>
-</div>
+<dt class="col-span-1">  
+    {{__("Status")}}:  
+    <i class="fa-solid fa-user-lock"></i>  
+</dt>  
+<dd class="col-span-3">  
+    {{ $user->status ?? __("No Status") }}  
+</dd>
+```
+
+##### Added (Created at) and Updated (Updated at):
+
+```php
+<dt class="col-span-1">  
+    {{ __("Added") }}  
+    <i class="fa-solid fa-calendar"></i>  
+</dt>  
+<dd class="col-span-3">  
+    {{ $user->created_at->format('j M Y') ?? __("-")}}  
+</dd>
 ```
 
 Duplicate the above and change the `created_at` for `updated_at`.
 
-Action buttons part... start by adding the form wrapper:
+Action buttons are contained in the footer of the section.
+
+After the `</dd>` and `</div>` we add the footer:
 
 ```php
 <!-- Only Admin and Staff access these options -->  
-<form method="POST"  
-      class="flex my-8 gap-6 ml-4"  
-      action="{{ route('users.destroy', $user) }}">  
   
-    @csrf  
-    @method('delete')  
-    
-</form>  
+<footer class="mt-4 gap-4 flex bg-neutral-200 -m-4 p-2 px-4">  
+    <x-primary-link-button        
+	    class="hover:bg-blue-800!"  
+		href="{{ route('admin.users.index', $user) }}">
+        All Users  
+    </x-primary-link-button>  
+    <x-primary-link-button 
+	    class="bg-neutral-700 hover:bg-yellow-700"  
+		href="{{ route('admin.users.edit', $user) }}">
+        Edit  
+    </x-primary-link-button>  
+    <x-secondary-button 
+	    class="hover:bg-red-800 hover:text-white!"  
+
+        Delete  
+    </x-secondary-button>  
+</footer>
 <!-- /Only Admin and Staff access these options -->
 ```
 
-Inside this wrapper you will add each button in turn, before the `</form>` tag.
-
-All users button
-
-```php
-<a href="{{ route('users.index', $user) }}"  
-   class="bg-gray-100 hover:bg-blue-500  
-          text-blue-800 hover:text-gray-100 text-center
-          border border-gray-300
-          transition ease-in-out duration-300
-          p-2 min-w-24 rounded">  
-    <i class="fa-solid fa-user inline-block"></i>  
-    {{ __('All Users') }}  
-</a> 
-```
-
-Edit button
-
-```php
-<a href="{{ route('users.edit', $user) }}"  
-   class="bg-gray-100 hover:bg-amber-500  
-          text-amber-800 hover:text-gray-100 text-center
-          border border-gray-300
-		  transition ease-in-out duration-300
-		  p-2 min-w-24 rounded">  
-    <i class="fa-solid fa-user-edit text-sm"></i>  
-    {{ __('Edit') }}  
-</a>  
-
-```
-
-
-Delete button, is a true button, as we saw on the index page.
-
-```php
-<button type="submit"  
-        class="bg-gray-100 hover:bg-red-500  
-               text-red-800 hover:text-gray-100
-               text-center
-               border border-gray-300                  
-               transition ease-in-out duration-300
-               p-2 min-w-16 rounded">
-    <i class="fa-solid fa-user-minus text-sm"></i>  
-    {{ __('Delete') }}  
-</button>
-
-```
 
 And we are done!
 
@@ -626,7 +695,7 @@ Make sure that everything is correctly entered, and you have your HTML balanced 
 
 If all works as expected you should be able to click on a user in the index page and it will jump to the users details.
 
-![](../assets/vivaldi_LTZ7aCBugA.gif)
+![](../assets/vivaldi_OE1N5p8Gul.gif)
 
 ## Add User
 
@@ -648,13 +717,44 @@ $roles = Collection::empty();
 return view('users.create', compact(['roles',]));
 ```
 
-Note the comment - we will update this when we add Roles & Permissions to the application.
+> ##### Note
+>  The comment indicates that we will update this when we add Roles & Permissions to the application.
+>
+> Also, you will need to add a `use` line: `use Illuminate\Database\Eloquent\Collection;`
 
-### Create `users/create.blade.php`
+
+#### Create a Secondary Link Button Component
+
+Copy the primary link button component:
+
+```shell
+cp resources/views/components/primary-link-button.blade.php resources/views/components/secondary-link-button.blade.php
+```
+
+Now edit the new `components/secondary-link-button.blade.php` to ensure the code is the same as the following:
+
+```php
+<a {{ $attributes->merge([  
+        'class' => 'inline-flex items-center  
+                    px-4 py-2                    
+                    bg-white hover:bg-gray-50                    
+                    border border-gray-300 rounded-md                    
+                    font-semibold text-xs text-gray-700 uppercase tracking-widest                    
+                    shadow-sm                    
+                    focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2                    
+                    disabled:opacity-25                    
+                    transition ease-in-out duration-150',  
+        ])  
+    }}>  
+    {{ $slot }}  
+</a>
+```
+
+### Create `admin/users/create.blade.php`
 
 We are ging to be a little lazy, and duplicate the show view we added previously.
 
-So, CTRL+C and CTRL+V the `users/show.blade.php` file and rename it to `create.blade.php`.
+So, CTRL+C and CTRL+V the `admin/users/show.blade.php` file and rename it to `create.blade.php`.
 
 The reason we are doing this is because we will lay out the create page in the same way as we did the show page.
 
@@ -666,127 +766,87 @@ Each block of the create page will have:
 Update the page header:
 
 ```php
-<header class="bg-gray-500 text-gray-50 text-lg px-4 py-2">  
-    <h5>  
-        {{ __('Create New User') }}  
+<header class="bg-neutral-800 text-neutral-50 text-lg px-4 py-2">  
+    <h5> 
+       {{ __('Create New User') }}  
     </h5>  
 </header>
 ```
 
-We now need to move the form code from its current location to immediately after the `<section>` tag.
+We now need to add the required code to create the form.
 
-Plus we also need to update the section and form's classes to suit the new layout:
+Remove the code between the `<section class="p-4">` and `</section>` tags.
+
+Then update the section to become:
 
 ```php
-<section>  
-
-	<form method="POST"  
-          class="my-4 gap-4 px-4 flex flex-col text-gray-800"  
-          action="{{ route('users.store') }}">  
+<section class="p-4">  
+    <form method="POST"  
+          class="sm:gap-4 lg:gap-6 w-full"  
+          action="{{ route('admin.users.store') }}">  
   
         @csrf  
-        
-  <!--- THE FORM FIELD BLOCKS WILL GO HERE -->
-   
-    </form>  
   
+  
+        <div class="w-full mt-4 sm:mt-0 flex flex-col space-y-2  text-neutral-700">  
+  
+            <x-input-label for="Name">  
+                {{__("Name")}}  
+            </x-input-label>  
+            <x-text-input type="text" id="Name" name="name"/>  
+            <x-input-error :messages="$errors->get('name')" class="mt-2"/>  
+  
+            <x-input-label for="Email">  
+                {{__("Email")}}  
+            </x-input-label>  
+            <x-text-input type="text" id="Email" name="email"/>  
+            <x-input-error :messages="$errors->get('email')" class="mt-2"/>  
+  
+            <x-input-label for="Role">  
+                {{__("Role")}}  
+            </x-input-label>  
+            <select id="Role" name="role">  
+                <option>No Roles Provided</option>  
+            </select>            <x-input-error :messages="$errors->get('role')" class="mt-2"/>  
+  
+            <x-input-label for="Status">  
+                {{__("Status")}}  
+            </x-input-label>  
+            <select id="Status" name="status">  
+                <option>No Status Provided</option>  
+            </select>            <x-input-error :messages="$errors->get('status')" class="mt-2"/>  
+      
+<x-input-label for="Password">  
+    {{__("Password")}}  
+</x-input-label>  
+<x-text-input type="password" id="Password" name="password"/>  
+<x-input-error :messages="$errors->get('password')" class="mt-2"/>  
+  
+<x-input-label for="PasswordConfirmation">  
+    {{__("Password Confirmation")}}  
+</x-input-label>  
+<x-text-input type="password" id="PasswordConfirmation" name="password_confirmation"/>  
+<x-input-error :messages="$errors->get('password_confirmation')" class="mt-2"/>
+
+        </div>  
+        
+        <footer class="mt-4 gap-4 flex bg-neutral-200 -m-4 p-2 px-4">  
+            <x-primary-button                class="bg-green-900! hover:bg-green-700! hover:text-white!">  
+                Save  
+            </x-primary-button>  
+  
+            <x-secondary-link-button                class="bg-neutral-700 hover:bg-yellow-700"  
+                href="{{ route('admin.users.index') }}"  
+            >  
+                Cancel  
+            </x-secondary-link-button>  
+  
+        </footer>    </form>  
 </section>
 ```
 
-The remaining blocks, will look very similar to the code below (the name field). Add each in turn, within the form tags.
+Make sure that the HTML is well formatted before continuing.
 
-```php
-<div class="flex flex-col">  
-    <x-input-label for="name" :value="__('Name')"/>  
-    
-    <x-text-input id="name" class="block mt-1 w-full"  
-                  type="text"  
-                  name="name"  
-                  :value="old('name')"  
-                  required autofocus autocomplete="name"/>  
-                  
-    <x-input-error :messages="$errors->get('name')" class="mt-2"/>  
-</div>
-```
-
-Email field...
-
-```php
-<div class="flex flex-col">  
-    <x-input-label for="Email" :value="__('Email')"/>  
-    <x-text-input id="Email" class="block mt-1 w-full"  
-                  type="text"  
-                  name="email"  
-                  :value="old('email')"  
-                  required autofocus autocomplete="email"/>  
-    <x-input-error :messages="$errors->get('email')" class="mt-2"/>  
-</div>
-```
-
-As the `div` is the same for the remaining fields, we are omitting it int he remaining sample code. You **must** add it for each field.
-
-Password field...
-
-```php
-<x-input-label for="Password" :value="__('Password')"/>  
-<x-text-input id="Password" class="block mt-1 w-full"  
-              type="text"  
-              name="password"  
-              required autofocus />  
-<x-input-error :messages="$errors->get('password')" class="mt-2"/>
-```
-
-Password Confirmation field...
-
-```php
-<x-input-label for="Password_Confirmation" :value="__('Confirm Password')"/>  
-<x-text-input id="Password_Confirmation" class="block mt-1 w-full"  
-              type="text"  
-              name="password_confirmation"  
-              required autofocus />  
-<x-input-error :messages="$errors->get('password_confirmation')" class="mt-2"/>
-```
-
-Role field...
-
-```php
-<x-input-label for="Role" :value="__('Role')"/>  
-<select id="Role"  
-        class="block mt-1 w-full px-2 py-1 border-gray-300  
-            focus:outline-indigo-500 focus:outline-2 focus:ring-2 focus:ring-indigo-500              rounded-md shadow-sm"        type="text"  
-        name="role"  
-        :value="old('role')"  
-        required autofocus autocomplete="role">  
-    <option>  
-        Role will be implemented with Roles & Permissions  
-    </option>  
-</select>  
-  
-<x-input-error :messages="$errors->get('role')" class="mt-2"/>
-```
-
-Buttons...
-
-The buttons are aligned horizontally so... `flex-row` for them in place of `flex-col`.
-
-```php
-<div class="flex flex-row gap-6  ">  
-  
-    <a href="{{ route('users.index') }}"  
-       class="bg-gray-100 hover:bg-blue-500  
-              text-blue-800 hover:text-gray-100 text-center              border border-gray-300              transition ease-in-out duration-300              p-2 min-w-24 rounded">  
-        <i class="fa-solid fa-times inline-block"></i>  
-        {{ __('Cancel') }}  
-    </a>  
-  
-    <button type="submit"  
-            class="bg-gray-100 hover:bg-green-500  
-                 text-green-800 hover:text-gray-100 text-center                 border border-gray-300              transition ease-in-out duration-300              p-2 min-w-32 rounded">  
-        <i class="fa-solid fa-save text-sm"></i>  
-        {{ __('Save') }}  
-    </button>  
-</div>
-```
 
 ### Add Store method to user management controller
 
@@ -796,20 +856,44 @@ The store method will:
 - return to the users index page
 
 ```php
-$validated = $request->validate([  
-    'name'=>['required','min:2', 'max:192',],  
-    'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],  
-    'password' => ['required', 'confirmed', Rules\Password::defaults()],  
-    'role'=>['nullable',],  
-]);  
+public function store(StoreUserRequest $request)  
+{  
+    $validated = $request->validate([  
+        'name'=>['required','min:2', 'max:192',],  
+        'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],  
+        'password' => ['required', 'confirmed', Password::defaults()],  
+        'role'=>['nullable',],  
+    ]);  
   
-$user = User::create([  
-    'name' => $request->name,  
-    'email' => mb_strtolower($request->email),  
-    'password' => Hash::make($request->password),  
-]);  
+    $user = User::create([  
+        'name' => $request->name,  
+        'email' => mb_strtolower($request->email),  
+        'password' => Hash::make($request->password),  
+    ]);  
   
-return redirect(route('users.index'));
+    return redirect(route('admin.users.index'));    
+}
+```
+
+
+The `Password::class` and `Hash::class` are imported using the following `use` lines:
+
+```php
+use Illuminate\Validation\Rules\Password;
+use Illuminate\Support\Facades\Hash;
+```
+
+Before being able to test we need to allow the action to be performed.
+
+Edit the `StoreUserRequest.php` file.
+
+Update the `authorize` method to be:
+
+```php
+public function authorize(): bool  
+{  
+    return auth()->check();  
+}
 ```
 
 ### Test Add Action
@@ -818,7 +902,7 @@ Test the action to see it works.
 
 Here is a demonstration.
 
-![](../assets/vivaldi_yYBUqIS4VM.gif)
+![](../assets/vivaldi_FqTSZ1ydWW.gif)
 
 
 ## Edit the User
