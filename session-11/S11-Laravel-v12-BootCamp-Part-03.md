@@ -446,9 +446,15 @@ Navigate to the `/app/Http/Requests` folder and delete the `Create` and `Update`
 
 Now we have removed the requests, let's update the Update method.
 
-Open the `ChirpController` and locate the `update` method.
+Open the `ChirpController` ... at the top, with the other `use` lines add:
 
-Modify the code below:
+```php
+use Illuminate\Http\Request;
+```
+
+This will allow you to access the Request data sent, without it going via the Update/Store Requests.
+
+Next, locate the `update` method and modify the code below:
 
 ```php
 public function update(UpdateChirpRequest $request, Chirp $chirp)  
@@ -477,6 +483,7 @@ public function update(Request $request, Chirp $chirp): RedirectResponse
     return redirect(route('chirps.index'));  
 }
 ```
+
 
 Note the small change to the validation for the message?
 

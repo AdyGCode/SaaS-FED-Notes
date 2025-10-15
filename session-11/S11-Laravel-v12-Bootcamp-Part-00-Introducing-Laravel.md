@@ -188,7 +188,7 @@ Check to see that you have at least these versions of the software tools. If not
 Open a terminal and execute the following:
 
 ```shell
-composer global install laravel/installer
+composer global require laravel/installer
 ```
 
 This makes it available anytime you wish to start a new project.
