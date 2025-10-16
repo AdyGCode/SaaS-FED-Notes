@@ -79,31 +79,27 @@ We added the search interface in the previous part of these notes. But as a revi
 We are even giving you the icon, hover and other effects from the exercises 😁.
 
 ```php
-<form action="{{ route('users.index') }}" method="GET" class="flex flex-row gap-0">
-    <x-text-input id="search"
-                  type="text"
-                  name="search"
-                  class="border border-gray-200 rounded-r-none shadow-transparent"
-                  :value="$search??''"
-    />
-
-    <button type="submit"
-            class="text-gray-800 hover:text-gray-100
-                   bg-gray-100 hover:bg-gray-800
-                   border border-gray-300
-                   rounded-lg
-                   transition ease-in-out duration-200
-                   px-4 py-1
-                   rounded-l-none">
-        <i class="fa-solid fa-magnifying-glass pr-1 aria-hidden:true"></i>
-        Search
-    </button>
+<form action="{{ route('admin.users.index') }}" method="GET" class="flex flex-row gap-1">  
+  
+    <x-text-input id="search"  
+                  type="text"  
+                  name="search"  
+                  class="border border-neutral-500/50"  
+                  :value="$search??''"  
+    />  
+  
+    <x-primary-button type="submit"  
+            class="px-4 py-1">  
+        <i class="fa-solid fa-search text-md"></i>  
+        <span class="sr-only">Search</span>  
+    </x-primary-button>  
+  
 </form>
 ```
 
 Animated Screenshot:
 
-![](../assets/vivaldi_YBcbXR0jam.gif)
+![](../assets/vivaldi_uQKFtB6QLn.gif)
 
 #### Implementing the Controller Changes
 
@@ -117,7 +113,7 @@ public function index(Request $request)
 
 Next, it is extremely important (make that a **MUST**) to validate any input that comes from the user...
 
-After the opening brackets we will add:
+After the opening `{` curly bracket we will add:
 
 ```php
         $validated = $request->validate([
@@ -127,7 +123,11 @@ After the opening brackets we will add:
 
 This allows for a search that is empty or a string.
 
-> Question: could we make this more strict and only allow alpha numeric characters? If so, how?
+> Question:
+> 
+> Could we make this more strict and only allow alpha numeric characters? 
+> 
+> If so, how?
 
 We then check to see if the validated data is empty, and if so we set a search variable to the validated data, ready for use later.
 
@@ -169,21 +169,30 @@ Even better is that one of the more recent Laravel updates added the ability to 
 
 So we will use this.
 
-Add after the `$search = ...;` the following:
+Update the `$users = User::all();` to become:
 
 ```php
 $users = User::whereAny(  
     ['name', 'email','position',],
-    'LIKE', "%$search%");
+    'LIKE', "%$search%")
+    ->get();
 ```
 
 The final change to the index method is to return the users *and* the search term, so that it can be used by the search form to fill in the field.
 
 ```php
-return view('users.index', compact(['users', 'search',]));
+return view('admin.users.index')  
+    ->with('users', $users)  
+    ->with('search', $search);
 ```
 
 Try it out and see if you get what you expect.
+
+### Exercise
+
+As an exercise, add a button to the form that will clear the search, and show all the users. 
+
+There are at least TWO ways to achieve this.
 
 
 ### Pagination
@@ -213,10 +222,10 @@ Adjust this to suit your purposes.
 
 Next we add ONE line to the index view.
 
-Navigate to the `footer` within the `article` and replace the placeholder text with the following:
+Navigate to the `footer` and replace the "Pagination here..." text with:
 
 ```php
-        {{ $users->links() }}  
+{{ $users->onEachSide(2)->links("vendor.pagination.tailwind") }}
 ```
 
 And you are done.
@@ -231,7 +240,7 @@ We need to customise the navigation component.
 
 #### Publishing the Pagination assets
 
-To be able to customise the component, we need to first publish the pagiantion assets.
+To be able to customise the component, we need to first publish the pagination assets.
 
 This is done using:
 
@@ -518,16 +527,16 @@ We will continue to investigate, but, just in case, try updating the validation 
 $validated = $request->validate([  
     'name' => ['required', 'min:2', 'max:192',],  
     'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class . ',email',],  
-    'password' => ['required', 'confirmed', Rules\Password::defaults()],  
+    'password' => ['required', 'confirmed', Password::defaults()],  
     'role' => ['nullable',],  
 ]);
 ```
 
 
-## Exercise
+## Exercises
 
-Add flash messages to Edit and Delete.
-
+1. Add flash messages to Edit (update) and Delete (destroy).
+2. When you have an error in the create user page, do the previous values from the form re-appear? If not, fix this using ` :value="old('field_name')"` where `field_name` is the name of the item being entered, e.g. `name`.
 
 # References
 
