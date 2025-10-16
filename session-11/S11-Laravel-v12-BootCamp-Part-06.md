@@ -16,9 +16,6 @@ created: 2024-09-20T11:17
 updated: 2025-08-21T17:39
 ---
 
-
-# INCOMPLETE - Updates 15/5/25
-
 # S11 Laravel Bootcamp: Part 6
 
 ## Software as a Service - Front-End Development
@@ -239,7 +236,7 @@ Refreshing will give a different error - no users index view found.
 
 ### Create `admin/users/index.blade.php`
 
-Use the touch command to create the index blade fle for the users:
+Use the touch command to create the index blade file for the users:
 
 ```shell
 touch resources/views/admin/users/index.blade.php
@@ -384,28 +381,30 @@ This gives:
 After the `@endforeach` and `</tbody>` and before the `</table>` we need to add the footer for the "table". It is a placeholder for the time being:
 
 ```php
-                <tfoot>  
-                <tr>
-                <td colspan="4" class="p-3">  
-                        Pagination here...  
-                </td>  
-                </tr>
-                </tfoot>
+<tfoot>  
+	<tr>
+		<td colspan="4" class="p-3">  
+			Pagination here...  
+		</td>  
+	</tr>
+</tfoot>
 ```
 
 The final result (showing end of page):
 
 ![](../assets/Pasted%20image%2020251015133327.png)
 
-Note that the role, status and pagination are not showing real details as we have to yet implement them.
+Note that the role, status and pagination are not showing any real details as we have to yet implemented them.
 
 ### Test Browse/Index Action
 
 Check the page works as expected.
 
-The "New User" button will be placed on the right side of the header area. We leave that as an exercise.
+The "New User" button will be placed on the right side of the header area. 
 
-## Read a User
+We leave that as an exercise.
+
+## Read a User (Show)
 
 Our next item in the CRUD / BREAD journey is the "read" sub-feature.
 
@@ -435,7 +434,7 @@ Add the following code:
 
 This uses the Route-Model binding that we have seen previously.
 
-### Create a `resources/views/components/primary-link-button-blade.php` file
+### Create a `primary-link-button-blade.php` component
 
 We will add a new component to simplify the creation of link based buttons.
 
@@ -489,6 +488,18 @@ This will show a green background on hover, and a rose background by default:
 
 ![](../assets/vivaldi_yiyZKNoOkm.gif)
 
+> **Note:** 
+> 
+> Sometimes you may find the button will not update after changing the colours, this may be due to the browser's cache and also the cached views from Laravel.
+> 
+> Clear the Laravel cached views using:
+> 
+> ```shell
+> php artisan view:clear
+> ```
+> Another way is to force the colour to take precedence by adding a `!` to the class. For example: `bg-blue-800!` forces the background to be blue shade 800.
+
+
 ### Create `admin/users/show.blade.php`
 
 The Show page will be a good start as we then duplicate and update it to become the Create page, and from that the Edit page.
@@ -502,8 +513,7 @@ In PhpStorm, click on the `admin/users/index.blade.php` file and then use CTRL+C
 
 Rename the file to `show.blade.php`.
 
-
-OR...
+*OR...*
 
 ```shell
 cp resources/views/admin/users/index.blade.php resources/views/admin/users/show.blade.php
@@ -584,7 +594,7 @@ We will use Unsplash to create an image for the user as we are not focussing on 
     </div>
 ```
 
-After the `</div` we next add a definition list for the other user details:
+After the `</div>` we next add a definition list for the other user details:
 
 ```php
 <dl class="mt-4 sm:mt-0 grid grid-cols-4 gap-2 text-neutral-700">  
@@ -609,7 +619,7 @@ Between the `<dl>` and `</dl>` you will now add name, email and other details:
 
 This basic layout will now be reproduced for each of the items of detail we will display...
 
-Email part:
+#### Email part:
 
 ```php
 <dt class="col-span-1">  
@@ -621,7 +631,7 @@ Email part:
 </dd>
 ```
 
-Role part:
+#### Role part:
 
 ```php
 <dt class="col-span-1">  
@@ -633,7 +643,7 @@ Role part:
 </dd>
 ```
 
-Status:
+#### Status:
 
 ```php
 <dt class="col-span-1">  
@@ -645,7 +655,7 @@ Status:
 </dd>
 ```
 
-##### Added (Created at) and Updated (Updated at):
+##### Added (Created at) and Updated (Updated at) Dates:
 
 ```php
 <dt class="col-span-1">  
@@ -691,23 +701,26 @@ And we are done!
 
 Make sure that everything is correctly entered, and you have your HTML balanced (start & end tags) as needed.
 
+
 ### Test Show Action
 
 If all works as expected you should be able to click on a user in the index page and it will jump to the users details.
 
 ![](../assets/vivaldi_OE1N5p8Gul.gif)
 
+> The final code does have some small tweaks to the original layout.
+
 ## Add User
 
-So that is **B**rowse and **R**ead complete... next is **A**dd.
+So that is **Browse** and **Read** complete... next is **Add**.
 
-OK, so we are skipping Edit for now... there are reasons...
+OK, so we are skipping **Edit** for now... there are reasons...
 
 ### Add Create method to user management controller
 
 Ok, so we now have the show page, we next need to add the "Create and Store" to be able to add a new user to the system.
 
-Locate the create method in the User Management Controller.
+Locate the `create` method in the User Management Controller.
 
 Add the following code:
 
@@ -725,7 +738,7 @@ return view('users.create', compact(['roles',]));
 
 #### Create a Secondary Link Button Component
 
-Copy the primary link button component:
+Copy the *primary link button* component:
 
 ```shell
 cp resources/views/components/primary-link-button.blade.php resources/views/components/secondary-link-button.blade.php
@@ -752,16 +765,17 @@ Now edit the new `components/secondary-link-button.blade.php` to ensure the code
 
 ### Create `admin/users/create.blade.php`
 
-We are ging to be a little lazy, and duplicate the show view we added previously.
+We are going to be a little lazy, and duplicate the show view we added previously.
 
 So, CTRL+C and CTRL+V the `admin/users/show.blade.php` file and rename it to `create.blade.php`.
 
-The reason we are doing this is because we will lay out the create page in the same way as we did the show page.
+The reason we are doing this is because we have the basic same layout as show.
 
 Each block of the create page will have:
-- a wrapper div
+
 - a label
 - the form control to be used
+- the error display code
 
 Update the page header:
 
@@ -793,55 +807,90 @@ Then update the section to become:
             <x-input-label for="Name">  
                 {{__("Name")}}  
             </x-input-label>  
-            <x-text-input type="text" id="Name" name="name"/>  
-            <x-input-error :messages="$errors->get('name')" class="mt-2"/>  
+            <x-text-input 
+	            type="text" 
+	            id="Name" 
+	            name="name"/>  
+            <x-input-error 
+	            :messages="$errors->get('name')" 
+	            class="mt-2"/>  
+  
   
             <x-input-label for="Email">  
                 {{__("Email")}}  
             </x-input-label>  
-            <x-text-input type="text" id="Email" name="email"/>  
-            <x-input-error :messages="$errors->get('email')" class="mt-2"/>  
+            <x-text-input 
+	            type="text" 
+	            id="Email" 
+	            name="email"/>  
+            <x-input-error 
+	            :messages="$errors->get('email')" 
+	            class="mt-2"/>  
+  
   
             <x-input-label for="Role">  
                 {{__("Role")}}  
             </x-input-label>  
             <select id="Role" name="role">  
                 <option>No Roles Provided</option>  
-            </select>            <x-input-error :messages="$errors->get('role')" class="mt-2"/>  
+            </select>            
+            <x-input-error 
+	            :messages="$errors->get('role')" 
+	            class="mt-2"/>  
+  
   
             <x-input-label for="Status">  
                 {{__("Status")}}  
             </x-input-label>  
-            <select id="Status" name="status">  
+            <select 
+	            id="Status" 
+		        name="status">  
                 <option>No Status Provided</option>  
-            </select>            <x-input-error :messages="$errors->get('status')" class="mt-2"/>  
+            </select>            
+            <x-input-error 
+	            :messages="$errors->get('status')" 
+	            class="mt-2"/>  
       
-<x-input-label for="Password">  
-    {{__("Password")}}  
-</x-input-label>  
-<x-text-input type="password" id="Password" name="password"/>  
-<x-input-error :messages="$errors->get('password')" class="mt-2"/>  
-  
-<x-input-label for="PasswordConfirmation">  
-    {{__("Password Confirmation")}}  
-</x-input-label>  
-<x-text-input type="password" id="PasswordConfirmation" name="password_confirmation"/>  
-<x-input-error :messages="$errors->get('password_confirmation')" class="mt-2"/>
+      
+			<x-input-label for="Password">  
+			    {{__("Password")}}  
+			</x-input-label>  
+			<x-text-input 
+				type="password" 
+				id="Password" 
+				name="password"/>  
+			<x-input-error 
+				:messages="$errors->get('password')" 
+				class="mt-2"/>  
+			  
+			  
+			<x-input-label for="PasswordConfirmation">
+			    {{__("Password Confirmation")}}  
+			</x-input-label>  
+			<x-text-input 
+				type="password" 
+				id="PasswordConfirmation" 
+				name="password_confirmation"/>  
+			<x-input-error 
+				:messages="$errors->get('password_confirmation')" 
+				class="mt-2"/>
 
         </div>  
         
         <footer class="mt-4 gap-4 flex bg-neutral-200 -m-4 p-2 px-4">  
-            <x-primary-button                class="bg-green-900! hover:bg-green-700! hover:text-white!">  
+            <x-primary-button
+                class="bg-green-900! hover:bg-green-700! hover:text-white!">  
                 Save  
             </x-primary-button>  
   
-            <x-secondary-link-button                class="bg-neutral-700 hover:bg-yellow-700"  
-                href="{{ route('admin.users.index') }}"  
-            >  
+            <x-secondary-link-button                
+	            class="bg-neutral-700 hover:bg-yellow-700"  
+                href="{{ route('admin.users.index') }}">  
                 Cancel  
             </x-secondary-link-button>  
   
-        </footer>    </form>  
+        </footer>    
+    </form>  
 </section>
 ```
 
@@ -907,7 +956,7 @@ Here is a demonstration.
 
 ## Edit the User
 
-We just got Add completed, so we are ready for Edit.
+We just completed the **Add**, so we are ready for **Edit**.
 
 The reason we did it this way around was so you could understand the basic process of validating data and ensuring you were redirected accordingly.
 
@@ -936,11 +985,13 @@ Change the edit method to read:
         // TODO: Update when we add Roles & Permissions
         $roles = Collection::empty();
 
-        return view('users.edit', compact(['roles', 'user',]));
+		return view('admin.users.edit')  
+		    ->with('roles', $roles)  
+		    ->with('user', $user);
     }
 ```
 
-This looks almost identical to the Add, except:
+This looks almost identical to the **Add**, except:
 - The method expects the user details to be given to it... the user that will be edited
 - The view call puts the roles and the user data into the packet that is sent to the view.
 
@@ -957,7 +1008,7 @@ Start by editing the article header, to show it is editing a user...
 ```php
 <header class="bg-gray-500 text-gray-50 text-lg px-4 py-2">
     <h5>
-    {{ __('Edit User') }}
+    {{ __('Edit User Details') }}
     </h5>
 </header>
 ```
@@ -966,11 +1017,20 @@ Now edit the form by changing the route that will be called:
 
 ```php
 <form method="POST"
-      class="my-4 px-4 gap-4 flex flex-col text-gray-800"
-      action="{{ route('users.update', $user) }}">
+	class="sm:gap-4 lg:gap-6 w-full"
+    action="{{ route('admin.users.update', $user) }}">
 ```
 
-Now, for the name, and otehr text-input fields we need to add a key aspect of the edit... the original information from the User's model must be shown when we open the file...
+After the above form lines, make sure you have:
+
+```php
+@csrf  
+@method("PATCH")
+```
+
+The `@method()` is Laravel's way of "faking" the HTTP (Patch) Request Verb that most web servers do not 'comprehend' and pass onto the application server (in our case PHP).
+
+Now, for the name, and other text-input fields we need to add a key aspect of the edit... the original information from the User's model must be shown when we open the file...
 
 Locate the `x-text-input` for the name, and update the value to read:
 
@@ -990,16 +1050,13 @@ This change will need to be completed for each of:
 - email
 - role
 
-The passwords do not take the old value, so we make sure there is no `:value` entry.
+The passwords do not take the old value, so we make sure there is no `:value` entry. If you want you may force the password to empty by having a `:value=""` entry.
 
 Once the changes are done, save and we can next look at the update method in the user management controller.
 
 ### Add Update method to user management controller
 
-
-### Test Update Action
-
-The definiton of the method should not change from the default that was created by the artisan command.
+The definition of the method should not change from the default that was created by the artisan command.
 
 ```php
 public function update(Request $request, User $user)  
@@ -1009,7 +1066,7 @@ public function update(Request $request, User $user)
 
 ```
 
-Next we need toa dd the validation to make sure the user is following our rules for data in the application.
+Next we need to add the validation to make sure the user is following our rules for data in the application.
 
 The validation looks dramatically similar to the store method's... with one or two small changes...
 
@@ -1041,7 +1098,7 @@ The rest of the validation rules code is again, untouched.
         'sometimes',  
         'nullable',  
         'confirmed',  
-        Rules\Password::defaults()  
+        Password::defaults()  
     ],  
     'role' => ['nullable',],  
 ]);  
@@ -1057,10 +1114,9 @@ To do this we check to see if the validated password is null, and if so remove t
 
 ```php
     // Remove password if null  
-    if (isNull($validated['password'])) {  
+    if (is_null($validated['password'])) {  
         unset($validated['password']);  
     }  
-
 ```
 
 Next we tell Laravel to fill the changed fields with the validated data...
@@ -1088,7 +1144,7 @@ Once this is set we save the updated user data.
 Finally the redirect back to the user index view.
 
 ```php
-    return redirect(route('users.index'));  
+    return redirect(route('admin.users.index'));  
 }
 ```
 
@@ -1100,17 +1156,32 @@ Test the edit to make sure it works.
 
 ### Notify User to Verify New Email
 
-If we are editing the user's email address, we want them to be notified, so we need to add three lines of code just before redirecting...
+If we are editing the user's email address, we want them to be notified, so we need to add the follow code just before redirecting...
 
 ```php
-if (isNull($user->email_verified_at)) {  
+if (is_null($user->email_verified_at)) {  
     $user->sendEmailVerificationNotification();  
 }
 ```
 
-This code checks to see if the email has had its verified at date and time reset to null, and if so force the system to send an email.
+This code checks to see if the email has had its verified at value reset to null, and if so tells the system to send an email.
 
 👍 Nice!
+
+##### Any Testing Errors
+
+Did you get an error when testing, and was it the "action is unauthorised"?
+
+What do we need to do? 
+
+Remember that we need to update the `UpdateUserRequest`...
+
+```php
+public function authorize(): bool  
+{  
+    return auth()->check();  
+}
+```
 
 ## Delete User
 
@@ -1125,126 +1196,266 @@ To do so we need to add a "delete" method and a new "delete" route to the contro
 
 ### Create `resources/views/users/delete.blade.php`
 
+Duplicate the `show.blade.php` file:
 
-### Add Destroy method to user management controller
+```shell
+cp resources/views/admin/users/show.blade.php resources/views/admin/users/delete.blade.php
+```
 
+This will form the basis of our verification that we really want to remove the user.
+
+First update the 'article' header:
+
+```php
+<header class="bg-red-800 text-neutral-50 text-lg px-4 py-2">  
+    <h5>  
+        {{ __('Confirm Delete User') }}  
+        <em>{{ $user->name }}</em>  
+    </h5>  
+</header>
+```
+
+Now we need to change the button and form functionality.
+
+- The form will now call the destroy method
+- The Cancel button will use a primary link button.
+- The Confirm Delete button will use a secondary button.
+
+The `form` element update:
+
+```php
+<form action="{{ route('admin.users.destroy', $user) }}"  
+      method="post"  
+      class="flex flex-row gap-4 w-full">  
+    @csrf  
+    @method('delete')
+```
+
+The button updates:
+
+```php
+<x-primary-link-button  
+    class="hover:bg-blue-800! flex-row gap-2"  
+    href="{{ route('admin.users.index') }}">  
+    <i class="fa-solid fa-users"></i>  
+    All Users  
+</x-primary-link-button>  
+  
+<x-primary-link-button  
+    class="bg-neutral-700 hover:bg-green-800! flex-row gap-2"  
+    href="{{ route('admin.users.show', $user) }}">  
+    <i class="fa-solid fa-user"></i>  
+    Show User  
+</x-primary-link-button>  
+  
+<x-secondary-button  
+    type="submit"  
+    class="hover:bg-red-800 hover:text-white flex-row gap-2">  
+    <i class="fa-solid fa-times-circle text-lg"></i>  
+    Delete  
+</x-secondary-button>
+```
+
+
+### Add Delete Method to the User Management Controller
+
+Add a new `delete` method before the current `destroy` method:
+
+```php
+/**  
+ * Confirmn removal of the User resource from storage.  */
+public function delete(User $user)  
+{  
+    return view('admin.users.delete')  
+        ->with('user', $user);  
+}
+```
+### Update Destroy method to user management controller
+
+The destroy method is now quite basic...
+
+```php
+public function destroy(User $user)  
+{  
+	$removed_user = $user;
+    $user->delete();  
+    return redirect(route('admin.users.index'));  
+}
+```
+### Add Delete Route to the Web Routes
+
+Edit the `web.php` routes file and just before the lines that read: 
+```php
+Route::resource('users',
+	UserManagementController::class);
+```
+
+add the following:
+
+```php
+Route::post('users/{user}/delete',
+	[UserManagementController::class, 'delete'])  
+    ->name('users.delete');  
+```
+
+It **must** be before the resource route otherwise the 'show' route will intercept the request.
+
+
+### Fix the Index and Show Delete buttons
+
+The Index and Show blade files will need a small change to ensure that the delete method is called and not the destroy method...
+#### Update the `admin/users/index.blade.php`
+
+Locate the lines that read:
+
+```php
+<form action="{{ route('admin.users.destroy', $user) }}"  
+      method="post"  
+      class="grid grid-cols-3 gap-2 w-full">  
+    @csrf  
+    @method('delete')
+```
+
+Modify them so they are now:
+
+```php
+<form action="{{ route('admin.users.delete', $user) }}"  
+      method="post"  
+      class="grid grid-cols-3 gap-2 w-full">  
+    @csrf
+```
+
+The `@method` line has been removed, and the `admin.users.destroy` has been replaced with `admin.users.delete`.
+
+#### Update the `admin/users/show.blade.php`
+
+The show user view will have the footer with the buttons updated.
+
+Here are each of the changes...
+
+```php
+<footer 
+    class="mt-4 bg-neutral-200 -m-4 p-2 px-4">  
+  
+    <form 
+        action="{{ route('admin.users.delete', $user) }}"  
+        method="post"  
+        class="flex flex-row gap-4 w-full">  
+        @csrf  
+```
+
+We change the form action to be the delete action, as per the index view, and remove the `@method('delete')` line.
+
+The buttons are extended a little by adding icons...
+
+```php
+<x-primary-link-button  
+    class="hover:bg-blue-800! flex gap-2"  
+    href="{{ route('admin.users.index', $user) }}">  
+    <i class="fa-solid fa-users"></i>  
+    All Users  
+</x-primary-link-button>
+```
+
+A "users" icon is added to the "All Users" link button.
+
+```php  
+<x-primary-link-button  
+    class="bg-neutral-700 hover:bg-yellow-700 flex gap-2"  
+    href="{{ route('admin.users.edit', $user) }}">  
+    <i class="fa-solid fa-user-cog"></i>  
+    Edit  
+</x-primary-link-button>
+```
+
+An "edit user" icon is added to the "Edit" link button.
+
+```php        
+<x-secondary-button  
+    type="submit"  
+    class="hover:bg-red-800 hover:text-white! flex gap-2">  
+    <i class="fa-solid fa-user-slash"></i>  
+    Delete  
+</x-secondary-button> 
+```
+
+Finally we add a "delete user" icon to the "Delete" secondary button.
+
+We then have the form closed and the footer ends...
+
+```php  
+    </form>  
+  
+</footer>
+```
 
 ### Test Delete Action
 
+To test the action, create two new dummy users, then try deleting them by using:
 
+- the delete button on the "all users" (index), and
+- the delete button on the show user details page.
 
-## Small UI Fixes
+They both should show the confirm page and this will allow you to confirm the deletion and return you back to the list of users.
 
-Ok, we have noted a few small UI abhorrations that may be fixed.
+## Adding Search box to Users Index Page
 
-### Index View - Edit and Show Buttons
-
-The index and show buttons are not well aligned, so we found that a a padding of 1.5 on the y axis seems to do the job.
-
-Locate the Edit and Show buttons (approximately lines 65 to 85 in the code) and update the following:
-
-```php
-grow px-2
-```
-
-to become:
+Open the `admin/users/index.blade.php` file and locate the section header:
 
 ```php
-grow px-2 py-1.5
-```
-
-### Fix the "header" for Index, Edit, Show, Delete, and Add views
-
-This needs two things to be completed.
-
-First we need to change the "app.blade.php" layout, and then we need to update the headers on each of the above views.
-
-#### App Blade Update
-
-Open the `app.blade.php` file and locate the section that reads:
-
-```php
-@isset($header)
-    <header class="bg-white shadow">
-        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-            {{ $header }}
-        </div>
+<section class="py-4 mx-8 space-y-4 ">  
+    <header class="flex justify-between">  
+        <h3 class="text-2xl font-bold text-zinc-700">  
+            Users  
+        </h3>  
+  
+        <x-primary-link-button  
+            href="{{ route('admin.users.create') }}"  
+            class="bg-blue-900 hover:bg-blue-500">  
+            New User  
+        </x-primary-link-button>  
     </header>
-@endisset
 ```
 
-The `div` will be updated to read:
+We are going to insert a search box in this area.
+
+Update the section (immediately after the `x-admin-layout`) to have the classes: `flex justify-between gap-8`
+
+Update the  `h3` to have the classes: `text-2xl font-bold text-zinc-700 grow`
+
+Next  we add the form after the `</h3>` closing tag, and immediately before the primary link button to add a user:
 
 ```php
-<div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex flex-row space-x-2">
-```
-
-This will then place the title on the left, the add and search on the right.
-#### User Views Updates
-
-The user's views `<x-slot>` for the header all need to have updates.
-
-These updates ensure that the layout is correct and also that there is a search box added ready for later.
-
-Open your code and update the sections shown.
-
-Opening of the header should NOT contain a class...:
-
-```php
-<x-slot name="header">
-```
-
-On the `h2` we need to add a `grow` class to the current list.
-
-```php
-<h2 class="font-semibold text-xl text-gray-800 leading-tight grow">
-```
-
-Immediately before the  `</x-slot>` we are adding the search box:
-
-```php
-<form action="{{ route('users.index') }}" method="GET" class="flex flex-row gap-0">
-
-    <x-text-input id="search"
-                  type="text"
-                  name="search"
-                  class="border border-gray-200 rounded-r-none shadow-transparent"
-                  :value="$search??''"
-    />
-
-    <button type="submit"
-            class="text-gray-800
-                   bg-gray-100
-                   border border-gray-300
-                   rounded-lg
-                   px-4 py-1
-                   rounded-l-none">
-        <i class="fa-solid "></i>
-        Search
-    </button>
-
+<form 
+	action="{{ route('admin.users.index') }}"
+	method="GET" 
+	class="flex flex-row gap-1">  
+  
+    <x-text-input 
+	    id="search"  
+        type="text"  
+        name="search"  
+        class="border border-neutral-500/50"  
+        :value="$search??''"  
+    />  
+  
+    <x-primary-button type="submit"  
+            class="px-4 py-1">  
+        <i class="fa-solid fa-search text-md"></i>  
+        <span class="sr-only">Search</span>  
+    </x-primary-button>  
+  
 </form>
 ```
 
+Here is an example of the interface once we have done the above updates. Yours may vary depending on browser, icon selection and more.
 
-These changes result in:
+![](../assets/Pasted%20image%2020251016164131.png)
 
-![](../assets/Pasted%20image%2020250515180411.png)
+## Exercises
 
-Well, they will when you complete the exercise below to add icons and a few other fixes...
-## Exercise
-
-Oh, you should work out for yourselves how to make the buttons for search and "New User" look better than they currently are...
-
-Improvements include:
-- Wrap the `h2` in an anchor element that links to the user's index page - this makes it easier to navigate back to this page.
-- Move the `grow` class from the `h2` and add a new `class=""` attribute with the value of `grow` class to the new anchor.
-- Add a user icon to the Add button.
-- Add a magnifying glass icon to the Search button.
-- Add hover effects by changing the font and background colours to be similar to the other buttons (as in they go dark background and light text).
-
-We have made the search and its button look like they are a single item already for you.
-
+1. Make sure that you tidy up any glitches in the interface.
+2. Add icons to buttons as needed.
 
 
 # References
