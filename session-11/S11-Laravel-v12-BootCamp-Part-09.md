@@ -192,13 +192,15 @@ Doing this in the model makes the controller code simpler to understand and use.
 ```php
 public function userVotes(): HasOne 
 {
-    return $this->votes()->one()->where('user_id', auth()->id());
+    return $this->votes()
+			    ->one()
+			    ->where('user_id', auth()->id());
 } 
 ```
 
-The return says: "For this **Chirp**, look at its **votes**, and retrieve **one vote** where the
-**User** has the **same
-ID** as the currently **logged-in User**".
+The return says:
+
+"For this **Chirp**, look at its **votes**, and retrieve **one vote** where the **User** has the **same ID** as the currently **logged-in User**".
 
 Very nice!
 
@@ -206,11 +208,18 @@ Very nice!
 
 To make this voting dynamic, we are going to introduce a LiveWire component.
 
-The Retro Blade Starter Kit has included LiveWire capabilities, so we do not have to use
-composer
-to add and then publish the required parts.
+We need to add LiveWire to the code, and we do this using Composer:
 
-It also has enabled the required items in the two layouts.
+```shell
+ composer require livewire/livewire
+ ```
+
+We also need to add the required "LiveWire activation" to the layouts:
+
+In each of the guest, app and amin layouts ensure the following are added in the required places:
+
+- Before the `</head>` add `@livewireStyles`
+- Before the `</body>` add `@livewireScripts`
 
 ### Create Like-Dislike Component
 
@@ -262,14 +271,13 @@ Between the closing `p` and `div` tags insert :
 
 ```php
     <div class="text-right">
-    @LiveWire('like-dislike', [$chirp])
+    @livewire('like-dislike', [$chirp])
     </div>
 ```
 
 ![Like/Dislike View Code](../assets/chirp-like-dislike-view-code.png)
 
-When you go back to the browser and view the Chirps you should now see (without colour)
-something like this:
+When you go back to the browser and view the Chirps you should now see (without colour) something like this:
 
 ![Example of how the like/dislike is shown on screen](../assets/chirp-like-dislike-sample.png)
 
@@ -299,6 +307,9 @@ public function mount(Chirp $chirp): void
 } 
 ```
 
+> Remember that you will need to use the Chirp model, and later the Vote model... so make sure you add the required lines to the `LikeDislike.php` file.
+
+		 
 ### Saving Like/Dislike
 
 So, at the moment we can click the like/dislike, but nothing will happen. In fact, we will get
@@ -384,9 +395,19 @@ Before the `has voted` mthod we will add the following:
 private function updateVote(int $value): void
 {
     if ($this->userVote) {
-        $this->chirp->votes()->update(['user_id' => auth()->id(), 'vote' => $value]);
+        $this->chirp
+	         ->votes()
+	         ->update([
+		        'user_id' => auth()->id(), 
+		        'vote' => $value
+	         ]);
     } else {
-        $this->userVote = $this->chirp->votes()->create(['user_id' => auth()->id(), 'vote' => $value]);
+        $this->userVote = $this->chirp
+	         ->votes()
+	         ->create([
+		         'user_id' => auth()->id(), 
+		         'vote' => $value
+		       ]);
     }
 }
 ```
@@ -451,8 +472,14 @@ In the Chirp Controller we need to update the index method.
     public function index(): View
     {
         $chirps = Chirp::with('userVotes')
-            ->withCount(['votes as likesCount' => fn (Builder $query) => $query->where('vote', '>', 0)], 'vote') 
-            ->withCount(['votes as dislikesCount' => fn (Builder $query) => $query->where('vote', '<', 0)], 'vote') 
+            ->withCount([
+	            'votes as likesCount' 
+		            => fn (Builder $query) 
+			            => $query->where('vote', '>', 0)], 'vote') 
+            ->withCount([
+	            'votes as dislikesCount' 
+		            => fn (Builder $query) 
+			            => $query->where('vote', '<', 0)], 'vote') 
             ->latest()
             ->paginate();
  
