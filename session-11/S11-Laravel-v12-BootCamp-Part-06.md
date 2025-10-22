@@ -16,7 +16,7 @@ created: 2024-09-20T11:17
 updated: 2025-08-21T17:39
 ---
 
-# S11 Laravel Bootcamp: Part 6
+# Laravel Bootcamp: Part 6
 
 ## Software as a Service - Front-End Development
 

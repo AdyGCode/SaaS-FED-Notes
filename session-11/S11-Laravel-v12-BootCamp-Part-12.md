@@ -16,7 +16,8 @@ created: 2024-09-20T11:17
 updated: 2025-08-21T15:59
 ---
 
-# S11 Laravel Bootcamp: Part 12
+
+# Laravel Bootcamp: Part 12
 
 ## Software as a Service - Front-End Development
 
@@ -34,19 +35,19 @@ includeLinks: true
 
 ---
 
-# Laravel Bootcamp: Part 12
+# Laravel Bootcamp: Part 11
 
-## Roles and Permissions Part 3
+## Roles and Permissions Part 2
 
-In this section, we continue with the administration/management front-end that allows
+In this section, we continue with the administration/management front-end that allows 
 users with particular rights to perform management actions on data in the Chirp system.
 
 We will:
-
 - Build User Management Interface
 - Determine Roles to use in Application
 - Determine Permissions each Role will have
 - Apply Roles & Permissions to Application (User Management)
+
 
 ## Before you start…
 
@@ -63,806 +64,403 @@ Have you completed (not just read):
 - [Laravel v12 Bootcamp - Part 8](S11-Laravel-v12-BootCamp-Part-08.md)
 - [Laravel v12 Bootcamp - Part 9](S11-Laravel-v12-BootCamp-Part-09.md)
 - [Laravel v12 Bootcamp - Part 10](S11-Laravel-v12-BootCamp-Part-10.md)
-- [Laravel v12 Bootcamp - Part 11](S11-Laravel-v12-BootCamp-Part-11.md)
+
 
 No? Well… go do it…
 
 You will need these to be able to continue…
 
-> **Important:** You should understand that whilst you are completing this tutorial, you may only see parts of the
-> application working.
+> **Important:** You should understand that whilst you are completing this tutorial, you may only see parts of the application working.
 >
 > So if you get an error in the browser, it may be because there is something missing.
->
+> 
 > Remember that code is available from the GitHub repository.
 
-# Manage User Roles (and Permissions)
 
-Remember the most up-to-date code is available on GitHub:
+# Manage Permissions in Roles
 
+So far we have created the major part of the roles and permissions CRUD:
+
+Create Role/Permission
+Read (all) Roles/Permissions
+Update Role/Permission
+Delete Role/Permissions
+
+One of the cool features we did add was in the Delete. We get the user to re-enter the role/permission to confirm deletion, just like GitHub does in its 'Danger Zone'.
+
+Remember the most up to date code is available on GitHub:
 - https://github.com/AdyGCode/roles-permissions-2025-s1
 
 Even though we give you this code, we **STRONGLY** suggest you complete this tutorial from scratch.
 
 This will assist your understanding and ability to apply to other projects
 
-## Organising our Code
+## Show all Permissions for a Role
 
-Up to this point we had not been organising our code very well. This was especially true with the Roles and Permissions
-controllers.
+When editing a role we need to see the permissions that are associated with it.
 
-So we are going to tidy up by adding an `Admin` folder to the `App/Http/Controllers` folder and moving our code to this
-folder.
+So let's start by:
+- Updating the `RoleController` edit method
+- Updating the `edit.blade.php` file for the roles
 
-When we do this, we need to then update any references to the controllers (e.g. in the `web.php` routes file).
 
-```shell
-mkdir App/Http/Controllers/Admin
-```
+### Update the Edit Method
 
-Now, in PhpStorm we can move files to other folders, and it will help refactor references as well.
+Let's start by getting the data and sending to the form.
 
-Drag and Drop the RoleController and the PermissionController into the Admin folder.
+We need to retrieve all the permissions and the permissions that the role currently has been given and pass them to the form:
 
-When prompted you will be given the opportunity to check that the changes **will be** correctly applied.
-
-Click Refactor to apply the changes.
-
-Here is an animation of the process:
-
-- Original Screen
-  Recording: [phpstorm-refactor-role-permission-admin-folder.mp4](../assets/phpstorm-refactor-role-permission-admin-folder.mp4)
-- Animated GIF: ![phpstorm-roles-perms-refactor.gif](../assets/phpstorm-roles-perms-refactor.gif)
-
-## Adding Roles to Users
-
-We will now create an admin section for users. This will allow us to add, remove and edit users as required.
-
-This has been done many times before, as we often use this as a way to teach CRUD/BREAD.
-
-### Add the User Admin Routes
-
-Edit the web.php file and add the admin route for users
 
 ```php
-        Route::post('users/{user}/delete', [UserController::class, "delete"])
-            ->name('users.delete');
-        
-        Route::resource('users',
-            UserController::class);
+$permissions = Permission::all();  
+$rolePermissions = $role->permissions()->get();  
+  
+return view('admin.roles.edit')  
+    ->with('role', $role)  
+    ->with('permissions', $permissions)  
+    ->with('rolePermissions', $rolePermissions);
 ```
 
-We put these in the `admin` block after the permissions routes.
+With this data, we are now ready to update the edit form.
+### Edit the Edit page
 
-### Create the User Admin Controller
+The edit page will look something similar to this when completed:
 
-As with the roles and permissions, we will put the admin controller for the users in the Controllers/Admin folder.
+![Picture: Role Administration Edit Form with Permission assign and revoke](../assets/Pasted%20image%2020250603170956.png)
 
-```shell
-php artisan make:controller Admin/UserController -r
-```
+We will update this form and the Role Controller in steps.
 
-To make things easier, we will give you the starting code for the User admin controller... it is in fact the code from
-the Chirper tutorial, so you will be able tos ee how to modify and update Chirper to have these new features.
+### Step 1: Add Display Current Permissions
+
+The first of the steps is to add the "pills" that contain the current permissions.
+
+Locate the end of the only form on the page (as it stands at the moment) which is the `</form>` tag.
+
+After this line add the following:
 
 ```php
-    /**
-     * Display a listing of the resource.
-     */
-    public function index(Request $request)
-    {
-        // TODO: Only allow authorised users (Admin/Staff Roles)
-
-        $validated = $request->validate([
-            'search' => ['nullable', 'string',]
-        ]);
-
-
-        $search = $validated['search'] ?? '';
-
-
-        $users = User::whereAny(
-            ['name', 'email', 'position',], 'LIKE', "%$search%")
-            ->paginate(2)
-            ->appends(['search' => $search]);
-
-
-        return view('users.index')
-            ->with('users', $users)
-            ->with('search', $search);
-
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        try {
-
-            $validated = $request->validate([
-                'name' => ['required', 'min:2', 'max:192',],
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class . ',email',],
-                'password' => ['required', 'confirmed', Rules\Password::defaults()],
-                'role' => ['nullable',],
-            ]);
-
-            $user = User::create([
-                'name' => $validated['name'],
-                'email' => Str::lower($validated['email']),
-                'password' => Hash::make($validated['password']),
-            ]);
-
-        } catch (ValidationException $e) {
-
-            flash()->error('Please fix the errors in the form.',
-                [
-                    'position' => 'top-center',
-                    'timeout' => 5000,
-                ],
-                'User Creation Failed');
-
-            return back()->withErrors($e->validator)->withInput();
-
-        }
-
-        $userName = $user->name;
-
-        flash()->success("User $userName created successfully!",
-            [
-                'position' => 'top-center',
-                'timeout' => 5000,
-            ],
-            "User Added");
-
-        return redirect(route('users.index'));
-
-
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        // TODO: Update when we add Roles & Permissions
-        $roles = Collection::empty();
-
-        return view('users.create', compact(['roles',]));
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(User $user)
-    {
-        // TODO: Update when we add Roles & Permissions
-
-        return view('users.show', compact(['user']));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(User $user)
-    {
-        // TODO: Update when we add Roles & Permissions
-        $roles = Collection::empty();
-
-        return view('users.edit', compact(['roles', 'user',]));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, User $user)
-    {
-        // TODO: Update when we add Roles & Permissions
-
-        try {
-
-            $validated = $request->validate([
-                'name' => ['required', 'min:2', 'max:192',],
-                'email' => [
-                    'required',
-                    'string',
-                    'email',
-                    'max:255',
-                    Rule::unique(User::class)->ignore($user),
-                ],
-                'password' => [
-                    'sometimes',
-                    'nullable',
-                    'confirmed',
-                    Rules\Password::defaults()
-                ],
-                'role' => ['nullable',],
-            ]);
-
-            // Remove password if null
-            if (isNull($validated['password'])) {
-                unset($validated['password']);
-            }
-
-            $user->fill($validated);
-
-            if ($user->isDirty('email')) {
-                $user->email_verified_at = null;
-            }
-
-            $user->save();
-
-        } catch (ValidationException $e) {
-
-            flash()->error('Please fix the errors in the form.',
-                [
-                    'position' => 'top-center',
-                    'timeout' => 5000,
-                ],
-                'User Update Failed');
-
-            return back()->withErrors($e->validator)->withInput();
-
-        }
-
-        if (isNull($user->email_verified_at)) {
-            $user->sendEmailVerificationNotification();
-        }
-
-        $userName = $user->name;
-
-        flash()->info("User $userName details updated successfully!",
-            [
-                'position' => 'top-center',
-                'timeout' => 5000,
-            ],
-            "User Updated");
-
-        return redirect(route('users.index'));
-    }
-
-    /**
-     * Confirm the removal of the specified user.
-     *
-     * This is a prequel to the actual destruction of the record.
-     * Put in place to provide a "confirm the action".
-     *
-     * @param User $user
-     */
-    public function delete(User $user)
-    {
-        // TODO: Update when we add Roles & Permissions
-
-        return view("users.delete", compact(['user',]));
-
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param User $user
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function destroy(User $user)
-    {
-        // TODO: Update when we add Roles & Permissions
-
-        $oldUser = $user;
-
-        $user->delete();
-
-
-        $userName = $oldUser->name;
-
-        flash()->info("User $userName removed successfully!",
-            [
-                'position' => 'top-center',
-                'timeout' => 5000,
-            ],
-            "User Deleted");
-
-        return redirect(route('users.index'));
-
-    }
-```
-
-#### Update the Routes!
-
-In this newly added code, search and replace the `route('users` with `route('admin.users`.
-
-### CRUD views
-
-Create a new folder in the `resources/views/admin` folder, called `users`.
-
-To make it a bit easier on you, we are providing the views to download from our sample code.
-
-- User List - [index.blade.php](sample-code/index.blade.php)
-- User Create - [create.blade.php](sample-code/create.blade.php)
-- User Edit - [edit.blade.php](sample-code/edit.blade.php)
-- User Delete - [delete.blade.php](sample-code/delete.blade.php)
-- User Details - [show.blade.php](sample-code/show.blade.php)
-
-Download each file and move into the users admin views folder.
-
-#### Update the Routes!
-
-In these files, you will then need to replace every occurrence of `route('users` with `route('admin.users` as you did
-with the controller code.
-
-Going to http://localhost:8000/users should now show the list of users.
-
-> IMPORTANT: Check the other functions work as expected adn fix any errors!
-
-
-Excellent - we are ready to continue!
-
-> ### redirect route or to_route
->
-> You may use `to_route(...)` to replace the `redirect(route(...))` combination.
-
-### Update the User Index (Show Roles)
-
-Edit the admin/users/index.blade.php file and alter the current code:
-
-```php
-<p class="col-span-1 space-x-1 ">
-    <span class="text-xs bg-gray-800 text-gray-100 rounded-full px-2 py-0.5">
-        Role
-    </span>
-</p>
-
-```
-
-to show the role names using the following code:
-
-```php
-<p class="col-span-1 space-x-1 ">
-    @foreach($user->roles as $role)
-        <span 
-            class="text-xs bg-gray-800 text-gray-100 rounded-full px-2 py-0.5"
-        >{{ $role->name }}</span>
-    @endforeach
-</p>                            
-```
-
-When the page refreshes you should see the role names in "pills".
-
-## Adding Roles to Add User
-
-Ok, so we are ready to start changing the code for the Add User form and method.
-
-Let's begin with the method:
-
-### Edit the Create User method
-
-Open the create user method and update where we had a placeholder collection:
-
-```php
-$roles= Collection::create();
-```
-
-Chenge this to:
-
-```php
-$roles = Role::orderBy('name')->get();
-```
-
-This will give the list of the roles.
-
-Remember that you will need the line `use Spatie\Permission\Models\Role;` after the namespace declaration.
-
-Now we can update the store method.
-
-### Edit the Store User method
-
-Locate the `store` method in the `admin/UserController` file.
-
-First change the role validation from being nullable to:
-
-```php
-                'role' => ['required','int','exists:roles,id',],
-```
-
-This ensures the role is provided, and it is an integer, and it exists in the roles table from the Spatie package.
-
-Next, after the user is created we need to attach the role to the user...
-
-Just before the catch add:
-
-```php
-$user->roles()->attach($validated['role']);
-```
-
-### Test the Add User
-
-Try adding a new user to see if we now get the roles shown and when selected the role is automatically allocated to the
-new user.
-
-Updated Add User form:
-
-![Picture: administration - user create with single (primary) role](../assets/admin-user-create-with-role-1.png)
-
-Results of Update Store Method:
-
-![Picture: administration - user list showing new user with single role](../assets/admin-user-create-with-role-2.png)
-
-## Edit user
-
-Edit user will be a bit more of a challenge as we need to:
-
-- Get the user details
-- Get the user's current roles
-- Get a list of all available roles
-- Remove the current "add role" select box
-- Show the current roles on the page
-- Show "Add Role" section on page
-- Show "Revoke Role" section on page
-
-We will use the same principle as the adding permissions to the role... put the add and remove into separate forms after
-the main editing for the user.
-
-### Modify the `User Controller`'s `edit` method
-
-Locate the edit method in the `Admin/UserController.php` file.
-
-Where we currently have the $roles=Collection::create(), replace with the following:
-
-```php
-// TODO: Update when we add Roles & Permissions
-
-$roles = Role::all();
-$permissions = Permission::all();
-$userRoles = $user->roles()->get();
-
-$roles  = $roles->diffUsing($userRoles, function ($a, $b) {
-    return $a->id <=> $b->id; // Compare by 'id'
-});
-
-return view('admin.users.edit', compact(['roles', 'user','userRoles','permissions',]));
-```
-
-> We included the comment and the return view for you.
->
-> At the moment, we pass everything including the permissions, but they are not yet implemented.
-
-This code presents a beautiful way of "removing" the role or roles the user already has from the list of roles they can
-be given...
-
-```php
-$roles  = $roles->diffUsing($userRoles, function ($a, $b) {
-    return $a->id <=> $b->id; // Compare by 'id'
-});
-```
-
-What we have here is a collection operation "difference using" that allows us to provide a collection of models (in this
-case the collection of Roles the user currently has)
-then using a closure (aka anonymous function) which compares the ID in the full list of Roles with the ID in the
-currently allocated roles, it removes the current user roles if it in the Roles list.
-
-It's a beautiful little bit of code!
-
-Ok, so armed with the available roles, the current user's roles (and permissions), we are able to now show the edit form.  
-
-### Modify the Edit Form
-
-First, let's add summary details of what role, or roles, the user current has:
-
-Open the `admin/users/edit.blade.php` file and locate the lines:
-
-```php
-            <i class="fa-solid fa-save text-sm"></i>
-            {{ __('Save') }}
-        </button>
-    </div>
-</form>
-```
-
-After the close form tag (`</form>`) we now add:
-
-```php
-<section class="grid grid-cols-2 space-y-2 mt-4 px-6  space-x-8">
-
-    <div class="-mx-6 bg-gray-100 col-span-2 px-6 pb-2">
-
-        <h3 class="-mx-6 px-6 py-2 text-lg font-semibold col-span-2 bg-gray-100">
-            Current Role(s)
-        </h3>
-
-        <div class="flex flex-row gap-1 flex-wrap pb-2">
-
-            @forelse($userRoles as $role)
-                <p class="text-xs bg-gray-700 text-gray-100 p-1 px-2 rounded-full whitespace-nowrap">{{ $role->name }}</p>
-            @empty
+<section class="grid grid-cols-2 space-y-2 mt-4 px-6  space-x-8">  
+    <div class="-mx-6 bg-gray-100 col-span-2 px-6 pb-2">  
+        <h3 class="-mx-6 px-6 py-2 text-lg font-semibold col-span-2 bg-gray-100">  
+            Current Permissions  
+        </h3>  
+        <div class="flex flex-row gap-1 flex-wrap pb-2">  
+            @forelse($rolePermissions as $rolePermission)  
+                <p class="text-xs bg-gray-700 text-gray-100 p-1 px-2 rounded-full whitespace-nowrap">
+                {{ $rolePermission->name }}
+                </p>  
+            @empty  
                 <p class="text-gray-600 text-sm">
-                    No Roles
-                </p>
-            @endforelse
-
-        </div>
+	                No Permissions
+                </p>  
+            @endforelse  
+        </div>  
     </div>
+
+</section>
 ```
 
-This will show the current roles.
+This will loop through each of the permissions and display them in a little 'pill'. Once the line is full, the next pill will start on the next line.
 
-Next we are going to add the "add and revoke" roles sections, immediately after the code we have above.
+Ok, so that is the first of the changes... next...
 
-### Add Roles
+### Step 2: Add Assign Permissions
 
-In a small departure from the create form, and also taking inspiration from the "revoke" part, we are going to present the user with buttons for the roles. 
+For this, we need to do two parts:
 
-They then can click a button and see the role added to the list, and be also added to the revokable roles list.
+- Add the "add permission" form
+- Add the assign permission method to the Role Controller
 
-Add the following code for "Add Roles":
+Adding the "Add Permission" to the page is first.
+
+#### Page Updates
+
+Locate the `</section>` from the code we just added to the page.
+
+Immediately BEFORE the close tag we want to add the code, but we also need to make sure we leave a blank line or two ready for the next part of the updated page.
+
+This code is a bit longer. We are adding a form with a select element and button to the page, with the select containing all the possible options for permissions listed in it.
 
 ```php
 <div class="mt-2 mb-6 bg-gray-100 shadow border border-gray-300 rounded p-4 pt-2">  
+
+    <h3 class="mb-2 bg-gray-300 text-gray-800 px-4 py-1 -mt-2 -mx-4">
+    Add Permissions
+    </h3>  
   
-    <h3 class="mb-2 bg-gray-300 text-gray-800 px-4 py-1 -mt-2 -mx-4 text-semibold">Add roles</h3>  
+    <form method="POST"
+          action="{{ route('admin.roles.permissions', $role->id) }}">  
+        @csrf  
+        
+        <div class="sm:col-span-6">  
   
-    <div class="flex space-x-4 flex-wrap">  
+            <x-input-label 
+	            for="permission" 
+	            :value="__('Permission')"/>  
   
-    @foreach ($roles as $role)  
+            <select 
+	            id="permission"
+	            name="permission" 
+	            autocomplete="permission-name"  
+	            class="mt-1 mb-4 block w-full py-1 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">  
+                
+                @foreach ($permissions as $permission)  
+                    <option value="{{ $permission->name }}">
+	                    {{ $permission->name }}
+	                </option>  
+                @endforeach
+                  
+            </select>  
+            
+            <x-input-error 
+	            :messages="$errors->get('permission')" 
+	            class="mt-2"/>  
+        </div>  
   
-        <form class="px-0 py-1 text-white rounded-md"  
-              method="POST"  
-              action="{{ route('admin.users.roles',  
-                                [$user]) }}"  
-              onsubmit="return confirm('Are you sure?');">  
-  
-            @csrf  
-  
-            <input type="hidden" name="role" value="{{$role->id}}"/>  
-  
-            <x-primary-button type="submit" class="bg-green-600">  
-                {{ $role->name }}  
-            </x-primary-button>  
-  
-        </form>  
-  
-    @endforeach  
-  
-    </div>  
+        <x-primary-button 
+	        class="bg-green-600 hover:bg-green-500 text-white" 
+	        type="submit">  
+            Assign  
+        </x-primary-button>  
+    </form>  
 </div>
 ```
 
-Ok so this will then present the roles that the user has not been given.
+We believe that by this point, the code used should be pretty clear.
 
-![](assets/Pasted%20image%2020250605133756.png)
+Now we need to add the code that performs the `admin.roles.permissions` and add a route to enable this action.
 
-### Add the "admin users roles revoke" route and name
+#### Web Routes Update
 
-Head back to the `web.php` route file, and locate the code:
+Open the web routes and **immediately** before the `delete` route add:
 
 ```php
-  
-Route::post('users/{user}/delete', [UserController::class, "delete"])  
-    ->name('users.delete');  
-  
-Route::resource('users',  
-    UserController::class);
+Route::post('/roles/{role}/permissions', 
+			[RoleController::class, 'givePermission'])
+	->name('roles.permissions');
 ```
 
-Update this block by adding the required extra lines so it now reads, 
+> ### Important:
+>  
+> One problem that you may encounter is when routes are ordered incorrectly.
+>  
+> This occurs when wildcards intercept parts of the URI incorrectly. 
+>  
+> For example, the route`/users/{user}` will accept anything at the `{user}` part of the URI. 
+> So this means that `/users/3`, `/users/edit/` and so on would be accepted. The `edit` 
+> would fail as we expect an integer in the `{user}` position.
+>  
+> This is why we placed our `delete` routes before the resourceful ones, thus enforcing they 
+> are added to the internal routing tables before the more general wildcard routes.
+
+
+#### Role Controller Updates
+
+Now open the `RoleController` and at the bottom of the class, immediately before the last closing curly brace (`}`), add:
 
 ```php
-Route::post('users/{user}/roles', [UserController::class, 'giveRole'])  
-    ->name('users.roles');  
-Route::delete('users/{user}/roles', [UserController::class, 'revokeRole'])  
-    ->name('users.roles.revoke');  
-  
-Route::post('users/{user}/delete', [UserController::class, "delete"])  
-    ->name('users.delete');  
-  
-Route::resource('users',  
-    UserController::class);
-
-```
-
-This adds the `admin/users/USERID/roles` URI path, which is actioned by `POST` and `DELETE` HTTP Methods. The two routes have names `users.roles` and `users.roles.revoke`.
-
-### Add `giveRole` to the UserController.
-
-Ok, so we have the form, and we have the routes, we now need the method to give the role to the user.
-
-Open teh `UserController`, and move your cursor to the last `}` curly brace.
-
-Immediately before this last closing brace, add:
-
-```php
-public function giveRole(Request $request, User $user)  
+public function givePermission(Request $request, Role $role)  
 {  
-    if ($user->hasRole($request->role)) {  
-  
-        flash()->warning('User already has this role.',  
-            [  
-                'position' => 'top-center',  
-                'timeout' => 5000,  
-            ],  
-            'Role Exists');  
-  
-        return back();  
-    }  
+    if ($role->hasPermissionTo($request->permission)) {  
     
-    $user->roles()->attach($request->role);  
-  
-    flash()->success('User has been granted the role.',  
-        [  
-            'position' => 'top-center',  
-            'timeout' => 5000,  
-        ],  
-        'Role Added');  
-  
-	return back();  
+        return back()->with('message', 'Permission exists.'); 
+         
+    }    
+    
+    $role->givePermissionTo($request->permission);  
+    
+    return back()->with('message', 'Permission added.');  
 }
 ```
-This will attach the role to the user. Even id the role is there already it will ensure the user has that role.
 
-BUT... we have not validated the data... which we MUST.
 
-Before the `if( $user->hasRole...` line, we need to validate the role id.
+You may be able to test this is working, but to do so you would need to add some permissions to begin with.
 
-Because we are doing this, it would also be a good idea to provide a warning flash message... so let's update the code.
+Now onto the revoke...
 
-We are using the same base code as the store and edit methods:
+### Step 3: Add Revoke Permissions
+
+Again we will split this into parts to complete.
+
+#### Page Updates
+
+Once again, locate the `</section>` from the edit page.
+
+Add a blank line, if there is not one, before the tag and then add the following (making sure you have a blank line after this code block):
+
 
 ```php
-try {  
-  
-    $validated = $request->validate([  
-        'role' => ['required','exists:roles,id'],  
-    ]);  
-  
-  
-} catch (ValidationException $e) {  
-  
-    flash()->error('The role you attempted to add does not exist.',  
-        [  
-            'position' => 'top-center',  
-            'timeout' => 5000,  
-        ],  
-        'Add Role Failed');  
-  
-    return back()->withErrors($e->validator)->withInput();  
-  
-}  
+@if ($role->permissions)  
+    <div class="mt-2 mb-6 bg-gray-100 shadow 
+                border border-gray-300 rounded px-4 pt-2">  
+        <h3 class="mb-2 bg-gray-300 text-gray-800 px-4 py-1 -mt-2 -mx-4">
+            Revoke Permissions
+        </h3>  
+        <div class="flex space-x-4 flex-wrap">  
+        
+            @foreach ($role->permissions as $rolePermission)  
+            
+                <form class="px-0 py-1 text-white rounded-md"  
+                       method="POST"  
+                       action="{{ route('admin.roles.permissions.revoke',
+                                    [$role->id, $rolePermission->id]) }}"  
+                       onsubmit="return confirm('Are you sure?');">  
+                       
+	                @csrf  
+                    @method('DELETE')  
+                       
+                    <x-danger-button type="submit">  
+                        {{ $rolePermission->name }}  
+                    </x-danger-button>  
+                </form>  
+                
+            @endforeach  
+            
+        </div>  
+    </div>  
+@endif  
 
-if ($user->hasRole($validated['role'])) {  
-  
-    flash()->warning('User already has this role.',  
-        [  
-           'position' => 'top-center',  
-           'timeout' => 5000,  
-        ],  
-        'Role Exists');  
-  
-        return back();  
-    }  
-  
-    $user->roles()->attach($validated['role']);  
-  
-flash()->success('User has been granted the role.',  
+```
+Whilst this may appear to be a little strange, what we have done is added a small form with a button for each currently assigned permission.
+
+This means we can click the button which then triggers a "submit" for the permission to be revoked.
+
+But... as the button is clicked we show a JavaScript pop-up dialog to confirm the action. If the cancel button is pressed then the revoke will be terminated.
+
+The revoke makes use of a new route `admin.roles.permissions.revoke`... so time to add this to the web routes.
+
+#### Web Routes Update
+
+Open the web routes and **immediately** before the `delete` route,  add the route to revoke a permission:
+
+```php
+Route::delete('/roles/{role}/permissions/{permission}', 
+				[RoleController::class, 'revokePermission'])  
+    ->name('roles.permissions.revoke');
+```
+Make sure you do not remove the current give permission route.
+
+#### Role Controller Updates
+
+Now open the `RoleController` and once again, at the bottom of the class and  immediately before the last closing curly brace (`}`), add:
+
+```php
+public function revokePermission(
+					Role $role, 
+					Permission $permission)  
+{  
+    if ($role->hasPermissionTo($permission)) {  
+    
+        $role->revokePermissionTo($permission);  
+        
+        return back()->with('message', 'Permission revoked.');  
+        
+    }    
+    
+    return back()->with('message', 'Permission does not.');  
+}
+```
+
+Here the code accepts the Role and Permission, and if the role has the permission, then it is 
+revoked. If not, then an error is shown.
+
+Well, it would be, but we need to change this to use the Flasher.
+
+> ### Important
+>  
+> If you have added a composer-based package to a project and pushed the changes to teh 
+> repository, then when editing on a different PC, or a team member is working on the 
+> application, then when the new code is pulled you must do the following:
+>  
+> - run `composer install` _or_ `composer update`
+> - run any additional installation routines
+> - clear caches, routes and compiled views:
+>   - `php artisan cache:clear`
+>   - `php artisan view:clear`
+>   - `php artisan route:clear`
+> - commit the updates so you have a 'roll back' point
+
+It is a good idea at this point to make sure that you have the flasher package installed and 
+are ready to continue using:
+
+```shell
+composer require php-flasher/flasher-laravel
+```
+
+
+
+### Update the Assign and Revoke messages to add Flasher
+
+This is going to be a quick change.
+
+#### Update the `return back()->` calls
+
+Change the permission exists line into the following lines:
+
+```php
+flash()->warning('Role already has this permission.',  
     [  
         'position' => 'top-center',  
         'timeout' => 5000,  
     ],  
-    'Role Added');  
+    'Permission Exists');  
   
 return back();
 ```
 
-#### Test!
 
-OK, try the add role to see if it works.
-
-
-### Revoke Role from User
-
-Ok, next we will do the revoke method in the controller.
-
-We are keeping the "positive test" rather than using a not, so if the user has the role then it is removed from the list of roles the user has.
+Change the permission added line into the following lines:
 
 ```php
-public function revokeRole(Request $request, User $user)  
-{  
-    $roleId = Role::whereId($request->role)->get();  
+flash()->success('Permission has been addd to the Role.',  
+    [  
+        'position' => 'top-center',  
+        'timeout' => 5000,  
+    ],  
+    'Permission Added');  
   
-    if ($user->hasRole($roleId)) {  
+return back();
+```
+
+Change the permission revoked line into the following lines:
+
+```php
+flash()->success('Permission has been removed from the Role.',  
+    [  
+        'position' => 'top-center',  
+        'timeout' => 5000,  
+    ],  
+    'Permission Revoked');  
   
-        $user->roles()->detach($roleId);  
+return back();
+```
+
+And finally, change the permission does not exist  into the following lines:
+
+```php
+flash()->warning('Role did not have this permission.',  
+    [  
+        'position' => 'top-center',  
+        'timeout' => 5000,  
+    ],  
+    'Permission not present');  
   
-        flash()->success('Role has been removed from the user.',  
-            [  
-                'position' => 'top-center',  
-                'timeout' => 5000,  
-            ],  
-            'Role Revoked');  
-  
-        return back();  
-    }  
-    flash()->warning('User did not have this role.',  
-        [  
-            'position' => 'top-center',  
-            'timeout' => 5000,  
-        ],  
-        'Role Did Not Exist');  
-  
-    return back();  
-}
+return back();
 ```
 
 
-### Revoke Role section of the View
-
-Now for the revoke role section of the edit view.
-
-It is remarkably similar to the "add role" section... and it sits immediately before the `</article>` tag.
-
-We check to see if the user has any roles, and display them for revoking.
-
-```php
-    @if ($userRoles)  
-  
-        <div class="mt-2 mb-6 bg-gray-100 shadow border border-gray-300 rounded px-4 pt-2">  
-            <h3 class="mb-2 bg-gray-300 text-gray-800 px-4 py-1 -mt-2 -mx-4  font-semibold">  
-                {{__("Revoke Role(s)")}}  
-            </h3>  
-            <div class="flex space-x-6 flex-wrap">  
-  
-                @foreach ($userRoles as $currentRole)  
-  
-                    <form class="px-0 py-1 text-white rounded-md"  
-                          method="POST"  
-                          action="{{ route('admin.users.roles.revoke',$user) }}"  
-                          onsubmit="return confirm('Are you sure?');">  
-  
-                        @csrf  
-                        @method('DELETE')  
-  
-                        <input type="hidden" name="role" value="{{  $currentRole->id }}"/>  
-  
-                        <x-danger-button type="submit" class="px-2! py-1!">  
-                            {{ $currentRole->name }}  
-                        </x-danger-button>  
-  
-                    </form>  
-  
-                @endforeach  
-  
-            </div>  
-        </div>  
-  
-    @endif  
-  
-```
-
-### Exercise: No user roles and no roles to add?
-
-Now add some extra code to the view that:
-
-- if there are no roles to be added then a "No Roles available" is shown
-- if there are no roles allocated to the user, then "No roles available" is shown
-
-Here is an example of the possible output:
-
-![](assets/Pasted%20image%2020250605141328.png)
-
-
-
-Excellent work.
-
-We are now ready to look at using these roles and permissions to restrict access to actions.
 
 
 
 # References
 
-- Xhepa, T. (2022, March 1). Spatie Laravel Permission.
+- Xhepa, T. (2022, March 1). Spatie Laravel Permission. 
+>   YouTube. http://www.youtube.com/playlist?list=PL6tf8fRbavl3xuFIe4_i3TB4PZbtbx3Js
 
-> YouTube. http://www.youtube.com/playlist?list=PL6tf8fRbavl3xuFIe4_i3TB4PZbtbx3Js
 
 # Up Next
 
-- [Laravel v12 Bootcamp - Part 13](S11-Laravel-v12-BootCamp-Part-13.md)
+- [Laravel v12 Bootcamp - Part 12](S11-Laravel-v12-BootCamp-Part-13.md)
 - [Session 11 ReadMe](../session-10/ReadMe.md)
 - [Session 11 Reflection Exercises & Study](../session-11/S11-Reflection-Exercises-and-Study.md)
 

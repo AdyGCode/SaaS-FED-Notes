@@ -21,7 +21,7 @@ updated: 2025-08-26T14:39
 
 **Code has issues**
 
-# S11 Laravel Bootcamp: Part 6
+# Laravel Bootcamp: Part 6
 
 ## Software as a Service - Front-End Development
 

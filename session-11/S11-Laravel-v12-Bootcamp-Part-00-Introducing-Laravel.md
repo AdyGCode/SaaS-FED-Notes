@@ -675,4 +675,4 @@ You are ready to carry on with the Boot Camp.
 
 # END
 
-Next up - [S11 Laravel Bootcamp Part 1](S11-Laravel-v12-BootCamp-Part-01.md) and [Part 2](S11-Laravel-v12-BootCamp-Part-02.md)
+Next up - [Laravel Bootcamp Part 1](S11-Laravel-v12-BootCamp-Part-01.md) and [Part 2](S11-Laravel-v12-BootCamp-Part-02.md)

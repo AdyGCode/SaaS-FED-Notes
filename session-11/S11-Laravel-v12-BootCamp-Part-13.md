@@ -11,11 +11,12 @@ tags:
   - SaaS
   - APIs
   - Back-End
+date created: 03 July 2024
 created: 2024-09-20T11:17
 updated: 2025-08-21T15:59
 ---
 
-# S11 Laravel Bootcamp: Part 13
+# Laravel Bootcamp: Part 13
 
 ## Software as a Service - Front-End Development
 
@@ -33,11 +34,9 @@ includeLinks: true
 
 ---
 
-# Laravel Bootcamp: Part 13
+# Laravel Bootcamp: Part 12
 
-# TODO: IN PROGRESS
-
-## Roles and Permissions Part 4
+## Roles and Permissions Part 3
 
 In this section, we continue with the administration/management front-end that allows
 users with particular rights to perform management actions on data in the Chirp system.
@@ -64,1043 +63,807 @@ Have you completed (not just read):
 - [Laravel v12 Bootcamp - Part 8](S11-Laravel-v12-BootCamp-Part-08.md)
 - [Laravel v12 Bootcamp - Part 9](S11-Laravel-v12-BootCamp-Part-09.md)
 - [Laravel v12 Bootcamp - Part 10](S11-Laravel-v12-BootCamp-Part-10.md)
-- [Laravel v12 Bootcamp - Part 11](S11-Laravel-v12-BootCamp-Part-11.md)
-- [Laravel v12 Bootcamp - Part 12](S11-Laravel-v12-BootCamp-Part-12.md)
+- [Laravel v12 Bootcamp - Part 11](S11-Laravel-v12-BootCamp-Part-12.md)
 
 No? Well… go do it…
 
 You will need these to be able to continue…
 
-> **Important:** You should understand that whilst you are completing this tutorial, you may
-> only see parts of the application working.
+> **Important:** You should understand that whilst you are completing this tutorial, you may only see parts of the
+> application working.
 >
 > So if you get an error in the browser, it may be because there is something missing.
 >
 > Remember that code is available from the GitHub repository.
 
-# Updating the Roles & Permissions & Seeders
+# Manage User Roles (and Permissions)
 
 Remember the most up-to-date code is available on GitHub:
 
 - https://github.com/AdyGCode/roles-permissions-2025-s1
 
-Even though we give you this code, we **STRONGLY** suggest you complete this tutorial from
-scratch.
+Even though we give you this code, we **STRONGLY** suggest you complete this tutorial from scratch.
 
 This will assist your understanding and ability to apply to other projects
 
-## Planning
+## Organising our Code
 
-It is always a good idea to carefully plan your Role Based Access Control.
+Up to this point we had not been organising our code very well. This was especially true with the Roles and Permissions
+controllers.
 
-Ideally, a table showing the Role (horizontally) and the Permissions (vertically) with an
-indicator if the role has the permission or not.
+So we are going to tidy up by adding an `Admin` folder to the `App/Http/Controllers` folder and moving our code to this
+folder.
 
-Here is a basic example. Across the top are the Roles, and down the side are the actions that
-may be performed.
-
-A `Y` means they are authorised to perform the action, a `blank` means they are not authorised to perform the action.
-
-Here we have named the actions based on the BREAD acronym, and kept the resource being operated upon SINGULAR.
-
-| Actions ⬇️        | Super Admin | Admin | Staff | Client |
-| ----------------- | :---------: | :---: | :---: | :----: |
-| browse user       |      Y      |   Y   |   Y   |        |
-| read user         |      Y      |   Y   |   Y   |        |
-| add user          |      Y      |   Y   |   Y   |        |
-| edit user         |      Y      |   Y   |   Y   |        |
-| delete user       |      Y      |   Y   |       |        |
-| ...               |             |       |       |        |
-| browse roles      |      Y      |   Y   |   Y   |        |
-| read role         |      Y      |   Y   |       |        |
-| edit role         |      Y      |   Y   |       |        |
-| add role          |      Y      |   Y   |       |        |
-| delete role       |      Y      |       |       |        |
-| ...               |             |       |       |        |
-| browse permission |      Y      |   Y   |   Y   |        |
-| read permission   |      Y      |   Y   |       |        |
-| edit permission   |      Y      |       |       |        |
-| add permission    |      Y      |       |       |        |
-| delete permission |      Y      |       |       |        |
-| ...               |             |       |       |        |
-| browse post       |      Y      |   Y   |   Y   |   Y    |
-| read post         |      Y      |   Y   |   Y   |   Y    |
-| edit post         |      Y      |       |       |   Y    |
-| add post          |      Y      |       |       |   Y    |
-| delete post       |      Y      |   Y   |   Y   |   Y    |
-| publish post      |      Y      |       |   Y   |   Y    |
-| ...               |             |       |       |        |
-
-We obviously will have issues where a Staff user must not be able to change the role of an admin user, and so on... these sort of items we can look at once the basic permissions are applied.
-
-It is possible to make the table more explicit and have lines for the likes of "Edit Admin User: change roles" if wanted. How you document your roles and permissions is important and should be documented no matter how complex the situation.
-
-## Create a New Roles and Permissions Seeder
-
-Before we continue, we are going to create a new seeder, and replace the current Role and Permissions seeders.
-
-As we do this, we will use the table we created as the start point.
+When we do this, we need to then update any references to the controllers (e.g. in the `web.php` routes file).
 
 ```shell
-php artisan make:seeder RoleAndPermissionSeeder
+mkdir App/Http/Controllers/Admin
 ```
 
-Once created, it's time to unify the two existing seeders into one.
+Now, in PhpStorm we can move files to other folders, and it will help refactor references as well.
 
-Open the `RoleAndPermissionSeeder` from the database migrations folder.
+Drag and Drop the RoleController and the PermissionController into the Admin folder.
 
-We are going to implement the permissions, one by one, with details on what each is doing.
+When prompted you will be given the opportunity to check that the changes **will be** correctly applied.
 
-#### Add List of Permissions
+Click Refactor to apply the changes.
 
-After the `run` method signature and opening `{` curly bracket, we add the list of the permissions we wish to use to seed the database.
+Here is an animation of the process:
+
+- Original Screen
+  Recording: [phpstorm-refactor-role-permission-admin-folder.mp4](../assets/phpstorm-refactor-role-permission-admin-folder.mp4)
+- Animated GIF: ![phpstorm-roles-perms-refactor.gif](../assets/phpstorm-roles-perms-refactor.gif)
+
+## Adding Roles to Users
+
+We will now create an admin section for users. This will allow us to add, remove and edit users as required.
+
+This has been done many times before, as we often use this as a way to teach CRUD/BREAD.
+
+### Add the User Admin Routes
+
+Edit the web.php file and add the admin route for users
 
 ```php
-$seedPermissions = [  
-    'browse user',  
-    'read user',  
-    'edit user',  
-    'add user',  
-    'delete user',  
-  
-    'browse post',  
-    'read post',  
-    'edit post',  
-    'add post',  
-    'delete post',  
-    'publish post',  
-  
-    'browse permission',  
-    'read permission',  
-    'edit permission',  
-    'add permission',  
-    'delete permission',  
-  
-    'browse role',  
-    'read role',  
-    'edit role',  
-    'add role',  
-    'delete role',  
-  
-];
+        Route::post('users/{user}/delete', [UserController::class, "delete"])
+            ->name('users.delete');
+        
+        Route::resource('users',
+            UserController::class);
 ```
 
-Nothing difficult about this list of strings.
+We put these in the `admin` block after the permissions routes.
 
-Next we will do something a little different. We are going to add a CLI "progress" meter to this seeder.
+### Create the User Admin Controller
 
-We create a new `ConsoleOutput` object that allows data to be sent to the command line output.
-
-Next a progress bar is created, linked to the output 'channel', with a count of the seed permissions. This allows the progress bar to step along as it performs the seeding.
-
-```php
-$output = new ConsoleOutput();  
-$progress = new ProgressBar($output, count($seedPermissions));  
-$output->writeln("");  
-$output->writeln('Seed Permissions');  
-$progress->start();
-```
-
-Next we loop over the seed permissions, creating each one in turn.
-
-After creating the permission, we tell the progress bar to advance...
-
-```php
-foreach ($seedPermissions as $newPermission) {  
-    $permission = Permission::firstOrCreate(['name' => $newPermission]);  
-    $progress->advance();  
-}
-```
-
-After the seeding is completed, we tell the progress bar to finish and then output a blank line.
-
-```php
-$progress->finish();  
-$output->writeln('');
-```
-
-OK, so that is the permissions seeded, now we are able to work with the roles and add the permissions as needed.
-
-#### Create Super-Admin Role
-
-This is an optional part of the seeding, but you may find it useful to define a super-admin. An administrator who can do ANYTHING.
-
-Yes, be aware of the security implications with this!
-
-Note the use of `firstOrCreate` which does a double action - it first checks to see if the role has already been created (`first`) and if so retrieves it's details. If not, then it creates the role and again grabs the resulting new role's details.
-
-Neat way to work!
-
-After this it syncs the permisssons.
-
-```php
-/* Create Super-Admin Role and Sync Permissions */  
-  
-$progress = new ProgressBar($output, 4);  
-$output->writeln("");  
-$output->writeln('Grant Permissions to Roles');  
-$progress->start();  
-  
-$roleSuperAdmin = Role::firstOrCreate([
-	'name' => 'super-admin'
-]);  
-
-$roleSuperAdmin->syncPermissions();  
-$progress->advance();
-```
-
-
-It is interesting to see we have not allocated all the permissions to the super-admin. This is because we will use a "gate" to apply an all access pass later in this stage.
-
-#### Admin Role
-
-Next we create the admin role.
-
-Here we create the role, then we list all the permissions the administrator role can perform, before synching them with the admin role.
-
-```php
-/* Create Admin Role and Sync Permissions */  
-  
-$roleAdmin = Role::firstOrCreate(['name' => 'admin']);  
-
-$adminPermissions = [  
-    'browse user', 'read user', 'edit user', 'add user', 'delete user',  
-    'browse post', 'read post', 'edit post', 'add post', 'delete post', 
-    'browse permission', 'read permission', 'edit permission', 'add permission',  
-    'browse role', 'read role', 'edit role', 'add role', 
-	'browse post', 'read post', 'edit post', 'add post', 'delete post', 'publish post',  
-];  
-
-$roleAdmin->syncPermissions($adminPermissions);  
-$progress->advance();
-```
-
-
-> ### Important: 
-> 
-> Make sure you check the table against this list of permissions. Make sure you fix any errors.
-
-
-This process is going to be repeated with the Staff and Client roles.
-
-#### Staff Role
-
-We keep going, next with the staff role.
-
-```php
-/* Create Staff Role and Sync Permissions */  
-  
-$roleStaff = Role::firstOrCreate(['name' => 'staff']);  
-
-$staffPermissions = [  
-    'browse user', 'read user', 'edit user', 'add user', 'delete user',  
-    'browse permission', 'read permission',  
-    'browse role', 'read role',  
-	'browse post', 'read post', 'edit post', 'add post', 'delete post',  
-	];  
-	
-$roleStaff->syncPermissions($staffPermissions);  
-$progress->advance();
-```
-
-> ### Important: 
-> 
-> Make sure you check the table against this list of permissions. Make sure you fix any errors.
-
-
-#### Client Role
-
-Finally the client role.
-
-```php
-/* Create Client Role and Sync Permissions */  
-  
-$roleClient = Role::create(['name' => 'client']);  
-$clientPermissions = [  
-    'browse post', 'read post', 'edit post', 'add post', 'delete post', 'publish post',  
-];  
-$roleClient->syncPermissions($clientPermissions);  
-$progress->advance();  
-  
-$progress->finish();  
-$output->writeln("");
-```
-
-> ### Important: 
-> 
-> Make sure you check the table against this list of permissions. Make sure you fix any errors.
-
-That's the seeder completed.
-
-> ### Error?
-> 
-> Did you spot the error in the client role seeder code?
-
-
-#### Forgetting Cached Permissions
-
-Just after the `{` of the "run" method signature line (`public function run(): void`), we add:
-
-```php
-// Reset cached roles and permissions  
-app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();  
-  
-```
-
-This ensures that the permissions that may have been cached are removed before seeding starts.
-
-#### Update the Database Seeder
-
-Next we need to update the database seeder.
-
-Remove the Role and Permission seeder lines and add one for the `RoleAndPermissionSeeder` instead.
-
-
-```php
-$this->call([  
-    RoleAndPermissionSeeder::class,  
-  
-    AdminUserSeeder::class,  
-    StaffUserSeeder::class,  
-    UserSeeder::class,  
-  
-]);
-```
-
-#### Reseed the Database
-
-Because we are in development mode, we can reseed the database without any issues.
+As with the roles and permissions, we will put the admin controller for the users in the Controllers/Admin folder.
 
 ```shell
-php artisan migrate:fresh --seed
+php artisan make:controller Admin/UserController -r
 ```
 
-If you wanted to run JUST the `RoleAndPermissionSeeder` then you could use:
-
-```shell
-php artisan db:seed RoleAndPermissionSeeder
-```
-
-This would also be safe for production.
-
-## Admin, Staff and Client Users Seeders
-
-We need to make a few changes to the Admin, Client and Staff user seeders. This is to reflect the changes in the roles and permissions and also to make sure we have everything seeded as expected.
-
-Instead of explaining every line, we will show blocks of the code with brief descriptions (which may be just one or two words)...
-
-### Admin Users Seeder
-
-List the details of the seed users - in this case the "super-admin" and an "admin" user.
+To make things easier, we will give you the starting code for the User admin controller... it is in fact the code from
+the Chirper tutorial, so you will be able tos ee how to modify and update Chirper to have these new features.
 
 ```php
-$seedAdminUsers = [  
-    [  
-        'id' => 100,  
-        'name' => 'Ad Ministrator',  
-        'email' => 'admin@example.com',  
-        'password' => 'Password1',  
-        'email_verified_at' => now(),  
-        'roles'=>['staff','admin',]  
-    ],  
-    [  
-        'id' => 99,  
-        'name' => 'System Administrator',  
-        'email' => 'systemadmin@example.com',  
-        'password' => 'Password1',  
-        'email_verified_at' => now(),  
-        'roles'=>['super-admin',]  
-    ],  
-];
-```
-
-Start the progress bar:
-
-```php
-$output = new ConsoleOutput();  
-$progress = new ProgressBar($output, count($seedAdminUsers));  
-$progress->start();
-```
-
-Seed users:
-
-```php
-foreach ($seedAdminUsers as $user) {  
-    $roles = $user['roles'] ?? null;  
-    unset($user['roles']);  
-  
-    $adminUser = User::updateOrCreate(  
-        ['id' => $user['id']],  
-        $user  
-    );  
-  
-    $adminUser->assignRole($roles);  
-    $progress->advance();  
-}
-```
-
-End the progress bar:
-
-```php
-$progress->finish();  
-$output->writeln("");
-```
-
-The remaining seeders will be very similar!
-
-### Staff Users Seeder
-
-```php
-  
-$seedStaffUsers = [  
-    [  
-        'id' => 200,  
-        'name' => 'Staff User',  
-        'email' => 'staff@example.com',  
-        'password' => 'Password1',  
-        'email_verified_at' => now(),  
-        'roles' => ['staff',],  
-    ],  
-    [  
-        'id' => 201,  
-        'name' => 'Staff User 2',  
-        'email' => 'staff2@example.com',  
-        'password' => 'Password1',  
-        'email_verified_at' => now(),  
-        'roles' => ['staff', 'client'],  
-    ],  
-    [  
-        'id' => 203,  
-        'name' => 'Staff User 3',  
-        'email' => 'staff3@example.com',  
-        'password' => 'Password1',  
-        'email_verified_at' => now(),  
-        'roles' => ['staff'],  
-    ],  
-];  
-  
-$output = new ConsoleOutput();  
-$progress = new ProgressBar($output, count($seedStaffUsers));  
-$progress->start();  
-  
-foreach ($seedStaffUsers as $user) {  
-    $roles = $user['roles'] ?? null;  
-    unset($user['roles']);  
-  
-    $staffUser = User::updateOrCreate(  
-        ['id' => $user['id']],  
-        $user  
-    );  
-  
-    $staffUser->assignRole($roles);  
-    $progress->advance();  
-}  
-
-$progress->finish();  
-$output->writeln("");
-```
-
-### Client Users Seeder
-
-```php
-$seedClientUsers = [  
-    [  
-        'id' => 501,  
-        'name' => 'Client User',  
-        'email' => 'client@example.com',  
-        'password' => 'Password1',  
-        'email_verified_at' => now(),  
-        'roles' => ['client',],  
-    ],  
-    [  
-        'id' => 502,  
-        'name' => 'Crystal Chantal-Lear',  
-        'email' => 'crystal@example.com',  
-        'password' => 'Password1',  
-        'email_verified_at' => null,  
-    ],  
-    [  
-        'id' => 503,  
-        'name' => 'Robyn Banks',  
-        'email' => 'robyn@example.com',  
-        'password' => 'Password1',  
-        'email_verified_at' => now(),  
-        'roles' => ['client',],  
-    ],  
-    [  
-        'id' => 504,  
-        'name' => 'Eileen Dover',  
-        'email' => 'eileen@example.com',  
-        'password' => 'Password1',  
-        'email_verified_at' => null,  
-        'roles' => ['client',],  
-    ],  
-];  
-  
-$output = new ConsoleOutput();  
-$progress = new ProgressBar($output, count($seedClientUsers));  
-$progress->start();  
-  
-foreach ($seedClientUsers as $user) {  
-    $roles = $user['roles'] ?? null;  
-    unset($user['roles']);  
-  
-    $clientUser = User::updateOrCreate(  
-        ['id' => $user['id']],  
-        $user  
-    );  
-  
-    if (isset($roles)) {  
-        $clientUser->assignRole($roles);  
-    }  
-    $progress->advance();  
-}  
-  
-$progress->finish();  
-$output->writeln("");
-```
-
-We suggest that you run each seeder in turn, using the `db:seed` method from above.
+    /**
+     * Display a listing of the resource.
+     */
+    public function index(Request $request)
+    {
+        // TODO: Only allow authorised users (Admin/Staff Roles)
 
-```shell
-php artisan db:seed AdminUserSeeder
-php artisan db:seed StaffUserSeeder
-php artisan db:seed UserSeeder
-```
+        $validated = $request->validate([
+            'search' => ['nullable', 'string',]
+        ]);
+
+
+        $search = $validated['search'] ?? '';
+
+
+        $users = User::whereAny(
+            ['name', 'email', 'position',], 'LIKE', "%$search%")
+            ->paginate(2)
+            ->appends(['search' => $search]);
+
+
+        return view('users.index')
+            ->with('users', $users)
+            ->with('search', $search);
+
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        try {
+
+            $validated = $request->validate([
+                'name' => ['required', 'min:2', 'max:192',],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class . ',email',],
+                'password' => ['required', 'confirmed', Rules\Password::defaults()],
+                'role' => ['nullable',],
+            ]);
+
+            $user = User::create([
+                'name' => $validated['name'],
+                'email' => Str::lower($validated['email']),
+                'password' => Hash::make($validated['password']),
+            ]);
+
+        } catch (ValidationException $e) {
+
+            flash()->error('Please fix the errors in the form.',
+                [
+                    'position' => 'top-center',
+                    'timeout' => 5000,
+                ],
+                'User Creation Failed');
+
+            return back()->withErrors($e->validator)->withInput();
+
+        }
+
+        $userName = $user->name;
+
+        flash()->success("User $userName created successfully!",
+            [
+                'position' => 'top-center',
+                'timeout' => 5000,
+            ],
+            "User Added");
+
+        return redirect(route('users.index'));
+
+
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        // TODO: Update when we add Roles & Permissions
+        $roles = Collection::empty();
+
+        return view('users.create', compact(['roles',]));
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(User $user)
+    {
+        // TODO: Update when we add Roles & Permissions
+
+        return view('users.show', compact(['user']));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(User $user)
+    {
+        // TODO: Update when we add Roles & Permissions
+        $roles = Collection::empty();
+
+        return view('users.edit', compact(['roles', 'user',]));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, User $user)
+    {
+        // TODO: Update when we add Roles & Permissions
+
+        try {
+
+            $validated = $request->validate([
+                'name' => ['required', 'min:2', 'max:192',],
+                'email' => [
+                    'required',
+                    'string',
+                    'email',
+                    'max:255',
+                    Rule::unique(User::class)->ignore($user),
+                ],
+                'password' => [
+                    'sometimes',
+                    'nullable',
+                    'confirmed',
+                    Rules\Password::defaults()
+                ],
+                'role' => ['nullable',],
+            ]);
+
+            // Remove password if null
+            if (isNull($validated['password'])) {
+                unset($validated['password']);
+            }
+
+            $user->fill($validated);
+
+            if ($user->isDirty('email')) {
+                $user->email_verified_at = null;
+            }
+
+            $user->save();
+
+        } catch (ValidationException $e) {
+
+            flash()->error('Please fix the errors in the form.',
+                [
+                    'position' => 'top-center',
+                    'timeout' => 5000,
+                ],
+                'User Update Failed');
+
+            return back()->withErrors($e->validator)->withInput();
+
+        }
+
+        if (isNull($user->email_verified_at)) {
+            $user->sendEmailVerificationNotification();
+        }
+
+        $userName = $user->name;
+
+        flash()->info("User $userName details updated successfully!",
+            [
+                'position' => 'top-center',
+                'timeout' => 5000,
+            ],
+            "User Updated");
+
+        return redirect(route('users.index'));
+    }
+
+    /**
+     * Confirm the removal of the specified user.
+     *
+     * This is a prequel to the actual destruction of the record.
+     * Put in place to provide a "confirm the action".
+     *
+     * @param User $user
+     */
+    public function delete(User $user)
+    {
+        // TODO: Update when we add Roles & Permissions
+
+        return view("users.delete", compact(['user',]));
+
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param User $user
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy(User $user)
+    {
+        // TODO: Update when we add Roles & Permissions
+
+        $oldUser = $user;
+
+        $user->delete();
+
+
+        $userName = $oldUser->name;
+
+        flash()->info("User $userName removed successfully!",
+            [
+                'position' => 'top-center',
+                'timeout' => 5000,
+            ],
+            "User Deleted");
+
+        return redirect(route('users.index'));
 
-# Super Admin!
-
-Adding a super admin is quite easy when working with Spatie's Permissions package.
-
-It is detailed in the package's documentaiton and in many tutorials.
-
-- https://spatie.be/docs/laravel-permission/v6/basic-usage/super-admin 
-
-Open the `App/Providers/AppServiceProvider` class, and in the `boot` method add the following:
-
-```php
-// Implicitly grant "Super Admin" role all permissions  
-// This works in the app by using gate-related functions like auth()->user->can() and @can()  
-// See https://spatie.be/docs/laravel-permission/v6/basic-usage/super-admin  
-Gate::before(function ($user, $ability) {  
-    return $user->hasRole('super-admin') ? true : null;  
-});
-```
-
-This will check to see if the logged in user is a super admin, and if they are, grant FULL PERMISSIONS to the user by opening the permissions gate.
-
-# Update The Views
-
-Now we have the roles and permissions seeded, we can operate on the views.
-
-There are a number of ways we can apply the roles and permissions to the views.
-
-The most important thing to remember is that PERMISSIONS should ALWAYS take PRIORITY over ROLES.
-
-In a blade template, you may use either:
-
-- `@hasrole(...)` ... `@endhasrole`
-
-or
-
-- `@can(...)` ... `@endcan`
-
-or one of their variants.
-
-
-## Navigation
-
-We begin by updating the navigation.
-
-> ### IMPORTANT
->
-> We are going to show you how to update the "desktop" navigation, but expect you to complete the mobile section as well.
-
-Open the `navigation.blade.php` file and locate the "Navigation Links" section.
-
-We are going to wrap the "admin" link with a `hasrole` that checks if the role the currently logged in user has is a staff, admin or super admin.
-
-
-```php
-
-@hasrole('admin|staff|super-admin')  
-<x-nav-link :href="route('admin.index')"  
-            :active="request()->routeIs('admin.*')">  
-	<i class="fa-solid fa-user-tie mr-1"></i>  
-        {{ __('Admin') }}  
-    </x-nav-link>  
-@endhasrole  
-```
-
-
-Now if you refresh and are logged in as a client, you will not see the admin link!
-
-![](../assets/Pasted%20image%2020250610173242.png)
-
-That's it (apart from the mobile navigation that you need to update).
-
-## Permissions
-
-Next onto the permissions.
-
-The steps here will be applied to the other views as well. The only changes are the roles or permissions we are going to be allowing to perform actions.
-
-### Permissions Create
-
-Open the `create.blade.php` file from the admin/permissions folder.
-
-Locate the `admin.permissions.create` link, and we are going to wrap it in a `@can` that checks for the logged in user's ability to  `add permission`.
-
-```php
-@can('add permission')  
-    <a href="{{ route('admin.permissions.create') }}"  
-       class="rounded bg-green-500 text-white hover:bg-white hover:text-green-500 border-green-500 px-4 py-2">  
-        New Permission  
-    </a>  
-@endcan
-```
-
-This is painless!
-
-Also we wrap the whole form in the same `@can('add permission')` and `@endcan` blade tags.
-
-One small change is that we are also going to display a big red warning that they cannot perform the action... We show it in its entirety on this occasion.
-
-```php
-    @can('add permission')  
-  
-        <form action="{{ route('admin.permissions.store') }}"  
-              method="POST"  
-              class="p-6 flex flex-col space-y-4">  
-  
-            @csrf  
-  
-            <div>  
-                <x-input-label for="name" :value="__('Permission Name')"/>  
-  
-                <x-text-input id="name" class="block mt-1 w-full" type="name" name="name"  
-                              :value="old('name')" required/>  
-  
-                <x-input-error :messages="$errors->get('name')" class="mt-2"/>  
-            </div>  
-  
-            <div class="flex flex-row space-x-4">  
-  
-                <x-primary-button>  
-                    Save  
-                </x-primary-button>  
-                <x-link-button href="{{route('admin.permissions.index')}}">  
-                    Cancel  
-                </x-link-button>  
-            </div>  
-        </form>  
-  
-    @else  
-        <p class="p-6 bg-red-500 text-white">You are not able to create new permissions</p>  
-    @endcan  
-```
-
-
-And you are done.
-
-### Permissions Delete
-
-Similar principle to the previous example.
-
-Wrap the "New permission link" (just a moment, that is the same as we just did for create... yep, we did say you'd be repeating yourself a fair amount).
-
-```php
-@can('add permission')  
-    <a href="{{ route('admin.permissions.create') }}"  
-       class="rounded bg-green-500 text-white hover:bg-white hover:text-green-500 border-green-500 px-4 py-2">  
-        New Permission  
-    </a>  
-@endcan
-```
-
-Wrap the form in `@can('delete permission')` ... `@endcan`. 
-
-We are not going to show all the code as it is the same process except for the message when the user cannot perform the action...
-
-```php
-  
-@can('delete permission')  
-<form action="{{ route('admin.permissions.destroy', $permission) }}"  
-      method="POST"  
-      class="p-6 flex flex-col space-y-4">  
-
-<!-- 
-We have removed this code for brevity. 
-Ensure you do not remove any code.
-Endure you wrap with the can/else/endcan 
--->
-</form>
-  
-@else  
-    <p class="p-6 bg-red-500 text-white">You are not able to delete permissions</p>  
-@endcan
-```
-
-
-### Edit Permission
-
-Guess what... you do the same again!
-
-This time the permission for the form is `edit permission` in place of `delete permission`.
-
-```php
-@can('edit permission')  
-    <form action="{{ route('admin.permissions.update', $permission) }}"  
-          method="POST"  
-          class="p-6 flex flex-col space-y-4">  
-
-<!-- 
-We have removed this code for brevity. 
-Ensure you do not remove any code.
-Endure you wrap with the can/else/endcan 
--->
-</form>
-  
-@else  
-    <p class="p-6 bg-red-500 text-white">You are not able to edit permissions</p>  
-@endcan  
-
-```
-
-### Browse Permission
-
-Finally browse permission. 
-
-This is slightly different as we will hide the buttons based on the permission the user has.
-
-We are not going to show full code, but we will show the wrapped code.
-
-#### "New Permission" button
-
-```php
-@can('add permission')  
-    <a href="{{ route('admin.permissions.create') }}"  
-       class="rounded bg-green-500 text-white hover:bg-white hover:text-green-500 border-green-500 px-4 py-2">  
-        New Permission  
-    </a>  
-@endcan
-```
-
-#### "Edit Permission" button
-
-```php
-@can('edit permission')  
-    <x-link-button  
-        class="hover:bg-amber-400 focus:bg-amber-400 active:bg-amber-400"  
-        href="{{ route('admin.permissions.edit', $permission) }}">  
-        Edit  
-    </x-link-button>  
-@endcan
-```
-
-#### "Delete Permission" button
-
-```php
-@can('delete permission')  
-    <x-link-button  
-        class="hover:bg-red-500 focus:bg-red-400 active:bg-red-400 "  
-        href="{{ route('admin.permissions.delete', $permission) }}">  
-        Delete  
-    </x-link-button>  
-@endcan
-```
-
-
-
-## Roles Views
-
-The roles views will be exactly the same apart from "role" instead of "permission".
-
-This is left as an exercise. Remember that we do provide the updated code in the GitHub repository.
-
-## User Views
-
-The user views will be the same, except we obviously now can view the user, and we also have the ability to update their role, or even permissions on a individual basis.
-
-
-# TODO: Finish off User Views
-
-
-# TODO: Add Web Routes Update
-
-```php
-Route::name('admin.')  
-    ->prefix('admin')  
-    ->middleware(['auth', 'verified', 'role:staff|admin|super-admin'])  
-    ->group(function () {  
-  
-        Route::get('/', [StaticPageController::class, 'admin'])  
-            ->name('index');  
-  
-        Route::post('roles/{role}/permissions', [RoleController::class, 'givePermission'])  
-            ->name('roles.permissions');  
-        Route::delete('roles/{role}/permissions/{permission}', [RoleController::class, 'revokePermission'])  
-            ->name('roles.permissions.revoke');  
-  
-        Route::get('roles/{role}/delete', [RoleController::class, 'delete'])  
-            ->name('roles.delete');  
-  
-        Route::resource('/roles', RoleController::class);  
-  
-        Route::get('permissions/{permission}/delete', [PermissionController::class, 'delete'])  
-            ->name('permissions.delete');  
-        Route::resource('/permissions', PermissionController::class);  
-  
-        Route::post('users/{user}/roles', [UserController::class, 'giveRole'])  
-            ->name('users.roles');  
-        Route::delete('users/{user}/roles', [UserController::class, 'revokeRole'])  
-            ->name('users.roles.revoke');  
-  
-        Route::post('users/{user}/delete', [UserController::class, "delete"])  
-            ->name('users.delete');  
-  
-        Route::resource('users',  
-            UserController::class);  
-    });
-```
-
-# App and Guest Template Fix
-
-You may have noticed a problem with the icons on the admin pages. 
-
-They are missing.
-
-That is because we made a newbie error and forgot to load them from assets.
-
-The `assets` function gives the full URL to the file you are wanting to add when it is stored in the `public` folder.
-
-So in our case we are wanting the `css/all.css` file so we make sure the file is in the `public/css/` folder then use `asset` to create the correct URL.
-
-```php
-<link rel="stylesheet" href="{{ asset('css/all.css') }}">
-```
-
-Fix the appropriate line in the App and Guest blade template files.
-
-# Using roles and permissions with controllers or policies
-
-The next level of security is applied at the 'controller' level.
-
-There are various ways to apply the policies or roles, we will show you some alternatives.
-
-
-## Option 1: 
-
-
-## Option 2: Controller Constructor & Middleware
-
-The first option is to use middleware in the controller's constructor method.
-
-For example, here we show the constructor for the `RoleController`:
-
-*The `__construct()` usually is placed as the first of the methods within the controller class.*
-
-```php
-/**  
- * Role Constructor
- *     
- * Apply permissions to the methods before they are 'called'     
- */
-public function __construct()  
-{  
-    $this->middleware('permission:browse role', ['only' => ['index',]]);  
-    
-    $this->middleware('permission:read role', ['only' => ['show',]]);  
-    
-    $this->middleware('permission:edit role', ['only' => ['update', 'edit', 'givePermission', 'revokePermission']]);  
-    
-    $this->middleware('permission:add role', ['only' => ['create', 'store', 'givePermission', 'revokePermission']]);  
-    
-    $this->middleware('permission:delete role', ['only' => ['delete', 'destroy']]);  
     }
 ```
 
-The "only" tells the middleware to *only allow the following methods to be executed*. 
+#### Update the Routes!
 
-So for the "add role" permission the actions that are allowed to be performed are the `create`, `store`, `givePermission`,  and `revokePermission` methods.
+In this newly added code, search and replace the `route('users` with `route('admin.users`.
 
+### CRUD views
 
-## Option 3: Model Policies
+Create a new folder in the `resources/views/admin` folder, called `users`.
 
-- https://spatie.be/docs/laravel-permission/v6/best-practices/using-policies
+To make it a bit easier on you, we are providing the views to download from our sample code.
 
-The third option is to use Model Policies.
+- User List - [index.blade.php](sample-code/index.blade.php)
+- User Create - [create.blade.php](sample-code/create.blade.php)
+- User Edit - [edit.blade.php](sample-code/edit.blade.php)
+- User Delete - [delete.blade.php](sample-code/delete.blade.php)
+- User Details - [show.blade.php](sample-code/show.blade.php)
 
-We will do this with a `Post` model.
+Download each file and move into the users admin views folder.
 
-### Create Post Model et al
+#### Update the Routes!
 
-To do this we need to add the model (we already have the permissions added in previous steps).
+In these files, you will then need to replace every occurrence of `route('users` with `route('admin.users` as you did
+with the controller code.
 
-```shell
-php artisan make:model Post --controller --resource --migration --seed --factory
-```
+Going to http://localhost:8000/users should now show the list of users.
 
-> #### Exercise time...
-> 
-> Yes this is the long hand version of the model creation... 
->  
->  As an exercise, what would a short-hand version of the same command?
->  
->  Hint: use `php artisan make:model --help` for assistance.
+> IMPORTANT: Check the other functions work as expected adn fix any errors!
 
 
-### Post Migration
+Excellent - we are ready to continue!
 
-Now edit the migration to have the following:
+> ### redirect route or to_route
+>
+> You may use `to_route(...)` to replace the `redirect(route(...))` combination.
 
-```php
-public function up(): void  
-{  
-    Schema::create('posts', function (Blueprint $table) {  
-        $table->id();  
-        $table->foreignId('user_id');  
-        $table->string('title');  
-        $table->text('content');  
-        $table->timestamps();  
-    });  
-}
-```
+### Update the User Index (Show Roles)
 
-### Post Factory
-
-We are going to use a factory to mock our posts for this exercise.
+Edit the admin/users/index.blade.php file and alter the current code:
 
 ```php
-public function definition(): array  
-{  
-    return [  
-        'title'=> $this->faker->sentence(),  
-        'content'=> $this->faker->paragraph(),  
-        'user_id'=> \App\Models\User::inRandomOrder()->first()->id,  
-    ];  
-}
+<p class="col-span-1 space-x-1 ">
+    <span class="text-xs bg-gray-800 text-gray-100 rounded-full px-2 py-0.5">
+        Role
+    </span>
+</p>
+
 ```
 
-The `user_id`  is created by randomly selecting an existing user from the User model. Nice trick for use when testing as well.
-
-### Post Seeder
-
-Next, update the `PostSeeder` by adding the following code:
+to show the role names using the following code:
 
 ```php
-public function run(): void  
-{  
+<p class="col-span-1 space-x-1 ">
+    @foreach($user->roles as $role)
+        <span 
+            class="text-xs bg-gray-800 text-gray-100 rounded-full px-2 py-0.5"
+        >{{ $role->name }}</span>
+    @endforeach
+</p>                            
+```
+
+When the page refreshes you should see the role names in "pills".
+
+## Adding Roles to Add User
+
+Ok, so we are ready to start changing the code for the Add User form and method.
+
+Let's begin with the method:
+
+### Edit the Create User method
+
+Open the create user method and update where we had a placeholder collection:
+
+```php
+$roles= Collection::create();
+```
+
+Chenge this to:
+
+```php
+$roles = Role::orderBy('name')->get();
+```
+
+This will give the list of the roles.
+
+Remember that you will need the line `use Spatie\Permission\Models\Role;` after the namespace declaration.
+
+Now we can update the store method.
+
+### Edit the Store User method
+
+Locate the `store` method in the `admin/UserController` file.
+
+First change the role validation from being nullable to:
+
+```php
+                'role' => ['required','int','exists:roles,id',],
+```
+
+This ensures the role is provided, and it is an integer, and it exists in the roles table from the Spatie package.
+
+Next, after the user is created we need to attach the role to the user...
+
+Just before the catch add:
+
+```php
+$user->roles()->attach($validated['role']);
+```
+
+### Test the Add User
+
+Try adding a new user to see if we now get the roles shown and when selected the role is automatically allocated to the
+new user.
+
+Updated Add User form:
+
+![Picture: administration - user create with single (primary) role](../assets/admin-user-create-with-role-1.png)
+
+Results of Update Store Method:
+
+![Picture: administration - user list showing new user with single role](../assets/admin-user-create-with-role-2.png)
+
+## Edit user
+
+Edit user will be a bit more of a challenge as we need to:
+
+- Get the user details
+- Get the user's current roles
+- Get a list of all available roles
+- Remove the current "add role" select box
+- Show the current roles on the page
+- Show "Add Role" section on page
+- Show "Revoke Role" section on page
+
+We will use the same principle as the adding permissions to the role... put the add and remove into separate forms after
+the main editing for the user.
+
+### Modify the `User Controller`'s `edit` method
+
+Locate the edit method in the `Admin/UserController.php` file.
+
+Where we currently have the $roles=Collection::create(), replace with the following:
+
+```php
+// TODO: Update when we add Roles & Permissions
+
+$roles = Role::all();
+$permissions = Permission::all();
+$userRoles = $user->roles()->get();
+
+$roles  = $roles->diffUsing($userRoles, function ($a, $b) {
+    return $a->id <=> $b->id; // Compare by 'id'
+});
+
+return view('admin.users.edit', compact(['roles', 'user','userRoles','permissions',]));
+```
+
+> We included the comment and the return view for you.
+>
+> At the moment, we pass everything including the permissions, but they are not yet implemented.
+
+This code presents a beautiful way of "removing" the role or roles the user already has from the list of roles they can
+be given...
+
+```php
+$roles  = $roles->diffUsing($userRoles, function ($a, $b) {
+    return $a->id <=> $b->id; // Compare by 'id'
+});
+```
+
+What we have here is a collection operation "difference using" that allows us to provide a collection of models (in this
+case the collection of Roles the user currently has)
+then using a closure (aka anonymous function) which compares the ID in the full list of Roles with the ID in the
+currently allocated roles, it removes the current user roles if it in the Roles list.
+
+It's a beautiful little bit of code!
+
+Ok, so armed with the available roles, the current user's roles (and permissions), we are able to now show the edit form.  
+
+### Modify the Edit Form
+
+First, let's add summary details of what role, or roles, the user current has:
+
+Open the `admin/users/edit.blade.php` file and locate the lines:
+
+```php
+            <i class="fa-solid fa-save text-sm"></i>
+            {{ __('Save') }}
+        </button>
+    </div>
+</form>
+```
+
+After the close form tag (`</form>`) we now add:
+
+```php
+<section class="grid grid-cols-2 space-y-2 mt-4 px-6  space-x-8">
+
+    <div class="-mx-6 bg-gray-100 col-span-2 px-6 pb-2">
+
+        <h3 class="-mx-6 px-6 py-2 text-lg font-semibold col-span-2 bg-gray-100">
+            Current Role(s)
+        </h3>
+
+        <div class="flex flex-row gap-1 flex-wrap pb-2">
+
+            @forelse($userRoles as $role)
+                <p class="text-xs bg-gray-700 text-gray-100 p-1 px-2 rounded-full whitespace-nowrap">{{ $role->name }}</p>
+            @empty
+                <p class="text-gray-600 text-sm">
+                    No Roles
+                </p>
+            @endforelse
+
+        </div>
+    </div>
+```
+
+This will show the current roles.
+
+Next we are going to add the "add and revoke" roles sections, immediately after the code we have above.
+
+### Add Roles
+
+In a small departure from the create form, and also taking inspiration from the "revoke" part, we are going to present the user with buttons for the roles. 
+
+They then can click a button and see the role added to the list, and be also added to the revokable roles list.
+
+Add the following code for "Add Roles":
+
+```php
+<div class="mt-2 mb-6 bg-gray-100 shadow border border-gray-300 rounded p-4 pt-2">  
   
-        Post::factory(20)->create();  
+    <h3 class="mb-2 bg-gray-300 text-gray-800 px-4 py-1 -mt-2 -mx-4 text-semibold">Add roles</h3>  
   
+    <div class="flex space-x-4 flex-wrap">  
+  
+    @foreach ($roles as $role)  
+  
+        <form class="px-0 py-1 text-white rounded-md"  
+              method="POST"  
+              action="{{ route('admin.users.roles',  
+                                [$user]) }}"  
+              onsubmit="return confirm('Are you sure?');">  
+  
+            @csrf  
+  
+            <input type="hidden" name="role" value="{{$role->id}}"/>  
+  
+            <x-primary-button type="submit" class="bg-green-600">  
+                {{ $role->name }}  
+            </x-primary-button>  
+  
+        </form>  
+  
+    @endforeach  
+  
+    </div>  
+</div>
+```
+
+Ok so this will then present the roles that the user has not been given.
+
+![](assets/Pasted%20image%2020250605133756.png)
+
+### Add the "admin users roles revoke" route and name
+
+Head back to the `web.php` route file, and locate the code:
+
+```php
+  
+Route::post('users/{user}/delete', [UserController::class, "delete"])  
+    ->name('users.delete');  
+  
+Route::resource('users',  
+    UserController::class);
+```
+
+Update this block by adding the required extra lines so it now reads, 
+
+```php
+Route::post('users/{user}/roles', [UserController::class, 'giveRole'])  
+    ->name('users.roles');  
+Route::delete('users/{user}/roles', [UserController::class, 'revokeRole'])  
+    ->name('users.roles.revoke');  
+  
+Route::post('users/{user}/delete', [UserController::class, "delete"])  
+    ->name('users.delete');  
+  
+Route::resource('users',  
+    UserController::class);
+
+```
+
+This adds the `admin/users/USERID/roles` URI path, which is actioned by `POST` and `DELETE` HTTP Methods. The two routes have names `users.roles` and `users.roles.revoke`.
+
+### Add `giveRole` to the UserController.
+
+Ok, so we have the form, and we have the routes, we now need the method to give the role to the user.
+
+Open teh `UserController`, and move your cursor to the last `}` curly brace.
+
+Immediately before this last closing brace, add:
+
+```php
+public function giveRole(Request $request, User $user)  
+{  
+    if ($user->hasRole($request->role)) {  
+  
+        flash()->warning('User already has this role.',  
+            [  
+                'position' => 'top-center',  
+                'timeout' => 5000,  
+            ],  
+            'Role Exists');  
+  
+        return back();  
+    }  
+    
+    $user->roles()->attach($request->role);  
+  
+    flash()->success('User has been granted the role.',  
+        [  
+            'position' => 'top-center',  
+            'timeout' => 5000,  
+        ],  
+        'Role Added');  
+  
+	return back();  
+}
+```
+This will attach the role to the user. Even id the role is there already it will ensure the user has that role.
+
+BUT... we have not validated the data... which we MUST.
+
+Before the `if( $user->hasRole...` line, we need to validate the role id.
+
+Because we are doing this, it would also be a good idea to provide a warning flash message... so let's update the code.
+
+We are using the same base code as the store and edit methods:
+
+```php
+try {  
+  
+    $validated = $request->validate([  
+        'role' => ['required','exists:roles,id'],  
+    ]);  
+  
+  
+} catch (ValidationException $e) {  
+  
+    flash()->error('The role you attempted to add does not exist.',  
+        [  
+            'position' => 'top-center',  
+            'timeout' => 5000,  
+        ],  
+        'Add Role Failed');  
+  
+    return back()->withErrors($e->validator)->withInput();  
+  
+}  
+
+if ($user->hasRole($validated['role'])) {  
+  
+    flash()->warning('User already has this role.',  
+        [  
+           'position' => 'top-center',  
+           'timeout' => 5000,  
+        ],  
+        'Role Exists');  
+  
+        return back();  
+    }  
+  
+    $user->roles()->attach($validated['role']);  
+  
+flash()->success('User has been granted the role.',  
+    [  
+        'position' => 'top-center',  
+        'timeout' => 5000,  
+    ],  
+    'Role Added');  
+  
+return back();
+```
+
+#### Test!
+
+OK, try the add role to see if it works.
+
+
+### Revoke Role from User
+
+Ok, next we will do the revoke method in the controller.
+
+We are keeping the "positive test" rather than using a not, so if the user has the role then it is removed from the list of roles the user has.
+
+```php
+public function revokeRole(Request $request, User $user)  
+{  
+    $roleId = Role::whereId($request->role)->get();  
+  
+    if ($user->hasRole($roleId)) {  
+  
+        $user->roles()->detach($roleId);  
+  
+        flash()->success('Role has been removed from the user.',  
+            [  
+                'position' => 'top-center',  
+                'timeout' => 5000,  
+            ],  
+            'Role Revoked');  
+  
+        return back();  
+    }  
+    flash()->warning('User did not have this role.',  
+        [  
+            'position' => 'top-center',  
+            'timeout' => 5000,  
+        ],  
+        'Role Did Not Exist');  
+  
+    return back();  
 }
 ```
 
-Run the migration and perform the seeding of the Post model using:
 
-```shell
-php artisan migrate 
-php artisan db:seed PostSeeder
-```
+### Revoke Role section of the View
 
+Now for the revoke role section of the edit view.
 
-### Post Policy - **Best Practice* 
+It is remarkably similar to the "add role" section... and it sits immediately before the `</article>` tag.
 
-- https://spatie.be/docs/laravel-permission/v6/best-practices/using-policies
-
-
-The post policy will be applied to the Post model, and in this instance the web routes. 
-
-The guard could be `web`, `api` or `command` depending on what routes this policy is being applied to.
-
-```shell
-php artisan make:policy PostPolicy --model=Post --guard=web
-```
-
-Now we will edit the policy (`App/Policies/PostPolicy.php`).
-
-By default the policies are "false", but we need to allow them given the ability to do something.
-
-We use the `can` method on the logged in user. 
-
-**Note: We have added further permissions to the role and permission seeder, to provide a more granular list of permissions.**
+We check to see if the user has any roles, and display them for revoking.
 
 ```php
-
+    @if ($userRoles)  
+  
+        <div class="mt-2 mb-6 bg-gray-100 shadow border border-gray-300 rounded px-4 pt-2">  
+            <h3 class="mb-2 bg-gray-300 text-gray-800 px-4 py-1 -mt-2 -mx-4  font-semibold">  
+                {{__("Revoke Role(s)")}}  
+            </h3>  
+            <div class="flex space-x-6 flex-wrap">  
+  
+                @foreach ($userRoles as $currentRole)  
+  
+                    <form class="px-0 py-1 text-white rounded-md"  
+                          method="POST"  
+                          action="{{ route('admin.users.roles.revoke',$user) }}"  
+                          onsubmit="return confirm('Are you sure?');">  
+  
+                        @csrf  
+                        @method('DELETE')  
+  
+                        <input type="hidden" name="role" value="{{  $currentRole->id }}"/>  
+  
+                        <x-danger-button type="submit" class="px-2! py-1!">  
+                            {{ $currentRole->name }}  
+                        </x-danger-button>  
+  
+                    </form>  
+  
+                @endforeach  
+  
+            </div>  
+        </div>  
+  
+    @endif  
+  
 ```
 
-#### Applying Policies
+### Exercise: No user roles and no roles to add?
 
-- https://laravel.com/docs/12.x/authorization#creating-policies
-- 
-To use a policy there are some different methods.
+Now add some extra code to the view that:
 
-We are able to:
+- if there are no roles to be added then a "No Roles available" is shown
+- if there are no roles allocated to the user, then "No roles available" is shown
 
-- apply the policy in the 
-- add the policy to the model
+Here is an example of the possible output:
 
-
+![](assets/Pasted%20image%2020250605141328.png)
 
 
-# Conclusion
 
-That's it, an example of applying roles and permissions to an application.
+Excellent work.
 
-Hopefully you have enough information to be able to apply the principles to your code.
-
-The last parts in this series will be adding our own 'twist' to the error pages, and other random ideas, hints and tips.
+We are now ready to look at using these roles and permissions to restrict access to actions.
 
 
-# TODO: Update Useful References and Tutorials
 
 # References
 
-- Xhepa, T. (2022, March 1). Spatie Laravel Permission. YouTube. http://www.youtube.com/playlist?list=PL6tf8fRbavl3xuFIe4_i3TB4PZbtbx3Js
+- Xhepa, T. (2022, March 1). Spatie Laravel Permission.
+
+> YouTube. http://www.youtube.com/playlist?list=PL6tf8fRbavl3xuFIe4_i3TB4PZbtbx3Js
 
 # Up Next
 
-- [Laravel v12 Bootcamp - Part 14](session-11/S10-Laravel-v12-BootCamp-Part-14.md)
+- [Laravel v12 Bootcamp - Part 13](S11-Laravel-v12-BootCamp-Part-14.md)
 - [Session 11 ReadMe](../session-10/ReadMe.md)
 - [Session 11 Reflection Exercises & Study](../session-11/S11-Reflection-Exercises-and-Study.md)
 
 # END
-
-
-
-Research
-https://www.youtube.com/@codingoblin
-
-https://spatie.be/docs/laravel-permission/v6/best-practices/using-policies
-
-https://laravel.com/docs/12.x/authorization#via-the-user-model
-
-https://spatie.be/docs/laravel-permission/v6/best-practices/using-policies
-
-https://medium.com/@codeaxion77/supercharge-your-laravel-app-with-spatie-roles-and-permissions-f20fe02a8c75
-
-https://spatie.be/docs/laravel-permission/v6/best-practices/using-policies
-
-https://laravel.io/forum/set-permission-in-controller-when-using-spatiepermission
-
-https://www.fundaofwebit.com/post/laravel-10-spatie-user-roles-and-permissions-tutorial
-
-https://dev.to/varzoeaa/spatie-permissions-vs-laravel-policies-and-gates-handling-role-based-access-1bdn
-
-https://magecomp.com/blog/manage-role-in-laravel-using-spatie-laravel-permission/
-
-https://devpishon.hashnode.dev/streamline-role-based-access-control-with-spatie-laravel-permission
-
-https://www.creative-tim.com/twcomponents/component/card-stats
-
-https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/stats
-
-https://www.youtube.com/watch?v=cNrMdCXNml8&list=PL6tf8fRbavl3xuFIe4_i3TB4PZbtbx3Js&index=15
-
-https://spatie.be/docs/laravel-permission/v6/basic-usage/blade-directives
-
-
-
-
-https://www.fundaofwebit.com/post/laravel-policy-using-spatie-roles-and-permission-tutorial-step-by-step

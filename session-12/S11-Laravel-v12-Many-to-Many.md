@@ -2,7 +2,7 @@
 created: 2025-02-25T14:55
 updated: 2025-06-05T13:33
 ---
-# S11 Laravel v12: Many-to-Many
+# Laravel v12: Many-to-Many
 
 
 This is based on:
@@ -1170,9 +1170,3 @@ The full list of updated views, and links to source code on GitHub, includes:
 | dashboard.blade.php             | [Dashboard](https://github.com/AdyGCode/SaaS-FED-L12-Basic-2025-S1/blob/main/resources/views/dashboard.blade.php)             |
 
 The changes include making the Navigation available to Guest and App layouts, adding a wrapper to the Auth components so the pages render with the parts in the middle of the screen, and updating the Welcome and Dashboard 'static' pages.
-
-
-
-
-
-

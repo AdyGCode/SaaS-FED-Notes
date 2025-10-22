@@ -648,7 +648,7 @@ In part two of our version of the Laravel Boot Camp, we will do the following:
 
 There may even be some other surprises to come as well!
 
-Let's get it done! - [S11 Laravel Bootcamp Part 2](S11-Laravel-v12-BootCamp-Part-02.md)
+Let's get it done! - [Laravel Bootcamp Part 2](S11-Laravel-v12-BootCamp-Part-02.md)
 
 
 # END

@@ -17,7 +17,7 @@ updated: 2025-08-21T15:59
 ---
 
 
-# S11 Laravel Bootcamp: Part 13
+# Laravel Bootcamp: Part 13
 
 # TODO: IN DEVELOPMENT - NOT STABLE
 
