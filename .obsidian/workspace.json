@@ -77,7 +77,8 @@
               "title": "S11-Laravel-v12-BootCamp-Part-10"
             }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -241,14 +242,14 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "0952c8ad96d9adc7",
+  "active": "64cc85f8a93e465e",
   "lastOpenFiles": [
-    "session-11/S11-Laravel-v12-BootCamp-Part-09.md",
     "session-11/S11-Laravel-v12-BootCamp-Part-10.md",
+    "session-11/S11-Laravel-v12-BootCamp-Part-09.md",
     "session-11/S11-Laravel-v12-BootCamp-Part-08.md",
     "session-11/S11-Laravel-v12-BootCamp-Part-07.md",
-    "assets/vivaldi_uQKFtB6QLn.gif",
     "session-11/S11-Laravel-v12-BootCamp-Part-06.md",
+    "assets/vivaldi_uQKFtB6QLn.gif",
     "session-11/S11-Laravel-v12-BootCamp-Part-05.md",
     "assets/Pasted image 20251016164131.png",
     "assets/Pasted image 20251016141900.png",

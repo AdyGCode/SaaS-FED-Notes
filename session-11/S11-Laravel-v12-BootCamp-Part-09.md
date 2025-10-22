@@ -488,6 +488,32 @@ In the Chirp Controller we need to update the index method.
 
 ```
 
+### Add the Likes to the Component
+
+Open the `like-dislike.blade.php` livewire component file, as we need to now update it to show the likes.
+
+```php
+<div class="flex">  
+    <a wire:click="like()" class="cursor-pointer">  
+        <i class="fa-solid fa-thumbs-up"></i>  
+    </a>    
+    0  
+</div>
+```
+
+In place of the 0 we now put `{{ $likes }}` ...
+
+```php
+<div class="flex">  
+    <a wire:click="like()" class="cursor-pointer">  
+        <i class="fa-solid fa-thumbs-up"></i>  
+    </a>    
+    {{ $likes }}  
+</div>
+```
+
+To be ready for the the exercise below you could update the component to show the dislike count...
+
 # TODO: Explain code
 
 #### Dislike Code
