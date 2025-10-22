@@ -514,9 +514,7 @@ In place of the 0 we now put `{{ $likes }}` ...
 
 To be ready for the the exercise below you could update the component to show the dislike count...
 
-# TODO: Explain code
-
-#### Dislike Code
+## Dislike Code
 
 > Exercise 🫨
 >
@@ -529,7 +527,7 @@ To be ready for the the exercise below you could update the component to show th
 
 # Up Next
 
-- [Laravel v12 Bootcamp - Part 9](S11-Laravel-v12-BootCamp-Part-09.md)
+- [Laravel v12 Bootcamp - Part 10](S11-Laravel-v12-BootCamp-Part-10.md)
 - [Session 11 ReadMe](../session-10/ReadMe.md)
 - [Session 11 Reflection Exercises & Study](../session-11/S11-Reflection-Exercises-and-Study.md)
 

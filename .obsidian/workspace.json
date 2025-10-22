@@ -78,7 +78,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -242,10 +242,10 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "64cc85f8a93e465e",
+  "active": "78bc43f415b977a3",
   "lastOpenFiles": [
-    "session-11/S11-Laravel-v12-BootCamp-Part-10.md",
     "session-11/S11-Laravel-v12-BootCamp-Part-09.md",
+    "session-11/S11-Laravel-v12-BootCamp-Part-10.md",
     "session-11/S11-Laravel-v12-BootCamp-Part-08.md",
     "session-11/S11-Laravel-v12-BootCamp-Part-07.md",
     "session-11/S11-Laravel-v12-BootCamp-Part-06.md",
