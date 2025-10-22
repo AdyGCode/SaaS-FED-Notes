@@ -77,8 +77,7 @@
               "title": "S11-Laravel-v12-BootCamp-Part-10"
             }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "vertical"
@@ -135,7 +134,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 347.5
   },
   "right": {
     "id": "26a2935f4ff09f9b",
@@ -230,6 +229,7 @@
   },
   "left-ribbon": {
     "hiddenItems": {
+      "table-editor-obsidian:Advanced Tables Toolbar": false,
       "bases:Create new base": false,
       "workspaces:Manage workspace layouts": false,
       "publish:Publish changes...": false,
@@ -241,10 +241,10 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "64cc85f8a93e465e",
+  "active": "0952c8ad96d9adc7",
   "lastOpenFiles": [
-    "session-11/S11-Laravel-v12-BootCamp-Part-10.md",
     "session-11/S11-Laravel-v12-BootCamp-Part-09.md",
+    "session-11/S11-Laravel-v12-BootCamp-Part-10.md",
     "session-11/S11-Laravel-v12-BootCamp-Part-08.md",
     "session-11/S11-Laravel-v12-BootCamp-Part-07.md",
     "assets/vivaldi_uQKFtB6QLn.gif",

@@ -677,6 +677,12 @@ After the `</dd>` and `</div>` we add the footer:
 <!-- Only Admin and Staff access these options -->  
   
 <footer class="mt-4 gap-4 flex bg-neutral-200 -m-4 p-2 px-4">  
+
+    <form action="{{ route('admin.users.delete', $user) }}"  
+        method="post"  
+        class="flex flex-row gap-4 w-full">  
+    @csrf
+    
     <x-primary-link-button        
 	    class="hover:bg-blue-800!"  
 		href="{{ route('admin.users.index', $user) }}">
@@ -692,6 +698,9 @@ After the `</dd>` and `</div>` we add the footer:
 
         Delete  
     </x-secondary-button>  
+    
+    </form>
+    
 </footer>
 <!-- /Only Admin and Staff access these options -->
 ```
@@ -752,7 +761,7 @@ Now edit the new `components/secondary-link-button.blade.php` to ensure the code
                     px-4 py-2                    
                     bg-white hover:bg-gray-50                    
                     border border-gray-300 rounded-md                    
-                    font-semibold text-xs text-gray-700 uppercase tracking-widest                    
+	                    font-semibold text-xs text-gray-700 uppercase tracking-widest                    
                     shadow-sm                    
                     focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2                    
                     disabled:opacity-25                    
