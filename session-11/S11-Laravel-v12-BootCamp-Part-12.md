@@ -35,7 +35,7 @@ includeLinks: true
 
 ---
 
-# Laravel Bootcamp: Part 11
+# Laravel Bootcamp: Part 12
 
 ## Roles and Permissions Part 2
 
@@ -64,6 +64,7 @@ Have you completed (not just read):
 - [Laravel v12 Bootcamp - Part 8](S11-Laravel-v12-BootCamp-Part-08.md)
 - [Laravel v12 Bootcamp - Part 9](S11-Laravel-v12-BootCamp-Part-09.md)
 - [Laravel v12 Bootcamp - Part 10](S11-Laravel-v12-BootCamp-Part-10.md)
+- [Laravel v12 Bootcamp - Part 11](S11-Laravel-v12-BootCamp-Part-11.md)
 
 
 No? Well… go do it…
@@ -76,20 +77,317 @@ You will need these to be able to continue…
 > 
 > Remember that code is available from the GitHub repository.
 
+# Permissions
+
+As we know, roles have permissions, but with our current data there are no permissions for the roles.
+
+We will fix this issue before continuing.
+
+## Adding Permissions to Seed Data
+
+We will add the permissions to the Role Seeder... it makes it easier to maintain as we need to update the permissions for the application.
+
+Open the `RoleSeeder.php` file, and update it.
+
+Begin by updating the list of classes used by this Seeder class:
+
+```php
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;  
+use Illuminate\Database\Seeder;  
+use Illuminate\Support\Str;  
+  
+use Laravel\Prompts\Output\ConsoleOutput;  
+
+use Spatie\Permission\Models\Permission;  
+use Spatie\Permission\Models\Role;  
+
+use Symfony\Component\Console\Helper\ProgressBar;
+```
+
+Next we will define the permissions. We do this by adding the following immediately AFTER the `public function run(): void {`:
+
+```php
+app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();  
+```
+
+This tells the Spatie package to clear the cached permissions so that we can update the collection.
+
+Next we define the permissions, without allocating them to any particular role or user. It is simply an array of the permission names.
+
+> **Note:** we will be kebab casing the permissions as we add them, but you may do this as you create them, and use the kebab method as a precaution.
+>
+>To illustrate this we have kebab cased two or three of the permissions.
+
+```php
+$seedPermissions = [  
+  
+    'browse-post',  
+    'read-any-post',  
+    'read own post',  
+    'read any unpublished post',  
+    'read own unpublished post',  
+    'edit any post',  
+    'edit own post',  
+    'add post',  
+    'delete any post',  
+    'delete own post',  
+    'publish any post',  
+    'publish own post',  
+    'restore any post',  
+    'restore own post',  
+    'trash any post',  
+    'trash own post',  
+  
+    'browse-user',  
+    'read user',  
+    'edit user',  
+    'add user',  
+    'delete user',  
+  
+    'browse permission',  
+    'read permission',  
+    'edit permission',  
+    'add permission',  
+    'delete permission',  
+  
+    'browse role',  
+    'read role',  
+    'edit role',  
+    'add role',  
+    'delete-role',  
+  
+];  
+```
+
+Ok, so now we are going to do a little more with the seeding.
+
+You will have noted that when you are seeding data it is not possible to tell how far though it has progresed.
+
+What we are going to do in this seeder (and you will be welcome to update any other seeders) is to add a progress bar to show this.
+
+We begin by setting up the console output, and setting the progress bar.
+
+The progress bar uses the count of the number of items to seed as a way to show the progress between 0 and 100%.
+
+The progress bar is started after a short message.
+```php  
+$output = new ConsoleOutput();  
+$progress = new ProgressBar($output, count($seedPermissions));  
+$output->writeln("");  
+$output->writeln('Seed Permissions');  
+$progress->start();  
+```
+
+Now we use a good old `foreach` loop to progress thrugh the seed data and add the new permissions:
+
+```php  
+foreach ($seedPermissions as $newPermission) {
+	$newPermission = Str::of($newPermission)->kjebab();
+	  
+    $permission = Permission::firstOrCreate(['name' => $newPermission]);  
+    $progress->advance();  
+}  
+```
+
+The final step is to finish up the progress bar and output a blank to force the cursor to the next line.
+```php  
+$progress->finish();  
+$output->writeln('');
+```
+
+### Adding Permissions to our Default Roles 
+
+Ok, so we have the permissions seeded, and we already have a list of our roles. Next we are going to add the permissions for each role.
+
+Immediately after the above code we will now add four sections, each creating a role and adding permissions.
+
+### Super Admin Role
+
+The super admin role has permission to perform ALL actions.
+
+To do this, we add the following code:
+```php
+$output->writeln('Create Roles with Permissions');  
+$output->writeln('');  
+  
+/* Create Super-Admin Role and Sync Permissions */  
+  
+$progress = new ProgressBar($output, 4);  
+$output->writeln("");  
+$output->writeln('Grant Permissions to Roles');  
+$progress->start();  
+  
+$roleSuperAdmin = Role::firstOrCreate(['name' => 'super-user']);  
+  
+$roleSuperAdmin->syncPermissions();  
+$progress->advance();
+```
+
+This is the simplest of the stages. The strange thing here is that we DO NOT need to have any permissions synchronised, so the `synvPermissions()` call is empty.
+
+We will use a different method to permit the super user complete access. We still need the role as we need to allocate to a user.
+
+Next we will do the admin role.
+
+### Admin Role
+
+The admin role has a set of permissions that is not quite as extensive as the super admin, but may be very close.
+
+To shorten the code we have put multiple permissions on each line.
+
+```php
+/* Create Admin Role and Sync Permissions */  
+  
+$roleAdmin = Role::firstOrCreate(['name' => 'admin']);  
+  
+$adminPermissions = [  
+    'browse user', 'read user', 'edit user',
+    'add user', 'delete user', 'browse post', 
+    'read any post', 'read own post',  
+    'read any unpublished post', 
+    'read own unpublished post',  
+    'edit any post', 'edit own post', 'add post', 
+    'delete any post', 'delete own post', 
+    'publish any post', 'publish own post', 
+    'restore any post',  'restore own post', 
+    'trash any post', 'trash own post',  
+    'browse permission', 'read permission', 
+    'edit permission', 'add permission', 
+    'delete permission',  
+    'browse role', 'read role', 'edit role', 
+    'add role', 'delete role',  
+];  
+  
+foreach ($adminPermissions as $key => $permission) {  
+    $adminPermissions[$key] = Str::of($permission)->kebab();  
+}  
+  
+$roleAdmin->syncPermissions($adminPermissions);  
+$progress->advance();
+```
+After defining the permissions for the admin role, we then kebab case the permissions and synch them to the user.
+
+Next is the Staff Role.
+
+### Staff Role
+
+This is a repeat of the Admin user, but with different permissions:
+
+```php
+/* Create Staff Role and Sync Permissions */  
+  
+$roleStaff = Role::firstOrCreate(['name' => 'staff']);  
+  
+$staffPermissions = [  
+    'browse user', 'read user', 'edit user', 'add user', 'delete user',  
+    'browse permission', 'read permission',  
+    'browse role', 'read role',  
+    'browse post', 'read any post', 'read own post',  
+    'read any unpublished post', 'read own unpublished post',  
+    'edit any post', 'edit own post', 'add post', 'delete any post',  
+    'delete own post', 'publish any post', 'publish own post', 'restore any post',  
+    'restore own post', 'trash any post', 'trash own post',  
+];  
+  
+foreach ($staffPermissions as $key => $permission) {  
+    $staffPermissions[$key] = Str::of($permission)->kebab();  
+}  
+  
+$roleStaff->syncPermissions($staffPermissions);  
+$progress->advance();
+```
+
+Finally we get the client role.
+
+### Client Role
+
+```php
+/* Create Client Role and Sync Permissions */  
+  
+$roleClient = Role::firstOrCreate(['name' => 'client']);  
+  
+$clientPermissions = [  
+    'browse post', 'read own post',  
+    'read own unpublished post',  
+    'edit own post', 'add post', 'delete own post',  
+    'publish own post', 'restore own post', 'trash own post',  
+];  
+  
+foreach ($clientPermissions as $key => $permission) {  
+    $clientPermissions[$key] = Str::of($permission)->kebab();  
+}  
+  
+$roleClient->syncPermissions($clientPermissions);  
+$progress->advance();  
+  
+$progress->finish();  
+$output->writeln(" ");
+```
+
+
+### Roles Without Default Permissions (not Super Admin)
+
+It is possible to create roles without default permissions. This could be useful if you want to seed the Role, but then let the administrators define the permissions.
+
+```php
+/* Permission-less Roles */  
+  
+$output->writeln("Adding roles, without permissions");  
+  
+$seedRoles = [  
+    ['name' => 'guest'],  
+];  
+  
+$output = new ConsoleOutput();  
+$progress = new ProgressBar($output, count($seedRoles));  
+$output->writeln("");  
+$output->writeln('Seed Permissionless Roles');  
+$progress->start();  
+  
+foreach ($seedRoles as $seedRole) {  
+    Role::create($seedRole);  
+    $progress->advance();  
+}  
+$progress->finish();  
+$output->writeln('');
+```
+
+### Adding execution time details
+
+If you want you can add a total execution time to the seeder by doing the following...
+
+At the start of the `run()` method, ass a `$time` variable that gets the value from `now()`.
+
+```php
+public function run(): void  
+{  
+  
+    $start = now();  
+  
+    app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
+```
+
+At the end of the method we then calculate the dime difference and display it.
+
+```php
+$time = $start->diffInSeconds(now());  
+$output->writeln("Roles & Permissions completed: $time seconds");  
+$output->writeln(" ");
+```
 
 # Manage Permissions in Roles
 
 So far we have created the major part of the roles and permissions CRUD:
 
-Create Role/Permission
-Read (all) Roles/Permissions
-Update Role/Permission
-Delete Role/Permissions
+- Create Role
+- Read (all) Roles/Permissions
+- Update Role
+- Delete Role
 
 One of the cool features we did add was in the Delete. We get the user to re-enter the role/permission to confirm deletion, just like GitHub does in its 'Danger Zone'.
 
 Remember the most up to date code is available on GitHub:
-- https://github.com/AdyGCode/roles-permissions-2025-s1
+- https://github.com/AdyGCode/xxx-roles-permissions-2025-s2
 
 Even though we give you this code, we **STRONGLY** suggest you complete this tutorial from scratch.
 
@@ -460,7 +758,7 @@ return back();
 
 # Up Next
 
-- [Laravel v12 Bootcamp - Part 12](S11-Laravel-v12-BootCamp-Part-13.md)
+- [Laravel v12 Bootcamp - Part 13](S11-Laravel-v12-BootCamp-Part-13.md)
 - [Session 11 ReadMe](../session-10/ReadMe.md)
 - [Session 11 Reflection Exercises & Study](../session-11/S11-Reflection-Exercises-and-Study.md)
 

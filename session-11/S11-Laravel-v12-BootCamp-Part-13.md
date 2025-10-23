@@ -63,7 +63,8 @@ Have you completed (not just read):
 - [Laravel v12 Bootcamp - Part 8](S11-Laravel-v12-BootCamp-Part-08.md)
 - [Laravel v12 Bootcamp - Part 9](S11-Laravel-v12-BootCamp-Part-09.md)
 - [Laravel v12 Bootcamp - Part 10](S11-Laravel-v12-BootCamp-Part-10.md)
-- [Laravel v12 Bootcamp - Part 11](S11-Laravel-v12-BootCamp-Part-12.md)
+- [Laravel v12 Bootcamp - Part 11](S11-Laravel-v12-BootCamp-Part-11.md)
+- [Laravel v12 Bootcamp - Part 12](S11-Laravel-v12-BootCamp-Part-12.md)
 
 No? Well… go do it…
 
