@@ -662,6 +662,7 @@ Add to it this code, after the `users` route and immediately before the `});`:
             ->group(function () {  
             
                 Route::resource('roles', RoleManagementController::class);  
+                
                 Route::resource('permissions', PermissionManagementController::class);
             });  
 ```
@@ -973,7 +974,26 @@ Here is a sample of how the roles looks, and the permissions should look similar
 
 ![Image: Roles shown in a table](../assets/Pasted%20image%2020251023130818.png)
 
-### Create the Add Role page
+### Create the Add Role action
+
+In this step we are going to:
+- update the create method in the role management class
+- add the create view for the roles
+
+#### Add the Create Method
+
+Go back to the `RoleManagementController` and locate the `create` method:
+
+```php
+public function create()  
+{  
+	$roles = Permissions::all();
+	return view('admin.roles.create')
+	       ->with('permissions', $permissions);
+}  
+```
+
+#### Add the Create View
 
 The easiest way to do this is to duplicate the index, and remove anything we do not want, to leave us with:
 
@@ -1160,9 +1180,15 @@ Then edit the page, making the following changes:
 
 ### Add Update Method to Role Management Controller
 
-Now edit the role controller.
+Now edit the role management controller.
 
-We need to add the required code for the update method, immediately after the `edit` method.
+First, because we will be using a specific rule that will ignore the current role, we need to include the Rule class from the illuminate - validation namespace:
+
+```php
+use Illuminate\Validation\Rule;
+```
+
+Now, we are able to add the required code for the update method.
 
 ```php
 $request['name'] = Str::of($request['name'])
@@ -1190,6 +1216,42 @@ As you can see, it is dramatically similar to the store method...
 The difference is in the validation and then in using the update method on the role.
 
 The validation will make sure the new name does not exist in the database before updating it.
+
+### Add Delete Route to `routes/web.php`
+
+By default there is no `delete` route with a GET HTTP action, so we need to create one.
+
+When we do this we need to take into account that there are a number of routes that are similar to this.
+
+Run the following command in the CLI:
+
+```shell
+php artisan route:list
+```
+
+When you get the results, find the `role` routes. You will see something that is similar to this:
+
+
+```text
+ GET|HEAD        admin/roles ............................... admin.roles.index › Admin\RoleManagementController@index
+  POST            admin/roles ............................... admin.roles.store › Admin\RoleManagementController@store
+  GET|HEAD        admin/roles/create ...................... admin.roles.create › Admin\RoleManagementController@create
+  GET|HEAD        admin/roles/{role} .......................... admin.roles.show › Admin\RoleManagementController@show
+  PUT|PATCH       admin/roles/{role} ...................... admin.roles.update › Admin\RoleManagementController@update
+  DELETE          admin/roles/{role} .................... admin.roles.destroy › Admin\RoleManagementController@destroy
+  GET|HEAD        admin/roles/{role}/edit ..................... admin.roles.edit › Admin\RoleManagementController@edit
+  POST            admin/roles/{role}/permissions admin.roles.permissions › Admin\RoleManagementController@givePermiss…
+
+```
+
+To add the delete route, open the `routes/web.php` file and add a new route. We show it here, plus the Roles resourceful route that we use to create the other routes for the Role Management.
+
+```php
+Route::get('roles/{role}/delete', [RoleManagementController::class, 'delete'])  
+    ->name('roles.delete');  
+Route::resource('roles', RoleManagementController::class);
+```
+
 
 ### Add "Confirm delete" View
 
@@ -1494,6 +1556,17 @@ Finish off by adding flash messages to the delete confirmation and the destroy m
 ## Testing
 
 Make sure you try out the various methods to ensure your code is correct.
+
+> **IMPORTANT ⚠️**
+> 
+> When testing make sure you DO NOT change the base roles of `super admin`, `admin`, `staff` or `client`. Doing so will break the application.
+
+### Exercise
+
+Are you able to work out how to protect the predefined roles so they cannot have their names changed?
+
+How do you think you could achieve this?
+
 
 ## Wrapping Up
 

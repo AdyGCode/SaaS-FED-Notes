@@ -120,7 +120,7 @@
             }
           }
         ],
-        "currentTab": 6
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -283,10 +283,10 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "ddcfa53851aeaca0",
+  "active": "ee86cbafcab0e1b7",
   "lastOpenFiles": [
-    "session-11/S11-Laravel-v12-BootCamp-Part-13.md",
     "session-11/S11-Laravel-v12-BootCamp-Part-12.md",
+    "session-11/S11-Laravel-v12-BootCamp-Part-13.md",
     "session-11/S11-Laravel-v12-BootCamp-Part-11.md",
     "assets/vivaldi_Tiaq7VTG1w.gif",
     "assets/Pasted image 20251023140446.png",
