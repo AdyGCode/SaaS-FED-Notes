@@ -12,7 +12,7 @@ tags:
   - APIs
   - Back-End
 created: 2024-09-20T11:17
-updated: 2025-08-21T15:59
+updated: 2025-10-28T22:05
 ---
 
 # Laravel Bootcamp: Part 14
@@ -64,8 +64,9 @@ Have you completed (not just read):
 - [Laravel v12 Bootcamp - Part 8](S11-Laravel-v12-BootCamp-Part-08.md)
 - [Laravel v12 Bootcamp - Part 9](S11-Laravel-v12-BootCamp-Part-09.md)
 - [Laravel v12 Bootcamp - Part 10](S11-Laravel-v12-BootCamp-Part-10.md)
-- [Laravel v12 Bootcamp - Part 11](S11-Laravel-v12-BootCamp-Part-12.md)
-- [Laravel v12 Bootcamp - Part 12](S11-Laravel-v12-BootCamp-Part-13.md)
+- [Laravel v12 Bootcamp - Part 11](S11-Laravel-v12-BootCamp-Part-11.md)
+- [Laravel v12 Bootcamp - Part 12](S11-Laravel-v12-BootCamp-Part-12.md)
+- [Laravel v12 Bootcamp - Part 13](S11-Laravel-v12-BootCamp-Part-13.md)
 
 No? Well… go do it…
 
@@ -82,7 +83,7 @@ You will need these to be able to continue…
 
 Remember the most up-to-date code is available on GitHub:
 
-- https://github.com/AdyGCode/roles-permissions-2025-s1
+- https://github.com/AdyGCode/xxx-roles-permissions-2025-s2
 
 Even though we give you this code, we **STRONGLY** suggest you complete this tutorial from
 scratch.
@@ -837,19 +838,19 @@ Route::name('admin.')
         Route::get('/', [StaticPageController::class, 'admin'])  
             ->name('index');  
   
-        Route::post('roles/{role}/permissions', [RoleController::class, 'givePermission'])  
+        Route::post('roles/{role}/permissions', [RoleManagementController::class, 'givePermission'])  
             ->name('roles.permissions');  
-        Route::delete('roles/{role}/permissions/{permission}', [RoleController::class, 'revokePermission'])  
+        Route::delete('roles/{role}/permissions/{permission}', [RoleManagementController::class, 'revokePermission'])  
             ->name('roles.permissions.revoke');  
   
-        Route::get('roles/{role}/delete', [RoleController::class, 'delete'])  
+        Route::get('roles/{role}/delete', [RoleManagementController::class, 'delete'])  
             ->name('roles.delete');  
   
-        Route::resource('/roles', RoleController::class);  
+        Route::resource('/roles', RoleManagementController::class);  
   
-        Route::get('permissions/{permission}/delete', [PermissionController::class, 'delete'])  
+        Route::get('permissions/{permission}/delete', [PermissionManagementController::class, 'delete'])  
             ->name('permissions.delete');  
-        Route::resource('/permissions', PermissionController::class);  
+        Route::resource('/permissions', PermissionManagementController::class);  
   
         Route::post('users/{user}/roles', [UserController::class, 'giveRole'])  
             ->name('users.roles');  
@@ -896,7 +897,7 @@ There are various ways to apply the policies or roles, we will show you some alt
 
 The first option is to use middleware in the controller's constructor method.
 
-For example, here we show the constructor for the `RoleController`:
+For example, here we show the constructor for the `RoleManagementController`:
 
 *The `__construct()` usually is placed as the first of the methods within the controller class.*
 

@@ -13,7 +13,7 @@ tags:
   - Back-End
 date created: 03 July 2024
 created: 2024-10-08T10:54
-updated: 2025-07-22T16:25
+updated: 2025-10-28T21:56
 ---
 
 # Laravel: 03 Product Feature

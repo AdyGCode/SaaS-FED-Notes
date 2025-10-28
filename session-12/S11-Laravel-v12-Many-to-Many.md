@@ -1,6 +1,6 @@
 ---
 created: 2025-02-25T14:55
-updated: 2025-06-05T13:33
+updated: 2025-10-28T21:56
 ---
 # Laravel v12: Many-to-Many
 

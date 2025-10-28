@@ -13,7 +13,7 @@ tags:
   - Back-End
 date created: 03 July 2024
 created: 2024-10-08T10:54
-updated: 2025-07-22T16:25
+updated: 2025-10-28T22:07
 ---
 
 # Laravel: Roles and Permissions
@@ -421,7 +421,7 @@ Permission middleware
 Use the command below to create a new Roles and Permissions Controller:
 
 ```shell
-php artisan make:controller RolesAndPermissionsController
+php artisan make:controller RolesAndPermissionsManagementController
 ```
 
 Open the new file from the `app/Http/Controllers` folder
@@ -739,13 +739,13 @@ Before the `require` line add:
 Route::group(['prefix' => 'admin',
               'middleware' => ['auth','verified','role:Admin|Super-Admin']], function () {
 
-    Route::get('/permissions', [RolesAndPermissionsController::class, 'index'])
+    Route::get('/permissions', [RolesAndPermissionsManagementController::class, 'index'])
         ->name('admin.permissions');
 
-    Route::post('/assign_role', [RolesAndPermissionsController::class, 'store'])
+    Route::post('/assign_role', [RolesAndPermissionsManagementController::class, 'store'])
         ->name('admin.assign-role');
 
-    Route::delete('/revoke_role', [RolesAndPermissionsController::class, 'destroy'])
+    Route::delete('/revoke_role', [RolesAndPermissionsManagementController::class, 'destroy'])
         ->name('admin.revoke-role');
 
     Route::resource('/users',UserController::class);

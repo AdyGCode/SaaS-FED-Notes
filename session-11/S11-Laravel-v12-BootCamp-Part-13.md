@@ -13,7 +13,7 @@ tags:
   - Back-End
 date created: 03 July 2024
 created: 2024-09-20T11:17
-updated: 2025-08-21T15:59
+updated: 2025-10-28T22:10
 ---
 
 # Laravel Bootcamp: Part 13
@@ -34,7 +34,7 @@ includeLinks: true
 
 ---
 
-# Laravel Bootcamp: Part 12
+# Laravel Bootcamp: Part 13
 
 ## Roles and Permissions Part 3
 
@@ -81,7 +81,7 @@ You will need these to be able to continue…
 
 Remember the most up-to-date code is available on GitHub:
 
-- https://github.com/AdyGCode/roles-permissions-2025-s1
+- https://github.com/AdyGCode/xxx-roles-permissions-2025-s2
 
 Even though we give you this code, we **STRONGLY** suggest you complete this tutorial from scratch.
 
@@ -89,31 +89,19 @@ This will assist your understanding and ability to apply to other projects
 
 ## Organising our Code
 
-Up to this point we had not been organising our code very well. This was especially true with the Roles and Permissions
-controllers.
+Just to refresh, we have been careful to organise our code.
 
-So we are going to tidy up by adding an `Admin` folder to the `App/Http/Controllers` folder and moving our code to this
-folder.
+We use namespaces to separate components into silos to be able to refer to and use them as needed.
 
-When we do this, we need to then update any references to the controllers (e.g. in the `web.php` routes file).
+We have the following folders in the `app/Http/Controller` folder:
+- Admin
+- Auth
+- Web
 
-```shell
-mkdir App/Http/Controllers/Admin
-```
+We are working in the Admin folder, which gives a namespace of:
 
-Now, in PhpStorm we can move files to other folders, and it will help refactor references as well.
+`App\Http\Controllers\Admin`
 
-Drag and Drop the RoleController and the PermissionController into the Admin folder.
-
-When prompted you will be given the opportunity to check that the changes **will be** correctly applied.
-
-Click Refactor to apply the changes.
-
-Here is an animation of the process:
-
-- Original Screen
-  Recording: [phpstorm-refactor-role-permission-admin-folder.mp4](../assets/phpstorm-refactor-role-permission-admin-folder.mp4)
-- Animated GIF: ![phpstorm-roles-perms-refactor.gif](../assets/phpstorm-roles-perms-refactor.gif)
 
 ## Adding Roles to Users
 
@@ -123,7 +111,7 @@ This has been done many times before, as we often use this as a way to teach CRU
 
 ### Add the User Admin Routes
 
-Edit the web.php file and add the admin route for users
+Edit the `web.php` file and add the admin route for users
 
 ```php
         Route::post('users/{user}/delete', [UserController::class, "delete"])

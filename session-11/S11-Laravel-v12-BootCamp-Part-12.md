@@ -13,7 +13,7 @@ tags:
   - Back-End
 date created: 03 July 2024
 created: 2024-09-20T11:17
-updated: 2025-08-21T15:59
+updated: 2025-10-28T22:56
 ---
 
 
@@ -76,6 +76,14 @@ You will need these to be able to continue…
 > So if you get an error in the browser, it may be because there is something missing.
 > 
 > Remember that code is available from the GitHub repository.
+> 
+>
+> - https://github.com/AdyGCode/xxx-roles-permissions-2025-s2
+>
+> Even though we give you this code, we **STRONGLY** suggest you complete this tutorial from scratch.
+>
+> This will assist your understanding and ability to apply to other projects.
+
 
 # Permissions
 
@@ -161,13 +169,13 @@ $seedPermissions = [
 
 Ok, so now we are going to do a little more with the seeding.
 
-You will have noted that when you are seeding data it is not possible to tell how far though it has progresed.
+You will have noted that when you are seeding data it is not possible to tell how far though it has progressed.
 
 What we are going to do in this seeder (and you will be welcome to update any other seeders) is to add a progress bar to show this.
 
 We begin by setting up the console output, and setting the progress bar.
 
-The progress bar uses the count of the number of items to seed as a way to show the progress between 0 and 100%.
+The progress bar uses the count of the number of items to seed as a way to show the progress between 0% and 100%.
 
 The progress bar is started after a short message.
 ```php  
@@ -182,18 +190,53 @@ Now we use a good old `foreach` loop to progress thrugh the seed data and add th
 
 ```php  
 foreach ($seedPermissions as $newPermission) {
-	$newPermission = Str::of($newPermission)->kjebab();
+	$newPermission = Str::of($newPermission)->kebab();
 	  
     $permission = Permission::firstOrCreate(['name' => $newPermission]);  
     $progress->advance();  
 }  
 ```
 
+> **Note:** You may encounter an issue with the line:
+>  
+> ```php
+> $newPermission = Str::of($newPermission)->kebab();
+> ```
+> If you do, then try these possible solutions:
+> - Run `composer update` in your project's root folder to ensure latest package versions are present.
+> - Replace the line with  `$newPermission = Str::kebab($newPermission);
+>
+> The original line runs successfully for the author on bot Windows and Mac systems.
+
+
 The final step is to finish up the progress bar and output a blank to force the cursor to the next line.
 ```php  
 $progress->finish();  
 $output->writeln('');
 ```
+
+
+##### Aside: Interesting String Utility Methods - `of()` and `kebab()`
+
+You will note that in the line:
+ 
+```php
+$newPermission = Str::of($newPermission)->kebab();
+```
+
+We see two static methods being used:
+
+- `Str::of()` 
+	- ensures that the variable is "stringable".
+	- provides access to chaining Str utility methods such as `lower()`, `title()`, `reverse()`, `limit()`, and `excerpt()`.
+	- See Laravel Docs: https://laravel.com/docs/12.x/strings
+- `Str::kebab()` 
+	- converts the string into kebeb case
+  
+So for a permission such as `Admin everything` the result is `admin-everything`.
+
+Another use-case of Str is shown at: https://laravel-news.com/attributes-as-stringable
+
 
 ### Adding Permissions to our Default Roles 
 
@@ -217,7 +260,9 @@ $output->writeln("");
 $output->writeln('Grant Permissions to Roles');  
 $progress->start();  
   
-$roleSuperAdmin = Role::firstOrCreate(['name' => 'super-user']);  
+$roleSuperAdmin = Role::firstOrCreate(
+					  ['name' => 'super-user']
+				  );  
   
 $roleSuperAdmin->syncPermissions();  
 $progress->advance();
@@ -225,7 +270,7 @@ $progress->advance();
 
 This is the simplest of the stages. The strange thing here is that we DO NOT need to have any permissions synchronised, so the `synvPermissions()` call is empty.
 
-We will use a different method to permit the super user complete access. We still need the role as we need to allocate to a user.
+We will use a different method to permit the super user complete access. We still need the role as we need to allocate it to a user.
 
 Next we will do the admin role.
 
@@ -246,10 +291,11 @@ $adminPermissions = [
     'read any post', 'read own post',  
     'read any unpublished post', 
     'read own unpublished post',  
-    'edit any post', 'edit own post', 'add post', 
-    'delete any post', 'delete own post', 
-    'publish any post', 'publish own post', 
-    'restore any post',  'restore own post', 
+    'edit any post', 'edit own post', 
+    'add post', 'delete any post', 
+    'delete own post', 'publish any post', 
+    'publish own post', 'restore any post',  
+    'restore own post', 
     'trash any post', 'trash own post',  
     'browse permission', 'read permission', 
     'edit permission', 'add permission', 
@@ -265,6 +311,7 @@ foreach ($adminPermissions as $key => $permission) {
 $roleAdmin->syncPermissions($adminPermissions);  
 $progress->advance();
 ```
+
 After defining the permissions for the admin role, we then kebab case the permissions and synch them to the user.
 
 Next is the Staff Role.
@@ -329,6 +376,8 @@ $output->writeln(" ");
 
 It is possible to create roles without default permissions. This could be useful if you want to seed the Role, but then let the administrators define the permissions.
 
+We will create a role of "Guest" but for this demo app we will not make any use of it.
+
 ```php
 /* Permission-less Roles */  
   
@@ -356,7 +405,7 @@ $output->writeln('');
 
 If you want you can add a total execution time to the seeder by doing the following...
 
-At the start of the `run()` method, ass a `$time` variable that gets the value from `now()`.
+At the start of the `run()` method, we grab the starting time as a variable (`$start`) that is set to the current date-time value using `now()`.
 
 ```php
 public function run(): void  
@@ -367,7 +416,7 @@ public function run(): void
     app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 ```
 
-At the end of the method we then calculate the dime difference and display it.
+At the end of the method we then calculate the time difference and display it.
 
 ```php
 $time = $start->diffInSeconds(now());  
@@ -387,6 +436,7 @@ So far we have created the major part of the roles and permissions CRUD:
 One of the cool features we did add was in the Delete. We get the user to re-enter the role/permission to confirm deletion, just like GitHub does in its 'Danger Zone'.
 
 Remember the most up to date code is available on GitHub:
+
 - https://github.com/AdyGCode/xxx-roles-permissions-2025-s2
 
 Even though we give you this code, we **STRONGLY** suggest you complete this tutorial from scratch.
@@ -398,7 +448,8 @@ This will assist your understanding and ability to apply to other projects
 When editing a role we need to see the permissions that are associated with it.
 
 So let's start by:
-- Updating the `RoleController` edit method
+
+- Updating the `RoleManagementController` edit method
 - Updating the `edit.blade.php` file for the roles
 
 
@@ -534,7 +585,7 @@ Open the web routes and **immediately** before the `delete` route add:
 
 ```php
 Route::post('/roles/{role}/permissions', 
-			[RoleController::class, 'givePermission'])
+			[RoleManagementController::class, 'givePermission'])
 	->name('roles.permissions');
 ```
 
@@ -554,7 +605,7 @@ Route::post('/roles/{role}/permissions',
 
 #### Role Controller Updates
 
-Now open the `RoleController` and at the bottom of the class, immediately before the last closing curly brace (`}`), add:
+Now open the `RoleManagementController` and at the bottom of the class, immediately before the last closing curly brace (`}`), add:
 
 ```php
 public function givePermission(Request $request, Role $role)  
@@ -633,14 +684,14 @@ Open the web routes and **immediately** before the `delete` route,  add the rout
 
 ```php
 Route::delete('/roles/{role}/permissions/{permission}', 
-				[RoleController::class, 'revokePermission'])  
+				[RoleManagementController::class, 'revokePermission'])  
     ->name('roles.permissions.revoke');
 ```
 Make sure you do not remove the current give permission route.
 
 #### Role Controller Updates
 
-Now open the `RoleController` and once again, at the bottom of the class and  immediately before the last closing curly brace (`}`), add:
+Now open the `RoleManagementController` and once again, at the bottom of the class and  immediately before the last closing curly brace (`}`), add:
 
 ```php
 public function revokePermission(

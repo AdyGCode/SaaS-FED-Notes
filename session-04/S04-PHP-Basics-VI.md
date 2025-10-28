@@ -9,7 +9,7 @@ color: "#ccc"
 backgroundColor: "#060606"
 tags: SaaS, Front-End, MVC, Laravel, Framework, PHP, MySQL, MariaDB, SQLite, Testing, Unit Testing, Feature Testng, PEST
 created: 2024-08-09T16:09
-updated: 2025-08-26T14:39
+updated: 2025-10-28T21:56
 ---
 
 # PHP Basics VI -  PDO!

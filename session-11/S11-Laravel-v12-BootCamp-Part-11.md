@@ -13,7 +13,7 @@ tags:
   - Back-End
 date created: 03 July 2024
 created: 2024-09-20T11:17
-updated: 2025-08-21T15:59
+updated: 2025-10-28T22:04
 ---
 
 
@@ -939,7 +939,7 @@ To help you practice and learn the skills, repeat the above for the permissions,
 ### Paginating the Roles (and Permissions)
 
 
-Open the `RolesController` and update the index method:
+Open the `RoleManagementController` and update the index method:
 
 ```php
         $roles = Role::paginate(10);
