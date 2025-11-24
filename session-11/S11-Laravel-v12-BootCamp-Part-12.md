@@ -129,40 +129,41 @@ Next we define the permissions, without allocating them to any particular role o
 ```php
 $seedPermissions = [  
   
-    'browse-post',  
-    'read-any-post',  
-    'read own post',  
-    'read any unpublished post',  
-    'read own unpublished post',  
-    'edit any post',  
-    'edit own post',  
-    'add post',  
-    'delete any post',  
-    'delete own post',  
-    'publish any post',  
-    'publish own post',  
-    'restore any post',  
-    'restore own post',  
-    'trash any post',  
-    'trash own post',  
+    'post add',  
+    'post browse',  
+    'post any read unpublished',  
+    'post any edit',  
+    'post any delete',  
+    'post any publish',  
+    'post any read',  
+    'post any restore',  
+    'post any trash',  
+    
+    'post own edit',  
+    'post own delete',  
+    'post own publish',  
+    'post own read',  
+    'post own read unpublished',  
+    'post own restore',  
+    'post own trash',  
   
-    'browse-user',  
-    'read user',  
-    'edit user',  
-    'add user',  
-    'delete user',  
+    'user browse',  
+    'user read',  
+    'user edit',  
+    'user add',  
+    'user delete',  
   
-    'browse permission',  
-    'read permission',  
-    'edit permission',  
-    'add permission',  
-    'delete permission',  
+    'permission browse',  
+    'permission read',  
+    'permission edit',  
+    'permission add',  
+    'permission delete',  
   
-    'browse role',  
-    'read role',  
-    'edit role',  
-    'add role',  
-    'delete-role',  
+    'role browse',  
+    'role read',  
+    'role edit',  
+    'role add',  
+    'role delete',  
   
 ];  
 ```
@@ -286,22 +287,25 @@ To shorten the code we have put multiple permissions on each line.
 $roleAdmin = Role::firstOrCreate(['name' => 'admin']);  
   
 $adminPermissions = [  
-    'browse user', 'read user', 'edit user',
-    'add user', 'delete user', 'browse post', 
-    'read any post', 'read own post',  
-    'read any unpublished post', 
-    'read own unpublished post',  
-    'edit any post', 'edit own post', 
-    'add post', 'delete any post', 
-    'delete own post', 'publish any post', 
-    'publish own post', 'restore any post',  
-    'restore own post', 
-    'trash any post', 'trash own post',  
-    'browse permission', 'read permission', 
-    'edit permission', 'add permission', 
+    'user browse', 'user read', 'user edit',
+    'user add', 'user delete', 
+    
+    'post browse', 'post read any', 'post read own',
+    'post any read unpublished', 
+    'post own read unpublished',  
+    'post any edit', 'post own edit', 
+    'post add', 'post any delete', 
+    'post own delete', 'post any publish', 
+    'post own publish', 'post any restore',  
+    'post own restore', 
+    'post any trash', 'post own trash',  
+    
+    'permission browse', 'permission read', 
+    'permission edit', 'permission add', 
     'delete permission',  
-    'browse role', 'read role', 'edit role', 
-    'add role', 'delete role',  
+    
+    'role browse', 'role read', 'role edit', 
+    'role add', 'role delete',  
 ];  
   
 foreach ($adminPermissions as $key => $permission) {  
@@ -326,14 +330,36 @@ This is a repeat of the Admin user, but with different permissions:
 $roleStaff = Role::firstOrCreate(['name' => 'staff']);  
   
 $staffPermissions = [  
-    'browse user', 'read user', 'edit user', 'add user', 'delete user',  
-    'browse permission', 'read permission',  
-    'browse role', 'read role',  
-    'browse post', 'read any post', 'read own post',  
-    'read any unpublished post', 'read own unpublished post',  
-    'edit any post', 'edit own post', 'add post', 'delete any post',  
-    'delete own post', 'publish any post', 'publish own post', 'restore any post',  
-    'restore own post', 'trash any post', 'trash own post',  
+    'user browse', 
+    'user read',
+    'user edit',
+    'user add',
+    'user delete',  
+    
+    'permission browse', 
+    'permission read',  
+    
+    'role browse', 
+    'role read',  
+    
+    'post add', 
+    'post browse',
+    
+    'post own read',  
+    'post own read unpublished',  
+    'post own edit', 
+    'post own delete',
+    'post own publish',
+    'post own restore',
+    'post own trash',  
+    
+    'post any read', 
+    'post any read unpublished ', 
+    'post any edit', 
+    'post any delete',  
+    'post any publish',
+    'post any restore',  
+    'post any trash',
 ];  
   
 foreach ($staffPermissions as $key => $permission) {  
@@ -354,10 +380,15 @@ Finally we get the client role.
 $roleClient = Role::firstOrCreate(['name' => 'client']);  
   
 $clientPermissions = [  
-    'browse post', 'read own post',  
-    'read own unpublished post',  
-    'edit own post', 'add post', 'delete own post',  
-    'publish own post', 'restore own post', 'trash own post',  
+    'post browse', 
+    'post own read',
+    'post own read unpublished',
+    'post own edit',
+    'post add',
+    'post own delete',
+    'post own publish',
+    'post own restore',
+    'post own trash',
 ];  
   
 foreach ($clientPermissions as $key => $permission) {  

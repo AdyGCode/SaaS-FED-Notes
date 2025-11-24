@@ -173,7 +173,8 @@ maximum of 180 days after their last enrolment period.
 
 # Up Next
 
-- [Laravel v12 Bootcamp - Part ?](../session-11/S10-Laravel-v12-BootCamp-Part-x.md)
+- [Laravel v12 Bootcamp - Part ?](..
+  /session-11/S11-Laravel-v12-BootCamp-Part-x.md)
 - [Session 11 ReadMe](../session-10/ReadMe.md)
 - [Session 11 Reflection Exercises & Study](../session-11/S11-Reflection-Exercises-and-Study.md)
 

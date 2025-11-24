@@ -209,7 +209,7 @@ Now we can add the Spatie Permissions package:
 composer require spatie/laravel-permission
 ```
 
-Install the migrations and settings for the Roles/Permissions package (one line):
+Install (publish) the migrations and settings for the Roles/Permissions package (one line):
 
 ```shell
 php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider" 
@@ -246,7 +246,7 @@ cd roles-permissions-2025-s2
 > 
 > See [Introducing Laravel v12](S11-Laravel-v12-Bootcamp-Part-00-Introducing-Laravel.md) for information on updating the `composer.json` file to add the new command options, and then use them.
 > 
-> Alternatively, the updated version of the base-blade-kit has the updated "run" commands. You may want to simply download the latest `composer.json` file from the original base-blade-kit repository and replace yours as needed.
+> Alternatively, the updated version of the base-blade-kit has the updated "run" commands. You may want to simply download the latest `composer.json` file from the original base-blade-kit repository and update yours as needed.
 
 
 
@@ -442,7 +442,10 @@ We order the unit before the qualification as on further analysis we found out t
 
 This will also hold true with units and clusters, where a unit could be part of multiple clusters.
 
-Given this information, we would seed the Permissions and then the Roles, before finally seeding the Users.
+Given this information, we would seed:
+- **Permissions**, and then
+- **Roles**, before finally seeding
+- **Users**.
 
 ### Refactor the Role Seeder
 
@@ -793,7 +796,7 @@ Likewise for the `PermissionManagementController`:
 
 ### Add index pages
 
-We copied the `admin/index.blade.php` page into the `roles` and `permisisons` folders. We are now ready to edit them.
+We copied the `admin/index.blade.php` page into the `roles` and `permissions` folders. We are now ready to edit them.
 
 ##### `admin/roles/index.blade.php`
 

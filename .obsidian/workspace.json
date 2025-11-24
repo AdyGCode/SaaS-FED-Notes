@@ -4,11 +4,39 @@
     "type": "split",
     "children": [
       {
-        "id": "98b8bb025bee987b",
+        "id": "25820be07b20bdbb",
         "type": "tabs",
         "children": [
           {
-            "id": "bb1a942a2deb29e9",
+            "id": "78bc43f415b977a3",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "session-11/S11-Laravel-v12-BootCamp-Part-10.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "S11-Laravel-v12-BootCamp-Part-10"
+            }
+          },
+          {
+            "id": "ee86cbafcab0e1b7",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "session-11/S11-Laravel-v12-BootCamp-Part-11.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "S11-Laravel-v12-BootCamp-Part-11"
+            }
+          },
+          {
+            "id": "ddcfa53851aeaca0",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -20,8 +48,51 @@
               "icon": "lucide-file",
               "title": "S11-Laravel-v12-BootCamp-Part-12"
             }
+          },
+          {
+            "id": "d25815c877b7fd97",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "session-11/S11-Laravel-v12-BootCamp-Part-13.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "S11-Laravel-v12-BootCamp-Part-13"
+            }
+          },
+          {
+            "id": "f9d33ca754343c6a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "session-11/S11-Laravel-v12-BootCamp-Part-14.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "S11-Laravel-v12-BootCamp-Part-14"
+            }
+          },
+          {
+            "id": "cb683f560e36ee7e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "session-11/S11-Laravel-v12-BootCamp-Part-15.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "S11-Laravel-v12-BootCamp-Part-15"
+            }
           }
-        ]
+        ],
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -78,7 +149,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 388.5
+    "width": 200
   },
   "right": {
     "id": "26a2935f4ff09f9b",
@@ -140,13 +211,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "session-11/S10-Laravel-v12-BootCamp-Part-1.md",
+                "file": "session-11/S11-Laravel-v12-BootCamp-Part-02.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of S10-Laravel-v12-BootCamp-Part-1"
+              "title": "Outline of S11-Laravel-v12-BootCamp-Part-02"
             }
           },
           {
@@ -174,7 +245,6 @@
   "left-ribbon": {
     "hiddenItems": {
       "bases:Create new base": false,
-      "obsidian-advanced-slides:Show Slide Preview": false,
       "workspaces:Manage workspace layouts": false,
       "publish:Publish changes...": false,
       "daily-notes:Open today's daily note": false,
@@ -182,58 +252,56 @@
       "graph:Open graph view": false,
       "canvas:Create new canvas": false,
       "templates:Insert template": false,
-      "command-palette:Open command palette": false,
-      "table-editor-obsidian:Advanced Tables Toolbar": false,
-      "templater-obsidian:Templater": false,
-      "mermaid-tools:Open Mermaid Toolbar": false
+      "command-palette:Open command palette": false
     }
   },
-  "active": "bb1a942a2deb29e9",
+  "active": "cb683f560e36ee7e",
   "lastOpenFiles": [
+    "session-11/S11-Laravel-v12-BootCamp-Part-99.md",
+    "session-11/S11-Laravel-v12-BootCamp-Part-15.md",
+    "session-11/S11-Laravel-v12-BootCamp-Part-14.md",
     "session-11/S11-Laravel-v12-BootCamp-Part-13.md",
     "session-11/S11-Laravel-v12-BootCamp-Part-12.md",
-    "session-11/S11-Laravel-v12-BootCamp-Part-14.md",
-    "session-11/S11-Laravel-v12-BootCamp-Part-05.md",
-    "session-11/S11-Laravel-v12-BootCamp-Part-07.md",
-    "session-11/S11-Laravel-v12-BootCamp-Part-08.md",
-    "session-11/S11-Laravel-v12-BootCamp-Part-09.md",
+    "session-11/S11-Laravel-v12-BootCamp-Part-11.md",
     "session-11/S11-Laravel-v12-BootCamp-Part-10.md",
-    "assets/PHP-Basics-I-20240723155556815.png",
+    "session-11/S11-Laravel-v12-BootCamp-Part-09.md",
+    "session-11/S11-Laravel-v12-BootCamp-Part-08.md",
+    "session-11/S11-Laravel-v12-BootCamp-Part-07.md",
     "session-11/S11-Laravel-v12-BootCamp-Part-06.md",
-    "session-11/sample-code/ChirpSeeder.php",
-    "session-06/S06-Terminology-MVC.md",
-    "session-06/S06-Practice-Exercises-and-Recap.md",
-    "session-06/S06-PHP-Basics-VII.md",
-    "session-06/S06-MVC-Background.md",
-    "session-06/S05-Exercises-and-Journal-Entry.md",
-    "assets/vivaldi_yiyZKNoOkm.gif",
-    "assets/vivaldi_uQKFtB6QLn.gif",
     "assets/vivaldi_Tiaq7VTG1w.gif",
-    "assets/vivaldi_OE1N5p8Gul.gif",
-    "assets/vivaldi_FqTSZ1ydWW.gif",
     "assets/Pasted image 20251023140446.png",
     "assets/Pasted image 20251023130818.png",
     "assets/Pasted image 20251023121713.png",
     "assets/Pasted image 20251023121622.png",
+    "assets/ERD-WITS-Base.png",
+    "assets/vivaldi_uQKFtB6QLn.gif",
+    "session-11/S11-Laravel-v12-BootCamp-Part-05.md",
+    "assets/Pasted image 20251016164131.png",
+    "assets/Pasted image 20251016141900.png",
+    "assets/vivaldi_FqTSZ1ydWW.gif",
     "session-11/S11-Laravel-v12-BootCamp-Part-04.md",
-    "session-06/S05-Terminology-MVC.md",
     "session-11/S11-Laravel-v12-BootCamp-Part-03.md",
     "session-11/S11-Laravel-v12-BootCamp-Part-02.md",
-    "session-11/S11-Laravel-v12-BootCamp-Part-01.md",
-    "session-11/S11-Laravel-v12-BootCamp-Part-11.md",
-    "session-11/S11-Laravel-v12-BootCamp-Part-99.md",
     "session-11/S11-Laravel-v12-Bootcamp-Part-00-Introducing-Laravel.md",
-    "Previous/S11-Laravel-01-Setting-Up.md",
-    "session-11/S11-What-To-Do-With-A-Cloned-Laravel-App.md",
-    "session-10/S10-Introducing-Laravel-v12.md",
+    "session-11/S11-Laravel-v12-BootCamp-Part-02.md~",
+    "session-11/S11-Laravel-v12-BootCamp-Part-01.md",
+    "session-04/S04-Practice-Exercises-and-Recap.md",
+    "session-06/S06-MVC-Background.md",
+    "session-06/S06-PHP-Basics-VII.md",
+    "session-06/S06-Terminology-MVC.md",
+    "session-06/S06-Practice-Exercises-and-Recap.md",
+    "session-06/S05-Practice-Exercises-and-Recap.md",
+    "session-06/S05-Exercises-and-Journal-Entry.md",
+    "session-05/S05-Practice-Exercises-and-Recap.md",
+    "session-05/S04-Practice-Exercises-and-Recap.md",
+    "session-04/sample-code/form-database-mysql.sql",
+    "session-04/sample-code/form-database-mariadb.sql",
+    "session-04/sample-code/database.sql",
+    "session-04/sample-code/database-mysql.sql",
+    "session-04/sample-code/database-mariadb.sql",
     "session-03/S03-TailwindCSS-Installation-Building.md~",
     "session-11/S10-Laravel-v12-BootCamp-Part-3.md~",
     "session-01/S01-PHP-for-Beginners-Laracasts.md~",
-    "session-11/sample-code/show.blade.php",
-    "session-11/sample-code/index.blade.php",
-    "session-11/sample-code/edit.blade.php",
-    "session-11/sample-code/delete.blade.php",
-    "session-11/sample-code/create.blade.php",
-    "assets/phpstorm-refactor-role-permission-admin-folder.mp4"
+    "session-11/sample-code/show.blade.php"
   ]
 }

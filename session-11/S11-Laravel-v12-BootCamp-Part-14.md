@@ -35,7 +35,6 @@ includeLinks: true
 
 # Laravel Bootcamp: Part 13
 
-# TODO: IN PROGRESS
 
 ## Roles and Permissions Part 4
 
@@ -132,13 +131,20 @@ Here we have named the actions based on the BREAD acronym, and kept the resource
 | publish post      |      Y      |       |   Y   |   Y    |
 | ...               |             |       |       |        |
 
+> On reflection we may find it easier (especially when sortinng by name), to order the "titles" of the permissions as:
+> - post add
+> - post delete
+> - post any read
+>
+> Obviously pros and cons, but we will go with the Model that has permissions applied to, then the "scope"  (any, own, etc), followed by the action.
+
 We obviously will have issues where a Staff user must not be able to change the role of an admin user, and so on... these sort of items we can look at once the basic permissions are applied.
 
 It is possible to make the table more explicit and have lines for the likes of "Edit Admin User: change roles" if wanted. How you document your roles and permissions is important and should be documented no matter how complex the situation.
 
-## Create a New Roles and Permissions Seeder
+## Replacing the Roles and Permissions Seeders
 
-Before we continue, we are going to create a new seeder, and replace the current Role and Permissions seeders.
+Before we continue, we are going to update  a new seeder, and replace the current Role and Permissions seeders.
 
 As we do this, we will use the table we created as the start point.
 
@@ -158,31 +164,42 @@ After the `run` method signature and opening `{` curly bracket, we add the list 
 
 ```php
 $seedPermissions = [  
-    'browse user',  
-    'read user',  
-    'edit user',  
-    'add user',  
-    'delete user',  
+    'permission browse',  
+    'permission read',  
+    'permission edit',  
+    'permission add',  
+    'permission delete',  
   
-    'browse post',  
-    'read post',  
-    'edit post',  
-    'add post',  
-    'delete post',  
-    'publish post',  
+    'role browse',  
+    'role read',  
+    'role edit',  
+    'role add',  
+    'role delete',  
   
-    'browse permission',  
-    'read permission',  
-    'edit permission',  
-    'add permission',  
-    'delete permission',  
+    'user browse',  
+    'user read',  
+    'user edit',  
+    'user add',  
+    'user delete',  
   
-    'browse role',  
-    'read role',  
-    'edit role',  
-    'add role',  
-    'delete role',  
+    'post browse',  
+    'post add',  
   
+    'post any read',  
+    'post any read unpublished',  
+    'post any edit',  
+    'post any delete',  
+    'post any publish',  
+    'post any restore',  
+    'post any trash',  
+  
+    'post own read',  
+    'post own read unpublished',  
+    'post own edit',  
+    'post own delete',  
+    'post own publish',  
+    'post own restore',  
+    'post own trash',  
 ];
 ```
 
@@ -265,12 +282,38 @@ Here we create the role, then we list all the permissions the administrator role
 $roleAdmin = Role::firstOrCreate(['name' => 'admin']);  
 
 $adminPermissions = [  
-    'browse user', 'read user', 'edit user', 'add user', 'delete user',  
-    'browse post', 'read post', 'edit post', 'add post', 'delete post', 
-    'browse permission', 'read permission', 'edit permission', 'add permission',  
-    'browse role', 'read role', 'edit role', 'add role', 
-	'browse post', 'read post', 'edit post', 'add post', 'delete post', 'publish post',  
-];  
+    'permission browse',  
+    'permission read',  
+    'permission edit',  
+    'permission add',  
+    'permission delete',  
+    'role browse',  
+    'role read',  
+    'role edit',  
+    'role add',  
+    'role delete',  
+    'user browse',  
+    'user read',  
+    'user edit',  
+    'user add',  
+    'user delete',  
+    'post browse',  
+    'post any read',  
+    'post own read',  
+    'post any read unpublished',  
+    'post own read unpublished',  
+    'post any edit',  
+    'post own edit',  
+    'post add ',  
+    'post any delete',  
+    'post own delete',  
+    'post any publish',  
+    'post own publish',  
+    'post any restore',  
+    'post own restore',  
+    'post any trash',  
+    'post own trash',  
+]; 
 
 $roleAdmin->syncPermissions($adminPermissions);  
 $progress->advance();
@@ -294,10 +337,36 @@ We keep going, next with the staff role.
 $roleStaff = Role::firstOrCreate(['name' => 'staff']);  
 
 $staffPermissions = [  
-    'browse user', 'read user', 'edit user', 'add user', 'delete user',  
-    'browse permission', 'read permission',  
-    'browse role', 'read role',  
-	'browse post', 'read post', 'edit post', 'add post', 'delete post',  
+'user browse',  
+'user read',  
+'user edit',  
+'user add',  
+'user delete',  
+  
+'permission browse',  
+'permission read',  
+  
+'role browse',  
+'role read',  
+  
+'post browse',  
+'post add',  
+  
+'post any read',  
+'post any read unpublished',  
+'post any edit',  
+'post any delete',  
+'post any publish',  
+'post any restore',  
+'post any trash',  
+  
+'post own restore',  
+'post own read',  
+'post own read unpublished',  
+'post own delete',  
+'post own edit',  
+'post own publish',  
+'post own trash',
 	];  
 	
 $roleStaff->syncPermissions($staffPermissions);  
@@ -318,7 +387,16 @@ Finally the client role.
   
 $roleClient = Role::create(['name' => 'client']);  
 $clientPermissions = [  
-    'browse post', 'read post', 'edit post', 'add post', 'delete post', 'publish post',  
+'post browse',  
+'post add',  
+  
+'post own read',  
+'post own read unpublished',  
+'post own edit',  
+'post own delete',  
+'post own publish',  
+'post own restore',  
+'post own trash',
 ];  
 $roleClient->syncPermissions($clientPermissions);  
 $progress->advance();  
@@ -583,6 +661,7 @@ Open the `App/Providers/AppServiceProvider` class, and in the `boot` method add 
 // Implicitly grant "Super Admin" role all permissions  
 // This works in the app by using gate-related functions like auth()->user->can() and @can()  
 // See https://spatie.be/docs/laravel-permission/v6/basic-usage/super-admin  
+
 Gate::before(function ($user, $ability) {  
     return $user->hasRole('super-admin') ? true : null;  
 });
@@ -621,7 +700,6 @@ Open the `navigation.blade.php` file and locate the "Navigation Links" section.
 
 We are going to wrap the "admin" link with a `hasrole` that checks if the role the currently logged in user has is a staff, admin or super admin.
 
-
 ```php
 
 @hasrole('admin|staff|super-admin')  
@@ -653,7 +731,7 @@ Open the `create.blade.php` file from the admin/permissions folder.
 Locate the `admin.permissions.create` link, and we are going to wrap it in a `@can` that checks for the logged in user's ability to  `add permission`.
 
 ```php
-@can('add permission')  
+@can('permission add')  
     <a href="{{ route('admin.permissions.create') }}"  
        class="rounded bg-green-500 text-white hover:bg-white hover:text-green-500 border-green-500 px-4 py-2">  
         New Permission  
@@ -668,7 +746,7 @@ Also we wrap the whole form in the same `@can('add permission')` and `@endcan` b
 One small change is that we are also going to display a big red warning that they cannot perform the action... We show it in its entirety on this occasion.
 
 ```php
-    @can('add permission')  
+    @can('permission add')  
   
         <form action="{{ route('admin.permissions.store') }}"  
               method="POST"  
@@ -711,7 +789,7 @@ Similar principle to the previous example.
 Wrap the "New permission link" (just a moment, that is the same as we just did for create... yep, we did say you'd be repeating yourself a fair amount).
 
 ```php
-@can('add permission')  
+@can('permission add')  
     <a href="{{ route('admin.permissions.create') }}"  
        class="rounded bg-green-500 text-white hover:bg-white hover:text-green-500 border-green-500 px-4 py-2">  
         New Permission  
@@ -719,13 +797,13 @@ Wrap the "New permission link" (just a moment, that is the same as we just did f
 @endcan
 ```
 
-Wrap the form in `@can('delete permission')` ... `@endcan`. 
+Wrap the form in `@can('permission delete')` ... `@endcan`. 
 
 We are not going to show all the code as it is the same process except for the message when the user cannot perform the action...
 
 ```php
   
-@can('delete permission')  
+@can('permission delete')  
 <form action="{{ route('admin.permissions.destroy', $permission) }}"  
       method="POST"  
       class="p-6 flex flex-col space-y-4">  
@@ -747,10 +825,10 @@ Endure you wrap with the can/else/endcan
 
 Guess what... you do the same again!
 
-This time the permission for the form is `edit permission` in place of `delete permission`.
+This time the permission for the form is for `edit permission` in place of `delete permission`.
 
 ```php
-@can('edit permission')  
+@can('permission edit')  
     <form action="{{ route('admin.permissions.update', $permission) }}"  
           method="POST"  
           class="p-6 flex flex-col space-y-4">  
@@ -779,7 +857,7 @@ We are not going to show full code, but we will show the wrapped code.
 #### "New Permission" button
 
 ```php
-@can('add permission')  
+@can('permission add')  
     <a href="{{ route('admin.permissions.create') }}"  
        class="rounded bg-green-500 text-white hover:bg-white hover:text-green-500 border-green-500 px-4 py-2">  
         New Permission  
@@ -790,7 +868,7 @@ We are not going to show full code, but we will show the wrapped code.
 #### "Edit Permission" button
 
 ```php
-@can('edit permission')  
+@can('permission edit')  
     <x-link-button  
         class="hover:bg-amber-400 focus:bg-amber-400 active:bg-amber-400"  
         href="{{ route('admin.permissions.edit', $permission) }}">  
@@ -802,7 +880,7 @@ We are not going to show full code, but we will show the wrapped code.
 #### "Delete Permission" button
 
 ```php
-@can('delete permission')  
+@can('permission delete')  
     <x-link-button  
         class="hover:bg-red-500 focus:bg-red-400 active:bg-red-400 "  
         href="{{ route('admin.permissions.delete', $permission) }}">  
@@ -824,10 +902,16 @@ This is left as an exercise. Remember that we do provide the updated code in the
 The user views will be the same, except we obviously now can view the user, and we also have the ability to update their role, or even permissions on a individual basis.
 
 
-# TODO: Finish off User Views
+# Exercise: Finish off User Views
+
+Ok, so you should now update the remaining views for users, roles and permissions as needed.
 
 
-# TODO: Add Web Routes Update
+# Web Routes Update
+
+We need to update the web routes so they look at the roles and/or permissions that they will allow through.
+
+Note how we add the 'role:...' to the middleware, which performs a check to see if the user is an admin, staff or super admin.
 
 ```php
 Route::name('admin.')  
@@ -889,11 +973,7 @@ The next level of security is applied at the 'controller' level.
 
 There are various ways to apply the policies or roles, we will show you some alternatives.
 
-
-## Option 1: 
-
-
-## Option 2: Controller Constructor & Middleware
+## Option 1: Controller Constructor & Middleware
 
 The first option is to use middleware in the controller's constructor method.
 
@@ -926,13 +1006,13 @@ The "only" tells the middleware to *only allow the following methods to be execu
 So for the "add role" permission the actions that are allowed to be performed are the `create`, `store`, `givePermission`,  and `revokePermission` methods.
 
 
-## Option 3: Model Policies
+## Option 2: Model Policies
 
 - https://spatie.be/docs/laravel-permission/v6/best-practices/using-policies
 
-The third option is to use Model Policies.
+The second option is to use Model Policies.
 
-We will do this with a `Post` model.
+We will do this with a `Post` model as an exercise.
 
 ### Create Post Model et al
 
@@ -1027,10 +1107,6 @@ We use the `can` method on the logged in user.
 
 **Note: We have added further permissions to the role and permission seeder, to provide a more granular list of permissions.**
 
-```php
-
-```
-
 #### Applying Policies
 
 - https://laravel.com/docs/12.x/authorization#creating-policies
@@ -1043,7 +1119,11 @@ We are able to:
 - add the policy to the model
 
 
+This is left for you to explore.
 
+## Which way to use the Permissions?
+
+For ease of learning, we recommend using the in Controller method (option 1).
 
 # Conclusion
 
@@ -1062,7 +1142,8 @@ The last parts in this series will be adding our own 'twist' to the error pages,
 
 # Up Next
 
-- [Laravel v12 Bootcamp - Part 14](session-11/S10-Laravel-v12-BootCamp-Part-14.md)
+- [Laravel v12 Bootcamp - Part 14](../
+  session-11/S11-Laravel-v12-BootCamp-Part-14.md)
 - [Session 11 ReadMe](../session-10/ReadMe.md)
 - [Session 11 Reflection Exercises & Study](../session-11/S11-Reflection-Exercises-and-Study.md)
 
