@@ -381,13 +381,15 @@ Yep, a lot is done by this one method.
 Here are the parts of the method with quick descriptions...
 
 ```php
-$requestMethod = $_SERVER['REQUEST_METHOD'];  
-  
-// Check for _method input  
-if ($requestMethod === 'POST' && isset($_POST['_method'])) {  
-    // Override the request method with the value of _method  
-    $requestMethod = strtoupper($_POST['_method']);  
-}
+public function route($uri)
+{
+    $requestMethod = $_SERVER['REQUEST_METHOD'];  
+    
+    // Check for _method input  
+    if ($requestMethod === 'POST' && isset($_POST['_method'])) {  
+        // Override the request method with the value of _method  
+        $requestMethod = strtoupper($_POST['_method']);  
+    }
 ```
 
 Here we get the request (HTTP) method that is being used (GET, POST).
@@ -408,34 +410,43 @@ foreach ($this->routes as $route) {
     $routeSegments = explode('/', trim($route['uri'], '/'));  
   
     $match = true;
-```
 
-Next we need to go through the registered routes one by one.
+    // Constructor for Database class
+    //  Next we need to go through the registered routes one by one.
 
-We explode the incoming request URI into segments. This is ready for matching.
+    // We explode the incoming request URI into segments. This is ready for matching.
 
-We do the same for the URI of the current registered route.
+    // We do the same for the URI of the current registered route.
 
-We then set a default value for match completion, so we only need to change this when no match is found.
+    // We then set a default value for match completion, so we only need to change this when no match is found.
 
-The next part is where we check the segments of the request against the segments of the registered route...
-
-```php
-if (count($uriSegments) === count($routeSegments) && strtoupper($route['method'] === $requestMethod)) {  
-    $params = [];  
+    // The next part is where we check the segments of the request against the segments of the registered route...
+    
+    if (count($uriSegments) === count($routeSegments) 
+        && strtoupper($route['method'] === $requestMethod)) {  
+        $params = [];  
   
-    $match = true;  
-    $segments = count($uriSegments);  
-    for ($i = 0; $i < $segments; $i++) {  
-        
-        if ($routeSegments[$i] !== $uriSegments[$i] && !preg_match('/\{(.+?)}/', $routeSegments[$i])) {  
-            $match = false;  
-            break;  
-        }  
-  
-        if (preg_match('/\{(.+?)}/', $routeSegments[$i], $matches)) {  
-            $params[$matches[1]] = $uriSegments[$i];  
-        }  
+        $match = true;  
+        $segments = count($uriSegments);
+
+        for ($i = 0; $i < $segments; $i++) {  
+            // If the uri's do not match and there is no parm
+            if ($routeSegments[$i] !== $uriSegments[$i] 
+                // /is the start and end of regex pattern
+                // \escapes the curly brace, making it a regular character, it's looking for it.  
+                // parenthesis is the capturing group
+                // . is any character that is not a newline
+                // + is one or more proceeding elements
+                // ? lazy making match as few of the preceding characters as possible
+                // eg /products/{id}
+                && !preg_match('/\{(.+?)}/', $routeSegments[$i])) {  
+                $match = false;  
+                break;  
+            }  
+    
+            if (preg_match('/\{(.+?)}/', $routeSegments[$i], $matches)) {  
+                $params[$matches[1]] = $uriSegments[$i];  
+            }  
     }
 ```
 
@@ -453,19 +464,23 @@ If the previous decision is false we then check and add the parameter to the par
 We are now ready to process the middleware component of the route, if required...
 
 ```php
-if ($match) {  
-    foreach ($route['Middleware'] as $middleware) {  
-        (new Authorise())->handle($middleware);  
-    }  
-  
-    $controller = 'App\\controllers\\' . $route['controller'];  
-    $controllerMethod = $route['controllerMethod'];  
-  
-    // Instantiate the controller and call the method  
-    $controllerInstance = new $controller();  
-    $controllerInstance->$controllerMethod($params);  
-    return;  
+        if ($match) {  
+            foreach ($route['Middleware'] as $middleware) {  
+                (new Authorise())->handle($middleware);  
+            }  
+        
+            $controller = 'App\\controllers\\' . $route['controller'];  
+            $controllerMethod = $route['controllerMethod'];  
+        
+            // Instantiate the controller and call the method  
+            $controllerInstance = new $controller();  
+            $controllerInstance->$controllerMethod($params);  
+            return;  
+        }
+    }
 }
+
+ErrorController::notFound();
 ```
 
 If we get to this block of code and the `match` is still true we are able to process the middleware requirements.
@@ -564,6 +579,7 @@ You are expected to update the header comments to give a title and explain the p
 
 ## Session
 
+3:27:00
 Use the same technique as previously to create a new class in the Framework folder, this time called Session.
 
 Fill out the header DocBlock as required.
