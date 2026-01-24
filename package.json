@@ -1,5 +1,10 @@
 {
   "devDependencies": {
     "tailwindcss": "^3.4.10"
+  },
+  "dependencies": {
+    "@iconify-json/fa7-brands": "^1.2.1",
+    "@iconify-json/fa7-solid": "^1.2.3",
+    "slidev-workspace": "^0.7.2"
   }
 }

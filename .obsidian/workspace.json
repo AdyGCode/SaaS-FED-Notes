@@ -13,15 +13,42 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "session-11/S11-Laravel-v12-BootCamp-Part-12.md",
+                "file": "session-11/S11-Laravel-v12-BootCamp-Part-09.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "S11-Laravel-v12-BootCamp-Part-12"
+              "title": "S11-Laravel-v12-BootCamp-Part-09"
+            }
+          },
+          {
+            "id": "e6a0e2b06391d46f",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.11.4"
+              },
+              "icon": "lucide-book-up",
+              "title": "Release Notes 1.11.4"
+            }
+          },
+          {
+            "id": "781bed36cff1aa41",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "templates/slides.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "slides"
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -174,7 +201,6 @@
   "left-ribbon": {
     "hiddenItems": {
       "bases:Create new base": false,
-      "obsidian-advanced-slides:Show Slide Preview": false,
       "workspaces:Manage workspace layouts": false,
       "publish:Publish changes...": false,
       "daily-notes:Open today's daily note": false,
@@ -182,58 +208,56 @@
       "graph:Open graph view": false,
       "canvas:Create new canvas": false,
       "templates:Insert template": false,
-      "command-palette:Open command palette": false,
-      "table-editor-obsidian:Advanced Tables Toolbar": false,
-      "templater-obsidian:Templater": false,
-      "mermaid-tools:Open Mermaid Toolbar": false
+      "command-palette:Open command palette": false
     }
   },
-  "active": "bb1a942a2deb29e9",
+  "active": "781bed36cff1aa41",
   "lastOpenFiles": [
-    "session-11/S11-Laravel-v12-BootCamp-Part-13.md",
-    "session-11/S11-Laravel-v12-BootCamp-Part-12.md",
-    "session-11/S11-Laravel-v12-BootCamp-Part-14.md",
-    "session-11/S11-Laravel-v12-BootCamp-Part-05.md",
-    "session-11/S11-Laravel-v12-BootCamp-Part-07.md",
-    "session-11/S11-Laravel-v12-BootCamp-Part-08.md",
-    "session-11/S11-Laravel-v12-BootCamp-Part-09.md",
-    "session-11/S11-Laravel-v12-BootCamp-Part-10.md",
-    "assets/PHP-Basics-I-20240723155556815.png",
-    "session-11/S11-Laravel-v12-BootCamp-Part-06.md",
-    "session-11/sample-code/ChirpSeeder.php",
-    "session-06/S06-Terminology-MVC.md",
-    "session-06/S06-Practice-Exercises-and-Recap.md",
-    "session-06/S06-PHP-Basics-VII.md",
-    "session-06/S06-MVC-Background.md",
-    "session-06/S05-Exercises-and-Journal-Entry.md",
-    "assets/vivaldi_yiyZKNoOkm.gif",
-    "assets/vivaldi_uQKFtB6QLn.gif",
-    "assets/vivaldi_Tiaq7VTG1w.gif",
-    "assets/vivaldi_OE1N5p8Gul.gif",
-    "assets/vivaldi_FqTSZ1ydWW.gif",
-    "assets/Pasted image 20251023140446.png",
-    "assets/Pasted image 20251023130818.png",
-    "assets/Pasted image 20251023121713.png",
-    "assets/Pasted image 20251023121622.png",
-    "session-11/S11-Laravel-v12-BootCamp-Part-04.md",
-    "session-06/S05-Terminology-MVC.md",
-    "session-11/S11-Laravel-v12-BootCamp-Part-03.md",
-    "session-11/S11-Laravel-v12-BootCamp-Part-02.md",
-    "session-11/S11-Laravel-v12-BootCamp-Part-01.md",
-    "session-11/S11-Laravel-v12-BootCamp-Part-11.md",
-    "session-11/S11-Laravel-v12-BootCamp-Part-99.md",
-    "session-11/S11-Laravel-v12-Bootcamp-Part-00-Introducing-Laravel.md",
-    "Previous/S11-Laravel-01-Setting-Up.md",
-    "session-11/S11-What-To-Do-With-A-Cloned-Laravel-App.md",
-    "session-10/S10-Introducing-Laravel-v12.md",
-    "session-03/S03-TailwindCSS-Installation-Building.md~",
-    "session-11/S10-Laravel-v12-BootCamp-Part-3.md~",
-    "session-01/S01-PHP-for-Beginners-Laracasts.md~",
-    "session-11/sample-code/show.blade.php",
-    "session-11/sample-code/index.blade.php",
-    "session-11/sample-code/edit.blade.php",
-    "session-11/sample-code/delete.blade.php",
-    "session-11/sample-code/create.blade.php",
-    "assets/phpstorm-refactor-role-permission-admin-folder.mp4"
+    "2026/test/views",
+    "2026/test/src",
+    "2026/test/public",
+    "2026/test/database/migrations",
+    "2026/test/database",
+    "2026/test",
+    "2026/Presentations/session-01/slides-live-demo.md",
+    "2026/Session-01/public/site.css",
+    "2026/Session-01/database/contact_list_db.sqlite-journal",
+    "2026/Session-01/contacts.sqlite",
+    "2026/Session-01/database/contact_list_db.sqlite",
+    "2026/Session-01/database/migrations/001_create_contacts.sql",
+    "2026/Session-01/Readme.md",
+    "2026/Presentations/prompt.md",
+    "2026/Presentations/session-01/slides-php-intro.md",
+    "2026/revealjs/examples/markdown.md",
+    "2026/Presentations/session-01/pages/imported-slides.md",
+    "2026/Presentations/session-01/slides.md",
+    "2026/Presentations/session-01/README.md",
+    "2026/Presentations/nmt-theme/assets/slidev-background-red-top.svg",
+    "2026/Presentations/nmt-theme/assets/slidev-background-red-mute.svg",
+    "2026/Presentations/nmt-theme/assets/slidev-background-red.svg",
+    "2026/Presentations/nmt-theme/assets/slidev-background.svg",
+    "2026/Presentations/nmt-theme/assets/slidev-background-gray.svg",
+    "2026/Presentations/nmt-theme/styles/assets/slidev-background.svg",
+    "2026/Presentations/nmt-theme/styles/assets/slidev-background-gray.svg",
+    "2026/Presentations/nmt-theme/styles/slidev-background.svg",
+    "2026/Presentations/nmt-theme/styles/slidev-background-gray.svg",
+    "2026/Presentations/nmt-theme/README.md",
+    "2026/Presentations/nmt-theme/example.md",
+    "2026/Presentations/NMT-Theme/node_modules/yargs/node_modules/string-width/readme.md",
+    "2026/Presentations/NMT-Theme/node_modules/yargs/node_modules/strip-ansi/readme.md",
+    "2026/Presentations/NMT-Theme/node_modules/yargs/node_modules/emoji-regex/README.md",
+    "2026/Presentations/NMT-Theme/node_modules/yargs/node_modules/ansi-regex/readme.md",
+    "2026/Presentations/NMT-Theme/node_modules/wrap-ansi/node_modules/strip-ansi/readme.md",
+    "2026/Presentations/NMT-Theme/node_modules/wrap-ansi/node_modules/string-width/readme.md",
+    "2026/Presentations/NMT-Theme/node_modules/wrap-ansi/node_modules/ansi-regex/readme.md",
+    "2026/Presentations/NMT-Theme/node_modules/wrap-ansi/node_modules/emoji-regex/README.md",
+    "2026/Presentations/NMT-Theme/node_modules/vite-plugin-static-copy/node_modules/readdirp/README.md",
+    "2026/Presentations/NMT-Theme/node_modules/vite-plugin-static-copy/node_modules/picomatch/README.md",
+    "2026/Presentations/NMT-Theme/node_modules/vite-plugin-static-copy/node_modules/picomatch/CHANGELOG.md",
+    "2026/Presentations/NMT-Theme/node_modules/vite-plugin-static-copy/node_modules/chokidar/README.md",
+    "2026/Presentations/NMT-Theme/node_modules/vite-plugin-inspect/node_modules/wsl-utils/readme.md",
+    "2026/Presentations/NMT-Theme/node_modules/vite-plugin-inspect/node_modules/open/readme.md",
+    "2026/Presentations/NMT-Theme/node_modules/vite-plugin-inspect/dist/client/favicon.svg",
+    "2026/Presentations/NMT-Theme/node_modules/untun/node_modules/pathe/README.md"
   ]
 }
