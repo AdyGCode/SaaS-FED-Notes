@@ -7,6 +7,8 @@ drawings:
 transition: fade
 mdc: true
 duration: 35min
+addons:
+  - announcement
 ---
 
 # PHP & MVC Intro
@@ -45,6 +47,7 @@ By the end of this session, you will be able to:
 - Use PDO to connect to a database and run queries
   - Use PDO safely with prepared statements
 - Understand the MVC request/response flow at a high level
+
 
 ---
 

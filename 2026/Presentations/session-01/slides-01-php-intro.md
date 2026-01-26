@@ -1,13 +1,125 @@
+---
+theme: nmt
+title: Session 01 - PHP Fundamentals & Intro MVC
+class: text-left
+drawings:
+  persist: false
+transition: fade
+mdc: true
+duration: 35min
+addons:
+  - announcement
+---
+
+# Session 01: Demo
+
+## SaaS – Cloud Application Development (Front-End Dev)
+
+### PHP to DB: Quick Sprint (Instructor Edition)
+
+<div @click="$slidev.nav.next" class="mt-12 -mx-4 p-4" hover:bg="white op-10">
+<p>Press <kbd>Space</kbd> or <kbd>RIGHT</kbd> for next slide/step <fa7-solid-arrow-right /></p>
+</div>
+
+<div class="abs-br m-6 text-xl">
+  <a href="https://github.com/adygcode/SaaS-FED-Notes" target="_blank" class="slidev-icon-btn">
+    <fa7-brands-github class="text-zinc-300 text-3xl -mr-2"/>
+  </a>
+</div>
+
+
+<!--
+The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
+-->
 
 ---
-title: "PHP to DB: Quick Sprint (Instructor Edition)"
+level: 2
+---
+
+# Session 01 Objectives
+
+## By the end, you should be capable of:
+
+- Running PHP from CLI and built-in web server
+- Handling HTTP requests (GET/POST), validate & escape input
+- Connecting to a database using PDO
+- Performing CRUD with prepared statements & transactions
+- Applying basic security patterns (password hashing, CSRF token, error modes)
+
+<!-- Instructor Notes:
+- Tie each outcome to a demo moment in the session.
+- Highlight that we’ll default to SQLite for zero-config, but show MySQL swap.
+-->
+
+
+---
+
+# Contents
+
+<Toc minDepth="1" maxDepth="1" />
+
+
+---
+layout: default
+level: 2
+---
+
+# Navigating Slides
+
+Hover over the bottom-left corner to see the navigation's controls panel.
+
+## Keyboard Shortcuts
+
+|                                                     |                             |
+|-----------------------------------------------------|-----------------------------|
+| <kbd>right</kbd> / <kbd>space</kbd>                 | next animation or slide     |
+| <kbd>left</kbd>  / <kbd>shift</kbd><kbd>space</kbd> | previous animation or slide |
+| <kbd>up</kbd>                                       | previous slide              |
+| <kbd>down</kbd>                                     | next slide                  |
+
+---
+layout: grid
 ---
 
 # PHP to DB: Quick Sprint
-**From Zero → Forms → PDO → CRUD**
 
-**Target:** PHP 8.4+  
-**Outcome:** Build a tiny web app that reads/writes a database securely.
+## From Zero → Forms → PDO → CRUD
+
+::tl::
+
+### Target Technology
+
+- PHP 8.4+
+- SQLite
+- HTML5 & CSS3
+
+::bl::
+
+### Resources
+
+- PhpStorm
+- Laragon
+- MS Terminal (& Bash)
+
+::tr::
+
+### Outcome
+
+- Build a tiny web app that reads/writes a database securely.
+
+::br::
+
+### Aside
+
+<Announcement title="PHP 8.4+">
+PHP 8.4 or later
+</Announcement>
+
+<Announcement type="info">
+Laragon from https://github.com/adygcode/
+</Announcement>
+
+
 
 <!-- Instructor Notes:
 - Set expectations: 90–120 minutes core, +30–60 stretch.
@@ -16,30 +128,34 @@ title: "PHP to DB: Quick Sprint (Instructor Edition)"
 - Icebreaker: "What’s the one thing you want your app to *save* today?"-->
 
 ---
-
-## Learning Outcomes
-By the end, you can:
-- Run PHP from CLI and built-in web server
-- Handle HTTP requests (GET/POST), validate & escape input
-- Connect to a database using PDO
-- Perform CRUD with prepared statements & transactions
-- Apply secure patterns (password hashing, CSRF token, error modes)
-
-<!-- Instructor Notes:
-- Tie each outcome to a demo moment in the session.
-- Highlight that we’ll default to SQLite for zero-config, but show MySQL swap.
--->
-
+level: 2
 ---
 
-## Prerequisites & Setup
+# Prerequisites & Setup
+- MS Terminal with Git's Bash enabled
 - PHP **8.4+** installed (`php -v`)
-- Editor (VS Code / PhpStorm)
-- SQLite (bundled PDO driver on most installs) or MySQL/MariaDB
-- PDO enabled (pdo_sqlite or pdo_mysql)
+- IDE (PhpStorm ✔️) or Editor (VS Code)
+- SQLite (bundled PDO driver on most installs)
+- PDO enabled in `php.ini` (`pdo_sqlite`)
+
+---
+level: 2
+---
+
+# Create folder structure
+
+- Open MS Terminal
+```shell [shell]
+pwd
+cd Source/Repos
+mkdir SaaS-1-CAD-FED
+cd SaaS-1-CAD-FED
+mkdir 
+```
 
 **Run the dev server:**
-```bash
+
+```bash [shell]
 php -S localhost:8000 -t public
 ```
 
@@ -51,6 +167,7 @@ php -S localhost:8000 -t public
 ---
 
 ## PHP: First Look
+
 ```php
 <?php
 declare(strict_types=1);
@@ -63,6 +180,7 @@ echo "Running PHP $version\n";
 - `declare(strict_types=1)` → stricter type checks for function calls
 - Scalar types, return types, nullable `?Type`
 - Error reporting:
+
 ```php
 error_reporting(E_ALL);
 ini_set('display_errors', '1'); // dev only
@@ -76,6 +194,7 @@ ini_set('display_errors', '1'); // dev only
 ---
 
 ## Flow Control & Functions
+
 ```php
 function greet(string $name = "world"): string {
   return "Hello, $name!";
@@ -97,6 +216,7 @@ foreach ($names as $n) {
 ---
 
 ## Arrays & Superglobals
+
 - Arrays are ordered and associative
 - Superglobals: `$_GET`, `$_POST`, `$_SERVER`, `$_SESSION`, `$_COOKIE`, `$_FILES`
 
@@ -115,6 +235,7 @@ echo htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
 ---
 
 ## Working with HTTP Forms
+
 1. Show form (GET)
 2. Submit (POST)
 3. Validate & sanitize
@@ -122,11 +243,13 @@ echo htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
 5. Redirect (PRG) and render safe HTML
 
 **Input filtering:**
+
 ```php
 $title = filter_input(INPUT_POST, 'title', FILTER_UNSAFE_RAW, FILTER_FLAG_STRIP_LOW);
 ```
 
 **Output escaping:**
+
 ```php
 echo htmlspecialchars($title, ENT_QUOTES, 'UTF-8');
 ```
@@ -139,6 +262,7 @@ echo htmlspecialchars($title, ENT_QUOTES, 'UTF-8');
 ---
 
 ## CSRF (Cross-Site Request Forgery)
+
 - Create a token, store in `$_SESSION`
 - Include hidden `<input>` in form
 - Verify token on POST
@@ -158,6 +282,7 @@ $token = $_SESSION['csrf'];
 ---
 
 ## Files & JSON (Quick Look)
+
 ```php
 $data = ["ok" => true, "time" => time()];
 file_put_contents("data.json", json_encode($data, JSON_PRETTY_PRINT));
@@ -172,6 +297,7 @@ $content = json_decode(file_get_contents("data.json"), true);
 ---
 
 ## OOP Basics (Tiny Taste)
+
 ```php
 class NoteService {
   public function __construct(private PDO $pdo) {}
@@ -192,11 +318,13 @@ class NoteService {
 ---
 
 ## Why PDO?
+
 - Unified API for many DBs (SQLite, MySQL, PostgreSQL…)
 - Prepared statements, transactions, error modes
 - Consistent, secure, future-proof
 
 **Connect (SQLite):**
+
 ```php
 $pdo = new PDO('sqlite:' . __DIR__ . '/../data/app.db', null, null, [
   PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
@@ -211,6 +339,7 @@ $pdo = new PDO('sqlite:' . __DIR__ . '/../data/app.db', null, null, [
 ---
 
 ## Prepared Statements
+
 ```php
 $stmt = $pdo->prepare("INSERT INTO notes(title, body) VALUES (:title, :body)");
 $stmt->execute([':title' => $title, ':body' => $body]);
@@ -226,6 +355,7 @@ $stmt->execute([':title' => $title, ':body' => $body]);
 ---
 
 ## Transactions
+
 ```php
 $pdo->beginTransaction();
 try {
@@ -246,6 +376,7 @@ try {
 ---
 
 ## MySQL DSN (Alternative)
+
 ```php
 $pdo = new PDO(
   "mysql:host=127.0.0.1;dbname=app;charset=utf8mb4",
@@ -265,14 +396,17 @@ $pdo = new PDO(
 ---
 
 ## Security Essentials
+
 - **Prepared statements** only (never concat SQL)
 - **Escape output** with `htmlspecialchars`
 - **CSRF tokens** on state changes
 - **Password hashing**:
+
 ```php
 $hash = password_hash($password, PASSWORD_DEFAULT);
 password_verify($input, $hash);
 ```
+
 - Turn off error display in production; log errors instead
 
 <!-- Instructor Notes:
@@ -282,13 +416,15 @@ password_verify($input, $hash);
 ---
 
 ## Demo: What We’ll Build
+
 - Notes mini-app
-  - List notes (title + body)
-  - Add new note (form POST)
-  - Edit & Delete note
-  - SQLite by default; MySQL optional
+    - List notes (title + body)
+    - Add new note (form POST)
+    - Edit & Delete note
+    - SQLite by default; MySQL optional
 
 **Run:**
+
 ```bash
 php -S localhost:8000 -t public
 ```
@@ -300,6 +436,7 @@ php -S localhost:8000 -t public
 ---
 
 ## Live Coding Checkpoint #1: Project Bootstrap (5–8 min)
+
 - Create folders: `public/`, `src/`, `data/`
 - Add `src/bootstrap.php` with error reporting, session, CSRF
 - Add `src/db.php` that returns PDO (SQLite)
@@ -314,6 +451,7 @@ php -S localhost:8000 -t public
 ---
 
 ## Live Coding Checkpoint #2: Create Note (10–12 min)
+
 - Build a POST form with fields: `title`, `body`, hidden `csrf`
 - Validate inputs; on success `INSERT` via prepared statement
 - PRG redirect back to `/`
@@ -327,6 +465,7 @@ php -S localhost:8000 -t public
 ---
 
 ## Live Coding Checkpoint #3: List & Delete (8–10 min)
+
 - Query all notes by `created_at DESC`
 - Render each with escaped HTML
 - Add `delete.php` handling POST + CSRF to remove by id
@@ -340,10 +479,11 @@ php -S localhost:8000 -t public
 ---
 
 ## Live Coding Checkpoint #4: Edit Note (10–12 min)
+
 - Add `edit.php`:
-  - GET loads note by id; prefill form
-  - POST validates and `UPDATE`s with prepared statement
-  - Redirect back to `/`
+    - GET loads note by id; prefill form
+    - POST validates and `UPDATE`s with prepared statement
+    - Redirect back to `/`
 
 **Goal:** Full CRUD achieved.
 
@@ -354,6 +494,7 @@ php -S localhost:8000 -t public
 ---
 
 ## Live Coding Checkpoint #5: Search & Pagination (Optional, 10–15 min)
+
 - Add GET `q` filter (title LIKE `%term%`)
 - Add page size (5) and `page` param for pagination
 
@@ -366,6 +507,7 @@ php -S localhost:8000 -t public
 ---
 
 ## Troubleshooting
+
 - “Driver not found” → enable `pdo_sqlite` or `pdo_mysql`
 - Permissions for `data/` folder (writable)
 - Check `error_log` if display is off
@@ -377,6 +519,7 @@ php -S localhost:8000 -t public
 ---
 
 ## Next Steps
+
 - Pagination & search
 - User accounts with sessions
 - Input validation library
@@ -390,6 +533,7 @@ php -S localhost:8000 -t public
 ---
 
 ## Stretch Goals (More!)
+
 - Tags with many-to-many relation to notes (tables: `tags`, `note_tag`)
 - Soft delete (`deleted_at` nullable) and restore
 - Full-text search (SQLite FTS5 or MySQL FULLTEXT where available)
@@ -406,6 +550,7 @@ php -S localhost:8000 -t public
 ---
 
 ## Resources
+
 - PHP Manual (language & functions)
 - PDO documentation
 - OWASP Cheat Sheets (XSS, SQLi, CSRF)
