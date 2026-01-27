@@ -1,0 +1,95 @@
+body {
+    max-width: 860px;
+    margin: 2rem auto;
+    font-family: Lexend, system-ui, sans-serif;
+}
+
+main {
+    padding: 1rem;
+    background: #f9f9f9;
+    border-left: 1px solid #999;
+    border-right: 1px solid #999;
+}
+
+header, footer {
+    padding: 1rem;
+    color: #444;
+    background: #eee;
+}
+
+header {
+    border-radius: 0.5rem 0.5rem 0 0;
+    border: 1px solid #999;
+}
+
+footer {
+    border-radius: 0 0 0.5rem 0.5rem;
+    border: 1px solid #999;
+}
+
+h1, h2 {
+    margin: 0.5rem 0 1rem;
+}
+
+h3, h4 {
+    margin: 1rem 0;
+}
+
+.error {
+    color: #b00020;
+}
+
+li > span {
+    padding-right: 1rem;
+    font-weight: 700;
+    display: inline-block;
+}
+
+form > div {
+    display: block;
+    margin: 0.5rem 2rem 0.5rem 1rem;
+    padding: 0.5rem 0;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border-bottom: 1px solid #ddd;
+    padding: .5rem;
+    text-align: left;
+}
+
+tr > th {
+    background: #000;
+    color: #fff;
+}
+
+label {
+    width: 100%;
+}
+
+input[type=text], input[type=email] {
+    margin: 0.25rem 0;
+    width: 100%;
+    padding: .5rem;
+    border-radius: 0.5rem;
+    border: 1px #999 solid;
+}
+
+button {
+    padding: 0.5rem 2rem;
+    background: #3399ff;
+    color: #fff;
+    border-radius: 0.5rem;
+    border: #003399 1px solid;
+}
+
+code {
+    background: #f6f8fa;
+    padding: .15rem .4rem;
+    border-radius: 3px;
+}
+
