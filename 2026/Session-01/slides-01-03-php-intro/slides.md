@@ -1101,20 +1101,34 @@ php -S localhost:8000 -t public
 
 ---
 
-## Resources
+# Resources
+
+The following resources will be useful for research and future learning
 
 - PHP Manual (language & functions)
+    -Manual. (2026). PHP: PHP Manual - Manual. Php.net. https://www.php.net/manual/en/index.php
+ 
 - PDO documentation
+    -  Manual. (2026). PHP: PDO - Manual. Php.net. https://www.php.net/manual/en/book.pdo.php
+
 - OWASP Cheat Sheets (XSS, SQLi, CSRF)
+    - Introduction - OWASP Cheat Sheet Series. (2026). Owasp.org. https://cheatsheetseries.owasp.org/index.html
 
+- OWASP Web Security Testing Guide
+    - WSTG - Latest | OWASP Foundation. (2026). Owasp.org. https://owasp.org/www-project-web-security-testing-guide/latest/
 
-<!-- Instructor Notes:
-- Provide links in LMS or repo README for easy access.
--->
-
+---
+level: 1
+layout: section
 ---
 
 # References
+
+---
+level: 2
+---
+
+# References 1
 
 
 - PHP Tutorial. (2025, April 10). PHP Tutorial. https://www.phptutorial.net/
@@ -1123,11 +1137,44 @@ php -S localhost:8000 -t public
 
 - berastis. (2023, June 6). An Exhaustive Guide to Understanding and Using PHP Data Types. Medium. https://medium.com/@berastis/an-exhaustive-guide-to-understanding-and-using-php-data-types-b56f6863c637
 - Scalar Type Hints. (2026). Symfonycasts.com. https://symfonycasts.com/screencast/php7/scalar-type-hints
+
+---
+level: 2
+---
+
+# References 2
+
+
 - Mastering Input Filtering in PHP: A Guide to `filter_input` Techniques. (2025, June 30). DEV Community; dev.to. https://dev.to/imoh_imohowo/mastering-input-filtering-in-php-a-guide-to-filterinput-techniques-n4o
 - GeeksforGeeks. (2019, February 14). PHP | filter_input() Function. GeeksforGeeks. https://www.geeksforgeeks.org/php/php-filter_input-function/
 - GeeksforGeeks. (2021, May 25). How to parse a JSON File in PHP? GeeksforGeeks. https://www.geeksforgeeks.org/php/how-to-parse-a-json-file-in-php/
 - Dupont, N. (2022, March 12). Read, Decode, Encode, Write JSON in PHP. Nidup.io. https://www.nidup.io/blog/manipulate-json-files-in-php/
+- Manual. (2026). PHP: PDO - Manual. Php.net. https://www.php.net/manual/en/book.pdo.php
+
+---
+level: 2
+---
+
+# References 3
+
 - Adams, A. (2023, September 4). The definitive guide to object-oriented programming in PHP. Honeybadger. https://www.honeybadger.io/blog/in-depth-guide-to-object-oriented-programming-in-php/
 - PHP Object-Oriented Programming Design Basics | Zend. (2025). Zend. https://www.zend.com/blog/object-oriented-programming-php
 - SQLite vs MySQL vs PostgreSQL (Detailed Comparison). (2025, October 20). RunCloud Blog. https://runcloud.io/blog/sqlite-vs-mysql-vs-postgresql
 - (The only proper) PDO tutorial. (2020). Treating PHP Delusions. https://phpdelusions.net/pdo
+- Manual. (2026). PHP: PHP Manual - Manual. Php.net. https://www.php.net/manual/en/index.php
+- Introduction - OWASP Cheat Sheet Series. (2026). Owasp.org. https://cheatsheetseries.owasp.org/index.html
+
+
+---
+
+# Acknowledgements
+
+- Fu, A. (2020). Slidev. Sli.dev. https://sli.dev/
+- Font Awesome. (2026). Font Awesome. Fontawesome.com; Font Awesome. https://fontawesome.com/
+
+- Slide template
+    - Adrian Gould
+
+<br>
+
+> - Some content was generated with the assistance of Microsoft CoPilot
