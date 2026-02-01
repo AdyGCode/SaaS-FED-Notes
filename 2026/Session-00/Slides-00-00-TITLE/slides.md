@@ -62,14 +62,19 @@ Hover over the bottom-left corner to see the navigation's controls panel.
 
 
 ---
+layout: section
+---
+
+# Objectives
+
+
+---
 layout: two-cols
 level: 1
 class: text-left
 ---
 
 # Objectives
-
-::left:: 
 
 ### Objective 1
 

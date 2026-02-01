@@ -13,6 +13,8 @@
     "@slidev/cli": "^52.11.3",
     "@slidev/theme-default": "latest",
     "@slidev/theme-seriph": "latest",
+    "shiki": "^3.22.0",
+    "shiki-magic-move": "^1.2.1",
     "slidev-addon-announcement": "^0.1.1",
     "slidev-theme-academic": "^2.1.0",
     "slidev-theme-meetup": "^3.13.0",

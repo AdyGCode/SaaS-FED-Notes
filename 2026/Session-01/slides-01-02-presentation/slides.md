@@ -57,27 +57,6 @@ By the end of this session, you will be able to:
 
 
 
-
----
-layout: about-me
-
-helloMsg: Your Presenter
-name: Adrian Gould
-position: left
-company: "North Metropolitan TAFE"
-jobRole: "ASL | HelpDesk Admin | ScreenCraft Admin"
-subjects: "SaaS, API Dev, IoT"
-msTeams: "Teams: adrian.gould@nmtafe.wa.edu.au"
-website: "https://northmetrotafe.wa.edu.au"
-github: "https://github.com/adygcode"
-imageSrc: /ajg-designer.png
-
-level: 2
----
-
-
-
-
 ---
 layout: default
 level: 2
@@ -96,6 +75,7 @@ Hover over the bottom-left corner to see the navigation's controls panel.
 | <kbd>left</kbd>  / <kbd>shift</kbd><kbd>space</kbd> | previous animation or slide |
 | <kbd>up</kbd>                                       | previous slide              |
 | <kbd>down</kbd>                                     | next slide                  |
+
 
 
 ---
@@ -147,7 +127,7 @@ Emphasize:
 level: 2
 ---
 
-# PHP 8+ Niceties We’ll Use
+# PHP 8+ Niceties We Will Use
 
 - Null-safe operator: `$user?->name`
 - Constructor property promotion
@@ -389,6 +369,8 @@ level: 2
 
 # Demo App: “Contacts”
 
+::left::
+
 - List contacts
 - Create new contact via form
 - Server-side validation
@@ -430,9 +412,9 @@ level: 2
 
 # Guided Practice (Pair)
 
-### Duration: 30 mins
-<br>
+:: left::
 
+### Duration: 30 mins
 
 - Pair Programming
 - Commit every 'dev' change
@@ -490,6 +472,8 @@ level: 2
 
 # Checklist for Code
 
+::left::
+
 - [ ] **Code**
   - [ ] Strict types are used 
   - [ ] Output is escaped
@@ -501,9 +485,6 @@ level: 2
   - [ ] Commits are completed regularly
 
 ::right:: 
-
-<br>
-<br>
 
 - [ ] **README.md File**
   - [ ] Explains flow (request → repo → view)
@@ -585,4 +566,3 @@ level: 2
 <br>
 
 > - Some content was generated with the assistance of Microsoft CoPilot
-

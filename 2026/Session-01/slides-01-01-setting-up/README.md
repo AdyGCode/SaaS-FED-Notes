@@ -3,9 +3,10 @@
 To start the slide show:
 ```shell
 pnpm install
-pnpm add slidev-theme-nmt
-pnpm add slidev-addon-announcement
-pnpm dev
+pnpm install slidev-theme-nmt
+pnpm install slidev-addon-announcement
+pnpm install shiki-magic-move shiki
+pnpm run dev
 ```
 
 - visit <http://localhost:3030>

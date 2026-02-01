@@ -91,8 +91,14 @@ Hover over the bottom-left corner to see the navigation's controls panel.
 
 
 ---
+layout: section
+---
+
+# Objectives
+
+---
 layout: two-cols
-level: 1
+level: 2
 class: text-left
 ---
 
@@ -130,10 +136,13 @@ github: "https://github.com/adygcode"
 imageSrc: ./public/ajg-claymation.jpg
 
 ---
+layout: section
+---
 
+# Important Procedures
 
 ---
-level: 1
+level: 2
 ---
 
 # Emergency Procedures
@@ -162,6 +171,7 @@ Lock Down
 
 ---
 layout: two-cols
+level: 2
 ---
 
 ## Evacuation
@@ -195,8 +205,15 @@ layout: two-cols
 - Out of sight
 
 ---
+layout: section
+---
+
+# Expectations and Guidelines
+
+---
 layout: two-cols
 class: text-left
+level: 2
 ---
 
 # Expectations and Guidelines
@@ -259,8 +276,16 @@ Support, **if** provided will be:
   - By appointment **only**, and
   - Outside of class time
 
+
+--- 
+layout: section
+---
+
+# LAP & Assessments
+
 ---
 layout: default
+level: 2
 ---
 
 # Learning and Assessment Plan
@@ -270,6 +295,7 @@ layout: default
 
 ---
 layout: default
+level: 2
 ---
 
 # Assessments

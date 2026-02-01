@@ -62,7 +62,7 @@ Hover over the bottom-left corner to see the navigation's controls panel.
 
 
 ---
-layout: twocols
+layout: two-cols
 level: 1
 class: text-left
 ---
@@ -125,7 +125,7 @@ class: text-left
   - etc
 
 ---
-layout: twocols
+layout: two-cols
 class: text-left
 ---
 

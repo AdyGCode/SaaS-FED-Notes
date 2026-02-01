@@ -28,8 +28,8 @@ duration: 35min
 
 
 <!--
-We have a set of requiremens that we use for our development worki, this 
-presentation takes you thorugh setting up in our TAFE labs, and a good 
+We have a set of requirements that we use for our development work, this 
+presentation takes you through setting up in our TAFE labs, and a good 
 guide for Windows 11 users at home.
 -->
 
