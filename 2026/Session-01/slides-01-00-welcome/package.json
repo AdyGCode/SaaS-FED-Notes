@@ -10,12 +10,12 @@
   "dependencies": {
     "@iconify-json/fa7-brands": "^1.2.1",
     "@iconify-json/fa7-solid": "^1.2.3",
-    "@slidev/cli": "^52.11.3",
+    "@slidev/cli": "^52.11.5",
     "@slidev/theme-default": "latest",
     "@slidev/theme-seriph": "latest",
     "shiki": "^3.22.0",
     "shiki-magic-move": "^1.2.1",
-    "slidev-addon-announcement": "^0.1.1",
+    "slidev-addon-announcement": "^0.1.2",
     "slidev-theme-academic": "^2.1.0",
     "slidev-theme-meetup": "^3.13.0",
     "slidev-theme-nmt": "^0.6.4",
@@ -38,6 +38,6 @@
     }
   },
   "devDependencies": {
-    "playwright-chromium": "^1.58.0"
+    "playwright-chromium": "^1.58.1"
   }
 }

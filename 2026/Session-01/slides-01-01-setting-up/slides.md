@@ -55,7 +55,7 @@ Hover over the bottom-left corner to see the navigation's controls panel.
 
 
 ---
-layout: twocols
+layout: two-cols
 level: 1
 class: text-left
 ---

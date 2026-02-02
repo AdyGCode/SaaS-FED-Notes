@@ -1,22 +1,13 @@
 ---
-# try also 'default' to start simple
 theme: nmt
-# random image from a curated Unsplash collection by Anthony
-# like them? see https://unsplash.com/collections/94734566/slidev
 background: https://cover.sli.dev
-# some information about your slides (markdown enabled)
 title: Session 01 - PHP Fundamentals & Intro MVC
-# apply UnoCSS classes to the current slide
 class: text-left
-# https://sli.dev/features/drawing
 drawings:
   persist: false
-# slide transition: https://sli.dev/guide/animations.html#slide-transitions
 transition: fade
-# enable MDC Syntax: https://sli.dev/features/mdc
 mdc: true
-# duration of the presentation
-duration: 35min
+duration: 60min
 ---
 
 # PHP & MVC Intro
@@ -165,7 +156,7 @@ cd session-01-activity
 
 
 ---
-layout: twocols
+layout: two-cols
 class: text-left
 level: 2
 ---
