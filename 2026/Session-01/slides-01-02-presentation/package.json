@@ -13,10 +13,10 @@
     "@slidev/cli": "^52.11.5",
     "@slidev/theme-default": "latest",
     "@slidev/theme-seriph": "latest",
-    "slidev-addon-announcement": "^0.1.2",
+    "slidev-addon-announcement": "^0.1.5",
     "slidev-theme-academic": "^2.1.0",
-    "slidev-theme-meetup": "^3.13.0",
-    "slidev-theme-nmt": "^0.6.4",
+    "slidev-theme-meetup": "^3.13.2",
+    "slidev-theme-nmt": "^0.6.6",
     "vue": "^3.5.27"
   },
   "slidev": {
@@ -36,6 +36,6 @@
     }
   },
   "devDependencies": {
-    "playwright-chromium": "^1.58.1"
+    "playwright-chromium": "^1.58.2"
   }
 }

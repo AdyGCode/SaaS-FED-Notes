@@ -4,11 +4,10 @@ title: Session 01 - PHP Fundamentals & Intro MVC
 class: text-left
 drawings:
   persist: false
-transition: fade
+transition: slide-left
 mdc: true
 duration: 35min
-addons:
-  - announcement
+
 ---
 
 # PHP & MVC Intro
@@ -144,8 +143,131 @@ We target PHP 8.4+
 layout: section
 ---
 
-# Request - Response Flow
+# HTTP
 
+
+### HyperText Transfer Protocol
+### Verbs
+### Request - Response
+
+---
+level: 2
+layout: grid
+---
+
+# HTTP Protocol
+
+::tl::
+
+## HTTP/1.0 
+  - Simple, one‑request‑per‑connection. 
+  - No keep‑alive by default. 
+  - Slow.
+
+::tr::
+
+## HTTP/1.1 
+  - Persistent connections + pipelining. 
+  - Reduced overhead. 
+  - Still head‑of‑line blocking.
+
+::bl::
+
+## HTTP/2
+  - Binary, multiplexed streams over one connection. 
+  - Header compression. 
+  - Much faster.
+
+::br::
+
+## HTTP/3
+  - Uses QUIC (over UDP). 
+  - Eliminates head‑of‑line blocking at transport layer. 
+  - Faster, more reliable on bad networks.
+
+---
+level: 2
+layout: two-cols
+---
+
+# HTTP Verbs
+
+Common Request Verbs
+
+::left::
+
+### GET
+
+- Retrieves a resource.
+- Read‑only, no changes made.
+
+<br>
+
+### POST
+
+- Sends data to the server to create something new.
+- Often used in forms.
+
+::right::
+
+### PUT
+
+- Replaces an entire existing resource with new data.
+
+<br>
+
+### PATCH
+
+- Partially updates an existing resource.
+
+---
+level: 2
+layout: two-cols
+---
+
+# HTTP Verbs
+
+Common Request Verbs (Continued)
+
+::left::
+
+### DELETE
+
+- Removes a resource from the server.
+
+<br>
+
+### HEAD
+
+- Same as GET but only headers, no body.
+- Used to check resource validity or size.
+
+<br>
+
+### CONNECT
+
+- Sets up a tunnel (e.g., for HTTPS via proxies).
+
+::right::
+
+### OPTIONS
+
+- Asks the server what methods/verbs are supported.
+- Common in CORS preflight requests.
+
+<br>
+
+### TRACE
+
+- Debugging; shows the path the request takes.
+- Rarely used today.
+
+
+---
+layout: section
+---
+
+# HTTP Requests
 
 ---
 level: 2
@@ -174,6 +296,255 @@ Map:
 
 Keep a “mental model” for request lifecycles.
 -->
+
+
+---
+layout: section
+---
+
+# PHP, Databases & Security Essentials
+
+
+---
+level: 2
+---
+
+# Data Access with PDO
+
+- DSN (Data Source Name)
+- Exceptions on (`errmode`)
+- Prepared statements & bound params
+- Transactions (for multistep writes)
+
+<!--
+DSN
+- 
+Security win:
+- prepared statements prevent injection. 
+
+Prefer exceptions
+- `errmode` is set
+- no silent fails.
+-->
+
+
+---
+level: 2
+---
+
+# PDO Prepared Statements
+
+Less readable:
+
+```php [PHP]
+$query = 'INSERT INTO contacts(name, email) VALUES(:name, :email)';
+$stmt  = $pdo->prepare($query);
+$stmt->execute([':name' => $name, ':email' => $email]);
+```
+
+---
+level: 2
+---
+
+# PDO Prepared Statements II
+
+Much more readable is to show the "binding":
+
+````md magic-move
+
+```php [PHP]
+$query = 'INSERT INTO contacts(name, email) VALUES(:name, :email)';
+$stmt  = $pdo->prepare($query);
+$stmt->execute([':name' => $name, ':email' => $email]);
+```
+
+```php [PHP]
+$query = 'INSERT INTO contacts(name, email) VALUES(:name,:email)';
+$stmt  = $pdo->prepare($query);
+
+$stmt->execute();
+```
+
+
+```php [PHP] {1,2,8|4-6|all}
+$query = 'INSERT INTO contacts(name, email) VALUES(:name,:email)';
+$stmt = $pdo->prepare($query);
+
+$stmt->bindValue(':name', $name, PDO::PARAM_STR);
+$stmt->bindValue(':email', $email, PDO::PARAM_STR);
+$stmt->bindValue(':phone', $phone, PDO::PARAM_STR);
+
+$stmt->execute();
+```
+
+
+
+````
+
+
+
+---
+level: 2
+---
+
+# Security & Validation Essentials
+
+- Validate & sanitize input
+- Escape output (`htmlspecialchars`)
+- CSRF token for forms
+- Principle of least privilege DB user
+
+<!--
+Even in a demo, model good habits.
+-->
+
+
+---
+layout: section
+---
+
+# Practical: A small contacts app
+
+---
+layout: two-cols
+level: 2
+---
+
+# Demo App: “Contacts”
+
+::left::
+
+## Requirements Brief
+
+- List contacts
+- Create new contact via form
+- Server-side validation
+- Persist with PDO
+
+::right::
+
+## Steps
+
+1. Create DB and `contacts` table (SQLite)
+2. Wire-up PDO & Repository
+3. Build GET `/contacts` to list records
+4. Build POST `/contacts` to insert record with validation
+5. Show request → response path and where “MVC-ish” pieces live
+
+<!--
+Show end-to-end quickly before students start
+
+Use SQLite to reduce setup friction.
+-->
+
+---
+level: 2
+layout: two-cols
+---
+
+# Contacts Application
+
+::left::
+
+### List/Home page
+
+![Contact List Page](/public/contact-list-list.png)
+
+::right::
+
+### Create New Contact page
+
+![Contact List Create Page](/public/contact-list-create.png)
+
+---
+layout: two-cols
+level: 2
+---
+
+# Guided Practice (Pair)
+
+:: left::
+
+### Duration: 30 mins
+
+- Pair Programming
+- Commit every 'dev' change
+  - if complete "feat(feature): Added feature title"
+  - e.g. `git commmit -m "feat(contact): Add contact form"` 
+- **Dev**: 
+  - **AT Keyboard** / Writes the code
+- **Lead**: 
+  - **NO Keyboard** / Bug hunting, verify code 
+
+::right::
+
+## We will:
+
+- Build `contacts` list and create form
+- Implement PDO repository
+- Validate required fields
+- Display errors inline on forms
+
+<!--
+- Paring:
+  - Get students to stand
+  - Odd IDs to left, Even to right
+  - If uneven, move some to other side
+  - 1:1 left:right
+- Circulate 
+- Nudge toward incremental commits
+-->
+
+---
+level: 2
+---
+
+# Independent Extension
+
+## Duration: 40 mins
+
+- Working in same pairs
+- Add two extra fields
+  - Each member of pair completes ONE extra field
+  - Add server-side validation for new fields
+- Add “created_at” timestamp
+- Write a README explaining the flow
+
+<!--
+Encourage peer review using a checklist
+- Checklist
+-->
+
+
+---
+layout: two-cols
+level: 2
+---
+
+# Checklist for Code
+
+::left::
+
+- [ ] **Code**
+  - [ ] Strict types are used 
+  - [ ] Output is escaped
+  - [ ] All queries use prepared statements
+  - [ ] Clear validation errors shown to user
+  - [ ] Code is clearly commented
+
+- [ ] **Version control**
+  - [ ] Commits are completed regularly
+
+::right:: 
+
+- [ ] **README.md File**
+  - [ ] Explains flow (request → repo → view)
+  - [ ] Developers are clearly indentified
+ 
+- [ ] **Finishing**
+  - [ ] Code compressed to Zip/7-Zip
+  - [ ] Copy taken by BOTH developers
+
 
 
 
@@ -285,216 +656,6 @@ sequenceDiagram
     
 ```
 
----
-layout: section
----
-
-# PHP, Databases & Security Essentials
-
-
----
-level: 2
----
-
-# Data Access with PDO
-
-- DSN (Data Source Name)
-- Exceptions on (`errmode`)
-- Prepared statements & bound params
-- Transactions (for multistep writes)
-
-<!--
-DSN
-- 
-Security win:
-- prepared statements prevent injection. 
-
-Prefer exceptions
-- `errmode` is set
-- no silent fails.
--->
-
-
----
-level: 2
----
-
-# PDO Prepared Statements
-
-Less readable:
-
-```php [PHP]
-$query = 'INSERT INTO contacts(name,email) VALUES(:name,:email)';
-$stmt  = $pdo->prepare($query);
-$stmt->execute([':name' => $name, ':email' => $email]);
-```
-
-Much more readable is to show the "binding":
-
-```php [PHP]
-$query = 'INSERT INTO contacts(name,email) VALUES(:name,:email)';
-$stmt  = $pdo->prepare($query);
-TODO: ** ADD teh Binding code here
-$stmt->execute([':name' => $name, ':email' => $email]);
-```
-
-
----
-level: 2
----
-
-# Security & Validation Essentials
-
-- Validate & sanitize input
-- Escape output (`htmlspecialchars`)
-- CSRF token for forms
-- Principle of least privilege DB user
-
-<!--
-Even in a demo, model good habits.
--->
-
-
-
----
-layout: section
----
-
-# Practical: A small contacts app
-
----
-layout: two-cols
-level: 2
----
-
-# Demo App: “Contacts”
-
-::left::
-
-- List contacts
-- Create new contact via form
-- Server-side validation
-- Persist with PDO
-
-::right::
-
-# Steps
-
-1. Create DB and `contacts` table (SQLite)
-2. Wire PDO & repository
-3. Build GET `/contacts` to list records
-4. Build POST `/contacts` to insert record with validation
-5. Show request → response path and where “MVC-ish” pieces live
-
-<!--
-Show end-to-end quickly before students start
-
-Use SQLite to reduce setup friction.
--->
-
----
-level: 2
----
-
-# TODO: Contacts Application Pages
-
-## Home Page
-
-
-
-## Create Page
-
-
----
-layout: two-cols
-level: 2
----
-
-# Guided Practice (Pair)
-
-:: left::
-
-### Duration: 30 mins
-
-- Pair Programming
-- Commit every 'dev' change
-  - if complete "feat(feature): Added feature title"
-  - e.g. `git commmit -m "feat(contact): Add contact form"` 
-- **Dev**: 
-  - **AT Keyboard** / Writes the code
-- **Lead**: 
-  - **NO Keyboard** / Bug hunting, verify code 
-
-::right::
-
-## We will:
-
-- Build `contacts` list and create form
-- Implement PDO repository
-- Validate required fields
-- Display errors inline on forms
-
-<!--
-- Paring:
-  - Get students to stand
-  - Odd IDs to left, Even to right
-  - If uneven, move some to other side
-  - 1:1 left:right
-- Circulate 
-- Nudge toward incremental commits
--->
-
----
-level: 2
----
-
-# Independent Extension
-
-## Duration: 40 mins
-
-- Working in same pairs
-- Add two extra fields
-  - Each member of pair completes ONE extra field
-  - Add server-side validation for new fields
-- Add “created_at” timestamp
-- Write a README explaining the flow
-
-<!--
-Encourage peer review using a checklist
-- Checklist
--->
-
-
----
-layout: two-cols
-level: 2
----
-
-# Checklist for Code
-
-::left::
-
-- [ ] **Code**
-  - [ ] Strict types are used 
-  - [ ] Output is escaped
-  - [ ] All queries use prepared statements
-  - [ ] Clear validation errors shown to user
-  - [ ] Code is clearly commented
-
-- [ ] **Version control**
-  - [ ] Commits are completed regularly
-
-::right:: 
-
-- [ ] **README.md File**
-  - [ ] Explains flow (request → repo → view)
-  - [ ] Developers are clearly indentified
- 
-- [ ] **Finishing**
-  - [ ] Code compressed to Zip/7-Zip
-  - [ ] Copy taken by BOTH developers
-
-
 
 
 ---
@@ -540,6 +701,8 @@ The end... for now
 - Fu, A. (2020). Slidev. Sli.dev. https://sli.dev/
 - Font Awesome. (2026). Font Awesome. Fontawesome.com; Font Awesome. https://fontawesome.com/
 - Mermaid Chart. (2026). Mermaid.ai. https://mermaid.ai/
+- Fielding, R., Gettys, J., Mogul, J., Frystyk, H., Masinter, L., Leach, P., & Berners-Lee, T. (1999). Hypertext Transfer Protocol—HTTP/1.1 (RFC 2616). Internet Engineering Task Force. https://www.rfc-editor.org/rfc/rfc2616 
+- IETF HTTP Working Group. (2022). HTTP documentation: Core specifications (RFCs 9110, 9111, 9112, 9113, 9114). https://httpwg.org/specs/
 
 <br>
 

@@ -16,8 +16,10 @@ declare(strict_types=1);
         <th>Created</th>
     </tr>
     </thead>
+
     <tbody>
     <?php foreach ($contacts as $c): ?>
+
         <tr>
             <td><?= (int) $c['id'] ?></td>
             <td><?= htmlspecialchars($c['name']) ?></td>
@@ -29,6 +31,15 @@ declare(strict_types=1);
                 </time>
             </td>
         </tr>
+
     <?php endforeach; ?>
     </tbody>
+
+    <tfoot>
+    <tr>
+        <td colspan="5">
+            <a href="#top">Go to Top</a>
+        </td>
+    </tr>
+    </tfoot>
 </table>

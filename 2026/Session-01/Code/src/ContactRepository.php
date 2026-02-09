@@ -1,13 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace Code\src;
+namespace App;
 
 use PDO;
 
 final class ContactRepository
 {
-    public function __construct(private PDO $pdo) {}
+    public function __construct(private PDO $pdo)
+    {
+    }
 
     public function all(): array
     {
@@ -17,13 +19,22 @@ final class ContactRepository
 
     public function insert(string $name, string $email, ?string $phone): int
     {
-        $sql  = "INSERT INTO contacts (name, email, phone) VALUES (:name, :email, :phone)";
+        $sql = "INSERT INTO contacts (name, email, phone) VALUES (:name, :email, :phone)";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([
-            ':name'  => $name,
-            ':email' => $email,
-            ':phone' => $phone,
-        ]);
+
+        // Less readable form, and no definition of field/column type
+        //        $stmt->execute([
+        //            ':name'  => $name,
+        //            ':email' => $email,
+        //            ':phone' => $phone,
+        //        ]);
+
+        $stmt->bindValue(':name', $name, PDO::PARAM_STR);
+        $stmt->bindValue(':email', $email, PDO::PARAM_STR);
+        $stmt->bindValue(':phone', $phone, PDO::PARAM_STR);
+
+        $stmt->execute();
+
         return (int) $this->pdo->lastInsertId();
     }
 }

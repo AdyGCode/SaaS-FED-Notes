@@ -2,11 +2,8 @@
 declare(strict_types=1);
 
 /**
- * @var string $title
- */
-
-/**
- * @var string $body
+ * @var string $title contains the page title (in browser tab)
+ * @var string $body contains the content for the body of the page
  */
 ?><!doctype html>
 <html lang="en">
@@ -19,7 +16,7 @@ declare(strict_types=1);
     <link rel="stylesheet" href="/site.css">
 </head>
 <body>
-<header>
+<header id="Top">
     <h1>Contacts</h1>
     <nav>
         <a href="/?action=list">List</a> &vert; <a href="/?action=create">Create</a>

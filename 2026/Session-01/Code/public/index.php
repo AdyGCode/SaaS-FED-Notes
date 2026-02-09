@@ -1,9 +1,24 @@
 <?php
 declare(strict_types=1);
 
-use Code\src\ContactRepository;
-use Code\src\Database;
+/**
+ *  Constants:
+ *  - DB_FILENAME        For SQLite ONLY
+ *  - DB_HOST            For MariaDB/MySQL
+ *  - DB_NAME            For MariaDB/MySQL
+ *  - DB_USER            For MariaDB/MySQL
+ *  - DB_PASSWORD        For MariaDB/MySQL
+ */
+const DB_FILENAME='contact_list_db.sqlite';
+const DB_HOST='localhost';
+const DB_NAME='contact_list_database';
+const DB_USER='contact_list_user';
+const DB_PASSWORD='some-secret-password';
 
+/**
+ * Register classes for automatic loading
+ * within the `App` namespace
+ */
 spl_autoload_register(function ($class) {
     $prefix = 'App\\';
     $baseDir = dirname(__DIR__).'/src/';
@@ -16,20 +31,27 @@ spl_autoload_register(function ($class) {
     }
 });
 
+/**
+ * Start the session for CSRF et al
+ */
 session_start();
 
-// Configure PDO (SQLite for class)
-$dbFile = dirname(__DIR__).'/database/contact_list_db.sqlite';
-if (!is_file($dbFile)) {
-    touch($dbFile);
-    $pdo = Database::sqlite($dbFile);
-    $schema = file_get_contents(dirname(__DIR__).'/database/migrations/001_create_contacts.sql');
-    $pdo->exec($schema);
-} else {
-    $pdo = Database::sqlite($dbFile);
-}
+
+use App\ContactRepository;
+use App\Database;
+
+/**
+ * Create the Database Connection
+ *
+ * If SQLite then we use the DB_FILENAME constant.
+ * The db is automatically created if it doesn't exist, and the schema is applied.
+ *
+ * If MySQL/MariaDB then we expect a database and user to have been created beforehand.
+ * Databse connection details are then added to replace the constants at the top of this file.
+ */
+$pdo = Database::sqlite(DB_FILENAME);
 // For MariaDB instead, comment out above and use:
-// $pdo = Database::mysql('127.0.0.1', 'cad', 'cad_user', 'secret');
+// $pdo = Database::mysql(DB_HOST, DB_NAME, DB_USER, DB_PASSWORD);
 
 $repo = new ContactRepository($pdo);
 
@@ -49,12 +71,14 @@ if ($action === 'list' && $_SERVER['REQUEST_METHOD'] === 'GET') {
     ob_start();
     require dirname(__DIR__).'/views/contacts.list.php';
     $body = ob_get_clean();
+
 } elseif ($action === 'create' && $_SERVER['REQUEST_METHOD'] === 'GET') {
     $errors = [];
     $old = [];
     ob_start();
     require dirname(__DIR__).'/views/contacts.form.php';
     $body = ob_get_clean();
+
 } elseif ($action === 'store' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     // Basic CSRF check
     if (!hash_equals($csrf, $_POST['_csrf'] ?? '')) {
@@ -80,11 +104,13 @@ if ($action === 'list' && $_SERVER['REQUEST_METHOD'] === 'GET') {
         ob_start();
         require dirname(__DIR__).'/views/contacts.form.php';
         $body = ob_get_clean();
+
     } else {
-        $repo->insert($name, $email, $phone !== '' ? $phone : None);
+        $repo->insert($name, $email, $phone !== '' ? $phone : null);
         header('Location: /?action=list');
         exit;
     }
+
 } else {
     http_response_code(404);
     $body = '<p>Not found</p>';

@@ -20,9 +20,6 @@ importers:
       '@slidev/theme-default':
         specifier: latest
         version: 0.25.0
-      '@slidev/theme-seriph':
-        specifier: latest
-        version: 0.25.0
       shiki:
         specifier: ^3.22.0
         version: 3.22.0

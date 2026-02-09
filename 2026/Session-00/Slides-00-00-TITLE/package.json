@@ -8,11 +8,12 @@
     "export": "slidev export"
   },
   "dependencies": {
-    "@iconify-json/fa7-brands": "^1.2.1",
-    "@iconify-json/fa7-solid": "^1.2.3",
-    "@slidev/cli": "^52.11.3",
+    "@slidev/cli": "^52.11.5",
     "@slidev/theme-default": "latest",
-    "@slidev/theme-seriph": "latest",
+    "@slidev/types": "latest",
+    "slidev-addon-announcement": "latest",
+    "slidev-theme-academic": "^2.1.0",
+    "slidev-theme-nmt": "^0.6.6",
     "shiki": "^3.22.0",
     "shiki-magic-move": "^1.2.1",
     "slidev-addon-announcement": "^0.1.1",
@@ -20,6 +21,9 @@
     "slidev-theme-meetup": "^3.13.0",
     "slidev-theme-nmt": "^0.6.4",
     "vue": "^3.5.27"
+  },
+  "devDependencies": {
+    "playwright-chromium": "^1.58.1"
   },
   "slidev": {
     "colorSchema": "dark",
@@ -36,8 +40,5 @@
       "transition": "fade",
       "aspectRatio": "16/10"
     }
-  },
-  "devDependencies": {
-    "playwright-chromium": "^1.58.0"
   }
 }
