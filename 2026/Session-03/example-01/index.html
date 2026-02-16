@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>example-01</title>
+    <link rel="preconnect" href="https://api.fonts.coollabs.io" crossorigin/>
+    <link href="https://api.fonts.coollabs.io/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet"/>
+
+    <link rel="stylesheet" href="src/style.css">
+</head>
+<body class="bg-gray-50">
+
+<span id="MainContent"></span>
+
+<header class="bg-black px-8 py-2 mb-0 sticky top-0">
+    <div class="mx-auto max-w-7xl flex items-center gap-8">
+        <a class=" text-teal-800 text-center items-center flex h-14 w-14" href="#MainContent">
+            <p class="text-3xl bg-teal-300 rounded-full h-14 w-14  items-center p-1 py-2">
+                AG
+                <span class="sr-only">Home</span>
+            </p>
+        </a>
+
+        <div class="flex flex-1 items-center justify-end md:justify-between">
+            <nav aria-label="Global" class="hidden md:block">
+                <ul class="flex items-center gap-6 text-sm">
+                    <li>
+                        <a class="text-teal-400 transition hover:text-teal-300" href="#About">
+                            About
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="text-teal-400 transition hover:text-teal-300" href="#Skills">
+                            Skills
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="text-teal-400 transition hover:text-teal-300" href="#Projects">
+                            Projects
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="text-teal-400 transition hover:text-teal-300" href="#Contact">
+                            Contact
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+
+            <div class="flex items-center gap-4">
+                <div class="sm:flex sm:gap-4">
+                    <a class="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"
+                       href="#">
+                        Login
+                    </a>
+
+                    <a class="hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75 sm:block"
+                       href="#">
+                        Register
+                    </a>
+                </div>
+
+                <button class="block rounded-sm bg-gray-100 p-2.5 text-gray-600 transition hover:text-gray-600/75 md:hidden">
+                    <span class="sr-only">Toggle menu</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="size-5" fill="none" viewBox="0 0 24 24"
+                         stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-12 pb-16 bg-white min-h-screen space-y-16">
+    <article class="border border-gray-200 rounded-xl shadow overflow-hidden">
+        <header class="bg-gray-700 text-gray-100 w-full">
+            <h1 class="text-3xl text-gray-100 p-4">
+                G'Day. Croeso. Bonjour. Guten Tag.
+            </h1>
+        </header>
+        <section class="space-y-4 p-4">
+            <p>
+                Welcome to Adrian's Profile.
+            </p>
+        </section>
+<span id="About"></span>
+    </article>
+
+
+    <article class="border border-gray-200 rounded-xl shadow overflow-hidden">
+        <header class="bg-gray-700 text-gray-100 w-full">
+            <h1 class="text-3xl text-gray-100 p-4">
+                About
+            </h1>
+        </header>
+        <section class="space-y-4 p-4 flex flex-wrap ">
+            <p class="w-[72ch]">
+                Lecturer in IT (ASL 1) at North Metropolitan TAFE, with over 35 years of experience in
+                Vocational Education and Training.
+            </p>
+            <p class="w-[72ch]">
+                Adrian has over 45 years of coding experience. In this time, Adrian has encountered over 20 different
+                languages including Basic, Pascal, C, SQL, PHP, JavaScript, and others.
+            </p>
+            <p class="w-[72ch]">
+                Adrian has a variety of interests from Photography to Lego to (Field) Hockey, where he has competed
+                at local,
+                state, national and international level.
+            </p>
+        </section>
+<span id="Skills"></span>
+    </article>
+
+
+    <article class="border border-gray-200 rounded-xl shadow overflow-hidden">
+        <header class="bg-gray-700 text-gray-100 w-full">
+            <h1 class="text-3xl text-gray-100 p-4">
+                Skills
+            </h1>
+        </header>
+
+        <dl class="grid grid-cols-4 gap-8 p-4">
+            <dt>HTML</dt>
+            <dd role="progressbar" aria-valuenow="excellent" aria-valuemin="nil" aria-valuemax="guru">
+                <div class="mt-2 h-4 w-full rounded-full bg-gray-200">
+                    <div class="h-full rounded-full bg-linear-to-r from-gray-800 to-gray-500 "
+                         style="width: 90%"></div>
+                </div>
+            </dd>
+
+            <dt>CSS</dt>
+            <dd role="progressbar" aria-valuenow="good" aria-valuemin="nil" aria-valuemax="guru">
+                <div class="mt-2 h-4 w-full rounded-full bg-gray-200">
+                    <div class="h-full rounded-full bg-linear-to-r from-gray-800 to-gray-500 " style="width: 60%"></div>
+                </div>
+            </dd>
+
+            <dt>Python</dt>
+            <dd role="progressbar" aria-valuenow="good" aria-valuemin="nil" aria-valuemax="guru">
+                <div class="mt-2 h-4 w-full rounded-full bg-gray-200">
+                    <div class="h-full rounded-full bg-linear-to-r from-gray-800 to-gray-500 " style="width: 50%"></div>
+                </div>
+            </dd>
+
+            <dt>PHP</dt>
+            <dd role="progressbar" aria-valuenow="good" aria-valuemin="nil" aria-valuemax="guru">
+                <div class="mt-2 h-4 w-full rounded-full bg-gray-200">
+                    <div class="h-full rounded-full bg-linear-to-r from-gray-800 to-gray-500 " style="width: 70%"></div>
+                </div>
+            </dd>
+
+            <dt>SQL</dt>
+            <dd role="progressbar" aria-valuenow="good" aria-valuemin="nil" aria-valuemax="guru">
+                <div class="mt-2 h-4 w-full rounded-full bg-gray-200">
+                    <div class="h-full rounded-full bg-linear-to-r from-gray-800 to-gray-500 " style="width: 60%"></div>
+                </div>
+            </dd>
+
+            <dt>Figma</dt>
+            <dd role="progressbar" aria-valuenow="good" aria-valuemin="nil" aria-valuemax="guru">
+                <div class="mt-2 h-4 w-full rounded-full bg-gray-200">
+                    <div class="h-full rounded-full bg-linear-to-r from-gray-800 to-gray-500 " style="width: 40%"></div>
+                </div>
+            </dd>
+
+            <dt>Laravel</dt>
+            <dd role="progressbar" aria-valuenow="good" aria-valuemin="nil" aria-valuemax="guru">
+                <div class="mt-2 h-4 w-full rounded-full bg-gray-200">
+                    <div class="h-full rounded-full bg-linear-to-r from-gray-800 to-gray-500 " style="width: 70%"></div>
+                </div>
+            </dd>
+
+            <dt>Laravel</dt>
+            <dd role="progressbar" aria-valuenow="good" aria-valuemin="nil" aria-valuemax="guru">
+                <div class="mt-2 h-4 w-full rounded-full bg-gray-200 overflow-hidden">
+                    <div class="h-full rounded-full bg-linear-to-r from-gray-800 to-gray-500 " style="width: 75%"></div>
+                </div>
+            </dd>
+
+            <dt>C#</dt>
+            <dd role="progressbar" aria-valuenow="ok" aria-valuemin="nil" aria-valuemax="guru">
+                <div class="mt-2 h-4 w-full rounded-full bg-gray-200">
+                    <div class="h-full rounded-full bg-linear-to-r from-gray-800 to-gray-500 " style="width: 15%"></div>
+                </div>
+            </dd>
+
+            <dt>Rust</dt>
+            <dd role="progressbar" aria-valuenow="nil" aria-valuemin="nil" aria-valuemax="guru">
+                <div class="mt-2 h-4 w-full rounded-full bg-gray-200">
+                    <div class="h-full rounded-full bg-linear-to-r from-gray-800 to-gray-500 " style="width: 00%"></div>
+                </div>
+            </dd>
+        </dl>
+<span id="Projects"></span>
+    </article>
+
+
+    <article class="border border-gray-200 rounded-xl shadow overflow-hidden">
+        <header class="bg-gray-700 text-gray-100 w-full">
+            <h1 class="text-3xl text-gray-100 p-4">
+                Projects
+            </h1>
+        </header>
+        <section class="gap-4 p-4 grid grid-cols-3">
+
+            <section class="group">
+                <img alt="Photo: Lego minifig heads"
+                     aria-description="Photo of a pile of Lego minifig heads by Conor Hennessy, https://unsplash.com/photos/yellow-and-blue-plastic-toy-1c4O_dHXNL8"
+                     src="https://images.unsplash.com/photo-1589042646837-89ec9183ab04?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                     class="h-56 w-full rounded-xl object-cover shadow transition group-hover:grayscale-80">
+
+                <div class="p-4">
+                    <a href="#">
+                        <h3 class="text-lg font-medium text-gray-900">Just Jesting</h3>
+                    </a>
+
+                    <p class="mt-2 line-clamp-3 text-sm/relaxed text-gray-500">
+                        A demonstration application using Laravel, TailwindCSS, Livewire, Sanctum and more.
+                    </p>
+                </div>
+            </section>
+            <section class="group">
+                <img alt="Photo: Starfield in motion"
+                     aria-description="Long exposure photo of a starfield by Eléonore Bommart, https://unsplash.com/photos/timelapse-photo-of-starry-sky-IJ7HG4woGlk"
+                     src="https://images.unsplash.com/photo-1500322095253-b2c00f31fa54?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                     class="h-56 w-full rounded-xl object-cover shadow transition group-hover:grayscale-80">
+
+                <div class="p-4">
+                    <a href="#">
+                        <h3 class="text-lg font-medium text-gray-900">Motion Sickness</h3>
+                    </a>
+
+                    <p class="mt-2 line-clamp-3 text-sm/relaxed text-gray-500">
+                        A demonstration application using Laravel, TailwindCSS, Livewire, Sanctum and more.
+                    </p>
+                </div>
+            </section>
+            <section class="group">
+                <img alt="Photo: Image of Batman Rubber Duck"
+                     aria-description="Photo of Batman Rubber Duck by Brett Jordan, https://unsplash.com/photos/dc-batman-duck-toy-wF7GqWA3Tag"
+                     src="https://images.unsplash.com/photo-1559715541-5daf8a0296d0?q=80&w=986&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                     class="h-56 w-full rounded-xl object-cover shadow transition group-hover:grayscale-80">
+
+                <div class="p-4">
+                    <a href="#">
+                        <h3 class="text-lg font-medium text-gray-900">Rubber Duck Debugging</h3>
+                    </a>
+
+                    <p class="mt-2 line-clamp-3 text-sm/relaxed text-gray-500">
+                        A demonstration application using Laravel, TailwindCSS, Livewire, Sanctum and more.
+                    </p>
+                </div>
+            </section>
+
+        </section>
+<span id="Contact"></span>
+    </article>
+
+    <article class="border border-gray-200 rounded-xl shadow overflow-hidden">
+        <header class="bg-gray-700 text-gray-100 w-full">
+            <h1 class="text-2xl font-bold text-gray-200 sm:text-3xl p-4">
+                Get in touch
+            </h1>
+        </header>
+        <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
+                <div class="md:py-4 space-y-4 text-pretty text-gray-600">
+
+                    <p class="mt-4">
+                        Feel free to contact us about how we are able to assist you.
+                    </p>
+                    <p>
+                        The best way is to complete the contact form as we are often unable to answer phone calls
+                        immediately.
+                    </p>
+
+                    <dl class="mt-6 space-y-3">
+                        <div>
+                            <dt class="sr-only">Phone number</dt>
+
+                            <dd class="grid grid-cols-[24px_1fr] items-center gap-2 text-gray-600">
+                                <i class="fa-solid fa-phone"></i>
+
+                                <span class="font-medium">+61 (0) 0123-4567</span>
+                            </dd>
+                        </div>
+
+                        <div>
+                            <dt class="sr-only">Email</dt>
+
+                            <dd class="grid grid-cols-[24px_1fr] items-center gap-2 text-gray-600">
+                                <i class="fa-solid fa-envelope"></i>
+
+                                <span class="font-medium">info@example.com</span>
+                            </dd>
+                        </div>
+
+                        <div>
+                            <dt class="sr-only">Location</dt>
+
+                            <dd class="grid grid-cols-[24px_1fr] items-center gap-2 text-gray-600">
+                                <i class="fa-solid fa-house"></i>
+
+                                <span class="font-medium">999 Short St, Woopwoop, WA, Australia</span>
+                            </dd>
+                        </div>
+                    </dl>
+                </div>
+
+                <form action="#" class="space-y-4 rounded-lg border border border-gray-300 bg-gray-100 p-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-900" for="name">Name</label>
+
+                        <input
+                                class="mt-1 p-2 w-full
+                                       rounded-lg border border-gray-300 focus:border-teal-700 focus:outline-none
+                                       focus:text-teal-800"
+                                id="name" type="text" placeholder="Your name">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-900" for="email">Email</label>
+
+                        <input
+                                class="mt-1 p-2 w-full
+                                       rounded-lg border border-gray-300 focus:border-teal-700 focus:outline-none\
+                                       focus:text-teal-800"
+                                id="email" type="email" placeholder="Your email">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-900" for="message">Message</label>
+
+                        <textarea
+                                class="mt-1 p-2 w-full
+                                       resize-none
+                                       rounded-lg border border-gray-300 focus:border-teal-700 focus:outline-none
+                                       focus:text-teal-800"
+                                id="message" rows="4" placeholder="Your message"></textarea>
+                    </div>
+
+                    <button
+                            class="block w-full rounded-lg
+                                   border border-teal-600 focus:border-teal-700 focus:outline-none
+                                   bg-teal-600 hover:bg-transparent focus:bg-teal-600/25
+                                   px-12 py-3
+                                   text-sm font-medium text-white hover:text-teal-800 focus:text-teal-800
+                                   transition-colors duration-500"
+                            type="submit">
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </section>
+    </article>
+
+</main>
+
+<footer class="bg-black text-gray-300  dark:bg-gray-900">
+    <div class="mx-auto max-w-7xl sm:px-6 lg:px-8 py-8 ">
+
+        <div class="sm:flex sm:items-start sm:justify-between ">
+
+            <a class=" text-teal-800 text-center items-center flex h-14 w-14" href="#">
+                <p class="text-3xl bg-teal-300 rounded-full h-14 w-14  items-center p-1 py-2">
+                    AG
+                    <span class="sr-only">Home</span>
+                </p>
+            </a>
+
+            <div>
+                <p class="text-right -mt-14 mb-4">
+                    <a class="inline-block rounded-full bg-teal-600 p-2 text-white shadow-sm transition hover:bg-teal-500 sm:p-3 lg:p-4 dark:bg-gray-700 dark:text-teal-400 dark:hover:bg-gray-600"
+                       href="#MainContent">
+                        <span class="sr-only">Back to top</span>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                  d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z"
+                                  clip-rule="evenodd"></path>
+                        </svg>
+                    </a>
+                </p>
+
+                <div class="flex flex-col gap-4">
+                    <p class="mt-4 text-center text-sm  lg:mt-0 lg:text-right">
+                        Copyright © 2026, Adrian Gould. All rights reserved.
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

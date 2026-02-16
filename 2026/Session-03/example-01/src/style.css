@@ -1,0 +1,6 @@
+@import "tailwindcss";
+@import "@fortawesome/fontawesome-free/css/all.css";
+
+@theme {
+    --font-sans: Lexend, Trebuchet, sans-serif;
+}

@@ -539,7 +539,7 @@ level: 2
 
 - [ ] **README.md File**
   - [ ] Explains flow (request → repo → view)
-  - [ ] Developers are clearly indentified
+  - [ ] Developers are clearly identified
  
 - [ ] **Finishing**
   - [ ] Code compressed to Zip/7-Zip

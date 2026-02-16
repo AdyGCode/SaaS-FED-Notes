@@ -17,7 +17,7 @@
     "slidev-theme-academic": "^2.1.0",
     "slidev-theme-meetup": "^3.13.2",
     "slidev-theme-nmt": "^0.6.6",
-    "vue": "^3.5.27"
+    "vue": "^3.5.28"
   },
   "slidev": {
     "colorSchema": "dark",
