@@ -58,10 +58,12 @@ layout: section
 
 ---
 layout: two-cols
-level: 1
+level: 2
 ---
 
 # Objectives
+
+::left::
 
 ## Setting Up
 
@@ -228,6 +230,8 @@ layout: two-cols
 
 # Creating the Project (3)
 
+::left::
+
 ## Execute the Dev server
 
 ```shell [Shell]
@@ -325,7 +329,7 @@ Header and Navigation based upon:
 ````md magic-move
 
 ```html
-<div class="bg-gray-50">
+<body class="bg-gray-50">
 ```
 
 ```html
@@ -361,7 +365,7 @@ Header and Navigation based upon:
 
 ```html
     </nav>
-</div>
+</body>
 
 <main class="max-w-7xl space-y-16 bg-white min-h-screen 
              mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-16">
@@ -464,13 +468,33 @@ Specifically: "Floating image with title and excerpt".
 
 ---
 
+# Practice!
+
+For practice, we want you to:
+
+- Follow the steps to create the profile-page project
+- Update the layout to be how you would like to present yourself professionally
+- Update colour, typeface and other aspects of the page
+- Ensure you have the following sections:
+  - About
+  - Skills
+  - Education 
+  - Projects
+  - (External) Interests
+  - Contact form
+
+You may add extra sections as you believe are useful.
+
+---
+
 # Recap Checklist
 
-- [ ] 
-- [ ] 
-- [ ] 
-- [ ] 
-- [ ] 
+- [ ] Create a new TailwindCSS Project
+- [ ] Set up the Base HTML for the project
+- [ ] Use different fonts for serif, sans and mono
+- [ ] Use the responsive layout capabilities
+- [ ] Ensure page is accessible
+- [ ] Contains the required sections
 
 ---
 level: 2
@@ -478,7 +502,11 @@ level: 2
 
 # Exit Ticket
 
-> Pose a question about the content
+> How has TailwindCSS altered your perception of CSS?
+
+<br>
+
+> What drawbacks do you see in TailwindCSS? 
 
 
 ---

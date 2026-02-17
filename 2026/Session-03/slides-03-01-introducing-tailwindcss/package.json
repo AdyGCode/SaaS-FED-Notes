@@ -5,21 +5,20 @@
   "scripts": {
     "build": "slidev build",
     "dev": "slidev --open",
-    "export": "slidev export"
+    "export": "slidev export",
+    "show": "slidev --remote SecretOne --port 8080 --open --force"
   },
   "dependencies": {
-    "@iconify-json/fa7-brands": "^1.2.2",
-    "@iconify-json/fa7-solid": "^1.2.4",
-    "@slidev/cli": "^52.11.5",
+    "@iconify-json/fa7-brands": "latest",
+    "@iconify-json/fa7-solid": "latest",
+    "@slidev/cli": "^52.12.0",
     "@slidev/theme-default": "latest",
     "@slidev/types": "latest",
-    "shiki": "^3.22.0",
-    "shiki-magic-move": "^1.2.1",
-    "slidev-addon-announcement": "^0.1.1",
-    "slidev-theme-academic": "^2.1.0",
-    "slidev-theme-meetup": "^3.13.0",
-    "slidev-theme-nmt": "^0.6.5",
-    "vue": "^3.5.27"
+    "shiki": "latest",
+    "shiki-magic-move": "latest",
+    "slidev-addon-announcement": "latest",
+    "slidev-theme-nmt": "latest",
+    "vue": "^3.5.28"
   },
   "slidev": {
     "colorSchema": "dark",
@@ -38,6 +37,6 @@
     }
   },
   "devDependencies": {
-    "playwright-chromium": "^1.58.1"
+    "playwright-chromium": "^1.58.2"
   }
 }
