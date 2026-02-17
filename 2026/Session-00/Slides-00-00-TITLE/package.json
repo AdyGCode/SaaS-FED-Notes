@@ -1,29 +1,24 @@
 {
-  "name": "session-01",
+  "name": "session-00",
   "type": "module",
   "private": true,
   "scripts": {
     "build": "slidev build",
     "dev": "slidev --open",
-    "export": "slidev export"
+    "export": "slidev export",
+    "show": "slidev --remote SecretOne --port 8080 --open --force"
   },
   "dependencies": {
-    "@slidev/cli": "^52.11.5",
+    "@iconify-json/fa7-brands": "latest",
+    "@iconify-json/fa7-solid": "latest",
+    "@slidev/cli": "^52.12.0",
     "@slidev/theme-default": "latest",
     "@slidev/types": "latest",
+    "shiki": "latest",
+    "shiki-magic-move": "latest",
     "slidev-addon-announcement": "latest",
-    "slidev-theme-academic": "^2.1.0",
-    "slidev-theme-nmt": "^0.6.6",
-    "shiki": "^3.22.0",
-    "shiki-magic-move": "^1.2.1",
-    "slidev-addon-announcement": "^0.1.1",
-    "slidev-theme-academic": "^2.1.0",
-    "slidev-theme-meetup": "^3.13.0",
-    "slidev-theme-nmt": "^0.6.4",
-    "vue": "^3.5.27"
-  },
-  "devDependencies": {
-    "playwright-chromium": "^1.58.1"
+    "slidev-theme-nmt": "latest",
+    "vue": "^3.5.28"
   },
   "slidev": {
     "colorSchema": "dark",
@@ -40,5 +35,8 @@
       "transition": "fade",
       "aspectRatio": "16/10"
     }
+  },
+  "devDependencies": {
+    "playwright-chromium": "latest"
   }
 }
