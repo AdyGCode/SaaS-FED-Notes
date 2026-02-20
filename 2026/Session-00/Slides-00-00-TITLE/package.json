@@ -1,5 +1,5 @@
 {
-  "name": "session-00",
+  "name": "session-XX-YY-presentation-title",
   "type": "module",
   "private": true,
   "scripts": {
@@ -8,18 +8,22 @@
     "export": "slidev export",
     "show": "slidev --remote SecretOne --port 8080 --open --force"
   },
+
   "dependencies": {
     "@iconify-json/fa7-brands": "latest",
+    "@iconify-json/fa7-regular": "latest",
     "@iconify-json/fa7-solid": "latest",
-    "@slidev/cli": "^52.12.0",
+    "@unocss/preset-icons": "latest",
+    "@slidev/cli": "latest",
     "@slidev/theme-default": "latest",
     "@slidev/types": "latest",
     "shiki": "latest",
     "shiki-magic-move": "latest",
     "slidev-addon-announcement": "latest",
     "slidev-theme-nmt": "latest",
-    "vue": "^3.5.28"
+    "vue": "latest"
   },
+
   "slidev": {
     "colorSchema": "dark",
     "highlighter": "shiki",
@@ -36,6 +40,7 @@
       "aspectRatio": "16/10"
     }
   },
+
   "devDependencies": {
     "playwright-chromium": "latest"
   }
