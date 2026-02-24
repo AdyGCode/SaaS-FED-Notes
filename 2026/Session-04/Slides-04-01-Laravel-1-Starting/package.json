@@ -1,0 +1,47 @@
+{
+  "name": "session-XX-YY-presentation-title",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "slidev build",
+    "dev": "slidev --open",
+    "export": "slidev export",
+    "show": "slidev --remote SecretOne --port 8080 --open --force"
+  },
+
+  "dependencies": {
+    "@iconify-json/fa7-brands": "latest",
+    "@iconify-json/fa7-regular": "latest",
+    "@iconify-json/fa7-solid": "latest",
+    "@unocss/preset-icons": "latest",
+    "@slidev/cli": "latest",
+    "@slidev/theme-default": "latest",
+    "@slidev/types": "latest",
+    "shiki": "latest",
+    "shiki-magic-move": "latest",
+    "slidev-addon-announcement": "latest",
+    "slidev-theme-nmt": "latest",
+    "vue": "latest"
+  },
+
+  "slidev": {
+    "colorSchema": "dark",
+    "highlighter": "shiki",
+    "defaults": {
+      "fonts": {
+        "provider": "coollabs",
+        "mono": "Fira Code,consolas",
+        "serif": "Roboto Serif,Georgia",
+        "sans": "Lexend,Avenir Next.Arial",
+        "local": "Lexend,Avenir Next,Arial",
+        "italic": false
+      },
+      "transition": "fade",
+      "aspectRatio": "16/10"
+    }
+  },
+
+  "devDependencies": {
+    "playwright-chromium": "latest"
+  }
+}
