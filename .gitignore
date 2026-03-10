@@ -459,3 +459,5 @@ dist
 /.obsidian/themes/
 
 !/.obsidian/plugins/obsidian-minimal-settings/data.json
+
+**/**/*-lock.yaml

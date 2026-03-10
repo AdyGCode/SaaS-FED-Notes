@@ -127,7 +127,8 @@ class: text-left
 
 <br>
 
-### *Platform:* Laravel 12 (MVC), Blade templating, Tailwind CSS  
+### *Platform:* Laravel 12 (MVC), Blade templating, Tailwind CSS
+
 ### *Goal:* Understand the workflow and build a small feature end‑to‑end
 
 <!-- Speaker notes:
@@ -140,7 +141,7 @@ database, and finish with knowledge checks, references, a session checklist, and
 -->
 
 ---
-layoput: section
+layout: section
 ---
 
 # Installing the Laravel Installer
@@ -153,26 +154,24 @@ Composer, PATH setup, and alternatives. We'll run “Hello, Laravel” locally.
 ---
 level: 2
 ---
+
 # Installing the Laravel Installer
 
-## 1) Prerequisites
+## 0) Prerequisites
 
-- PHP (compatible with Laravel 12)
+- PHP 5.4+ (compatible with Laravel 12)
 - Composer (global)
-- Node.js + npm (for Vite/Tailwind)
+- Node.js plus:
+    - npm (for Vite/Tailwind)
+    - pnpm (and Vite/Tailwind)
 
 ---
 level: 2
 ---
+
 # Installing the Laravel Installer (2)
 
-## 2) Install the Laravel Installer (global)
-
-```bash
-composer global require laravel/installer
-```
-
-> Ensure Composer in your Path
+## 1) Ensure Composer in your Path
 
 <Announcement type="important" title="Laravel & Laragon">
 <p>Remember that with Laragon, before opening your terminal, you will:</p>
@@ -184,15 +183,29 @@ composer global require laravel/installer
 
 
 You may also verify alternative locations:
+
 - **Windows:** `%USERPROFILE%\AppData\Roaming\Composer\vendor\bin`
 - **macOS/Linux (bash/zsh):** `~/.composer/vendor/bin` or
   `~/.config/composer/vendor/bin`
+
 ---
 level: 2
 ---
+
 # Installing the Laravel Installer (3)
 
-## 3) Verify installed and acessible
+## 2) Install the Laravel Installer (global)
+
+```bash
+composer global require laravel/installer
+```
+
+You may re-run this every two or three weeks.
+
+This updates the installer with
+the latest bug and security fixes and new features.
+
+## 3) Verify installed and accessible
 
 ```bash
 laravel --version
@@ -212,6 +225,12 @@ layout: section
 
 # Creating a New Laravel Project
 
+<!-- Speaker notes:
+- Option A is often faster and gives a clean scaffold.
+- Option B is great for CI or when the installer isn’t available.
+- Option C for when you use an Application Template
+-->
+
 ---
 level: 2
 ---
@@ -220,14 +239,15 @@ level: 2
 
 ## Option A: Using the Laravel Installer
 
+To create a new application using
+
+- the Laravel installer,
+- `pnpm` for TailwindCSS etc. and
+- initialising a git repository...
+
 ```bash
-laravel new <MY_APPLICATION_NAME>
-cd <MY_APPLICATION_NAME>
-php artisan serve
+laravel new <MY_APPLICATION_NAME> --pnpm --git
 ```
-
-Open: http://127.0.0.1:8000
-
 
 ---
 level: 2
@@ -237,10 +257,10 @@ level: 2
 
 ## Option B: Using Composer Directly
 
+Creates a basic application with no extras
+
 ```bash
 composer create-project laravel/laravel <MY_APPLICATION_NAME>
-cd <MY_APPLICATION_NAME>
-php artisan serve
 ```
 
 ---
@@ -252,35 +272,132 @@ level: 2
 ## Option C: Using the Laravel Installer & Template
 
 ```bash
-laravel new <MY_APPLICATION_NAME> --using=<TEMPLATE_NAME>
-cd <MY_APPLICATION_NAME>
-php artisan serve
+laravel new <MY_APPLICATION_NAME> --using=<TEMPLATE_NAME> --pnpm --git
 ```
+
+<Announcement type="information" title="Templates">
+<p>We will make use of a template later in the semster.</p>
+<p>The template code will be provided by Adrian Gould.</p>
+</Announcement>
 
 ---
 level: 2
 ---
+
 # Creating a New Project (4)
 
-## Initialize Frontend (Vite + Tailwind)
+## Options commonly used when prompted
+
+These are for Option A and C:
+
+| Prompt                                                                                   | **Respond With** |
+|------------------------------------------------------------------------------------------|------------------|
+| Which starter kit would you like to install? **\[None]**:                                | **None**         |
+| Which testing framework do you prefer? **\[Pest]**:                                      | **0** (Pest)     |
+| Do you want to install Laravel Boost to improve AI assisted coding? (yes/no) **\[yes]**: | **No**           |
+| Which database will your application use? **\[SQLite]**:                                 | **sqlite**       |
+
+---
+level: 2
+---
+
+# Creating a New Project (5)
+
+## Running the Development Server
 
 ```bash
-npm install
-npm run dev      # or: npm run build
+cd <MY_APPLICATION_NAME>
+composer run dev
 ```
 
-> *Tip:* Use `php artisan key:generate` if needed (usually auto-run).
+Open: http://127.0.0.1:8000
 
-<!-- Speaker notes:
-- Option A is often faster and gives a clean scaffold.
-- Option B is great for CI or when the installer isn’t available.
-- `npm run dev` launches Vite in dev mode with HMR. Use a second terminal for that.
--->
+### Dev Server
+
+`composer run dev` executes a node script to run multiple processes in
+parallel for development.
+
+- The PHP Web Server
+- The Laravel Queue manager
+- The Vite watcher
 
 ---
-
 layout: section
 ---
+
+# Clone & Set-up Existing Project
+
+#### Steps to set up an existing remote repository for development locally
+
+---
+level: 2
+layout: two-cols
+---
+
+# Clone & Set-up Existing Project
+
+<br>
+When you want to work on a project at a different location/computer, do
+the following:
+
+::left::
+
+- Clone the repository
+    - `git clone <REPOSITORY_URI>`
+- Change directory into repository folder
+    - `cd <FOLDER_NAME>`
+- Execute `composer install`
+- Execute `pnpm install`
+- Copy the example `.env` file:
+    - `cp .env.example .env`
+
+::right::
+
+- Generate a key
+    - `php artisan key:generate`
+- Create empty SQLite file if in development:
+    - `touch database/database.sqlite`
+- Update the `.env`
+- Migrate the database
+    - `php artisan migrate`
+- Seed the database
+    - `php artisan db:seed`
+
+---
+level: 2
+---
+
+# .env Settings to Update
+
+| KEY          | Example Setting                                           |
+|--------------|-----------------------------------------------------------|
+| `APP_NAME`   | `"Contactive"`                                            |
+| `APP_ENV`    | `local` (dev), `production`, `staging`, `testing`         |
+| `APP_DEBUG`  | `true` (dev), `false` (production)                        |
+| `APP_URL`    | `http://localhost:8000` (dev), `https://my-domain.com.au` |
+| `APP_LOCALE` | `en_AU`                                                   |
+
+---
+level: 2
+---
+
+# .env Settings to Update (2)
+
+| KEY          | Example Setting        |
+|---------------------|------------------------|
+| `MAIL_MAILER`       | `smtp`                 |
+| `MAIL_HOST`         | `127.0.0.1`            |
+| `MAIL_PORT`         | `2525`                 |
+| `MAIL_FROM_ADDRESS` | `no-reply@example.com` |
+
+Others updated depending on requirements
+
+
+---
+layout: section
+---
+
+# Laravel Folder Structure
 
 <!-- Speaker notes:
 Section: Laravel folder structure. Focus on the high-signal directories and what
@@ -293,19 +410,19 @@ level: 2
 
 ## Folder Structure (The Greatest Hits)
 
-- **app/** — Your application code
-    - `Http/Controllers/`, `Models/`, `Policies/`, `Middleware/`
-- **bootstrap/** — Framework bootstrapping (cache, autoload)
-- **config/** — Config files (`app.php`, `database.php`, `mail.php`, …)
-- **database/** — Migrations, factories, seeders
-- **public/** — Web root (index.php, assets entry point)
-- **resources/** — Views (Blade), CSS/JS (pre-Vite build), lang
-- **routes/** — `web.php`, `api.php`, `console.php`, `channels.php`
-- **storage/** — Logs, compiled views, file uploads
-- **tests/** — Unit/Feature tests
-- **vendor/** — Composer dependencies (don’t edit)
+- `app/` — Your application code
+- `bootstrap/` — Framework bootstrapping (cache, autoload)
+- `config/` — Config files (`app.php`, `database.php`, `mail.php`, …)
+- `database/` — Migrations, factories, seeders
+- `public/` — Web root (index.php, assets entry point)
+- `resources/` — Views (Blade), CSS/JS (pre-Vite build), lang
+- `routes/` — `web.php`, `api.php`, `console.php`, `channels.php`
+- `storage/` — Logs, compiled views, file uploads
+- `tests/` — Unit/Feature tests
+- `vendor/` — Composer dependencies (**don’t edit**)
+- `node_modules/` — Node.js dependencies (**don’t edit**)
 
-> You’ll mostly live in **app/**, **resources/**, and **routes/**.
+You’ll mostly live in `app/`, `resources/`, and `routes/`.
 
 <!-- Speaker notes:
 - Emphasize that public/ is the document root for production web servers.
@@ -313,9 +430,12 @@ level: 2
 -->
 
 ---
-
 layout: section
 ---
+
+# MVC Concepts
+
+## Model - View - Controller
 
 <!-- Speaker notes:
 Section: MVC concepts. Define the three roles, data flow, and how routes fit in.
@@ -328,24 +448,36 @@ level: 2
 
 ## MVC Overview: Model–View–Controller
 
-**Model**
+## Model
 
 - Business logic & data representation (often Eloquent models)
 
-**View**
+## View
 
 - Presentation layer (Blade templates)
 
-**Controller**
+## Controller
 
 - Coordinates the request, invokes domain logic, returns responses
 
-**Flow**  
+---
+level: 2
+---
+
+# MVC Overview: Model–View–Controller (2)
+
+## Router
+
+- Directs the incoming requests to the correct controller and method
+
+## Flow
 Browser → Route → Controller → (Model/services) → View (HTML) → Browser
 
-> Routes map URLs to controllers; controllers prepare data; views present it.
-
-
+<Announcement type="information">
+<p>Routes map URLs to controllers.</p>
+<p>Controllers prepare data (via Models).</p>
+<p>Views present the data.</p>
+</Announcement>
 
 <!-- Speaker notes:
 - Keep controllers skinny: orchestrate, don’t implement heavy business logic.
@@ -355,12 +487,15 @@ Browser → Route → Controller → (Model/services) → View (HTML) → Browse
 
 ---
 layout: image
-image: public/Laravel-Page-Request-Seqeunce-Simplified.png
+imageUrl: public/Laravel-Page-Request-Simplified@2x.png
+imageCaption: Laravel Simplified Page Request
 ---
 
 ---
 layout: section
 ---
+
+# Creating Blade Views
 
 <!-- Speaker notes:
 Section: Blade basics—creating views, syntax, escaping, and common directives.
@@ -371,32 +506,51 @@ Include simple code examples, data passing, and escaping safeguards.
 level: 2
 ---
 
-## Creating Blade Views
+# Creating Blade Views
 
-**Route → View**
+## Route → View
 
-```php
-// routes/web.php
+From the `routes/web.php` file:
+
+```php [php] {1|3,5|all}
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome', ['name' => 'Adrian']);
 });
 ```
+OK for simple views.
 
-**View (resources/views/welcome.blade.php)**
+Use controllers for maintainability and more complex logic.
 
-```blade
+---
+level: 2
+---
+
+# Creating Blade Views (2)
+
+## View (`resources/views/welcome.blade.php`)
+
+```blade [blade] {1-3,6-7,9-10|all}
 <!doctype html>
 <html>
-  <head><meta charset="utf-8"><title>Welcome</title></head>
-  <body class="font-sans antialiased">
-    <h1 class="text-2xl">Hello, {{ $name }}!</h1>
-  </body>
+<head>
+  <meta charset="utf-8">
+  <title>Welcome</title>
+</head>
+<body class="font-sans antialiased">
+  <h1 class="text-2xl">Hello, {{ $name }}!</h1>
+</body>
 </html>
 ```
 
-**Passing Data**
+---
+level: 2
+---
+
+# Creating Blade Views (3)
+
+## Passing Data
 
 - Array: `view('welcome', ['name' => 'Adrian'])`
 - `with()`: `view('welcome')->with('name', 'Adrian')`
@@ -408,22 +562,43 @@ Route::get('/', function () {
 -->
 
 ---
+layout: section
+---
+
+# Blade Syntax & Escaping
+
+---
 level: 2
 ---
 
-## Blade Syntax & Escaping
+# Blade Syntax & Escaping
 
-**Echoing Variables**
+## Echoing Variables
 
-```blade
-{{ $title }}           {{-- Escaped (safe) --}}
-{!! $html !!}          {{-- Unescaped (trust only sanitized content) --}}
-@{{ user }}            {{-- Output literal “{{ user }}” (e.g., for Vue) --}}
+###  Escaped (safe) 
+```blade [blade] {none|all}
+{{ $title }}
 ```
 
-**Control Structures**
+###  Unescaped (trust only sanitized content) 
+```blade [blade] {none|all}
+{!! $html !!}
+```
 
-```blade
+###  Output literal (e.g., for Vue) 
+```blade [blade] {none|all}
+@{{ user }}            
+```
+
+---
+level: 2
+---
+
+# Blade Syntax & Escaping (2)
+
+## Control Structures
+
+```blade [blade] {1,7|1,3,5,7|all}
 @if($count > 0)
   <p>Items: {{ $count }}</p>
 @elseif($count === 0)
@@ -431,21 +606,34 @@ level: 2
 @else
   <p>Unknown</p>
 @endif
+```
 
+
+---
+level: 2
+---
+
+# Blade Syntax & Escaping (3)
+
+## Control Structures (2)
+
+```blade [blade] {1,3|all}
 @foreach($items as $item)
   <li>{{ $item->name }}</li>
 @endforeach
 ```
 
-**Raw Blocks**
+### Raw Blocks
 
-```blade
+```blade [blade] {none|all}
 @verbatim
   <div id="app">{{ message }}</div>
 @endverbatim
 ```
 
-> Prefer `{{ }}` for safety. Use `{!! !!}` only for trusted HTML.
+> Prefer `{{ }}` for safety.
+> 
+> Use `{!! !!}` only for trusted HTML.
 
 <!-- Speaker notes:
 - Emphasize XSS protection via HTML escaping.
@@ -462,8 +650,9 @@ level: 2
 - `@include('partials.alert')` to pull partial templates
 - `@once ... @endonce` to ensure a block renders once
 - `@push('scripts')/@stack('scripts')` for stacked sections
+
 - Attribute/State directives:
-  ```blade
+  ```blade [blade] {1|2|3|4|all}
   <input type="checkbox" @checked($active)>
   <option @selected($id === $current)>
   <button @disabled($busy)>
@@ -476,9 +665,10 @@ level: 2
 -->
 
 ---
-
 layout: section
 ---
+
+# Templates & Inheritance
 
 <!-- Speaker notes:
 Section: Components & template inheritance. Show @extends/@section flow and the
@@ -489,12 +679,22 @@ component-driven (x-) layout approach with slots and class merging. Then compare
 level: 2
 ---
 
-## Template Inheritance: `@extends` / `@section` / `@yield`
+# Template Inheritance
 
-**Layout**
+- `@extends`
+- `@section`
+- `@yield`
 
-```blade
-{{-- resources/views/layouts/app.blade.php --}}
+
+---
+level: 2
+---
+
+# Template Inheritance (2)
+
+## Layout `resources/views/layouts/app.blade.php` 
+
+```blade {1-3,7,8,15-16|4|5|6|1-8,15-16|8,15|9-11|12-14|all}
 <!doctype html>
 <html>
 <head>
@@ -503,7 +703,9 @@ level: 2
   @vite(['resources/css/app.css','resources/js/app.js'])
 </head>
 <body class="min-h-dvh bg-gray-50 text-gray-900">
-  <header class="p-4 border-b">My App</header>
+  <header class="p-4 border-b">
+    My App
+  </header>
   <main class="p-6">
     @yield('content')
   </main>
@@ -511,10 +713,16 @@ level: 2
 </html>
 ```
 
-**Child View**
+---
+level: 2
+---
 
-```blade
-{{-- resources/views/home.blade.php --}}
+# Template Inheritance
+## Child View using Template
+
+### View (`resources/views/static/home.blade.php`)
+
+```blade [blade] {1|3|5,7|all}
 @extends('layouts.app')
 
 @section('title', 'Home')
@@ -533,12 +741,13 @@ level: 2
 level: 2
 ---
 
-## Components: `<x-…>` + Slots + Class Merging
+# Components: `<x-…>` + Slots + Class Merging
 
-**Layout as a Component**
+## Layout as a Component
 
-```blade
-{{-- resources/views/components/layout.blade.php --}}
+Component file: `resources/views/components/layout.blade.php`
+
+```blade {1|3-6|7|8-9|10,15|11|12-14|15-16|all}
 @props(['title' => 'My App'])
 
 <!doctype html>
@@ -556,23 +765,35 @@ level: 2
 </body>
 </html>
 ```
+---
+level: 2
+---
 
-**Using the Component**
 
-```blade
-{{-- resources/views/dashboard.blade.php --}}
+# Components: `<x-…>` + Slots + Class Merging (2)
+
+## Using the Component
+
+View File: `resources/views/dashboard.blade.php` 
+
+```blade {1,3|2|all}
 <x-layout title="Dashboard">
   <h1 class="text-2xl font-semibold">Hello from the component layout</h1>
 </x-layout>
 ```
+---
+level: 2
+---
 
-**Reusable Button (with Tailwind Class Merge)**
+# Components: `<x-…>` + Slots + Class Merging (3)
 
-```blade
-{{-- resources/views/components/button.blade.php --}}
+## Reusable Button (with Tailwind Class Merge)
+ 
+Component Filename: `resources/views/components/button.blade.php` 
+
+```blade {1|2,7,9|3-6|7-9|all}
 @props(['type' => 'button'])
-<button
-  type="{{ $type }}"
+<button type="{{ $type }}"
   {{ $attributes->merge(['class' =>
     'inline-flex items-center rounded-md px-4 py-2 text-sm font-medium
      bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none focus:ring'
@@ -582,9 +803,9 @@ level: 2
 </button>
 ```
 
-**Use it**
+## Use it
 
-```blade
+```blade {none|all}
 <x-button type="submit" class="mt-3">Save</x-button>
 ```
 
@@ -593,13 +814,24 @@ level: 2
 - Anonymous components live in resources/views/components. Named slots: <x-slot:name>.
 -->
 
+
+---
+layout: section
+---
+
+# `@extends` vs `<x-component>`
+
+## When & Why
+
 ---
 level: 2
 ---
 
-## `@extends` vs `<x-component>` — When & Why
+# `@extends` vs `<x-component>` — When & Why
 
-**`@extends` Layouts**
+<br>
+
+## `@extends` Layouts
 
 - Ideal for **page-level layout inheritance** (e.g., master layout with
   `@yield` regions)
@@ -607,7 +839,15 @@ level: 2
 - Great for **global structure** (head, nav, footer) with per-page content
 - Simple mental model; less moving parts
 
-**`<x-…>` Components**
+---
+level: 2
+---
+
+# `@extends` vs `<x-component>` — When & Why (2)
+
+<br>
+
+## `<x-…>` Components
 
 - Ideal for **reusable UI pieces** and **layout-as-component** patterns
 - Support **props**, **slots**, and `$attributes->merge()` (excellent for
@@ -616,9 +856,17 @@ level: 2
   discoverable)
 - Can live as **anonymous** (Blade-only) or **class-based** components
 
-**Choosing Between Them**
+---
+level: 2
+---
 
-- Use **`@extends`** for a site-wide base layout with named sections
+# `@extends` vs `<x-component>` — When & Why
+
+<br>
+
+## Choosing Between Them
+
+- Use `@extends` for a site-wide base layout with named sections
 - Use **components** for reusable widgets (buttons, cards, alerts) **and**
   when you prefer composition over inheritance for layouts
 - It’s common to **mix both**: `@extends` for the outer shell + `<x-*>` for
@@ -630,9 +878,11 @@ level: 2
 -->
 
 ---
-
 layout: section
 ---
+
+
+# How Tailwind Fits With Blade
 
 <!-- Speaker notes:
 Section: Tailwind + Blade. Show where Tailwind is configured, how Vite compiles it,
@@ -643,47 +893,124 @@ and how Blade makes Tailwind ergonomic via directives and components.
 level: 2
 ---
 
-## How Tailwind Fits With Blade
+# How Tailwind Fits With Blade
 
-**Tailwind in Your Project**
+## Tailwind in Your Project: CSS
 
-- **resources/css/app.css**
-  ```css
-  @tailwind base;
-  @tailwind components;
-  @tailwind utilities;
-  ```
-- **tailwind.config.js** — content paths include Blade & JS
-- **Vite** compiles Tailwind & your assets
+Filename: `resources/css/app.css`
 
-**Vite Setup (excerpt)**
+````md magic-move
+```css [css] {none|all}
+/* Import TailwindCSS v4 (or later) */
+@import 'tailwindcss';
+...
+```
+```css
+...
+/* Tell Vite to search following folders for Tailwind 
+   class usage to purge unused styles */
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+...
+```
+```css
+...
+/* Specify any custom CSS for Tailwind.
+   Here we define the Instrument Sans font as 
+   our default for sans-serif text */
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+}
+```
 
-```js
-// vite.config.js
-import {defineConfig} from 'vite'
-import laravel from 'laravel-vite-plugin'
+````
+Full Code:
+- https://github.com/AdyGCode/contact-list-2026-s1/blob/main/resources/css/app.css
 
+---
+level: 2
+---
+
+# How Tailwind Fits With Blade (2)
+
+## Tailwind in Your Project: Vite
+
+Filename: `/vite.config.js`
+
+
+````md magic-move
+
+```js [js] {1-3|5,7|all}
+import { defineConfig } from 'vite';
+import laravel from 'laravel-vite-plugin';
+import tailwindcss from '@tailwindcss/vite';
+
+export default defineConfig({
+    ...
+});
+
+```
+
+```js [js] {2,11|3,9|4-7|8|all}
+...
 export default defineConfig({
     plugins: [
         laravel({
             input: ['resources/css/app.css', 'resources/js/app.js'],
             refresh: true,
         }),
+        tailwindcss(),
     ],
-})
+    ...
+});
 ```
 
-**In Blade Layout**
+```js [js] {2,9|4,8|5-7|all}
+...
+export default defineConfig({
+...
+    server: {
+        watch: {
+            ignored: ['**/storage/framework/views/**'],
+        },
+    },
+});
+```
+
+````
+
+Full Code:
+- https://github.com/AdyGCode/contact-list-2026-s1/blob/main/vite.config.js
+
+---
+level: 2
+---
+
+# How Tailwind Fits With Blade
+
+## Tailwind in Your Project: In Blade Layout
 
 ```blade
 @vite(['resources/css/app.css','resources/js/app.js'])
 ```
 
-**Ergonomics in Blade**
+This instructs Vite to hot reload the CSS and JS files during development.
 
-- `@class([...])` for conditional Tailwind classes
-- Components encapsulate Tailwind patterns with
-  `$attributes->merge(['class' => '...'])`
+---
+level: 2
+---
+
+# How Tailwind Fits With Blade
+
+## Tailwind in Your Project: Ergonomics in Blade
+
+- Conditional Tailwind classes
+  - `@class([...])` 
+- Components encapsulate Tailwind patterns with:
+  -   `$attributes->merge(['class' => '...'])`
 
 <!-- Speaker notes:
 - Starter kits (e.g., Breeze/Jetstream) ship with Tailwind + Vite pre-configured.
@@ -691,9 +1018,18 @@ export default defineConfig({
 -->
 
 ---
-
 layout: section
 ---
+
+# Contact List Application
+
+<br>
+
+## Building a simple Contact-List Application 
+
+### Using Laravel, Blade, and Tailwind.
+
+#### Stage 1: Static Page - Contact Us
 
 <!-- Speaker notes:
 Section: Mini build—the “Contact Us” page. We’ll create routes, a controller, a
@@ -704,46 +1040,76 @@ view with a Tailwind form, validate input, and show a success message—no datab
 level: 2
 ---
 
-## Mini Build: “Contact Us” (No Storage)
+# Building a Contact-List App
 
-### 1) Routes
+## Static Pages - Contact Us
 
-```php
-// routes/web.php
-use App\Http\Controllers\ContactController;
-use Illuminate\Support\Facades\Route;
+Create each part of this page in turn:
 
-Route::get('/contact', [ContactController::class, 'create'])->name('contact.create');
-Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+- Controller with stubs
+- Routes to the controller
+- Blade view with Tailwind form
+
+---
+level: 2
+---
+
+# Building a Contact-List App
+
+## Static Pages - Contact Us - Controller With Stubs
+
+To create a controller with stubs for the contact form:
+
+```bash
+php artisan make:controller ContactController --resource --only=index,show
 ```
 
-### 2) Controller
+We will rename the show to `thankyou` later.
 
-```php
-// app/Http/Controllers/ContactController.php
-namespace App\Http\Controllers;
+---
+level: 2
+---
+
+# Building a Contact-List App (2)
+
+## Static Pages - Contact Us - Routes 
+
+Filename: `routes/web.php`
+
+```php [php] {none|1-2|4-5|6-7|all}
+use App\Http\Controllers\StaticPages\ContactController;
+use Illuminate\Support\Facades\Route;
+
+Route::get('/contact-us', [ContactUsController::class, 'index'])
+  ->name('static.contact-us');
+Route::get('/thank-you', [ContactUsController::class, 'thankyou'])
+  ->name('static.thank-you');
+```
+---
+level: 2
+---
+
+# Building a Contact-List App (3)
+
+## Static Pages - Contact Us - Controller
+
+Filename: `app/Http/Controllers/ContactController.php`
+
+```php {none|1,3|5-6,16|7-10|12-15|all}
+namespace App\Http\Controllers\StaticPages;
 
 use Illuminate\Http\Request;
 
-class ContactController extends Controller
+class ContactUsController extends Controller
 {
-    public function create()
+    public function index()
     {
-        return view('contact.create');
+        return view('static-pages.index');
     }
 
-    public function store(Request $request)
+    public function thankyou()
     {
-        $data = $request->validate([
-            'name'    => ['required','string','max:255'],
-            'email'   => ['required','email'],
-            'message' => ['required','string','max:5000'],
-        ]);
-
-        // No storage: e.g., log or discard
-        // \Log::info('Contact form submitted', $data);
-
-        return back()->with('status', 'Thanks! Your message has been received.');
+        return view('static-pages.thank-you');
     }
 }
 ```
@@ -752,348 +1118,196 @@ class ContactController extends Controller
 - We explicitly validate and then do nothing with the data (no DB).
 - Using back()->with() flashes a success message for UX.
 -->
-
 ---
 level: 2
 ---
 
-## Contact Blade View (Tailwind Form)
+# Building a Contact-List App (4)
 
-```blade
-{{-- resources/views/contact/create.blade.php --}}
-<x-layout title="Contact Us">
-  @if (session('status'))
-    <div class="mb-4 rounded-md bg-green-50 p-4 text-green-800">
-      {{ session('status') }}
-    </div>
-  @endif
+## Static Pages - Contact Us - Contact Us Page
 
-  <h1 class="mb-6 text-2xl font-semibold">Contact Us</h1>
+### Create a folder
 
-  <form method="POST" action="{{ route('contact.store') }}" class="space-y-4 max-w-xl">
-    @csrf
-
-    <div>
-      <label for="name" class="block text-sm font-medium">Name</label>
-      <input id="name" name="name" type="text"
-             value="{{ old('name') }}"
-             class="mt-1 block w-full rounded-md border-gray-300 shadow-sm
-                    focus:border-indigo-500 focus:ring-indigo-500" />
-      @error('name')
-        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-      @enderror
-    </div>
-
-    <div>
-      <label for="email" class="block text-sm font-medium">Email</label>
-      <input id="email" name="email" type="email"
-             value="{{ old('email') }}"
-             class="mt-1 block w-full rounded-md border-gray-300 shadow-sm
-                    focus:border-indigo-500 focus:ring-indigo-500" />
-      @error('email')
-        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-      @enderror
-    </div>
-
-    <div>
-      <label for="message" class="block text-sm font-medium">Message</label>
-      <textarea id="message" name="message" rows="5"
-                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm
-                       focus:border-indigo-500 focus:ring-indigo-500">{{ old('message') }}</textarea>
-      @error('message')
-        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-      @enderror
-    </div>
-
-    <x-button type="submit" class="mt-3">Send</x-button>
-  </form>
-</x-layout>
-```
-
-> Make sure you have the `<x-layout>` and `<x-button>` components from
-> earlier.
-
-<!-- Speaker notes:
-- Old input values repopulate on validation errors.
-- @error directives show field-level feedback.
-- The success banner uses the flashed session('status').
--->
-
----
-level: 2
----
-
-## Mini Build: Quick Checklist
-
-- [ ] Routes defined (`GET /contact`, `POST /contact`)
-- [ ] Controller actions (`create`, `store`)
-- [ ] Validation in `store()` (discard or log data)
-- [ ] Blade view with form + CSRF + errors
-- [ ] Tailwind classes applied for clean UI
-- [ ] Flash success message on submit
-
-**Run it**
+Create the `static-pages` folder for the views:
 
 ```bash
-php artisan serve
-npm run dev
+mkdir -p resources/views/static-pages
 ```
 
-<!-- Speaker notes:
-- That’s it—fully functional UX without persistence.
-- Optional extension: send an email via Mail::to() if desired (beyond scope here).
--->
+### Creating multiple folders a once
+
+```bash
+mkdir -p resources/views/{static-pages,client,admin}
+```
+
+Creates three subfolders, `static-pages`, `client` and `admin` within the 
+`resources/views` folder.
 
 ---
+level: 2
+---
 
+# Building a Contact-List App (5)
+
+## Static Pages - Contact Us - Contact Us Page
+
+Filename: `/resources/views/static-pages/index.blade.php`
+
+We are not using a layout... yet.
+
+````md magic-move
+
+```blade [blade] {none|1-2,3,8-9,11-12|1-3,5,8-9,11-13|3-11|all}
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <!-- more head content here -->
+    <title>Contact Us | {{ config('app.name', 'Laravel') }}</title>
+    <!-- Fonts -->
+    <!-- Styles / Scripts -->
+</head>
+<body>
+<!-- body content to go here -->
+</body>
+</html>
+```
+
+```blade [blade] {1-3,8-13|4-7|all}
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Contact Us | {{ config('app.name', 'Laravel') }}</title>
+
+    <!-- Fonts -->
+    <!-- Styles / Scripts -->
+</head>
+```
+
+```blade [blade] {1-3|4|5-6|all}
+    <title>Contact Us | {{ config('app.name', 'Laravel') }}</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net"/>
+    <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600"
+          rel="stylesheet"/>
+```
+
+```blade [blade] {1-4|5|5-9|all}
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net"/>
+    <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600"
+          rel="stylesheet"/>
+    <!-- Styles / Scripts -->
+    @vite([
+        'resources/css/app.css',
+        'resources/js/app.js'
+    ])
+</head>
+```
+
+```blade [blade] {1|1-2,12-13|4-6|8-11|all}
+</head>
+<body>
+
+<h1 class="text-4xl text-blue-500">
+    Contact Us
+</h1>
+
+<a href="{{ route('static.thank-you') }}"
+   class="text-xl p-1 bg-blue-100">
+    Thank You Test Link
+</a>
+</body>
+</html>
+```
+
+````
+
+---
+level: 2
+---
+
+# Building a Contact-List App (6)
+
+## Static Pages - Contact Us - Thank You Page
+
+Filename: `/resources/views/static-pages/thank-you.blade.php`
+
+We are not using a layout... yet.
+
+- Copy the contact-us page
+- Rename to `thank-you.blade.php`
+- Change the content:
+  - Contact Us --> becomes --> Thank You
+  - Change colours if you want
+  - Update the title of the page
+  - Remove the test link to the thank-you page
+
+<!-- Speaker notes:
+The thank-you.blade.php file is the same as the contact-us blade file, 
+with the name of the file and text changed, plus the link removed.
+-->
+
+
+
+---
+level: 2
+---
+
+# Building a Contact-List App (7)
+
+## Static Pages - Contact Us - Testing
+
+
+Make sure your development server is running:
+
+```bash
+composer run dev
+````
+
+Then visit:
+
+- `http://127.0.0.1:8000/contact-us`
+
+Click the “Thank You Test Link” to verify the thank-you page works.
+
+---
 layout: section
 ---
 
-<!-- Speaker notes:
-Section: Knowledge check. Four groups of multi-select questions. Encourage
-discussion in pairs or small groups before revealing answers.
+# Quick Group Exercise
+
+<!--
+Split group into 5 teams.
+Each team investigates adn answers given question
+After 5 minutes, team members will be mixed with other teams
+Share findings about all 5 questions with each other
 -->
 
 ---
 level: 2
 ---
 
-## Knowledge Check — Installing Laravel & Creating a Project (5)
+## Knowledge Check
 
-**Q1. Which tools are typically required before creating a Laravel project?
-**  
-A. PHP  
-B. Composer  
-C. Node.js + npm  
-D. Docker
+Teams are Numbered 1-5
 
-**Answer:** A, B (C is common for asset pipeline; Docker is optional)
+Answer your question as a team
 
----
-
-**Q2. Which commands can initialize a new Laravel app?**  
-A. `laravel new myapp`  
-B. `composer create-project laravel/laravel myapp`  
-C. `php artisan app:new myapp`  
-D. `npm create laravel myapp`
-
-**Answer:** A, B
+1. Which tools are typically required before creating a Laravel project?
+2. Which directories are most commonly edited during feature work?**  
+3. Which layer is responsible for rendering HTML?**  
+4. Where should heavy business logic primarily live?**  
 
 ---
-
-**Q3. What does `@vite([...])` in a Blade layout do?**  
-A. Includes compiled assets from Vite  
-B. Registers Composer packages  
-C. Runs database migrations  
-D. Enables hot module replacement in production
-
-**Answer:** A
-
----
-
-**Q4. When `laravel` command isn’t found after install, what’s the likely fix?
-**  
-A. Reinstall PHP  
-B. Add Composer’s global `vendor/bin` to PATH  
-C. Run `php artisan serve`  
-D. Delete `vendor/`
-
-**Answer:** B
-
----
-
-**Q5. Which commands start the dev servers?**  
-A. `php artisan serve`  
-B. `npm run dev`  
-C. `composer serve`  
-D. `php artisan dev`
-
-**Answer:** A, B
-
-<!-- Speaker notes:
-Clarify that Node.js/npm are part of the modern asset pipeline. Some teams might
-use alternatives, but Vite is the default.
--->
-
----
-level: 2
----
-
-## Knowledge Check — Laravel Folder Structure (5)
-
-**Q1. Which directories are most commonly edited during feature work?**  
-A. `app/`  
-B. `resources/`  
-C. `routes/`  
-D. `vendor/`
-
-**Answer:** A, B, C
-
----
-
-**Q2. Where do Blade templates live by default?**  
-A. `resources/views/`  
-B. `app/Views/`  
-C. `resources/templates/`  
-D. `resources/blade/`
-
-**Answer:** A
-
----
-
-**Q3. Which folder is the web document root in production?**  
-A. `storage/`  
-B. `public/`  
-C. `resources/`  
-D. `bootstrap/`
-
-**Answer:** B
-
----
-
-**Q4. Where do cached/compiled views and logs reside?**  
-A. `storage/`  
-B. `bootstrap/`  
-C. `config/`  
-D. `database/`
-
-**Answer:** A
-
----
-
-**Q5. Which files define HTTP routes?**  
-A. `routes/web.php`  
-B. `routes/api.php`  
-C. `routes/console.php`  
-D. `routes/channels.php`
-
-**Answer:** A, B (console/channels are for CLI/notifications)
-
-<!-- Speaker notes:
-Reinforce that editing vendor/ is a no-go; changes would be overwritten by updates.
--->
-
----
-level: 2
----
-
-## Knowledge Check — MVC Terms & Concepts (5)
-
-**Q1. Which layer is responsible for rendering HTML?**  
-A. Model  
-B. View  
-C. Controller  
-D. Route
-
-**Answer:** B
-
----
-
-**Q2. Which items typically contain business rules or data access?**  
-A. Models  
-B. Controllers  
-C. Views  
-D. Middleware
-
-**Answer:** A (services may encapsulate business logic as well)
-
----
-
-**Q3. Typical request flow includes which steps?**  
-A. Browser → Route → Controller  
-B. Controller → Model/Service → View  
-C. View → Controller → Model  
-D. Browser → View → Controller
-
-**Answer:** A, B
-
----
-
-**Q4. Where should heavy business logic primarily live?**  
-A. Controllers  
-B. Views  
-C. Models/Services  
-D. Routes
-
-**Answer:** C
-
----
-
-**Q5. Which is true about routes?**  
-A. They map URIs to actions  
-B. They should render large HTML blocks directly  
-C. They can point to controllers or closures  
-D. They run after Blade renders
-
-**Answer:** A, C
-
-<!-- Speaker notes:
-Encourage “thin controllers, fat models/services.” Views are for presentation only.
--->
-
----
-level: 2
----
-
-## Knowledge Check — Blade Views, Syntax & Inheritance (5)
-
-**Q1. Which Blade echo escapes HTML by default?**  
-A. `{{ $var }}`  
-B. `{!! $var !!}`  
-C. `@{{ $var }}`  
-D. `{{!! $var !!}}`
-
-**Answer:** A
-
----
-
-**Q2. Which features support template inheritance?**  
-A. `@extends`  
-B. `@section`  
-C. `@yield`  
-D. `<x-layout> ... </x-layout>`
-
-**Answer:** A, B, C, D (components offer an alternative inheritance pattern)
-
----
-
-**Q3. What does `$attributes->merge(['class' => '...'])` do in a component?
-**  
-A. Overrides all attributes  
-B. Appends/merges classes with caller’s attributes  
-C. Removes the `class` attribute  
-D. Compiles Tailwind into CSS
-
-**Answer:** B
-
----
-
-**Q4. Which Blade directives help with conditional Tailwind classes?**  
-A. `@class([...])`  
-B. `@style([...])`  
-C. `@checked($expr)`  
-D. `@selected($expr)`
-
-**Answer:** A, C, D
-
----
-
-**Q5. Which statements are true?**  
-A. `@verbatim` outputs content without Blade parsing  
-B. `{!! !!}` should be used for arbitrary user input  
-C. `@include` can inject partials into a view  
-D. `<x-*>` components can define slots
-
-**Answer:** A, C, D
-
-<!-- Speaker notes:
-Stress the security risk of unescaped output and where it’s appropriate (only trusted/sanitized content).
--->
-
----
-
 layout: section
 ---
+
+# Session Checklist!
 
 <!-- Speaker notes:
 Wrap-up: provide a quick checklist of what was covered and then exit tickets as
@@ -1106,16 +1320,16 @@ level: 2
 
 ## Session Checklist (Covered Today)
 
-- Installing the Laravel installer & alternatives (Composer)
-- Creating a new project; running PHP server; Vite dev server
-- Folder structure: app/, resources/, routes/, public/, storage/
-- MVC overview: roles and request flow
-- Blade: creating views, syntax, escaping, directives
-- Template inheritance with `@extends/@section/@yield`
-- Components with `<x-…>` (props, slots, `$attributes->merge`)
-- How Tailwind integrates via Vite and Blade
-- Mini build: “Contact Us” (routes, controller, validation, form UI)
-- Knowledge checks & references
+- [ ] Installing the Laravel installer & alternatives (Composer)
+- [ ] Creating a new project; running PHP server; Vite dev server
+- [ ] Folder structure: app/, resources/, routes/, public/, storage/
+- [ ] MVC overview: roles and request flow
+- [ ] Blade: creating views, syntax, escaping, directives
+- [ ] Template inheritance with `@extends/@section/@yield`
+- [ ] Components with `<x-…>` (props, slots, `$attributes->merge`)
+- [ ] How Tailwind integrates via Vite and Blade
+- [ ] Mini build: “Contact Us” (routes, controller, simple view)
+
 
 <!-- Speaker notes:
 Ask learners to identify any topics needing a deeper dive next session.

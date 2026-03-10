@@ -19,7 +19,6 @@
     "@slidev/types": "latest",
     "shiki": "latest",
     "shiki-magic-move": "latest",
-    "slidev-addon-announcement": "latest",
     "slidev-theme-nmt": "latest",
     "vue": "latest"
   },
