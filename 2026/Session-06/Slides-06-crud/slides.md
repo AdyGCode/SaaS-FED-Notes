@@ -77,28 +77,17 @@ level: 2
 <Toc minDepth="1" maxDepth="1" />
 
 ---
+layout: figure
+figureUrl: public/orly-book-cover-saas-bread.png
+---
+
+
+
+---
 layout: section
 ---
 
 # Ice Breaker
----
-layout: two-cols
-level: 2
----
-
-# Ice Breaker
-
-::left::
-
-## Verb - Operation Match
-
-1. In pairs, decide which verb fits each action in a contact book.
-
-- View list,
-- Add a contact,
-- See one contact,
-- edit a contact,
-- delete a contact.
 
 ---
 layout: two-cols
@@ -113,11 +102,30 @@ level: 2
 
 1. In pairs, decide which verb fits each action in a contact book.
 
-- View list,
-- Add a contact,
-- See one contact,
-- edit a contact,
-- delete a contact.
+    - View list of contacts,
+    - Create a contact,
+    - View one contact,
+    - Update a contact,
+    - Remove a contact.
+
+---
+layout: two-cols
+level: 2
+---
+
+# Ice Breaker
+
+::left::
+
+## Verb - Operation Match
+
+1. In pairs, decide which verb fits each action in a contact book.
+
+    - View list of contacts,
+    - Create a contact,
+    - View one contact,
+    - Update a contact,
+    - Remove a contact.
 
 ::right::
 
@@ -130,9 +138,35 @@ level: 2
 layout: section
 ---
 
-# What are CRUD/BREAD
+# What are CRUD/BREAD & HTTP Verbs
+
+--- 
+level: 2
+layout: two-cols
+---
+
+# BREAD & CRUD
 
 Two acronyms with similar meanings
+
+::left::
+
+## CRUD
+
+- Create
+- Retrieve / Read
+- Update
+- Delete / Destroy
+
+::right::
+
+## BREAD
+
+- Browse
+- Read
+- Edit
+- Add
+- Delete / Destroy
 
 --- 
 level: 2
@@ -163,12 +197,6 @@ Often used in Administration UIs
 | A       | Add              | Creation of one or more item of data and storing in the data store                    |
 | D       | Delete / Destroy | The removal of one or more items from the data store                                  |
 
----
-layout: section
----
-
-# What are HTTP Verbs
-
 --- 
 level: 2
 layout: two-cols
@@ -178,6 +206,8 @@ layout: two-cols
 
 ::left::
 
+## HTTP Verbs
+
 - HTTP verbs (aka “HTTP methods”) express intent:
     - GET,
     - POST,
@@ -186,31 +216,46 @@ layout: two-cols
     - DELETE,
     - HEAD,
     - OPTIONS.
-      ::right::
+
+::right::
+
+## Important Notes
+
 - Some are safe and idempotent: e.g.
     - GET is safe/idempotent,
     - PUT/DELETE are idempotent,
     - POST is neither.
-- Core semantics standardized by IETF RFC 9110 (2022)
+- Core semantics
+    - standardised by IETF RFC 9110 (2022)
     - applies across HTTP/1.1, HTTP/2, HTTP/3.
 
 ---
-lavel: 2
+level: 2
+layout: two-cols
 ---
 
 # Examples: HTTP Verbs in Requests
 
-### Get Request to "contacts"
+::left::
+
+### Get All "contacts"
+
+URI: http://contact-list.test/contacts
 
 ```http
 GET /contacts HTTP/1.1
 Host: contact-list.test
 ```
 
+::right::
+
 ### Post Request to create a Contact
+
+URI: http://contact-list.test/contacts
 
 ```http
 POST /contacts HTTP/1.1
+Host: contact-list.test
 Content-Type: application/json
 
 {
@@ -220,10 +265,83 @@ Content-Type: application/json
 ```
 
 ---
+level: 2
+layout: two-cols
+---
+
+# Examples: HTTP Verbs in Requests 2
+
+::left::
+
+### Get One Contact (ID 1)
+
+URI: http://contact-list.test/contacts/1
+
+```http
+GET /contacts/1 HTTP/1.1
+Host: contact-list.test
+```
+
+::right::
+
+## Update a contact  (ID 1)
+
+Replace ALL data (`PUT`) in contact #1
+
+URI: http://contact-list.test/contacts/1
+
+```http
+PUT /contacts/1 HTTP/1.1
+Host: contact-list.test
+Content-Type: application/json
+
+{
+    "name": "Ada Lovelace",
+    "email": "ada.lovelace@example.com"
+}
+```
+
+---
+level: 2
+layout: two-cols
+---
+
+# Examples: HTTP Verbs in Requests 3
+
+::left::
+
+## Update a contact (ID 1)
+
+Replace SOME data (`PATCH`) in contact #1
+
+URI: http://contact-list.test/contacts/1
+
+```http
+PATCH /contacts/1 HTTP/1.1
+Host: contact-list.test
+Content-Type: application/json
+
+{
+    "email": "ada.new@example.com"
+}
+```
+
+::right::
+
+## Delete a contact (ID 1)
+
+URI: http://contact-list.test/contacts/1
+
+```http
+DELETE /contacts/1 HTTP/1.1
+Host: contact-list.test
+```
+
+---
 layout: section
 ---
 
-# HTTP Verbs & CRUD/BREAD Operation Mapping
+# HTTP Verbs, Routes & CRUD/BREAD Operations
 
 --- 
 level: 2
@@ -241,12 +359,6 @@ Typical mapping & status codes (Web + API):
 | Edit   | update  | `PUT` or `PATCH` | `/contacts/{id}` | 200 OK or 204 No Content.                                   |
 | Delete | destroy | `DELETE`         | `/contacts/{id}` | 204 No Content.                                             |
 
----
-layout: section
----
-
-# HTTP Verbs and Laravel Routes
-
 --- 
 level: 2
 ---
@@ -255,7 +367,7 @@ level: 2
 
 The `routes\web.php` routes file may be split into several files.
 
-This can aid with maintenance and make it easier to develop additional 
+This can aid with maintenance and make it easier to develop additional
 features.
 
 Suggested files:
@@ -315,12 +427,13 @@ level: 2
 
 # HTTP Verbs and Laravel Routes 4
 
-### Client (Logged-in user) Routes: `routes\web.client.php` 
+### Client (Logged-in user) Routes: `routes\web.client.php`
+
 <small>Longer code snippet, all in same file</small>
 
 ````md magic-move
 
-```php [PHP] {1-3|5|5-6,9|7-8|all}
+```php [php] {1-3|5|5-6,9|7-8|all}
 use App\Http\Controllers\Client\DashboardController;
 use App\Http\Controllers\Client\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -344,7 +457,6 @@ Route::middleware('auth')->group(function () {
         ->name('profile.destroy');
 });
 ```
-
 
 ```php [PHP] {1-2,17|1-4,17|1-2,5-6,17|1-2,7-8,17|1-2,9-10,17|1-2,11-12,17|1-2,13-14,17|1-2,15-17|all}
 // Authenticated user access to contacts
@@ -413,6 +525,51 @@ Route::middleware('auth')->group(function () {
 ```
 ````
 
+--- 
+level: 2
+---
+
+# Resourceful Routing
+
+What if some methods are not needed?
+
+Use the chainable methods:
+
+- `->only()`, and
+- `->except()`
+
+Example: Only index, show wanted...
+
+````md magic-move
+```php [PHP] {1-2,7|all}
+// Authenticated user access to contacts
+Route::middleware('auth')->group(function () {
+    Route::get('/contacts', [ContactController::class, 'index'])
+        ->name('contacts.index');
+    Route::get('/contacts/{contact}', [ContactController::class, 'show'])
+        ->name('contacts.show');
+});
+```
+
+```php [PHP] {1,2,5|all}
+// Authenticated user access to contacts
+Route::middleware('auth')->group(function () {
+    Route::resource('contacts', ContactController::class)
+        -> only(['index','show']);
+});
+```
+
+```php [PHP] {1-3,5|all}
+// Authenticated user access to contacts
+Route::middleware('auth')->group(function () {
+    Route::resource('contacts', ContactController::class)
+        -> except(['store','put','patch','destroy']);
+});
+```
+
+
+````
+
 ---
 layout: section
 ---
@@ -427,6 +584,7 @@ level: 2
 # Laravel Routes & Controller Methods
 
 ### Best Practice:
+
 - Use Form Requests to centralize validation & authorization.
 
 Following code shows a simple version of each controller method
@@ -476,7 +634,6 @@ class ContactController extends Controller
 } // End of Contact Controller
 ```
 
-
 ```php [php] {1-3,14|1-5,10-11,14|1-6,10-11,14|1-5,7-9,14|all}
 class ContactController extends Controller
 {
@@ -494,7 +651,6 @@ class ContactController extends Controller
 } // End of Contact Controller
 ```
 
-
 ```php [php] {1-2,11|1-3,7,11|1-5,7,11|1-3,6-7,11|all}
 class ContactController extends Controller
 {
@@ -508,7 +664,6 @@ class ContactController extends Controller
    
 } // End of Contact Controller
 ```
-
 
 ```php [php] {1-2,11|1-3,7,11|1-5,7,11|1-3,6-7,11|all}
 class ContactController extends Controller
@@ -524,7 +679,6 @@ class ContactController extends Controller
     
 } // End of Contact Controller
 ```
-
 
 ```php [php] {1-2,11|1-3,7,11|1-5,7,11|1-3,6-7,11|all}
 class ContactController extends Controller
@@ -543,7 +697,6 @@ class ContactController extends Controller
     
 } // End of Contact Controller
 ```
-
 
 ```php [php] {1-2,11|1-3,7,11|1-5,7,11|1-3,6-7,11|all}
 class ContactController extends Controller
@@ -586,6 +739,552 @@ Binding injects the Contact or 404s if not found. [laravel.com]
 
 ---
 layout: section
+---
+
+# Implementing Basic CRUD/BREAD
+
+--- 
+level: 2
+---
+
+# Implementing Basic CRUD/BREAD
+
+Before you begin, ensure you have:
+
+- Create contacts migration, factory & seeder,
+- Contact model,
+- Executed the migrations & seeder
+
+For demonstration purposes, we presume a **Contact** has:
+
+- `given_name`, `family_name`, `nickname`, `email`, ...
+  only.
+
+The instructions presume you have your application in a folder
+`contact-list-2026-s1`.
+
+```shell
+cd contact-list-2026-s1
+```
+
+--- 
+level: 2
+---
+
+# Implementing Basic CRUD/BREAD
+
+## Creating stub Model, Migration, Seeder and Factory
+
+```shell
+php artisan make:model Contact
+php artisan make:migration create_contacts_table
+php artisan make:factory ContactFactory
+php artisan make:seeder ContactSeeder
+```
+
+Alternatively you may use:
+
+```shell [Shell]
+php artisan make:model Contact --seed --factory --migration
+```
+
+Or even shorter:
+
+```shell [Shell]
+php artisan make:model Contact -mfs
+```
+
+---
+level: 2
+---
+
+# Implementing Basic CRUD/BREAD
+
+## Migration code
+
+```php [PHP] {all}
+Schema::create('contacts', function (Blueprint $table) {
+    $table->id();
+    $table->string('title', 16)->nullable();
+    $table->string('given_name', 64);
+    $table->string('family_name', 64)->nullable();
+    $table->string('nick_name', 32)->nullable();
+    $table->string('email', 360)->nullable();
+    // TODO: Use an update migration to add user contact belongs to
+    $table->timestamps();
+    // TODO: Use an update migration to add indexes
+});
+```
+
+- `nullable()` may be empty
+
+---
+level: 2
+---
+
+# Implementing Basic CRUD/BREAD
+
+## Seeder Code
+
+Open the `database\seeders\DatabaseSeeder.php` class file.
+
+Start by adding the 'database' seeder code, which invokes each model's seeder
+in turn.
+
+```php [PHP] {1-2,11|1-4,9-11|all}
+public function run(): void
+{
+    $this->call(
+        [
+            // When using Spatie Permissions, perform the Role / Permission 
+            // seeding FIRST. e.g. RolePermissionSeeder::class,
+            UserSeeder::class,
+            // Add further seeder classes here. e.g. ContactSeeder::class,
+        ]
+    );
+}
+```
+
+---
+level: 2
+---
+
+# Implementing Basic CRUD/BREAD
+
+## Seeder Code (Users)
+
+The `User` Model and `users` Table are created automatically by Laravel.
+
+We seed them for later use.
+
+<Announcement type="info">
+Note that this is quite long, so we will show each user separately.
+</Announcement>
+
+```php [PHP] {all}
+public function run(): void
+{
+    // Seeder code is added in two stages:
+    // - List of Seed Users
+    // - Creation Code
+}
+```
+
+---
+level: 2
+---
+
+# Implementing Basic CRUD/BREAD
+
+## Seeder Code (Users)
+
+````md magic-move
+
+```php [PHP] {1-4,9-10|4-8|all}
+public function run(): void
+{
+    // Seeder code is added in two stages:
+    // - List of Seed Users
+    $seedUsers = [
+        // seed users added here
+    ];
+
+    // - Creation code
+}
+```
+
+```php [PHP] {1-3,14-15|4-13|all}
+    // Seeder code is added in two stages:
+    // - List of Seed Users
+    $seedUsers = [
+        [
+            'id' => 99,
+            'name' => 'Super Admin',
+            'email' => 'supervisor@example.com',
+            'password' => 'Password1',
+            'email_verified_at' => now(),
+            'roles' => ['super-user', 'admin'],
+            'permissions' => [],
+        ],
+        // Next seed user (100)...
+    ];
+    // - Creation code
+```
+
+```php [PHP] {1-4,14-17|all}
+    // Seeder code is added in two stages:
+    // - List of Seed Users
+    $seedUsers = [
+        // Previous seed user removed for brevity
+        [
+            'id' => 100,
+            'name' => 'Admin I Strator',
+            'email' => 'admin@example.com',
+            'password' => 'Password1',
+            'email_verified_at' => now(),
+            'roles' => ['admin'],
+            'permissions' => [],
+        ],
+        // Next seed user (200)...
+    ];
+    // - Creation code
+```
+
+```php [PHP] {1-4,14-17|all}
+    // Seeder code is added in two stages:
+    // - List of Seed Users
+    $seedUsers = [
+        // Previous seed user removed for brevity
+        [
+            'id' => 200,
+            'name' => 'Staff User',
+            'email' => 'staff@example.com',
+            'password' => 'Password1',
+            'email_verified_at' => now(),
+            'roles' => ['staff'],
+            'permissions' => [],
+        ],
+        // Next seed user (300) ...
+    ];
+
+    // - Creation code
+```
+
+```php [PHP] {1-4,14-17|all}
+    // Seeder code is added in two stages:
+    // - List of Seed Users
+    $seedUsers = [
+        // Previous seed user removed for brevity
+        [
+            'id' => 300,
+            'name' => 'Client User',
+            'email' => 'client@example.com',
+            'password' => 'Password1',
+            'email_verified_at' => now(),
+            'roles' => ['client'],
+            'permissions' => [],
+        ],
+        // Next seed user (301) here...
+    ];
+
+    // - Creation code
+```
+
+```php [PHP] {1-4,14-17|all}
+    // Seeder code is added in two stages:
+    // - List of Seed Users
+    $seedUsers = [
+        // Previous seed user removed for brevity
+        [
+            'id' => 301,
+            'name' => 'Client User II',
+            'email' => 'client2@example.com',
+            'password' => 'Password1',
+            'email_verified_at' => null,
+            'roles' => ['client'],
+            'permissions' => [],
+        ],
+        // Next seed user (302) here...
+    ];
+
+    // - Creation code
+```
+
+```php [PHP] {1-4,14-17|all}
+    // Seeder code is added in two stages:
+    // - List of Seed Users
+    $seedUsers = [
+        // Previous seed user removed for brevity
+        [
+            'id' => 302,
+            'name' => 'Client User III',
+            'email' => 'client3@example.com',
+            'password' => 'Password1',
+            'email_verified_at' => null,
+            'roles' => ['client'],
+            'permissions' => [],
+        ],
+        // Next seed user (303) here...
+    ];
+
+    // - Creation code
+```
+
+```php [PHP] {1-4,16-18|all}
+    // Seeder code is added in two stages:
+    // - List of Seed Users
+    $seedUsers = [
+        // Previous seed user removed for brevity
+        [
+            'id' => 303,
+            'name' => 'Client User IV',
+            'email' => 'client4@example.com',
+            'password' => 'Password1',
+            'email_verified_at' => null,
+            'suspended_at' => now(),
+            'roles' => ['client'],
+            'permissions' => [],
+        ],
+        // No more seed users
+    ];
+
+    // - Creation code
+```
+
+```php [PHP] {1-7,16|9-12|14-15|all}
+public function run(): void
+{
+    // Seeder code is added in two stages:
+    // - List of seed users
+    $seedUsers = [
+        // Seed user data removed for brevity
+    ];
+
+    // - Creation code
+    foreach ($seedUsers as $newUser) {
+        // Create each seed user in turn here
+    }
+
+    // Uncomment the line below to create (10) randomly named users using the User Factory.
+    // User::factory(10)->create();
+}
+```
+
+```php [PHP] {1-4,11-15|5-10|all}
+    // - List of Seed Users removed for brevity
+
+    // - Creation code
+    foreach ($seedUsers as $newUser) {
+
+        // grab the roles & additional permissions from the seed users
+        $roles = $newUser['roles'];
+        unset($newUser['roles']);
+        
+        // more code to come (~10 lines)
+    }
+
+    // Uncomment the line below to create (10) randomly named users using the User Factory.
+    // User::factory(10)->create();
+}
+```
+
+```php [PHP] {1-6,12-15|5-11}
+    // - List of Seed Users removed for brevity
+
+    // - Creation code
+    foreach ($seedUsers as $newUser) {
+
+        // grab the roles ... cut for brevity
+
+        $permissions = $newUser['permissions'];
+        unset($newUser['permissions']);
+
+        // More code to come (~7 lines)
+    }
+
+    // Uncomment the line below to create (10) randomly named users using the User Factory.
+    // User::factory(10)->create();
+}
+```
+
+```php [PHP] {1-6,14-18|5-13}
+    // - List of Seed Users removed for brevity
+
+    // - Creation code
+    foreach ($seedUsers as $newUser) {
+
+        // permissions code removed for brevity
+
+        $user = User::updateOrCreate(
+            ['id' => $newUser['id']],
+            $newUser
+        );
+        
+        // Three (commented) lines to come
+    }
+
+    // Uncomment the line below to create (10) randomly named users using the User Factory.
+    // User::factory(10)->create();
+}
+```
+
+```php [PHP] {1-6,14-18|7-11}
+   // - List of Seed Users removed for brevity
+
+    // - Creation code
+    foreach ($seedUsers as $newUser) {
+
+        // roles, permissions & create code removed
+
+        // Uncomment this line when using Spatie Permissions
+        // $user->assignRole($roles);
+        // $user->assignPermissions($permissions);
+
+    }
+
+    // Uncomment the line below to create (10) randomly named users using the User Factory.
+    // User::factory(10)->create();
+}
+```
+
+````
+
+---
+level: 2
+---
+
+# Implementing Basic CRUD/BREAD
+
+## Seeder Code (Contacts)
+
+Open the `database\seeders\ContactSeeder.php` class file.
+
+The seeder follows the same form of pattern as the `UserSeeder.php` class.
+
+- Seed Contacts
+- Creation Code
+
+We start by creating a 'blank contact' layout that we can duplicate.
+
+---
+level: 2
+---
+
+# Implementing Basic CRUD/BREAD
+
+## Seeder Code (Contacts)
+
+Update the run method to have the following basic structure:
+
+```php
+    public function run(): void
+    {
+        $seedContacts = [
+            [
+                'title' => '',
+                'given_name' => '',
+                'family_name' => '',
+                'nick_name' => '',
+                'email' => '',
+                'user_id' => 000,
+            ],
+        ];
+        // Creation code here...
+    }
+```
+
+---
+level: 2
+---
+
+# Implementing Basic CRUD/BREAD
+
+## Seeder Code (Contacts)
+
+- Select the `[ 'title'=>` ... to ... `000, ],`
+- Duplicate this 10 times (total 11 copies)
+- Fill in the data from the following table(s) into the templates
+
+Any fields that have no data remove them, for example:
+
+```php
+    [
+        'given_name' => 'Isaac',
+        'nick_name' => 'Gravity Falls',
+        'user_id' => 100,
+    ],
+```
+
+---
+level: 2
+---
+
+# Implementing Basic CRUD/BREAD
+
+## Seeder Data (Contacts)
+
+| title | given_name | family_name | nick_name | email | user_id |
+|-------|------------|-------------|-----------|-------|---------|
+|       |            |             |           |       |         |
+|       |            |             |           |       |         |
+|       |            |             |           |       |         |
+|       |            |             |           |       |         |
+|       |            |             |           |       |         |
+|       |            |             |           |       |         |
+|       |            |             |           |       |         |
+|       |            |             |           |       |         |
+|       |            |             |           |       |         |
+|       |            |             |           |       |         |
+|       |            |             |           |       |         |
+
+---
+level: 2
+---
+
+# Implementing Basic CRUD/BREAD
+
+## Seeder Code
+
+---
+level: 2
+---
+
+# Implementing Basic CRUD/BREAD
+
+## Model Code
+
+---
+level: 2
+---
+
+# Implementing Basic CRUD/BREAD
+
+## Execute migration and Seeders
+
+### Create/Update (Missing) Tables
+
+```shell
+php artisan migrate
+```
+
+### Seed Database
+
+```shell
+php artisan db:seed --
+```
+
+### Recreate Tables & Seed from Scratch
+
+<Announcement type="info" title="Fresh Table of Bel Air">
+<p>When working on a <strong>TESTING</strong>/<strong>DEVELOPMENT</strong> 
+system you <strong>MAY</strong> want to use the arisan command:</p>
+<p><code>migrate:fresh --seed</code></p>
+</Announcement>
+
+```shell
+php artisan migrate:fresh --seed
+```
+
+--- 
+level: 2
+---
+
+# Implementing Basic CRUD/BREAD
+
+--- 
+level: 2
+---
+
+# Implementing Basic CRUD/BREAD
+
+--- 
+level: 2
+---
+
+# Implementing Basic CRUD/BREAD
+
+--- 
+level: 2
 ---
 
 # Implementing Basic CRUD/BREAD
