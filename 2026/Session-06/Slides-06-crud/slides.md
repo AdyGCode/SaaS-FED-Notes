@@ -1203,19 +1203,14 @@ level: 2
 
 ## Seeder Data (Contacts)
 
-| title | given_name | family_name | nick_name | email | user_id |
-|-------|------------|-------------|-----------|-------|---------|
-|       |            |             |           |       |         |
-|       |            |             |           |       |         |
-|       |            |             |           |       |         |
-|       |            |             |           |       |         |
-|       |            |             |           |       |         |
-|       |            |             |           |       |         |
-|       |            |             |           |       |         |
-|       |            |             |           |       |         |
-|       |            |             |           |       |         |
-|       |            |             |           |       |         |
-|       |            |             |           |       |         |
+| title | given_name | family_name | nick_name | email                     | user_id |
+|-------|------------|-------------|-----------|---------------------------|---------|
+| Ms    | Penny      | Lane        |           | Penny.Lane@example.com    | 303     |
+| Dr    | Maura      | Less        |           | Maura.Less@example.com    | 300     |
+|       | Kitty      | Litter      | Kit       | Kitty.Litter@example.com  | 302     |
+| Ms    | Dot        | Matrix      | Dotty     | Dot.Matrix@example.com    | 200     |
+| Cllr  | Robin      | Money       | Rob       | Robin.Money@example.com   | 100     |
+|       | Chip       | Munk        | Woody     | Chip.Munk@example.com     | 303     |
 
 ---
 level: 2
@@ -1223,7 +1218,68 @@ level: 2
 
 # Implementing Basic CRUD/BREAD
 
-## Seeder Code
+## Seeder Data (Contacts)
+
+| title | given_name | family_name | nick_name | email                     | user_id |
+|-------|------------|-------------|-----------|---------------------------|---------|
+|       | Rusty      | Nails       |           | Rusty.Nails@example.com   | 300     |
+|       | Hazel      | Nutt        | Crackers  | Hazel.Nutt@example.com    | 200     |
+| Ms    | Zoe        | Ology       |           | Zoe.Ology@example.com     | 100     |
+|       | Rick       | O'Shea      |           | Rick.O'Shea@example.com   | 303     |
+| Mstr  | Tad        | Pole        | Tad       | Tad.Pole@example.com      | 200     |
+| Mstr  | Peter      | Pan         |           | Peter.Pan@example.com     | 302     |
+
+---
+level: 2
+---
+
+# Implementing Basic CRUD/BREAD
+
+## Seeder Data (Contacts)
+
+| title | given_name | family_name | nick_name | email                     | user_id |
+|-------|------------|-------------|-----------|---------------------------|---------|
+| Dame  | Holly      | Day         |           | Holly.Day@example.com     | 301     |
+|       | Dwayne     | Pipe        |           | Dwayne.Pipe@example.com   | 100     |
+| Mr    | Samson     | Knight      |           | Samson.Knight@example.com | 300     |
+|       | May        | Day         |           | May.Day@example.com       | 301     |
+| Mr    | Mason      | Knight      |           | Mason.Knight@example.com  | 300     |
+| Dr    | Lou        | Pole        |           | Lou.Pole@example.com      | 200     |
+
+---
+level: 2
+---
+
+# Implementing Basic CRUD/BREAD
+
+## Seeder Data (Contacts)
+
+| title | given_name | family_name | nick_name | email                     | user_id |
+|-------|------------|-------------|-----------|---------------------------|---------|
+| Mrs   | Lily       | Pond        |           | Lily.Pond@example.com     | 301     |
+|       | Jack       | Pott        |           | Jack.Pott@example.com     | 300     |
+| HRH   | Owen       | Money       |           | Owen.Money@example.com    | 100     |
+|       | Will       | Power       | Zap       | Will.Power@example.com    | 302     |
+|       | Dee        | Zaster      | Dee       | Dee.Zaster@example.com    | 200     |
+| Mrs   | Tamara     | Knight      | Tam       | Tamara.Knight@example.com | 300     |
+
+---
+level: 2
+---
+
+# Implementing Basic CRUD/BREAD
+
+## Seeder Data (Contacts)
+
+| title | given_name | family_name | nick_name | email                     | user_id |
+|-------|------------|-------------|-----------|---------------------------|---------|
+| Prof  | Jed I.     | Knight      | Obi-wan   | Jed.I.Knight@example.com  | 300     |
+| Mrs   | Sandy      | Beach       |           | Sandy.Beach@example.com   | 303     |
+| Sir   | Sonny      | Day         |           | Sonny.Day@example.com     | 301     |
+|       | Windy      | Day         |           | Windy.Day@example.com     | 301     |
+| Mr    | Rocky      | Beach       |           | Rocky.Beach@example.com   | 303     |
+|       | Rusty      | Dorr        | Squeeky   | Rusty.Dorr@example.com    | 100     |
+
 
 ---
 level: 2
@@ -1233,6 +1289,83 @@ level: 2
 
 ## Model Code
 
+The Contact model requires us to define the:
+- fillable fields, 
+- protected fields and 
+- type casts.
+
+We are also able to define:
+
+- utility methods, 
+- calculated attributes
+- relationships between models and 
+- other business logic.
+
+
+
+---
+level: 2
+---
+
+# Implementing Basic CRUD/BREAD
+
+## Model Code
+
+
+Open the `App\Models\Contact.php` model class file.
+
+Add the code to the class definition:
+
+````md magic-move
+
+```php
+/**
+ * Mass assignable attributes (table fields)
+ *
+ */
+protected $fillable = [
+    'given_name',
+    'family_name',
+    'nick_name',
+    'title',
+    'email',
+    'user_id',
+];
+
+```
+
+
+```php [PHP] {7-12}
+
+protected $fillable = [ ... ]; // code folded to save space
+
+/**
+ * Hidden from serialisation attributes (fields)
+ *
+ */
+protected $hidden = [];
+
+```
+
+
+
+```php [PHP] {5-12}
+protected $fillable = [ ... ]; // code folded to save space
+
+protected $hidden = [];        // code folded to save space
+
+/**
+ * Attribute (type) casting
+ *
+ */
+protected function casts(): array{
+    return [];
+}
+```
+
+
+````
+
 ---
 level: 2
 ---
@@ -1241,25 +1374,74 @@ level: 2
 
 ## Execute migration and Seeders
 
-### Create/Update (Missing) Tables
+Executes new migrations: both create & update
 
 ```shell
 php artisan migrate
 ```
 
-### Seed Database
+<br>
+
+### Fresh migration
+
+
+<Announcement type="error">
+This DESTROYS all existing data. <br> DO NOT use on a production / live databas.
+</Announcement>
+
+Migrating from the beginning: drops all tables & deletes all data
+
 
 ```shell
-php artisan db:seed --
+php artisan migrate:fresh
 ```
 
-### Recreate Tables & Seed from Scratch
 
-<Announcement type="info" title="Fresh Table of Bel Air">
+---
+level: 2
+---
+
+# Implementing Basic CRUD/BREAD
+
+## Execute migration and Seeders
+
+### Seed Database
+
+Seeding a database may be executed for:
+- all seeders, or 
+- individual seeders.
+
+Run all seeders: 
+
+```shell
+php artisan db:seed --seeder
+```
+
+Run a given seeder (e.g. ContactSeeder): 
+
+```shell
+php artisan db:seed --seeder=ContactSeeder
+```
+
+
+---
+level: 2
+---
+
+# Implementing Basic CRUD/BREAD
+
+##  Recreate Tables & Seed from Scratch
+
+<Announcement type="info" title="Make a fresh start">
 <p>When working on a <strong>TESTING</strong>/<strong>DEVELOPMENT</strong> 
-system you <strong>MAY</strong> want to use the arisan command:</p>
-<p><code>migrate:fresh --seed</code></p>
+system you <strong>MAY</strong> want to use the following artisan command.</p>
 </Announcement>
+
+To:
+- Drop all tables, 
+- Delete all data, 
+- Execute all migrations (create & update)
+- Execute all seeders
 
 ```shell
 php artisan migrate:fresh --seed
@@ -1270,6 +1452,7 @@ level: 2
 ---
 
 # Implementing Basic CRUD/BREAD
+
 
 --- 
 level: 2
