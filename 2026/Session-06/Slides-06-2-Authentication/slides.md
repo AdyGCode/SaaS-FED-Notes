@@ -480,28 +480,6 @@ This adds `suspended_at` and `banned_at` fields. You may or may not
 require these for your application, but these fields are part of the user 
 seeder that is the starter kit.
 
----
-level: 2
----
-
-# Adding Breeze Based Authentication
-
-## Update App CSS file
-
-Edit the `resources/css/app.css` file and add/update to include:
-
-```css
-@import "@fortawesome/fontawesome-free/css/all.css";
-```
-
-immediately after `@import 'tailwindcss';`
-
-<br>
-
-<Announcement type="info">
-You may wish to copy the custom CSS from the
-<code>resources/css/app.css</code> file into your site file.
-</Announcement>
 
 ---
 level: 2
@@ -547,6 +525,29 @@ import Alpine from 'alpinejs';
 window.Alpine = Alpine;
 Alpine.start();
 ```
+
+---
+level: 2
+---
+
+# Adding Breeze Based Authentication
+
+## Update App CSS file
+
+Edit the `resources/css/app.css` file and add/update to include:
+
+```css
+@import "@fortawesome/fontawesome-free/css/all.css";
+```
+
+immediately after `@import 'tailwindcss';`
+
+<br>
+
+<Announcement type="info">
+You may wish to copy the custom CSS from the
+<code>resources/css/app.css</code> file into your site file.
+</Announcement>
 
 
 ---
