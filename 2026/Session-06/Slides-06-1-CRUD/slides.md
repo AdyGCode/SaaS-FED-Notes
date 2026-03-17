@@ -81,8 +81,6 @@ layout: figure
 figureUrl: public/orly-book-cover-saas-bread.png
 ---
 
-
-
 ---
 layout: section
 ---
@@ -133,6 +131,7 @@ level: 2
 
 2. Map each verb to a URL (e.g., /contacts/42) and a status code you’d
    expect back.
+
 
 ---
 layout: section
@@ -391,7 +390,8 @@ level: 2
 require __DIR__ . '/web.static.php';
 require __DIR__ . '/web.client.php';
 require __DIR__ . '/web.admin.php';
-require __DIR__ . '/auth.php';
+// Auth routes added when authentication installed
+// require __DIR__ . '/auth.php';
 
 ```
 
@@ -418,7 +418,6 @@ Route::name('web.static.')->group(function () {
     Route::get('/privacy', [StaticPageController::class, 'privacy'])
         ->name('privacy');
 });
-
 ```
 
 --- 
@@ -577,6 +576,7 @@ layout: section
 # Laravel Routes & Controller Methods
 
 ## “Thin routes, focused controllers”
+
 --- 
 level: 2
 ---
@@ -585,7 +585,7 @@ level: 2
 
 ### Best Practice:
 
-- Use Form Requests to centralize validation & authorization.
+- Use Form Requests to centralise validation & authorisation.
 
 Following code shows a simple version of each controller method
 
@@ -728,14 +728,76 @@ level: 2
 
 # Laravel Route-Model Binding
 
-```php
-// Controller signatures
-public function show(\App\Models\Contact $contact) { /* ... */ }
-public function update(Request $request, \App\Models\Contact $contact) { /* ... */ }
+Example Simple Controller signature
 
+```php
+public function update(Request $request, string $id)
+{ /* ... */ }
 ```
 
-Binding injects the Contact or 404s if not found. [laravel.com]
+### Why?
+Two useful outcomes:
+
+- Injects the Contact when found, or 
+- Injects and reroutes to give a 404 if not found. 
+
+Route-Model Binding Controller Method Signature
+
+```php
+public function update(Request $request, Contact $contact)
+{ /* ... */ }
+```
+
+
+---
+level: 2
+layout: two-cols
+---
+
+# Laravel Route-Model Binding
+
+<br>
+
+### The Binding
+
+- Replace `int $id` with `Contact $contact`
+- Contact model is imported via `use \App\Models\Contact;` 
+
+::left::
+
+### Without Route-Model Binding
+
+```php
+Route::get('/contacts/{$id}', 
+    [ContactController::class, 'show'])
+->name('web.contacts.show');
+```
+
+```php
+public function show(string $id) {
+    $contact = Contact::findOrFail($id); 
+    return view('contacts.show')
+        ->with('contact', $contact); 
+}
+```
+
+::right::
+
+### With Route Model Binding
+
+```php
+Route::get('/contacts/{$contact}',
+    [ContactController::class, 'show'])
+->name('web.contacts.show');
+```
+
+```php
+public function show(Contact $contact) { 
+      return view('contacts.show')
+        ->with('contact', $contact);  
+    }
+```
+
 
 ---
 layout: section
@@ -749,7 +811,7 @@ level: 2
 
 # Implementing Basic CRUD/BREAD
 
-Before you begin, ensure you have:
+Before we complete the example we will:
 
 - Create contacts migration, factory & seeder,
 - Contact model,
@@ -757,7 +819,7 @@ Before you begin, ensure you have:
 
 For demonstration purposes, we presume a **Contact** has:
 
-- `given_name`, `family_name`, `nickname`, `email`, ...
+- `title`, `given_name`, `family_name`, `nick_name`, `email`, ...
   only.
 
 The instructions presume you have your application in a folder
@@ -1135,16 +1197,37 @@ level: 2
 
 # Implementing Basic CRUD/BREAD
 
-## Seeder Code (Contacts)
+## Practice - Seeder Code (Contacts)
 
+The following slides give you steps to create the contacts seeder.
+
+## Creating Seeder File
+
+If you have not done so already, create the seeder file using:
+
+```shell
+php artisan make:seeder ContactSeeder
+```
+
+---
+level: 2
+---
+
+# Implementing Basic CRUD/BREAD
+
+## Practice - Seeder Code (Contacts)
+
+### Edit the File
+ 
 Open the `database\seeders\ContactSeeder.php` class file.
 
-The seeder follows the same form of pattern as the `UserSeeder.php` class.
+The seeder follows the same 'pattern' as the `UserSeeder.php` class.
 
 - Seed Contacts
 - Creation Code
 
-We start by creating a 'blank contact' layout that we can duplicate.
+We start by creating a 'blank contact' associative array that we can 
+duplicate.
 
 ---
 level: 2
@@ -1414,7 +1497,7 @@ Seeding a database may be executed for:
 Run all seeders: 
 
 ```shell
-php artisan db:seed --seeder
+php artisan db:seed
 ```
 
 Run a given seeder (e.g. ContactSeeder): 
@@ -1422,7 +1505,6 @@ Run a given seeder (e.g. ContactSeeder):
 ```shell
 php artisan db:seed --seeder=ContactSeeder
 ```
-
 
 ---
 level: 2
@@ -1434,14 +1516,15 @@ level: 2
 
 <Announcement type="info" title="Make a fresh start">
 <p>When working on a <strong>TESTING</strong>/<strong>DEVELOPMENT</strong> 
-system you <strong>MAY</strong> want to use the following artisan command.</p>
+system you <strong>MAY</strong> want to use the following artisan command 
+to...</p>
+<ul>
+<li>Drop all tables</li> 
+<li>Delete all data</li> 
+<li>Execute all migrations (create & update)</li>
+<li>Execute all seeders</li>
+</ul>
 </Announcement>
-
-To:
-- Drop all tables, 
-- Delete all data, 
-- Execute all migrations (create & update)
-- Execute all seeders
 
 ```shell
 php artisan migrate:fresh --seed
