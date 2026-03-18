@@ -353,8 +353,8 @@ layout: two-cols
 
 Two options:
 
-- When building a new app
-- Adding to an existing app
+- When building a new app from scratch 🌶️, or with template kit 🌶️🌶️
+- Adding to an existing app (using a template kit) 🌶️🌶️🌶️
 
 ::left::
 
@@ -369,9 +369,18 @@ Two options:
 
 ### When Creating a New Application:
 
-- create new app
-- use the `using` switch
-    - `--using=adygcode/blade-sanctum-kit`
+1. create new app with `using` switch
+2. create new app and add Breeze
+  
+
+---
+level: 2
+layout: section
+---
+
+# Adding Breeze Based Authentication
+
+## Creating a New Application With Starter Kit
 
 ---
 level: 2
@@ -379,22 +388,20 @@ level: 2
 
 # Adding Breeze Based Authentication
 
-## Adding when Creating a New Application
+## Adding when Creating a New Application (With kit)
 
-Use the command line:
+Use the command line, and answer questions...
 
 ```shell
-laravel new --using=adygcode/blade-sanctum-kit APPLICATION_NAME
+laravel new APPLICATION_NAME --using=adygcode/blade-sanctum-kit 
 ```
 
 To do the above but also set up version control (Git), PNPM, Pest testing,
-SQLite
+SQLite...
 
 ```shell
-laravel new --using=adygcode/blade-sanctum-kit \
-            --git  --pnpm  --pest \
-            --database=sqlite \
-            APPLICATION_NAME
+laravel new  APPLICATION_NAME --using=adygcode/blade-sanctum-kit --git  
+             --pnpm --pest --database=sqlite 
 ```
 
 <Announcement type="info">
@@ -403,6 +410,55 @@ laravel new --using=adygcode/blade-sanctum-kit \
 command continuation character.</p>
 </Announcement>
 
+
+---
+level: 2
+layout: section
+---
+
+# Adding Breeze Based Authentication
+
+## Creating New Application and Adding Breeze
+
+
+---
+level: 2
+---
+
+# Adding Breeze Based Authentication
+
+## Creating a New Application and Adding Breeze
+
+Similar to previous steps... execute and select NONE for the starter kit...
+
+```shell
+laravel new APPLICATION_NAME 
+```
+Better option, as above, plus: Git, PNPM, 
+Pest testing, SQLite... 
+
+```shell
+laravel new  APPLICATION_NAME --using=adygcode/blade-sanctum-kit --git  
+             --pnpm --pest --database=sqlite 
+```
+
+Then... 
+
+```shell
+cd APPLICATION_NAME
+composer require --dev laravel/breeze
+php artisan breeze:install
+php artisan migrate
+```
+
+---
+level: 2
+layout: section
+---
+
+# Adding Breeze Based Authentication
+
+## To Existing Simple Application via Starter Kit
 
 
 ---
@@ -573,11 +629,25 @@ layout: section
 
 ---
 level: 2
+layout: two-cols
 ---
 
 # Recap Checklist
 
-- 
+I should  now able to...
+
+::left::
+
+- [ ] explain what authentication is
+- [ ] understand why authentication is required
+- [ ] describe different authentication methods
+- [ ] understand each Laravel authentication option
+
+::right::
+- [ ] create a new Laravel app with a starter kit or add Breeze manually
+- [ ] integrate a starter kit into an existing project
+- [ ] updated routes, controllers, and views correctly
+- [ ] register a new account and log in
 
 ---
 level: 2
@@ -585,7 +655,13 @@ level: 2
 
 # Quick Summary
 
-- 
+- Authentication verifies user identity and protects applications.
+- Laravel offers a full spectrum of authentication tools (Sanctum → 
+  Jetstream).
+- Starter kits simplify setting up complete auth flows.
+- Proper setup requires updates to routes, controllers, views, CSS, JS, and 
+  Node dependencies.
+- Testing includes using seeded accounts and verifying registration works.
 
 ---
 level: 2
