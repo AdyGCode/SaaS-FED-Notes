@@ -132,7 +132,6 @@ level: 2
 2. Map each verb to a URL (e.g., /contacts/42) and a status code you’d
    expect back.
 
-
 ---
 layout: section
 ---
@@ -736,10 +735,11 @@ public function update(Request $request, string $id)
 ```
 
 ### Why?
+
 Two useful outcomes:
 
-- Injects the Contact when found, or 
-- Injects and reroutes to give a 404 if not found. 
+- Injects the Contact when found, or
+- Injects and reroutes to give a 404 if not found.
 
 Route-Model Binding Controller Method Signature
 
@@ -747,7 +747,6 @@ Route-Model Binding Controller Method Signature
 public function update(Request $request, Contact $contact)
 { /* ... */ }
 ```
-
 
 ---
 level: 2
@@ -761,7 +760,7 @@ layout: two-cols
 ### The Binding
 
 - Replace `int $id` with `Contact $contact`
-- Contact model is imported via `use \App\Models\Contact;` 
+- Contact model is imported via `use \App\Models\Contact;`
 
 ::left::
 
@@ -798,7 +797,6 @@ public function show(Contact $contact) {
     }
 ```
 
-
 ---
 layout: section
 ---
@@ -807,20 +805,103 @@ layout: section
 
 --- 
 level: 2
+layout: two-cols
 ---
 
 # Implementing Basic CRUD/BREAD
 
-Before we complete the example we will:
+::left::
 
-- Create contacts migration, factory & seeder,
-- Contact model,
-- Executed the migrations & seeder
+## Create these:
+
+- Model,
+- Migration, 
+- Factory,
+- Seeder, 
+- Form Requests, 
+- Controller, 
+- Routes
+
+::right::
+
+## When "making":
+
+Using `artisan make` for most of these...
+
+- Stub files are created quickly.
+
+- Actual code takes a little time.
+
+but...
+
+- Routes added manually
+
+--- 
+level: 2
+---
+
+# Implementing Basic CRUD/BREAD 2
+
+## Artisan "make" Sub-Commands
+
+| Create     | Artisan Command   | Example                                            |
+|------------|-------------------|----------------------------------------------------|
+| Model      | `make:model`      | `php artisan make:model Contact`                   |
+| Migration  | `make:migration`  | `php artisan make:migration create_contacts_table` |
+| Factory    | `make:factory`    | `php artisan make:factory ContactFactory`          |
+| Seeder     | `make:seeder`     | `php artisan make:seeder ContactSeeder`            |
+| Controller | `make:controller` | `php artisan make:controller ContactController`    |
+| Request    | `make:request`    | `php artisan make:request StoreContactRequest`     |
+
+--- 
+level: 2
+layout: two-cols-2-1
+---
+
+# Implementing Basic CRUD/BREAD 3
+
+::right:: 
+
+### Creates...
+
+- Model
+- Migration
+- Seeder
+- Factory
+- Pest Test
+- Policy
+- Resourceful Controller
+- Request
+
+::left::
+
+### One-Shot Make
+
+```shell
+php artisan make:model MODEL_NAME --all --seed --pest 
+```
+
+or
+
+```shell
+php artisan make:model MODEL_NAME -as --pest
+```
+
+`MODEL_NAME`: **singular** PascalCase version of the table/entity.
+
+For more details use `php artisan make:model --help`.
+
+--- 
+level: 2
+---
+
+# Implementing Basic CRUD/BREAD
+
+## Creating Contacts Feature
 
 For demonstration purposes, we presume a **Contact** has:
 
-- `title`, `given_name`, `family_name`, `nick_name`, `email`, ...
-  only.
+- `title`, `given_name`, `family_name`, `nick_name`, and `email`, only.
 
 The instructions presume you have your application in a folder
 `contact-list-2026-s1`.
@@ -835,25 +916,22 @@ level: 2
 
 # Implementing Basic CRUD/BREAD
 
-## Creating stub Model, Migration, Seeder and Factory
+## Creating Stubs
 
-```shell
+```shell [Shell]
 php artisan make:model Contact
 php artisan make:migration create_contacts_table
 php artisan make:factory ContactFactory
 php artisan make:seeder ContactSeeder
+php artisan make:controller ContactController
+php artisan make:request StoreContactRequest
+# etc
 ```
 
-Alternatively you may use:
+to be 'lazy' use:
 
 ```shell [Shell]
-php artisan make:model Contact --seed --factory --migration
-```
-
-Or even shorter:
-
-```shell [Shell]
-php artisan make:model Contact -mfs
+php artisan make:model Contact -as --pest
 ```
 
 ---
@@ -864,6 +942,8 @@ level: 2
 
 ## Migration code
 
+Open `database/migrations/YYYY_MM_DD_HHMMSS_create_contacts_table.php`:
+
 ```php [PHP] {all}
 Schema::create('contacts', function (Blueprint $table) {
     $table->id();
@@ -872,9 +952,9 @@ Schema::create('contacts', function (Blueprint $table) {
     $table->string('family_name', 64)->nullable();
     $table->string('nick_name', 32)->nullable();
     $table->string('email', 360)->nullable();
-    // TODO: Use an update migration to add user contact belongs to
+    // TODO: Create update migration to add user - contact relationship
     $table->timestamps();
-    // TODO: Use an update migration to add indexes
+    // TODO: Create update migration to add indexes
 });
 ```
 
@@ -893,7 +973,7 @@ Open the `database\seeders\DatabaseSeeder.php` class file.
 Start by adding the 'database' seeder code, which invokes each model's seeder
 in turn.
 
-```php [PHP] {1-2,11|1-4,9-11|all}
+```php [PHP] {1-2,11|1-4,10-13|1-4,5-7,10-13|1-4,8-9,10-13|all}
 public function run(): void
 {
     $this->call(
@@ -902,6 +982,7 @@ public function run(): void
             // seeding FIRST. e.g. RolePermissionSeeder::class,
             UserSeeder::class,
             // Add further seeder classes here. e.g. ContactSeeder::class,
+            ContactSeeder::class,
         ]
     );
 }
@@ -917,7 +998,25 @@ level: 2
 
 The `User` Model and `users` Table are created automatically by Laravel.
 
-We seed them for later use.
+We primarily add seed users for testing...
+
+Create a User Seeder class:
+
+```shell
+php artisan make:seeder UserSeeder 
+```
+
+Open the `database\seeders\UserSeeder.php` class file.
+
+Edit the `run` method...
+
+---
+level: 2
+---
+
+# Implementing Basic CRUD/BREAD
+
+## Seeder Code (Users)
 
 <Announcement type="info">
 Note that this is quite long, so we will show each user separately.
@@ -977,7 +1076,7 @@ public function run(): void
     // Seeder code is added in two stages:
     // - List of Seed Users
     $seedUsers = [
-        // Previous seed user removed for brevity
+        // Previous seed user 99 hidden for brevity
         [
             'id' => 100,
             'name' => 'Admin I Strator',
@@ -996,7 +1095,7 @@ public function run(): void
     // Seeder code is added in two stages:
     // - List of Seed Users
     $seedUsers = [
-        // Previous seed user removed for brevity
+        // Previous seed user 100 hidden for brevity
         [
             'id' => 200,
             'name' => 'Staff User',
@@ -1016,7 +1115,7 @@ public function run(): void
     // Seeder code is added in two stages:
     // - List of Seed Users
     $seedUsers = [
-        // Previous seed user removed for brevity
+        // Previous seed user 200 hidden for brevity
         [
             'id' => 300,
             'name' => 'Client User',
@@ -1036,7 +1135,7 @@ public function run(): void
     // Seeder code is added in two stages:
     // - List of Seed Users
     $seedUsers = [
-        // Previous seed user removed for brevity
+        // Previous seed user 300 hidden for brevity
         [
             'id' => 301,
             'name' => 'Client User II',
@@ -1056,7 +1155,7 @@ public function run(): void
     // Seeder code is added in two stages:
     // - List of Seed Users
     $seedUsers = [
-        // Previous seed user removed for brevity
+        // Previous seed user 301 hidden for brevity
         [
             'id' => 302,
             'name' => 'Client User III',
@@ -1076,7 +1175,7 @@ public function run(): void
     // Seeder code is added in two stages:
     // - List of Seed Users
     $seedUsers = [
-        // Previous seed user removed for brevity
+        // Previous seed user 302 hidden for brevity
         [
             'id' => 303,
             'name' => 'Client User IV',
@@ -1099,7 +1198,7 @@ public function run(): void
     // Seeder code is added in two stages:
     // - List of seed users
     $seedUsers = [
-        // Seed user data removed for brevity
+        // Seed user data hidden for brevity
     ];
 
     // - Creation code
@@ -1113,7 +1212,7 @@ public function run(): void
 ```
 
 ```php [PHP] {1-4,11-15|5-10|all}
-    // - List of Seed Users removed for brevity
+    // - List of Seed Users hidden for brevity
 
     // - Creation code
     foreach ($seedUsers as $newUser) {
@@ -1131,7 +1230,7 @@ public function run(): void
 ```
 
 ```php [PHP] {1-6,12-15|5-11}
-    // - List of Seed Users removed for brevity
+    // - List of Seed Users hidden for brevity
 
     // - Creation code
     foreach ($seedUsers as $newUser) {
@@ -1150,13 +1249,13 @@ public function run(): void
 ```
 
 ```php [PHP] {1-6,14-18|5-13}
-    // - List of Seed Users removed for brevity
+    // - List of Seed Users hidden for brevity
 
     // - Creation code
     foreach ($seedUsers as $newUser) {
 
-        // permissions code removed for brevity
-
+        // permissions code hidden for brevity
+        // if the seed user is not found, create them, otherwise update
         $user = User::updateOrCreate(
             ['id' => $newUser['id']],
             $newUser
@@ -1171,7 +1270,7 @@ public function run(): void
 ```
 
 ```php [PHP] {1-6,14-18|7-11}
-   // - List of Seed Users removed for brevity
+   // - List of Seed Users hidden for brevity
 
     // - Creation code
     foreach ($seedUsers as $newUser) {
@@ -1218,7 +1317,7 @@ level: 2
 ## Practice - Seeder Code (Contacts)
 
 ### Edit the File
- 
+
 Open the `database\seeders\ContactSeeder.php` class file.
 
 The seeder follows the same 'pattern' as the `UserSeeder.php` class.
@@ -1226,7 +1325,7 @@ The seeder follows the same 'pattern' as the `UserSeeder.php` class.
 - Seed Contacts
 - Creation Code
 
-We start by creating a 'blank contact' associative array that we can 
+We start by creating a 'blank contact' associative array that we can
 duplicate.
 
 ---
@@ -1265,7 +1364,7 @@ level: 2
 ## Seeder Code (Contacts)
 
 - Select the `[ 'title'=>` ... to ... `000, ],`
-- Duplicate this 10 times (total 11 copies)
+- Duplicate this 29 times (total 30 copies)
 - Fill in the data from the following table(s) into the templates
 
 Any fields that have no data remove them, for example:
@@ -1286,14 +1385,14 @@ level: 2
 
 ## Seeder Data (Contacts)
 
-| title | given_name | family_name | nick_name | email                     | user_id |
-|-------|------------|-------------|-----------|---------------------------|---------|
-| Ms    | Penny      | Lane        |           | Penny.Lane@example.com    | 303     |
-| Dr    | Maura      | Less        |           | Maura.Less@example.com    | 300     |
-|       | Kitty      | Litter      | Kit       | Kitty.Litter@example.com  | 302     |
-| Ms    | Dot        | Matrix      | Dotty     | Dot.Matrix@example.com    | 200     |
-| Cllr  | Robin      | Money       | Rob       | Robin.Money@example.com   | 100     |
-|       | Chip       | Munk        | Woody     | Chip.Munk@example.com     | 303     |
+| title | given_name | family_name | nick_name | email                    | user_id |
+|-------|------------|-------------|-----------|--------------------------|---------|
+| Ms    | Penny      | Lane        |           | Penny.Lane@example.com   | 303     |
+| Dr    | Maura      | Less        |           | Maura.Less@example.com   | 300     |
+|       | Kitty      | Litter      | Kit       | Kitty.Litter@example.com | 302     |
+| Ms    | Dot        | Matrix      | Dotty     | Dot.Matrix@example.com   | 200     |
+| Cllr  | Robin      | Money       | Rob       | Robin.Money@example.com  | 100     |
+|       | Chip       | Munk        | Woody     | Chip.Munk@example.com    | 303     |
 
 ---
 level: 2
@@ -1303,14 +1402,14 @@ level: 2
 
 ## Seeder Data (Contacts)
 
-| title | given_name | family_name | nick_name | email                     | user_id |
-|-------|------------|-------------|-----------|---------------------------|---------|
-|       | Rusty      | Nails       |           | Rusty.Nails@example.com   | 300     |
-|       | Hazel      | Nutt        | Crackers  | Hazel.Nutt@example.com    | 200     |
-| Ms    | Zoe        | Ology       |           | Zoe.Ology@example.com     | 100     |
-|       | Rick       | O'Shea      |           | Rick.O'Shea@example.com   | 303     |
-| Mstr  | Tad        | Pole        | Tad       | Tad.Pole@example.com      | 200     |
-| Mstr  | Peter      | Pan         |           | Peter.Pan@example.com     | 302     |
+| title | given_name | family_name | nick_name | email                   | user_id |
+|-------|------------|-------------|-----------|-------------------------|---------|
+|       | Rusty      | Nails       |           | Rusty.Nails@example.com | 300     |
+|       | Hazel      | Nutt        | Crackers  | Hazel.Nutt@example.com  | 200     |
+| Ms    | Zoe        | Ology       |           | Zoe.Ology@example.com   | 100     |
+|       | Rick       | O'Shea      |           | Rick.O'Shea@example.com | 303     |
+| Mstr  | Tad        | Pole        | Tad       | Tad.Pole@example.com    | 200     |
+| Mstr  | Peter      | Pan         |           | Peter.Pan@example.com   | 302     |
 
 ---
 level: 2
@@ -1354,15 +1453,14 @@ level: 2
 
 ## Seeder Data (Contacts)
 
-| title | given_name | family_name | nick_name | email                     | user_id |
-|-------|------------|-------------|-----------|---------------------------|---------|
-| Prof  | Jed I.     | Knight      | Obi-wan   | Jed.I.Knight@example.com  | 300     |
-| Mrs   | Sandy      | Beach       |           | Sandy.Beach@example.com   | 303     |
-| Sir   | Sonny      | Day         |           | Sonny.Day@example.com     | 301     |
-|       | Windy      | Day         |           | Windy.Day@example.com     | 301     |
-| Mr    | Rocky      | Beach       |           | Rocky.Beach@example.com   | 303     |
-|       | Rusty      | Dorr        | Squeeky   | Rusty.Dorr@example.com    | 100     |
-
+| title | given_name | family_name | nick_name | email                    | user_id |
+|-------|------------|-------------|-----------|--------------------------|---------|
+| Prof  | Jed I.     | Knight      | Obi-wan   | Jed.I.Knight@example.com | 300     |
+| Mrs   | Sandy      | Beach       |           | Sandy.Beach@example.com  | 303     |
+| Sir   | Sonny      | Day         |           | Sonny.Day@example.com    | 301     |
+|       | Windy      | Day         |           | Windy.Day@example.com    | 301     |
+| Mr    | Rocky      | Beach       |           | Rocky.Beach@example.com  | 303     |
+|       | Rusty      | Dorr        | Squeeky   | Rusty.Dorr@example.com   | 100     |
 
 ---
 level: 2
@@ -1373,18 +1471,17 @@ level: 2
 ## Model Code
 
 The Contact model requires us to define the:
-- fillable fields, 
-- protected fields and 
+
+- fillable fields,
+- protected fields and
 - type casts.
 
 We are also able to define:
 
-- utility methods, 
+- utility methods,
 - calculated attributes
-- relationships between models and 
+- relationships between models and
 - other business logic.
-
-
 
 ---
 level: 2
@@ -1393,7 +1490,6 @@ level: 2
 # Implementing Basic CRUD/BREAD
 
 ## Model Code
-
 
 Open the `App\Models\Contact.php` model class file.
 
@@ -1417,7 +1513,6 @@ protected $fillable = [
 
 ```
 
-
 ```php [PHP] {7-12}
 
 protected $fillable = [ ... ]; // code folded to save space
@@ -1429,8 +1524,6 @@ protected $fillable = [ ... ]; // code folded to save space
 protected $hidden = [];
 
 ```
-
-
 
 ```php [PHP] {5-12}
 protected $fillable = [ ... ]; // code folded to save space
@@ -1467,18 +1560,15 @@ php artisan migrate
 
 ### Fresh migration
 
-
 <Announcement type="error">
 This DESTROYS all existing data. <br> DO NOT use on a production / live databas.
 </Announcement>
 
 Migrating from the beginning: drops all tables & deletes all data
 
-
 ```shell
 php artisan migrate:fresh
 ```
-
 
 ---
 level: 2
@@ -1491,16 +1581,17 @@ level: 2
 ### Seed Database
 
 Seeding a database may be executed for:
-- all seeders, or 
+
+- all seeders, or
 - individual seeders.
 
-Run all seeders: 
+Run all seeders:
 
 ```shell
 php artisan db:seed
 ```
 
-Run a given seeder (e.g. ContactSeeder): 
+Run a given seeder (e.g. ContactSeeder):
 
 ```shell
 php artisan db:seed --seeder=ContactSeeder
@@ -1512,7 +1603,7 @@ level: 2
 
 # Implementing Basic CRUD/BREAD
 
-##  Recreate Tables & Seed from Scratch
+## Recreate Tables & Seed from Scratch
 
 <Announcement type="info" title="Make a fresh start">
 <p>When working on a <strong>TESTING</strong>/<strong>DEVELOPMENT</strong> 
@@ -1535,7 +1626,6 @@ level: 2
 ---
 
 # Implementing Basic CRUD/BREAD
-
 
 --- 
 level: 2
