@@ -36,7 +36,8 @@
         "italic": false
       },
       "transition": "fade",
-      "aspectRatio": "16/10"
+      "aspectRatio": "16/10",
+       "addons": ["slidev-component-poll"]
     }
   },
 
