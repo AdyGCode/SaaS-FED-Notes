@@ -797,6 +797,172 @@ public function show(Contact $contact) {
     }
 ```
 
+
+---
+layout: section
+---
+
+# Validation / Authorisation Requests
+
+--- 
+level: 2
+layout: two-cols
+---
+
+# Validation / Authorisation Requests
+
+Requests are stored in `app\Http\Requests`.
+
+::left:: 
+
+They provide two features by default:
+- Authorisation to perform a request
+- Validation of data sent to the request
+
+By default, we get:
+- Update MODEL_NAME Request and Create MODEL_NAME Request
+- We may add others
+
+::right:: 
+
+Created using:
+
+```shell
+php artisan make:request NAME_OF_REQUEST
+```
+
+Where NAME_OF_REQUEST would be similar to:
+
+```shell
+StoreContactUsRequest
+```
+
+--- 
+level: 2
+layout: two-cols
+---
+
+# Validation / Authorisation Requests 2
+
+<br>
+
+## Request Code Structure
+
+Two parts:
+
+```php [PHP] {none|1-4|6-11|all}
+    public function authorize(): bool
+    {
+        return false;
+    }
+
+    public function rules(): array
+    {
+        return [
+            //
+        ];
+    }
+```
+
+
+--- 
+level: 2
+layout: two-cols
+---
+
+# Validation / Authorisation Requests 3
+
+::left::
+
+## authorize
+
+By default, access is presented (`false`)
+
+Example options:
+
+- allow everyone access: <br>`true`
+- logged-in, allow access:<br> `auth()`
+- logged-in, apply permission: <br>`auth()->can('users-edit-any')`
+
+
+::right::
+
+## validate
+
+By default, there is no validation
+
+Example:
+
+```php
+return [
+    'email': [
+        'required',
+        'email',
+        'unique:users',
+    ],
+'given_name': [
+    'nullable',
+    'max:64',
+],
+```
+
+
+--- 
+level: 2
+layout: two-cols-2-1
+---
+
+# Validation / Authorisation Requests 4
+
+::left::
+
+### Another example:
+```php
+return [
+    'name' => ['required', 'min:2', 'max:192',],
+    'email' => [
+        'required',
+        'string',
+        'email',
+        'max:255',
+        Rule::unique(User::class)->ignore($user),
+    ],
+    'password' => [
+        'sometimes',
+        'nullable',
+        'confirmed',
+        Rules\Password::defaults()
+    ],
+    'role' => ['nullable',],
+];
+```
+
+::right::
+
+### Note on Validation
+
+- Has many options.
+- Including, but not limited to:
+
+`Accepted` `After`  <br> `Alpha`
+`Between` 
+`Contains` <br> 
+`Confirmed` 
+`Extensions` <br> 
+`Filled` 
+`Declined If` <br>
+`Min` 
+`Doesnt End With` <br>
+`IP Address` <br> 
+`Not In` 
+`Missing` <br>
+`Max Digits` 
+`Unique` <br>
+`Sometimes` 
+`MIME Types` 
+
+
+
 ---
 layout: section
 ---
