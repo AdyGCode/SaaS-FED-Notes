@@ -792,6 +792,8 @@ public function store(StoreTopicRequest $request)
 
 ---
 layout: section
+level: 2
+
 ---
 
 # Topics Admin: Create/Add
@@ -1036,6 +1038,7 @@ level: 2
 
 ---
 layout: section
+level: 2
 ---
 
 # Topics Admin: Create/Add
@@ -1284,6 +1287,7 @@ level: 2
 The route (<code>admin.topics.index</code>) will be updated to 
 <code>admin.topics.show</code> when we implement READ from the BREAD actions.
 </Announcement>
+
 ---
 level: 2
 ---
@@ -1306,6 +1310,7 @@ level: 2
 The route (<code>admin.topics.index</code>) will be updated to
 <code>admin.topics.edit</code> when we implement EDIT from the BREAD actions.
 </Announcement>
+
 ---
 level: 2
 ---
@@ -1331,7 +1336,242 @@ The route (<code>admin.topics.index</code>) will be updated to
 <code>admin.topics.delete</code> when we implement the DELETE from the BREAD actions.
 </Announcement>
 
+---
+layout: section
+---
 
+# Topics Admin: Show
+
+---
+level: 2
+---
+
+# Topics Admin: Show
+
+- Sub-feature of Topic Admin
+- Displays the details for the topic
+- Allows access to edit
+- Allows topic to be deleted
+
+---
+level: 2
+---
+
+# TODO: Sample Image here
+
+---
+level: 2
+---
+
+# Topics Admin: Show
+
+## Update 'show' primary link button route 
+
+Edit the `admin/topcs/index.blade.php` file and alter the show's primary 
+link button's href to:
+
+```html [Blade & HTML]
+<x-primary-link-button href="{{ route('admin.topics.show', $topic) }}"
+```
+
+---
+level: 2
+---
+
+# Topics Admin: Show
+## Update admin web routes
+
+Edit the `web.admin.php` route file
+
+Change the `->except()` method by removing 'show'.
+
+```php
+        Route::resource('topics', TopicController::class)
+            ->except(['edit', 'update', 'destroy']);
+```
+
+---
+level: 2
+---
+
+# Topics Admin: Show
+## Update Topic Controller
+
+Open the `app/Http/Controllers/Admin/TopicController.php` and update the show 
+method
+
+```php
+    public function show(Topic $topic)
+    {
+        return view('admin.topics.show')
+            ->with('topic', $topic);
+    }
+```
+
+Uses route-model binding to get the Topiuc details.
+
+---
+level: 2
+---
+
+# Topics Admin: Show
+## Topic Show UI
+
+Create a new file:
+
+```shell
+touch resources/admin/topics/show.blade.php
+```
+
+Add the "Common wrapper" for Admin layouts (on next slide).
+
+
+---
+level: 2
+---
+
+# Topics Admin: Show
+## Standard Admin Page Layout Wrapper
+
+
+````md magic-move
+
+
+```php
+<x-admin-layout>
+    <!-- TODO: Header Slot -->
+    <!-- TODO: Content Slot -->
+    <!-- Content slot dependent on the page function -->
+</x-admin-layout>
+```
+
+```html [HTML & Blade]
+<!-- Header Slot Code -->
+<x-slot name="header">
+    <h2 class="font-semibold text-xl text-white leading-tight">
+        {{ __('Topics Admin') }}
+    </h2>
+</x-slot>
+```
+
+```html
+<!-- Content Slot Code -->
+<section class="py-4 mx-8 space-y-4 ">
+  <header class="flex justify-between">
+      <h3 class="text-2xl font-bold text-zinc-700">
+          Topic Details
+      </h3>
+
+      <x-primary-link-button href="{{ route('admin.topics.create') }}">Add Topic</x-primary-link-button>
+  </header>
+
+  <!-- TODO: Content of page here -->  
+</section>
+```
+
+````
+
+---
+level: 2
+---
+
+# Topics Admin: Show
+## Show Page Details
+
+For the Show page the "Content of page" will be:
+
+````md magic-move
+
+```html
+<!-- Layout for card details code -->
+<div class="overflow-x-auto rounded bg-white border border-gray-300
+            shadow-sm w-full sm:w-1/2 lg:w-1/3 p-4 sm:p-8
+            sm:flex flex-col sm:justify-between sm:gap-2 lg:gap-4">
+
+    <header class="bg-gray-200 -m-8 mb-0 p-4">
+        <h3 class="text-xl font-medium text-pretty text-gray-900">
+            {{ $topic->name }}
+        </h3>
+    </header>
+
+    <!-- TODO: Description and Creation Date -->
+</div>
+```
+
+
+```html
+<!-- Description and Creation Date -->
+<p class="mt-4 line-clamp-2 text-pretty text-gray-700">
+    @empty($topic->description)
+        n/a
+    @else
+        {{ $topic->description }}
+    @endempty
+</p>
+
+<div class="flex items-center gap-2">
+    <p class="text-gray-700">
+        Added:
+    </p>
+    <p class="text-gray-700">{{ $topic->created_at }}</p>
+</div>
+</dl>
+<!-- TODO: Card Footer -->
+```
+
+```html
+<!-- Card Footer -->
+<footer class="mt-2 gap-2 flex justify-end content-between">
+    <!-- TODO: Show ALl Link Button -->
+    <!-- TODO: Edit Link Button -->
+    <!-- TODO: Delete Form -->
+</footer>
+```
+
+
+```html
+<!-- Card Footer -->
+<footer class="mt-2 gap-2 flex justify-end content-between">
+    <x-primary-link-button href="{{ route('admin.topics.index') }}"
+                           class="hover:bg-green-800!">
+        <i class="fa-solid fa-eye"></i>
+        <span class="sr-only">All</span>
+    </x-primary-link-button>
+    <!-- TODO: Edit Link Button -->
+    <!-- TODO: Delete Form -->
+</footer>
+```
+
+
+```html
+<!-- Edit Link Button -->
+<x-primary-link-button href="{{ route('admin.topics.index', $topic) }}"
+                       class="hover:bg-amber-800!">
+    <i class="fa-solid fa-edit"></i>
+    <span class="sr-only">Edit</span>
+</x-primary-link-button>
+```
+
+
+```html
+<!-- Delete Form and Button -->
+<form action="{{ route('admin.topics.index', $topic) }}"
+      method="post">
+    @csrf
+    @method('delete')
+    <x-secondary-button class="hover:bg-red-800! hover:text-white!">
+        <i class="fa-solid fa-trash"></i>
+        <span class="sr-only">Delete</span>
+    </x-secondary-button>
+</form>
+```
+
+
+````
+
+---
+level: 2
+---
 
 
 
@@ -1340,7 +1580,7 @@ The route (<code>admin.topics.index</code>) will be updated to
 layout: section
 ---
 
-# Recap Checklist
+# Recap
 
 ---
 level: 2
@@ -1405,6 +1645,14 @@ experience.</p>
 </Announcement>
 
 ---
+layout: section
+---
+
+# Acknowledgements & References
+
+---
+level: 2
+---
 
 # Acknowledgements & References
 
@@ -1447,6 +1695,7 @@ level: 2
 
 ---
 layout: end
+level: 2
 ---
 
 # Fin!
