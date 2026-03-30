@@ -84,6 +84,24 @@ figureUrl: public/orly-book-cover-saas-bread.png
 level: 2
 ---
 
+# Warm-up time!
+
+Split into pairs (Lecturer will indicate how)
+
+Before writing any code, we need to be clear about what the web expects.
+
+## Question
+
+Answer the following in plain language:
+
+- What does an HTTP status code communicate?
+- What does idempotent mean in the context of HTTP?
+- Why should a developer care about idempotency?
+
+---
+level: 2
+---
+
 # A quick reminder
 
 Laradumps is a great way to help debug code.
@@ -407,7 +425,20 @@ level: 2
 
 # Topics: Migrate, Seed, Route
 
-## Routes for administration
+## Authentication for Staff/Admin Routes:
+
+Authentication is:
+
+- Added via Laravel Breeze,
+- Enforced via route middleware and FormRequest authorization.
+
+--- 
+level: 2
+---
+
+# Topics: Migrate, Seed, Route
+
+## Routes for Administration
 
 We already know we can split `routes\web.php` into several files.
 
@@ -726,9 +757,6 @@ We will create the following:
 - validates the user submitted data
 - verifies user allowed to add topic
 
-
-
-
 ---
 level: 2
 layout: figure
@@ -897,7 +925,8 @@ class StoreTopicRequest extends FormRequest
             'name'=>[
                 'required',
                 'string',
-                'max:16'
+                'max:16',
+                'unique:topics'
             ],
             // description, available rules to come
         ];
@@ -987,6 +1016,7 @@ level: 2
             'nullable' => 'You may leave :attribute empty',
             'string' => ':attribute must contain text',
             'max' => 'Maximum length of :attribute is :max',
+            'unique' => 'The :attribute has already been taken.',
         ];
     }
 ```
@@ -1353,11 +1383,17 @@ level: 2
 - Allows access to edit
 - Allows topic to be deleted
 
+
 ---
-level: 2
+layout: figure
+figureUrl: public/topic-admin-index-show-link.png
 ---
 
-# TODO: Sample Image here
+---
+layout: figure
+figureUrl: public/topic-admin-show.png
+---
+
 
 ---
 level: 2
@@ -1365,12 +1401,13 @@ level: 2
 
 # Topics Admin: Show
 
-## Update 'show' primary link button route 
+## Update 'show' primary link button route
 
-Edit the `admin/topcs/index.blade.php` file and alter the show's primary 
+Edit the `admin/topcs/index.blade.php` file and alter the show's primary
 link button's href to:
 
 ```html [Blade & HTML]
+
 <x-primary-link-button href="{{ route('admin.topics.show', $topic) }}"
 ```
 
@@ -1379,6 +1416,7 @@ level: 2
 ---
 
 # Topics Admin: Show
+
 ## Update admin web routes
 
 Edit the `web.admin.php` route file
@@ -1395,9 +1433,10 @@ level: 2
 ---
 
 # Topics Admin: Show
+
 ## Update Topic Controller
 
-Open the `app/Http/Controllers/Admin/TopicController.php` and update the show 
+Open the `app/Http/Controllers/Admin/TopicController.php` and update the show
 method
 
 ```php
@@ -1415,6 +1454,7 @@ level: 2
 ---
 
 # Topics Admin: Show
+
 ## Topic Show UI
 
 Create a new file:
@@ -1431,8 +1471,8 @@ level: 2
 ---
 
 # Topics Admin: Show
-## Standard Admin Page Layout Wrapper
 
+## Standard Admin Page Layout Wrapper
 
 ````md magic-move
 
@@ -1476,6 +1516,7 @@ level: 2
 ---
 
 # Topics Admin: Show
+
 ## Show Page Details
 
 For the Show page the "Content of page" will be:
@@ -1497,7 +1538,6 @@ For the Show page the "Content of page" will be:
     <!-- TODO: Description and Creation Date -->
 </div>
 ```
-
 
 ```html
 <!-- Description and Creation Date -->
@@ -1528,20 +1568,18 @@ For the Show page the "Content of page" will be:
 </footer>
 ```
 
-
 ```html
 <!-- Card Footer -->
 <footer class="mt-2 gap-2 flex justify-end content-between">
     <x-primary-link-button href="{{ route('admin.topics.index') }}"
                            class="hover:bg-green-800!">
-        <i class="fa-solid fa-eye"></i>
+        <i class="fa-solid fa-list"></i>
         <span class="sr-only">All</span>
     </x-primary-link-button>
     <!-- TODO: Edit Link Button -->
     <!-- TODO: Delete Form -->
 </footer>
 ```
-
 
 ```html
 <!-- Edit Link Button -->
@@ -1551,7 +1589,6 @@ For the Show page the "Content of page" will be:
     <span class="sr-only">Edit</span>
 </x-primary-link-button>
 ```
-
 
 ```html
 <!-- Delete Form and Button -->
@@ -1570,11 +1607,523 @@ For the Show page the "Content of page" will be:
 ````
 
 ---
+layout: section
+---
+
+# Topics Admin: Edit
+
+---
 level: 2
 ---
 
+# Topics Admin: Edit
+
+Edit requires:
+
+- Update the admin topics routing
+- Update the links in index & show
+- Edit Admin Topics view
+- Topic Controller edit method
+- Topic Controller update method
+- Update Topic Request
 
 
+
+---
+layout: figure
+figureUrl: public/topic-admin-show-edit-link.png
+---
+
+
+---
+layout: figure
+figureUrl: public/topic-admin-edit-page.png
+---
+
+
+---
+layout: figure
+figureUrl: public/topic-admin-edit-error.png
+---
+
+
+---
+level: 2
+---
+
+# Topics Admin: Edit
+
+## Update Admin  Topic Route
+
+- Remove the 'edit' and 'update' exceptions
+
+```php
+        Route::resource('topics', TopicController::class)
+            ->except(['destroy']);
+```
+
+---
+level: 2
+---
+
+# Topics Admin: Edit
+
+## Update Links
+
+Edit:
+
+- `/resources/views/admin/topics/index.blade.php`
+- `/resources/views/admin/topics/show.blade.php`
+
+Locate the "edit" primary link button...
+
+Change:
+
+````md magic-move
+
+```php
+ <x-primary-link-button href="{{ route('admin.topics.index') }}"
+                        class="hover:bg-amber-800!">
+```
+
+```php
+ <x-primary-link-button href="{{ route('admin.topics.edit', $topic) }}"
+                        class="hover:bg-amber-800!">
+```
+
+````
+
+---
+level: 2
+---
+
+# Topics Admin: Edit
+
+## Edit Method
+
+- Retrieve topic
+- Call edit view to be rendered and sent to client
+
+---
+level: 2
+---
+
+# Topics Admin: Edit
+
+## Edit Method
+
+```php [PHP]
+public function edit(Topic $topic)
+{
+    return view('admin.topics.edit')
+        ->with('topic', $topic)
+        ->with('messages');    
+}
+```
+
+---
+level: 2
+---
+
+# Topics Admin: Edit
+
+## Update Request
+
+- Ignore current topic when editing
+    - If not, update will fail due to perceived duplicate
+- Define error messages
+- Make sure available is set
+
+````md magic-move
+
+```php [PHP]
+public function authorize(): bool
+{
+    return auth()->check();
+}
+```
+
+```php [PHP]
+public function rules(): array
+{
+    return [
+        'name' => [ ... ],
+        'description' => [ ... ],
+        'available' => [ ... ],
+    ];
+}
+```
+
+```php [PHP]
+        'name' => [
+            'required',
+            'string',
+            'max:16',
+            Rule::unique(Topic::class)
+                ->ignoreModel($this->route('topic'))
+        ],
+```
+
+```php [PHP]
+        'description' => [
+            'nullable',
+            'string'
+        ],
+```
+
+```php [PHP]
+        'available' => [
+            'required',
+            'boolean'
+        ],
+```
+
+```php
+    public function messages(): array
+    {
+        return [
+            'required' => 'Please give a value for :attribute',
+            'nullable' => 'You may leave :attribute empty',
+            'string' => ':attribute must contain text',
+            'max' => 'Maximum length of :attribute is :max',
+            'unique' => 'The :attribute has already been taken.',
+        ];
+    }
+```
+
+```php [PHP]
+    protected function prepareForValidation(): void
+    {
+        if (!$this->filled('available')) {
+            $this->merge([
+                'available' => false,
+            ]);
+        }
+    }
+```
+
+````
+
+---
+level: 2
+---
+
+# Topics Admin: Edit
+
+## Update Method
+
+```php [PHP]
+    public function update(UpdateTopicRequest $request, Topic $topic)
+    {
+        $validated = $request->validated();
+        $topic->update($validated);
+        return redirect(route('admin.topics.index'))
+            ->with('message','updated');
+    }
+```
+
+---
+level: 2
+---
+
+# Topics Admin: Edit
+
+## Edit View
+
+Easiest way to create the Edit view:
+
+- Duplicate the`resources/views/admin/topics/index.blade.php`
+- Naming the copy `resources/views/admin/topics/edit.blade.php`
+
+Update the following:
+
+- Add `put` method
+- Name input
+- Description text area
+- Available checkbox
+- Heading
+
+---
+level: 2
+---
+
+# Topics Admin Edit
+
+## Edit View
+
+Update each part:
+
+````md magic-move
+
+```html [HTML & Blade]
+<section class="py-4 mx-8 space-y-4 ">
+    <header>
+        <h3 class="text-2xl font-bold text-zinc-700">
+            Edit Topic
+        </h3>
+    </header>
+```
+
+```html [HTMNL & Blade]
+<form action="{{ route('admin.topics.update', $topic) }}"
+      method="post"
+      class="flex flex-col p-4 bg-white">
+
+  @csrf
+  @method('put')
+```
+
+```html [HTMNL & Blade]
+<x-text-input id="name"
+              name="name"
+              type="text"
+              placeholder="Name of topic"
+              value="{{ old('name')?? $topic->name }}"
+              autocomplete="name"
+              class="w-full"
+/>
+```
+
+```html [HTML & Blade]
+<x-textarea id="description"
+            name="description"
+            type="text"
+            :value="old('description')??$topic->description"
+            placeholder="Topic Description"
+            autocomplete="description"
+/>
+```
+
+```html [HTML & Blade]
+<input type="checkbox"
+       value="1"
+       id="available"
+       name="available"
+       @if($topic->available) checked @endif
+       class="peer sr-only">
+```
+
+````
+
+<Announcement type="info" title="Update textarea component">
+<p>
+You may need to edit the 
+<code>resources/views/components/textarea.blade.php</code> file and replace
+<code>message</code> with <code>value</code>.
+</p>
+</Announcement>
+
+
+
+---
+layout: section
+---
+
+# Topics Admin: Delete
+
+---
+level: 2
+layout: two-cols
+---
+
+# Topics Admin: Delete
+
+<br>
+
+## Four ways to 'delete'
+
+::left::
+
+### Hard or Soft Delete
+
+- Non-Reversible Delete, or
+- Soft Delete
+
+<br>
+
+### To Confirm, or Not to Confirm
+
+- Immediate, or
+- Confirm.
+
+::right::
+
+### This example:
+
+- Non-Reversible (hard)
+- Immediate (no confirmation)
+
+---
+level: 2
+---
+
+# Topics Admin: Delete
+
+- update destroy route
+- add destroy method
+- update the delete form actions
+
+---
+layout: figure
+figureUrl: public/topic-admin-delete-button.png
+figureCaption: Delete button hovered over
+---
+
+---
+layout: figure
+figureUrl: public/topic-admin-delete-result.png
+figureCaption: Topic has been deleted, no confirmation
+---
+
+
+---
+level: 2
+---
+
+# Topics Admin: Delete
+
+## Update destroy route
+
+Remove the except, as we now have all the actions
+
+```php [PHP]
+Route::resource('topics', TopicController::class);
+```
+
+---
+level: 2
+---
+
+# Topics Admin: Delete
+
+## Update delete form action (index and show views)
+
+Open:
+
+- `resources/views/admin/topics/index.blade.php`
+- `resources/views/admin/topics/edit.blade.php`
+
+Update the secondary button to be a submit button:
+
+````md magic-move
+```php
+<x-secondary-button class="hover:bg-red-800! hover:text-white!">
+    <i class="fa-solid fa-trash"></i>
+    <span class="sr-only">Delete</span></x-secondary-button>
+```
+
+```php
+<x-secondary-button class="hover:bg-red-800! hover:text-white!" type="submit">
+    <i class="fa-solid fa-trash"></i>
+    <span class="sr-only">Delete</span></x-secondary-button>
+```
+````
+
+---
+level: 2
+---
+
+# Topics Admin: Delete
+
+## Add destroy method
+
+Edit `Admin/TopicController.php`
+
+```php [PHP]
+    public function destroy(Topic $topic)
+    {
+        $oldTopic = $topic;
+        $topic->delete();
+
+        return redirect(route('admin.topics.index'))
+            ->with('massage','deleted');
+    }
+```
+
+---
+layout: section
+---
+
+# Admin Navigation Update
+
+
+---
+level: 2
+---
+
+# Admin Navigation Update
+
+We need to:
+- update the admin sidebar navigation to add "Topics"
+
+
+Open `resources/views/layouts/`admin-navigation.blade.php
+
+Search for `Jokes`
+
+
+---
+level: 2
+---
+
+# Admin Navigation Update
+
+Edit the `route()` to point to:
+- `admin.topics.index`
+
+Edit the `routeIs()` to point to:
+- `admin.topics.*`
+
+Update the `__('Jokes')` to:
+- `__('Topics')`
+
+Change the Icon to suit, for example:
+- `fa-list`
+- `fa-tag`
+
+---
+level: 2
+---
+
+# Admin Navigation Update
+
+Test the navigation update by heading to:
+
+- `http://localhost:8000/admin/topics`
+
+---
+layout: section
+---
+
+# Exercises
+
+---
+level: 2
+---
+
+# Exercise: Fill the Table (Pairs)
+
+For each action:
+
+- identify the HTTP verb,
+- whether it is safe, idempotent, both, or neither,
+- and the most appropriate success status code.
+
+| Action           | Verb | Safe? | Idempotent? | Typical Success Code |
+|------------------|------|-------|-------------|----------------------|
+| Browse contacts  | ?    | ?     | ?           | ?                    |
+| View one contact | ?    | ?     | ?           | ?                    |
+| Create a contact | ?    | ?     | ?           | ?                    |
+| Update a contact | ?    | ?     | ?           | ?                    |
+| Delete a contact | ?    | ?     | ?           | ?                    |
+
+<!-- 
+Expected Concepts (Instructor Notes)
+GET → Safe ✅, Idempotent ✅
+POST → Not safe ❌, Not idempotent ❌
+PUT/PATCH → Not safe ❌, Idempotent ✅
+DELETE → Not safe ❌, Idempotent ✅
+-->
 
 ---
 layout: section
@@ -1588,7 +2137,7 @@ level: 2
 
 # Recap Checklist
 
-- [ ]  I can define safe vs idempotent and pick verbs accordingly.
+- [ ]  I can choose appropriate HTTP verbs (safe vs idempotent) and apply them using Laravel resource routes.
 - [ ]  I can map CRUD/BREAD to routes, names, and status codes.
 - [ ]  I can create resourceful routes and rely on route model binding.
 - [ ]  I can validate with Form Requests (web gets redirect+errors, API gets
@@ -1620,12 +2169,13 @@ Think back over everything we explored today:
 
 - HTTP verbs,
 - CRUD/BREAD operations,
-- Laravel’s resourceful routing, and
-- validation.
+- Laravel’s resourceful routing, and validation.
 
 Now imagine you’ve been asked to extend the Contact‑List application with
 a brand‑new feature... For example, tagging contacts, marking VIPs, or
 bulk‑updating records.
+
+You must support validation, authorization, and pagination.
 
 ::right::
 
