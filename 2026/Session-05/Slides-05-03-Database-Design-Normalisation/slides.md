@@ -120,34 +120,172 @@ level: 2
 
 We typically work through:
 
-1. **UNF (Unnormalised Form)**
+1. **0NF/UNF (Unnormalised Form)**
 2. **1NF – First Normal Form**
 3. **2NF – Second Normal Form**
 4. **3NF – Third Normal Form**
 
-<Announcement type="warning" style="width: 100%; padding: 1rem;"
-title="Important">
+<br>
+<br>
 
-- Each step builds on the previous one
-
-- You do **not skip steps**
-
-</Announcemnt>
+<Announcement type="warning" style="width: 100%; padding: 1rem;" title="Important">
+<ul>
+<li>Each step builds on the previous one</li>
+<li>You do <strong>not skip steps</strong></li>
+</ul> 
+</Announcement>
 
 
 ---
 layout: section
 ---
 
-# UNF – Unnormalised Form
+# Entity Relationship Diagrams (ERDs)
+
+---
+level: 2
+layout: two-cols
+---
+
+# ERDs – Purpose
+
+::left::
+
+### ERDs - Visual Tool
+
+An **Entity Relationship Diagram (ERD)** is a visual model that shows:
+
+- Tables (entities)
+- Relationships between tables
+- Cardinality:
+  - One‑to‑One (1:1)
+  - One‑to‑Many (1:M)
+  - Many‑to‑Many (M:N)
+
+::right::
+
+### ERDs help identify:
+
+- Missing tables
+- Invalid relationships
+- Normalisation problems
+
+---
+level: 2
+layout: two-cols
+---
+
+# ERD Basics
+
+::left::
+
+## Entities
+
+Also Known As: Tables
+
+```mermaid
+---
+config:
+    layout: elk
+---
+erDiagram
+    direction LR
+    Table_Name {
+        TYPE    FIELD_NAME PK  
+        TYPE    FIELD_NAME   
+    }
+
+```
+
+::right::
+
+## Example Diagram
+
+```mermaid
+---
+config:
+    layout: elk
+---
+erDiagram
+    direction LR
+    
+ Messages {
+        int id PK
+        string name
+        string email
+        int topic_id FK
+        string subject
+        text message
+    }
+    
+ Topics {
+        int id PK
+        string name
+        string description
+    }
+  
+    Topics ||--|{ Messages : ""
+    
+```
+
+---
+level: 2
+layout: two-cols
+---
+
+# ERD and Common Relationship Types
+
+::left::
+
+## The "Crows Feet" Notation
+
+```mermaid
+---
+config:
+    layout: elk
+---
+erDiagram
+    "Table A" ||--|| "Table B" : "one-to-one"
+    "Table C" ||--|{ "Table D" : "one-to-many"
+    "Table E" }|--|{ "Table F" : "many-to-many"
+```
+
+::right::
+
+## Note on ERDs:
+
+ERDs allow:
+- representation of tables & relationships
+- identification of design issues
+
+<br>
+
+## Diagram Note:
+
+Common relationships:
+
+<div style="font-size: 0.95rem">
+
+- 1:1 one-to-one → rare: merge / used as lookup tables
+- 1:M one-to-many → common: use foreign keys 
+- M:N many-to-many → issue: must be resolved
+
+</div>
+
+---
+layout: section
+---
+
+# 0NF (or UNF) 
+# Zero -or- Un-normalised Form
 
 ---
 level: 2
 ---
 
-## UNF (0NF) – Unnormalised Data
+## 0NF (UNF) – Zero or  Un-normalised Data
 
-UNF describes **raw, collected data**:
+0NF/UNF describes **raw, collected data**:
 
 - Repeating groups
 - Multi‑valued fields
@@ -173,6 +311,48 @@ level: 2
 - Repeating columns
 - Difficult to query and extend
 
+
+---
+level: 2
+layout: two-cols
+---
+
+## 0NF/UNF – Conceptual ERD
+
+::left::
+
+```mermaid
+erDiagram
+    RAW_BOOK_DATA {
+        string book_title
+        string isbn
+        string publisher
+        string author_list
+    }
+```
+
+::right::
+
+For dbdiagram.io the DBML is:
+
+```text
+Table RAW_BOOK_DATA {
+  book_title varchar
+  isbn varchar
+  publisher varchar
+  author_list varchar
+}
+```
+
+<!--
+Presenter Notes:
+- 0NF/UNF represents raw, collected data.
+- Highlight the multi-valued author_list field as the main design flaw.
+- No keys, no relationships, no integrity guarantees.
+-->
+
+
+
 ---
 layout: section
 ---
@@ -189,9 +369,13 @@ level: 2
 
 ## A table is in **First Normal Form (1NF)** if:
 
+<div style="font-size: 1.5rem">
+
 1. All fields contain **atomic (indivisible) values**
 2. There are **no repeating groups or columns**
 3. Each record can be **uniquely identified** (primary key)
+
+</div>
 
 ---
 level: 2
@@ -216,6 +400,47 @@ We remove repeating author columns by creating **multiple rows**.
 </Announcement>
 
 ---
+level: 2
+layout: two-cols
+---
+
+## 1NF – Atomic Values
+
+::left::
+
+```mermaid
+erDiagram
+    BOOK_1NF {
+        int book_id PK
+        string book_title
+        string isbn
+        string publisher
+        string author_name
+    }
+```
+
+::right::
+
+For dbdiagram.io the DBML is:
+
+```text
+Table BOOK_1NF {
+  book_id int [pk]
+  book_title varchar
+  isbn varchar
+  publisher varchar
+  author_name varchar
+}
+```
+
+<!-- Presenter Notes:
+1NF removes repeating groups by making all values atomic.
+Point out that redundancy still exists (publisher repeated per row).
+This is progress, but not a finished design.
+-->
+
+
+---
 layout: section
 ---
 
@@ -231,23 +456,25 @@ level: 2
 
 ## A table is in **Second Normal Form (2NF)** if:
 
+
+<div style="font-size: 1.5rem">
+
 1. It is already in **1NF**
 2. All non‑key fields depend on the **whole primary key**
 3. No **partial dependencies** exist
+
+</div>
 
 This usually means splitting data into **new tables**
 
 
 ---
 level: 2
-layout: two-cols
 ---
 
 ## 2NF Transformation
 
 We separate **Books** and **Authors**.
-
-::left::
 
 ### Books
 
@@ -256,7 +483,16 @@ We separate **Books** and **Authors**.
 |       1 | The CSS Anthology   | 0957921888 | SitePoint      |
 |       2 | Quality Web Systems | 0201719363 | Addison‑Wesley |
 
-::right::
+
+<br>
+
+> Authors on the next page
+
+---
+level: 2
+---
+
+## 2NF Transformation
 
 ### Authors
 
@@ -275,6 +511,59 @@ We separate **Books** and **Authors**.
 </Announcement>
 
 ---
+level: 2
+layout: two-cols
+---
+
+
+## 2NF – Remove Partial Dependencies
+
+::left::
+
+```mermaid
+erDiagram 
+    direction LR
+    BOOKS {
+        int book_id PK
+        string title
+        string isbn
+        string publisher
+    }
+    AUTHORS_2NF {
+        int author_id PK
+        int book_id FK
+        string author_name
+    }
+    BOOKS ||--o{ AUTHORS_2NF : has
+```
+
+::right::
+
+For dbdiagram.io the DBML is:
+
+```text
+Table Books {
+  book_id int [pk]
+  title varchar
+  isbn varchar
+  publisher varchar
+}
+
+Table Authors_2NF {
+  author_id int [pk]
+  book_id int [ref: > Books.book_id]
+  author_name varchar
+}
+```
+
+<!-- Presenter Notes:
+Explain partial dependency using plain language: book data should not depend on author rows.
+This slide is where students usually "get" why multiple tables are necessary.
+-->
+
+
+
+---
 layout: section
 ---
 
@@ -290,25 +579,24 @@ level: 2
 
 ## A table is in **Third Normal Form (3NF)** if:
 
+<div style="font-size: 1.5rem">
+
 1. It is already in **2NF**
 2. No non‑key attribute depends on another non‑key attribute
 3. All fields depend **only on the primary key**
+
+</div>
 
 This removes **transitive dependencies**.
 
 
 ---
 level: 2
-layout: two-cols
 ---
 
 ## 3NF Transformation
 
 <p style="margin:0">Publisher data does not depend directly on the book.</p>
-
-::left::
-
-<div style="font-size:0.8em; margin-bottom: 1rem;">
 
 ### Books
 
@@ -317,8 +605,11 @@ layout: two-cols
 |       1 | The CSS Anthology   | 0957921888 | 1            |
 |       2 | Quality Web Systems | 0201719363 | 2            |
 
-</div>
-<div style="font-size:0.8em; margin-bottom: 1rem;">
+---
+level: 2
+---
+
+## 3NF Transformation
 
 ### Publishers
 
@@ -327,11 +618,12 @@ layout: two-cols
 |            1 | SitePoint      |
 |            2 | Addison‑Wesley |
 
-</div>
+---
+level: 2
+---
 
-::right::
+## 3NF Transformation
 
-<div style="font-size:0.8em; margin-bottom: 1rem;">
 
 ### Authors
 
@@ -342,7 +634,6 @@ layout: two-cols
 |         3 |       2 | Rashka, Jeff       |
 |         4 |       2 | McDiarmid, Douglas |
 
-</div>
 
 <Announcement type="info" style="width:100%;">
 
@@ -352,14 +643,80 @@ layout: two-cols
 
 </Announcement>
 
+
+
 ---
 level: 2
 layout: two-cols
 ---
 
-# Summarising steps so far
+## 3NF – Remove Transitive Dependencies
 
 ::left::
+
+```mermaid
+erDiagram
+    BOOKS {
+        int book_id PK
+        string title
+        string isbn
+        int publisher_id FK
+    }
+    PUBLISHERS {
+        int publisher_id PK
+        string name
+    }
+    AUTHORS {
+        int author_id PK
+        int book_id FK
+        string name
+    }
+    
+    BOOKS ||--|| PUBLISHERS : published_by
+    BOOKS ||--|{ AUTHORS : written_by
+```
+
+<Announcement type="info" style="font-size: 0.9rem; margin-top: 1rem;">
+Note a Problem: Authors <strong>write many</strong> Books, and Books <strong>have many</strong> Authors... 
+</Announcement>
+
+::right::
+
+For dbdiagram.io the DBML is:
+
+```text
+Table Publishers {
+  publisher_id int [pk]
+  name varchar
+}   
+
+Table Books {
+  book_id int [pk]
+  title varchar
+  isbn varchar
+  publisher_id int [ref: > Publishers.publisher_id]
+}
+
+Table Authors {
+  author_id int [pk]
+  name varchar
+  book_id int [ref: > Books.book_id]
+}
+```
+
+<!-- Presenter Notes:
+Reinforce the key idea: non-key fields must not depend on other non-key fields.
+Publisher details depend on publisher, not directly on book.
+Most production systems aim for 3NF.
+-->
+
+
+---
+level: 2
+---
+
+# Summarising steps so far
+
 
 ## Key Takeaways
 
@@ -371,9 +728,14 @@ layout: two-cols
 
 - Most real‑world systems aim for **3NF** or higher for robust design
 
-::right::
+---
+level: 2
+---
 
-## Minimal Normalisation <br>... Complete 🌱
+# Summarising steps so far
+
+
+## Minimal Normalisation ... Complete 🌱
 
 - Less duplication
 - Clear relationships
@@ -383,9 +745,9 @@ layout: two-cols
 layout: section
 ---
 
-# Advanced Normalisation & ERDs
+# Advanced Normalisation
 
-## Entity Relationship Diagrams, 4NF & 5NF
+## Fourth and Fifth Normal Forms (4NF & 5NF)
 
 Resolving complex relationships and validating designs
 
@@ -417,65 +779,6 @@ layout: two-cols
 layout: section
 ---
 
-# Entity Relationship Diagrams (ERDs)
-
----
-level: 2
-layout: two-cols
----
-
-# ERDs – Purpose
-
-::left::
-
-### ERDs - Visual Tool
-
-An **Entity Relationship Diagram (ERD)** is a visual model that shows:
-
-- Tables (entities)
-- Relationships between tables
-- Cardinality:
-    - One‑to‑One (1:1)
-    - One‑to‑Many (1:M)
-    - Many‑to‑Many (M:N)
-
-::right::
-
-### ERDs help identify:
-
-- Missing tables
-- Invalid relationships
-- Normalisation problems
-
----
-level: 2
----
-
-# ERD and Common Relationship Types
-
-```mermaid
----
-config:
-    layout: elk
----
-erDiagram
-    "Table A" ||--|| "Table B" : "one-to-one"
-    "Table C" ||--|{ "Table D" : "one-to-many"
-    "Table E" }|--|{ "Table F" : "many-to-many"
-```
-
-<br>
-
-<Announcement type="important">
-<p><code>1:1</code> → rare, often merge tables (unless lookup tables) <br>
-<code>1:M</code> → common, use foreign keys <br>
-<code>M:N</code> → must be resolved  </p>
-</Announcement>
-
----
-layout: section
----
-
 # 4NF – Fourth Normal Form
 
 ---
@@ -492,9 +795,9 @@ level: 2
 
 ### Classic example:
 
-- A book has many authors
-- An author writes many books
-
+- A book <strong style="background: rgba(255,255,255,0.2);padding: 0.1rem 0.25em; border-radius: 0.25rem;">has many</strong> authors
+- An author <strong style="background: rgba(255,255,255,0.2);padding: 0.1rem 0.25em; border-radius: 0.25rem;">writes many</strong> books
+ 
 This is a **many‑to‑many** relationship.
 
 ---
@@ -507,13 +810,68 @@ level: 2
 
 ## A table is in **Fourth Normal Form (4NF)** if:
 
+<div style="font-size: 1.5rem">
+
 1. It is already in **3NF**
 2. It contains **no multi‑valued dependencies**
 3. Each independent relationship is represented separately
 
+</div>
+
 ## Solution:
 
 Use an **intersection** (junction/pivot/intermediatory) table
+
+---
+level: 2
+---
+
+# 4NF Solution – Junction Table
+
+Books and Publishers tables stay the same as before:
+
+### Books
+
+<div style="line-height: 1rem;">
+
+| book_id | book_title          | ISBN       | publisher_id |
+|--------:|---------------------|------------|--------------|
+|       1 | The CSS Anthology   | 0957921888 | 1            |
+|       2 | Quality Web Systems | 0201719363 | 2            |
+
+</div>
+
+### Publishers
+
+<div style="line-height: 1rem;">
+
+| publisher_id | publisher      |
+|-------------:|----------------|
+|            1 | SitePoint      |
+|            2 | Addison‑Wesley |
+
+</div>
+
+---
+level: 2
+---
+
+# 4NF Solution – Junction Table
+
+Authors no longer has the Book ID, it is moved into an Authors-Books table. 
+
+### Authors
+
+| author_id | author_name        |
+|----------:|--------------------|
+|         1 | Andrew, Rachel     |
+|         2 | Dustin, Elfriede   |
+|         3 | Rashka, Jeff       |
+|         4 | McDiarmid, Douglas |
+
+
+Authors-Books on next slide
+
 
 ---
 level: 2
@@ -524,32 +882,19 @@ layout: two-cols
 
 ::left::
 
-<div style="font-size:0.9em; margin-bottom: 1rem;">
-
-#### Books
-
-| book_id | title |
-|:--------|:------|
-
-<br>
-
-#### Authors
-
-| author_id | name |
-|:----------|:-----|
-
-<br>
-
-#### Author - Books (Junction) &dagger;
+#### Authors - Books (Junction) &dagger;
 
 | author_id | book_id |
-|:----------|:--------|
+|----------:|--------:|
+|         1 |       1 |
+|         2 |       2 |
+|         3 |       2 |
+|         4 |       2 |
 
-</div>
 
 <Announcement type="important">
-&dagger; Laravel calls this a **pivot table**. Alphabetical order is 
-common for naming: `authors_books`
+&dagger; Laravel calls this a <strong>pivot table</strong>. <br>Alphabetical order is 
+common for naming: <code>authors_books</code>.
 </Announcement>
 
 ::right::
@@ -602,9 +947,14 @@ level: 2
 
 ## A database is in **Fifth Normal Form (5NF)** if:
 
+
+<div style="font-size: 1.5rem">
+
 1. It is already in **4NF**
 2. Every join dependency is implied by candidate keys
 3. No information is lost when tables are decomposed
+
+</div>
 
 ## If you can reconstruct the original data:
 
@@ -616,12 +966,14 @@ level: 2
 
 # Reconstruction Example
 
-```sql
+<br>
+
+```sql [SQL]
 SELECT b.title,
        p.publisher_name,
        a.author_name
 FROM Books b
-         JOIN BooksByAuthor ba ON b.book_id = ba.book_id
+         JOIN Authors_Books ba ON b.book_id = ba.book_id
          JOIN Authors a ON ba.author_id = a.author_id
          JOIN Publishers p ON b.publisher_id = p.publisher_id;
 ```
@@ -672,6 +1024,7 @@ layout: two-cols
 - ✅ Reduce duplication
 - ✅ Improve integrity
 - ❌ Increase number of joins
+- ❌ May increase query execution time
 
 ::right::
 
@@ -690,12 +1043,9 @@ Normalisation is a **design tool**, not a rulebook.
 
 ---
 level: 2
-layout: two-cols
 ---
 
 # Summarising the advanced steps
-
-::left::
 
 ## Key Takeaways
 
@@ -705,194 +1055,24 @@ layout: two-cols
 - Not all systems need advanced normal forms
 - Understanding them improves **design judgement**
 
-::right::
+---
+level: 2
+---
 
-## Advanced Normalisation <br>... Complete 🌿
+# Summarising the advanced steps
+
+## Advanced Normalisation ... Complete 🌿
 
 - Structure refined
 - Relationships clarified
 - Designs made trustworthy
 
----
-layout: section
----
-
-# Normalisation & ERDs
-
-Advanced Practice, Exercises, and Design Trade-offs
-
-<!-- Presenter Notes:
-This session extends core normalisation concepts into advanced, practical design.
-Emphasise that students are moving from "knowing rules" to "applying judgement".
--->
 
 ---
 layout: section
 ---
 
-# ERDs Through Normalisation
-
-<!--
-Presenter Notes:
-We now visualise each normalisation step using ERDs.
-Stress that ERDs make problems visible earlier than SQL alone.
--->
-
----
-level: 2
----
-
-## UNF – Conceptual ERD
-
-```mermaid
-erDiagram
-    RAW_BOOK_DATA {
-        string book_title
-        string isbn
-        string publisher
-        string author_list
-    }
-```
-
-<!--
-Table RAW_BOOK_DATA {
-  book_title varchar
-  isbn varchar
-  publisher varchar
-  author_list varchar
-}
-
-Presenter Notes:
-UNF represents raw, collected data.
-Highlight the multi-valued author_list field as the main design flaw.
-No keys, no relationships, no integrity guarantees.
--->
-
----
-level: 2
----
-
-## 1NF – Atomic Values
-
-```mermaid
-erDiagram
-    BOOK_1NF {
-        int book_id PK
-        string book_title
-        string isbn
-        string publisher
-        string author_name
-    }
-```
-
-```dbml
-Table BOOK_1NF {
-  book_id int [pk]
-  book_title varchar
-  isbn varchar
-  publisher varchar
-  author_name varchar
-}
-```
-
-<!-- Presenter Notes:
-1NF removes repeating groups by making all values atomic.
-Point out that redundancy still exists (publisher repeated per row).
-This is progress, but not a finished design.
--->
-
----
-level: 2
----
-
-## 2NF – Remove Partial Dependencies
-
-```mermaid
-erDiagram
-    BOOKS {
-        int book_id PK
-        string title
-        string isbn
-        string publisher
-    }
-    AUTHORS_2NF {
-        int author_id PK
-        int book_id FK
-        string author_name
-    }
-    BOOKS ||--o{ AUTHORS_2NF : has
-```
-
-```dbml
-Table Books {
-  book_id int [pk]
-  title varchar
-  isbn varchar
-  publisher varchar
-}
-
-Table Authors_2NF {
-  author_id int [pk]
-  book_id int [ref: > Books.book_id]
-  author_name varchar
-}
-```
-
-<!-- Presenter Notes:
-Explain partial dependency using plain language: book data should not depend on author rows.
-This slide is where students usually "get" why multiple tables are necessary.
--->
-
----
-level: 2
----
-
-## 3NF – Remove Transitive Dependencies
-
-```mermaid
-erDiagram
-    BOOKS {
-        int book_id PK
-        string title
-        string isbn
-        int publisher_id FK
-    }
-    PUBLISHERS {
-        int publisher_id PK
-        string name
-    }
-    AUTHORS {
-        int author_id PK
-        string name
-    }
-    BOOKS ||--|| PUBLISHERS : published_by
-```
-
-```dbml
-Table Publishers {
-  publisher_id int [pk]
-  name varchar
-}
-
-Table Books {
-  book_id int [pk]
-  title varchar
-  isbn varchar
-  publisher_id int [ref: > Publishers.publisher_id]
-}
-```
-
-<!-- Presenter Notes:
-Reinforce the key idea: non-key fields must not depend on other non-key fields.
-Publisher details depend on publisher, not directly on book.
-Most production systems aim for 3NF.
--->
-
----
-layout: section
----
-
-# Normalisation Revision Exercises (UNF → 5NF)
+# Normalisation Revision Exercises (0NF/UNF → 5NF)
 
 <!-- Presenter Notes:
 These exercises shift students from recognition to transformation.
@@ -919,6 +1099,8 @@ level: 2
 ## Exercise 2 – Convert UNF to 1NF
 
 Rewrite the raw book data so all fields are atomic.
+
+> HINT: think about authors...
 
 <!-- Presenter Notes:
 Look for removal of multi-valued fields and creation of multiple rows.
@@ -1036,7 +1218,10 @@ level: 2
 
 ## Solution – dbdiagram
 
-```dbml
+
+For dbdiagram.io the DBML is:
+
+```text
 Table Students {
   student_id int [pk]
   name varchar
@@ -1187,8 +1372,8 @@ layout: end
 
 # End of Advanced Normalisation
 
-Sound structure first.
-Optimise second.
+- Sound structure first.
+- Optimise second.
 
 <!-- Presenter Notes:
 Encourage reflection: design is about balance, not dogma.
@@ -1216,7 +1401,7 @@ level: 2
 
 By the end of this session, students should be able to:
 
-- [ ]  Describe UNF, 1NF, 2NF, 3NF, 4NF, and 5NF
+- [ ] Describe UNF, 1NF, 2NF, 3NF, 4NF, and 5NF
 - [ ] Identify multi‑valued and transitive dependencies
 - [ ] Resolve many‑to‑many relationships using junction tables
 - [ ] Draw ERDs using Mermaid or dbdiagram notation
@@ -1243,10 +1428,15 @@ layout: two-cols
 ## Exit Ticket 1
 
 <Announcement type="brainstorm"  style="width: 100%; padding: 1rem;" title="SQL & Data Safety">
+<p>
 A student claims that Third Normal Form is always sufficient and that higher normal forms are “academic only”.
+</p>
+<p>
 Do you agree or disagree?
+</p>
+<p>
 Justify your answer with one real‑world example.
-
+</p>
 </Announcement>
 
 
@@ -1255,9 +1445,12 @@ Justify your answer with one real‑world example.
 ### Exit Ticket 2
 
 <Announcement type="brainstorm"   style="width: 100%; padding: 1rem;" title="DQL vs DML">
-
+<p>
 Explain why a junction table is required to satisfy 4NF in a many‑to‑many relationship.
+</p>
+<p>
 What problems would occur if the junction table were not used?
+</p>
 </Announcement>
 
 
@@ -1282,36 +1475,36 @@ purposes.</p>
 
 ---
 level: 2
-layout: two-cols
 ---
 
-<h1 style="margin-bottom:0">Additional Learning & Further Study</h1>
+# Additional Learning & Further Study
 
-::left::
-
-Text / Interactive Resource
+## Text / Interactive Resource
 
 GeeksforGeeks. (n.d.). Fourth, Fifth Normal Forms and BCNF.
 Clear worked examples and decompositions useful for revision.
 https://www.geeksforgeeks.org/fourth-normal-form-4nf/
 
-Video Resource
+## Video Resource
 
 Neso Academy. (n.d.). Boyce‑Codd Normal Form (BCNF), 4NF & 5NF (Video series).
 Excellent conceptual explanations with diagrams and step‑by‑step logic.
 https://www.youtube.com/@NesoAcademy
 
+---
+level: 2
+---
 
-### Database Design (General)
+# Additional Learning & Further Study
+
+## Database Design (General)
 
 - Allen, J. (n.d.). *SQLBolt: Learn SQL with interactive
   exercises*.    https://sqlbolt.com
 
 - Mode Analytics. (n.d.). *SQL tutorial*.    https://mode.com/sql-tutorial/
 
-::right::
-
-### Normalisation
+## Normalisation
 
 - MariaDB Foundation. (n.d.). *MariaDB knowledge
   base*.  https://mariadb.com/kb/en/
@@ -1338,31 +1531,18 @@ level: 2
 - Laravel. (2026). *The PHP framework for web artisans. Laravel.com*; *
   *Laravel**.    https://laravel.com/
 
+- Date, C. J. (2019). An introduction to database systems (8th ed.). Addison‑Wesley.
 
-Date, C. J. (2019). An introduction to database systems (8th ed.). Addison‑Wesley.
+- Elmasri, R., & Navathe, S. B. (2016). Fundamentals of database systems (7th ed.). Pearson Education.
 
+- ISO/IEC. (2016). ISO/IEC 9075‑1:2016 — Information technology — Database languages — SQL — Framework. International Organization for Standardization.
 
-Elmasri, R., & Navathe, S. B. (2016). Fundamentals of database systems (7th ed.). Pearson Education.
-
-
-ISO/IEC. (2016). ISO/IEC 9075‑1:2016 — Information technology — Database languages — SQL — Framework. International Organization for Standardization.
-
-
-Connolly, T., & Begg, C. (2015). Database systems: A practical approach to design, implementation, and management (6th ed.). Pearson.
+- Connolly, T., & Begg, C. (2015). Database systems: A practical approach to design, implementation, and management (6th ed.). Pearson.
 
 
----
-level: 2
----
-
-# References & Acknowledgements (2)
-
-<br>
 
 <Announcement type="info" style="width: 100%; padding: 1rem;" title="Disclosures">
-<p><b>Slide template:</b> Adrian Gould</p>
-<p><b>AI Use:</b> Some content was generated with the assistance of Microsoft 
-CoPilot</p>
+<p><b>AI Use:</b> Some content was generated with the assistance of Microsoft CoPilot</p>
 </Announcement>
 
 
@@ -1371,6 +1551,5 @@ level: 2
 layout: end
 ---
 
-<h1 style="text-align: left">
-Spring indexes bud —<br>Design trims the data loss<br>Queries fly away
-</h1>
+
+# Spring indexes bud — <br>Design trims the data loss<br>Queries fly away

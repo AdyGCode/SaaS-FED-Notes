@@ -8,21 +8,21 @@
     "export": "slidev export",
     "show": "slidev --remote SecretOne --port 8080 --open --force"
   },
-
   "dependencies": {
     "@iconify-json/fa7-brands": "latest",
     "@iconify-json/fa7-regular": "latest",
     "@iconify-json/fa7-solid": "latest",
-    "@unocss/preset-icons": "latest",
+    "@napi-rs/wasm-runtime": "^1.1.2",
     "@slidev/cli": "latest",
     "@slidev/theme-default": "latest",
     "@slidev/types": "latest",
+    "@unocss/preset-icons": "latest",
+    "ocx-parser": "0.0.1-beta",
     "shiki": "latest",
     "shiki-magic-move": "latest",
     "slidev-theme-nmt": "latest",
     "vue": "latest"
   },
-
   "slidev": {
     "colorSchema": "dark",
     "highlighter": "shiki",
@@ -39,7 +39,6 @@
       "aspectRatio": "16/10"
     }
   },
-
   "devDependencies": {
     "playwright-chromium": "latest"
   }
