@@ -14,7 +14,6 @@
     "@iconify-json/fa7-solid": "latest",
     "@napi-rs/wasm-runtime": "^1.1.2",
     "@slidev/cli": "latest",
-    "@slidev/theme-default": "latest",
     "@slidev/types": "latest",
     "@unocss/preset-icons": "latest",
     "ocx-parser": "0.0.1-beta",

@@ -80,8 +80,7 @@ level: 2
 
 # Contents
 
-<Toc minDepth="1" maxDepth="1" />
-
+<Toc minDepth="1" maxDepth="1" columns="2"/>
 
 ---
 layout: section
@@ -666,14 +665,20 @@ erDiagram
         int publisher_id PK
         string name
     }
+    AUTHORS_BOOKS {
+        int author_id FK
+        int book_id FK
+        
+    }
     AUTHORS {
         int author_id PK
         int book_id FK
         string name
     }
     
-    BOOKS ||--|| PUBLISHERS : published_by
-    BOOKS ||--|{ AUTHORS : written_by
+    BOOKS ||--|| PUBLISHERS : "published by"
+    BOOKS ||--|{ AUTHORS_BOOKS : "have many"
+    AUTHOR_BOOKS |}--|| AUTHORS : "write many"
 ```
 
 <Announcement type="info" style="font-size: 0.9rem; margin-top: 1rem;">
@@ -763,9 +768,9 @@ layout: two-cols
 
 ### Most real‑world database designs:
 
-- ✅ Aim for **Third Normal Form**
-- ❌ Still fail when **many‑to‑many** relationships exist
-- ❌ Can hide duplication across tables
+- Aim for **Third Normal Form**
+- May fail because **many‑to‑many** relationships have not been resolved
+- May hide duplication across tables
 
 ::right::
 
@@ -786,6 +791,8 @@ level: 2
 ---
 
 # 4NF – The Problem
+
+## TODO: Update 4NF
 
 4NF addresses a specific issue:
 
@@ -820,7 +827,9 @@ level: 2
 
 ## Solution:
 
-Use an **intersection** (junction/pivot/intermediatory) table
+If you have not done so in the 3NF stage:
+
+- Use an **intersection** (junction/pivot/intermediatory) table
 
 ---
 level: 2
