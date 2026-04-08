@@ -64,29 +64,40 @@ class: text-left
 
 # Objectives
 
+By the end of this session, students will be able to:
+
 ::left::
 
--
+- Explain the purpose of database normalisation beyond Third Normal Form (3NF)
+- Identify functional, partial, transitive, and multi‑valued dependencies
+- Interpret and create ERDs for progressively normalised designs
+- Resolve one‑to‑many and many‑to‑many relationships correctly
 
 ::right::
 
--
+- Apply Fourth Normal Form (4NF) and Fifth Normal Form (5NF) where appropriate
+- Convert ERDs into valid SQL DDL statements
+- Apply appropriate keys and constraints to enforce data integrity
+- Explain when and why **controlled denormalisation** is justified
+- Compare normalisation strategies in **OLTP vs OLAP** systems
+
 
 <!-- Presenter Notes:
 
-
 -->
+
 ---
 level: 2
 ---
 
 # Contents
 
-<Toc minDepth="1" maxDepth="1" />
+<Toc minDepth="1" maxDepth="1" columns="2" />
+
 
 ---
-class: text-left
 layout: section
+level: 1
 ---
 
 # Databases: Terminology
@@ -440,106 +451,12 @@ level: 2
 | Schema                   | The logical structure of a database (tables, columns, relationships). |
 | Instance                 | The data stored in the database at a specific point in time.          |
 
----
-level: 2
----
-
-# Relational Databases: Terminology
-
-## Keys and Relationships
-
-|                  |                                                                 |
-|------------------|-----------------------------------------------------------------|
-| Primary Key (PK) | A column (or set of columns) that uniquely identifies each row. |
-| Foreign Key (FK) | A column that references a primary key in another table.        |
-| Candidate Key    | Any column(s) that could serve as a primary key.                |
-| Composite Key    | A primary key made of multiple columns.                         |
-| Surrogate Key    | An artificial key (e.g. auto‑increment ID).                     |
-| Relationship     | How tables are connected (via keys).                            |
 
 ---
 level: 2
 ---
 
-# Relational Databases: Terminology
-
-## Relationship Types
-
-|                                                  |                                                        |
-|--------------------------------------------------|--------------------------------------------------------|
-| One‑to‑One (1:1)                                 | One row relates to one row.                            |
-| One‑to‑Many (1:M)                                | One row relates to many rows.                          |
-| Many‑to‑Many (M:M)                               | Many rows relate to many rows (uses a junction table). |
-| Junction, Pivot, Link, <br> Intermediatory Table | Resolves many‑to‑many relationships.                   |
-
----
-level: 2
----
-
-# Relational Databases: Terminology
-
-## Data Integrity
-
-|                       |                                                                   |
-|-----------------------|-------------------------------------------------------------------|
-| Entity Integrity      | Primary key must be unique and not null.                          |
-| Referential Integrity | Foreign keys must reference valid primary keys.                   |
-| Domain Integrity      | Data must follow defined rules (type, range, format).             |
-| Constraints           | Rules enforced on data (PRIMARY KEY, FOREIGN KEY, UNIQUE, CHECK). |
-| NULL                  | Represents missing or unknown data (not zero or empty).           |
-
----
-level: 2
----
-
-# Relational Databases: Terminology
-
-## Normalisation Concepts
-
-|                          |                                           |
-|--------------------------|-------------------------------------------|
-| Normalisation            | Process of reducing data redundancy.      |
-| First Normal Form (1NF)  | Atomic values, no repeating groups.       |
-| Second Normal Form (2NF) | No partial dependency on a composite key. |
-| Third Normal Form (3NF)  | No transitive dependencies.               |
-| Denormalisation          | Intentional duplication for performance.  |
-
----
-level: 2
----
-
-# Relational Databases: Terminology
-
-## Indexes & Performance
-
-|                     |                                            |
-|---------------------|--------------------------------------------|
-| Index               | Improves query performance.                |
-| Clustered Index     | Data stored in index order.                |
-| Non‑clustered Index | Separate structure referencing table data. |
-| Query Optimiser     | Chooses the most efficient execution plan. |
-
----
-level: 2
----
-
-# Relational Databases: Terminology
-
-## Transactions & ACID
-
-|             |                                                  |
-|-------------|--------------------------------------------------|
-| Transaction | A unit of work treated as a whole.               |
-| ACID        | Atomicity / Consistency / Isolation / Durability |
-| COMMIT      | Saves transaction changes.                       |
-| ROLLBACK    | Undoes transaction changes.                      |
-| Lock        | Prevents conflicting data access.                |
-
----
-level: 2
----
-
-# Relational Databases: Terminology
+# Databases: Terminology
 
 ## "Common" Data Types: SQL vs NoSQL
 
@@ -568,7 +485,7 @@ level: 2
 level: 2
 ---
 
-# Relational Databases: Terminology
+# Databases: Terminology
 
 ## "Common" Data Types: SQL vs NoSQL
 
@@ -593,8 +510,657 @@ level: 2
 
 -->
 
+
 ---
 level: 2
+---
+
+# Databases: Terminology
+## Data Types & Domain Integrity
+
+In any type of database, choosing the correct type for the data is important
+
+Consider:
+
+- `INT` vs `BIGINT`
+- `VARCHAR(n)` vs `TEXT`
+- `DATE` / `DATETIME`
+- `BOOLEAN`
+
+<br>
+
+<Announcement type="important" title="Rule">
+<p>Store data in the most restrictive valid type & size possible.</p>
+</Announcement>
+
+
+
+---
+level: 2
+---
+
+# Relational Databases: Terminology
+
+## Keys and Relationships
+
+|                  |                                                                 |
+|------------------|-----------------------------------------------------------------|
+| Primary Key (PK) | A column (or set of columns) that uniquely identifies each row. |
+| Foreign Key (FK) | A column that references a primary key in another table.        |
+| Candidate Key    | Any column(s) that could serve as a primary key.                |
+| Composite Key    | A primary key made of multiple columns.                         |
+| Surrogate Key    | An artificial key (e.g. auto‑increment ID).                     |
+| Relationship     | How tables are connected (via keys).                            |
+
+
+---
+level: 2
+layout: two-cols
+---
+
+# Databases: Terminology
+
+## Keys in Relational Design
+
+::left::
+
+### Primary Key (PK):
+- Uniquely identifies a row
+- Must be UNIQUE and NOT NULL
+
+<br>
+
+### Candidate Key:
+
+- Any attribute(s) that *could* be a PK
+- Example: `ISBN`
+
+::right::
+
+### Foreign Key (FK):
+- References a PK in another table
+- Enforces referential integrity
+
+
+<br>
+
+### Composite Key:
+- A PK made of multiple columns
+- Common in junction tables
+
+---
+layout: section
+---
+
+# SQL Constraints & Data Integrity
+
+Protecting your data **at the database level**
+
+---
+level: 2
+---
+
+# SQL Constraints & Data Integrity
+
+## Why Constraints Matter
+
+Constraints ensure that **invalid data never enters the database**.
+
+They:
+
+- Enforce business rules
+- Maintain referential integrity
+- Reduce reliance on application-only validation
+- Prevent data anomalies *before* they happen
+
+<br>
+
+<Announcement type="important" title="Rule of thumb">  
+<p>If the rule is always true — enforce it in SQL</p>
+</Announcement>
+
+---
+level: 2
+---
+
+# Databases: Terminology
+## Constraints & Integrity
+
+### Common SQL Constraints
+
+- `PRIMARY KEY`
+- `FOREIGN KEY`
+- `UNIQUE`
+- `NOT NULL`
+- `CHECK`
+
+---
+level: 2
+layout: two-cols
+---
+
+# Databases: Terminology
+## Constraints & Integrity: `PRIMARY KEY`
+
+::left::
+
+### What a PRIMARY KEY Does
+
+- Uniquely identifies each row
+- Cannot be `NULL`
+- Cannot contain duplicate values
+- Automatically indexed
+
+<br>
+
+<Announcement type="brainstorm">
+Every table <strong>must</strong> have a primary key
+</Announcement>
+
+::right::
+
+### PRIMARY KEY – Example
+
+```sql
+CREATE TABLE Students (
+    student_id INT PRIMARY KEY,
+    name VARCHAR(100)
+);
+```
+
+- `student_id` uniquely identifies a student
+- Two rows can never share the same `student_id`
+
+---
+level: 2
+layout: two-cols
+---
+
+# Databases: Terminology
+## Constraints & Integrity: `PRIMARY KEY`
+
+::left::
+
+### Common PRIMARY KEY Mistakes 
+
+- Using mutable data (email, name) as PK
+- Forgetting to define one at all
+- Expecting the application to enforce uniqueness
+
+
+---
+level: 2
+layout: two-cols
+---
+
+# Databases: Terminology
+## Constraints & Integrity: `FOREIGN KEY`
+ 
+::left::
+
+### What a FOREIGN KEY Does
+
+- Links one table to another
+- Enforces referential integrity
+- Prevents orphaned records
+
+<br>
+
+<Announcement type="brainstorm">
+You can’t reference what doesn’t exist.
+</Announcement>
+
+::right::
+
+```sql
+CREATE TABLE Enrolments (
+    student_id INT,
+    unit_id INT,
+FOREIGN KEY (student_id) 
+    REFERENCES Students(student_id)
+);
+```
+
+- An enrolment must belong to a real student
+- You cannot enrol `student_id = 999` if it doesn’t exist
+
+---
+level: 2
+layout: two-cols
+---
+
+# Databases: Terminology
+## Constraints & Integrity: `FOREIGN KEY`
+
+<br>
+
+### FOREIGN KEY Problems Prevented
+
+::left::
+
+#### Without FKs:
+
+- Orphaned rows
+- Broken joins
+- Silent data corruption
+
+::right::
+
+#### With FKs:
+
+- Database rejects invalid inserts immediately
+
+---
+level: 2
+layout: two-cols
+---
+
+# Databases: Terminology
+## Constraints & Integrity: `UNIQUE` Constraint
+
+::left::
+
+## What UNIQUE Does
+
+- Ensures values are not duplicated
+- Allows `NULL` <br>(unless combined with `NOT NULL`)
+- Often used for candidate keys
+
+::right::
+
+### UNIQUE – Example
+
+
+```sql
+CREATE TABLE Users (
+  user_id INT PRIMARY KEY,
+  email VARCHAR(255) UNIQUE NOT NULL
+);
+```
+
+- Two users cannot share the same email
+- Email is a candidate key, <br>Not necessarily the PK
+
+
+---
+level: 2
+layout: two-cols
+---
+
+# Databases: Terminology
+## Constraints & Integrity
+
+::left::
+
+### PK vs UNIQUE (Quick Compare)
+
+| Feature       | PRIMARY KEY | UNIQUE |
+|---------------|-------------|--------|
+| NULL  allowed | No          | Yes    |
+| One per table | One         | Many   |
+| Indexed       | Yes         | Yes    |
+
+
+---
+level: 2
+layout: two-cols
+---
+
+# Databases: Terminology
+## Constraints & Integrity: `NOT NULL`
+
+::left::
+
+## What NOT NULL Does
+
+- Prevents missing data
+- Enforces mandatory fields
+
+::right::
+
+### NOT NULL Example
+
+```sql
+CREATE TABLE Units (
+  unit_id INT PRIMARY KEY,
+  title VARCHAR(100) NOT NULL
+);
+
+```
+
+- A unit must have a title
+- `INSERT INTO Units VALUES (1, NULL);` fails
+
+---
+level: 2
+layout: two-cols
+---
+
+# Databases: Terminology
+## Constraints & Integrity: `UNIQUE` Constraint
+
+::left::
+
+### NOT NULL Is Not Validation Logic
+
+- It does not check format
+- It only checks presence
+
+::right::
+
+###  Consider...
+
+- Email format?
+- Age range?
+
+Use CHECK or application validation
+
+---
+level: 2
+layout: two-cols
+---
+
+# Databases: Terminology
+## Constraints & Integrity: `CHECK` Constraint
+
+::left::
+
+### What CHECK Does
+
+- Enforces value rules
+- Prevents logically invalid data
+
+::right::
+
+### CHECK constraint example
+```sql
+CREATE TABLE Students (
+  student_id INT PRIMARY KEY,
+  age INT CHECK (age >= 16),
+  status VARCHAR(20) CHECK 
+      (status IN ('active', 'inactive'))
+);
+
+```
+
+- No underage students
+- Only valid status values allowed
+
+---
+level: 2
+layout: two-cols
+---
+
+# Databases: Terminology
+## Constraints & Integrity: `CHECK` Constraint
+
+::left::
+
+### CHECK: Database Support Note
+
+- Fully supported in PostgreSQL, SQL Server
+-️ MySQL supports it from 8.0.16+
+- Ignored in very old MySQL versions
+
+---
+level: 2
+layout: two-cols
+---
+
+# Databases: Terminology
+## Constraints & Integrity: Constraints Working Together
+
+::left::
+
+
+### Realistic Example
+
+```sql
+CREATE TABLE Books (
+  book_id INT PRIMARY KEY,
+  isbn VARCHAR(20) UNIQUE,
+  title VARCHAR(200) NOT NULL,
+  publisher_id INT NOT NULL,
+  FOREIGN KEY (publisher_id) 
+      REFERENCES Publishers(publisher_id)
+);
+```
+
+::right::
+
+### This table enforces:
+
+- Identity
+- Uniqueness
+- Required data
+- Referential integrity
+
+
+---
+level: 2
+layout: two-cols
+---
+
+# Databases: Terminology
+## Constraints & Integrity: Constraints vs Application Logic
+
+::left::
+
+### Best Practice Split
+
+| Rule Type              | Enforced Where |
+|------------------------|----------------|
+| Existence, uniqueness  | Database       |
+| Relationships          | Database       |
+| Format (email regex)   | Application    |
+| Complex workflow rules | Application    |
+
+::right::
+
+### So...
+
+- Databases protect the truth
+- Applications protect the experience
+
+
+---
+level: 2
+layout: two-cols
+---
+
+# Databases: Terminology
+## Constraints & Integrity: Constraints Working Together
+
+::left::
+
+### Common Errors
+
+- Confusing UNIQUE with PRIMARY KEY
+- Forgetting foreign keys in junction tables
+- Relying only on front-end validation
+- Assuming indexes enforce correctness
+
+::right::
+
+### Key Takeaways
+
+- Constraints enforce data integrity
+- Every table needs a primary key
+- Foreign keys prevent orphaned data
+- CHECK constraints protect logical correctness
+- Integrity belongs in the database first
+
+---
+level: 2
+layout: two-cols
+---
+
+# Databases: Terminology
+## Constraints & Integrity: Quick Reflection Question
+
+::left::
+### Consider this...
+
+If a rule is broken in the database, <br>should the application be able to “fix it later”?
+
+::right::
+
+### Answer this...
+
+Why or why not?
+
+---
+level: 2
+---
+
+# Relational Databases: Terminology
+
+## Relationship Types
+
+|                                              |                                                            |
+|----------------------------------------------|------------------------------------------------------------|
+| One‑to‑One (1:1)                             | One row relates to one row.                                |
+| One‑to‑Many (1:M)                            | One row relates to many rows.                              |
+| Many‑to‑Many (M:M)                           | Many rows relate to many rows <br>(uses a junction table). |
+| Junction, Pivot, Link,  Intermediatory Table | Resolves many‑to‑many relationships.                       |
+
+---
+level: 2
+---
+
+# Relational Databases: Terminology
+
+## Data Integrity
+
+|                       |                                                                       |
+|-----------------------|-----------------------------------------------------------------------|
+| Entity Integrity      | Primary key must be unique and not null.                              |
+| Referential Integrity | Foreign keys must reference valid primary keys.                       |
+| Domain Integrity      | Data must follow defined rules <br>(type, range, format).             |
+| Constraints           | Rules enforced on data <br>(PRIMARY KEY, FOREIGN KEY, UNIQUE, CHECK). |
+| NULL                  | Represents missing or unknown data <br>(not zero or empty).           |
+
+---
+level: 2
+---
+
+# Relational Databases: Terminology
+
+## Normalisation Concepts
+
+<div style="line-height: 1.1rem; font-size: 0.95rem;">
+
+|                          |                                                                                                 |
+|--------------------------|-------------------------------------------------------------------------------------------------|
+| Normalisation            | Process of structuring data to reduce redundancy and anomalies.                                 |
+| First Normal Form (1NF)  | Atomic values; <br>No repeating groups or multi-valued fields.                                  |
+| Second Normal Form (2NF) | No partial dependency on a composite primary key.                                               |
+| Third Normal Form (3NF)  | No transitive dependencies between non-key attributes; <br>M:N resolved via junction tables.    |
+| Fourth Normal Form (4NF) | No independent multi-valued dependencies in one table.                                          |
+| Fifth Normal Form (5NF)  | No join dependencies remain; <br>Decomposed tables can be losslessly reconstructed using joins. |
+| Denormalisation          | Intentional duplication of data to improve read performance.                                    |
+</div>
+
+<!-- Presenter Notes:
+
+- 3NF fixes dependency correctness
+- 4NF fixes independent many-to-many facts
+- 5NF proves logical completeness, not performance
+
+-->
+
+
+---
+level: 2
+layout: two-cols
+---
+
+# Relational Databases: Terminology
+## Controlled Denormalisation 
+
+- Normalisation ensures correctness.
+- Denormalisation may improve performance.
+
+::left::
+
+#### Acceptable When:
+
+- Data is derived or cached
+- Infrequent writes, frequent reads
+- Reporting / dashboards
+
+::right::
+
+#### Not Acceptable When:
+
+- It breaks source‑of‑truth integrity
+- It introduces update anomalies
+
+
+---
+level: 2
+---
+
+# Relational Databases: Terminology
+
+## Indexes & Performance
+
+|                     |                                            |
+|---------------------|--------------------------------------------|
+| Index               | Improves query performance.                |
+| Clustered Index     | Data stored in index order.                |
+| Non‑clustered Index | Separate structure referencing table data. |
+| Query Optimiser     | Chooses the most efficient execution plan. |
+
+
+---
+level: 2
+layout: two-cols
+---
+
+# Databases: Terminology
+## Indexes (Performance Awareness)
+
+::left::
+
+### What Indexes Do
+
+- Speed up data retrieval
+- Add overhead to 
+  - `INSERT` and
+  - `UPDATE`
+
+::right::
+
+### Typical Index Targets
+
+- Primary keys (automatic)
+- Foreign keys (often manual)
+- Columns used in 
+  - `WHERE`,
+  - `JOIN`,
+  - `ORDER BY`
+
+
+
+---
+level: 2
+---
+
+# Relational Databases: Terminology
+
+## Transactions & ACID
+
+|             |                                                  |
+|-------------|--------------------------------------------------|
+| Transaction | A unit of work treated as a whole.               |
+| ACID        | Atomicity / Consistency / Isolation / Durability |
+| COMMIT      | Saves transaction changes.                       |
+| ROLLBACK    | Undoes transaction changes.                      |
+| Lock        | Prevents conflicting data access.                |
+
+
+---
 layout: section
 ---
 
@@ -606,7 +1172,7 @@ level: 2
 
 # Relational Databases: SQL
 
-<br>
+
 
 ## SQL
 
@@ -809,23 +1375,43 @@ layout: two-cols
 ### Examples
 
 ```sql
-BEGIN
-TRANSACTION;
-UPDATE accounts
-SET balance = balance - 100
-WHERE account_id = 1;
-UPDATE accounts
-SET balance = balance + 100
-WHERE account_id = 2;
+BEGIN TRANSACTION;
+    UPDATE accounts
+        SET balance = balance - 100
+        WHERE account_id = 1;
+    UPDATE accounts
+        SET balance = balance + 100
+        WHERE account_id = 2;
 COMMIT;
 ```
 
 <Announcement type="info">
-<p><code>BEGIN TRANSACTION</code> may simply be 
-<code>BEGIN</code><br>RDBMS 
-implementation dependant.</p>
+<p>Syntax varies depending on RDBMS implementation.</p>
 </Announcement>
 
+---
+level: 2
+---
+
+
+# Relational Databases: SQL
+
+### Transaction (TCL) Syntax Comparison
+
+<div style="line-height: 0.75rem; font-size: 0.7rem;">
+
+| Feature / DBMS        | Oracle                                                       | MS SQL Server                                                                       | MySQL                                                                               | PostgreSQL                                              |
+|-----------------------|--------------------------------------------------------------|-------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|---------------------------------------------------------|
+| Start Transaction     | Implicit (auto after previous commit)<br> or SET TRANSACTION | BEGIN TRANSACTION <br>or BEGIN                                                      | START TRANSACTION <br>or BEGIN                                                      | BEGIN <br>or START TRANSACTION                          | 
+| Commit                | COMMIT                                                       | COMMIT                                                                              | COMMIT                                                                              | COMMIT                                                  | 
+| Rollback              | ROLLBACK                                                     | ROLLBACK                                                                            | ROLLBACK                                                                            | ROLLBACK                                                | 
+| Savepoint             | SAVEPOINT name                                               | SAVE TRANSACTION name                                                               | SAVEPOINT name                                                                      | SAVEPOINT name                                          | 
+| Rollback to Savepoint | ROLLBACK TO name                                             | ROLLBACK TRANSACTION name                                                           | ROLLBACK TO name                                                                    | ROLLBACK TO name                                        | 
+| Autocommit Default    | OFF (manual commit required)                                 | ON (each statement commits unless inside explicit transaction)                      | ON (must disable for multi-step transactions)                                       | OFF (manual commit required)                            | 
+| Isolation Levels      | READ COMMITTED (default), SERIALIZABLE, READ ONLY            | READ COMMITTED (default), READ UNCOMMITTED, REPEATABLE READ, SNAPSHOT, SERIALIZABLE | REPEATABLE READ (default in InnoDB), READ COMMITTED, READ UNCOMMITTED, SERIALIZABLE | READ COMMITTED (default), REPEATABLE READ, SERIALIZABLE | 
+
+
+</div>
 
 ---
 layout: section
@@ -851,6 +1437,7 @@ Focus areas:
 
 Try each exercise **before** checking the answers.
 
+Use the SQL syntax for MariaDB/MySQL.
 
 ---
 level: 2
@@ -1071,7 +1658,7 @@ layout: two-cols
 
 # TCL – Transaction Control Language
 
-TCL controls **when changes are saved or undone**.
+TCL controls when changes are **saved** or **undone**.
 
 ::left::
 
@@ -1079,7 +1666,9 @@ TCL controls **when changes are saved or undone**.
 
 Start a transaction and update a student’s name to `Alexander Tan`.
 
-Do **not** make the change permanent.
+<Announcement type="warning">
+Do <strong>not</strong> make the change permanent.
+</Announcement>
 
 ::right::
 
@@ -1116,7 +1705,12 @@ DCL manages **users and permissions**.
 
 ## Exercise 12
 
-Grant a user named `lecturer@localhost`  permission to:
+Create two users:
+
+- `lecturer@localhost`
+- `lecturer@127.0.0.1`
+
+Grant these two users permission to:
 
 - view (`SELECT`) data in the `students` table
 
@@ -1124,10 +1718,18 @@ Grant a user named `lecturer@localhost`  permission to:
 
 ## Exercise 13
 
-Revoke permission to delete records from the same user.
+Revoke permission to delete records from the same users.
 
 <!-- Presenter Notes:
 Exercise 12 Answer:
+
+Same syntax for `lecturer`@`127.0.0.1`;
+
+CREATE USER 'lecturer'@'localhost' 
+IDENTIFIED VIA mysql_native_password 
+USING 'Password1';
+
+GRANT USAGE ON *.* TO 'lecturer'@'localhost' REQUIRE NONE;
 
 GRANT SELECT
 ON students
