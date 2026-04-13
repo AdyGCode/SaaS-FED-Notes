@@ -8,21 +8,30 @@
     "export": "slidev export",
     "show": "slidev --remote SecretOne --port 8080 --open --force"
   },
-
   "dependencies": {
-    "@iconify-json/fa7-brands": "latest",
-    "@iconify-json/fa7-regular": "latest",
-    "@iconify-json/fa7-solid": "latest",
-    "@unocss/preset-icons": "latest",
-    "@slidev/cli": "latest",
-    "@slidev/theme-default": "latest",
-    "@slidev/types": "latest",
-    "shiki": "latest",
-    "shiki-magic-move": "latest",
-    "slidev-theme-nmt": "latest",
-    "vue": "latest"
+    "@iconify-json/fa7-brands": "^1.2.2",
+    "@iconify-json/fa7-regular": "^1.2.3",
+    "@iconify-json/fa7-solid": "^1.2.4",
+    "@napi-rs/wasm-runtime": "^1.1.3",
+    "@slidev/cli": "^52.14.2",
+    "@slidev/client": "^52.14.2",
+    "@slidev/types": "^52.14.2",
+    "@unocss/preset-icons": "^66.6.8",
+    "dompurify": "^3.3.3",
+    "emnapi": "^1.9.2",
+    "nuxt": "^4.4.2",
+    "shiki": "^4.0.2",
+    "shiki-magic-move": "^1.3.0",
+    "slidev-addon-sync": "^0.1.0",
+    "slidev-component-poll": "^3.0.0",
+    "slidev-theme-nmt": "^0.9.2",
+    "unplugin-vue-markdown": "^30.0.0",
+    "vite": "^7.0.0",
+    "vite-dev-rpc": "^1.1.0",
+    "vite-hot-client": "^2.1.0",
+    "vite-plugin-inspect": "^11.3.3",
+    "vue": "^3.5.32"
   },
-
   "slidev": {
     "colorSchema": "dark",
     "highlighter": "shiki",
@@ -39,7 +48,6 @@
       "aspectRatio": "16/10"
     }
   },
-
   "devDependencies": {
     "playwright-chromium": "latest"
   }

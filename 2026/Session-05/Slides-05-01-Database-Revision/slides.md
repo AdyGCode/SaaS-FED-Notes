@@ -10,7 +10,7 @@ mdc: true
 duration: 35min
 ---
 
-# Session 05: Database Revision
+# Session 05: Database Revision 
 
 ## SaaS 1 – Cloud Application Development (Front-End Dev)
 
@@ -233,31 +233,33 @@ layout: two-cols-2-1
 
 ::left::
 
-<div style="font-size: 0.8rem; margin-top: 0;">
+<div style="font-size: 0.75rem; margin-top: 0; line-height: 0.9rem;">
 
-| RDBMS           | Licence  | Complexity | Users & Permissions                 |
-|-----------------|----------|------------|-------------------------------------|
-| SQLite          | PD       | VL         | ❌ No (single application user)      |
-| MySQL           | OC/OS/CO | L          | ✅ Yes (basic role & user support)   |
-| MariaDB         | OS       | L–M        | ✅ Yes (users, roles, grants)        |
-| PostgreSQL      | OS       | M          | ✅✅ Advanced roles &  privileges     |
-| SQL Server      | CO       | M–H        | ✅✅ Advanced (roles, AD integration) |
-| Oracle Database | CO       | V H        | ✅✅✅ Enterprise‑grade security model |
+| RDBMS           | Licence  | Complexity | | Users & Permissions              |
+|-----------------|----------|------------|----|----------------------------------|
+| SQLite          | PD       | VL         | ❌ | No (single application user)     |
+| MySQL           | OC/OS/CO | L          | ✅ | Yes (basic role & user support)  |
+| MariaDB         | OS       | L–M        | ✅ | Yes (users, roles, grants)       |
+| PostgreSQL      | OS       | M          | ✅✅ | Advanced roles &  privileges     |
+| MS SQL Server   | CO       | M–H        | ✅✅ | Advanced (roles, AD integration) |
+| Oracle Database | CO       | V H        | ✅✅✅ | Enterprise‑grade security model  |
 
 </div>
 
 ::right::
 
-<div style="font-size: 0.75rem; margin-top: 0;">
+<div style="font-size: 0.6rem; margin-top: 0;  line-height: 0.65rem;">
 
-- PD = Public Domain (no licence, free to use)
-- CO = Commercial (paid licence)
-- OS = Open Source (free to use, source code available)
-- OC = Open Core (free core features, paid for advanced features)
-- VL = Very Low
-- L = Low
-- M = Medium
-- H = High
+| **Key** | **Definition**    | Notes                                        |
+|---------|-----------------|----------------------------------------------|
+| PD      | Public Domain | no licence, free to use                     |
+| CO      | Commercial | paid licence                                |
+| OS      | Open Source | free to use, source code available          |
+| OC      | Open Core | free core features, paid: advanced features |
+| VL      | Very Low  |                                              |
+| L       | Low       |                                              |
+| M       | Medium    |                                              |
+| H       | High      |                                              |
 
 </div>
 
@@ -1949,5 +1951,12 @@ layout: end
 ---
 
 <h1 style="text-align: left">
-Spring indexes bud —<br>Design trims the data loss<br>Queries fly away
+Fin!
+<br>
+<br>
+Spring indexes bud —
+<br>
+Design trims the data loss
+<br>
+Queries fly away
 </h1>
