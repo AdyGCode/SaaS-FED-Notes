@@ -64,7 +64,6 @@ level: 2
 
 # Objectives
 
-
 - Explain the purpose of database normalisation beyond Third Normal Form (3NF)
 - Interpret and create ERDs for progressively normalised designs
 - Apply Fourth Normal Form (4NF) and Fifth Normal Form (5NF) correctly
@@ -72,7 +71,6 @@ level: 2
 - Convert normalised ERDs into SQL DDL statements
 - Explain when controlled denormalisation is appropriate
 - Compare normalisation strategies in OLTP vs analytic (OLAP) systems
-
 
 ---
 level: 2
@@ -117,20 +115,25 @@ level: 2
 
 ## The Normalisation Process
 
-We typically work through:
+<div style="font-size: 0.9rem; line-height: 0.4rem; margin-bottom: 2rem;">
 
-1. **0NF/UNF (Unnormalised Form)**
-2. **1NF – First Normal Form**
-3. **2NF – Second Normal Form**
-4. **3NF – Third Normal Form**
+| Normal Form | Purpose                                  | Notes      |
+|-------------|------------------------------------------|------------|
+| 0NF         | Unnormalised data, "no" structure        | ---        |
+| 1NF         | Atomic values                            | Simple DBs |
+| 2NF         | Remove partial dependencies              | Simple DBs |
+| 3NF         | Remove transitive dependencies           | Simple DBs |
+| BCNF        | All determinants are candidate keys      | Common DBs |
+| 4NF         | Resolve multi‑valued / M:N relationships | Common DBs |
+| 5NF         | Lossless reconstruction                  | Common DBs |
 
-<br>
-<br>
+</div>
 
 <Announcement type="warning" style="width: 100%; padding: 1rem;" title="Important">
 <ul>
 <li>Each step builds on the previous one</li>
 <li>You do <strong>not skip steps</strong></li>
+<li>3NF still leaves some issues, you will often progress to BCNF and 4NF.</li>
 </ul> 
 </Announcement>
 
@@ -157,9 +160,9 @@ An **Entity Relationship Diagram (ERD)** is a visual model that shows:
 - Tables (entities)
 - Relationships between tables
 - Cardinality:
-  - One‑to‑One (1:1)
-  - One‑to‑Many (1:M)
-  - Many‑to‑Many (M:N)
+    - One‑to‑One (1:1)
+    - One‑to‑Many (1:M)
+    - Many‑to‑Many (M:N)
 
 ::right::
 
@@ -190,8 +193,8 @@ config:
 erDiagram
     direction LR
     Table_Name {
-        TYPE    FIELD_NAME PK  
-        TYPE    FIELD_NAME   
+        TYPE FIELD_NAME PK
+        TYPE FIELD_NAME
     }
 
 ```
@@ -207,8 +210,8 @@ config:
 ---
 erDiagram
     direction LR
-    
- Messages {
+
+    Messages {
         int id PK
         string name
         string email
@@ -216,15 +219,15 @@ erDiagram
         string subject
         text message
     }
-    
- Topics {
+
+    Topics {
         int id PK
         string name
         string description
     }
-  
-    Topics ||--|{ Messages : ""
-    
+
+    Topics ||--|{ Messages: ""
+
 ```
 
 ---
@@ -244,16 +247,18 @@ config:
     layout: elk
 ---
 erDiagram
-    "Table A" ||--|| "Table B" : "one-to-one"
-    "Table C" ||--|{ "Table D" : "one-to-many"
-    "Table E" }|--|{ "Table F" : "many-to-many"
+    "Table A" ||--o| "Table B": "(1)<br>one-to-one <br>(0..1)"
+    "Table C" ||--|{ "Table D": "(1)<br>one-to-many <br>(1..m)"
+    "Table E" }|--o{ "Table F": "(1..n)<br>many-to-many <br>(0..m)"
 ```
+
 
 ::right::
 
 ## Note on ERDs:
 
 ERDs allow:
+
 - representation of tables & relationships
 - identification of design issues
 
@@ -266,16 +271,28 @@ Common relationships:
 <div style="font-size: 0.95rem">
 
 - 1:1 one-to-one → rare: merge / used as lookup tables
-- 1:M one-to-many → common: use foreign keys 
+- 1:M one-to-many → common: use foreign keys
 - M:N many-to-many → issue: must be resolved
 
 </div>
+
+<!-- Presenter Notes:
+
+Crows Feet:
+
+- || represents 1..1 (aka one)
+- |o represents 0..1 (aka zero or one)
+- |{ represents 1..m (aka one or more)
+- o{ represents 0..m (aka zero or more)
+-->
+
 
 ---
 layout: section
 ---
 
-# 0NF (or UNF) 
+# 0NF (or UNF)
+
 # Zero -or- Un-normalised Form
 
 ---
@@ -309,7 +326,6 @@ level: 2
 - Variable number of authors
 - Repeating columns
 - Difficult to query and extend
-
 
 ---
 level: 2
@@ -455,7 +471,6 @@ level: 2
 
 ## A table is in **Second Normal Form (2NF)** if:
 
-
 <div style="font-size: 1.5rem">
 
 1. It is already in **1NF**
@@ -481,7 +496,6 @@ We separate **Books** and **Authors**.
 |--------:|---------------------|------------|----------------|
 |       1 | The CSS Anthology   | 0957921888 | SitePoint      |
 |       2 | Quality Web Systems | 0201719363 | Addison‑Wesley |
-
 
 <br>
 
@@ -514,13 +528,12 @@ level: 2
 layout: two-cols
 ---
 
-
 ## 2NF – Remove Partial Dependencies
 
 ::left::
 
 ```mermaid
-erDiagram 
+erDiagram
     direction LR
     BOOKS {
         int book_id PK
@@ -533,7 +546,7 @@ erDiagram
         int book_id FK
         string author_name
     }
-    BOOKS ||--o{ AUTHORS_2NF : has
+    BOOKS ||--o{ AUTHORS_2NF: has
 ```
 
 ::right::
@@ -588,6 +601,32 @@ level: 2
 
 This removes **transitive dependencies**.
 
+## 3NF – Third Normal Form ✅ (Corrected)
+
+### Purpose
+
+Third Normal Form (3NF) ensures **dependency correctness within a table**.
+It focuses on eliminating *transitive dependencies* — **not** relationship cardinality.
+
+### Formal Definition
+
+A table is in **Third Normal Form (3NF)** if:
+
+1. It is already in **Second Normal Form (2NF)**
+2. Every non‑key attribute depends on the **primary key**
+3. No non‑key attribute depends on another non‑key attribute
+
+> *The key, the whole key, and nothing but the key.*
+
+### What 3NF Fixes
+
+- Removes transitive (non‑key → non‑key) dependencies
+- Separates lookup / descriptive data
+
+3NF **does not**:
+
+- Resolve many‑to‑many (M:N) relationships
+- Require junction tables
 
 ---
 level: 2
@@ -623,7 +662,6 @@ level: 2
 
 ## 3NF Transformation
 
-
 ### Authors
 
 | author_id | book_id | author_name        |
@@ -632,7 +670,6 @@ level: 2
 |         2 |       2 | Dustin, Elfriede   |
 |         3 |       2 | Rashka, Jeff       |
 |         4 |       2 | McDiarmid, Douglas |
-
 
 <Announcement type="info" style="width:100%;">
 
@@ -653,6 +690,8 @@ layout: two-cols
 
 ::left::
 
+<div style="width:67%">
+
 ```mermaid
 erDiagram
     BOOKS {
@@ -665,24 +704,21 @@ erDiagram
         int publisher_id PK
         string name
     }
-    AUTHORS_BOOKS {
-        int author_id FK
-        int book_id FK
-        
-    }
     AUTHORS {
         int author_id PK
         int book_id FK
         string name
     }
-    
-    BOOKS ||--|| PUBLISHERS : "published by"
-    BOOKS ||--|{ AUTHORS_BOOKS : "have many"
-    AUTHOR_BOOKS |}--|| AUTHORS : "write many"
+
+    BOOKS }|--|| PUBLISHERS: "published by"
+    BOOKS }|--|{ AUTHORS: "have many"
 ```
 
+</div>
+
 <Announcement type="info" style="font-size: 0.9rem; margin-top: 1rem;">
-Note a Problem: Authors <strong>write many</strong> Books, and Books <strong>have many</strong> Authors... 
+Problem? Authors <strong>write many</strong> Books, and Books <strong>have 
+many</strong> Authors... 
 </Announcement>
 
 ::right::
@@ -718,12 +754,14 @@ Most production systems aim for 3NF.
 
 ---
 level: 2
+layout: two-cols
 ---
 
 # Summarising steps so far
 
+::left::
 
-## Key Takeaways
+### Key Takeaways
 
 - Normalisation is **incremental**
 - Each normal form solves specific problems
@@ -733,14 +771,9 @@ level: 2
 
 - Most real‑world systems aim for **3NF** or higher for robust design
 
----
-level: 2
----
+::right::
 
-# Summarising steps so far
-
-
-## Minimal Normalisation ... Complete 🌱
+### Minimal Normalisation ... Complete
 
 - Less duplication
 - Clear relationships
@@ -752,7 +785,7 @@ layout: section
 
 # Advanced Normalisation
 
-## Fourth and Fifth Normal Forms (4NF & 5NF)
+## Boyce-Codd, Fourth and Fifth Normal Forms <br>(BCNF, 4NF & 5NF)
 
 Resolving complex relationships and validating designs
 
@@ -780,6 +813,266 @@ layout: two-cols
 - Data independence matters
 - Analytical correctness is critical
 
+
+---
+level: 2
+layout: two-cols
+---
+
+# Why 3NF Is Not Always Enough
+
+::left::
+
+### Core Idea
+
+A schema can satisfy **Third Normal Form (3NF)** and still:
+
+- Allow update anomalies
+- Contain subtle redundancy
+- Break dependency rules in edge cases
+
+::right::
+
+### 3NF guarantees:
+
+- No **transitive dependencies**
+
+<br>
+
+### Does **not** guarantee:
+
+- That *every determinant is a candidate key*
+
+---
+level: 2
+layout: two-cols
+---
+
+# Why 3NF Is Not Always Enough
+
+::left::
+
+### Visual Intuition
+
+```mermaid
+erDiagram
+    COURSE_ASSIGNMENTS {
+        string course
+        string instructor
+        string room
+    }
+```
+
+::right::
+
+### Functional dependencies
+
+- course → room
+- instructor → course
+
+These have:
+- No transitive dependency 
+  - → <span class="bg-green-500/75 py-1 px-2 rounded"> 3NF satisfied  </span>
+- instructor is not a candidate key
+  - → <span class="bg-red-500/75 py-1 px-2 rounded"> anomalies still possible </span>
+
+<!-- Presenter Notes:
+- Students often believe 3NF is the end of normalisation.
+- This slide introduces cognitive dissonance: the table is 'correct' by 3NF rules but still 
+flawed.
+- Use this moment to motivate BCNF.
+-->
+
+---
+level: 2
+---
+
+# Why 3NF Is Not Always Enough
+
+## Concept Slide – 3NF vs BCNF
+
+### The Key Difference
+
+| Aspect                          | 3NF                            | BCNF                            |
+|---------------------------------|--------------------------------|---------------------------------|
+| Focus                           | Remove transitive dependencies | Restrict who can determine data |
+| Determinant must be key?        | Not always                     | Always                          |
+| Handles multiple candidate keys | Sometimes poorly               | Correctly                       |
+| Typical use                     | Most production schemas        | Edge cases / validation         |
+
+---
+level: 2
+layout: two-cols
+---
+
+# Why 3NF Is Not Always Enough
+
+::left::
+
+## Rule Comparison
+
+**3NF Rule (Simplified):**
+
+- Non‑key attributes must depend on the key, <br>not on other non‑keys
+
+**BCNF Rule:**
+
+- For every functional dependency X → Y, <br>X must be a candidate key
+
+::right::
+
+## Memory Shortcut
+
+**3NF asks:**
+- “Is this value dependent on the primary key?”
+
+**BCNF asks:** 
+- “Who is *allowed* to determine this value?”
+
+<!-- Presenter Notes:
+- This framing helps students move from mechanical rule checking to reasoning about authority 
+and control in data.
+- BCNF is about power: who determines what.
+-->
+
+---
+layout: section
+---
+
+# BCNF – Boyce–Codd Normal Form
+
+---
+level: 2
+---
+
+# BCNF – Boyce–Codd Normal Form 
+
+### Why BCNF Exists
+
+BCNF is a **stronger version of 3NF** used when:
+
+- Multiple candidate keys exist
+- Determinants are not superkeys
+
+Some schemas satisfy 3NF but still allow anomalies — BCNF closes that gap.
+
+---
+level: 2
+---
+
+# BCNF – Boyce–Codd Normal Form
+
+## BCNF Rule
+
+A table is in **Boyce–Codd Normal Form (BCNF)** if:
+
+- For every functional dependency **X → Y**, <br> **X is a candidate key**.
+
+---
+level: 2
+layout: two-cols
+---
+
+# BCNF – Boyce–Codd Normal Form
+
+<br>
+
+## BCNF Edge Case – Before (Violates BCNF)
+
+::left::
+
+### Scenario
+
+A course is taught in **one room**, but an instructor may teach only **one course**.
+
+Functional dependencies:
+
+- course → room
+- instructor → course
+
+This satisfies **3NF**, but violates **BCNF**.
+
+::right::
+
+```mermaid
+erDiagram
+    COURSE_ASSIGNMENTS {
+        string course
+        string instructor
+        string room
+    }
+```
+
+<!-- Presenter Notes:
+This table satisfies 3NF because there are no transitive dependencies.
+However, instructor determines course, and instructor is not a candidate key.
+This allows update anomalies (e.g., changing a room for a course).
+-->
+
+
+---
+level: 2
+layout: two-cols
+---
+
+# BCNF – Boyce–Codd Normal Form
+
+<br>
+## BCNF Edge Case – After (BCNF Decomposition)
+
+::left::
+
+### Step 1: Instructor → Course
+
+```mermaid
+erDiagram
+    INSTRUCTOR_COURSES {
+        string instructor PK
+        string course
+    }
+```
+
+::right::
+
+### Step 2: Course → Room
+
+```mermaid
+erDiagram
+    COURSE_ROOMS {
+        string course PK
+        string room
+    }
+```
+
+<!-- Presenter Notes:
+Each determinant is now a candidate key.
+All functional dependencies are enforced without anomalies.
+This schema satisfies BCNF.
+-->
+
+---
+level: 2
+---
+
+# BCNF – Boyce–Codd Normal Form
+
+<br>
+
+### BCNF vs 3NF – Visual Summary
+
+```mermaid
+erDiagram
+    COURSE_ASSIGNMENTS ||--o{ INSTRUCTOR_COURSES: decomposed_into
+    COURSE_ASSIGNMENTS ||--o{ COURSE_ROOMS: decomposed_into
+```
+
+<!-- Presenter Notes:
+Use this diagram to emphasise that BCNF often splits tables further than 3NF.
+BCNF is applied selectively, not automatically.
+-->
+
+
+
 ---
 layout: section
 ---
@@ -788,48 +1081,82 @@ layout: section
 
 ---
 level: 2
+layout: two-cols
 ---
 
-# 4NF – The Problem
+# 4NF – Fourth Normal Form
 
-## TODO: Update 4NF
+::left::
 
-4NF addresses a specific issue:
+### Purpose
 
-<Announcement type="important" style="width: 100%; padding: 1rem;" title="4NF Addresses Problem">
-<p><strong>Independent multi‑valued relationships</strong> stored in the same table.</p>
-</Announcement>
+Fourth Normal Form (4NF) eliminates **multi‑valued dependencies**.
 
-### Classic example:
+This is where **many‑to‑many relationships** are resolved correctly.
 
-- A book <strong style="background: rgba(255,255,255,0.2);padding: 0.1rem 0.25em; border-radius: 0.25rem;">has many</strong> authors
-- An author <strong style="background: rgba(255,255,255,0.2);padding: 0.1rem 0.25em; border-radius: 0.25rem;">writes many</strong> books
- 
-This is a **many‑to‑many** relationship.
+::right::
+
+### Formal Definition
+
+A table is in **Fourth Normal Form (4NF)** if:
+
+1. It is already in **BCNF** <br>(or 3NF in simplified approach)
+2. It contains **no multi‑valued dependencies**
 
 ---
 level: 2
 ---
-
-# 4NF – The Rule
-
+# 4NF – Fourth Normal Form
 <br>
 
-## A table is in **Fourth Normal Form (4NF)** if:
+## 4NF Violation – Before (M:N Stored Together)
 
-<div style="font-size: 1.5rem">
+```mermaid
+erDiagram
+    BOOK_AUTHOR {
+        int book_id
+        string title
+        int author_id
+        string author_name
+    }
+```
 
-1. It is already in **3NF**
-2. It contains **no multi‑valued dependencies**
-3. Each independent relationship is represented separately
+<!-- Presenter Notes:
+A book can have many authors and an author can write many books.
+Storing both relationships together creates duplication and anomalies.
+This violates 4NF.
+-->
 
-</div>
+---
 
-## Solution:
+## ✅ 4NF – After (Junction Table Introduced)
 
-If you have not done so in the 3NF stage:
+```mermaid
+erDiagram
+    BOOKS {
+        int book_id PK
+        string title
+    }
 
-- Use an **intersection** (junction/pivot/intermediatory) table
+    AUTHORS {
+        int author_id PK
+        string name
+    }
+
+    AUTHORS_BOOKS {
+        int author_id FK
+        int book_id FK
+    }
+
+    BOOKS ||--o{ AUTHORS_BOOKS: "has many"
+    AUTHORS ||--o{ AUTHORS_BOOKS: "has many"
+```
+
+<!-- Presenter Notes:
+This junction table resolves the many‑to‑many relationship.
+Each independent fact is now stored separately.
+The schema satisfies 4NF.
+-->
 
 ---
 level: 2
@@ -867,7 +1194,7 @@ level: 2
 
 # 4NF Solution – Junction Table
 
-Authors no longer has the Book ID, it is moved into an Authors-Books table. 
+Authors no longer has the Book ID, it is moved into an Authors-Books table.
 
 ### Authors
 
@@ -877,7 +1204,6 @@ Authors no longer has the Book ID, it is moved into an Authors-Books table.
 |         2 | Dustin, Elfriede   |
 |         3 | Rashka, Jeff       |
 |         4 | McDiarmid, Douglas |
-
 
 Authors-Books on next slide
 
@@ -900,10 +1226,11 @@ layout: two-cols
 |         3 |       2 |
 |         4 |       2 |
 
+<br>
 
 <Announcement type="important">
-&dagger; Laravel calls this a <strong>pivot table</strong>. <br>Alphabetical order is 
-common for naming: <code>authors_books</code>.
+&dagger; Laravel calls this a <strong>pivot table</strong>. <br>Alphabetical order, and 
+singular naming convention: <code>author_book</code>.
 </Announcement>
 
 ::right::
@@ -927,19 +1254,26 @@ layout: section
 ---
 
 # 5NF – Fifth Normal Form
+
 ---
 level: 2
+layout: two-cols
 ---
 
 # 5NF – What It Solves
 
-## 5NF ensures:
+::left::
+
+## 5NF ensures
 
 <Announcement type="important" style="width: 100%; padding: 1rem;" title="5NF Addresses Problem">
-<p>The original data can be **reconstructed** by joining the decomposed tables</p>
+<p>The original data can be <strong class="underline">reconstructed</strong> by joining the 
+decomposed tables</p>
 </Announcement>
 
-## It focuses on:
+::right::
+
+## It focuses on
 
 - Logical correctness
 - Lossless decomposition
@@ -956,8 +1290,7 @@ level: 2
 
 ## A database is in **Fifth Normal Form (5NF)** if:
 
-
-<div style="font-size: 1.5rem">
+<div style="font-size: 1.25rem">
 
 1. It is already in **4NF**
 2. Every join dependency is implied by candidate keys
@@ -965,9 +1298,12 @@ level: 2
 
 </div>
 
-## If you can reconstruct the original data:
+<br>
+<br>
 
-- ✅ You have met 5NF
+### If you can reconstruct the original data:
+
+- ###  You have met 5NF
 
 ---
 level: 2
@@ -989,8 +1325,8 @@ FROM Books b
 
 If this query reproduces the original dataset:
 
-- ✅ Normalisation is valid
-- ✅ No data loss occurred
+- Normalisation is valid
+- No data loss occurred
 
 ---
 layout: section
@@ -1006,9 +1342,9 @@ level: 2
 
 ## In practice:
 
-- ✅ Most systems stop at **3NF**
-- ✅ 4NF used when M:N relationships exist
-- ⚠️ 5NF mainly used for:
+- Most systems stop at **3NF**
+- 4NF used when M:N relationships exist
+- 5NF mainly used for:
     - Validation
     - Highly sensitive systems
     - Academic and analytical correctness
@@ -1030,10 +1366,10 @@ layout: two-cols
 
 ## Highly normalised designs:
 
-- ✅ Reduce duplication
-- ✅ Improve integrity
-- ❌ Increase number of joins
-- ❌ May increase query execution time
+- Reduce duplication
+- Improve integrity
+- Increase number of joins
+- May increase query execution time
 
 ::right::
 
@@ -1070,12 +1406,11 @@ level: 2
 
 # Summarising the advanced steps
 
-## Advanced Normalisation ... Complete 🌿
+## Advanced Normalisation ... Complete
 
 - Structure refined
 - Relationships clarified
 - Designs made trustworthy
-
 
 ---
 layout: section
@@ -1098,7 +1433,7 @@ Given a table with repeating author columns, identify the current normal form
 and justify.
 
 <!-- Presenter Notes:
-Expected answer: UNF (or 0NF), because of repeating groups and non-atomic fields.
+- Expected answer: UNF (or 0NF), because of repeating groups and non-atomic fields.
 -->
 
 ---
@@ -1112,8 +1447,8 @@ Rewrite the raw book data so all fields are atomic.
 > HINT: think about authors...
 
 <!-- Presenter Notes:
-Look for removal of multi-valued fields and creation of multiple rows.
-Primary key should be introduced.
+- Look for removal of multi-valued fields and creation of multiple rows.
+- Primary key should be introduced.
 -->
 
 ---
@@ -1125,7 +1460,7 @@ level: 2
 Split the data to remove partial dependencies.
 
 <!-- Presenter Notes:
-Students should identify duplicated book data and separate tables accordingly.
+- Students should identify duplicated book data and separate tables accordingly.
 -->
 
 ---
@@ -1137,7 +1472,7 @@ level: 2
 Identify and remove transitive dependencies.
 
 <!-- Presenter Notes:
-Publisher is the classic transitive dependency example.
+- Publisher is the classic transitive dependency example.
 -->
 
 ---
@@ -1149,7 +1484,7 @@ level: 2
 Create a junction table for Books ↔ Authors.
 
 <!-- Presenter Notes:
-Expect a composite key made from both foreign keys.
+- Expect a composite key made from both foreign keys.
 -->
 
 ---
@@ -1161,7 +1496,7 @@ level: 2
 Demonstrate how the original data can be reconstructed using JOINs.
 
 <!-- Presenter Notes:
-Any correct JOIN that reconstructs the original dataset demonstrates 5NF.
+- Any correct JOIN that reconstructs the original dataset demonstrates 5NF.
 -->
 
 ---
@@ -1171,8 +1506,8 @@ layout: section
 # ERD Drawing Exercises
 
 <!-- Presenter Notes:
-This is a practical modelling skill check.
-Students often struggle initially; that is expected.
+- This is a practical modelling skill check.
+- Students often struggle initially; that is expected.
 -->
 
 ---
@@ -1190,7 +1525,7 @@ Entities:
 - Enrolments
 
 <!-- Presenter Notes:
-Watch for correct handling of the many-to-many relationship.
+- Watch for correct handling of the many-to-many relationship.
 -->
 
 ---
@@ -1213,12 +1548,16 @@ erDiagram
         int student_id FK
         int unit_id FK
     }
-    STUDENTS ||--o{ ENROLMENTS : enrols
-    UNITS ||--o{ ENROLMENTS : contains
+    STUDENTS ||--o{ ENROLMENTS: enrols
+    UNITS ||--o{ ENROLMENTS: contains
 ```
 
+You could use the Laravel alternative for `ENROLMENTS`, which would be `STUDENT_UNIT`.
+
+This would reduce Laravel workload, but make it harder to visualise directly.
+
 <!-- Presenter Notes:
-Explain that ENROLMENTS resolves the many-to-many relationship.
+- Explain that ENROLMENTS resolves the many-to-many relationship.
 -->
 
 ---
@@ -1226,7 +1565,6 @@ level: 2
 ---
 
 ## Solution – dbdiagram
-
 
 For dbdiagram.io the DBML is:
 
@@ -1248,7 +1586,7 @@ Table Enrolments {
 ```
 
 <!-- Presenter Notes:
-Point out portability between modelling tools.
+- Point out portability between modelling tools.
 -->
 
 ---
@@ -1258,7 +1596,7 @@ layout: section
 # Mapping ERD to SQL DDL
 
 <!-- Presenter Notes:
-This closes the loop from theory to implementation.
+- This closes the loop from theory to implementation.
 -->
 
 ---
@@ -1289,7 +1627,7 @@ CREATE TABLE Enrolments
 ```
 
 <!-- Presenter Notes:
-Highlight composite primary keys and enforcement of referential integrity.
+- Highlight composite primary keys and enforcement of referential integrity.
 -->
 
 ---
@@ -1299,7 +1637,7 @@ layout: section
 # Controlled Denormalisation
 
 <!-- Presenter Notes:
-Shift students from "rules" to "trade-offs" thinking.
+- Shift students from "rules" to "trade-offs" thinking.
 -->
 
 ---
@@ -1319,7 +1657,7 @@ Solution:
 - Add a cached `enrolment_count` column to Units
 
 <!-- Presenter Notes:
-Stress this is controlled and justified, not random duplication.
+- Stress this is controlled and justified, not random duplication.
 -->
 
 ---
@@ -1331,7 +1669,7 @@ level: 2
 Modify the Units table to store `enrolment_count`.
 
 <!-- Presenter Notes:
-Discuss how this value would be maintained (triggers, application logic).
+- Discuss how this value would be maintained (triggers, application logic).
 -->
 
 ---
@@ -1346,7 +1684,7 @@ ALTER TABLE Units
 ```
 
 <!-- Presenter Notes:
-Explain the importance of keeping derived data consistent.
+- Explain the importance of keeping derived data consistent.
 -->
 
 ---
@@ -1356,7 +1694,7 @@ layout: section
 # OLTP vs Analytics Normalisation
 
 <!-- Presenter Notes:
-This prepares students for real-world system design discussions.
+- This prepares students for real-world system design discussions.
 -->
 
 ---
@@ -1371,12 +1709,11 @@ level: 2
 | Design        | Update-focused          | Read-focused       |
 
 <!-- Presenter Notes:
-Reinforce that different workloads require different design strategies.
+- Reinforce that different workloads require different design strategies.
 -->
 
 ---
 level: 2
-layout: end
 ---
 
 # End of Advanced Normalisation
@@ -1385,10 +1722,8 @@ layout: end
 - Optimise second.
 
 <!-- Presenter Notes:
-Encourage reflection: design is about balance, not dogma.
+- Encourage reflection: design is about balance, not dogma.
 -->
-
-
 
 ---
 layout: section
@@ -1396,9 +1731,9 @@ layout: section
 
 # Session Checklist!
 
-<!-- 
-Speaker notes:
-Wrap-up: provide a quick checklist of what was covered and then exit tickets as
+<!-- Presenter notes:
+
+- Wrap-up: provide a quick checklist of what was covered and then exit tickets as
 last slide for reflection/self-assessment.
 -->
 
@@ -1413,7 +1748,7 @@ By the end of this session, students should be able to:
 - [ ] Describe UNF, 1NF, 2NF, 3NF, 4NF, and 5NF
 - [ ] Identify multi‑valued and transitive dependencies
 - [ ] Resolve many‑to‑many relationships using junction tables
-- [ ] Draw ERDs using Mermaid or dbdiagram notation
+- [ ] Draw ERDs using Mermaid or dbDiagram notation
 - [ ] Map ERDs to CREATE TABLE SQL statements
 - [ ] Explain the role of 5NF in validating lossless decomposition
 - [ ] Explain why and when denormalisation is intentionally used
@@ -1451,7 +1786,7 @@ Justify your answer with one real‑world example.
 
 ::right::
 
-### Exit Ticket 2
+## Exit Ticket 2
 
 <Announcement type="brainstorm"   style="width: 100%; padding: 1rem;" title="DQL vs DML">
 <p>
@@ -1463,7 +1798,7 @@ What problems would occur if the junction table were not used?
 </Announcement>
 
 
-<!-- Speaker notes:
+<!-- Presenter notes:
 ...
 
 -->
@@ -1491,14 +1826,18 @@ level: 2
 ## Text / Interactive Resource
 
 GeeksforGeeks. (n.d.). Fourth, Fifth Normal Forms and BCNF.
+
 Clear worked examples and decompositions useful for revision.
-https://www.geeksforgeeks.org/fourth-normal-form-4nf/
+
+- https://www.geeksforgeeks.org/fourth-normal-form-4nf/
 
 ## Video Resource
 
 Neso Academy. (n.d.). Boyce‑Codd Normal Form (BCNF), 4NF & 5NF (Video series).
+
 Excellent conceptual explanations with diagrams and step‑by‑step logic.
-https://www.youtube.com/@NesoAcademy
+
+- https://www.youtube.com/@NesoAcademy
 
 ---
 level: 2
@@ -1527,7 +1866,7 @@ layout: section
 
 # Acknowledgements & References
 
-<!-- Speaker notes:
+<!-- Presenter notes:
 Section: References. Provide reputable sources for further study in APA 7 style.
 -->
 
@@ -1540,18 +1879,55 @@ level: 2
 - Laravel. (2026). *The PHP framework for web artisans. Laravel.com*; *
   *Laravel**.    https://laravel.com/
 
+- AlmaBetter. (n.d.). *Normalization in
+  DBMS*. https://www.almabetter.com/bytes/articles/normalization-in-dbms
+
+- Connolly, T., & Begg, C. (2015). Database systems: A practical approach to design,
+  implementation, and management (6th ed.). Pearson.
+
+- DataCamp. (n.d.). *Normalization in SQL: 1NF to 5NF
+  explained*. https://www.datacamp.com/tutorial/normalization-in-sql
+
+---
+level: 2
+---
+
+# References & Acknowledgements
+
+- Datanamic. (n.d.). *Database normalization
+  explained*. https://www.datanamic.com/support/learn/articles/database-normalization.html
+
 - Date, C. J. (2019). An introduction to database systems (8th ed.). Addison‑Wesley.
 
-- Elmasri, R., & Navathe, S. B. (2016). Fundamentals of database systems (7th ed.). Pearson Education.
+- DigitalOcean. (n.d.). *Database normalization
+  explained*. https://www.digitalocean.com/community/tutorials/database-normalization
 
-- ISO/IEC. (2016). ISO/IEC 9075‑1:2016 — Information technology — Database languages — SQL — Framework. International Organization for Standardization.
+- Elmasri, R., & Navathe, S. B. (2016). Fundamentals of database systems (7th ed.). Pearson
+  Education.
 
-- Connolly, T., & Begg, C. (2015). Database systems: A practical approach to design, implementation, and management (6th ed.). Pearson.
+---
+level: 2
+---
 
+# References & Acknowledgements
 
+- ISO/IEC. (2016). ISO/IEC 9075‑1:2016 — Information technology — Database languages — SQL —
+  Framework. International Organization for Standardization.
 
-<Announcement type="info" style="width: 100%; padding: 1rem;" title="Disclosures">
-<p><b>AI Use:</b> Some content was generated with the assistance of Microsoft CoPilot</p>
+- Kinda Technical. (n.d.). *Normalization: 1NF through 5NF with real
+  examples*. https://kindatechnical.com/postgresql/normalization-1nf-through-5nf-with-real-examples.html
+
+- Nejati, H. (n.d.). *Understanding database normalization from 1NF to
+  5NF*. https://hosseinnejati.medium.com/understanding-database-normalization-from-1nf-to-5nf-
+
+<br>
+
+<Announcement type="info" style="padding: 1rem; margin: 0 2rem;" title="Disclosure - AI Use">
+<p>Some content was:</p>
+<ul>
+<li>collated and generated using references provided to Microsoft CoPilot,</li>
+<li>generated with the assistance of Microsoft CoPilot</li>
+</ul>
 </Announcement>
 
 
@@ -1560,5 +1936,8 @@ level: 2
 layout: end
 ---
 
+# Fin!
+
+<br><br>
 
 # Spring indexes bud — <br>Design trims the data loss<br>Queries fly away

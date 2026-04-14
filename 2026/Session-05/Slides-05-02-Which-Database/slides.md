@@ -944,9 +944,19 @@ layout: section
 
 ---
 level: 2
+layout: two-cols
 ---
 
-# Student Scenario
+# Practice Exercise
+
+Use the process just covered.<br>
+Use the matrix to help make informed decisions.<br>
+Note your answers, and reasoning down.
+
+
+::left::
+
+## Scenario
 
 You are designing a **club membership system**:
 
@@ -956,23 +966,19 @@ You are designing a **club membership system**:
 - Reporting for audits
 
 
+::right::
 
-<!-- Presenter Notes:
-This is deliberately similar but not identical to the worked example.
--->
-
----
-level: 2
----
-
-# Guided Questions
+## Guided Questions
 
 1. What are the strongest data relationships?
 2. Is correctness or availability more important?
 3. What workload dominates?
 4. Which two DBMS options would you shortlist?
 
+
 <!-- Presenter Notes:
+This is deliberately similar but not identical to the worked example.
+
 Require written answers for justification.
 -->
 
@@ -984,63 +990,65 @@ layout: section
 
 ---
 level: 2
+layout: grid
 ---
 
-# Exit to the Left 🎫
+# Ausgang nach links 🎫
+<p style="width:100%; text-align: right; color: rgba(192,192,192,0.75); font-size: 0.6rem;">
+DE: Exit on the left
+</p>
+
 
 Answer briefly:
+
+::tl::
+
 - Which selection step narrowed your options the most?
+
+::tr::
+
 - What mistake are you now less likely to make?
+
+::bl::
+
+- What database(s) would you choose for your mini-project?
+
+::br::
+
+- Which requirement(s) influenced your choice most?
+
 
 <!-- Presenter Notes:
 Use this to assess conceptual understanding, not recall.
--->
 
----
- layout: end ---
-## Fin
 
-*Choose with intent,*  
-*Data shape before dashboards,*  
-*Migrations cost years.*
-
-<!-- Presenter Notes:
 End by reinforcing disciplined decision-making.
 -->
 
----
-layout: section
----
-
-# Guided Practice
 
 ---
-layout: section
+ layout: end 
 ---
+# Fin
+#### Two Haiku for you this time...
 
-# Exit Questions 🎫
+<div class="grid grid-cols-2 gap-24 text-md">
 
----
-level: 2
----
+<h2 style="font-size: 1.25rem; " class="bg-stone-900! text-stone-300! p-8 pt-6 border border-stone-700/50
+rounded-lg ">
+Right data, right load,  <br>
+Trends fade, requirements stay,  <br>
+Migrations hurt.
+</h2>
 
-# Exit Reflection Questions  🎫
+<h2 style="font-size: 1.25rem"  class="bg-zinc-900! text-zinc-300! p-8 pt-6 border border-zinc-700/50
+rounded-lg ">
+Choose with intent,  <br>
+Data shape before dashboards,  <br>
+Migrations cost years.
+</h2>
 
-- What database would you choose for your project?
-
-- Which requirement influenced your choice most?
-
-<!-- Presenter Notes:
-Collect responses as exit tickets or LMS submissions.
--->
-
----
- layout: end ---
-## Fin
-
-*Right data, right load,*  
-*Trends fade, requirements stay,*  
-*Migrations hurt.*
+</div>
 
 <!-- Presenter Notes:
 End by reinforcing that good database choices reduce pain later.
