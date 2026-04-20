@@ -1,7 +1,7 @@
 ---
 theme: nmt
 background: https://cover.sli.dev
-title: Session 09 - Laravel Testing & Code Coverage
+title: Session 11 - Laravel Testing Revisited
 class: text-left
 drawings:
   persist: false
@@ -10,7 +10,7 @@ mdc: true
 duration: 90min
 ---
 
-# Session 09: Laravel Testing & Code Coverage
+# Session 11: Laravel Testing Revisited
 
 ## SaaS 1 – Cloud Application Development (Front-End Dev)
 
@@ -102,7 +102,7 @@ layout: section
 
 <!--
 
-> You need a timer, initially set to 90s
+- You need a timer, initially set to 90s
 
 “The Testing Time Machine” (5–7 minutes)
 
