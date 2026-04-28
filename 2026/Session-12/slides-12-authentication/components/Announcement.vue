@@ -104,6 +104,7 @@ const iconClasses = computed(() => {
   const insets = props.compact ? 'my-0.5' : 'my-1'
   return [
     current.value.iconClass,
+      insets,
     'self-stretch aspect-square inline-block',
   ].join(' ')
 })
