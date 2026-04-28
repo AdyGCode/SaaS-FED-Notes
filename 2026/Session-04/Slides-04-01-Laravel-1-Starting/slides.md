@@ -1,7 +1,7 @@
 ---
 theme: nmt
 background: https://cover.sli.dev
-title: Session 04 - Starting Laravel - 1
+title: Session 04 - Starting Laravel - Our First App
 class: text-left
 drawings:
   persist: false
@@ -113,7 +113,7 @@ level: 2
 
 # Contents
 
-<Toc minDepth="1" maxDepth="1" />
+<Toc minDepth="1" maxDepth="1" columns="2" />
 
 ---
 class: text-left
@@ -131,7 +131,7 @@ class: text-left
 
 ### *Goal:* Understand the workflow and build a small feature end‑to‑end
 
-<!-- Speaker notes:
+<!-- Presenter Notes:
 Welcome! This deck walks through installing Laravel, spinning up a project,
 understanding folder structure, MVC concepts, Blade fundamentals, components,
 template inheritance, and how Tailwind ties in. 
@@ -211,7 +211,7 @@ the latest bug and security fixes and new features.
 laravel --version
 ```
 
-<!-- Speaker notes:
+<!-- Presenter Notes:
 - If “laravel” isn’t found, the global Composer bin directory isn’t on PATH.
 - macOS/Linux can add: export PATH="$HOME/.composer/vendor/bin:$PATH"
   (or ~/.config/composer/vendor/bin depending on Composer version).
@@ -225,7 +225,7 @@ layout: section
 
 # Creating a New Laravel Project
 
-<!-- Speaker notes:
+<!-- Presenter Notes:
 - Option A is often faster and gives a clean scaffold.
 - Option B is great for CI or when the installer isn’t available.
 - Option C for when you use an Application Template
@@ -399,7 +399,7 @@ layout: section
 
 # Laravel Folder Structure
 
-<!-- Speaker notes:
+<!-- Presenter Notes:
 Section: Laravel folder structure. Focus on the high-signal directories and what
 lives inside them for everyday development.
 -->
@@ -424,7 +424,7 @@ level: 2
 
 You’ll mostly live in `app/`, `resources/`, and `routes/`.
 
-<!-- Speaker notes:
+<!-- Presenter Notes:
 - Emphasize that public/ is the document root for production web servers.
 - storage/logs/laravel.log is the first stop for debugging unexpected errors.
 -->
@@ -437,7 +437,7 @@ layout: section
 
 ## Model - View - Controller
 
-<!-- Speaker notes:
+<!-- Presenter Notes:
 Section: MVC concepts. Define the three roles, data flow, and how routes fit in.
 Keep the mental model clear and practical.
 -->
@@ -479,7 +479,7 @@ Browser → Route → Controller → (Model/services) → View (HTML) → Browse
 <p>Views present the data.</p>
 </Announcement>
 
-<!-- Speaker notes:
+<!-- Presenter Notes:
 - Keep controllers skinny: orchestrate, don’t implement heavy business logic.
 - Views should contain as little logic as possible; use Blade directives sparingly.
 -->
@@ -497,7 +497,7 @@ layout: section
 
 # Creating Blade Views
 
-<!-- Speaker notes:
+<!-- Presenter Notes:
 Section: Blade basics—creating views, syntax, escaping, and common directives.
 Include simple code examples, data passing, and escaping safeguards.
 -->
@@ -555,7 +555,7 @@ level: 2
 - Array: `view('welcome', ['name' => 'Adrian'])`
 - `with()`: `view('welcome')->with('name', 'Adrian')`
 
-<!-- Speaker notes:
+<!-- Presenter Notes:
 - Blade files end with .blade.php.
 - Keep view files in resources/views. Nested folders use dot notation:
   views/home/index.blade.php → view('home.index').
@@ -635,7 +635,7 @@ level: 2
 > 
 > Use `{!! !!}` only for trusted HTML.
 
-<!-- Speaker notes:
+<!-- Presenter Notes:
 - Emphasize XSS protection via HTML escaping.
 - @csrf and @method are helpers for forms—cover during the mini build.
 -->
@@ -659,7 +659,7 @@ level: 2
   <div @class(['p-4', 'bg-green-100' => $ok, 'bg-red-100' => !$ok])></div>
   ```
 
-<!-- Speaker notes:
+<!-- Presenter Notes:
 - @class is perfect for conditional Tailwind classes.
 - @push/@stack helps when children need to append to layout-defined areas (e.g., scripts).
 -->
@@ -670,7 +670,7 @@ layout: section
 
 # Templates & Inheritance
 
-<!-- Speaker notes:
+<!-- Presenter Notes:
 Section: Components & template inheritance. Show @extends/@section flow and the
 component-driven (x-) layout approach with slots and class merging. Then compare them.
 -->
@@ -732,7 +732,7 @@ level: 2
 @endsection
 ```
 
-<!-- Speaker notes:
+<!-- Presenter Notes:
 - @yield defines placeholders; @section fills them in child views.
 - You can use @section('title', '...') shorthand for single-line sections.
 -->
@@ -809,7 +809,7 @@ Component Filename: `resources/views/components/button.blade.php`
 <x-button type="submit" class="mt-3">Save</x-button>
 ```
 
-<!-- Speaker notes:
+<!-- Presenter Notes:
 - $attributes->merge(['class' => '...']) merges caller classes with defaults—great for Tailwind.
 - Anonymous components live in resources/views/components. Named slots: <x-slot:name>.
 -->
@@ -872,7 +872,7 @@ level: 2
 - It’s common to **mix both**: `@extends` for the outer shell + `<x-*>` for
   inner UI patterns
 
-<!-- Speaker notes:
+<!-- Presenter Notes:
 - Both compile to efficient PHP; choice is about ergonomics and reuse.
 - Teams often start with @extends and gradually extract components as patterns repeat.
 -->
@@ -884,7 +884,7 @@ layout: section
 
 # How Tailwind Fits With Blade
 
-<!-- Speaker notes:
+<!-- Presenter Notes:
 Section: Tailwind + Blade. Show where Tailwind is configured, how Vite compiles it,
 and how Blade makes Tailwind ergonomic via directives and components.
 -->
@@ -1012,7 +1012,7 @@ level: 2
 - Components encapsulate Tailwind patterns with:
   -   `$attributes->merge(['class' => '...'])`
 
-<!-- Speaker notes:
+<!-- Presenter Notes:
 - Starter kits (e.g., Breeze/Jetstream) ship with Tailwind + Vite pre-configured.
 - Keep tailwind.config.js content globs up to date to avoid purge issues.
 -->
@@ -1031,7 +1031,7 @@ layout: section
 
 #### Stage 1: Static Page - Contact Us
 
-<!-- Speaker notes:
+<!-- Presenter Notes:
 Section: Mini build—the “Contact Us” page. We’ll create routes, a controller, a
 view with a Tailwind form, validate input, and show a success message—no database.
 -->
@@ -1114,7 +1114,7 @@ class ContactUsController extends Controller
 }
 ```
 
-<!-- Speaker notes:
+<!-- Presenter Notes:
 - We explicitly validate and then do nothing with the data (no DB).
 - Using back()->with() flashes a success message for UX.
 -->
@@ -1247,7 +1247,7 @@ We are not using a layout... yet.
   - Update the title of the page
   - Remove the test link to the thank-you page
 
-<!-- Speaker notes:
+<!-- Presenter Notes:
 The thank-you.blade.php file is the same as the contact-us blade file, 
 with the name of the file and text changed, plus the link removed.
 -->
@@ -1309,7 +1309,7 @@ layout: section
 
 # Session Checklist!
 
-<!-- Speaker notes:
+<!-- Presenter Notes:
 Wrap-up: provide a quick checklist of what was covered and then exit tickets as
 last slide for reflection/self-assessment.
 -->
@@ -1331,31 +1331,50 @@ level: 2
 - [ ] Mini build: “Contact Us” (routes, controller, simple view)
 
 
-<!-- Speaker notes:
+<!-- Presenter Notes:
 Ask learners to identify any topics needing a deeper dive next session.
 -->
 
 ---
-level: 2
+layout: section
 ---
 
-## Exit Tickets (Discuss or Submit)
+# Exit Tickets 🎫🎫
 
-1) **Architecture Reflection:**
+---
+level: 2
+layout: two-cols
+---
+
+## Exit Tickets 🎫
+
+::left::
+
+### Architecture Reflection
 
 In your own words, describe how a request to `/contact` flows through
-Laravel (route → controller → validation → view) in our mini build. Where
-might you add logging or email sending, and why would you put that logic
+Laravel in our mini-build.
+
+In basic terms (without explanation) this may be route → controller → 
+validation → view.
+
+Where might you add logging or email sending, and why would you put that logic
 there?
 
-2) **Blade & Tailwind Application:**
+::right::
+
+### Blade & Tailwind Application
 
 Take the contact form and propose two improvements using Blade components and
-Tailwind utilities (e.g., extract an `<x-input>` with label + error, add a
-responsive grid). Explain how `$attributes->merge` and `@class` help keep your
+Tailwind utilities.
+
+For example you could extract an `<x-enhanced-input>` with label + error, 
+add a responsive grid. 
+
+Explain how `$attributes->merge` and `@class` help keep your
 markup DRY and readable.
 
-<!-- Speaker notes:
+<!-- Presenter Notes:
 Look for clarity of request flow and solid reasoning for where to place logic.
 For Blade/Tailwind: emphasize reusability, consistency, and conditional styling.
 -->
@@ -1367,7 +1386,7 @@ layout: section
 
 # Acknowledgements & References
 
-<!-- Speaker notes:
+<!-- Presenter Notes:
 Section: References. Provide reputable sources for further study in APA 7 style.
 -->
 
@@ -1405,10 +1424,13 @@ level: 2
 - Font Awesome. (2026). *Font Awesome. Fontawesome.com*; **Font Awesome**.
   https://fontawesome.com/
 
-<!-- Speaker notes:
+<br>
+
+<br>
+<br>
+
+> Some content may have been generated generated with the assistance of Microsoft CoPilot
+ 
+<!-- Presenter Notes:
 Encourage learners to browse docs for their exact Laravel minor version.
 -->
-
-- Slide template: Adrian Gould
-
-> - Some content was generated with the assistance of Microsoft CoPilot

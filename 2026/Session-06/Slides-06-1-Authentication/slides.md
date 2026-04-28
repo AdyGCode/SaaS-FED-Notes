@@ -71,7 +71,7 @@ level: 2
 
 # Contents
 
-<Toc minDepth="1" maxDepth="1" />
+<Toc minDepth="1" maxDepth="1" columns="2" />
 
 ---
 layout: figure
@@ -705,7 +705,7 @@ level: 2
 <br>
 
 
-> - Some content was generated with the assistance of Microsoft CoPilot
+> Some content may have been generated with the assistance of Microsoft CoPilot
 
 ---
 layout: end

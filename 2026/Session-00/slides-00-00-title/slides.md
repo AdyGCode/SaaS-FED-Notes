@@ -90,7 +90,7 @@ level: 2
 
 # Contents 
 
-<Toc minDepth="1" maxDepth="1" />
+<Toc minDepth="1" maxDepth="1" columns="2" />
 
 ---
 class: text-left
@@ -131,4 +131,4 @@ level: 2
 <br>
 
 > - Mermaid syntax used for some diagrams
-> - Some content was generated with the assistance of Microsoft CoPilot
+> Some content may have been generated with the assistance of Microsoft CoPilot

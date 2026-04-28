@@ -46,7 +46,7 @@ Also create a set of multi select questions and answers (covering the details ab
 Please create a markdown document for the slides.
 
 Slides are separated by `---`
-The speaker notes are embedded as HTML comment blocks BEFORE the slide separator for the next slide.
+The Presenter Notes are embedded as HTML comment blocks BEFORE the slide separator for the next slide.
 
 The presentation slides will be separated into sections using:
 ---

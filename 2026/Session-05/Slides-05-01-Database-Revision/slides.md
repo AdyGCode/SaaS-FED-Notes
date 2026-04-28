@@ -1781,7 +1781,7 @@ layout: section
 # Session Checklist!
 
 <!-- 
-Speaker notes:
+Presenter Notes:
 Wrap-up: provide a quick checklist of what was covered and then exit tickets as
 last slide for reflection/self-assessment.
 -->
@@ -1848,7 +1848,7 @@ systems group it under DML.
 </Announcement>
 
 
-<!-- Speaker notes:
+<!-- Presenter Notes:
 ...
 
 -->
@@ -1905,7 +1905,7 @@ layout: section
 
 # Acknowledgements & References
 
-<!-- Speaker notes:
+<!-- Presenter Notes:
 Section: References. Provide reputable sources for further study in APA 7 style.
 -->
 
@@ -1940,7 +1940,7 @@ level: 2
 
 <Announcement type="info" style="width: 100%; padding: 1rem;" title="Disclosures">
 <p><b>Slide template:</b> Adrian Gould</p>
-<p><b>AI Use:</b> Some content was generated with the assistance of Microsoft 
+<p><b>AI Use:</b> Some content may have been generated with the assistance of Microsoft 
 CoPilot</p>
 </Announcement>
 

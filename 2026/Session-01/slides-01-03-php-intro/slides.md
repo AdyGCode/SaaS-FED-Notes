@@ -56,7 +56,7 @@ level: 2
 
 # Contents
 
-<Toc minDepth="1" maxDepth="1" />
+<Toc minDepth="1" maxDepth="1" columns="2" />
 
 
 ---
@@ -1175,6 +1175,8 @@ level: 2
 - Slide template
     - Adrian Gould
 
+
+<br>
 <br>
 
-> - Some content was generated with the assistance of Microsoft CoPilot
+> Some content may have been generated generated with the assistance of Microsoft CoPilot

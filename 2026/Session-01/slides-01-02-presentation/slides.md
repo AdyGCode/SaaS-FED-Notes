@@ -52,7 +52,7 @@ By the end of this session, you will be able to:
 
 # Contents
 
-<Toc minDepth="1" maxDepth="1" />
+<Toc minDepth="1" maxDepth="1" columns="2" />
 
 
 
@@ -726,6 +726,8 @@ level: 2
 
 > - Mermaid syntax used for some diagrams
 
+
+<br>
 <br>
 
-> - Some content was generated with the assistance of Microsoft CoPilot
+> Some content may have been generated generated with the assistance of Microsoft CoPilot
