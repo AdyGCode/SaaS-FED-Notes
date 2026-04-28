@@ -889,9 +889,14 @@ layout: section
 
 Testing register, login, logout, and other actions.
 
-<!-- Presenter Notes:
+<!--- Presenter Notes:
 
--->
+This section introduces automated testing for authentication.
+
+Emphasise that authentication is critical infrastructure and MUST be tested.
+These are feature tests that simulate real user behaviour.
+
+--->
 
 --- 
 level: 2
@@ -909,68 +914,150 @@ We test:
 Why:
 - Confidence
 - Prevent regressions
+- Catch security flaws early
+- Prove expected behaviour
 
 
---- 
+<!--- Presenter Notes:
+
+Reinforce: authentication bugs are security bugs.
+Testing ensures our assumptions about access control are correct.
+
+--->
+
+
+---
 level: 2
 ---
 
 ## Register success
 
+```php
+it('allows a user to register successfully', function () {
+    $response = $this->post('/register', [
+        'name' => 'Test User',
+        'email' => 'test@example.com',
+        'password' => 'password',
+        'password_confirmation' => 'password',
+    ]);
+    $response->assertRedirect('/email/verify');
+    $this->assertDatabaseHas('users', [
+        'email' => 'test@example.com',
+    ]);
+});
+```
 
---- 
+
+---
 level: 2
 ---
 
 ## Register failure
 
---- 
+```php
+it('fails registration when email is missing', function () 
+{    
+    $response = $this->post('/register', [        
+        'name' => 'Test User',        
+        'password' => 'password',        
+        'password_confirmation' => 'password',    
+    ]);    
+    $response->assertSessionHasErrors('email');
+});
+
+```
+
+
+---
 level: 2
 ---
 
 ## Verify email success
 
---- 
+```php
+it('verifies a users email address', function () {    
+    $user = User::factory()->unverified()->create();    
+    $verifyUrl = URL::temporarySignedRoute(        
+        'verification.verify',        
+        now()->addMinutes(60),        
+        [
+            'id' => $user->id, 
+            'hash' => sha1($user->email)
+        ]
+    );    
+    $this->actingAs($user)->get($verifyUrl);    
+    expect($user->fresh()->hasVerifiedEmail())->toBeTrue();
+});
+```
+
+
+---
 level: 2
 ---
 
 ## Verify email failure
 
---- 
+```php
+it('rejects an invalid verification link', function () {    $user = User::factory()->unverified()->create();    $invalidUrl = route('verification.verify', [        'id' => $user->id,        'hash' => 'invalid-hash',    ]);    $this->actingAs($user)->get($invalidUrl)        ->assertStatus(403);});
+```
+
+
+---
 level: 2
 ---
 
 ## Login success
 
---- 
+```php
+it('allows a verified user to login', function () {    $user = User::factory()->create([        'password' => bcrypt('password'),        'email_verified_at' => now(),    ]);    $response = $this->post('/login', [        'email' => $user->email,        'password' => 'password',    ]);    $response->assertRedirect('/dashboard');    $this->assertAuthenticatedAs($user);});
+```
+
+
+---
 level: 2
 ---
 
 ## Login failure (wrong email address)
 
---- 
+```php
+it('fails login with incorrect email', function () {    $user = User::factory()->create([        'password' => bcrypt('password'),    ]);    $response = $this->post('/login', [        'email' => 'wrong@example.com',        'password' => 'password',    ]);    $response->assertSessionHasErrors();    $this->assertGuest();});
+```
+
+
+---
 level: 2
 ---
 
 ## Login failure (password)
 
---- 
+```php
+it('fails login with incorrect password', function () {    $user = User::factory()->create([        'password' => bcrypt('password'),    ]);    $response = $this->post('/login', [        'email' => $user->email,        'password' => 'wrong-password',    ]);    $response->assertSessionHasErrors();    $this->assertGuest();});
+```
+
+
+---
 level: 2
 ---
 
 ## Logout success (authenticated)
 
---- 
+```php
+it('logs out an authenticated user', function () {    $user = User::factory()->create();    $this->actingAs($user)        ->post('/logout')        ->assertRedirect('/');    $this->assertGuest();});
+```
+
+
+---
 level: 2
 ---
 
 ## Logout failure (not authenticated)
 
-<!-- Presenter Notes:
+```php
+it('prevents logout when not authenticated', function () {    $this->post('/logout')        ->assertRedirect('/login');});
+```
 
-Each of the above will be level: 2 slides
 
--->
+---
 
 
 ---
