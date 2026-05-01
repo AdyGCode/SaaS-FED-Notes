@@ -3,6 +3,7 @@
   "type": "module",
   "private": true,
   "scripts": {
+    "setup": "rm -Rf node_modules pnpm-lock.yaml package.lock && pnpm install",
     "build": "slidev build",
     "dev": "slidev --open",
     "export": "slidev export",
@@ -10,22 +11,25 @@
   },
 
   "dependencies": {
-    "@iconify-json/fa7-brands": "latest",
-    "@iconify-json/fa7-regular": "latest",
-    "@iconify-json/fa7-solid": "latest",
-    "@unocss/preset-icons": "latest",
-    "@slidev/cli": "latest",
-    "@slidev/theme-default": "latest",
-    "@slidev/types": "latest",
-    "shiki": "latest",
-    "shiki-magic-move": "latest",
-    "slidev-theme-nmt": "latest",
-    "vue": "latest"
+    "@iconify-json/fa-brands": "^1.2.2",
+    "@iconify-json/fa-regular": "^1.2.2",
+    "@iconify-json/fa-solid": "^1.2.2",
+    "@slidev/types": "^0.50.0-beta.5",
+    "@unocss/preset-icons": "^66.6.8",
+    "codemirror-theme-vars": "^0.1.1",
+    "prism-theme-vars": "^0.2.4",
+    "slidev-addon-sync": "^0.1.0",
+    "slidev-component-poll": "^3.0.0",
+    "theme-vitesse": "^0.6.2"
   },
 
+  "devDependencies": {
+    "@slidev/cli": "^0.50.0-beta.5",
+    "@types/node": "^18.13.0"
+  },
+  "//": "Learn more: https://sli.dev/themes/write-a-theme.html",
   "slidev": {
-    "colorSchema": "dark",
-    "highlighter": "shiki",
+    "colorSchema": "both",
     "defaults": {
       "fonts": {
         "provider": "coollabs",
@@ -37,11 +41,12 @@
       },
       "transition": "fade",
       "aspectRatio": "16/10",
-       "addons": ["slidev-component-poll"]
+      "addons": [
+        "slidev-component-poll"
+      ]
     }
   },
-
-  "devDependencies": {
-    "playwright-chromium": "latest"
-  }
+  "author": "Adrian Gould <ady.g.coder@gmail.com>",
+  "funding": "https://github.com/sponsors/adygcode",
+  "bugs": "https://github.com/adygcode/slidev-theme-nmt/issues"
 }

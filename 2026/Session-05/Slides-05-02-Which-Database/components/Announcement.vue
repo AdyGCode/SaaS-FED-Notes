@@ -44,39 +44,39 @@ const props = defineProps({
 const map = {
   default: {
     classes: 'bg-zinc-800 text-zinc-200',
-    iconClass: 'i-fa7-solid-note-sticky text-[1.25em]',
+    iconClass: 'i-fa-solid-note-sticky text-[1.25em]',
   },
   error: {
     classes: 'bg-red-800 text-red-200 m-0.5',
-    iconClass: 'i-fa7-solid-triangle-exclamation text-[1.25em]',
+    iconClass: 'i-fa-solid-triangle-exclamation text-[1.25em]',
   },
   warning: {
     classes: 'bg-amber-800 text-amber-200 m-0.5',
-    iconClass: 'i-fa7-solid-circle-exclamation text-[1.25em]',
+    iconClass: 'i-fa-solid-circle-exclamation text-[1.25em]',
   },
   info: {
     classes: 'bg-sky-800 text-sky-200 m-0.5',
-    iconClass: 'i-fa7-solid-circle-info text-[1.25em]',
+    iconClass: 'i-fa-solid-circle-info text-[1.25em]',
   },
   duration: {
     classes: 'bg-blue-800 text-blue-200 m-0.5',
-    iconClass: 'i-fa7-solid-hourglass-half text-[1.25em]',
+    iconClass: 'i-fa-solid-hourglass-half text-[1.25em]',
   },
   important: {
     classes: 'bg-green-800 text-green-200 m-0.5',
-    iconClass: 'i-fa7-solid-star text-[1.25em]',
+    iconClass: 'i-fa-solid-star text-[1.25em]',
   },
   idea: {
     classes: 'bg-teal-800 text-teal-200 m-0.5',
-    iconClass: 'i-fa7-solid-lightbulb text-[1.25em]',
+    iconClass: 'i-fa-solid-lightbulb text-[1.25em]',
   },
   priority: {
     classes: 'bg-violet-800 text-violet-200 m-0.5',
-    iconClass: 'i-fa7-solid-bolt-lightning text-[1.25em]',
+    iconClass: 'i-fa-solid-bolt-lightning text-[1.25em]',
   },
   brainstorm: {
     classes: 'bg-pink-800 text-pink-200 m-0.5',
-    iconClass: 'i-fa7-solid-brain text-[1.25em]',
+    iconClass: 'i-fa-solid-brain text-[1.25em]',
   },
 }
 

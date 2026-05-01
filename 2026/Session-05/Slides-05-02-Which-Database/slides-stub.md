@@ -17,12 +17,12 @@ duration: 35min
 ## SaaS 2 – APIs & NoSQL (Back-End Dev)
 
 <div @click="$slidev.nav.next" class="mt-12 -mx-4 p-4" hover:bg="white op-10">
-<p>Press <kbd>Space</kbd> or <kbd>RIGHT</kbd> for next slide/step <fa7-solid-arrow-right /></p>
+<p>Press <kbd>Space</kbd> or <kbd>RIGHT</kbd> for next slide/step <fa-solid-arrow-right /></p>
 </div>
 
 <div class="abs-br m-6 text-xl">
   <a href="https://github.com/adygcode/SaaS-FED-Notes" target="_blank" class="slidev-icon-btn">
-    <fa7-brands-github class="text-zinc-300 text-3xl -mr-2"/>
+    <fa-brands-github class="text-zinc-300 text-3xl -mr-2"/>
   </a>
 </div>
 
@@ -299,7 +299,7 @@ level: 2
 
 <Announcement type="info" style="width: 100%; padding: 1rem;" title="Disclosures">
 <p><b>Slide template:</b> Adrian Gould</p>
-<p><b>AI Use:</b> Some content was generated with the assistance of Microsoft 
+<p><b>AI Use:</b> Some content may have been generated with the assistance of Microsoft 
 CoPilot</p>
 </Announcement>
 
