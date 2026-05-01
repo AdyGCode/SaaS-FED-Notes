@@ -122,7 +122,7 @@ layout: section
 
 # Authentication and Authorisation
 
---- 
+---
 level: 2
 layout: two-cols
 ---
@@ -193,7 +193,7 @@ Note:
 
 -->
 
---- 
+---
 level: 2
 ---
 
@@ -321,7 +321,7 @@ level: 2
 Open `config/fortify.php` and ensure the following features are enabled:
 
 ```php
-'features' => [    
+'features' => [
   Features::registration(),
   Features::resetPasswords(),
   Features::emailVerification(),
@@ -732,7 +732,7 @@ layout: section
 
 -->
 
---- 
+---
 level: 2
 ---
 
@@ -744,7 +744,7 @@ level: 2
 
 -->
 
---- 
+---
 level: 2
 ---
 
@@ -762,7 +762,7 @@ Route::middleware('auth')->group(function () {
 
 -->
 
---- 
+---
 level: 2
 ---
 
@@ -782,7 +782,7 @@ public function authorize(): bool
 
 -->
 
---- 
+---
 level: 2
 ---
 
@@ -796,7 +796,7 @@ level: 2
 
 -->
 
---- 
+---
 layout: section
 level: 2
 ---
@@ -833,8 +833,8 @@ layout: two-cols
 
 ## Benefits...
 
-✅ Safe  
-✅ Fast  
+✅ Safe
+✅ Fast
 ✅ Visual
 
 ---
@@ -847,10 +847,9 @@ level: 2
 
 | Option             | Notes                                             |
 |--------------------|---------------------------------------------------|
-| Local Installation | Does not rely on WSL/Docker/et al         |
+| Local Installation | Does not rely on WSL/Docker/et al                 |
 | Docker             | Self contained                                    |
 | Laragon            | Windows Only, Laragon v8 has Mailpit as an option |
-
 
 <Announcement type=info title="Installation instructions">
 
@@ -862,28 +861,35 @@ org/docs/install/
 
 ---
 level: 2
+layout: two-cols
 ---
 
 # Testing Email Verification using Mailpit
 
 ## Using Mailpit
 
-### Using Docker
+| Exposed Service | Address:Port          |
+|-----------------|-----------------------|
+| SMTP Server     | localhost:1025        |
+| Web UI          | http://localhost:8025 |
 
-```bash
-docker run -d \
-  -p 1025:1025 \
-  -p 8025:8025 \
-  axllent/mailpit
-```
+::left::
 
-SMTP Server: localhost:1025
-Web UI: http://localhost:8025
+### Configure Laravel to Use Mailpit
 
-Configure Laravel to Use Mailpit
-Update your .env file:
+Update your `.env` file.
 
-```ini
+When testing only change:
+
+- `MAIL_MAILER`, `MAIL_HOST`, `MAIL_PORT`, `MAIL_FROM_ADDRESS`
+
+External mail providers - check their details.
+
+::right::
+
+### Example settings
+
+```ini {none|1|2|3|7|all}
 MAIL_MAILER = smtp
 MAIL_HOST = 127.0.0.1
 MAIL_PORT = 1025
@@ -894,66 +900,122 @@ MAIL_FROM_ADDRESS = "noreply@example.com"
 MAIL_FROM_NAME = "${APP_NAME}"
 ```
 
-Triggering the Verification Email
+---
+level: 2
+---
 
-Register a new user
-Laravel automatically sends a verification email
-Mailpit captures the email instantly
+# Testing Email Verification using Mailpit
+
+## Triggering the Verification Email
+
+- Register a new user
+- Laravel automatically sends a verification email
+- Mailpit captures the email instantly
 
 ✅ No extra code required
 
-Viewing the Verification Email
 
-Open Mailpit in your browser
-👉 http://localhost:8025
+---
+level: 2
+layout: two-cols
+---
+
+# Testing Email Verification using Mailpit
+
+::left::
+
+## Viewing the Verification Email
+
+Open Mailpit in your browser: http://localhost:8025
+
 Select the latest email
+
 Inspect:
 
-Recipient
-Subject
-Verification link
+- Recipient
+- Subject
+- Verification link
 
-Verifying the Email Address
+::right::
+
+## Verifying the Email Address
 
 Click the verification link in Mailpit
+
 Laravel validates:
 
-Signed URL
-User ID
+- Signed URL
+- User ID
 
-email_verified_at is updated
-User is redirected to the intended page
+When successful:
+
+- email_verified_at is updated
+- User is redirected to the intended page
 
 ✅ Email successfully verified
 
-Common Issues & Troubleshooting
+---
+level: 2
+layout: grid
+---
 
-No email received?
+# Testing Email Verification using Mailpit
 
-Check Mailpit is running
-Confirm .env MAIL settings
+## Common Issues & Troubleshooting
 
-Verification link expired?
+::tl::
 
-Request new verification email
+### No email received?
 
-Access denied?
+- Check Mailpit is running
+- Confirm .env MAIL settings
 
-Ensure verified middleware is applied correctly
+::tr::
 
-Useful Routes for Testing
+### Verification link expired?
+
+- Request new verification email
+
+::bl::
+
+### Access denied?
+
+- Ensure verified middleware is applied correctly
+
+---
+level: 2
+layout: two-cols
+---
+
+# Testing Email Verification using Mailpit
+
+<br>
+
+## Useful Routes for Testing
+
+Use the dashboard to test authentication:
+
+- e.g. http://localhost:8000/dashboard
 
 ```php
 Route::middleware(['auth', 'verified'])
-  ->get('/dashboard', function () {
-      return view('dashboard');
-  });
+    ->get('/dashboard', function () {
+        return view('dashboard');
+    });
 ```
 
-- Try accessing before verification ❌
-- Try accessing after verification ✅
+::left::
 
-Why This Matters for Testing
+### When testing the routes...
+
+Try accessing "client dashboard":
+
+- before email verification
+- after email verification
+
+::right::
+
+### Why This Matters for Testing
 
 - Prevents fake accounts
 - Verifies email-based workflows
@@ -963,28 +1025,60 @@ Why This Matters for Testing
 Mailpit ensures this can all be done locally and safely.
 
 
---- 
+---
 level: 2
+layout: two-cols
 ---
 
-# Use a Confirm Password before accessing the "admin dashboard"
+# Confirm Password: Adding extra protection
 
-Sensitive actions may require re-confirmation:
+Accomplish this by password re-confirmation.
 
-- Admin dashboard
+::left::
+
+### Protect:
+
+- sensitive areas of site
+- sensitive actions/features
+
+::right::
+
+### For example:
+
 - Changing email
 - Deleting account
+- Protecting the Admin Dashboard and other Admin routes.
 
-For example, protecting the Admin Dashboard and other Admin routes.
+---
+level: 2
+layout: two-cols
+---
 
-### Protect the Admin dashboard route
+# Confirm Password: Adding extra protection
 
-Endpoint: `/admin`
-Route Name: `admin.index`
+<br>
+
+## Example:
+
+- protecting the admin dashboard
+- require re-enter current user password
+
+::left::
+
+### Protect Admin dashboard
+
+|             |               |
+|-------------|---------------|
+| Endpoint:   | `/admin`      |
+| Route Name: | `admin.index` |
+
+::right::
+
+### Example Code
 
 ```php
 Route::get('/admin', fn () => view('admin'))
-    ->middleware(['auth', 'password.confirm'])
+    ->middleware([ 'auth', 'password.confirm' ])
     ->name('admin.index');
 ```
 
@@ -997,7 +1091,7 @@ Route::get('/admin', fn () => view('admin'))
 layout: section
 ---
 
-# Pest Testing Authentication
+# Authentication Pest Testing
 
 Testing register, login, logout, and other actions.
 
@@ -1005,17 +1099,18 @@ Testing register, login, logout, and other actions.
 
 This section introduces automated testing for authentication.
 
-Emphasise that authentication is critical infrastructure and MUST be tested.
+Emphasize authentication is critical infrastructure and MUST be tested.
+
 These are feature tests that simulate real user behaviour.
 
 -->
 
---- 
+---
 level: 2
 layout: two-cols
 ---
 
-# Pest Testing Authentication
+# Authentication Pest Testing
 
 ::left::
 
@@ -1047,20 +1142,26 @@ Testing ensures our assumptions about access control are correct.
 level: 2
 ---
 
+# Authentication Pest Testing
+
 ## Register success
 
 ```php
 it('allows a user to register successfully', function () {
+
     $response = $this->post('/register', [
         'name' => 'Test User',
-        'email' => 'test@example.com',
+        'email' => 'pest.test@example.com',
         'password' => 'password',
         'password_confirmation' => 'password',
     ]);
+
     $response->assertRedirect('/email/verify');
+
     $this->assertDatabaseHas('users', [
-        'email' => 'test@example.com',
+        'email' => 'pest.test@example.com',
     ]);
+
 });
 ```
 
@@ -1068,16 +1169,19 @@ it('allows a user to register successfully', function () {
 level: 2
 ---
 
+# Authentication Pest Testing
+
 ## Register failure
 
 ```php
-it('fails registration when email is missing', function () 
-{    
-    $response = $this->post('/register', [        
-        'name' => 'Test User',        
-        'password' => 'password',        
-        'password_confirmation' => 'password',    
-    ]);    
+it('fails registration when email is missing', function ()
+{
+    $response = $this->post('/register', [
+        'name' => 'Test User',
+        'password' => 'password',
+        'password_confirmation' => 'password',
+    ]);
+
     $response->assertSessionHasErrors('email');
 });
 
@@ -1087,20 +1191,25 @@ it('fails registration when email is missing', function ()
 level: 2
 ---
 
+# Authentication Pest Testing
+
 ## Verify email success
 
 ```php
-it('verifies a users email address', function () {    
-    $user = User::factory()->unverified()->create();    
-    $verifyUrl = URL::temporarySignedRoute(        
-        'verification.verify',        
-        now()->addMinutes(60),        
+it('verifies a users email address', function () {
+    $user = User::factory()->unverified()->create();
+
+    $verifyUrl = URL::temporarySignedRoute(
+        'verification.verify',
+        now()->addMinutes(60),
         [
-            'id' => $user->id, 
+            'id' => $user->id,
             'hash' => sha1($user->email)
         ]
-    );    
-    $this->actingAs($user)->get($verifyUrl);    
+    );
+
+    $this->actingAs($user)->get($verifyUrl);
+
     expect($user->fresh()->hasVerifiedEmail())->toBeTrue();
 });
 ```
@@ -1109,115 +1218,210 @@ it('verifies a users email address', function () {
 level: 2
 ---
 
+# Authentication Pest Testing
+
 ## Verify email failure
 
 ```php
-it('rejects an invalid verification link', function () {    $user = User::factory()->unverified()->create();    $invalidUrl = route('verification.verify', [        'id' => $user->id,        'hash' => 'invalid-hash',    ]);    $this->actingAs($user)->get($invalidUrl)        ->assertStatus(403);});
+it('rejects an invalid verification link', function () {
+
+    $user = User::factory()
+                ->unverified()
+                ->create();
+
+    $invalidUrl = route('verification.verify', [
+                            'id' => $user->id,
+                            'hash' => 'invalid-hash',
+                  ]);
+               
+    $this->actingAs($user)
+        ->get($invalidUrl)
+        ->assertStatus(403);
+});
 ```
 
 ---
 level: 2
 ---
+
+# Authentication Pest Testing
 
 ## Login success
 
 ```php
-it('allows a verified user to login', function () {    $user = User::factory()->create([        'password' => bcrypt('password'),        'email_verified_at' => now(),    ]);    $response = $this->post('/login', [        'email' => $user->email,        'password' => 'password',    ]);    $response->assertRedirect('/dashboard');    $this->assertAuthenticatedAs($user);});
+it('allows a verified user to login', function () {
+
+    $user = User::factory()->create([
+        'password' => bcrypt('password'),
+        'email_verified_at' => now(),
+    ]);
+
+    $response = $this->post('/login', [
+        'email' => $user->email,
+        'password' => 'password',
+    ]);
+
+    $response->assertRedirect('/dashboard');
+
+    $this->assertAuthenticatedAs($user);
+});
 ```
 
 ---
 level: 2
 ---
+
+# Authentication Pest Testing
 
 ## Login failure (wrong email address)
 
 ```php
-it('fails login with incorrect email', function () {    $user = User::factory()->create([        'password' => bcrypt('password'),    ]);    $response = $this->post('/login', [        'email' => 'wrong@example.com',        'password' => 'password',    ]);    $response->assertSessionHasErrors();    $this->assertGuest();});
+it('fails login with incorrect email', function () {
+
+    $user = User::factory()->create([
+        'password' => bcrypt('password'),
+    ]);
+
+    $response = $this->post('/login', [
+        'email' => 'wrong@example.com',
+        'password' => 'password',
+    ]);
+
+    $response->assertSessionHasErrors();
+
+    $this->assertGuest();
+});
 ```
 
 ---
 level: 2
 ---
+
+# Authentication Pest Testing
 
 ## Login failure (password)
 
 ```php
-it('fails login with incorrect password', function () {    $user = User::factory()->create([        'password' => bcrypt('password'),    ]);    $response = $this->post('/login', [        'email' => $user->email,        'password' => 'wrong-password',    ]);    $response->assertSessionHasErrors();    $this->assertGuest();});
+it('fails login with incorrect password', function () {
+
+    $user = User::factory()->create([
+        'password' => bcrypt('password'),
+    ]);
+
+    $response = $this->post('/login', [
+        'email' => $user->email,
+        'password' => 'wrong-password',
+    ]);
+
+    $response->assertSessionHasErrors();
+    $this->assertGuest();
+});
 ```
 
 ---
 level: 2
 ---
+
+# Authentication Pest Testing
 
 ## Logout success (authenticated)
 
 ```php
-it('logs out an authenticated user', function () {    $user = User::factory()->create();    $this->actingAs($user)        ->post('/logout')        ->assertRedirect('/');    $this->assertGuest();});
+it('logs out an authenticated user', function () {   
+ 
+    $user = User::factory()->create();    
+    
+    $this->actingAs($user)        
+         ->post('/logout')        
+         ->assertRedirect('/');
+             
+    $this->assertGuest();
+});
 ```
 
 ---
 level: 2
 ---
 
+# Authentication Pest Testing
+
 ## Logout failure (not authenticated)
 
 ```php
-it('prevents logout when not authenticated', function () {    $this->post('/logout')        ->assertRedirect('/login');});
+it('prevents logout when not authenticated', function () {    
+
+    $this->post('/logout')        
+         ->assertRedirect('/login');
+         
+});
 ```
-
----
-
 
 ---
 layout: section
 ---
 
-# Demo: Adding a "Topics" CRUD with Authentication
+# Demo
+
+Adding a "Topics" CRUD with Authentication
 
 <!-- Presenter Notes:
 
 -->
 
---- 
+---
 level: 2
+layout: two-cols
 ---
 
 # Adding a "Topics" CRUD with Authentication
 
+<br>
+
 ## General Overview
 
-- Topics are used for the Contact Us form
-- A topic ius a general subject for the form
-- Users will add their own, more defined, subject when feature implemented
-- This is just the CRUD for the Topics
-- Both Code and Views are to be created
-- TailwindCSS formatting employed
-- Components provided are:
-    - x-application-logo, x-auth-session-status, x-danger-button, x-dropdown,
-    - x-dropdown-link, x-input-error, x-input-label, x-modal, x-nav-link,
-    - x-primary-button, x-primary-link-button, x-responsive-nav-link,
-    - x-secondary-button, x-secondary-link-button, x-side-nav-link,
-    - x-stats-card, x-text-input, x-textarea
+With the Contacts Application, we are providing a "Contact Us" page.
+
+::left::
+
+### Contact Us Page:
+
+- Details how to contact the company
+- A contact us form to send messages
+
+<br>
+
+### Contact Us Form:
+
+- Name, Topic, Subject, and Message fields
+
+::right::
+
+### Topics:
+
+- A topic is a general subject for the form
+- We are providing CRUD/BREAD to manage the topics
 - Topic CRUD will be part of the Admin area
-    - Layout will be `x-admin-layout`
-    - Routes will prefix with `admin/topics` and named `admin.topics.*`
-    - Controller will be stored in app/Http/Controllers/Admin
-    - Requests stored in app/Http/Requests/Admin
-    - Views stored in `resources/views/admin/topics`
 
-## Topic Overview:
+---
+level: 2
+---
 
-A topic has:
+# Topic Overview
 
-- name (unique, min: 6, max: 32),
-- description (nullable),
-- available (boolean, default true)
+<br>
 
-Plus the default "id", "created_at" and "updated_at" fields that come with
-Laravel migrations.
+### Topic Model Detail 
 
+| Property    | Specifications                       |    |
+|-------------|--------------------------------------|----|
+| id          | unsigned, big integer, autoincrement | PK |
+| name        | string, unique, min: 6, max: 32      |    |
+| description | string, nullable                     |    |
+| available   | boolean, default true                |    |
+| created_at  | timestamp                            |    |
+| updated_at  | timestamp                            |    |
 
---- 
+---
 level: 2
 ---
 
@@ -1226,8 +1430,10 @@ level: 2
 ## Create Stub Files
 
 ```shell
-php artisan make:model Topic --controller --migration --policy --seed --resource --factory --pest
+php artisan make:model Topic --controller --migration --policy --seed --resource --factory --pest --request
 ```
+<Announcement type="warning">Lots of typing. Easy to make 
+mistakes.</Announcement>
 
 or shorthand:
 
@@ -1235,25 +1441,50 @@ or shorthand:
 php artisan make:model Topic --all --pest
 ```
 
-- Create required subfolders and add empty .gitignore files:
+<Announcement type="joke">Much Neater!</Announcement>
+
+<br>
+
+## Create Subfolders
 
 ```shell
 mkdir -p app/Http/{Controllers,Requests}/{Admin,Web,Client}
+```
+
+<br>
+
+## Create `.gitignore` files
+
+```shell
 touch app/Http/{Controllers,Requests}/{Admin,Client,Web}/.gitignore
 ```
 
-- Move the Topic Controller and Requests into the sub-folders.
+---
+level: 2
+---
+
+# Adding a "Topics" CRUD with Authentication
+
+## Organise Newly Added  Files
+
+Move the Topic Controller and Requests into the sub-folders.
 
 ```shell
-mv app/Http/Controllers/TopicController.php \ 
-      app/Http/Controllers/Admin/TopicController.php 
-mv app/Http/Requests/StoreTopicRequest.php \ 
-      app/Http/Requests/Admin/StoreTopicRequest.php 
-mv app/Http/Requests/UpdateTopicRequest.php \ 
-      app/Http/Requests/Admin/UpdateTopicRequest.php 
+mv app/Http/Controllers/TopicController.php app/Http/Controllers/Admin/TopicController.php
+
+mv app/Http/Requests/{StoreTopicRequest.php,UpdateTopicRequest.php} app/Http/Requests/Admin
 ```
 
---- 
+<br>
+<br>
+
+<Announcement type=info title="Bash Shortcuts">
+<p>Note the use of the `{ }` in the commands.</p>
+<p>This provides a list of items that will be iterated.</p>
+<p>Helps reduce number of commands entered.</p>
+</Announcement>
+
+---
 level: 2
 ---
 
@@ -1261,7 +1492,35 @@ level: 2
 
 ## Add Model code
 
---- 
+We will employ the use of PHP Attributes for defining our properties:
+
+```php {none|1|2-3,22|4-5|6-14|15-21|all}
+#[Fillable(['name', 'description', 'available'])]
+class Topic extends Model
+{
+    /** @use HasFactory<\Database\Factories\TopicFactory> */
+     use HasFactory;
+     
+    /**
+     * Attribute (type) casting
+     *
+     */
+    protected function casts(): array{
+        return [];
+    }
+
+    /**
+     * Relationships
+     */
+
+    /**
+     * Model helper methods
+     */
+}
+```
+
+Use `#[Hidden([...])]` for hidden/non-serialisable properties
+---
 level: 2
 ---
 
@@ -1269,7 +1528,42 @@ level: 2
 
 ## Add Migration code
 
---- 
+Open `database/migrations/YYYY_MM_DD_HHMMSS_create_topics_table.php`
+
+Update the 'up' method:
+
+```php {none|1-2,10|3,9|4|5|6|7|8|all}
+public function up(): void
+{
+    Schema::create('topics', function (Blueprint $table) {
+        $table->id();
+        $table->string('name',16)->unique()->default("general");
+        $table->string('description')->nullable();
+        $table->boolean('available')->default(true);
+        $table->timestamps();
+    });
+}
+```
+
+---
+level: 2
+---
+
+# Adding a "Topics" CRUD with Authentication
+
+## Seed Data
+
+We are going to add seed data.
+
+Topic #1 is a default "Unknown / General Query" topic
+
+| ID  | Name    | Description                    | Available                             |
+|-----|---------|--------------------------------|---------------------------------------|
+| 1   | General | Genweral query / Unknown topic | <span class="text-green-500">Y</span> |
+
+Open the `database/seeders/TopicSeeder.php` file...
+
+---
 level: 2
 ---
 
@@ -1277,47 +1571,145 @@ level: 2
 
 ## Add Seeder code
 
-Seed data:
+We will show each block of the seeder code.
 
-| ID  | Name        | Description                      | Available |
-|-----|-------------|----------------------------------|-----------|
-| 1   | Unknown     | Unknown topic                    | Y         |
-| 100 | Books       | Fiction & Non Fiction            | Y         |
-| 199 | Dummy Topic |                                  | N         |
-| 200 | Technology  | Information & Other Technologies | Y         |
-| 900 | Dummy Topic |                                  | N         |
+````md magic-move
 
-```php
-$seedTopics = [
-    [ 
-        'id'=>1,           'name'=>'Unknown' ,
-        'description'=>'Unknown topic', 
-        'available'=>true, 
-    ],
-    [ 
-        'id'=>100,         'name'=>'Books' ,
-        'description'=>'Fiction and Non Fiction', 
-        'available'=>true, 
-    ],
-    [ 
-        'id'=>199, 'name'=>'Dummy Topic' ,
-        'description'=>null, 
-        'available'=>false, 
-    ],
-    [ 
-        'id'=>200,         'name'=>'Technology' ,
-        'description'=>'Information and Other Technologies', 
-        'available'=>true, 
-    ],
-    [ 
-        'id'=>900,         'name'=>'Dummy Topic' ,
-        'description'=>null, 
-        'available'=>false, 
-    ],
-];
+```php {1-2,14|4-6|8-12|all}
+public function run(): void
+{
+
+    $seedTopics = [
+        // Seed topics added here
+    ];
+
+    foreach($seedTopics as $seedTopic){
+        if (! Topic::find($seedTopic['name'])) {
+            Topic::create($seedTopic);
+        }
+    }
+
+}
 ```
 
---- 
+```php {4,11-12|5-10|all}
+public function run(): void
+{
+
+    $seedTopics = [
+        [
+            'id'=>1,
+            'name' => 'general',
+            'description' => 'General Query / Unknown Topic',
+            'available' => true,
+        ],
+        // Three more seed topics
+    ];
+
+    foreach($seedTopics as $seedTopic){
+        if (! Topic::find($seedTopic['name'])) {
+            Topic::create($seedTopic);
+        }
+    }
+
+}
+```
+
+
+```php {4,12-13|5-11|all}
+public function run(): void
+{
+
+    $seedTopics = [
+        // Topic 1 [ 'id'=>1, ...],
+        [
+            'id'=>100,
+            'name' => 'website errors',
+            'description' => 'Website errors',
+            'available' => true,
+        ],
+        // Two more seed topics
+    ];
+
+    foreach($seedTopics as $seedTopic){
+        if (! Topic::find($seedTopic['name'])) {
+            Topic::create($seedTopic);
+        }
+    }
+
+}
+```
+
+```php {4,12-13|4-6,12-13|7-11|all}
+public function run(): void
+{
+
+    $seedTopics = [
+        // Topic 1 [ 'id'=>1, ...],
+        // Topic 100 [ 'id'=>100, ...],
+        [
+            'name' => 'website oopsie',
+            'description' => 'Website errors',
+            'available' => false,
+        ],
+        // One more seed topic
+    ];
+
+    foreach($seedTopics as $seedTopic){
+        if (! Topic::find($seedTopic['name'])) {
+            Topic::create($seedTopic);
+        }
+    }
+
+}
+```
+
+
+```php {4-7,13|8-12|all}
+public function run(): void
+{
+
+    $seedTopics = [
+        // Topic 1 [ 'id'=>1, ...],
+        // Topic 100 [ 'id'=>100, ...],
+        // Topic 101 [ 'name'=>'feedback', ...],
+        [
+            'name' => 'feedback',
+            'description' => 'Client feedback (positive and negative)',
+            'available' => true,
+        ],
+    ];
+
+    foreach($seedTopics as $seedTopic){
+        if (! Topic::find($seedTopic['name'])) {
+            Topic::create($seedTopic);
+        }
+    }
+
+}
+```
+
+
+````
+
+---
+level: 2
+---
+
+# Exercise: add more seed topics
+
+Add the following seed topics to the seeder:
+
+| ID  | Name        | Description                      | Available                             |
+|-----|-------------|----------------------------------|---------------------------------------|
+| 300 | Books       | Fiction & Non Fiction            | <span class="text-green-500">Y</span> |
+| 199 | Dummy Topic |                                  | <span class="text-red-500">N</span>   |
+| 200 | Technology  | Information & Other Technologies | <span class="text-green-500">Y</span> |
+| 900 | Dummy Topic |                                  | <span class="text-red-500">N</span>   |
+
+Make sure you keep the above order in the seed data.
+
+---
 level: 2
 ---
 
@@ -1325,7 +1717,46 @@ level: 2
 
 ## Add Factory code
 
---- 
+Open the `database/factories/TopicFactory.php` file...
+
+Edit the file - the code is show in stages.
+
+````md magic-move
+
+```php {none|1-4|5-11|all}
+namespace Database\Factories;
+
+use App\Models\Topic;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+/**
+ * @extends Factory<Topic>
+ */
+class TopicFactory extends Factory
+{
+    public function definition(): array
+    {
+        // Code to add here
+    }
+}
+
+```
+
+```php {1-2,8|3,7|4|5|6|all}
+    public function definition(): array
+    {
+        return [
+                'name' => fake()->word(),
+                'description' => fake()->sentence(),
+                'available' => fake()->boolean(0.5),
+            ];
+    }
+```
+
+````
+
+
+---
 level: 2
 ---
 
@@ -1333,7 +1764,51 @@ level: 2
 
 ## Add Routing for Topics
 
---- 
+Open the `routes\web.admin.php` (or `routes\web\admin.php`) file.
+
+The top of the file indicates the controllers being used.
+
+Add:
+- Admin and Topic Controllers:
+- Route middleware, name and prefixing
+- Define the topics as a resourceful route
+
+#### Code:
+
+````md magic-move
+```php
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\TopicController;
+use Illuminate\Support\Facades\Route;
+```
+
+```php
+Route::middleware(['auth', 'verified'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+
+    // Add Routes
+
+    });
+
+```
+
+```php
+    ->group(function () {
+
+        // URL base: http://HOSTNAME/admin/topics
+        // Route Names: admin.topics.*
+        Route::resource('topics', TopicController::class);
+
+        Route::get('/', [AdminController::class, 'index'])
+            ->name('index');
+    });
+```
+
+````
+
+---
 level: 2
 ---
 
@@ -1341,7 +1816,87 @@ level: 2
 
 ## Add Resourceful controller code
 
---- 
+We will now create the TopicController code for each method:
+
+- index
+- show
+- create
+- store
+- edit
+- update
+- destroy
+
+
+---
+level: 2
+---
+
+# Adding a "Topics" CRUD with Authentication
+
+## Resourceful Controller Code: `index`
+
+
+
+---
+level: 2
+---
+
+# Adding a "Topics" CRUD with Authentication
+
+## Resourceful Controller Code: `show`
+
+
+
+---
+level: 2
+---
+
+# Adding a "Topics" CRUD with Authentication
+
+## Resourceful Controller Code: `create`
+
+
+
+---
+level: 2
+---
+
+# Adding a "Topics" CRUD with Authentication
+
+## Resourceful Controller Code: `store`
+
+
+---
+level: 2
+---
+
+# Adding a "Topics" CRUD with Authentication
+
+## Resourceful Controller Code: `edit`
+
+
+
+---
+level: 2
+---
+
+# Adding a "Topics" CRUD with Authentication
+
+## Resourceful Controller Code: `update`
+
+
+
+---
+level: 2
+---
+
+# Adding a "Topics" CRUD with Authentication
+
+## Resourceful Controller Code: `destroy`
+
+
+
+---
 level: 2
 ---
 
@@ -1349,25 +1904,47 @@ level: 2
 
 ## Add Requests code for Store and Update
 
-### Replace return false with return true
+The authorize method requires updating:
+
+- brute force, return true
+
+Problem:
+- allows anyone to use the store/update.
+
+Solution:
+- check if logged in
+- additionally check permissions (later)
 
 This applies to BOTH Store and Update requests.
 
 ```php
 public function authorize(): bool
 {
-    return true;
+    return auth()->check();
 }
 ```
 
-- Allows anyone to perform the action.
-- Will be changed later to check if logged in.
+
+
+
+---
+level: 2
+---
+
+# Adding a "Topics" CRUD with Authentication
 
 ### Add Validation for Store Request
 
+
+---
+level: 2
+---
+
+# Adding a "Topics" CRUD with Authentication
+
 ### Add Validation for Update Request
 
---- 
+---
 level: 2
 ---
 
@@ -1375,7 +1952,7 @@ level: 2
 
 ## Add Authentication validation for routes, requests and actions
 
---- 
+---
 level: 2
 ---
 
@@ -1383,7 +1960,7 @@ level: 2
 
 ## Authentication: All actions must be logged in before working
 
---- 
+---
 level: 2
 ---
 
@@ -1420,97 +1997,97 @@ layout: section
 
 -->
 
---- 
+---
 level: 2
 ---
 
 # Pest Testing Actions with Authentication
 
---- 
+---
 level: 2
 ---
 
 ## Browse topics (no authentication)
 
---- 
+---
 level: 2
 ---
 
 ## Read a Topic (authentication required)
 
---- 
+---
 level: 2
 ---
 
 ## Read a Topic Failure (Not Authenticated)
 
---- 
+---
 level: 2
 ---
 
 ## Read a Topic Failure (Authenticated, Topic does not exist)
 
---- 
+---
 level: 2
 ---
 
 ## Create/Store a New Topic (Authenticated)
 
---- 
+---
 level: 2
 ---
 
 ## Create/Store a New Topic Failure (Authenticated, missing topic name)
 
---- 
+---
 level: 2
 ---
 
 ## Create/Store a New Topic Failure (Authenticated, Topic name too short)
 
---- 
+---
 level: 2
 ---
 
 ## Create/Store a New Topic Failure (Not Authenticated)
 
---- 
+---
 level: 2
 ---
 
 ## Edit/Update an existing Topic (Authenticated)
 
---- 
+---
 level: 2
 ---
 
 ## Edit/Update an existing Topic Failure (Authenticated, missing topic name)
 
---- 
+---
 level: 2
 ---
 
 ## Edit/Update an existing Topic Failure (Authenticated, Topic name too short)
 
---- 
+---
 level: 2
 ---
 
 ## Edit/Update an existing Topic Failure (Not Authenticated)
 
---- 
+---
 level: 2
 ---
 
 ## Destroy an existing Topic (authentication required)
 
---- 
+---
 level: 2
 ---
 
 ## Destroy an existing Topic Failure (Not authenticated)
 
---- 
+---
 level: 2
 ---
 
