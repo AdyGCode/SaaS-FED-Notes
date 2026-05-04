@@ -1410,7 +1410,7 @@ level: 2
 
 <br>
 
-### Topic Model Detail 
+### Topic Model Detail
 
 | Property    | Specifications                       |    |
 |-------------|--------------------------------------|----|
@@ -1432,7 +1432,8 @@ level: 2
 ```shell
 php artisan make:model Topic --controller --migration --policy --seed --resource --factory --pest --request
 ```
-<Announcement type="warning">Lots of typing. Easy to make 
+
+<Announcement type="warning">Lots of typing. Easy to make
 mistakes.</Announcement>
 
 or shorthand:
@@ -1494,6 +1495,30 @@ level: 2
 
 We will employ the use of PHP Attributes for defining our properties:
 
+- `#[Fillable([...])]` for visible/serialisable properties
+- `#[Hidden([...])]` for hidden/non-serialisable properties
+
+<br>
+
+<Announcement type=info title="Eloquent PHP Attributes">
+
+We need to import the following for Eloquent to pick these up correctly:
+
+<pre><code>
+use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\Hidden;
+</code></pre>
+
+</Announcement>
+
+---
+level: 2
+---
+
+# Adding a "Topics" CRUD with Authentication
+
+## Add Model code
+
 ```php {none|1|2-3,22|4-5|6-14|15-21|all}
 #[Fillable(['name', 'description', 'available'])]
 class Topic extends Model
@@ -1503,7 +1528,6 @@ class Topic extends Model
      
     /**
      * Attribute (type) casting
-     *
      */
     protected function casts(): array{
         return [];
@@ -1519,7 +1543,6 @@ class Topic extends Model
 }
 ```
 
-Use `#[Hidden([...])]` for hidden/non-serialisable properties
 ---
 level: 2
 ---
@@ -1557,9 +1580,9 @@ We are going to add seed data.
 
 Topic #1 is a default "Unknown / General Query" topic
 
-| ID  | Name    | Description                    | Available                             |
-|-----|---------|--------------------------------|---------------------------------------|
-| 1   | General | Genweral query / Unknown topic | <span class="text-green-500">Y</span> |
+| ID | Name    | Description                    | Available                             |
+|----|---------|--------------------------------|---------------------------------------|
+| 1  | General | Genweral query / Unknown topic | <span class="text-green-500">Y</span> |
 
 Open the `database/seeders/TopicSeeder.php` file...
 
@@ -1615,7 +1638,6 @@ public function run(): void
 }
 ```
 
-
 ```php {4,12-13|5-11|all}
 public function run(): void
 {
@@ -1663,7 +1685,6 @@ public function run(): void
 
 }
 ```
-
 
 ```php {4-7,13|8-12|all}
 public function run(): void
@@ -1755,7 +1776,6 @@ class TopicFactory extends Factory
 
 ````
 
-
 ---
 level: 2
 ---
@@ -1769,6 +1789,7 @@ Open the `routes\web.admin.php` (or `routes\web\admin.php`) file.
 The top of the file indicates the controllers being used.
 
 Add:
+
 - Admin and Topic Controllers:
 - Route middleware, name and prefixing
 - Define the topics as a resourceful route
@@ -1826,7 +1847,6 @@ We will now create the TopicController code for each method:
 - update
 - destroy
 
-
 ---
 level: 2
 ---
@@ -1835,7 +1855,23 @@ level: 2
 
 ## Resourceful Controller Code: `index`
 
+- Obtain the topics sorted by name
+- Add any messages that may be sent to the UI
+- paginate (3 topics at a time for testing)
 
+<br>
+
+```php
+public function index()
+{
+    $topics = Topic::orderBy('name')
+        ->with('messages')
+        ->paginate(3);
+
+    return view('admin.topics.index')
+        ->with('topics', $topics);
+}
+```
 
 ---
 level: 2
@@ -1845,7 +1881,14 @@ level: 2
 
 ## Resourceful Controller Code: `show`
 
-
+```php
+    public function show(Topic $topic)
+    {
+        return view('admin.topics.show')
+            ->with('topic', $topic)
+            ->with('messages');
+    }
+```
 
 ---
 level: 2
@@ -1855,7 +1898,165 @@ level: 2
 
 ## Resourceful Controller Code: `create`
 
+```php
+    public function create()
+    {
+        return view('admin.topics.create');
+    }
+```
 
+---
+level: 2
+layout: two-cols
+---
+
+# Adding a "Topics" CRUD with Authentication
+
+## Resourceful Controller Code: `store`
+
+<br>
+
+```php
+    public function store(StoreTopicRequest $request)
+    {
+        $validated = $request->validated();
+
+        Topic::create($validated);
+
+        return redirect(route('admin.topics.index'))
+            ->with('status', 'Topic Created');
+    }
+```
+
+::left::
+
+### The `store` method
+
+- accepts the request sent from the form (via the appropriate route)
+- directs the request to the `StoreTopicRequest` class
+
+::right::
+
+### When the `StoreTopicRequest` returns
+
+- validated data is obtained
+- new topic is added
+- user is redirected to the index for topics
+
+But what is the `StoreTopicRequest`?
+
+
+---
+level: 2
+layout: grid
+---
+
+# Adding a "Topics" CRUD with Authentication
+
+### Add Validation for Store Request
+
+A Store/Update MODEL_NAME Request may perform:
+
+::tl::
+
+#### authorisation checks
+
+```php
+public function authorize(): bool
+{ /* ... */ }
+```
+
+::tr::
+
+#### validation & custom messages
+
+```php
+public function rules(): array
+{ /* ... */ }
+
+public function messages(): array
+{ /* ... */ }
+```
+
+::bl::
+
+#### data processing before validation
+
+```php
+protected function prepareForValidation(): void
+{ /* ... */ }
+```
+
+::br::
+
+#### data processing after validation
+
+```php
+protected function passedValidation(): void
+{ /* ... */ }
+```
+
+---
+level: 2
+layout: two-cols
+---
+
+# Adding a "Topics" CRUD with Authentication
+
+### Add Validation for Store Request
+
+::left::
+
+For the topics we will:
+
+- validate the user is logged in
+- preprocess the data before validation
+- validate the data passed by the request
+
+::right::
+
+**Later**, when we look at Roles & Permissions, we will:
+
+- validate the user is an admin
+
+We will **not** implement:
+
+- post-process the data after validation
+
+---
+level: 2
+layout: two-cols
+---
+
+# Adding a "Topics" CRUD with Authentication
+
+## Add Requests code for Store and Update
+
+By default, the `authorize()` method returns false, thus blocking the request.
+
+To allow a "store" (or "update), the `authorize()` method requires updating.
+
+::left::
+
+#### Brute Force: All users allowed
+
+To allow anyone to perform the action:
+
+- Simply `return true`.
+
+::right::
+
+#### Ensure Logged In (and Authorised)
+
+When you need the user to:
+
+1. Be authenticated
+2. Have permission to perform the action
+
+We will need to:
+
+- check if logged in (Authenticated)
+- additionally check permissions (Authorised) (later)
 
 ---
 level: 2
@@ -1863,8 +2064,135 @@ level: 2
 
 # Adding a "Topics" CRUD with Authentication
 
-## Resourceful Controller Code: `store`
+## Add Validation for Store Request
 
+### Verify Authorised to Perform Action
+
+By default, the `authorize()` method returns false.
+
+- blocking the request
+
+We need to verify the user is logged in:
+
+````md magic-move
+```php {none|1-2,4|3|all}
+public function authorize(): bool
+{
+    return false; // No-one may perform action
+}
+```
+
+```php {none|1-2,4|3|all}
+public function authorize(): bool
+{
+    return true; // Allow anyone to perform action
+}
+```
+
+```php {none|1-2,5|3-4|all}
+public function authorize(): bool
+{
+    return auth()->check(); // Authenticated users allowed to perform action
+    // TODO: Check user CAN perform action
+}
+```
+
+````
+
+<!-- Presenter Notes:
+- Emphasise the difference between three versions
+- Also make sure we will revisit when roles-and-permissions implemented
+-->
+
+---
+level: 2
+---
+
+# Adding a "Topics" CRUD with Authentication
+
+## Add Validation for Store Request
+
+### Perform Request Data Validation
+
+- Data validation may be performed in the controller.
+- More robust to perform as part of the Request.
+
+```php {none|1-3,18-19|4-9|10-13|14-17|all}
+public function rules(): array
+{
+    return [
+        'name' => [
+            'required',
+            'string',
+            'max:16',
+            'unique:topics'
+        ],
+        'description' => [
+            'nullable',
+            'string'
+        ],
+        'available' => [
+            'required',
+            'boolean'
+        ],
+    ];
+}
+```
+
+---
+level: 2
+---
+
+# Adding a "Topics" CRUD with Authentication
+
+## Add Validation for Store Request
+
+### Create "custom" validation error message
+
+```php {none|1-3,9-10|4|5|6|7|8|all}
+public function messages(): array
+{
+    return [
+        'required' => 'Please give a value for :attribute',
+        'nullable' => 'You may leave :attribute empty',
+        'string' => ':attribute must contain text',
+        'max' => 'Maximum length of :attribute is :max',
+        'unique' => 'The :attribute has already been taken.',
+    ];
+}
+```
+
+---
+level: 2
+---
+
+# Adding a "Topics" CRUD with Authentication
+
+## Add Validation for Store Request
+
+### Pre-Validation Data Processing
+
+We will need to check that "available" (form checkbox) has data before
+validation.
+
+<br>
+
+```php {none|1-2,8|3,7|4,6|5|3-7|all}
+protected function prepareForValidation(): void
+{
+    if (!$this->filled('available')) {
+        $this->merge([
+            'available' => false,
+        ]);
+    }
+}
+```
+
+Why?
+
+- because a HTML Form Checkbox does not send data when unchecked
+
+So we add `available` as `false` when missing.
 
 ---
 level: 2
@@ -1874,7 +2202,28 @@ level: 2
 
 ## Resourceful Controller Code: `edit`
 
+Edit and Update are similar to Create and Store.
 
+Edit does the following:
+
+- Perform Route-Model binding to retrieve the topic data
+- Send the data to the required view (`admin/topics/edit.blade.php`)
+
+<br>
+
+```php {none|1-2,6|3|4|5|all}
+public function edit(Topic $topic)
+{
+    return view('admin.topics.edit')
+        ->with('topic', $topic)
+        ->with('messages');
+}
+```
+
+<br>
+<Announcement type=info title="404 Not Found">
+Route-Model binding automatically will give "404" error when the topic is not found.
+</Announcement>
 
 ---
 level: 2
@@ -1884,56 +2233,43 @@ level: 2
 
 ## Resourceful Controller Code: `update`
 
+When an HTTP `PUT` or `PATCH` request is sent:
 
+- the `update()` method is called
+- authorization is verified & request data is validated
+- validated data is obtained
+- topic is updated with the validated data
+- redirect to topics index page with any required messages
 
----
-level: 2
----
+<br>
 
-# Adding a "Topics" CRUD with Authentication
-
-## Resourceful Controller Code: `destroy`
-
-
-
----
-level: 2
----
-
-# Adding a "Topics" CRUD with Authentication
-
-## Add Requests code for Store and Update
-
-The authorize method requires updating:
-
-- brute force, return true
-
-Problem:
-- allows anyone to use the store/update.
-
-Solution:
-- check if logged in
-- additionally check permissions (later)
-
-This applies to BOTH Store and Update requests.
-
-```php
-public function authorize(): bool
+```php {none|1-2,9|3|5|7-8|all}
+public function update(UpdateTopicRequest $request, Topic $topic)
 {
-    return auth()->check();
+    $validated = $request->validated();
+    
+    $topic->update($validated);
+    
+    return redirect(route('admin.topics.index'))
+        ->with('success`','updated');
 }
 ```
 
-
-
-
 ---
 level: 2
 ---
 
 # Adding a "Topics" CRUD with Authentication
 
-### Add Validation for Store Request
+### Add Validation for Update Request
+
+Previously, to add a new topics we used `StoreTopicRequest`
+
+In place of this `UpdateTopicRequest` is used.
+
+In this request we allow description only to be updated.
+
+To do this we "ignore" the current topic's name when it is unchanged.
 
 
 ---
@@ -1944,13 +2280,75 @@ level: 2
 
 ### Add Validation for Update Request
 
+For this scenario, the `authorize()`, `messages()`, and
+`prepareForValidation()`
+methods are the same as the `StoreTopicRequest` code.
+
+````md magic-move
+```php {none|all}
+public function authorize(): bool
+{
+    return auth()->check();
+}
+```
+
+```php {all}
+public function messages(): array
+{
+    return [
+        'required' => 'Please give a value for :attribute',
+        'nullable' => 'You may leave :attribute empty',
+        'string' => ':attribute must contain text',
+        'max' => 'Maximum length of :attribute is :max',
+        'unique' => 'The :attribute has already been taken.',
+    ];
+}
+```
+
+```php {all}
+protected function prepareForValidation(): void
+{
+    if (!$this->filled('available')) {
+        $this->merge([
+            'available' => false,
+        ]);
+    }
+}
+```
+
+````
+
 ---
 level: 2
 ---
 
 # Adding a "Topics" CRUD with Authentication
 
-## Add Authentication validation for routes, requests and actions
+### Add Validation for Update Request
+
+Let us now investigate the `rules()`.
+
+You may copy the rules from the StoreTopicRequest as a starter.
+
+The change comes in the `name`, which we show below:
+
+```php {none|1,7|2|3|4|5-6|all}
+'name' => [
+    'sometimes',
+    'string',
+    'max:16',
+    Rule::unique(Topic::class)
+        ->ignoreModel($this->route('topic'))
+],
+```
+
+<br>
+<Announcement title="Rules" type=info>
+
+- `sometimes` allows for the name to be updated "sometimes" (i.e when changed)
+- `ignoreModel` allows the topic name "unique" requirement to be ignored
+
+</Announcement>
 
 ---
 level: 2
@@ -1958,7 +2356,26 @@ level: 2
 
 # Adding a "Topics" CRUD with Authentication
 
-## Authentication: All actions must be logged in before working
+## Resourceful Controller Code: `destroy`
+
+Destroy literally "destroys", aka delete permanently, the topic.
+
+We will implement this first, then take a look at how we can "verify" that
+destroy must be performed. That is, add a safety check.
+
+How it works:
+
+- user makes a request (POST ACTION) to delete topic
+- topic is validated (exists)
+- topic is permanently removed from database
+
+<br>
+
+### Destroy Topic Request
+
+Whilst the Destroy method does not have a request by default, we are going
+to create one.
+
 
 ---
 level: 2
@@ -1966,9 +2383,39 @@ level: 2
 
 # Adding a "Topics" CRUD with Authentication
 
-## Authentication verification within Store & Update Requests
+## Resourceful Controller Code: `destroy`
 
-Modify the previous `authorize` method to now read:
+### Destroy Topic Request
+
+To create the request we use:
+
+```shell
+php artisan make:request Admin/DestroyTopicRequest
+```
+
+Thios creates the request in the `app/Http/Requests/Admin` folder.
+
+Once created edit the `app/Http/Requests/Admin/DestroyTopicRequest.php` class
+file.
+
+In this file we will:
+
+- Check authorisation
+- Validate the topic exists
+
+---
+level: 2
+---
+
+# Adding a "Topics" CRUD with Authentication
+
+## Resourceful Controller Code: `destroy`
+
+Edit the `app/Http/Requests/Admin/DestroyTopicRequest.php` class file.
+
+### Destroy Topic Request: Check authorisation
+
+This should look very familiar!
 
 ```php
 public function authorize(): bool
@@ -1977,14 +2424,310 @@ public function authorize(): bool
 }
 ```
 
-- Checks is CURRENT USER is logged in.
-- Returns:
-    - true (logged in - authenticated) or
-    - false (not authenticated)
+---
+level: 2
+---
 
-<!-- Presenter Notes:
+# Adding a "Topics" CRUD with Authentication
 
--->
+## Resourceful Controller Code: `destroy`
+
+### Destroy Topic Request: Validate the topic exists
+
+First we create a rule that will be ready for the confirmation page:
+
+```php
+    public function rules(): array
+    {
+        return [
+            // future‑proofed: confirmation input
+            'confirmation_name' => [
+                'nullable',
+                'string',
+            ],
+        ];
+    }
+
+```
+
+---
+level: 2
+---
+
+# Adding a "Topics" CRUD with Authentication
+
+## Resourceful Controller Code: `destroy`
+
+### Destroy Topic Request: Validate the topic exists
+
+Next, we ensure the topic exists.
+
+Route model binding already handles this, but this safeguards
+future non‑bound usage (eg. confirmation step POST).
+
+```php {1-5,11|6|8-10|all}
+/**
+ * Ensure the topic exists.
+ */
+public function validateResolved()
+{
+    parent::validateResolved();
+
+    if (! $this->route('topic') instanceof Topic) {
+        abort(404, 'Topic not found');
+    }
+}
+```
+
+---
+level: 2
+---
+
+# Adding a "Topics" CRUD with Authentication
+
+## Resourceful Controller Code: `destroy`
+
+Now we can add the destroy method:
+
+- store the topic details for later use (e.g. messages)
+- delete the topic
+- redirect to the admin topics index page
+
+<br>
+
+```php {1-2,10|3|4|6|8-9|all}
+public function destroy(DestroyTopicRequest $request, Topic $topic)
+{
+    $oldTopic = $topic;
+    $topic->delete();
+    
+    $message = "Successfully removed {$oldTopic->name}."
+    
+    return redirect(route('admin.topics.index'))
+        ->with('success',$message);
+}
+```
+
+---
+layout: section
+---
+
+# Confirming an Action
+
+Adding a "confirm you want to perform this action"
+
+
+---
+level: 2
+---
+
+# Confirming an Action
+
+Let's extend "destroy" by:
+
+- adding a delete route that shows a delete confirmation
+- updating the destroy request to ensure topic name is confirmed
+
+To do so we need:
+
+- add new delete route to the admin routes
+- add a new confirmation view
+- update the DestroyTopicRequest class
+- update the Topics `destroy` method
+- add a Topics `delete` method
+
+---
+level: 2
+---
+
+# Confirming an Action
+
+## Admin/TopicController: Add a Topics `delete` method
+
+Open the `app/Http/Controllers/Admin/TopicCotnroller.php` cl;ass file
+
+Just before the `destroy` method add:
+
+```php
+    /**
+     * Confirm topic deletion
+     */
+    public function delete(Topic $topic)
+    {
+         return redirect(route('admin.topics.delete'))
+            ->with('topic',$topic);
+    }
+```
+
+This will open the delete confirmation view.
+
+---
+level: 2
+---
+
+# Confirming an Action
+
+## Admin/TopicController: Add a new confirmation view
+
+In the `resources/views/admin/topics` folder, duplicate the `create.blade.php`
+file.
+
+Name the new file `delete.blade.php`.
+
+<hr>
+
+Edit the file making the following changes:
+
+| Item        | original                       | change to                               |
+|-------------|--------------------------------|-----------------------------------------|
+| header h3   | Add New Topic                  | Confirm Delete Topic                    |
+| form action | `route('admin.topics.create')` | `route('admin.topics.destroy', $topic)` |
+| button text | Save                           | Confirm Delete                          |
+
+Delete the `div` blocks for Description and Available.
+
+
+---
+level: 2
+---
+
+# Confirming an Action
+
+## Admin/TopicController: Add a new confirmation view
+
+Still working on the delete view...
+
+Immediately after the `@csrf` <br>
+and before the ` <div class="p-4 w-1/2"> <x-input-label for="name">` add a
+paragraph as shown:
+
+```php
+@csrf
+
+<p class="my-2">
+    Enter <strong class="font-mono text-red-500">{{ $topic->name }}</strong> below to confirm deletion.
+</p>
+
+<div class="p-4 w-1/2">
+```
+
+We are almost finished with this view...
+
+---
+level: 2
+---
+
+# Confirming an Action
+
+## Admin/TopicController: Add a new confirmation view
+
+Next we update the name input to read:
+
+```php
+<div class="p-4 w-1/2">
+    <x-input-label for="confirmation_name">
+        Confirm Topic Name:
+    </x-input-label>
+
+    <x-text-input id="confirmation_name"
+                  name="confirmation_name"
+                  type="text"
+                  placeholder="Enter name here"
+                  autocomplete="name"
+                  class="w-full"
+    />
+
+    <x-input-error :messages="$errors->first('confirmation_name')"
+                   class="my-2"/>
+</div>
+```
+
+---
+level: 2
+---
+
+# Confirming an Action
+
+## Admin/TopicController: Add new delete route to the admin routes
+
+We have the:
+
+- delete and updated destroy controller actions
+- delete confirmation view
+
+Now we add a new route to `routes/admin.web.php` (or `routes/admin/web.php`).
+
+This **MUST** come immediately before the topics resourceful route.
+
+```php
+Route::post('/topics/{topic}/delete', [TopicController::class, 'delete'])
+    ->name('topics.delete-confirm');
+Route::get('/topics/{topic}/delete', [TopicController::class, 'delete'])
+    ->name('topics.delete-confirm');
+Route::resource('topics', TopicController::class);
+```
+
+This will then accept a POST method to the `/admin/topics/TOPIC_ID/delete`
+route.
+
+
+
+---
+level: 2
+---
+
+# Confirming an Action
+
+### Admin/TopicController: Add new delete route to the admin routes
+
+Check routes by using:
+
+```shell
+php artisan route:list
+```
+
+Make sure you see the following lines:
+
+```text
+POST            admin/topics/{topic}/delete ....... admin.topics.delete-confirm › Admin\TopicController@delete
+GET|HEAD        admin/topics/{topic}/delete ....... admin.topics.delete-confirm › Admin\TopicController@delete
+```
+
+<Announcement type="info" title="A Bit of a Hack" class="mt-4">
+<p>The use of get and post routes is not perfect. <br>We are using it as a 
+way to "hack" the validation redirect to the confirm page.<br> This happens 
+when the topic is omitted.</p>
+</Announcement>
+
+<Announcement type="brainstorm" title="Research Question" class="mt-4">
+<p>How could you force the rules from the validation to use the post route correctly?</p>
+</Announcement>
+
+---
+level: 2
+---
+
+# Confirming an Action
+
+## Admin/TopicController: Update the DestroyTopicRequest class
+
+Finally, open the `DestroyTopicRequest` class,and update the
+`confirmation_name` part to read:
+
+```php
+
+ public function rules(): array
+    {
+        return [
+            'confirmation_name' => [
+                'required',
+                'string',
+            ],
+        ];
+    }
+```
+
+Now you can go test this out!
 
 ---
 layout: section
@@ -1999,21 +2742,269 @@ layout: section
 
 ---
 level: 2
+layout: two-cols-2-1
 ---
 
 # Pest Testing Actions with Authentication
 
+Before we start, we are going to remove any unwanted tests.
+
+::left::
+
+Locate and remove the following files
+
+- `Tests\Unit\ExampleTest.php`
+- `Tests\Feature\Admin\Topic\TopicReadTest.php`
+- `Tests\Feature\ExampleTest.php`
+- `Tests\Feature\Http\Controllers\Admin\TopicControllerTest.php`
+
+You may also remove the folders from `Test\Feature\Http` to
+`Tests\Feature\Http\Controllers\Admin\`.
+
+Add empty `.gitignore` files using:
+
+```shell
+touch tests/{Unit,Feature}/.gitignore
+```
+
+Feel free to add an empty `.gitignore` to any subfolders you wish to keep
+in the project structure when using version control.
+
+::right::
+
+![Laravel: Example of Tests folder structure](./laravel-tests-folder-structure-example.png)
+
 ---
 level: 2
 ---
+
+# Pest Testing Actions with Authentication
+
+We will begin by creating separate files for each section of the tests.
+
+```shell
+php artisan make:test Admin/Topic/TopicReadTest --pest
+php artisan make:test Admin/Topic/TopicCreateTest --pest
+php artisan make:test Admin/Topic/TopicUpdateTest --pest
+php artisan make:test Admin/Topic/TopicDeleteTest --pest
+```
+
+Why?
+
+- Maintainability
+- Execute Tests by "CRUD" component
+
+All tests will:
+
+- create a dummy user
+- use dummy user for authentication
+- perform the action as this user
+
+We are **NOT** testing for permission at this stage.
+
+---
+level: 2
+---
+
+# Pest Testing Actions with Authentication
+
+## Update All Test Files
+
+Replace the existing code:
+
+```php
+test('example', function () {
+    $response = $this->get('/');
+
+    $response->assertStatus(200);
+});
+```
+
+With the following:
+
+```php
+use App\Models\User;
+use App\Models\Topic;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+
+uses(RefreshDatabase::class);
+```
+
+This:
+
+- links to the User and Topic models,
+- adds "Refresh Database" which is used when testing to ensure the data is
+  reset
+  between tests.
+
+---
+level: 2
+---
+
+# Pest Testing Actions with Authentication
 
 ## Browse topics (no authentication)
 
+Open the `tests/Feature/Admin/Topic/TopicReadTest.php` file
+
+Add:
+
+```php
+it('denies unauthenticated users from browsing topics', function () {
+    $response = $this->get(route('topics.index'));
+
+    $response->assertRedirect(route('login'));
+});
+```
+
+Note:
+
+- The clear title for the test
+- The response is captured
+- The response is then checked against assertions
+
 ---
 level: 2
 ---
 
-## Read a Topic (authentication required)
+# Pest Testing Actions with Authentication
+
+## Browse topics (no authentication)
+
+To run all tests use:
+
+```shell
+php artisan test
+```
+
+Expected results similar to:
+
+```text
+$ php artisan test
+
+   PASS  Tests\Feature\Admin\Topic\TopicReadTest
+  ✓ it denies unauthenticated users from browsing topics                     17.91s
+
+  Tests:    1 passed (2 assertions)
+  Duration: 28.04s
+```
+
+You should have much faster results.
+
+
+---
+level: 2
+layout: two-cols-2-1
+---
+
+# Pest Testing Actions with Authentication
+
+## Topics CRUD - no authentication
+
+::right::
+
+We repeat the test for each of Show, Add, Edit, Store, Update, Delete and
+Destroy actions, adding to the correct test file.
+
+<div class="text-sm! leading-1!">
+
+| Action  | Route                | Method |
+|---------|----------------------|--------|
+| Show    | admin.topics.show    | GET    |
+| Create  | admin.topics.create  | GET    |
+| Store   | admin.topics.store   | POST   |
+| Edit    | admin.topics.edit    | GET    |
+| Update  | admin.topics.update  | PUT    |
+| Update  | admin.topics.update  | PATCH  |
+| Delete  | admin.topics.delete  | GET    |
+| Delete  | admin.topics.delete  | POST   |
+| Destroy | admin.topics.destroy | DELETE |
+
+</div>
+
+::left::
+
+## Tests
+
+Here are some of the tests as examples.
+
+<br>
+
+````md magic-move
+
+```php
+/* tests/Feature/Admin/Topic/TopicUpdateTest.php */
+
+it('denies unauthenticated users from updating topic via PUT', function () {
+    $response = $this->put(route('admin.topics.update', 1));
+
+    $response->assertRedirect(route('login'));
+});
+```
+
+
+```php
+/* tests/Feature/Admin/Topic/TopicCreateTest.php */
+
+it('denies unauthenticated users from storing a new topic', function () {
+    $response = $this->post(route('admin.topics.store', 1));
+
+    $response->assertRedirect(route('login'));
+});
+```
+
+
+```php
+/* tests/Feature/Admin/Topic/TopicDeleteTest.php */
+
+it('denies unauthenticated users from destroying given topic', function () {
+    $response = $this->delete(route('admin.topics.destroy', 1));
+
+    $response->assertRedirect(route('login'));
+});
+```
+
+````
+
+---
+level: 2
+---
+
+# Pest Testing Actions with Authentication
+
+## Browse topics (Authenticated)
+
+```php
+it('shows topics when seeded', function () {
+    Topic::factory()->count(3)->create();
+
+    $user = User::factory()->create();
+
+    $response = $this->actingAs($user)->get(route('topics.index'));
+
+    $response->assertStatus(200);
+    $response->assertSee(Topic::first()->name);
+});
+```
+
+
+```php
+it('shows no topics message when none exist', function () {
+    $user = User::factory()->create();
+
+    $response = $this->actingAs($user)->get(route('topics.index'));
+
+    $response->assertStatus(200);
+    $response->assertSee('No topics available');
+});
+```
+---
+level: 2
+---
+
+# Pest Testing Actions with Authentication
+
+## Read a Topic (Authenticated)
 
 ---
 level: 2
@@ -2033,47 +3024,182 @@ level: 2
 
 ## Create/Store a New Topic (Authenticated)
 
+```php
+it('shows add topic page', function () {
+    $user = User::factory()->create();
+
+    $response = $this->actingAs($user)
+        ->get(route('topics.create'));
+
+    $response->assertStatus(200);
+    $response->assertSee('Add Topic');
+});
+```
 ---
 level: 2
 ---
 
 ## Create/Store a New Topic Failure (Authenticated, missing topic name)
 
+```php
+it('fails when topic name is missing', function () {
+    $user = User::factory()->create();
+
+    $response = $this->actingAs($user)
+        ->post(route('topics.store'), [
+            'name' => '',
+            'description' => 'Test description',
+            'available' => true,
+        ]);
+
+    $response->assertSessionHasErrors('name');
+    $response->assertSessionHasInput('description', 'Test description');
+    $response->assertSessionHasInput('available', true);
+});
+```
 ---
 level: 2
 ---
 
 ## Create/Store a New Topic Failure (Authenticated, Topic name too short)
 
+```php
+it('creates topic when valid and unique', function () {
+    $user = User::factory()->create();
+
+    $response = $this->actingAs($user)
+        ->post(route('topics.store'), [
+            'name' => 'Laravel',
+            'description' => 'Framework',
+            'available' => true,
+        ]);
+
+    $response->assertRedirect(route('topics.index'));
+
+    $this->assertDatabaseHas('topics', [
+        'name' => 'Laravel',
+    ]);
+});
+```
 ---
 level: 2
 ---
 
-## Create/Store a New Topic Failure (Not Authenticated)
+## Create/Store a New Topic Failure (Authenticated, Duplicate Name)
 
+```php
+it('fails when topic already exists', function () {
+    Topic::factory()->create(['name' => 'Laravel']);
+
+    $user = User::factory()->create();
+
+    $response = $this->actingAs($user)
+        ->post(route('topics.store'), [
+            'name' => 'Laravel',
+            'description' => 'Duplicate',
+            'available' => true,
+        ]);
+
+    $response->assertSessionHasErrors('name');
+});
+```
 ---
 level: 2
 ---
 
 ## Edit/Update an existing Topic (Authenticated)
 
+```php
+it('shows edit page for existing topic', function () {
+    $topic = Topic::factory()->create();
+    $user = User::factory()->create();
+
+    $response = $this->actingAs($user)
+        ->get(route('topics.edit', $topic));
+
+    $response->assertStatus(200);
+    $response->assertSee($topic->name);
+});
+```
 ---
 level: 2
 ---
 
 ## Edit/Update an existing Topic Failure (Authenticated, missing topic name)
 
+```php
+it('redirects when topic is missing', function () {
+    $user = User::factory()->create();
+
+    $response = $this->actingAs($user)
+        ->get(route('topics.edit', 999));
+
+    $response->assertRedirect(route('topics.index'));
+    $response->assertSessionHas('error');
+});
+```
+
+
+```php
+it('fails update when name is missing', function () {
+    $topic = Topic::factory()->create();
+    $user = User::factory()->create();
+
+    $response = $this->actingAs($user)
+        ->put(route('topics.update', $topic), [
+            'name' => '',
+            'description' => 'Updated',
+            'available' => true,
+        ]);
+
+    $response->assertSessionHasErrors('name');
+});
+```
 ---
 level: 2
 ---
 
 ## Edit/Update an existing Topic Failure (Authenticated, Topic name too short)
 
+```php
+it('fails update when topic name already exists', function () {
+    Topic::factory()->create(['name' => 'Existing']);
+
+    $topic = Topic::factory()->create(['name' => 'Original']);
+    $user = User::factory()->create();
+
+    $response = $this->actingAs($user)
+        ->put(route('topics.update', $topic), [
+            'name' => 'Existing',
+        ]);
+
+    $response->assertSessionHasErrors('name');
+});
+
+```
 ---
 level: 2
 ---
 
 ## Edit/Update an existing Topic Failure (Not Authenticated)
+
+```php
+it('updates topic when valid', function () {
+    $topic = Topic::factory()->create();
+    $user = User::factory()->create();
+
+    $response = $this->actingAs($user)
+        ->put(route('topics.update', $topic), [
+            'name' => 'Updated Name',
+            'description' => 'Updated',
+            'available' => true,
+        ]);
+
+    $this->assertDatabaseHas('topics', [
+        'name' => 'Updated Name',
+    ]);
+});
+```
 
 ---
 level: 2
@@ -2081,17 +3207,85 @@ level: 2
 
 ## Destroy an existing Topic (authentication required)
 
+```php
+it('shows delete confirmation for existing topic', function () {
+    $topic = Topic::factory()->create();
+    $user = User::factory()->create();
+
+    $response = $this->actingAs($user)
+        ->get(route('topics.delete', $topic));
+
+    $response->assertStatus(200);
+    $response->assertSee('Confirm Delete');
+});
+```
+
+
+```php
+it('redirects when deleting missing topic', function () {
+    $user = User::factory()->create();
+
+    $response = $this->actingAs($user)
+        ->get(route('topics.delete', 999));
+
+    $response->assertRedirect(route('topics.index'));
+    $response->assertSessionHas('error');
+});
+```
 ---
 level: 2
 ---
 
 ## Destroy an existing Topic Failure (Not authenticated)
 
+```php
+it('fails destroy when topic missing', function () {
+    $user = User::factory()->create();
+
+    $response = $this->actingAs($user)
+        ->delete(route('topics.destroy', 999));
+
+    $response->assertRedirect(route('topics.index'));
+    $response->assertSessionHas('error');
+});
+```
+
 ---
 level: 2
 ---
 
 ## Destroy an existing Topic Failure (Authenticated, Topic does not exist)
+
+```php
+it('requires confirmation before deleting', function () {
+    $topic = Topic::factory()->create();
+    $user = User::factory()->create();
+
+    $response = $this->actingAs($user)
+        ->delete(route('topics.destroy', $topic), [
+            'confirm' => false,
+        ]);
+
+    $response->assertRedirect(route('topics.delete', $topic));
+    $response->assertSessionHas('error');
+});
+```
+
+```php
+it('deletes topic with valid confirmation', function () {
+    $topic = Topic::factory()->create();
+    $user = User::factory()->create();
+
+    $response = $this->actingAs($user)
+        ->delete(route('topics.destroy', $topic), [
+            'confirm' => true,
+        ]);
+
+    $this->assertDatabaseMissing('topics', [
+        'id' => $topic->id,
+    ]);
+});
+```
 
 <!-- Presenter Notes:
 
