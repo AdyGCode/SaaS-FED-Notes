@@ -2843,7 +2843,7 @@ level: 2
 
 # Pest Testing Actions with Authentication
 
-## Browse topics (no authentication)
+## Browse Topics (no authentication)
 
 Open the `tests/Feature/Admin/Topic/TopicReadTest.php` file
 
@@ -2851,7 +2851,7 @@ Add:
 
 ```php
 it('denies unauthenticated users from browsing topics', function () {
-    $response = $this->get(route('topics.index'));
+    $response = $this->get(route('admin.topics.index'));
 
     $response->assertRedirect(route('login'));
 });
@@ -2869,7 +2869,7 @@ level: 2
 
 # Pest Testing Actions with Authentication
 
-## Browse topics (no authentication)
+## Browse Topics (no authentication)
 
 To run all tests use:
 
@@ -2883,7 +2883,7 @@ Expected results similar to:
 $ php artisan test
 
    PASS  Tests\Feature\Admin\Topic\TopicReadTest
-  ✓ it denies unauthenticated users from browsing topics                     17.91s
+  ✓ it denies unauthenticated users from browsing topics               17.91s
 
   Tests:    1 passed (2 assertions)
   Duration: 28.04s
@@ -2903,8 +2903,10 @@ layout: two-cols-2-1
 
 ::right::
 
-We repeat the test for each of Show, Add, Edit, Store, Update, Delete and
-Destroy actions, adding to the correct test file.
+### Exercise 
+
+You will repeat the test for each of Show, Add, Edit, Store, Update, 
+Delete and Destroy actions, adding to the correct test file.
 
 <div class="text-sm! leading-1!">
 
@@ -2924,7 +2926,7 @@ Destroy actions, adding to the correct test file.
 
 ::left::
 
-## Tests
+### Tests
 
 Here are some of the tests as examples.
 
@@ -2942,7 +2944,6 @@ it('denies unauthenticated users from updating topic via PUT', function () {
 });
 ```
 
-
 ```php
 /* tests/Feature/Admin/Topic/TopicCreateTest.php */
 
@@ -2952,7 +2953,6 @@ it('denies unauthenticated users from storing a new topic', function () {
     $response->assertRedirect(route('login'));
 });
 ```
-
 
 ```php
 /* tests/Feature/Admin/Topic/TopicDeleteTest.php */
@@ -2972,15 +2972,26 @@ level: 2
 
 # Pest Testing Actions with Authentication
 
-## Browse topics (Authenticated)
+## Browse Topics (authenticated)
 
-```php
+When we need to perform tests as an authenticated (and verified 
+user), we must:
+- create a fake user
+- ensure the email is verified
+- authenticate the user
+- perform the rest of the test
+
+For example, when showing the topics (browse), or when no topics are 
+created...
+
+````md magic-move
+```php {none|1,3-10|2|all}
 it('shows topics when seeded', function () {
-    Topic::factory()->count(3)->create();
+    $user = User::factory()->create()->hasVerifiedEmail();
+    
+    Topic::factory()->count(25)->create();
 
-    $user = User::factory()->create();
-
-    $response = $this->actingAs($user)->get(route('topics.index'));
+    $response = $this->actingAs($user)->get(route('admin.topics.index'));
 
     $response->assertStatus(200);
     $response->assertSee(Topic::first()->name);
@@ -2988,16 +2999,18 @@ it('shows topics when seeded', function () {
 ```
 
 
-```php
+```php {none|2|all}
 it('shows no topics message when none exist', function () {
-    $user = User::factory()->create();
+    $user = User::factory()->create()->hasVerifiedEmail();
 
-    $response = $this->actingAs($user)->get(route('topics.index'));
+    $response = $this->actingAs($user)->get(route('admin.topics.index'));
 
     $response->assertStatus(200);
     $response->assertSee('No topics available');
 });
 ```
+````
+
 ---
 level: 2
 ---
@@ -3006,11 +3019,6 @@ level: 2
 
 ## Read a Topic (Authenticated)
 
----
-level: 2
----
-
-## Read a Topic Failure (Not Authenticated)
 
 ---
 level: 2
@@ -3029,7 +3037,7 @@ it('shows add topic page', function () {
     $user = User::factory()->create();
 
     $response = $this->actingAs($user)
-        ->get(route('topics.create'));
+        ->get(route('admin.topics.create'));
 
     $response->assertStatus(200);
     $response->assertSee('Add Topic');
@@ -3046,7 +3054,7 @@ it('fails when topic name is missing', function () {
     $user = User::factory()->create();
 
     $response = $this->actingAs($user)
-        ->post(route('topics.store'), [
+        ->post(route('admin.topics.store'), [
             'name' => '',
             'description' => 'Test description',
             'available' => true,
@@ -3068,13 +3076,13 @@ it('creates topic when valid and unique', function () {
     $user = User::factory()->create();
 
     $response = $this->actingAs($user)
-        ->post(route('topics.store'), [
+        ->post(route('admin.topics.store'), [
             'name' => 'Laravel',
             'description' => 'Framework',
             'available' => true,
         ]);
 
-    $response->assertRedirect(route('topics.index'));
+    $response->assertRedirect(route('admin.topics.index'));
 
     $this->assertDatabaseHas('topics', [
         'name' => 'Laravel',
@@ -3094,7 +3102,7 @@ it('fails when topic already exists', function () {
     $user = User::factory()->create();
 
     $response = $this->actingAs($user)
-        ->post(route('topics.store'), [
+        ->post(route('admin.topics.store'), [
             'name' => 'Laravel',
             'description' => 'Duplicate',
             'available' => true,
@@ -3115,7 +3123,7 @@ it('shows edit page for existing topic', function () {
     $user = User::factory()->create();
 
     $response = $this->actingAs($user)
-        ->get(route('topics.edit', $topic));
+        ->get(route('admin.topics.edit', $topic));
 
     $response->assertStatus(200);
     $response->assertSee($topic->name);
@@ -3132,9 +3140,9 @@ it('redirects when topic is missing', function () {
     $user = User::factory()->create();
 
     $response = $this->actingAs($user)
-        ->get(route('topics.edit', 999));
+        ->get(route('admin.topics.edit', 999));
 
-    $response->assertRedirect(route('topics.index'));
+    $response->assertRedirect(route('admin.topics.index'));
     $response->assertSessionHas('error');
 });
 ```
@@ -3146,7 +3154,7 @@ it('fails update when name is missing', function () {
     $user = User::factory()->create();
 
     $response = $this->actingAs($user)
-        ->put(route('topics.update', $topic), [
+        ->put(route('admin.topics.update', $topic), [
             'name' => '',
             'description' => 'Updated',
             'available' => true,
@@ -3169,7 +3177,7 @@ it('fails update when topic name already exists', function () {
     $user = User::factory()->create();
 
     $response = $this->actingAs($user)
-        ->put(route('topics.update', $topic), [
+        ->put(route('admin.topics.update', $topic), [
             'name' => 'Existing',
         ]);
 
@@ -3189,7 +3197,7 @@ it('updates topic when valid', function () {
     $user = User::factory()->create();
 
     $response = $this->actingAs($user)
-        ->put(route('topics.update', $topic), [
+        ->put(route('admin.topics.update', $topic), [
             'name' => 'Updated Name',
             'description' => 'Updated',
             'available' => true,
@@ -3213,7 +3221,7 @@ it('shows delete confirmation for existing topic', function () {
     $user = User::factory()->create();
 
     $response = $this->actingAs($user)
-        ->get(route('topics.delete', $topic));
+        ->get(route('admin.topics.delete', $topic));
 
     $response->assertStatus(200);
     $response->assertSee('Confirm Delete');
@@ -3226,9 +3234,9 @@ it('redirects when deleting missing topic', function () {
     $user = User::factory()->create();
 
     $response = $this->actingAs($user)
-        ->get(route('topics.delete', 999));
+        ->get(route('admin.topics.delete', 999));
 
-    $response->assertRedirect(route('topics.index'));
+    $response->assertRedirect(route('admin.topics.index'));
     $response->assertSessionHas('error');
 });
 ```
@@ -3243,9 +3251,9 @@ it('fails destroy when topic missing', function () {
     $user = User::factory()->create();
 
     $response = $this->actingAs($user)
-        ->delete(route('topics.destroy', 999));
+        ->delete(route('admin.topics.destroy', 999));
 
-    $response->assertRedirect(route('topics.index'));
+    $response->assertRedirect(route('admin.topics.index'));
     $response->assertSessionHas('error');
 });
 ```
@@ -3262,11 +3270,11 @@ it('requires confirmation before deleting', function () {
     $user = User::factory()->create();
 
     $response = $this->actingAs($user)
-        ->delete(route('topics.destroy', $topic), [
+        ->delete(route('admin.topics.destroy', $topic), [
             'confirm' => false,
         ]);
 
-    $response->assertRedirect(route('topics.delete', $topic));
+    $response->assertRedirect(route('admin.topics.delete', $topic));
     $response->assertSessionHas('error');
 });
 ```
@@ -3277,7 +3285,7 @@ it('deletes topic with valid confirmation', function () {
     $user = User::factory()->create();
 
     $response = $this->actingAs($user)
-        ->delete(route('topics.destroy', $topic), [
+        ->delete(route('admin.topics.destroy', $topic), [
             'confirm' => true,
         ]);
 
