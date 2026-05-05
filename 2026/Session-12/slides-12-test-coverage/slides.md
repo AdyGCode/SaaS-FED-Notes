@@ -212,20 +212,42 @@ layout: two-cols
 
 # Static Analysis & Code Coverage
 
-## Requirements
+## About xDebug & PCov
 
-<Announcement type=error title="Compatibility">
-You should **NOT enable** xDebug and PCov at the same time. You will 
-encounter serious iussues with PHP, and most likely be unable to execute 
-any code. 
+<br>
+
+<Announcement type=warning title="Compatibility">
+<p>You should <strong>NOT enable</strong> xDebug and PCov at the same time. </p>
+<p>You are likely to encounter serious issues with PHP, and probably 
+unable to execute any code. </p>
 </Announcement>
 
 ::left:: 
-### Option 1
-- xDebug
-- Larastan
 
-Pros:
+### xDebug Pros
+
+- All‑in‑one debugging tool
+- Excellent developer experience
+- Well‑established and widely supported
+- Accurate coverage reporting
+- Useful beyond testing
+
+::right::
+
+### Pcov Pros
+
+- Extremely fast code coverage
+- Minimal overhead
+- CI‑friendly
+- Simple configuration
+- Works perfectly with PHPUnit / PEST
+- Recommended by the Laravel community for CI
+
+
+
+<!-- Presenter Notes:
+
+### Option 1: xDebug Pros:
 
 ✅ All‑in‑one debugging tool
 Provides step debugging, stack traces, variable inspection, profiling, and code coverage.
@@ -238,25 +260,8 @@ Produces precise line‑level and branch coverage data.
 ✅ Useful beyond testing
 Valuable for diagnosing complex runtime bugs during development.
 
-Cons:
 
-❌ Significant performance overhead
-Tests and requests can be 2–5× slower, especially with coverage enabled.
-❌ Heavy memory usage
-Can cause OOM issues in large test suites or CI environments.
-❌ Configuration complexity
-Requires careful ini tuning (modes, triggers, environment flags).
-❌ Not ideal for CI
-Slower pipelines unless coverage is explicitly disabled.
-❌ Debugging features mostly unused in CI
-Overkill when you just want coverage metrics.
-
-::right::
-## Option 2
-- Pcov
-- Larastan
-
-Pros:
+## Option 2: Pcov Pros:
 
 ✅ Extremely fast code coverage
 Purpose‑built for coverage; often 3–10× faster than Xdebug.
@@ -271,7 +276,53 @@ Seamless coverage integration.
 ✅ Recommended by the Laravel community for CI
 Frequently used in production test pipelines.
 
-Cons:
+
+-->
+
+
+---
+level: 2
+layout: two-cols
+---
+
+# Static Analysis & Code Coverage
+
+## About xDebug & PCov
+
+::left:: 
+### xDebug Cons
+
+- Significant performance overhead
+- Heavy memory usage
+- Configuration complexity
+- Not ideal for CI
+- Debugging features mostly NOT used in CI
+
+::right::
+### Pcov Cons:
+
+- No step debugging
+- Not a general debugging tool
+- Less visibility into runtime behaviour
+- Another extension to manage
+
+
+<!-- Presenter Notes:
+
+xDebug Cons:
+
+❌ Significant performance overhead
+Tests and requests can be 2–5× slower, especially with coverage enabled.
+❌ Heavy memory usage
+Can cause OOM issues in large test suites or CI environments.
+❌ Configuration complexity
+Requires careful ini tuning (modes, triggers, environment flags).
+❌ Not ideal for CI
+Slower pipelines unless coverage is explicitly disabled.
+❌ Debugging features mostly unused in CI
+Overkill when you just want coverage metrics.
+
+PCOV Cons:
 
 ❌ No step debugging
 Coverage only—no breakpoints, stack inspection, or profiling.
@@ -282,27 +333,40 @@ Cannot inspect variables or execution flow interactively.
 ❌ Another extension to manage
 Requires switching extensions between local and CI environments.
 
-
-✅ Recommended Strategy (Best Practice)
-
-
-EnvironmentRecommendationLocal developmentXdebug + LarastanCI / Coverage runsPCOV + Larastan
-Why this works best:
-
-You get excellent debugging locally
-You get fast, reliable coverage in CI
-Larastan works identically in both setups
-Many teams toggle extensions via .env or separate php.ini files
-
-
-✅ One‑line summary
-
-Xdebug is for humans debugging code; PCOV is for machines measuring coverage.
+-->
 
 
 ---
 level: 2
-layout: two-cols
+---
+
+# Static Analysis & Code Coverage
+
+## About xDebug & PCov
+
+### Recommended Strategy (Best Practice)
+
+| Environment | Recommendation |
+|---|---|
+| Local development | Xdebug + Larastan |
+| CI / Coverage runs | PCOV + Larastan |
+
+Why this works best:
+
+- You get excellent debugging locally
+- You get fast, reliable coverage in CI
+- Larastan works identically in both setups
+- Many teams toggle extensions via `.env` or separate `php.ini` files
+
+<!-- Presenter notes:
+
+- Xdebug is for humans debugging code; 
+- PCOV is for machines measuring coverage.
+
+-->
+
+---
+level: 2
 ---
 
 # Static Analysis & Code Coverage
@@ -313,16 +377,13 @@ layout: two-cols
 
 When using a PC:
 
-::left::
+- Download the relevant DLL from https://pecl.php.net/package/pcov
+- Extract the four files from the zip file
+- copy the DLL and PDB file into the `Laragon/bin/php/php-8.x.y-.../ext` 
+  folder
+- Open the `Laragon/bin/php/php-8.x.y-.../php.ini`
+- Move to the bottom of the file and add
 
-
-
-Download the relevant DLL from https://pecl.php.net/package/pcov
-Extract the four files from the zip file
-copy the DLL and PDB file into the `Laragon/bin/php/php-8.x.y-.../ext` folder
-
-Open the `Laragon/bin/php/php-8.x.y-.../php.ini`
-Move to the bottom of the file and add
 ```ini
 [pcov]
 extension=pcov
@@ -331,7 +392,19 @@ pcov.enabled=1
 
 Save teh changes
 
-Check pcov enabled using
+
+---
+level: 2
+---
+
+# Static Analysis & Code Coverage
+
+## Installing xDebug / PCov
+
+### PCov
+
+Check PCov enabled using
+
 ```shell
 php --info | grep pcov
 ```
@@ -346,13 +419,10 @@ pcov.initial.memory => 65336 bytes
 pcov.initial.files => 64
 ```
 
-::right::
-
 ...
 
 ---
 level: 2
-layout: two-cols
 ---
 
 # Static Analysis & Code Coverage
@@ -370,6 +440,7 @@ level: 2
 ---
 
 # Static Analysis & Code Coverage
+
 ### Installing Larastan (& PhpStan static analysis tool)
 
 Execute the following composer command:
