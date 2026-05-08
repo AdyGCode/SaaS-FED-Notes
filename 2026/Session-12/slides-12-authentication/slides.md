@@ -3023,12 +3023,14 @@ level: 2
 ---
 level: 2
 ---
+# Pest Testing Actions with Authentication
 
 ## Read a Topic Failure (Authenticated, Topic does not exist)
 
 ---
 level: 2
 ---
+# Pest Testing Actions with Authentication
 
 ## Create/Store a New Topic (Authenticated)
 
@@ -3046,6 +3048,7 @@ it('shows add topic page', function () {
 ---
 level: 2
 ---
+# Pest Testing Actions with Authentication
 
 ## Create/Store a New Topic Failure (Authenticated, missing topic name)
 
@@ -3068,6 +3071,7 @@ it('fails when topic name is missing', function () {
 ---
 level: 2
 ---
+# Pest Testing Actions with Authentication
 
 ## Create/Store a New Topic Failure (Authenticated, Topic name too short)
 
@@ -3092,6 +3096,7 @@ it('creates topic when valid and unique', function () {
 ---
 level: 2
 ---
+# Pest Testing Actions with Authentication
 
 ## Create/Store a New Topic Failure (Authenticated, Duplicate Name)
 
@@ -3114,6 +3119,7 @@ it('fails when topic already exists', function () {
 ---
 level: 2
 ---
+# Pest Testing Actions with Authentication
 
 ## Edit/Update an existing Topic (Authenticated)
 
@@ -3132,6 +3138,7 @@ it('shows edit page for existing topic', function () {
 ---
 level: 2
 ---
+# Pest Testing Actions with Authentication
 
 ## Edit/Update an existing Topic Failure (Authenticated, missing topic name)
 
@@ -3166,6 +3173,7 @@ it('fails update when name is missing', function () {
 ---
 level: 2
 ---
+# Pest Testing Actions with Authentication
 
 ## Edit/Update an existing Topic Failure (Authenticated, Topic name too short)
 
@@ -3188,6 +3196,7 @@ it('fails update when topic name already exists', function () {
 ---
 level: 2
 ---
+# Pest Testing Actions with Authentication
 
 ## Edit/Update an existing Topic Failure (Not Authenticated)
 
@@ -3212,6 +3221,7 @@ it('updates topic when valid', function () {
 ---
 level: 2
 ---
+# Pest Testing Actions with Authentication
 
 ## Destroy an existing Topic (authentication required)
 
@@ -3243,6 +3253,7 @@ it('redirects when deleting missing topic', function () {
 ---
 level: 2
 ---
+# Pest Testing Actions with Authentication
 
 ## Destroy an existing Topic Failure (Not authenticated)
 
@@ -3261,6 +3272,7 @@ it('fails destroy when topic missing', function () {
 ---
 level: 2
 ---
+# Pest Testing Actions with Authentication
 
 ## Destroy an existing Topic Failure (Authenticated, Topic does not exist)
 
