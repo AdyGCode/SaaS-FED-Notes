@@ -186,7 +186,7 @@ It provides:
 
 Note:
 
-- No UI provided
+- **No UI provided**
 - Fully configurable
 
 <!-- Presenter Notes:
@@ -233,6 +233,37 @@ level: 2
 
 - Most Laravel web apps use both
 
+
+
+---
+level: 2
+layout: two-cols
+---
+
+# What Fortify Does Not Do
+
+::left::
+
+### Boundaries...
+
+It is important to understand Fortify’s boundaries:
+
+- Does NOT provide frontend styling
+- Does NOT define roles or permissions
+- Does NOT replace policies or gates
+
+::right::
+
+### Handled by...
+
+Those responsibilities belong to:
+
+- Blade / Tailwind / Frontend framework
+- Laravel Authorisation (Policies & Gates)
+- Sanctum (API authentication)
+
+
+
 ---
 layout: section
 ---
@@ -270,7 +301,7 @@ level: 2
 From your Laravel project root, install Fortify using Composer:
 
 ```shell
-composer require laravel\/fortify
+composer require laravel/fortify
 ```
 
 Once installed, run the Fortify installer:
@@ -316,16 +347,26 @@ level: 2
 
 ## Configuring Fortify
 
-### Enable Core Features
+### Enable Fortify Features
 
-Open `config/fortify.php` and ensure the following features are enabled:
+We are able to configure Fortify's features in the `config/fortify.php`
+file.
+
+Open the file, and either scroll, or search for the `features` section.
 
 ```php
-'features' => [
-  Features::registration(),
-  Features::resetPasswords(),
-  Features::emailVerification(),
-],
+    'features' => [
+        Features::registration(),
+        Features::resetPasswords(),
+        Features::emailVerification(),
+        Features::updateProfileInformation(),
+        Features::updatePasswords(),
+        Features::twoFactorAuthentication([
+            'confirm' => true,
+            'confirmPassword' => true,
+            // 'window' => 0,
+        ]),
+    ],
 ```
 
 These features provide:
@@ -333,6 +374,9 @@ These features provide:
 - User registration
 - Password reset workflow
 - Email verification enforcement
+- Update user profile information
+- update passwords
+- two-factor authentication
 
 ---
 level: 2
@@ -359,6 +403,11 @@ class User extends Authenticatable implements MustVerifyEmail
 This ensures Laravel automatically requires verified email addresses where
 appropriate.
 
+## Register Fortify
+
+Fortify should already be registered automatically when we did the
+installation.
+
 
 ---
 level: 2
@@ -366,35 +415,18 @@ level: 2
 
 # How to Install, Configure & Implement Laravel Fortify
 
-## Ensure Fortify Is Registered
+## How to Publish Settings & Other Components
 
-Fortify should already be registered automatically.
+Fortify is UI-agnostic by default.
 
-Inside AppServiceProvider (or bootstrap/app.php in Laravel 11+), ensure
-providers are loaded correctly, verifying that the Fortify Service
-Provider exists:
+It also does not come with any default views.
 
-```php
-/FortifyServiceProvider.php
-```
-
----
-level: 2
----
-
-# How to Install, Configure & Implement Laravel Fortify
-
-## How to Publish Settings, Components, and Views
-
-Fortify is UI-agnostic by default, meaning it does not publish Blade views
-automatically.
-
-The following steps allow you to customise authentication pages.
+The following steps allow you to implement Bl;ade based views for each
+authentication action.
 
 - Publish Configuration
     - No further action required here unless updating features
-- Publish Fortify Views (Optional but Recommended)
-    - To customise login, register, and verification views
+- Create/Adapt Blade views and Interaction Code
 
 ---
 level: 2
@@ -402,26 +434,19 @@ level: 2
 
 # How to Install, Configure & Implement Laravel Fortify
 
-## How to Publish Settings, Components, and Views
+## Which Views do we Require?
 
-To publish the Fortify views use:
+Because there are no default views with Fortify we will need to do the
+following:
 
-```shell
-artisan vendor:publish --tag=fortify-views
-```
-
-This creates `resources/views/auth/`, including templates for:
-
-- Login
-- Registration
-- Password reset
-- Email verification
-- Confirm password
-
-<Announcement type="idea">
-You are now free to modify these views using Blade + Tailwind CSS.
-</Announcement>
-
+- Create Admin, App and Guest Layout classes
+- Create Admin, App and Guest Page layouts
+- Add Components for views as required
+- Create each view required for:
+    - Registration
+    - Password reset
+    - Verify Email
+    - Login
 
 ---
 level: 2
@@ -444,11 +469,597 @@ public function boot(): void
 }
 ```
 
-You may also define views for:
+You should also define views for:
 
 - Password reset
 - Email verification
 - Confirm password
+
+---
+level: 2
+---
+
+# How to Install, Configure & Implement Laravel Fortify
+
+## Creating the Layout Classes
+
+To create the layout classes use:
+
+```shell
+php artisan make:class Views/Components/AdminLayout
+php artisan make:class Views/Components/AppLayout
+php artisan make:class Views/Components/GuestLayout
+```
+
+---
+level: 2
+---
+
+# How to Install, Configure & Implement Laravel Fortify
+
+## Coding Layout Classes
+
+Open the Admin Layout class (`app/Http/Views/Components/AdminLayout.php`) and
+update the code to read:
+
+```php
+namespace App\Layouts;
+
+use Closure;
+use Illuminate\Contracts\View\View;
+use Illuminate\View\Component;
+
+final class AdminLayout extends Component
+{
+    /**
+     * Create a new component instance.
+     */
+    public function __construct()
+    {
+    }
+
+    /**
+     * Get the view / contents that represent the component.
+     */
+    public function render(): View|Closure|string
+    {
+        return view('layouts.admin');
+    }
+}
+
+```
+
+---
+level: 2
+---
+
+# How to Install, Configure & Implement Laravel Fortify
+
+## Coding Layout Classes
+
+Repeat this for the Guest and App layouts by replacing `layouts.admin` in
+the render method, with `layouts.app` and `layouts.guest` respectively.
+
+For example:
+
+```php
+namespace App\Layouts;
+
+use Closure;
+use Illuminate\Contracts\View\View;
+use Illuminate\View\Component;
+
+final class GuestLayout extends Component
+{
+    public function __construct()
+    {
+    }
+
+    public function render(): View|Closure|string
+    {
+        return view('layouts.guest');
+    }
+}
+
+```
+
+---
+level: 2
+---
+
+# How to Install, Configure & Implement Laravel Fortify
+
+## Creating the Layouts - Admin Layout
+
+The admin layout file is contained in the `resources\views\layouts` folder.
+
+We create layouts and components folders, plus an empty blade file using:
+
+```shell
+mkdir -p resources/views/{layouts,components}
+touch resources/views/layouts/admin.blade.php
+```
+
+You could also create the empty guest, app, navigation, admin-navigation,
+and footer blade files:
+
+```shell
+touch resources/views/layouts/{navigation,admin-navigation,footer}.blade.php
+touch resources/views/layouts/{app,guest}.blade.php
+```
+
+## Admin Blade File
+
+The admin blade file will be very similar to the guest and app versions.
+
+In the next slides we will construct the `admin.blade.php` content, and then
+show the key variations for the other files.
+
+With the right configurations, the guest layout could be ignored.
+
+The Admin layout features the following:
+
+- A simple basic layout
+- A vertical navigation area (left)
+- No footer
+- No predefined header
+
+---
+level: 2
+---
+
+# How to Install, Configure & Implement Laravel Fortify
+
+## Creating the Layouts - Admin Layout
+
+The admin blade file will be very similar to the guest and app versions.
+
+We start with this, and then show the key variations for the other files.
+
+With the right configurations, the guest layout could be ignored.
+
+````md magic-move
+
+```php 
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>{{ config('app.name', 'Laravel') }}</title>
+    <!-- Fonts -->
+```
+
+```php 
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet"/>
+
+    <!-- Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+```
+
+```php 
+</head>
+<body class="font-sans antialiased">
+<div class="min-h-screen bg-zinc-100 flex flex-row">
+
+    <nav class="basic-1/4 h-screen sticky top-0">
+        @include('layouts/admin-navigation')
+    </nav>
+
+    <div class="grow flex flex-col">
+        <!-- Page Heading -->
+```
+
+```php 
+        <!-- Page Heading -->
+        @isset($header)
+            <header class="bg-zinc-700 shadow">
+                <div class="w-full py-6 px-4 sm:px-6 lg:px-8">
+                    {{ $header }}
+                </div>
+            </header>
+        @endisset
+```
+
+```php 
+        @endisset
+
+        <!-- Page Content -->
+        <main class="h-max">
+            {{ $slot }}
+        </main>
+
+    </div>
+</div>
+</body>
+</html>
+```
+
+````
+
+---
+level: 2
+---
+
+# How to Install, Configure & Implement Laravel Fortify
+
+## Creating the Layouts - App Layout
+
+The key differences from the Admin layout for the App layout are:
+
+- Different basic layout
+- A Horizontal Page Header/Navigation Bar
+- A Footer
+
+Here are the key changes:
+
+````md magic-move
+
+```php
+<body class="font-sans antialiased">
+<div class="min-h-screen bg-zinc-100">
+    @include('layouts.navigation')
+```
+
+```php
+    <!-- Page Heading -->
+    @isset($header)
+        <header class="bg-white shadow">
+            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+```
+
+```php
+    <main>
+        {{ $slot }}
+    </main>
+</div>
+
+@include("layouts.footer")
+```
+
+````
+
+---
+level: 2
+---
+
+# How to Install, Configure & Implement Laravel Fortify
+
+## Creating the Layouts - Guest Layout
+
+The key differences from the App layout for the Guest layout are:
+
+- App logo in centre of page
+- A different style for the the main slot
+
+````md magic-move
+
+```php
+<body class="font-sans text-zinc-900 antialiased">
+<div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-zinc-100">
+    <div>
+        <a href="/">
+            <x-application-logo class="w-20 h-20 fill-current text-zinc-500"/>
+        </a>
+    </div>
+```
+
+```php
+    <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+        {{ $slot }}
+    </div>
+</div>
+```
+
+````
+
+---
+level: 2
+---
+
+# How to Install, Configure & Implement Laravel Fortify
+
+## Why Layout Classes?
+
+When we use a layout class, we gain the ability to use "custom HTML tags".
+
+The three layouts are now available using: `<x-admin-layout>`,
+`<x-app-layout>` and `<x-guest-layout>`.
+
+For example, a skeleton use of each type of layout:
+
+````md magic-move
+
+```php
+<x-admin-layout>
+    <x-slot name="header">
+        {{-- Header indicating the area of administration --}}    
+    </x-slot>
+    
+    {{-- The main slot content --}}    
+</x-admin-layout>
+```
+
+```php
+<x-app-layout>
+    <x-slot name="header">
+        {{-- Header indicating the area of administration --}}    
+    </x-slot>
+    
+    {{-- The main slot content --}}    
+</x-app-layout>
+```
+
+```php
+<x-guest-layout>
+    {{-- The main slot content --}}    
+</x-guest-layout>
+```
+
+````
+
+---
+level: 2
+---
+
+# How to Install, Configure & Implement Laravel Fortify
+
+## Navigation Bars & Components
+
+### Components
+
+Components provide re-usable parts for Blade layouts. These components 
+were a part of the Breeze Template. 
+
+Breeze was a core part of Laravel but is no longer a standard part of the 
+framework. 
+
+Examples include:
+
+| File                            | Putpose                                          |
+|---------------------------------|--------------------------------------------------|
+| `dropdown.blade.php`            | Adds a styled drop-down menu with dropdown-links |
+| `text-input.blade.php`          | Shows a styled input control                     |
+| `primary-button.blade.php`      | Shows a button with a dark background (default)  |
+| `auth-session-status.blade.php` | Displays status when one is provided             |
+| `application-logo.blade.php`    | Shows the logo image for the application         |
+
+
+
+---
+level: 2
+---
+
+# How to Install, Configure & Implement Laravel Fortify
+
+## Navigation Bars & Components
+
+### Components - Example Code
+
+Here are some example components:
+
+````md magic-move
+
+```php
+@props(['messages'])
+
+@if ($messages)
+    <ul {{ $attributes->merge(['class' => 'text-sm text-red-600 space-y-1']) }}>
+        @foreach ((array) $messages as $message)
+            <li>{{ $message }}</li>
+        @endforeach
+    </ul>
+@endif
+```
+
+```php
+@props(['active'])
+
+@php
+    $classes = ($active ?? false)
+                ? 'block pl-3 pr-4 py-2 text-sm font-medium text-zinc-100 hover:text-zinc-900 
+                   bg-zinc-600 hover:bg-zinc-300 border-0 border-l-4 border-zinc-400
+                   focus:border-sky-700 focus:outline-none
+                   transition duration-250 ease-in-out'
+                : 'block pl-3 pr-4 py-2 text-sm font-medium text-zinc-500 hover:text-zinc-900 
+                   focus:text-zinc-700 hover:bg-zinc-200 border-0 border-l-4 border-transparent
+                   hover:border-zinc-700 focus:border-zinc-300 focus:outline-none
+                   transition duration-250 ease-in-out';
+@endphp
+
+<a
+    {{ $attributes->merge(['class' => $classes]) }}
+>
+    {{ $slot }}
+</a>
+```
+
+```php
+@props(['disabled' => false])
+
+<input @disabled($disabled)
+    {{ $attributes->merge([
+        'class' => 'rounded-md p-2 py-1 
+                    border-zinc-300 focus:border-sky-500 
+                    focus:ring-sky-500
+                    rounded-md shadow shadow-zinc-500/50']) 
+    }}>
+```
+
+````
+
+
+---
+level: 2
+---
+
+# How to Install, Configure & Implement Laravel Fortify
+
+## Navigation Bars & Components
+
+### Navigation Bars
+
+The navigation bars are quite long as they have responsive layout options.
+
+Rather than cover every line of code we provide the files as downloads.
+
+The navigation bars use components that include:
+
+- `nav-link.blade.php`
+- `responsive-nav-link.blade.php`
+- `side-nav-link.blade.php`
+
+and others.
+
+
+---
+level: 2
+layout: two-cols
+---
+
+# How to Install, Configure & Implement Laravel Fortify
+
+## Navigation Bars & Components for Download
+
+The files have `.txt` added after the `.php` to make them viewable/downloadable.
+
+Save them to your computer and rename them without the `.txt`.
+
+You will find some custom components not in the original Breeze templates.
+
+::left::
+
+#### Page Layouts
+- [admin.blade.php](files/admin.blade.php.txt)
+- [app.blade.php](files/app.blade.php.txt)
+- [guest.blade.php](files/guest.blade.php.txt)
+
+<br>
+
+#### Navigation Layouts
+
+- [admin-navigation.blade.php](files/admin-navigation.blade.php.txt)
+- [footer.blade.php](files/footer.blade.php.txt)
+- [navigation.blade.php](files/navigation.blade.php.txt)
+
+::right::
+
+#### Components
+- [application-logo.blade.php](files/application-logo.blade.php.txt)
+- [auth-session-status.blade.php](files/auth-session-status.blade.php.txt)
+- [danger-button.blade.php](files/danger-button.blade.php.txt)
+- [dropdown.blade.php](files/dropdown.blade.php.txt)
+- [dropdown-link.blade.php](files/dropdown-link.blade.php.txt)
+- [input-error.blade.php](files/input-error.blade.php.txt)
+- [input-label.blade.php](files/input-label.blade.php.txt)
+- [modal.blade.php](files/modal.blade.php.txt)
+
+---
+level: 2
+layout: two-cols
+---
+
+# How to Install, Configure & Implement Laravel Fortify
+
+## Navigation Bars & Components for Download
+
+The files have `.txt` added after the `.php` to make them 
+viewable/downloadable.
+
+Save them to your computer and rename them without the `.txt`.
+
+You will find some custom components not in the original Breeze templates.
+
+::left::
+
+#### Components
+
+- [nav-link.blade.php](files/nav-link.blade.php.txt)
+- [primary-button.blade.php](files/primary-button.blade.php.txt)
+- [primary-link-button.blade.php](files/primary-link-button.blade.php.txt)
+- [responsive-nav-link.blade.php](files/responsive-nav-link.blade.php.txt)
+- [secondary-button.blade.php](files/secondary-button.blade.php.txt)
+- [secondary-link-button.blade.php](files/secondary-link-button.blade.php.txt)
+- [side-nav-link.blade.php](files/side-nav-link.blade.php.txt)
+- [stats-card.blade.php](files/stats-card.blade.php.txt)
+
+::right::
+
+#### Components
+
+- [text-input.blade.php](files/text-input.blade.php.txt)
+- [textarea.blade.php](files/textarea.blade.php.txt)
+
+<br>
+
+#### Starter Kit
+
+You may also want to check out the Starter Kit "l13-blade-kit" on GitHub 
+which has all these layouts, components and navigation items.
+
+- [https://github.com/adygcode/l13-blade-kit](https://github.com/adygcode/l13-blade-kit).
+
+
+---
+level: 2
+layout: two-cols
+---
+
+# How to Install, Configure & Implement Laravel Fortify
+
+## Navigation Bars & Components for Download
+
+::left::
+
+#### Authentication Views
+
+Finally, we are providing the basic pages for Login, Register, et al.
+
+This is to make it easier to work with as a start point.
+
+Make sure you have a `resources/views/auth` folder.
+
+Download, rename and move the files to this location.
+
+::right::
+
+### Authentication View Files
+
+- ...
+
+
+
+---
+level: 2
+---
+
+# Authentication Routes with Fortify
+
+## Routes for the Authentication.
+
+
+
+---
+level: 2
+---
+
+# Fortify Installation & Implementation - Common errors
+
+#### Unable to locate a class or view for component [app-layout].
+
+Try:
+
+```shell
+composer dump-autoload
+php artisan view:clear
+```
+
+Then refreshing the page.
 
 ---
 level: 2
@@ -462,31 +1073,7 @@ level: 2
 - `fortify:install` executed
 - Config enabled (`config/fortify.php`)
 - User model implements MustVerifyEmail
-- Views published and editable
-- Fortify service provider configured
-
----
-level: 2
-layout: two-cols
----
-
-# What Fortify Does Not Do
-
-::left::
-
-It is important to understand Fortify’s boundaries:
-
-- Does NOT provide frontend styling
-- Does NOT define roles or permissions
-- Does NOT replace policies or gates
-
-::right::
-
-Those responsibilities belong to:
-
-- Blade / Tailwind / Frontend framework
-- Laravel Authorisation (Policies & Gates)
-- Sanctum (API authentication)
+- Views created and edited as required
 
 ---
 layout: section
@@ -598,6 +1185,20 @@ sequenceDiagram
     Laravel->>Database: Update email_verified_at
     Laravel->>User: Email verified successfully
 ```
+
+---
+level: 2
+---
+
+# How Fortify Works
+
+## Summary: How Email Verification Works
+
+- Registration
+    - → User created
+    - → Registered event fired
+    - → Sends verification notification
+    - → Signed URL generated
 
 ---
 level: 2
@@ -768,29 +1369,34 @@ level: 2
 
 # Authentication in Store, Update Requests
 
+We do an Authentication Check:
+
 ```php
-public function authorize(): bool
-{
-    return auth()->check();
-}
+auth()->check();
 ```
 
 - Protects business logic
 - Works even if routes are misconfigured
 
-<!-- Presenter Notes:
+Here is an example within a Store Request:
 
--->
+```php {1-2,15|3-7,12|8-10|8-11|all}
+final class StoreTopicRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     */
+    public function authorize(): bool
+    {
+        /* Verify authenticatted. 
+         * Extend this when roles & permissions are implemented.
+         */
+        return auth()->check();
+    }
 
----
-level: 2
----
-
-# Enabling & Configuring Email Verification
-
-- Ensures user owns the email address
-- Prevents fake account abuse
-- Enabled in Laravel by implementing MustVerifyEmail
+    /* More code for the request here */
+}
+```
 
 <!-- Presenter Notes:
 
@@ -798,7 +1404,129 @@ level: 2
 
 ---
 layout: section
+---
+
+# Enabling & Configuring Email Verification
+
+One line of defence against spam
+
+---
 level: 2
+---
+
+# Enabling & Configuring Email Verification
+
+## Why
+
+- Helps to ensure newly registering user owns the email address
+- Prevents fake account abuse
+- Enabled in Laravel by implementing `MustVerifyEmail`
+
+## Steps
+
+- Add `MustVerifyEmail` to User model
+- Enable verification routes
+- Customise verification email
+- Restrict access with verified middleware
+
+---
+level: 2
+---
+
+# Enabling & Configuring Email Verification
+
+## Add MustVerifyEmail to User model
+
+Open the `/app/Models/User.php` model class.
+
+Have the Model implement the `MustVerifyEmail` interface:
+
+```php
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+/* lines removed for brevity */
+
+final class User extends Authenticatable implements MustVerifyEmail
+{
+    /* remainder of the model code */
+}
+```
+
+---
+level: 2
+---
+
+# Enabling & Configuring Email Verification
+
+## Enable verification on routes
+
+(Almost) Any route that you require authentication is a prime candidate for
+the addition of verified email checks.
+
+Laravel Fortify automatically registers all authentication and email
+verification routes when:
+
+- Fortify is installed
+- Features::emailVerification() is enabled
+- The User model implements MustVerifyEmail
+
+This means, no routes need to be manually added!
+
+Another victory for Laravel's aim to make development easier.
+
+
+---
+level: 2
+---
+
+# Enabling & Configuring Email Verification
+
+## Customise verification email
+
+Laravel allows the customisation of the verification emails.
+
+For more details please see:
+
+Laravel: How to Customize Verification Email Text. (2026, May 6). Laravel
+Daily. https://laraveldaily.com/post/laravel-customize-verify-email-text
+
+
+
+---
+level: 2
+---
+
+# Enabling & Configuring Email Verification
+
+## Restrict access with verified middleware
+
+Open the required web routes file and update the required routes to be
+similar to the ones below.
+
+Note the use of `verified` in the middleware.
+
+### Example 1: Admin Routes (No Authorisation)
+
+```php {none|1|all}
+Route::middleware(['auth', 'verified'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function (): void {
+        /* Remaining code */
+    });
+
+```
+
+### Example 2: Client Dashboard Route (No Authorisation)
+
+```php {none|1,4|all}
+Route::middleware(['auth', 'verified'])->group(function (): void {
+    Route::get('/dashboard', [DashboardController::class, 'dashboard'])
+        ->name('dashboard');
+});
+```
+
+---
+layout: section
 ---
 
 # Testing Email Verification using Mailpit
@@ -837,6 +1565,16 @@ layout: two-cols
 ✅ Fast
 ✅ Visual
 
+
+---
+level: 2
+layout: two-cols
+---
+
+# Testing Email Verification using Mailpit
+
+## Mailpit features
+
 ---
 level: 2
 ---
@@ -853,8 +1591,8 @@ level: 2
 
 <Announcement type=info title="Installation instructions">
 
-Please refer to the Axllent Mailpit Docs: https://mailpit.axllent.
-org/docs/install/
+Please refer to the Axllent Mailpit
+Docs: https://mailpit.axllent.org/docs/install/
 
 </Announcement>
 
@@ -2903,9 +3641,9 @@ layout: two-cols-2-1
 
 ::right::
 
-### Exercise 
+### Exercise
 
-You will repeat the test for each of Show, Add, Edit, Store, Update, 
+You will repeat the test for each of Show, Add, Edit, Store, Update,
 Delete and Destroy actions, adding to the correct test file.
 
 <div class="text-sm! leading-1!">
@@ -2974,20 +3712,25 @@ level: 2
 
 ## Browse Topics (authenticated)
 
-When we need to perform tests as an authenticated (and verified 
+When we need to perform tests as an authenticated (and verified
 user), we must:
+
 - create a fake user
 - ensure the email is verified
 - authenticate the user
 - perform the rest of the test
 
-For example, when showing the topics (browse), or when no topics are 
+For example, when showing the topics (browse), or when no topics are
 created...
 
 ````md magic-move
-```php {none|1,3-10|2|all}
+```php {none|1,7-13|2|4-6|8|10|11-12|all}
 it('shows topics when seeded', function () {
-    $user = User::factory()->create()->hasVerifiedEmail();
+    $user = User::factory()->create();
+    
+    $user = User::factory()->create([
+        'email_verified_at' => now(),
+    ]);
     
     Topic::factory()->count(25)->create();
 
@@ -2997,7 +3740,6 @@ it('shows topics when seeded', function () {
     $response->assertSee(Topic::first()->name);
 });
 ```
-
 
 ```php {none|2|all}
 it('shows no topics message when none exist', function () {
@@ -3019,10 +3761,10 @@ level: 2
 
 ## Read a Topic (Authenticated)
 
-
 ---
 level: 2
 ---
+
 # Pest Testing Actions with Authentication
 
 ## Read a Topic Failure (Authenticated, Topic does not exist)
@@ -3030,6 +3772,7 @@ level: 2
 ---
 level: 2
 ---
+
 # Pest Testing Actions with Authentication
 
 ## Create/Store a New Topic (Authenticated)
@@ -3045,9 +3788,11 @@ it('shows add topic page', function () {
     $response->assertSee('Add Topic');
 });
 ```
+
 ---
 level: 2
 ---
+
 # Pest Testing Actions with Authentication
 
 ## Create/Store a New Topic Failure (Authenticated, missing topic name)
@@ -3068,9 +3813,11 @@ it('fails when topic name is missing', function () {
     $response->assertSessionHasInput('available', true);
 });
 ```
+
 ---
 level: 2
 ---
+
 # Pest Testing Actions with Authentication
 
 ## Create/Store a New Topic Failure (Authenticated, Topic name too short)
@@ -3093,9 +3840,11 @@ it('creates topic when valid and unique', function () {
     ]);
 });
 ```
+
 ---
 level: 2
 ---
+
 # Pest Testing Actions with Authentication
 
 ## Create/Store a New Topic Failure (Authenticated, Duplicate Name)
@@ -3116,9 +3865,11 @@ it('fails when topic already exists', function () {
     $response->assertSessionHasErrors('name');
 });
 ```
+
 ---
 level: 2
 ---
+
 # Pest Testing Actions with Authentication
 
 ## Edit/Update an existing Topic (Authenticated)
@@ -3135,9 +3886,11 @@ it('shows edit page for existing topic', function () {
     $response->assertSee($topic->name);
 });
 ```
+
 ---
 level: 2
 ---
+
 # Pest Testing Actions with Authentication
 
 ## Edit/Update an existing Topic Failure (Authenticated, missing topic name)
@@ -3154,7 +3907,6 @@ it('redirects when topic is missing', function () {
 });
 ```
 
-
 ```php
 it('fails update when name is missing', function () {
     $topic = Topic::factory()->create();
@@ -3170,9 +3922,11 @@ it('fails update when name is missing', function () {
     $response->assertSessionHasErrors('name');
 });
 ```
+
 ---
 level: 2
 ---
+
 # Pest Testing Actions with Authentication
 
 ## Edit/Update an existing Topic Failure (Authenticated, Topic name too short)
@@ -3193,9 +3947,11 @@ it('fails update when topic name already exists', function () {
 });
 
 ```
+
 ---
 level: 2
 ---
+
 # Pest Testing Actions with Authentication
 
 ## Edit/Update an existing Topic Failure (Not Authenticated)
@@ -3221,6 +3977,7 @@ it('updates topic when valid', function () {
 ---
 level: 2
 ---
+
 # Pest Testing Actions with Authentication
 
 ## Destroy an existing Topic (authentication required)
@@ -3238,7 +3995,6 @@ it('shows delete confirmation for existing topic', function () {
 });
 ```
 
-
 ```php
 it('redirects when deleting missing topic', function () {
     $user = User::factory()->create();
@@ -3250,9 +4006,11 @@ it('redirects when deleting missing topic', function () {
     $response->assertSessionHas('error');
 });
 ```
+
 ---
 level: 2
 ---
+
 # Pest Testing Actions with Authentication
 
 ## Destroy an existing Topic Failure (Not authenticated)
@@ -3272,6 +4030,7 @@ it('fails destroy when topic missing', function () {
 ---
 level: 2
 ---
+
 # Pest Testing Actions with Authentication
 
 ## Destroy an existing Topic Failure (Authenticated, Topic does not exist)
