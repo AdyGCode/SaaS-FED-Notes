@@ -13,17 +13,18 @@
     "@iconify-json/fa-brands": "^1.2.2",
     "@iconify-json/fa-regular": "^1.2.2",
     "@iconify-json/fa-solid": "^1.2.2",
-    "@slidev/types": "^0.50.0-beta.5",
+    "@slidev/types": "^0.50.0",
     "@unocss/preset-icons": "^66.6.8",
-    "codemirror-theme-vars": "^0.1.1",
-    "prism-theme-vars": "^0.2.4",
+    "codemirror-theme-vars": "^0.1.2",
+    "prism-theme-vars": "^0.2.5",
     "slidev-addon-sync": "^0.1.0",
     "slidev-component-poll": "^3.0.0",
-    "theme-vitesse": "^0.6.2"
+    "slidev-theme-nmt": "^0.9.10",
+    "theme-vitesse": "^0.6.4"
   },
   "devDependencies": {
-    "@slidev/cli": "^0.50.0-beta.5",
-    "@types/node": "^18.13.0"
+    "@slidev/cli": "^0.50.0",
+    "@types/node": "^18.19.130"
   },
   "//": "Learn more: https://sli.dev/themes/write-a-theme.html",
   "slidev": {

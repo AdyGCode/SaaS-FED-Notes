@@ -63,8 +63,6 @@ layout: two-cols
 
 ::left::
 
-
-
 ::right::
 
 
@@ -87,7 +85,6 @@ layout: section
 
 ## TODO: Add ice-breaker
 
-
 ---
 layout: section
 ---
@@ -104,7 +101,8 @@ level: 2
 ::left::
 
 ### Client & Admin Dashboards
-- Client Dashboard: 
+
+- Client Dashboard:
     - Users of the application
     - Layout similar to main application
     - User's Statistics & Other information
@@ -113,7 +111,6 @@ level: 2
     - Layout Often different from main application
     - System Statistics & Other information
 
-
 ::right::
 
 ### Parts
@@ -121,12 +118,10 @@ level: 2
 - Admin Dashboard Index Page
 - Admin Dashboard Controller
 
-
-
 ### Requirements
 
 - HyperUI.dev TailwindCSS components
-- Laravel v12+ 
+- Laravel v12+
 - TailwindCSS
 - PHP 8.4 or later
 
@@ -137,8 +132,6 @@ layout: section
 # Admin Dashboard: Controller
 
 ## The Controller
-
-
 
 ---
 level: 2
@@ -157,13 +150,13 @@ Open the `/app/Http/Controllers/Admin/AdminController.php` file
 ## Index method
 
 The index method will:
+
 - collect data for display on admin dashboard
 - send data to view and request it to be rendered
 
 ---
 level: 2
 ---
-
 
 # Admin Dashboard: Controller
 
@@ -172,7 +165,8 @@ level: 2
 Start of the `AdminController.php` file:
 
 Include:
-- required models, 
+
+- required models,
 - other required classes
 
 ```php [PHP] {none|1|3|4-5|6-7|all}
@@ -188,7 +182,6 @@ use Illuminate\View\View;
 ---
 level: 2
 ---
-
 
 # Admin Dashboard: Controller
 
@@ -212,7 +205,6 @@ class AdminController extends Controller
 }
 ```
 
-
 ```php [PHP] {1-3|3-6|8-9|11-14|16|all}
     public function index()
     {
@@ -231,7 +223,6 @@ class AdminController extends Controller
 
         // Render View Code
 ```
-
 
 ```php [PHP] {1|1-2|3-5|7-8|10-13|all}
         // Render View Code
@@ -280,8 +271,7 @@ level: 2
 
 ## Process from sample `index.blade.php`
 
-- Update / Remove items as needed 
-
+- Update / Remove items as needed
 
 ---
 level: 2
@@ -306,7 +296,6 @@ level: 2
 </x-admin-layout>
 ```
 
-
 ---
 level: 2
 ---
@@ -316,7 +305,6 @@ level: 2
 ## Statistic Section
 
 This replaces, or is added after the `<!-- statistics section -->` comment.
-
 
 ```php
 <section class="my-6 mx-12 space-y-4">
@@ -359,6 +347,7 @@ This replaces, or is added after the `<!-- statistics section -->` comment.
         </div>
     </section>
 ```
+
 <br>
 
 <Announcement type="info">
@@ -376,7 +365,6 @@ level: 2
 ## Users Section
 
 This replaces, or is added after the `<!-- users section -->` comment.
-
 
 ```php
     <section class="my-6 mx-12 space-y-4">
@@ -428,7 +416,6 @@ This replaces, or is added after the `<!-- users section -->` comment.
     </section>
 ```
 
-
 ---
 level: 2
 ---
@@ -438,7 +425,6 @@ level: 2
 ## System Section
 
 This replaces, or is added after the `<!-- system section -->` comment.
-
 
 ```php
     <section class="my-6 mx-12 space-y-4">
@@ -484,6 +470,148 @@ This replaces, or is added after the `<!-- system section -->` comment.
 
 ```
 
+---
+layout: section
+---
+
+# Determining Roles & Permissions
+
+---
+level: 2
+---
+
+# Determining Roles & Permisisons
+
+When you add roles & permissions it is a good idea to know what each role will
+be able to do in the system.
+
+This can be done by creating a table of roles and permissions.
+
+| Role      | Permission 1 | Permission 2 | Permission 3 | ... |
+|-----------|--------------|--------------|--------------|-----|  
+| Admin     | Yes          | Yes          | Yes          | ... |
+| Moderator | No           | Yes          | Yes          | ... | 
+| User      | No           | No           | Yes          | ... |
+
+You may also base this on the features of the system, and determine which
+roles will have access to which features, and then determine the permissions
+based on the features.
+
+This is the method we have used in this course, and is a good method to use as
+it is based on the features of the system, and can be easily updated as the
+system evolves.
+
+---
+level: 2
+---
+
+# Determining Roles & Permissions
+
+We have created a spreadsheet to assist in completing this task:
+
+- [Permission-Matrix.xlsx](public/Permission-Matrix.xlsx)
+- Available from the course's GitHub repository 
+
+The Permissions Matrix is best created in conjunction with the development
+team and stakeholders to ensure that all requirements are captured and
+understood.
+
+This will include the MoSCoW and RACI frameworks to help determine the
+importance and responsibility of each permission.
+
+
+
+
+
+---
+layout: section
+---
+
+# Adding Roles & Permissions
+
+---
+level: 2
+---
+
+# Adding Roles & Permissions
+
+## Options
+
+- Implement your own
+- Use a package such as
+    - Spatie Laravel
+      Permission (https://spatie.be/docs/laravel-permission/v5/introduction)
+    - Bouncer (https://github.com/JosephSilber/bouncer)
+    - Laratrust (https://laratrust.santigarcor.me/)
+    - Sentinel (https://cartalyst.com/manual/sentinel/2.x)
+    - Jeremy Kenedy's Laravel
+      Roles (https://github.com/jeremykenedy/laravel-roles)
+    - and many more
+
+We will use Spatie's Laravel Permission package for this course.
+
+---
+level: 2
+---
+
+# Adding Roles & Permissions
+
+## Spatie Laravel Permission Package
+
+- Open Source package for handling roles and permissions in Laravel
+  applications
+- Provides a simple and flexible way to manage user roles and permissions
+- Supports both role-based and permission-based access control
+- Integrates well with Laravel's built-in authentication system
+- Provides Artisan commands for managing roles and permissions
+- Provides middleware for checking permissions in routes and controllers
+- Provides blade directives for checking permissions in views
+
+and much more...
+
+---
+level: 2
+---
+
+# Adding Roles & Permissions
+
+## Installation
+
+```shell
+composer require spatie/laravel-permission
+``` 
+
+Once the package is installed, you can publish the migration and config files
+using the following command:
+
+```shell
+php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
+``` 
+
+Then run the migrations to create the necessary tables in the database:
+
+```shell
+php artisan migrate
+```
+
+<Announcement class="mt-6" type="info">
+You may publish the requiured files using an integrated menu:
+
+<code>php artisan vendor:publish</code>
+
+Then select the relevant items from the list.
+</Announcement>
+
+
+---
+level: 2
+---
+
+# Adding Roles & Permissions
+
+Once installed we need to:
+
+- Create a
 
 ---
 level: 2
@@ -507,7 +635,8 @@ TODO: Add exit ticket questions
 
 - TODO: Add references etc
 
-> Some content may have been generated with the assistance of Microsoft Copilot
+> Some content may have been generated with the assistance of Microsoft
+> Copilot
 
 ---
 layout: end
