@@ -510,7 +510,9 @@ level: 2
 We have created a spreadsheet to assist in completing this task:
 
 - [Permission-Matrix.xlsx](public/Permission-Matrix.xlsx)
-- Available from the course's GitHub repository 
+- Alternative links:
+  - Notes [GitHub repository](https://github.com/AdyGCode/SaaS-FED-Notes)
+  - Session Folder [Permission Matrix Excel Spreadsheet](https://github.com/AdyGCode/SaaS-FED-Notes/tree/main/2026/Session-11/Session-11-2-roles-permissions-intro/public) 
 
 The Permissions Matrix is best created in conjunction with the development
 team and stakeholders to ensure that all requirements are captured and
@@ -520,8 +522,20 @@ This will include the MoSCoW and RACI frameworks to help determine the
 importance and responsibility of each permission.
 
 
+---
+layout: figure
+figureUrl: ./images/Permission-Matrix.png
+figureCaption: Sample Permission Matrix (partially completed)
+---
 
+# Permission Matrix Sample
 
+A sample of a partially completed permission matrix is shown in the image 
+below. 
+
+This is just an example and is not complete. 
+
+It is meant to show the format and how it can be used to determine the roles and permissions for the system.
 
 ---
 layout: section
@@ -611,7 +625,245 @@ level: 2
 
 Once installed we need to:
 
-- Create a
+- Create a seeder which will contain the default roles and permissions for 
+  the system.
+- Create a middleware to check for permissions in the routes and controllers.
+- Update the User model to use the HasRoles trait provided by the package.  
+- Update the routes and controllers to check for permissions using the middleware.
+- Update the views to show/hide content based on permissions using the blade directives provided by the package.
+
+
+---
+level: 2
+---
+
+# Adding Roles & Permissions
+## Creating a Seeder
+
+To create a seeder for the default roles and permissions, run the following command:
+
+```shell
+php artisan make:seeder RolesAndPermissionsSeeder
+``` 
+This will create a new seeder file in the `database/seeders` directory. Open the file and add the following code to create some default roles and permissions:
+
+```php
+use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;  
+
+class RolesAndPermissionsSeeder extends Seeder
+{
+    public function run()
+    {
+        // Reset cached roles and permissions
+        app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
+
+        // Create permissions
+        $seedRoles = [
+            // Roles depend on the application's requirements
+            ['name' => 'super-admin'],
+            ['name' => 'admin'],
+            ['name' => 'staff'],
+            ['name' => 'client'],
+        ];
+
+        $seedPermissions = [
+            //     [ 'permission'=>'', 'roles'=>['']],
+            ['permission' => 'user-add', 'roles' => ['admin', 'staff']],
+            ['permission' => 'user-edit', 'roles' => ['admin', 'staff']],
+            ['permission' => 'user-browse', 'roles' => ['admin', 'staff']],
+            ['permission' => 'user-read', 'roles' => ['admin']],
+            ['permission' => 'user-delete', 'roles' => ['admin']],
+
+            ['permission' => 'users-count', 'roles' => ['admin', 'staff']],
+            ['permission' => 'client-only', 'roles' => ['client']],
+            ['permission' => 'staff-only', 'roles' => ['staff']],
+            ['permission' => 'admin-only', 'roles' => ['admin']],
+        ];
+
+        foreach ($seedRoles as $role) {
+            $role = Role::create($role);
+        }
+
+        foreach ($seedPermissions as $seedPermission) {
+            $newPermission = ['name' => $seedPermission['permission']];
+            $permission = Permission::create($newPermission);
+            $permission->syncRoles($seedPermission['roles']);
+        }
+}
+```
+
+---
+level: 2
+---
+
+After creating the seeder, you can run it using the following command:
+
+```shell  
+php artisan db:seed --class=RolesAndPermissionsSeeder
+```
+
+This seeds teh Roles and Permissions
+
+Next we need to work on the User model and the seeder we have.
+
+The seeder will be updated to apply the roles and permissions we allocate to the users we create.
+
+```php
+
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\User;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+
+class UserSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
+    {
+        $seedUsers = [
+            [
+                'id' => 100,
+                'name' => 'Ad Ministrator',
+                'email' => 'admin@example.com',
+                'password' => bcrypt('Password1'),
+                'permissions' => [],
+                'roles' => ['admin']
+            ],
+            [
+                'id' => 200,
+                'name' => 'Staff Member',
+                'email' => 'staff@example.com',
+                'password' => bcrypt('Password1'),
+                'permissions' => [],
+                'roles' => ['staff']
+            ],
+            [
+                'id' => 1000,
+                'name' => 'Client User',
+                'email' => 'client@example.com',
+                'password' => bcrypt('Password1'),
+                'permissions' => [],
+                'roles' => ['client']
+            ],
+        ];
+
+        foreach ($seedUsers as $seedUser) {
+            $permissions = $seedUser['permissions'];
+            $roles = $seedUser['roles'];
+            unset($seedUser['permissions']);
+            unset($seedUser['roles']);
+
+            $user = User::create($seedUser);
+            $user->permissions()->sync($permissions);
+            $user->syncRoles($roles);
+        }
+    }
+}
+
+```
+
+---
+layout: section
+---
+
+# Applying Roles & Permissions
+
+
+---
+level: 2
+---
+
+# Applying Roles & Permissions
+
+We have a number of methods to apply the roles and permissions.
+
+- Apply to Routes
+- Apply to Controllers
+- Apply to Views
+- Apply to Blade Templates
+- Apply to Middleware
+- Apply to Policies
+- Apply to Gates
+- Apply to any other part of the application where you need to check for permissions
+
+We will look at:
+
+- Routes
+- Controllers
+- Views & Blade Templates
+- Middleware
+
+---
+level: 2
+---
+
+## Routes
+
+To apply the middleware to routes, you can add it to the route definition like this:
+
+```php
+Route::get('/admin', [AdminController::class, 'index'])
+    ->middleware('permission:admin-only');
+```
+
+
+---
+level: 2
+---
+
+## Middleware
+To create a middleware for checking permissions, run the following command:
+
+```shell
+php artisan make:middleware PermissionMiddleware
+``` 
+This will create a new middleware file in the `app/Http/Middleware` directory. Open the file and add the following code to check for permissions:
+
+```php
+namespace App\Http\Middleware;
+
+use Closure;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Exceptions\UnauthorizedException;
+
+class PermissionMiddleware
+{
+    public function handle(Request $request, Closure $next, $permission)
+    {
+        if (!Auth::check()) {
+            throw UnauthorizedException::notLoggedIn();
+        }
+
+        if (!Auth::user()->can($permission)) {
+            throw UnauthorizedException::forPermissions([$permission]);
+        }
+
+        return $next($request);
+    }
+}
+```
+This middleware checks if the user is authenticated and has the required permission. If not, it throws an UnauthorizedException.
+
+## Applying the middleware
+To apply the middleware to routes, you can add it to the route definition like this:
+
+```php
+Route::get('/admin', [AdminController::class, 'index'])
+    ->middleware('permission:admin-only');
+``` 
+
+This route will only be accessible to users who have the 'admin-only' permission.
+
+
+
 
 ---
 level: 2
