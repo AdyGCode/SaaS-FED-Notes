@@ -106,8 +106,8 @@ level: 2
 - relevant features and data
 - similar design to main application
 - often simpler and more streamlined interface
-- different requirements for different clients
-- permissions determine accessible features and data
+- different requirements for different client types
+  - permissions determine accessible features and data
 
 ::right::
 
@@ -150,12 +150,14 @@ level: 2
 
 ## Admin
 
-- manage complete application
-- manage users, content, system settings etc
-- access to all data and features of the application
+- application management
+  - users, content, system settings etc
+  - access to all data and features of the application
 - often has a different layout and design to the main application
-- focuses on tools and information for administrators to effectively manage
-  the application
+- focus on tools and information
+  - effective application management
+- levels of authority and permission
+  - granular control over who can access & manage features/data 
 
 ::right::
 
@@ -283,13 +285,27 @@ level: 2
 
 ## Naming conventions
 
-Consistency in naming conventions is imperative
+Consistency in naming conventions is imperative.
+
+Suggested conventions for controllers, views, and routes:
+
+#### First Option: File Based
 
 | type        | static       | client           | admin           |
 |-------------|--------------|------------------|-----------------|
 | controllers | `Web\...`    | `Client\...`     | `Admin\...`     |
 | views       | `static\...` | `client\...`     | `admin\...`     |
-| routes      | `web.php`    | `web.client.php` | `web.admin.php` 
+| routes      | `web.php`    | `web.client.php` | `web.admin.php` |
+
+#### Second Option: Folder Based
+
+| type        | static       | client           | admin           |
+|-------------|--------------|------------------|-----------------|
+| controllers | `Web\...`    | `Client\...`     | `Admin\...`     |
+| views       | `static\...` | `client\...`     | `admin\...`     |
+| routes      | `web.php`    | `client\web.php` | `admin\web.php` |
+
+
 
 ---
 level: 2
@@ -303,15 +319,28 @@ Strongly suggested convention:
 
 | Controller Type | Example 1                           | Example 2                            |
 |-----------------|-------------------------------------|--------------------------------------|
-| static          | `Web\AboutController`               | `Web\StatisPageController`           |
+| static          | `Web\AboutController`               | `Web\StaticPageController`           |
 | admin           | `Admin\ContactManagementController` | `Admin\AnalyticsController`          |
 | client          | `Client\ContactController`          | `Client\ProfileController`           |
 | API             | `Api\V1\ContactController`          | `Api\V1\ContactManagementController` |
 
 > All have `.php` extensions
 
-<!--
-Strongly suggest naming controllers based on their purpose and functionality, rather than the type of user they serve. This promotes better organization and maintainability of the codebase.
+
+Create using commands such as:
+```shell
+php artisan make:controller Web\StaticPageController 
+php artisan make:controller Client\ContactController 
+php artisan make:controller Admin\AnalyticsController
+php artisan make:controller Api\V1\ContactManagementController
+```
+
+<!-- Presenter Notes:
+
+Strongly suggest naming controllers based on their purpose and functionality
+rather than the type of user they serve. 
+
+This promotes better organization and maintainability of the codebase.
 
 -->
 

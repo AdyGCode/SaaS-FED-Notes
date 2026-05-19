@@ -539,7 +539,7 @@ width:96ch;">
 [vite]   ➜  Local:   http://localhost:5173/
 [vite]   ➜  Network: use --host to expose
 [vite]
-[vite]   LARAVEL v12.56.0  plugin v3.0.1
+[vite]   Laravel v13.56.0  plugin v3.0.1
 [vite]
 [vite]   ➜  APP_URL: http://localhost
 [vite] 1:16:05 pm [vite] (client) [optimizer] scanning dependencies...

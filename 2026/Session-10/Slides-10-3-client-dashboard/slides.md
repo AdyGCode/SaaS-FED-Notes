@@ -126,7 +126,7 @@ level: 2
 ### Requirements
 
 - HyperUI.dev TailwindCSS components
-- Laravel v12+ 
+- Laravel v13+ 
 - TailwindCSS
 - PHP 8.4 or later
 
