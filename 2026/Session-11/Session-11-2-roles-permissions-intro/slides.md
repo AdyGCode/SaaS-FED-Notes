@@ -498,6 +498,27 @@ level: 2
 
 # Setting up the Application
 
+## Roles & Permissions Package Options
+
+- Implement your own
+- Use a package such as
+    - Spatie Laravel
+      Permission (https://spatie.be/docs/laravel-permission/v5/introduction)
+    - Bouncer (https://github.com/JosephSilber/bouncer)
+    - Laratrust (https://laratrust.santigarcor.me/)
+    - Sentinel (https://cartalyst.com/manual/sentinel/2.x)
+    - Jeremy Kenedy's Laravel
+      Roles (https://github.com/jeremykenedy/laravel-roles)
+    - and many more
+
+We will use Spatie's Laravel Permission package for this course.
+
+---
+level: 2
+---
+
+# Setting up the Application
+
 ### Add Spatie Laravel Permission
 
 - Use composer to add the package
@@ -1382,34 +1403,22 @@ Route::middleware(['auth', 'verified'])->group(function () {
 ```
 
 ````
+
+
 ---
-level: 2
+Layout: section
 ---
 
-# Adding Roles & Permissions
+# Adding & Using Spatie Permission Package
 
-## Options
-
-- Implement your own
-- Use a package such as
-    - Spatie Laravel
-      Permission (https://spatie.be/docs/laravel-permission/v5/introduction)
-    - Bouncer (https://github.com/JosephSilber/bouncer)
-    - Laratrust (https://laratrust.santigarcor.me/)
-    - Sentinel (https://cartalyst.com/manual/sentinel/2.x)
-    - Jeremy Kenedy's Laravel
-      Roles (https://github.com/jeremykenedy/laravel-roles)
-    - and many more
-
-We will use Spatie's Laravel Permission package for this course.
 
 ---
 level: 2
 ---
 
-# Adding Roles & Permissions
+# Adding & Using Spatie Permission Package
 
-## Spatie Laravel Permission Package
+## Quick Overview
 
 - Open Source package for handling roles and permissions in Laravel
   applications
@@ -1426,9 +1435,11 @@ and much more...
 level: 2
 ---
 
-# Adding Roles & Permissions
+# Adding & Using Spatie Permission Package
 
 ## Installation
+
+If you have not added it already, then use:
 
 ```shell
 composer require spatie/laravel-permission
@@ -1448,7 +1459,7 @@ php artisan migrate
 ```
 
 <Announcement class="mt-6" type="info">
-You may publish the requiured files using an integrated menu:
+You may publish the required files using an integrated menu:
 
 <code>php artisan vendor:publish</code>
 
@@ -1465,9 +1476,9 @@ level: 2
 
 Before we can use Spatie's Permissions, we will also need to:
 
-- add middleware to the bootstrap/app.php file
-- add the HasRoles (and HasPermissions) trait to the User model
-- add the required relationships to the User model
+- add middleware to the `bootstrap/app.php` file
+- add the `HasRoles` (and `HasPermissions`) traits to the `User` model
+- add the required relationships to the `User` model
 
 
 ---
@@ -1640,11 +1651,8 @@ We have a number of methods to apply the roles and permissions.
 - Apply to Routes
 - Apply to Controllers
 - Apply to Views
-- Apply to Blade Templates
 - Apply to Middleware
-- Apply to Policies
-- Apply to Gates
-- Apply to any other part of the application where you need to check for permissions
+- and more...
 
 We will look at:
 
