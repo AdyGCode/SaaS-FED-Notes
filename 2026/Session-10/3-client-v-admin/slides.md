@@ -1,7 +1,7 @@
 ---
 theme: nmt
 background: https://cover.sli.dev
-title: Session 11 - Client v Admin
+title: Session 10 - Client v Admin
 class: text-left
 drawings:
   persist: false
@@ -10,7 +10,7 @@ mdc: true
 duration: 90min
 ---
 
-# Session 11: Client v Admin
+# Session 10: Client v Admin
 
 ## SaaS 1 – Cloud Application Development (Front-End Dev)
 
