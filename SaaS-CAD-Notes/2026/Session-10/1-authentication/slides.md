@@ -29,7 +29,8 @@ duration: 90min
 <!-- Presenter Notes:
 Introduce scope.
 
-This session is authentication only; authorisation comes next.
+- This session is authentication only.
+- Later session covers authorisation.
 -->
 
 
@@ -341,11 +342,14 @@ This file controls which authentication features are enabled.
 
 ---
 level: 2
+layout: two-cols
 ---
 
 # How to Install, Configure & Implement Laravel Fortify
 
 ## Configuring Fortify
+
+::left::
 
 ### Enable Fortify Features
 
@@ -369,7 +373,9 @@ Open the file, and either scroll, or search for the `features` section.
     ],
 ```
 
-These features provide:
+::right::
+
+### These features provide:
 
 - User registration
 - Password reset workflow
@@ -588,6 +594,13 @@ touch resources/views/layouts/{navigation,admin-navigation,footer}.blade.php
 touch resources/views/layouts/{app,guest}.blade.php
 ```
 
+
+---
+level: 2
+---
+
+# How to Install, Configure & Implement Laravel Fortify
+
 ## Admin Blade File
 
 The admin blade file will be very similar to the guest and app versions.
@@ -758,6 +771,7 @@ The key differences from the App layout for the Guest layout are:
 
 ````
 
+
 ---
 level: 2
 ---
@@ -846,6 +860,7 @@ Here are some example components:
 ````md magic-move
 
 ```php
+/* x-input-error */
 @props(['messages'])
 
 @if ($messages)
@@ -858,6 +873,7 @@ Here are some example components:
 ```
 
 ```php
+/* x-primary-link-button */
 @props(['active'])
 
 @php
@@ -880,6 +896,7 @@ Here are some example components:
 ```
 
 ```php
+/* x-text-input */
 @props(['disabled' => false])
 
 <input @disabled($disabled)
@@ -1408,7 +1425,7 @@ layout: section
 
 # Enabling & Configuring Email Verification
 
-One line of defence against spam
+- A line of defense
 
 ---
 level: 2
@@ -1421,6 +1438,7 @@ level: 2
 - Helps to ensure newly registering user owns the email address
 - Prevents fake account abuse
 - Enabled in Laravel by implementing `MustVerifyEmail`
+- Reduces bot activity in creating invalid accounts
 
 ## Steps
 
@@ -1439,7 +1457,7 @@ level: 2
 
 Open the `/app/Models/User.php` model class.
 
-Have the Model implement the `MustVerifyEmail` interface:
+Have the `User` Model implement the `MustVerifyEmail` interface:
 
 ```php
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -1453,11 +1471,16 @@ final class User extends Authenticatable implements MustVerifyEmail
 
 ---
 level: 2
+layout: two-cols
 ---
 
 # Enabling & Configuring Email Verification
 
-## Enable verification on routes
+## Enabling Email Verification on Routes
+
+::left::
+
+### Routes to Enable
 
 (Almost) Any route that you require authentication is a prime candidate for
 the addition of verified email checks.
@@ -1472,6 +1495,14 @@ verification routes when:
 This means, no routes need to be manually added!
 
 Another victory for Laravel's aim to make development easier.
+
+::right::
+
+### Routes not to Enable
+
+You do not implement the middleware on:
+- Login
+- Register
 
 
 ---
@@ -1722,18 +1753,21 @@ layout: grid
 
 ---
 level: 2
-layout: two-cols
+layout: grid
 ---
 
-# Testing Email Verification using Mailpit
+# Testing Email Verification using MailPit
 
-<br>
+::tl::
 
-## Useful Routes for Testing
+### Useful Routes for Testing
 
 Use the dashboard to test authentication:
 
 - e.g. http://localhost:8000/dashboard
+
+::tr::
+### Example Route
 
 ```php
 Route::middleware(['auth', 'verified'])
@@ -1742,7 +1776,7 @@ Route::middleware(['auth', 'verified'])
     });
 ```
 
-::left::
+::bl::
 
 ### When testing the routes...
 
@@ -1751,7 +1785,7 @@ Try accessing "client dashboard":
 - before email verification
 - after email verification
 
-::right::
+::br::
 
 ### Why This Matters for Testing
 
@@ -2577,13 +2611,20 @@ level: 2
 
 We will now create the TopicController code for each method:
 
-- index
-- show
-- create
-- store
-- edit
-- update
-- destroy
+<div class="grid grid-cols-4 gap-4">
+<span class="text-2xl block text-center bg-blue-500 p-6 rounded">index</span>
+<span class="text-2xl block text-center bg-indigo-500 p-6 rounded">show</span>
+<span class="text-2xl block text-center bg-violet-500 p-6 rounded">create</span>
+<span class="text-2xl block text-center bg-purple-500 p-6 rounded">store</span>
+<span class="text-2xl block text-center bg-rose-500 p-6 rounded">edit</span>
+<span class="text-2xl block text-center bg-red-500 p-6 rounded">update</span>
+<span class="text-2xl block text-center bg-orange-500 p-6 rounded">destroy</span>
+<span class="text-2xl block text-center bg-yellow-500 p-6 rounded">delete <kbd class="bg-black!">*</kbd></span>
+</div>
+
+The resourceful controller skeleton was created with the artisan make command we used earlier.
+
+<kbd>*</kbd> is an optional enhancement
 
 ---
 level: 2
@@ -2591,7 +2632,8 @@ level: 2
 
 # Adding a "Topics" CRUD with Authentication
 
-## Resourceful Controller Code: `index`
+## Resourceful Controller Code: <span class="text-2xl inline-block text-center bg-blue-500 p-2 rounded">index</span>
+
 
 - Obtain the topics sorted by name
 - Add any messages that may be sent to the UI
@@ -2617,7 +2659,8 @@ level: 2
 
 # Adding a "Topics" CRUD with Authentication
 
-## Resourceful Controller Code: `show`
+## Resourceful Controller Code: <span class="text-2xl inline-block text-center bg-indigo-500 p-2 rounded">show</span>
+
 
 ```php
     public function show(Topic $topic)
@@ -2634,7 +2677,8 @@ level: 2
 
 # Adding a "Topics" CRUD with Authentication
 
-## Resourceful Controller Code: `create`
+## Resourceful Controller Code: <span class="text-2xl inline-block text-center bg-violet-500 p-2 rounded">create</span>
+
 
 ```php
     public function create()
@@ -2650,7 +2694,7 @@ layout: two-cols
 
 # Adding a "Topics" CRUD with Authentication
 
-## Resourceful Controller Code: `store`
+## Resourceful Controller Code: <span class="text-2xl inline-block text-center bg-purple-500 p-2 rounded">store</span>
 
 <br>
 
@@ -2938,7 +2982,7 @@ level: 2
 
 # Adding a "Topics" CRUD with Authentication
 
-## Resourceful Controller Code: `edit`
+## Resourceful Controller Code: <span class="text-2xl inline-block text-center bg-rose-500 p-2 rounded">edit</span>
 
 Edit and Update are similar to Create and Store.
 
@@ -2969,7 +3013,7 @@ level: 2
 
 # Adding a "Topics" CRUD with Authentication
 
-## Resourceful Controller Code: `update`
+## Resourceful Controller Code: <span class="text-2xl inline-block text-center bg-red-500 p-2 rounded">update</span>
 
 When an HTTP `PUT` or `PATCH` request is sent:
 
@@ -3094,8 +3138,7 @@ level: 2
 
 # Adding a "Topics" CRUD with Authentication
 
-## Resourceful Controller Code: `destroy`
-
+## Resourceful Controller Code: <span class="text-2xl inline-block text-center bg-orange-500 p-2 rounded">destroy</span>
 Destroy literally "destroys", aka delete permanently, the topic.
 
 We will implement this first, then take a look at how we can "verify" that
@@ -3280,9 +3323,9 @@ level: 2
 
 # Confirming an Action
 
-## Admin/TopicController: Add a Topics `delete` method
+## Admin/TopicController: Add Topics method <span class="text-2xl inline-block text-center bg-yellow-500 p-2 rounded">delete</span>
 
-Open the `app/Http/Controllers/Admin/TopicCotnroller.php` cl;ass file
+Open the `app/Http/Controllers/Admin/TopicCotnroller.php` class file
 
 Just before the `destroy` method add:
 
@@ -3386,7 +3429,7 @@ level: 2
 
 # Confirming an Action
 
-## Admin/TopicController: Add new delete route to the admin routes
+### Admin/TopicController: Add new delete route to the admin routes
 
 We have the:
 
@@ -3405,10 +3448,13 @@ Route::get('/topics/{topic}/delete', [TopicController::class, 'delete'])
 Route::resource('topics', TopicController::class);
 ```
 
-This will then accept a POST method to the `/admin/topics/TOPIC_ID/delete`
-route.
+This will then accept POST method to the `/admin/topics/TOPIC_ID/delete` route to then .
 
+GET method is used when validation fails.
 
+<Announcement type=warning>
+We should ensure GET method is <strong>not</strong> called directly
+</Announcement>
 
 ---
 level: 2
@@ -3488,6 +3534,7 @@ layout: two-cols-2-1
 Before we start, we are going to remove any unwanted tests.
 
 ::left::
+### Tidy Up
 
 Locate and remove the following files
 
@@ -3498,6 +3545,23 @@ Locate and remove the following files
 
 You may also remove the folders from `Test\Feature\Http` to
 `Tests\Feature\Http\Controllers\Admin\`.
+
+
+::right::
+
+![Laravel: Example of Tests folder structure](./laravel-tests-folder-structure-example.png)
+
+---
+level: 2
+layout: two-cols-2-1
+---
+
+# Pest Testing Actions with Authentication
+
+Before we start, we are going to remove any unwanted tests.
+
+::left::
+### Add ignore files
 
 Add empty `.gitignore` files using:
 
@@ -3514,9 +3578,14 @@ in the project structure when using version control.
 
 ---
 level: 2
+layout: two-cols-2-1
 ---
 
 # Pest Testing Actions with Authentication
+
+::left::
+
+### Create Test Stubs
 
 We will begin by creating separate files for each section of the tests.
 
@@ -3527,7 +3596,9 @@ php artisan make:test Admin/Topic/TopicUpdateTest --pest
 php artisan make:test Admin/Topic/TopicDeleteTest --pest
 ```
 
-Why?
+::right::
+
+### Why?
 
 - Maintainability
 - Execute Tests by "CRUD" component
@@ -3550,7 +3621,7 @@ level: 2
 
 Replace the existing code:
 
-```php
+```php {none|all}
 test('example', function () {
     $response = $this->get('/');
 
@@ -3560,7 +3631,7 @@ test('example', function () {
 
 With the following:
 
-```php
+```php {none|all}
 use App\Models\User;
 use App\Models\Topic;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -3572,8 +3643,7 @@ This:
 
 - links to the User and Topic models,
 - adds "Refresh Database" which is used when testing to ensure the data is
-  reset
-  between tests.
+  reset between tests.
 
 ---
 level: 2
@@ -3595,11 +3665,11 @@ it('denies unauthenticated users from browsing topics', function () {
 });
 ```
 
-Note:
-
-- The clear title for the test
-- The response is captured
-- The response is then checked against assertions
+### Note:
+ 
+- The clear title for the test `denies unauthenticated users from browsing topics`
+- The response is captured `$response = $this->get(...)`
+- The response is then checked against assertions `$response->assertRedirect(...)`
 
 ---
 level: 2
@@ -3632,39 +3702,11 @@ You should have much faster results.
 
 ---
 level: 2
-layout: two-cols-2-1
 ---
 
 # Pest Testing Actions with Authentication
 
-## Topics CRUD - no authentication
-
-::right::
-
-### Exercise
-
-You will repeat the test for each of Show, Add, Edit, Store, Update,
-Delete and Destroy actions, adding to the correct test file.
-
-<div class="text-sm! leading-1!">
-
-| Action  | Route                | Method |
-|---------|----------------------|--------|
-| Show    | admin.topics.show    | GET    |
-| Create  | admin.topics.create  | GET    |
-| Store   | admin.topics.store   | POST   |
-| Edit    | admin.topics.edit    | GET    |
-| Update  | admin.topics.update  | PUT    |
-| Update  | admin.topics.update  | PATCH  |
-| Delete  | admin.topics.delete  | GET    |
-| Delete  | admin.topics.delete  | POST   |
-| Destroy | admin.topics.destroy | DELETE |
-
-</div>
-
-::left::
-
-### Tests
+## Topics CRUD - no authentication - Tests
 
 Here are some of the tests as examples.
 
@@ -3710,21 +3752,58 @@ level: 2
 
 # Pest Testing Actions with Authentication
 
+## Topics CRUD - no authentication
+
+
+### Exercise
+
+You will repeat the test for each of Show, Add, Edit, Store, Update,
+Delete and Destroy actions, adding to the correct test file.
+
+<div class="text-sm! leading-1!">
+
+| Action  | Route                | Method |
+|---------|----------------------|--------|
+| Show    | admin.topics.show    | GET    |
+| Create  | admin.topics.create  | GET    |
+| Store   | admin.topics.store   | POST   |
+| Edit    | admin.topics.edit    | GET    |
+| Update  | admin.topics.update  | PUT    |
+| Update  | admin.topics.update  | PATCH  |
+| Delete  | admin.topics.delete  | GET    |
+| Delete  | admin.topics.delete  | POST   |
+| Destroy | admin.topics.destroy | DELETE |
+
+</div>
+
+
+
+---
+level: 2
+layout: two-cols
+---
+
+# Pest Testing Actions with Authentication
+
 ## Browse Topics (authenticated)
+
+::left::
 
 When we need to perform tests as an authenticated (and verified
 user), we must:
 
 - create a fake user
 - ensure the email is verified
+- create fake topics
 - authenticate the user
 - perform the rest of the test
 
-For example, when showing the topics (browse), or when no topics are
-created...
+::right::
+
+For example, when **showing the topics** (browse), or when **no topics exist**...
 
 ````md magic-move
-```php {none|1,7-13|2|4-6|8|10|11-12|all}
+```php {none|1-2,15|1,4-6,15|1,8,15|1,10-11,15|1,13-15|all}
 it('shows topics when seeded', function () {
     $user = User::factory()->create();
     
@@ -3734,7 +3813,8 @@ it('shows topics when seeded', function () {
     
     Topic::factory()->count(25)->create();
 
-    $response = $this->actingAs($user)->get(route('admin.topics.index'));
+    $response = $this->actingAs($user)
+                    ->get(route('admin.topics.index'));
 
     $response->assertStatus(200);
     $response->assertSee(Topic::first()->name);
@@ -4090,11 +4170,6 @@ Each of the above will be level: 2 slides
 <!-- Presenter Notes:
 
 
-
--->
-
-
-<!-- Presenter Notes:
 
 -->
 
