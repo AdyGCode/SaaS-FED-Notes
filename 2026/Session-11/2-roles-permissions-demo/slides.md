@@ -10,7 +10,7 @@ mdc: true
 duration: 90min
 ---
 
-# Session 11: Roles & Permissions
+# 2 - Roles & Permissions - Demo
 
 ## SaaS 1 – Cloud Application Development (Front-End Dev)
 
@@ -63,8 +63,11 @@ layout: two-cols
 
 ::left::
 
+...
+
 ::right::
 
+...
 
 
 ---
@@ -81,349 +84,8 @@ figureUrl: public/orly-book-cover-dashboards.png
 layout: section
 ---
 
-# 🌟 Ice Breaker
-
-## TODO: Add ice-breaker
-
-
-
----
-layout: section
----
-
-# Authorisation - PBAC/RBAC
-
-Who can do what in the system?
-
----
-level: 2
----
-
-# What is Authorisation
-
-- Controls what an authenticated user can do
-- Happens *after* authentication
-- Enforced by backend logic
-
-## Access Control Models
-
-There are many ACMs (Access Control Models).
-
-We will concentrate on the use of RBAC/PBAC for this cluster.
-
-<!-- Presenter Notes:
-Authn vs Authz distinction.
--->
-
-
----
-level: 2
----
-
-# Access Control Models
-
-<div class="leading-2 ">
-
-| Model                                                                                       | Quick Description                                           |
-|---------------------------------------------------------------------------------------------|-------------------------------------------------------------|
-| <strong class="bg-green-800 px-2 py-2 rounded w-24 inline-block text-center">ABAC</strong>  | attributes-based rules                                      |
-| <strong class="bg-gray-800 px-2 py-2 rounded w-24 inline-block text-center">ACL</strong>    | per‑resource lists of users and their allowed actions       |
-| <strong class="bg-gray-800 px-2 py-2 rounded w-24 inline-block text-center">DAC</strong>    | resource owners decide who can access their resources       |
-| <strong class="bg-gray-800 px-2 py-2 rounded w-24 inline-block text-center">Hybrid</strong> | combines multiple models for flexible, fine‑grained control |
-| <strong class="bg-gray-800 px-2 py-2 rounded w-24 inline-block text-center">MAC</strong>    | centrally enforced security labels and clearance rules      |
-| <strong class="bg-green-800 px-2 py-2 rounded w-24 inline-block text-center">PBAC</strong>  | policy-driven rules                                         |
-| <strong class="bg-gray-800 px-2 py-2 rounded w-24 inline-block text-center">TBAC</strong>   | permissions activated only while performing specific tasks  |
-| <strong class="bg-green-800 px-2 py-2 rounded w-24 inline-block text-center">RBAC</strong>  | roles with permissions                                      |
-| <strong class="bg-gray-800 px-2 py-2 rounded w-24 inline-block text-center">ReBAC</strong>  | access based on relationships between users and resources   |
-| <strong class="bg-gray-800 px-2 py-2 rounded w-24 inline-block text-center">RuBAC</strong>  | access decisions made using explicit logical rules          |
-
-</div>
-
-<!-- Presenter Notes:
-
-Focus on PBAC/RBAC for this cluster.
-
-- RBAC answers: “What role are you?”
-- ABAC answers: “What attributes apply right now?”
-- PBAC answers: “Do the policies allow this?”
-
-Students are expected to know RBAC, ABAC and PBAC conceptually
--->
-
----
-layout: two-cols
-level: 2
----
-
-# Access Control Models
-
-## RBAC — Role-Based Access Control
-
-::left::
-
-### What it is:
-
-- Access is granted based on **roles**
-- Roles group permissions together
-
-<br>
-
-### How it works:
-
-- Users → roles
-- Roles → permissions
-
-::right::
-
-### Examples:
-
-- Admin, staff, student roles
-- Enterprise business systems
-
-<br>
-
-### Key Points
-
-- ✅ Simple and easy to manage
-- ✅ Scales well
-- ❌ Limited flexibility for complex rules
-
----
-layout: two-cols
-level: 2
----
-
-# Access Control Models
-
-## ABAC — Attribute-Based Access Control
-
-::left::
-
-### What it is:
-
-- Access decisions based on **attributes**
-
-<br>
-
-### Common attributes:
-
-- User (department, clearance)
-- Resource (owner, sensitivity)
-- Environment (time, location)
-
-::right::
-
-### Examples:
-
-- Cloud platforms
-- Fine-grained data protection
-
-<br>
-
-### Key Points:
-
-- ✅ Very flexible
-- ✅ Context-aware decisions
-- ❌ More complex to design and manage
-
-<!-- Presenter Notes:
-
-Reinforce that RBAC is the most common model students will encounter.
-
-Emphasise that ABAC evaluates conditions dynamically at runtime.
--->
-
-
----
-layout: two-cols
-level: 2
----
-
-# Access Control Models
-
-## PBAC — Policy-Based Access Control
-
-::left::
-
-### What it is:
-
-- Access governed by **policies**
-- Policies define rules independently of code
-
-<br>
-
-### How it works:
-
-- Requests evaluated against policies
-- Often implemented via policy engines
-
-::right::
-
-### Examples:
-
-- Enterprise security platforms
-- Compliance-driven systems
-
-<br>
-
-### Key Points:
-
-- ✅ Centralised control
-- ✅ Highly configurable
-- ❌ Policy complexity can grow quickly
-
-<!-- Presenter Notes:
-PBAC is often seen as an architectural approach rather than a single model.
-
--->
-
----
-level: 2
----
-
-# Access Control Models
-
-
-## Key Takeaways
-
-- **RBAC** is best for clear, stable permissions
-- **ABAC** handles complex, dynamic conditions
-- **PBAC** provides centralised policy control
-- **Other** models solve niche problems
-- Real systems often **combine these models** into Hybrid models
-
-
-## Beyond RBAC, ABAC & PBAC
-
-For more details on what lays beyond RBAC/PBAC/ABAC please refer to:
-
-- [Access Control - Wikipedia](https://en.wikipedia.org/wiki/Access_control)
-  - `https://en.wikipedia.org/wiki/Access_control`
-- [Authorisation Notes - Intermediate IoT & Software Security](https://github.com/AdyGCode/ICT50220-InterRIoT-Notes/tree/main/Software-Security/04-authorisation)
-  - `https://github.com/AdyGCode/ICT50220-InterRIoT-Notes/tree/main/Software-Security/04-authorisation`
-
-<!-- Presenter Notes:
-Introduce this as a broadening of student knowledge.
-Explain that RBAC, ABAC and PBAC are common, but not the only models.
--->
-
-
----
-layout: section
----
-
-# Determining Roles & Permissions
-
----
-level: 2
-layout: two-cols
----
-
-# Determining Roles & Permissions
-## Quick Recap
-
-::left::
-#### Role
-
-- aka Group, Position, etc
-- A collection of permissions
-- Assigned to users
-- Defines what users can do in the system
-- Examples: Admin, Moderator, User, etc.
-
-<br>
-
-##### Identify Roles based on:
-
-- application's requirements & features
-- business needs of the system
-- security & compliance needs of the system
-- user types of the system 
-- and more...
-
-::right::
-#### Permission
-
-- aka Policy, Capability, Right, etc
-- Defines specific actions users can perform
-- May be grouped into roles
-- Examples: create-post, edit-post, delete-post, view-dashboard, etc.
-
-<br>
-
-##### Identify Permissions based on:
-
-- application's features and functionality
-- actions users need to perform
-- security and compliance requirements of the system
-- and more...
-
----
-level: 2
----
-
-# Determining Roles & Permissions
-
-When you add roles & permissions it is a good idea to know what each role will
-be able to do in the system.
-
-This can be done by creating a table of roles and permissions.
-
-| Role      | Permission 1 | Permission 2 | Permission 3 | ... |
-|-----------|--------------|--------------|--------------|-----|  
-| Admin     | Yes          | Yes          | Yes          | ... |
-| Moderator | No           | Yes          | Yes          | ... | 
-| User      | No           | No           | Yes          | ... |
-
-You may also base this on the features of the system, and determine which
-roles will have access to which features, and then determine the permissions
-based on the features.
-
-This is the method we have used in this course, and is a good method to use as
-it is based on the features of the system, and can be easily updated as the
-system evolves.
-
----
-level: 2
----
-
-# Determining Roles & Permissions
-
-We have created a spreadsheet to assist in completing this task:
-
-- [Permission-Matrix.xlsx](public/Permission-Matrix.xlsx)
-- Alternative links:
-  - Notes [GitHub repository](https://github.com/AdyGCode/SaaS-FED-Notes)
-  - GitHub Notes Session Folder [Permission Matrix Excel Spreadsheet](https://github.com/AdyGCode/SaaS-FED-Notes/tree/main/2026/Session-11/Session-11-2-roles-permissions-intro/public) 
-
-The Permissions Matrix is best created in conjunction with the development
-team and stakeholders to ensure that all requirements are captured and
-understood.
-
-This will include the MoSCoW and RACI frameworks to help determine the
-importance and responsibility of each permission.
-
-
----
-layout: figure
-figureUrl: ./images/Permission-Matrix.png
-figureCaption: Sample Permission Matrix (partially completed)
----
-
-# Permission Matrix Sample
-
-A sample of a partially completed permission matrix is shown in the image 
-below. 
-
-This is just an example and is not complete. 
-
-It is meant to show the format and how it can be used to determine the roles and permissions for the system.
-
----
-layout: section
----
-
 # Adding Roles & Permissions
+
 ## A demonstration application
 
 ---
@@ -431,18 +93,18 @@ level: 2
 ---
 
 # Adding Roles & Permissions
+
 ## A demonstration application
 
-This application  will:
+This application will:
+
 - Contain "Static" Home page
 - Basic Authentication (Login, Register, Logout)
 - Basic Admin & Client Dashboards
 - An Articles feature with:
-  - CRUD operations
-  - RBAC/PBAC permissions for each operation
-  - A simple UI for managing articles
-
-
+    - CRUD operations
+    - RBAC/PBAC permissions for each operation
+    - A simple UI for managing articles
 
 ---
 layout: section
@@ -458,7 +120,7 @@ level: 2
 
 Use the standard methods to set up the application:
 
-- run the Laravel "new" command 
+- run the Laravel "new" command
 - configure the application (database, environment, etc)
 - install & configure Spatie Laravel Permission package
 - create Article model, migration, factory, seeder, controller, views, and routes
@@ -472,14 +134,14 @@ level: 2
 
 ### Create Base Laravel Application
 
-This setup uses the Livewire starter kit to create the application with 
+This setup uses the Livewire starter kit to create the application with
 Pest, Fortify Authentication, Livewire (with Authentication UI), and Git...
 
 ### Commands:
 
 ```shell
 cd ~/Source/Repos
-laravel new l13-roles-permissions---pnpm demo --pest --git --livewire --no-boost --database=sqlite
+laravel new l13-roles-permissions --pnpm --pest --git --livewire --no-boost --database=sqlite
 cd l13-roles-permissions-demo
 composer run dev
 ```
@@ -489,7 +151,49 @@ composer run dev
 You will be asked a few questions. Responses should be as follows:
 
 - Question: Which Authentication features:
-  - Answer: email-verification,registration,password-confirmation
+    - Answer: email-verification, registration, password-confirmation
+
+---
+level: 2
+---
+
+# Setting up the Application
+
+## Adding Font Awesome
+
+For this application wer are using the FontAwesome Free icons.
+
+### Update the `app.css`
+
+Open the `resources\css\app.css` file and add **IMMEDIATELY** after the
+Tailwind import and before any other lines, the following line to import
+FontAwesome icons:
+
+```css
+@import "@fortawesome/fontawesome-free/css/all.css";
+
+```
+
+Install FontAwesome NPM Package using:
+
+```shell
+pnpm add @fortawesome/fontawesome-free
+pnpm install
+php artisan view:clear
+```
+
+Example Icons:
+
+<p class="flex gap-4">
+
+<fa-solid-home class="text-zinc-300"/>
+<fa-solid-cat class="text-zinc-300"/>
+<fa-solid-user class="text-zinc-300"/>
+<fa-solid-folder class="text-zinc-300"/>
+<fa-solid-dog class="text-zinc-300"/>
+<fa-solid-info class="text-zinc-300"/>
+
+</p>
 
 
 ---
@@ -502,16 +206,128 @@ level: 2
 
 - Implement your own
 - Use a package such as
-    - Spatie Laravel
-      Permission (https://spatie.be/docs/laravel-permission/v5/introduction)
+    - Spatie Laravel Permission (https://spatie.be/docs/laravel-permission/v5/introduction)
     - Bouncer (https://github.com/JosephSilber/bouncer)
     - Laratrust (https://laratrust.santigarcor.me/)
     - Sentinel (https://cartalyst.com/manual/sentinel/2.x)
-    - Jeremy Kenedy's Laravel
-      Roles (https://github.com/jeremykenedy/laravel-roles)
+    - Jeremy Kenedy's Laravel Roles (https://github.com/jeremykenedy/laravel-roles)
     - and many more
 
-We will use Spatie's Laravel Permission package for this course.
+
+
+---
+level: 2
+layout: two-cols
+---
+
+# Setting up the Application
+
+## Adding Roles & Permissions - Quick Comparison
+
+::left::
+
+#### Implement your own
+
+Pros
+
+- Full control flexibility
+- Tailored business logic
+- Minimal external dependencies
+- Deep system understanding
+
+Cons
+
+- Longer development time
+- Higher maintenance burden
+- Increased bug risk
+- Scalability challenges arise
+
+::right::
+
+#### Use a package
+
+Pros
+
+- Faster implementation speed
+- Community tested reliability
+- Built-in feature richness
+- Regular security updates
+
+Cons
+
+- Limited customization flexibility
+- Package dependency risk
+- Possible performance overhead
+- Learning curve required
+
+---
+level: 2
+layout: grid
+---
+
+# Setting up the Application
+
+## Adding Roles & Permissions - Quick Comparison
+
+Whilst we will use Spatie's Laravel Permission package for this course, here are a few key differences between some of the packages available.
+
+::tl::
+
+##### Spatie Laravel Permission
+
+<div class="text-xs">
+
+- Widely used package
+- Roles permissions via models
+- Built-in caching support
+- Extensive documentation
+- 📦 ~95M downloads / 🔄 Update Apr 29, 2026 
+
+</div>
+
+::bl::
+
+##### Laratrust
+
+<div class="text-xs">
+
+- Roles permissions teams
+- Blade directives included
+- Seeder helpers available
+- Team based access
+- 📦 ~5.5M downloads / 🔄 Update May 2026
+
+</div>
+
+::tr::
+
+
+##### Sentinel
+
+<div class="text-xs">
+
+- Full authentication system
+- Role based permissions
+- Built-in security features
+- Framework agnostic design
+- 📦 ~2.6M downloads / 🔄 Update May 2026
+
+</div>
+
+::br::
+
+##### Jeremy Kenedy Laravel Roles
+
+<div class="text-xs">
+
+- Simple roles permissions 
+- Middleware protection support 
+- Blade helpers included 
+- Optional GUI interface 
+- ⭐ ~1k stars 
+
+</div>
+
 
 ---
 level: 2
@@ -519,11 +335,13 @@ level: 2
 
 # Setting up the Application
 
-### Add Spatie Laravel Permission
+### Adding Spatie Laravel Permission
 
 - Use composer to add the package
 - Use artisan to publish migration, and other files.
 - Perform the migration
+
+Execute the following:
 
 ```shell
 composer require spatie/laravel-permission
@@ -531,18 +349,28 @@ php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvid
 php artisan migrate
 ```
 
-### Create Required Folders
-
-```shell
-mkdir -p resources/views/{admin,client,static}
-mkdir -p app/Http/Controllers/{Admin,Client,Static}
-```
 
 ---
 level: 2
 ---
 
 # Setting up the Application
+
+### Create Required Folders
+
+```shell
+mkdir -p resources/views/{admin,client,static}
+mkdir -p app/Http/Controllers/{Admin,Client,Static}
+
+```
+
+
+---
+level: 2
+---
+
+# Setting up the Application
+
 ## User Model Update
 
 Permission package requires updates to the User model.
@@ -554,13 +382,16 @@ use Spatie\Permission\Traits\HasRoles;
 use Spatie\Permission\Traits\HasPermissions;
 ```
 
-In the User class modify the class definition to include the HasRoles and 
-HadPermissions trait:
+In the User class modify the class definition to include the `HasRoles` and
+`HadPermissions` traits:
 
 ```php
 class User extends Authenticatable
 {
     use HasFactory, Notifiable, HasRoles, HasPermissions;
+
+    // Remainder of model code
+}
 ```
 
 ---
@@ -569,9 +400,10 @@ layout: two-cols
 ---
 
 # Setting up the Application
+
 ## Roles and Permissions Seeder
 
-Execute the following to create a Roles & Permissions plus a User 
+Execute the following to create a Roles & Permissions plus a User
 Seeder.
 
 ```shell
@@ -579,18 +411,18 @@ php artisan make:seeder RolesAndPermissionsSeeder
 php artisan make:seeder UserSeeder
 ```
 
-Edit the new `database\seeder\RolesAndPermissionsSeeder.php` file.
-
-We will add the following Roles and Permissions to the system:
+Edit the new `database\seeder\RolesAndPermissionsSeeder.php` file, and add the following **Roles** and **Permissions** to the system:
 
 ::left::
 
 #### Roles
 
 The Basic Roles:
+
 - super-admin, admin, staff, client
 
 Plus Roles relating to Articles:
+
 - editor, writer, viewer
 
 ::right::
@@ -598,17 +430,18 @@ Plus Roles relating to Articles:
 #### Permissions
 
 - User Admin: `user-*`
-  - add, edit, browse, read, delete
+    - add, edit, browse, read, delete
 - Article Admin: `article-*`
-  - view, add, edit, publish, delete
+    - view, add, edit, publish, delete
 - Other:
-  - client-only, staff-only, admin-only
+    - client-only, staff-only, admin-only
 
 ---
 level: 2
 ---
 
 # Setting up the Application
+
 ## Roles and Permissions Seeder
 
 <small>Comments removed for brevity. See the full code in the `database\seeders\RolePermissionSeeder.php` file.</small>
@@ -629,6 +462,8 @@ class RolePermissionSeeder extends Seeder
 ```
 
 ```php
+    // last line of previous block {
+    
         $seedRoles = [
             // Roles depend on the application's requirements
             ['name' => 'super-admin'],
@@ -643,6 +478,8 @@ class RolePermissionSeeder extends Seeder
 ```
 
 ```php
+        // last line of previous block  ];
+         
         $seedPermissions = [
             // Structure of Seeder Lines:
             //    [ 'permission'=>'', 'roles'=> ['',]],
@@ -651,11 +488,19 @@ class RolePermissionSeeder extends Seeder
             ['permission' => 'user-browse', 'roles' => ['admin', 'staff']],
             ['permission' => 'user-read', 'roles' => ['admin']],
             ['permission' => 'user-delete', 'roles' => ['admin']],
+```
 
+```php
+            // last line of previous block  ['permission' => 'user-delete', 'roles' => ['admin']],
+            
             ['permission' => 'client-only', 'roles' => ['client']],
             ['permission' => 'staff-only', 'roles' => ['staff']],
             ['permission' => 'admin-only', 'roles' => ['admin']],
+```
 
+```php
+            // last line of previous block  ['permission' => 'admin-only', 'roles' => ['admin']],
+            
             [ 'permission' => 'article-view', 'roles' => ['admin', 'staff', 'editor', 'writer', 'client', 'viewer'], ],
             [ 'permission' => 'article-add', 'roles' => ['admin', 'staff', 'writer'], ],
             [ 'permission' => 'article-edit', 'roles' => ['admin', 'writer', 'editor'], ],
@@ -666,6 +511,8 @@ class RolePermissionSeeder extends Seeder
 ```
 
 ```php
+        // last line of previous block  ];
+        
         // Create the Roles
         foreach ($seedRoles as $newRole) {
             $role = Role::findOrCreate($newRole['name']);
@@ -687,13 +534,13 @@ level: 2
 ---
 
 # Setting up the Application
+
 ## User Seeder
 
-Likewise, we need to add Users to the UserSeeder for demonstration and 
+Likewise, we need to add Users to the UserSeeder for demonstration and
 testing.
 
 This will create some demo users and add their basic roles and permissions.
-
 
 ````md magic-move
 
@@ -782,6 +629,7 @@ level: 2
 ---
 
 # Setting up the Application
+
 ## User, Roles and Permissions Seeders
 
 Add the seeder to the Database seeder (`database\seeders\DatabaseSeeder.php`) file:
@@ -802,13 +650,14 @@ Then run the seeder: `php artisan db:seed`
 
 <Announcement type="info" title="Migrate & Seed the Database">
 
-Remember that you may Reset the database, then Migrate and Seed in one go.
+<p class="bg-black text-red-500 p-1 rounded text-center"><strong>DO NOT DO THIS IN PRODUCTION!</strong></p>
 
-DO NOT DO THIS IN PRODUCTION!
+Remember that you may Reset the database, then Migrate and Seed in one go.
 
 ```shell
 php artisan migrate:fresh --seed
 ```
+
 </Announcement>
 
 
@@ -845,14 +694,14 @@ level: 2
 <br>
 
 ##### Requires:
+
 - Client Dashboard View (Index)
 - Client Dashboard Controller
 - Client Dashboard Routes
 
-
 ::right::
 
-### Admin Dashboard 
+### Admin Dashboard
 
 - Admin Dashboard:
     - Authenticated Users
@@ -863,11 +712,10 @@ level: 2
 <br>
 
 ##### Requires:
+
 - Admin Dashboard View (Index)
 - Admin Dashboard Controller
 - Admin Dashboard Routes
-
-
 
 ---
 layout: section
@@ -881,7 +729,7 @@ level: 2
 
 # Dashboard Controllers
 
-We will create the studs for the two dashboards, plus a static page 
+We will create the studs for the two dashboards, plus a static page
 controller:
 
 ```shell
@@ -893,6 +741,7 @@ php artisan make:controller Static/StaticController --resource
 You will edit each of these in turn to add the required methods and logic for each dashboard and static page.
 
 You may open each file and remove the methods for:
+
 - show
 - create
 - store
@@ -900,7 +749,7 @@ You may open each file and remove the methods for:
 - update
 - destroy
 
-Leave the index method as this is the method we will use to display the dashboard and static page.
+Leave the `index` method as this is the method we will use to display the dashboard and static page.
 
 ---
 level: 2
@@ -1024,8 +873,6 @@ level: 2
 
 ## Client Dashboard Controller
 
-
-
 ````md magic-move
 
 ```php
@@ -1059,9 +906,14 @@ class ClientController extends Controller
 
 ---
 level: 2
+layout: two-cols
 ---
 
 # Static Page Controller
+
+::left::
+
+### StaticController
 
 The static page controller will handle the rendering of:
 
@@ -1070,16 +922,17 @@ The static page controller will handle the rendering of:
 - contact
 - and other static pages
 
+::right::
 
----
-level: 2
----
+### Sample Code
 
-```php
+````md magic-move
+
+```php {none|1-2,14|1-7,14|8-13|all}
 class StaticController extends Controller
 {
     /**
-     * Home Page Controller
+     * Home Page Method
      *
      * @return View
      */
@@ -1087,9 +940,28 @@ class StaticController extends Controller
     {
         return view('static.home');
     }
+    
+    // About Page Method
 }
 ```
 
+```php {none|1-2,14|1-9,14|10-13|all}
+class StaticController extends Controller
+{
+    // Home Page Method...
+    
+    /**
+     * About Us Page Method
+     *
+     * @return View
+     */
+    public function about()
+    {
+        return view('static.about');
+    }
+}
+```
+````
 
 ---
 level: 2
@@ -1099,18 +971,151 @@ level: 2
 
 You will need to add routes for the admin and client dashboards, and the static pages.
 
-Open the `routes/web.php` file, and replace the current `home` route with the 
+Open the `routes/web.php` file, and replace the current `home` route with the
 following routes:
 
-```php
+```php {1-2|4-5|7-9|all}
 // Admin Dashboard Route
 Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
+
 // Client Dashboard Route
 Route::get('/client', [ClientController::class, 'index'])->name('client.dashboard');
+
 // Static Pages Routes
-Route::get('/', [StaticController::class, 'home'])->name('home');
+Route::get('/', [StaticController::class, 'home'])->name('static.home');
+Route::get('/about', [StaticController::class, 'about'])->name('static.about');
+
 ```
 
+<br>
+
+<Announcement type=note>
+To bring consistency with route naming, we will add <code>static.</code> in front of the static page route names.
+</Announcement>
+
+
+---
+level: 2
+---
+
+# Routes
+
+## Route Organisation
+
+Applications can become quite difficult to manage and maintain when the route files become large.
+
+You may wish to consider options such as:
+
+- Place individual route files for each feature in a `routes\FEATURE_NAME` folder 
+- Place individual route files for each "role" in separate `routes\ROLE_NAME` folders
+- Place individual route files in the `routes` folder but named `web.FEATURE_NAME.php`
+
+These are suggestions only.
+
+
+---
+level: 2
+---
+
+# Routes
+
+## Route Organisation Examples
+
+<br>
+
+### Using `routes\FEATURE_NAME` folder
+
+```mermaid
+---
+config:
+  flowchart:
+    curve: stepAfter
+---
+flowchart TB
+    
+    A[fa:fa-folder routes] --> B[web.php]
+    A --> C[fa:fa-folder users]
+    C --> D[admin.php]
+    A --> E[fa:fa-folder categories]
+    E --> F[admin.php]
+    E --> G[client.php]
+    E --> H[staff.php]
+    A --> I[fa:fa-folder articles]
+    I --> J[admin.php]
+    I --> K[client.php]
+    I --> L[staff.php]
+    
+    linkStyle default stroke:#aaccaa,stroke-width:2px
+```
+
+---
+level: 2
+---
+
+# Routes
+
+## Route Organisation Examples
+
+### Using `routes\ROLE_NAME` folders
+
+```mermaid
+---
+config:
+  flowchart:
+    curve: stepAfter
+---
+flowchart TB
+    
+    A[fa:fa-folder routes]
+    A --> C[fa:fa-folder admin]
+    C --> D[users.php]
+    C --> E[articles.php]
+    C --> F[categories.php]
+    A --> G[fa:fa-folder client]
+    G --> H[articles.php]
+    G --> I[categories.php]
+    A --> J[fa:fa-folder static]
+    J --> K[web.php]
+    A --> B[web.php]
+
+    
+    linkStyle default stroke:#aaccaa,stroke-width:2px
+```
+
+
+---
+level: 2
+---
+
+# Routes
+
+## Route Organisation Examples
+
+### Using `routes\ROLE_NAME` folders
+
+### Using `web.FEATURE_NAME.php` files
+
+```mermaid
+---
+config:
+  flowchart:
+    curve: stepAfter
+---
+flowchart TB
+    
+    A[fa:fa-folder routes]
+    A --> C[web.admin.php]
+    A --> D[web.admin.users.php]
+    A --> E[web.admin.articles.php]
+    A --> G[web.client.php]
+    A --> H[web.client.articles.php]
+    A --> I[web.client.categories.php]
+    A --> J[web.static.php]
+    A --> B[web.php]
+
+    
+    linkStyle default stroke:#aaccaa,stroke-width:2px
+```
 
 
 ---
@@ -1123,32 +1128,20 @@ layout: section
 level: 2
 ---
 
+
+# View Components
+
+## Statistics Card Component
+
 You will require the `stats-card` component.
 
 The code for this is found in the `resources\views\components\stats-card.blade.php` file.
 
-Instructions on adding the component to your project and how it is built 
-are found in the Slides-10-2-admin-dashboard presentation.
+Instructions on adding the component to your project and how it is built
+are found in the 5-admin-dashboard presentation.
 
-Take a 10-minute break to add the component to your project and understand 
+Take a 10-minute break to add the component to your project and understand
 how it works.
-
-Open the `resources\css\app.css` file and add IMMEDIATELY after the 
-Tailwind import and before any other lines, the following line to import 
-FontAwesome icons:
-
-```css
-@import "@fortawesome/fontawesome-free/css/all.css";
-
-```
-
-Install FontAwesome using:
-
-```shell
-pnpm add @fortawesome/fontawesome-free
-pnpm install
-php artisan view:clear
-```
 
 ---
 layout: section
@@ -1177,8 +1170,6 @@ level: 2
 
 - Update / Remove items as needed
 
-
-
 ---
 level: 2
 ---
@@ -1196,11 +1187,23 @@ level: 2
     </x-slot>
 
     <!-- statistics section -->
+    ...
     <!-- users section -->
+    ...
     <!-- system section -->
-
+    ...
+    
 </x-admin-layout>
 ```
+
+
+<br>
+
+<Announcement type="info">
+The <code>...</code> (ellipsis) is used to show where more code will be added. 
+</Announcement>
+
+
 
 ---
 level: 2
@@ -1211,6 +1214,8 @@ level: 2
 ## Statistic Section
 
 This replaces, or is added after the `<!-- statistics section -->` comment.
+
+````md magic-move
 
 ```php
 <section class="my-6 mx-12 space-y-4">
@@ -1234,6 +1239,10 @@ This replaces, or is added after the `<!-- statistics section -->` comment.
                           bg="bg-pink-700"
                           icon="fa-solid fa-tag"
                           icon-color="text-white"/>
+            ...
+```
+
+```php
 
             <x-stats-card title="{{ __('Messages') }}"
                           value="{{ $message_count }}"
@@ -1253,13 +1262,7 @@ This replaces, or is added after the `<!-- statistics section -->` comment.
         </div>
     </section>
 ```
-
-<br>
-
-<Announcement type="info">
-The <code>...</code> (elipsis) is used to show where more code will be added. 
-</Announcement>
-
+````
 
 
 ---
@@ -1272,6 +1275,10 @@ level: 2
 
 This replaces, or is added after the `<!-- users section -->` comment.
 
+
+````md magic-move
+
+
 ```php
     <section class="my-6 mx-12 space-y-4">
 
@@ -1283,14 +1290,16 @@ This replaces, or is added after the `<!-- users section -->` comment.
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 ">
 
-            <a href="{{ route('admin.users.index') }}">
-                <x-stats-card icon="fa-solid fa-person"
-                              title="{{ __('Users') }}"
-                              value="{{ $user_count }}"
-                              bg="bg-purple-700"
-                              icon-color="text-white"/>
-            </a>
+            <x-stats-card icon="fa-solid fa-person"
+                          title="{{ __('Users') }}"
+                          value="{{ $user_count }}"
+                          bg="bg-purple-700"
+                          icon-color="text-white"/>
+            ...
+```
 
+```php
+   
             <x-stats-card icon="fa-solid fa-person-walking"
                           title="{{ __('Signed In') }}"
                           value="{{ $user_logged_in_count }}"
@@ -1304,13 +1313,18 @@ This replaces, or is added after the `<!-- users section -->` comment.
                           bg="bg-amber-700"
                           icon="fa-solid fa-person-circle-exclamation"
                           icon-color="text-white"/>
-
+            
             <x-stats-card title="{{ __('Unverified') }}"
                           value="{{ $user_unverified_count }}"
                           bg="bg-orange-700"
                           icon="fa-solid fa-person-circle-question"
                           icon-color="text-white"/>
 
+            ...
+```
+
+```php
+    
             <x-stats-card title="{{ __('Banned') }}"
                           value="{{ $user_banned_count }}"
                           bg="bg-red-700"
@@ -1322,6 +1336,8 @@ This replaces, or is added after the `<!-- users section -->` comment.
     </section>
 ```
 
+````
+
 ---
 level: 2
 ---
@@ -1331,6 +1347,8 @@ level: 2
 ## System Section
 
 This replaces, or is added after the `<!-- system section -->` comment.
+
+````md magic-move
 
 ```php
     <section class="my-6 mx-12 space-y-4">
@@ -1349,6 +1367,11 @@ This replaces, or is added after the `<!-- system section -->` comment.
                           value-class="text-xl text-zinc-900"
                           bg="bg-slate-700"
                           icon-color="text-white"/>
+                          
+             ...
+```
+
+```php
 
             <x-stats-card icon="fa-solid fa-square-binary"
                           title="{{ __('Environment') }}"
@@ -1364,6 +1387,11 @@ This replaces, or is added after the `<!-- system section -->` comment.
                           bg="bg-laravel-500"
                           icon-color="text-white"/>
 
+            ...
+```
+
+```php
+        
             <x-stats-card icon="fa-brands fa-php"
                           title="{{ __('PHP') }}"
                           value="{{ phpversion() }}"
@@ -1376,15 +1404,19 @@ This replaces, or is added after the `<!-- system section -->` comment.
 
 ```
 
+````
+
+
 ---
 level: 2
 ---
 
 # Client Dashboard: View
 
-We will leave the client dashbaord as it is.
+We will leave the client dashboard as it is.
 
-Simply move the current `dashboard.blade.php` file from the `/resources/views` directory to the `/resources/views/client` directory.
+Simply move the current `dashboard.blade.php` file from the `/resources/views` directory to the
+`/resources/views/client` directory.
 
 You may need to update any references to this, e.g. in the `routes/web.php` file, to ensure it is correct.
 
@@ -1404,13 +1436,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 ````
 
-
 ---
 Layout: section
 ---
 
 # Adding & Using Spatie Permission Package
-
 
 ---
 level: 2
@@ -1487,14 +1517,18 @@ level: 2
 
 # Adding Roles & Permissions
 
-Once installed we need to:
+## Installation
 
-- Create a seeder which will contain the default roles and permissions for 
-  the system.
-- Create a middleware to check for permissions in the routes and controllers.
-- Update the User model to use the HasRoles trait provided by the package.  
-- Update the routes and controllers to check for permissions using the middleware.
-- Update the views to show/hide content based on permissions using the blade directives provided by the package.
+### Add middleware to `bootstrap/app.php`
+
+Open the bootstrap/app.php file and update it to read:
+
+
+### Add `HasRoles` (and `HasPermissions`) traits
+
+
+
+### Create required relationships
 
 
 ---
@@ -1502,6 +1536,23 @@ level: 2
 ---
 
 # Adding Roles & Permissions
+
+We already have the 
+Once installed we need to:
+
+- Create a seeder which will contain the default roles and permissions for
+  the system.
+- Create a middleware to check for permissions in the routes and controllers.
+- Update the User model to use the HasRoles trait provided by the package.
+- Update the routes and controllers to check for permissions using the middleware.
+- Update the views to show/hide content based on permissions using the blade directives provided by the package.
+
+---
+level: 2
+---
+
+# Adding Roles & Permissions
+
 ## Creating a Seeder
 
 To create a seeder for the default roles and permissions, run the following command:
@@ -1509,7 +1560,9 @@ To create a seeder for the default roles and permissions, run the following comm
 ```shell
 php artisan make:seeder RolesAndPermissionsSeeder
 ``` 
-This will create a new seeder file in the `database/seeders` directory. Open the file and add the following code to create some default roles and permissions:
+
+This will create a new seeder file in the `database/seeders` directory. Open the file and add the following code to
+create some default roles and permissions:
 
 ```php
 use Illuminate\Database\Seeder;
@@ -1639,7 +1692,6 @@ layout: section
 
 # Applying Roles & Permissions
 
-
 ---
 level: 2
 ---
@@ -1674,18 +1726,20 @@ Route::get('/admin', [AdminController::class, 'index'])
     ->middleware('permission:admin-only');
 ```
 
-
 ---
 level: 2
 ---
 
 ## Middleware
+
 To create a middleware for checking permissions, run the following command:
 
 ```shell
 php artisan make:middleware PermissionMiddleware
 ``` 
-This will create a new middleware file in the `app/Http/Middleware` directory. Open the file and add the following code to check for permissions:
+
+This will create a new middleware file in the `app/Http/Middleware` directory. Open the file and add the following code
+to check for permissions:
 
 ```php
 namespace App\Http\Middleware;
@@ -1711,9 +1765,12 @@ class PermissionMiddleware
     }
 }
 ```
-This middleware checks if the user is authenticated and has the required permission. If not, it throws an UnauthorizedException.
+
+This middleware checks if the user is authenticated and has the required permission. If not, it throws an
+UnauthorizedException.
 
 ## Applying the middleware
+
 To apply the middleware to routes, you can add it to the route definition like this:
 
 ```php

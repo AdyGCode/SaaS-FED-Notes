@@ -133,7 +133,7 @@ subjects: "SaaS, API Dev, IoT"
 msTeams: "Teams: adrian.gould@nmtafe.wa.edu.au"
 website: "https://northmetrotafe.wa.edu.au"
 github: "https://github.com/adygcode"
-imageSrc: ./public/ajg-claymation.jpg
+imageSrc: ./ajg-claymation.jpg
 
 ---
 layout: section

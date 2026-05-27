@@ -138,7 +138,7 @@ layout: two-cols
 
 ## Screen Capture
 
-![screen-capture-profile-page-complete.png](./public/screen-capture-profile-page-complete.png)
+![screen-capture-profile-page-complete.png](./screen-capture-profile-page-complete.png)
 
 ::right::
 
@@ -147,12 +147,12 @@ layout: two-cols
 <SlidevVideo v-click autoplay controls class="max-h-96">
   <!-- Anything that can go in an HTML video element. -->
   <source 
-    src="./public/screen-capture-profile-page-demo-video.mp4" 
+    src="./screen-capture-profile-page-demo-video.mp4" 
     type="video/mp4" 
     />
   <p>
     Your browser does not support videos. You may download it
-    <a href="./public/screen-capture-profile-page-demo-video.mp4">here</a>.
+    <a href="./screen-capture-profile-page-demo-video.mp4">here</a>.
   </p>
 </SlidevVideo>
 
@@ -292,7 +292,7 @@ This page is Vite's welcome page.
 
 ## Default Vite Welcome Page
 
-![Image: Screenshot of the Vite Welcome Page](./public/screenshot-vite-welcome.png)
+![Image: Screenshot of the Vite Welcome Page](./screenshot-vite-welcome.png)
 
 ---
 layout: section

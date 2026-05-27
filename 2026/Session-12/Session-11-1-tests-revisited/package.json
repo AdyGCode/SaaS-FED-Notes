@@ -19,6 +19,7 @@
     "prism-theme-vars": "^0.2.4",
     "slidev-addon-sync": "^0.1.0",
     "slidev-component-poll": "^3.0.0",
+    "slidev-theme-nmt": "^0.9.10",
     "theme-vitesse": "^0.6.2"
   },
   "devDependencies": {

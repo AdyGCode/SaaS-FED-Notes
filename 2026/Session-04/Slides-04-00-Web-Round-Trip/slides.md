@@ -634,7 +634,7 @@ Browser → Route → Controller → (Model/services) → View (HTML) → Browse
 
 ---
 layout: figure
-figureUrl: ./public/assets/Laravel-Page-Request-Seqeunce-Simplified@2x.png
+figureUrl: ./assets/Laravel-Page-Request-Seqeunce-Simplified@2x.png
 figureCaption: Laravel Page Request Sequence (Simplified)
 ---
 <!-- Presenter Notes:
