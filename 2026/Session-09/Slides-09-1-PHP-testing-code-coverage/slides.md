@@ -322,6 +322,7 @@ layout: section
 level: 2
 layout: two-cols
 ---
+
 # Why Pest?
 
 ::left::
@@ -331,7 +332,7 @@ layout: two-cols
 - Built on PHPUnit 
     - full ecosystem compatibility
 - First-class **Laravel** plugin and helpers
-- **Pest v4**: 
+- Pest v4: 
     - integrated **Browser Testing**, 
         - visual & smoke tests 
         - device emulation
@@ -341,7 +342,7 @@ layout: two-cols
 
 ### PHP Unit
 
-```php [PHP]
+```php
 public function test_example() { 
     $this->assertTrue(true); 
 }
@@ -351,7 +352,7 @@ public function test_example() {
 
 ### Pest
 
-```php [PHP]
+```php
 it('works', function () { 
     expect(true)->toBeTrue(); 
 });
@@ -359,11 +360,12 @@ it('works', function () {
 
 
 <!-- notes
-Show the readability delta. Less ceremony helps students focus on behaviour.
- -->
+Show the readability delta. 
+
+Less ceremony helps students focus on behaviour.
+-->
 
 ---
-layout: two-cols
 level: 2
 ---
 
@@ -375,26 +377,105 @@ The "contacts" app is the context/domain we use for demonstration.
 The "contact us" page is the specific area.
 
 
+---
+level: 2
+layout: two-cols
+---
+
+# Setup: Packages & Scaffolding
+
+::left::
+
+Before starting:
+
+- Duplicate `.env` and name it `.env.testing`
+- Edit `.env.testing` 
+    - Update `APP_NAME` to include `Testing: ` 
+    - Change the DB details:
+        - DB_CONNECTION is `sqlite`
+        - DB_DATABASE is `testing.sqlite`
+
+- In the command line run:
+```shell
+touch database\testing.sqlite
+```
+
+::right::
+
+Now we are ready to install the Pest framework:
+
+1) **Install Pest + Laravel plugin**
+
+```bash
+composer require --dev pestphp/pest 
+composer require --dev pestphp/pest-plugin-laravel
+php artisan pest:install
+```
+
+2) **Enable Pest v4 Browser Testing** (Playwright)
+
+Using Pnpm:
+
+```bash
+composer require --dev pestphp/pest-plugin-browser
+pnpm add -D playwright@latest
+pnpm exec playwright install
+```
+
+3) Run tests
+
+```bash
+php artisan test
+```
+
+<!-- notes 
+
+Ensure `.env.testing` is configured (separate DB). 
+
+Add `uses(RefreshDatabase::class);` to `tests/Pest.php` for DB isolation.
+-->
+
+
+
+
+---
+layout: two-cols
+level: 1
+---
+
+
+# Models for the Tests
+
+
 <Announcement type="info" title="Remember">
 <code>created_at</code> and <code>updated_at</code> are generated using <code>timestamps()</code> method.
 </Announcement>
 
-<br>
+The fields for the models are:
 
-## (Two) Testing Models
-
-::left:: 
+::left::
 
 #### Topic
-`id`, `name`, `description`, `available`, `created_at`, 
-  `updated_at`
+- `id`,
+- `name`,
+- `description`,
+- `available`,
+- `created_at`,
+- `updated_at`
 
 ::right::
 
 #### Message
 
-`id`, `name`, `email`, `subject`, `topic_id`, `message`, `read_at`, `created_at`, 
-  `updated_at`
+- `id`,
+- `name`,
+- `email`,
+- `subject`,
+- `topic_id`,
+- `message`,
+- `read_at`,
+- `created_at`,
+- `updated_at`
 
 <!-- notes 
 Students will CRUD Topics and submit Messages via a simple Contact page. 
@@ -408,51 +489,6 @@ Topic: - `id`, `name` (string), `description` (text, nullable), `available`
 Message: - `id`, `name` (string), `email` (string), `subject` (string), `topic_id` (fk
   to topics), `message` (text), `read_at` (nullable datetime), timestamps
 
--->
-
----
-level: 2
----
-
-# Setup: Packages & Scaffolding
-
-Before starting:
-
-- Duplicate `.env` and name it `.env.testing`
-- Edit `.env.testing` 
-    - Update `APP_NAME` to include `Testing: ` 
-    - Change the DB details:
-        - DB_CONNECTION is sqlite
-        - DB_DATABASE is testing.sqlite
-
-::left:: 
-
-
-1) **Install Pest + Laravel plugin**
-
-```bash
-composer require --dev pestphp/pest pestphp/pest-plugin-laravel
-php artisan pest:install
-```
-
-2) **Enable Pest v4 Browser Testing** (Playwright)
-
-```bash
-composer require --dev pestphp/pest-plugin-browser
-npm install playwright@latest
-npx playwright install
-```
-
-3) Run tests
-
-```bash
-php artisan test
-```
-
-<!-- notes 
-
-Ensure `.env.testing` is configured (separate DB). Add
-`uses(RefreshDatabase::class);` to `tests/Pest.php` for DB isolation.
 -->
 
 ---
