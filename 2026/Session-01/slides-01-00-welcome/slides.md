@@ -129,11 +129,12 @@ name: Adrian "Ady" Gould
 position: left
 company: "North Metropolitan TAFE"
 jobRole: "ASL | HelpDesk Admin | ScreenCraft Admin"
-subjects: "SaaS, API Dev, IoT"
 msTeams: "Teams: adrian.gould@nmtafe.wa.edu.au"
 website: "https://northmetrotafe.wa.edu.au"
 github: "https://github.com/adygcode"
-imageSrc: ./ajg-claymation.jpg
+imageSrc: ./Adrian-Gould-03.jpg
+subjects: Adrian is a geek, nerd and field hockey goalie, who has been coding since they were 12. They love to learn, laugh and be wrong as every error is a new experience. So sit down and be ready for a fun and challenging experience as Adrian guides you through your learning for subjects such as SaaS, API Dev and  IoT.
+
 
 ---
 layout: section
