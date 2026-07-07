@@ -257,7 +257,7 @@ fi
 # Migrate
 # ==========================================
 
-run_step "migrate" "php artisan migrate"
+run_step "migrate" "php artisan migrate:fresh --seed"
 
 # ==========================================
 # Cleanup Node Modules (if not already done)
