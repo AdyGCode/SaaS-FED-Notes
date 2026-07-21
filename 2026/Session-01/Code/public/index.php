@@ -64,13 +64,14 @@ $pdo = Database::mysql(DB_HOST, DB_NAME, DB_USER, DB_PASSWORD);
 $repo = new ContactRepository($pdo);
 
 // Check the namespace
-print_r($repo);
+// print_r($repo);
 
 // CSRF: generate token if missing
 if (empty($_SESSION['_csrf'])) {
     $_SESSION['_csrf'] = bin2hex(random_bytes(16));
 }
 $csrf = $_SESSION['_csrf'];
+// var_dump($_SESSION);
 
 // Routing
 $action = $_GET['action'] ?? 'list';
@@ -90,7 +91,7 @@ if ($action === 'list' && $_SERVER['REQUEST_METHOD'] === 'GET') {
 
 } elseif ($action === 'create' && $_SERVER['REQUEST_METHOD'] === 'GET') {
 
-
+    print_r($_SERVER);
     $errors = [];
     $old = [];
     ob_start();
