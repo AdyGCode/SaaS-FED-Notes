@@ -1,0 +1,5 @@
+/.idea/
+/.vscode/
+/database/contact_list_db.sqlite
+*.log
+.DS_Store
