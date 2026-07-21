@@ -1,0 +1,134 @@
+{
+  "terminal.integrated.profiles.windows": {
+    "PowerShell": {
+      "source": "PowerShell",
+      "icon": "terminal-powershell",
+      "color": "terminal.ansiBlue"
+    },
+    "Command Prompt": {
+      "path": [
+        "${env:windir}\\Sysnative\\cmd.exe",
+        "${env:windir}\\System32\\cmd.exe"
+      ],
+      "args": [],
+      "icon": "terminal-cmd",
+      "color": "terminal.ansiYellow"
+    },
+    "System Git Bash": {
+      "source": "Git Bash",
+      "icon": "terminal-bash",
+      "color": "terminal.ansiGreen"
+    },
+    "Laragon Git Bash": {
+      "path": "C:\\ProgramData\\Laragon\\bin\\git\\bin\\bash.exe",
+      "args": ["--login", "-i"],
+      "icon": "server-process",
+      "color": "terminal.ansiMagenta"
+    }
+  },
+  "terminal.integrated.defaultProfile.windows": "Laragon Git Bash",
+  "terminal.integrated.useWslProfiles": false,
+  "terminal.integrated.cwd": "C:\\ProgramData\\Laragon\\www\\Sources\\Repos",
+  "terminal.integrated.initialHint": false,
+  "terminal.integrated.automationProfile.osx": null,
+  "terminal.integrated.automationProfile.linux": null,
+  "terminal.integrated.env.windows": {
+    "PYTHONIOENCODING": "utf-8"
+  },
+  "editor.formatOnPaste": false,
+  "editor.formatOnType": false,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.minimap.renderCharacters": false,
+  "editor.minimap.enabled": false,
+  "editor.inlineSuggest.edits.showLongDistanceHint": false,
+  "editor.inlineSuggest.edits.renderSideBySide": "never",
+  "editor.inlineSuggest.edits.allowCodeShifting": "never",
+  "workbench.editor.empty.hint": "hidden",
+  "workbench.browser.enableChatTools": false,
+  "explorer.confirmDelete": true,
+  "explorer.confirmDragAndDrop": true,
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/.pytest_cache": true,
+    "**/node_modules": true,
+    "**/.next": true,
+    "**/dist": true,
+    "**/build": true
+  },
+  "git.confirmSync": true,
+  "git.enableSmartCommit": false,
+  "git.autofetch": true,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "js/ts.updateImportsOnFileMove.enabled": "always",
+  "js/ts.preferences.importModuleSpecifier": "relative",
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "eslint.codeActionsOnSave.rules": null,
+  "[python]": {
+    "editor.defaultFormatter": null,
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    }
+  },
+  "python.defaultInterpreterPath": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+  "python.terminal.activateEnvironment": true,
+  "python.createEnvironment.trigger": "off",
+  "python.envFile": "${workspaceFolder}/.env",
+  "python.testing.pytestEnabled": true,
+  "python.testing.unittestEnabled": false,
+  "python.analysis.typeCheckingMode": "basic",
+  "python.analysis.autoImportCompletions": false,
+  "python.venvFolders": [".venv", "venv", "~/.virtualenvs"],
+  "chat.disableAIFeatures": true,
+  "chat.agent.enabled": false,
+  "chat.extensionTools.enabled": false,
+  "chat.plugins.enabled": false,
+  "chat.mcp.gallery.enabled": false,
+  "chat.mcp.access": "none",
+  "chat.mcp.autoStart": "never",
+  "chat.tools.global.autoApprove": false,
+  "chat.tools.terminal.enableAutoApprove": false,
+  "chat.instructionsFilesLocations": {
+    ".github/instructions": true,
+    ".claude/rules": true,
+    "~/.copilot/instructions": true,
+    "~/.claude/rules": true
+  },
+  "github.copilot.enable": {
+    "*": false
+  },
+  "github.copilot.nextEditSuggestions.enabled": false,
+  "github.copilot.nextEditSuggestions.fixes": false,
+  "github.copilot.nextEditSuggestions.allowWhitespaceOnlyChanges": false,
+  "github.copilot.chat.agent.currentEditorContext.enabled": false,
+  "github.copilot.chat.anthropic.useMessagesApi": false,
+  "github.copilot.chat.claudeAgent.enabled": false,
+  "github.copilot.chat.cloudAgent.enabled": false,
+  "github.copilot.chat.codeGeneration.useInstructionFiles": false,
+  "github.copilot.chat.customInstructionsInSystemMessage": false,
+  "github.copilot.chat.organizationCustomAgents.enabled": false,
+  "github.copilot.chat.organizationInstructions.enabled": false,
+  "github.copilot.chat.reviewAgent.enabled": false,
+  "github.copilot.chat.reviewSelection.enabled": false,
+  "editor.formatOnSave": true,
+  "workbench.settings.applyToAllProfiles": []
+}

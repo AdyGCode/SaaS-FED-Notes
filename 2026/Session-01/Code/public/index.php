@@ -9,7 +9,7 @@ declare(strict_types=1);
  *  - DB_USER            For MariaDB/MySQL
  *  - DB_PASSWORD        For MariaDB/MySQL
  */
-const DB_FILENAME='contact_list_db.sqlite';
+// const DB_FILENAME='contact_list_db.sqlite';
 const DB_HOST='localhost';
 const DB_NAME='contact_list_database';
 const DB_USER='contact_list_user';
@@ -49,11 +49,22 @@ use App\Database;
  * If MySQL/MariaDB then we expect a database and user to have been created beforehand.
  * Databse connection details are then added to replace the constants at the top of this file.
  */
-$pdo = Database::sqlite(DB_FILENAME);
+// $pdo = Database::sqlite(DB_FILENAME);
 // For MariaDB instead, comment out above and use:
-// $pdo = Database::mysql(DB_HOST, DB_NAME, DB_USER, DB_PASSWORD);
+$pdo = Database::mysql(DB_HOST, DB_NAME, DB_USER, DB_PASSWORD);
+
+// Print all the contacts
+// $stmt = $pdo->query("SELECT * FROM contacts");
+
+// echo "<pre>";
+// var_dump($stmt->fetchAll(PDO::FETCH_ASSOC));
+// echo "</pre>";
+// exit;
 
 $repo = new ContactRepository($pdo);
+
+// Check the namespace
+print_r($repo);
 
 // CSRF: generate token if missing
 if (empty($_SESSION['_csrf'])) {
@@ -68,11 +79,18 @@ $body = '';
 
 if ($action === 'list' && $_SERVER['REQUEST_METHOD'] === 'GET') {
     $contacts = $repo->all();
+
+    // var_dump($contacts);
+    // print_r($contacts);
+    // die(var_dump($contacts));
+
     ob_start();
     require dirname(__DIR__).'/views/contacts.list.php';
     $body = ob_get_clean();
 
 } elseif ($action === 'create' && $_SERVER['REQUEST_METHOD'] === 'GET') {
+
+
     $errors = [];
     $old = [];
     ob_start();

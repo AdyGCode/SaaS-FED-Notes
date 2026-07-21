@@ -1,0 +1,85 @@
+#
+# Quick Folder Access Aliases
+#
+
+
+# ---------------------------------------------------------------------
+# OneDrive folders
+add_alias od 'cd ~/OneDrive\ -\ TAFE'
+# If you have a folder 2024 on OneDrive...
+add_alias od24 'cd ~/OneDrive\ -\ TAFE/2024'
+add_alias od25 'cd ~/OneDrive\ -\ TAFE/2025'
+add_alias od26 'cd ~/OneDrive\ -\ TAFE/2026'
+
+# ---------------------------------------------------------------------
+# Laragon
+# For TAFE Labs
+add_alias laragon 'cd /c/ProgramData/Laragon/'
+# On OWN machine, also Room 306 or TDM Labs
+add_alias laragon 'cd /c/Laragon'
+
+# ---------------------------------------------------------------------
+# Bash utils
+add_alias cls 'clear'
+add_alias countFiles 'la -1 | wc -l'
+
+# ---------------------------------------------------------------------
+# Alias management
+# For TAFE Labs
+add_alias alias-update 'source ~/.bashrc'
+add_alias alias-edit 'nano ~/.aliases'
+# On OWN machine, also Room 306 or TDM Labs
+add_alias alias-update 'source /c/Users/$USERNAME/.bashrc'
+add_alias alias-edit 'nano /c/Users/$USERNAME/.aliases'
+add_alias edit-aliases 'alias-edit'
+add_alias update-aliases 'alias-update'
+
+# ---------------------------------------------------------------------
+add_alias aliases 'alias | less'
+
+# ---------------------------------------------------------------------
+# Development Utilities
+add_alias mp2525 'mailpit --smtp 0.0.0.0:2525'
+
+# For TAFE Machines
+add_alias emqx-start 'cd /c/Laragon/bin/emqx/bin && ./emqx foreground'
+add_alias emqx-stop 'cd /c/Laragon/bin/emqx/bin && emqx stop'
+add_alias moz-start 'cd /c/Laragon/bin/mosquitto && ./mosquitto.exe -c mosquitto.conf -v'
+
+# On OWN machine, also Room 306 or TDM Labs
+add_alias emqx-start 'cd /c/ProgramData/Laragon/bin/emqx/bin && ./emqx foreground'
+add_alias emqx-stop 'cd /c/ProgramData/Laragon/bin/emqx/bin && emqx stop'
+add_alias moz-start 'cd /c/ProgramData/Laragon/bin/mosquitto && ./mosquitto.exe -c mosquitto.conf -v'
+
+# ---------------------------------------------------------------------
+# Laravel Utilities
+add_alias --force artisan 'php artisan'
+
+add_alias --force tinker 'artisan tinker'
+add_alias --force fresh 'artisan migrate:fresh --seed'
+add_alias --force makeall 'artisan make:model -arcs'
+add_alias --force makeapi 'artisan make:model -acs --api'
+add_alias --force pest './vendor/bin/pest'
+add_alias --force pint './vendor/bin/pint'
+add_alias --force test 'artisan test'
+add_alias --force clear-all 'artisan view:clear && artisan route:clear && artisan event:clear && artisan optimize:clear && artisan config:clear && artisan cache:clear && artisan auth:clear-resets'
+
+# ---------------------------------------------------------------------
+# Python Utilities
+add_alias --force activate 'source .venv/Scripts/activate'
+add_alias venv 'python -m venv .venv'
+add_alias reqs 'python -m pip install -r requirements.txt'
+add_alias vac 'venv && activate'
+add_alias vacr 'vac && reqs'
+
+
+# ---------------------------------------------------------------------
+# General Use Utilities
+add_alias pico 'nano'
+
+# ---------------------------------------------------------------------
+# NodeJS Utilities
+add_alias --force tailwind './node_modules/.bin/tailwindcss'
+
+
+

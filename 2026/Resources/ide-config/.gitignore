@@ -1,0 +1,10 @@
+### Backup template
+*.bak
+*.gho
+*.ori
+*.orig
+*.tmp
+
+*.log
+checksums.txt
+.idea

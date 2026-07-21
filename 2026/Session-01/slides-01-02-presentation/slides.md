@@ -7,7 +7,6 @@ drawings:
 transition: slide-left
 mdc: true
 duration: 35min
-
 ---
 
 # PHP & MVC Intro
@@ -26,14 +25,13 @@ duration: 35min
   </a>
 </div>
 
-
 <!--
 The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
 -->
 
 ---
-level: 2
----
+
+## level: 2
 
 # Session 01 Objectives
 
@@ -47,20 +45,18 @@ By the end of this session, you will be able to:
   - Use PDO safely with prepared statements
 - Understand the MVC request/response flow at a high level
 
-
 ---
 
 # Contents
 
 <Toc minDepth="1" maxDepth="1" columns="2" />
 
-
-
 ---
+
 layout: default
 level: 2
----
 
+---
 
 # Navigating Slides
 
@@ -68,24 +64,22 @@ Hover over the bottom-left corner to see the navigation's controls panel.
 
 ## Keyboard Shortcuts
 
-|                                                     |                             |
-| --------------------------------------------------- | --------------------------- |
-| <kbd>right</kbd> / <kbd>space</kbd>                 | next animation or slide     |
-| <kbd>left</kbd>  / <kbd>shift</kbd><kbd>space</kbd> | previous animation or slide |
-| <kbd>up</kbd>                                       | previous slide              |
-| <kbd>down</kbd>                                     | next slide                  |
-
-
+|                                                    |                             |
+| -------------------------------------------------- | --------------------------- |
+| <kbd>right</kbd> / <kbd>space</kbd>                | next animation or slide     |
+| <kbd>left</kbd> / <kbd>shift</kbd><kbd>space</kbd> | previous animation or slide |
+| <kbd>up</kbd>                                      | previous slide              |
+| <kbd>down</kbd>                                    | next slide                  |
 
 ---
-layout: section
----
+
+## layout: section
 
 # Background
 
 ---
-level: 2
----
+
+## level: 2
 
 # What Does a Server-Side Language Do?
 
@@ -95,17 +89,15 @@ level: 2
 - Validates/filters input
 - Sends structured output (HTML / JSON / XML)
 
-
-
 ---
-layout: section
----
+
+## layout: section
 
 # PHP Overview
 
 ---
-level: 2
----
+
+## level: 2
 
 # PHP Refresher (Syntax)
 
@@ -123,8 +115,8 @@ Emphasize:
 -->
 
 ---
-level: 2
----
+
+## level: 2
 
 # PHP 8+ Niceties We Will Use
 
@@ -140,54 +132,63 @@ We target PHP 8.4+
 -->
 
 ---
-layout: section
----
+
+## layout: section
 
 # HTTP
 
-
 ### HyperText Transfer Protocol
+
 ### Verbs
+
 ### Request - Response
 
 ---
+
 level: 2
 layout: grid
+
 ---
 
 # HTTP Protocol
 
 ::tl::
 
-## HTTP/1.0 
-  - Simple, one‑request‑per‑connection. 
-  - No keep‑alive by default. 
-  - Slow.
+## HTTP/1.0
+
+- Simple, one‑request‑per‑connection.
+- No keep‑alive by default.
+- Slow.
 
 ::tr::
 
-## HTTP/1.1 
-  - Persistent connections + pipelining. 
-  - Reduced overhead. 
-  - Still head‑of‑line blocking.
+## HTTP/1.1
+
+- Persistent connections + pipelining.
+- Reduced overhead.
+- Still head‑of‑line blocking.
 
 ::bl::
 
 ## HTTP/2
-  - Binary, multiplexed streams over one connection. 
-  - Header compression. 
-  - Much faster.
+
+- Binary, multiplexed streams over one connection.
+- Header compression.
+- Much faster.
 
 ::br::
 
 ## HTTP/3
-  - Uses QUIC (over UDP). 
-  - Eliminates head‑of‑line blocking at transport layer. 
-  - Faster, more reliable on bad networks.
+
+- Uses QUIC (over UDP).
+- Eliminates head‑of‑line blocking at transport layer.
+- Faster, more reliable on bad networks.
 
 ---
+
 level: 2
 layout: two-cols
+
 ---
 
 # HTTP Verbs
@@ -221,8 +222,10 @@ Common Request Verbs
 - Partially updates an existing resource.
 
 ---
+
 level: 2
 layout: two-cols
+
 ---
 
 # HTTP Verbs
@@ -262,16 +265,15 @@ Common Request Verbs (Continued)
 - Debugging; shows the path the request takes.
 - Rarely used today.
 
+---
 
----
-layout: section
----
+## layout: section
 
 # HTTP Requests
 
 ---
-level: 2
----
+
+## level: 2
 
 # HTTP Request → Response
 
@@ -281,7 +283,7 @@ flowchart LR
     P[PHP Router]
     D[Database]
     R[Repository]
-    
+
     C -->|GET /contacts| P
     P --> R
     R --> DB
@@ -291,23 +293,21 @@ flowchart LR
 
 <!--
 Map:
-- GET for listing, 
-- POST for creating. 
+- GET for listing,
+- POST for creating.
 
 Keep a “mental model” for request lifecycles.
 -->
 
+---
 
----
-layout: section
----
+## layout: section
 
 # PHP, Databases & Security Essentials
 
+---
 
----
-level: 2
----
+## level: 2
 
 # Data Access with PDO
 
@@ -318,19 +318,18 @@ level: 2
 
 <!--
 DSN
-- 
+-
 Security win:
-- prepared statements prevent injection. 
+- prepared statements prevent injection.
 
 Prefer exceptions
 - `errmode` is set
 - no silent fails.
 -->
 
+---
 
----
-level: 2
----
+## level: 2
 
 # PDO Prepared Statements
 
@@ -343,15 +342,14 @@ $stmt->execute([':name' => $name, ':email' => $email]);
 ```
 
 ---
-level: 2
----
+
+## level: 2
 
 # PDO Prepared Statements II
 
 Much more readable is to show the "binding":
 
 ````md magic-move
-
 ```php [PHP]
 $query = 'INSERT INTO contacts(name, email) VALUES(:name, :email)';
 $stmt  = $pdo->prepare($query);
@@ -365,7 +363,6 @@ $stmt  = $pdo->prepare($query);
 $stmt->execute();
 ```
 
-
 ```php [PHP] {1,2,8|4-6|all}
 $query = 'INSERT INTO contacts(name, email) VALUES(:name,:email)';
 $stmt = $pdo->prepare($query);
@@ -376,16 +373,11 @@ $stmt->bindValue(':phone', $phone, PDO::PARAM_STR);
 
 $stmt->execute();
 ```
-
-
-
 ````
 
-
-
 ---
-level: 2
----
+
+## level: 2
 
 # Security & Validation Essentials
 
@@ -398,16 +390,17 @@ level: 2
 Even in a demo, model good habits.
 -->
 
+---
 
----
-layout: section
----
+## layout: section
 
 # Practical: A small contacts app
 
 ---
+
 layout: two-cols
 level: 2
+
 ---
 
 # Demo App: “Contacts”
@@ -438,8 +431,10 @@ Use SQLite to reduce setup friction.
 -->
 
 ---
+
 level: 2
 layout: two-cols
+
 ---
 
 # Contacts Application
@@ -448,17 +443,19 @@ layout: two-cols
 
 ### List/Home page
 
-![Contact List Page](/public/contact-list-list.png)
+![Contact List Page](/contact-list-list.png)
 
 ::right::
 
 ### Create New Contact page
 
-![Contact List Create Page](/public/contact-list-create.png)
+![Contact List Create Page](/contact-list-create.png)
 
 ---
+
 layout: two-cols
 level: 2
+
 ---
 
 # Guided Practice (Pair)
@@ -470,11 +467,11 @@ level: 2
 - Pair Programming
 - Commit every 'dev' change
   - if complete "feat(feature): Added feature title"
-  - e.g. `git commmit -m "feat(contact): Add contact form"` 
-- **Dev**: 
+  - e.g. `git commmit -m "feat(contact): Add contact form"`
+- **Dev**:
   - **AT Keyboard** / Writes the code
-- **Lead**: 
-  - **NO Keyboard** / Bug hunting, verify code 
+- **Lead**:
+  - **NO Keyboard** / Bug hunting, verify code
 
 ::right::
 
@@ -491,13 +488,13 @@ level: 2
   - Odd IDs to left, Even to right
   - If uneven, move some to other side
   - 1:1 left:right
-- Circulate 
+- Circulate
 - Nudge toward incremental commits
 -->
 
 ---
-level: 2
----
+
+## level: 2
 
 # Independent Extension
 
@@ -515,10 +512,11 @@ Encourage peer review using a checklist
 - Checklist
 -->
 
-
 ---
+
 layout: two-cols
 level: 2
+
 ---
 
 # Checklist for Code
@@ -526,7 +524,7 @@ level: 2
 ::left::
 
 - [ ] **Code**
-  - [ ] Strict types are used 
+  - [ ] Strict types are used
   - [ ] Output is escaped
   - [ ] All queries use prepared statements
   - [ ] Clear validation errors shown to user
@@ -535,22 +533,21 @@ level: 2
 - [ ] **Version control**
   - [ ] Commits are completed regularly
 
-::right:: 
+::right::
 
 - [ ] **README.md File**
   - [ ] Explains flow (request → repo → view)
   - [ ] Developers are clearly identified
- 
+
 - [ ] **Finishing**
   - [ ] Code compressed to Zip/7-Zip
   - [ ] Copy taken by BOTH developers
 
-
-
-
 ---
+
 layout: section
 level: 1
+
 ---
 
 # MVC Flow
@@ -558,9 +555,8 @@ level: 1
 Flowchart and sequence diagrams for the MVC architecture flow
 
 ---
-level: 2
----
 
+## level: 2
 
 # MVC (High Level - Flowchart)
 
@@ -583,7 +579,7 @@ flowchart LR
     MO[Model]
     DA[Database]
     VW[View]
-      
+
     CL -->|makes request<br>to URI| RO
     RO -->|directs to| CO
 
@@ -592,26 +588,23 @@ flowchart LR
 
     DA -->|returned to| MO
     MO -->|collection| CO
-    
+
     CO -->|sends data to| VW
     VW -->|rendered as<br>HTML/response| CL
 ```
-
 
 <!--
 In this example:
 - “controller” is a lightweight router script
 - “model” is a repository class
-- “view” is a template. 
+- “view” is a template.
 
 Full MVC frameworks (e.g., Laravel) formalize this.
 -->
 
 ---
-level: 2
----
 
-
+## level: 2
 
 # MVC (Sequence Diagram)
 
@@ -640,12 +633,12 @@ sequenceDiagram
     autonumber
     accTitle: MVC
     accDescr: MVC as a Sequence Diagram
-    
+
     actor Client
     Client->>Router: Requests URI
     Router->>Controller: Directs to
     Controller->>Model: Directs query to
-   
+
     participant Database@{ "type" : "database" }
     Model--)Database: Query sent to
     Database--)Model: Query results returned
@@ -653,14 +646,12 @@ sequenceDiagram
     Controller->>View: Sends data to view
     View->>Controller: Renders HTML, injects data
     Controller->>Client: HTML response
-    
+
 ```
 
-
-
 ---
-layout: section
----
+
+## layout: section
 
 # Reflection
 
@@ -668,15 +659,16 @@ layout: section
 - Where does MVC fit?
 - Identify one thing to improve
 
-
 <!--
 Invite 2–3 student shares.
 -->
 
 ---
+
 layout: end
 transition: fade-out
 level: 2
+
 ---
 
 # Laisser les bon temps rouler <fa-solid-brain />
@@ -684,7 +676,7 @@ level: 2
 <br>
 <br>
 
-> “Where does MVC fit into what we built today,<br> 
+> “Where does MVC fit into what we built today,<br>
 > and which part is weakest/strongest in our mini‑stack?”
 
 <br>
@@ -701,7 +693,7 @@ The end... for now
 - Fu, A. (2020). Slidev. Sli.dev. https://sli.dev/
 - Font Awesome. (2026). Font Awesome. Fontawesome.com; Font Awesome. https://fontawesome.com/
 - Mermaid Chart. (2026). Mermaid.ai. https://mermaid.ai/
-- Fielding, R., Gettys, J., Mogul, J., Frystyk, H., Masinter, L., Leach, P., & Berners-Lee, T. (1999). Hypertext Transfer Protocol—HTTP/1.1 (RFC 2616). Internet Engineering Task Force. https://www.rfc-editor.org/rfc/rfc2616 
+- Fielding, R., Gettys, J., Mogul, J., Frystyk, H., Masinter, L., Leach, P., & Berners-Lee, T. (1999). Hypertext Transfer Protocol—HTTP/1.1 (RFC 2616). Internet Engineering Task Force. https://www.rfc-editor.org/rfc/rfc2616
 - IETF HTTP Working Group. (2022). HTTP documentation: Core specifications (RFCs 9110, 9111, 9112, 9113, 9114). https://httpwg.org/specs/
 
 <br>
@@ -714,9 +706,8 @@ Sample code is available from:
 - [https://...](https://...)
 
 ---
-level: 2
----
 
+## level: 2
 
 # Acknowledgements
 
@@ -725,7 +716,6 @@ level: 2
 <br>
 
 > - Mermaid syntax used for some diagrams
-
 
 <br>
 <br>

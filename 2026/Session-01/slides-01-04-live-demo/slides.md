@@ -26,17 +26,16 @@ duration: 60min
   </a>
 </div>
 
-
 <!--
 The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
 -->
 
-
 ---
+
 layout: default
 level: 2
----
 
+---
 
 # Navigating Slides
 
@@ -44,25 +43,27 @@ Hover over the bottom-left corner to see the navigation's controls panel.
 
 ## Keyboard Shortcuts
 
-|                                                     |                             |
-| --------------------------------------------------- | --------------------------- |
-| <kbd>right</kbd> / <kbd>space</kbd>                 | next animation or slide     |
-| <kbd>left</kbd>  / <kbd>shift</kbd><kbd>space</kbd> | previous animation or slide |
-| <kbd>up</kbd>                                       | previous slide              |
-| <kbd>down</kbd>                                     | next slide                  |
-
+|                                                    |                             |
+| -------------------------------------------------- | --------------------------- |
+| <kbd>right</kbd> / <kbd>space</kbd>                | next animation or slide     |
+| <kbd>left</kbd> / <kbd>shift</kbd><kbd>space</kbd> | previous animation or slide |
+| <kbd>up</kbd>                                      | previous slide              |
+| <kbd>down</kbd>                                    | next slide                  |
 
 ---
+
 layout: two-cols
 level: 1
 class: text-left
+
 ---
 
 # Session 01 Live Demo Objectives
 
-::left:: 
+::left::
 
 ### A1. List Contacts
+
 - **Goal:** Render all contacts in a table
 - **Steps:**
   1. Set up project
@@ -70,13 +71,14 @@ class: text-left
   3. Implement `ContactRepository::all()`
   4. Route `GET /?action=list` to load and render `views/contacts.list.php`
 
-- **Acceptance:** 
-  - Table shows at least the columns:<br> 
+- **Acceptance:**
+  - Table shows at least the columns:<br>
     ID, Name, Email, Phone, Created.
 
 ::right::
 
 ### A2. Create Contact (Form)
+
 - **Goal:** Insert a record via POST with validation
 - **Steps:**
   1. Build `views/contacts.form.php` with fields: `name`, `email`, `phone`
@@ -84,22 +86,21 @@ class: text-left
   3. Validate: `name` required; `email` valid
   4. On error: show messages and keep old input; on success: redirect to list
 
-- **Acceptance:** 
+- **Acceptance:**
   - Valid submissions appear in list
   - Invalid ones show clear errors
 
-
----
-level: 2
 ---
 
-# Contents 
+## level: 2
+
+# Contents
 
 <Toc minDepth="1" maxDepth="1" columns="2" />
 
 ---
-class: text-left
----
+
+## class: text-left
 
 # Important: College Requirements
 
@@ -116,8 +117,10 @@ class: text-left
   - etc
 
 ---
+
 layout: two-cols
 class: text-left
+
 ---
 
 # Create Project & Structure
@@ -133,7 +136,6 @@ class: text-left
 - Navigate UI
 - Open the `session-01-activity` folder
 
-
 ::right::
 
 ## Create Source/Repos Folder
@@ -146,7 +148,6 @@ mkdir SaaS-1-CAD-FED
 cd  SaaS-1-CAD-FED
 ```
 
-
 ## Create Project Folder
 
 ```shell {none|1|2|all}
@@ -154,11 +155,12 @@ mkdir -P session-01-activity
 cd session-01-activity
 ```
 
-
 ---
+
 layout: two-cols
 class: text-left
 level: 2
+
 ---
 
 # Create Project Folder Structure
@@ -198,14 +200,14 @@ flowchart
     P[public]
     S[src]
     V[views]
-    
+
     R-->D
     D-->M
     R-->P
     R-->S
     R-->V
-    
-    
+
+
 ```
 
 ---
@@ -233,8 +235,8 @@ CREATE TABLE IF NOT EXISTS contacts (
 ```
 
 ---
-level: 2
----
+
+## level: 2
 
 ## Add "Seed Data"
 
@@ -248,7 +250,6 @@ INSERT INTO CONTACTS(name, email, phone)
 INSERT INTO CONTACTS(name, email, phone)
     VALUES ("Robyn Banks", "robyn@example.com", "+61-2-0000-0002");
 ```
-
 
 ---
 
@@ -265,8 +266,8 @@ touch public/{index.php,styles.css}
 ```
 
 ---
-level: 2
----
+
+## level: 2
 
 ## Edit `public/index.php`
 
@@ -290,10 +291,9 @@ spl_autoload_register(function ($class) {
 
 ```
 
+---
 
----
-level: 2
----
+## level: 2
 
 ## `public/index.php` Contrinues
 
@@ -317,10 +317,9 @@ $repo = new ContactRepository($pdo);
 
 ```
 
+---
 
----
-level: 2
----
+## level: 2
 
 ## `public/index.php` Contrinues
 
@@ -338,10 +337,9 @@ $body = '';
 
 ```
 
+---
 
----
-level: 2
----
+## level: 2
 
 ## `public/index.php` Contrinues
 
@@ -357,13 +355,12 @@ if ($action === 'list' && $_SERVER['REQUEST_METHOD'] === 'GET') {
     ob_start();
     require dirname(__DIR__).'/views/contacts.form.php';
     $body = ob_get_clean();
-    
+
 ```
 
+---
 
----
-level: 2
----
+## level: 2
 
 ## `public/index.php` Contrinues
 
@@ -382,10 +379,9 @@ level: 2
 
 ```
 
+---
 
----
-level: 2
----
+## level: 2
 
 ## `public/index.php` Contrinues
 
@@ -408,13 +404,12 @@ level: 2
         header('Location: /?action=list');
         exit;
     }
-    
+
 ```
 
+---
 
----
-level: 2
----
+## level: 2
 
 ## `public/index.php` Contrinues
 
@@ -431,176 +426,172 @@ echo ob_get_clean();
 ```
 
 ---
-level: 2
----
+
+## level: 2
 
 ## Edit the `site.css` file
 
-
 ```css
 body {
-    max-width: 860px;
-    margin: 2rem auto;
-    font-family: Lexend, system-ui, sans-serif;
+  max-width: 860px;
+  margin: 2rem auto;
+  font-family: Lexend, system-ui, sans-serif;
 }
 
 main {
-    padding: 1rem;
-    background: #f9f9f9;
-    border-left: 1px solid #999;
-    border-right: 1px solid #999;
+  padding: 1rem;
+  background: #f9f9f9;
+  border-left: 1px solid #999;
+  border-right: 1px solid #999;
 }
 ```
 
 ---
-level: 2
----
+
+## level: 2
 
 ## `site.css` continues
 
 ```css
-header, footer {
-    padding: 1rem;
-    color: #444;
-    background: #eee;
+header,
+footer {
+  padding: 1rem;
+  color: #444;
+  background: #eee;
 }
 
 header {
-    border-radius: 0.5rem 0.5rem 0 0;
-    border: 1px solid #999;
+  border-radius: 0.5rem 0.5rem 0 0;
+  border: 1px solid #999;
 }
 ```
 
 ---
-level: 2
----
+
+## level: 2
 
 ## `site.css` continues
 
 ```css
-
 footer {
-    border-radius: 0 0 0.5rem 0.5rem;
-    border: 1px solid #999;
+  border-radius: 0 0 0.5rem 0.5rem;
+  border: 1px solid #999;
 }
 
-h1, h2 {
-    margin: 0.5rem 0 1rem;
+h1,
+h2 {
+  margin: 0.5rem 0 1rem;
 }
 
-h3, h4 {
-    margin: 1rem 0;
+h3,
+h4 {
+  margin: 1rem 0;
 }
 ```
 
 ---
-level: 2
----
+
+## level: 2
 
 ## `site.css` continues
 
 ```css
-
 .error {
-    color: #b00020;
+  color: #b00020;
 }
 
 li > span {
-    padding-right: 1rem;
-    font-weight: 700;
-    display: inline-block;
+  padding-right: 1rem;
+  font-weight: 700;
+  display: inline-block;
 }
 
 form > div {
-    display: block;
-    margin: 0.5rem 2rem 0.5rem 1rem;
-    padding: 0.5rem 0;
+  display: block;
+  margin: 0.5rem 2rem 0.5rem 1rem;
+  padding: 0.5rem 0;
 }
-
 ```
 
 ---
-level: 2
----
+
+## level: 2
 
 ## `site.css` continues
 
 ```css
-
 table {
-    border-collapse: collapse;
-    width: 100%;
+  border-collapse: collapse;
+  width: 100%;
 }
 
-td, th {
-    border-bottom: 1px solid #ddd;
-    padding: .5rem;
-    text-align: left;
+td,
+th {
+  border-bottom: 1px solid #ddd;
+  padding: 0.5rem;
+  text-align: left;
 }
 ```
 
 ---
-level: 2
----
+
+## level: 2
 
 ## `site.css` continues
 
 ```css
-
 tr > th {
-    background: #000;
-    color: #fff;
+  background: #000;
+  color: #fff;
 }
 
 label {
-    width: 100%;
+  width: 100%;
 }
 ```
 
 ---
-level: 2
----
+
+## level: 2
 
 ## `site.css` continues
 
 ```css
-
-input[type=text], input[type=email] {
-    margin: 0.25rem 0;
-    width: 100%;
-    padding: .5rem;
-    border-radius: 0.5rem;
-    border: 1px #999 solid;
+input[type="text"],
+input[type="email"] {
+  margin: 0.25rem 0;
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px #999 solid;
 }
 
 button {
-    padding: 0.5rem 2rem;
-    background: #3399ff;
-    color: #fff;
-    border-radius: 0.5rem;
-    border: #003399 1px solid;
+  padding: 0.5rem 2rem;
+  background: #3399ff;
+  color: #fff;
+  border-radius: 0.5rem;
+  border: #003399 1px solid;
 }
 ```
 
 ---
-level: 2
----
+
+## level: 2
 
 ## `site.css` continues
 
 ```css
-
 code {
-    background: #f6f8fa;
-    padding: .15rem .4rem;
-    border-radius: 3px;
+  background: #f6f8fa;
+  padding: 0.15rem 0.4rem;
+  border-radius: 3px;
 }
-
 ```
 
 ---
-level: 2
----
+
+## level: 2
 
 ## `site.css` continues
 
@@ -609,8 +600,8 @@ level: 2
 ```
 
 ---
-level: 2
----
+
+## level: 2
 
 ## `site.css` continues
 
@@ -619,8 +610,8 @@ level: 2
 ```
 
 ---
-level: 2
----
+
+## level: 2
 
 # Practice Checklist
 
@@ -631,13 +622,12 @@ level: 2
 - [ ] Students commit work to VCS
 
 ---
-level: 2
----
+
+## level: 2
 
 # Exit Ticket
 
 > “Where does MVC fit into what we built today, and which part is weakest/strongest in our mini‑stack?”
-
 
 ---
 
@@ -653,4 +643,4 @@ level: 2
 <br>
 
 > - Mermaid syntax used for some diagrams
-> Some content may have been generated with the assistance of Microsoft CoPilot
+>   Some content may have been generated with the assistance of Microsoft CoPilot
