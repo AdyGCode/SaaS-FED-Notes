@@ -1,5 +1,3 @@
-If delivery finishes at **Week 17**, I would structure the course so that all teaching is complete by then, leaving assessment and catch-up outside the formal teaching sequence. This also better aligns with the competency requirements of **ICTDBS507** and **ICTPRG556**.
-
 | Week   | Topic                                                                      | Unit Focus |
 | ------ | -------------------------------------------------------------------------- | ---------- |
 | **1**  | Course Introduction, Development Environment, Git/GitHub Workflow          | PRG556     |
@@ -20,31 +18,16 @@ If delivery finishes at **Week 17**, I would structure the course so that all te
 | **16** | Deployment, Environment Configuration and Production Readiness             | Both       |
 | **17** | Capstone Integration Project, Review and Competency Consolidation          | Both       |
 
-### Notes for the LAP
+### Notes for the Course
 
-The following topics should remain as **stand-alone lessons** rather than being merged:
+The following software archiotecture topics are completed throughout the course.
 
-* HTTP fundamentals before introducing Laravel.
-* MVC architecture before writing controllers.
-* SQL and relational database concepts before Eloquent.
-* Database migrations before CRUD.
-* Authentication before middleware and authorisation.
-* RESTful HTTP methods before building APIs.
-* Security as a dedicated lesson rather than being sprinkled throughout.
-* Testing and debugging as a dedicated lesson.
-* Deployment as a separate lesson from development.
-
-### Topics to Verify Against the Repository
-
-When I review the repository in detail, I'll specifically check whether these are adequately covered or need additional material:
-
-* Database planning and integration documentation.
-* SQL normalisation and schema design.
-* HTTP redirects and model binding.
-* PUT/PATCH request handling.
-* Browser compatibility testing (required by ICTDBS507).
-* NoSQL concepts (knowledge evidence only).
-* Query optimisation and indexing.
-* Production deployment and environment management.
-
-I think this 17-week sequence is a stronger structure than a typical Laravel tutorial because it introduces the underlying concepts **before** the framework abstractions, making it much better suited to a TAFE Diploma course and the competency requirements of both units.
+- HTTP fundamentals before introducing Laravel.
+- MVC architecture before writing controllers.
+- SQL and relational database concepts before Eloquent.
+- Database migrations before CRUD.
+- Authentication before middleware and authorisation.
+- RESTful HTTP methods before building APIs.
+- Security as a dedicated lesson rather than being sprinkled throughout.
+- Testing and debugging as a dedicated lesson.
+- Deployment as a separate lesson from development.
