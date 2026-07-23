@@ -3,38 +3,44 @@
     "PowerShell": {
       "source": "PowerShell",
       "icon": "terminal-powershell",
-      "color": "terminal.ansiBlue"
+      "color": "terminal.ansiBlue",
     },
     "Command Prompt": {
       "path": [
         "${env:windir}\\Sysnative\\cmd.exe",
-        "${env:windir}\\System32\\cmd.exe"
+        "${env:windir}\\System32\\cmd.exe",
       ],
       "args": [],
       "icon": "terminal-cmd",
-      "color": "terminal.ansiYellow"
+      "color": "terminal.ansiYellow",
     },
     "System Git Bash": {
       "source": "Git Bash",
       "icon": "terminal-bash",
-      "color": "terminal.ansiGreen"
+      "color": "terminal.ansiGreen",
     },
-    "Laragon Git Bash": {
+    "TAFE Laragon Bash": {
       "path": "C:\\ProgramData\\Laragon\\bin\\git\\bin\\bash.exe",
       "args": ["--login", "-i"],
       "icon": "server-process",
-      "color": "terminal.ansiMagenta"
-    }
+      "color": "terminal.ansiMagenta",
+    },
+    "Local Laragon Bash": {
+      "path": "C:\\Laragon\\bin\\git\\bin\\bash.exe",
+      "args": ["--login", "-i"],
+      "icon": "server-process",
+      "color": "terminal.ansiCyan",
+    },
   },
-  "terminal.integrated.defaultProfile.windows": "Laragon Git Bash",
+
+  "terminal.integrated.defaultProfile.windows": "TAFE Laragon Bash",
   "terminal.integrated.useWslProfiles": false,
   "terminal.integrated.cwd": "C:\\ProgramData\\Laragon\\www\\Sources\\Repos",
   "terminal.integrated.initialHint": false,
-  "terminal.integrated.automationProfile.osx": null,
-  "terminal.integrated.automationProfile.linux": null,
   "terminal.integrated.env.windows": {
-    "PYTHONIOENCODING": "utf-8"
+    "PYTHONIOENCODING": "utf-8",
   },
+
   "editor.formatOnPaste": false,
   "editor.formatOnType": false,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -43,10 +49,12 @@
   "editor.inlineSuggest.edits.showLongDistanceHint": false,
   "editor.inlineSuggest.edits.renderSideBySide": "never",
   "editor.inlineSuggest.edits.allowCodeShifting": "never",
+
   "workbench.editor.empty.hint": "hidden",
   "workbench.browser.enableChatTools": false,
   "explorer.confirmDelete": true,
-  "explorer.confirmDragAndDrop": true,
+  "explorer.confirmDragAndDrop": false,
+
   "files.trimTrailingWhitespace": true,
   "files.insertFinalNewline": true,
   "files.exclude": {
@@ -55,23 +63,36 @@
     "**/node_modules": true,
     "**/.next": true,
     "**/dist": true,
-    "**/build": true
+    "**/build": true,
   },
+
   "git.confirmSync": true,
   "git.enableSmartCommit": false,
   "git.autofetch": true,
   "diffEditor.ignoreTrimWhitespace": false,
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
   },
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
   },
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
   },
   "js/ts.updateImportsOnFileMove.enabled": "always",
   "js/ts.preferences.importModuleSpecifier": "relative",
@@ -79,15 +100,14 @@
     "javascript",
     "javascriptreact",
     "typescript",
-    "typescriptreact"
+    "typescriptreact",
   ],
   "eslint.codeActionsOnSave.rules": null,
   "[python]": {
-    "editor.defaultFormatter": null,
-    "editor.formatOnSave": true,
+    "editor.formatOnSave": false,
     "editor.codeActionsOnSave": {
-      "source.organizeImports": "explicit"
-    }
+      "source.organizeImports": "explicit",
+    },
   },
   "python.defaultInterpreterPath": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
   "python.terminal.activateEnvironment": true,
@@ -97,7 +117,7 @@
   "python.testing.unittestEnabled": false,
   "python.analysis.typeCheckingMode": "basic",
   "python.analysis.autoImportCompletions": false,
-  "python.venvFolders": [".venv", "venv", "~/.virtualenvs"],
+  "python.venvFolders": ["~/.virtualenvs"],
   "chat.disableAIFeatures": true,
   "chat.agent.enabled": false,
   "chat.extensionTools.enabled": false,
@@ -111,10 +131,10 @@
     ".github/instructions": true,
     ".claude/rules": true,
     "~/.copilot/instructions": true,
-    "~/.claude/rules": true
+    "~/.claude/rules": true,
   },
   "github.copilot.enable": {
-    "*": false
+    "*": false,
   },
   "github.copilot.nextEditSuggestions.enabled": false,
   "github.copilot.nextEditSuggestions.fixes": false,
@@ -129,6 +149,5 @@
   "github.copilot.chat.organizationInstructions.enabled": false,
   "github.copilot.chat.reviewAgent.enabled": false,
   "github.copilot.chat.reviewSelection.enabled": false,
-  "editor.formatOnSave": true,
-  "workbench.settings.applyToAllProfiles": []
+  "workbench.settings.applyToAllProfiles": [],
 }
