@@ -151,7 +151,7 @@ add_to_path() {
 # as verifying commands/folders exist before creating the alias
 #
 # Examples of how to use:
-# 
+#
 # add_alias 'alias-edit' 'nano /c/Users/$USERNAME/.aliases'
 # add_alias laragon 'cd /c/ProgramData/Laragon/'
 # add_alias emqx-stop 'cd /c/Laragon/bin/mqtt/emqx/bin && emqx stop'
@@ -461,6 +461,69 @@ _probe_python_version() {
 }
 
 # ---------------------------------------------------------------------
+# Locate latest version of PHP and add to path
+
+find_latest_php() {
+  local search_dirs=(
+    "/c/ProgramData/Laragon/bin/php"
+    "/c/Laragon/bin/php"
+  )
+
+  local php_executables=()
+  local php_exe
+  local php_version
+  local latest_php=""
+  local latest_version=""
+
+  for search_dir in "${search_dirs[@]}"; do
+    [ -d "$search_dir" ] || continue
+
+    while IFS= read -r php_exe; do
+      php_executables+=("$php_exe")
+    done < <(
+      find "$search_dir" \
+        -mindepth 2 \
+        -maxdepth 2 \
+        -type f \
+        -iname "php.exe" \
+        2>/dev/null
+    )
+  done
+
+  if [ "${#php_executables[@]}" -eq 0 ]; then
+    cli_warning "No Laragon PHP installation was found."
+    return 1
+  fi
+
+  for php_exe in "${php_executables[@]}"; do
+    php_version=$(
+      "$php_exe" -r 'echo PHP_VERSION;' 2>/dev/null |
+      tr -d '\r'
+    )
+
+    [ -n "$php_version" ] || continue
+
+    if [ -z "$latest_version" ] ||
+       [ "$(printf '%s\n%s\n' "$latest_version" "$php_version" |
+           sort -V |
+           tail -n 1)" = "$php_version" ]; then
+      latest_version="$php_version"
+      latest_php="$php_exe"
+    fi
+  done
+
+  if [ -z "$latest_php" ]; then
+    cli_warning "PHP installations were found, but their versions could not be read."
+    return 1
+  fi
+
+  add_to_path "$(dirname "$latest_php")"
+  export PHPRC="$(dirname "$latest_php")"
+
+  cli_info "Current PHP: $("$latest_php" --version | head -n 1)"
+}
+
+# ---------------------------------------------------------------------
 # Locate latest version of Python and add to path
 
 find_latest_python() {
@@ -631,19 +694,15 @@ _remove_bashrc() {
     fi
 }
 
-
 # =====================================================================
 # Add JRE location as environment variable
 export EXE4J_JAVA_HOME="/c/laragon/bin/Java/jdk-25.0.1+8-jre/bin"
-
 
 # =====================================================================
 # Required basic aliases. Others added tot he .aliases file
 add_alias la 'ls -ah'
 add_alias ll 'ls -lah'
 add_alias ls 'ls -F --color=auto --show-control-chars'
-
-
 
 # =====================================================================
 # Add tools and environments to PATH
@@ -669,7 +728,6 @@ add_to_path "/c/ProgramData/Laragon/bin/mqtt/mosquitto"
 add_to_path "/c/ProgramData/Laragon/bin/marp"
 add_to_path "/c/ProgramData/Laragon/bin/mqtt/nanomq/bin"
 
-
 # ---------------------------------------------------------------------
 # TDM and Home Computers
 add_to_path /c/Laragon/bin/mailpit
@@ -687,8 +745,6 @@ add_to_path "/c/Program\ Files/Erlang\ OTP/bin/"
 add_to_path "/C/laragon/bin/DbVisualizer"
 add_to_path "/C/laragon/bin/Java/jdk-25.0.1+8-jre/bin"
 
-
-#
 # Any Windows PC
 add_to_path "/c/Program Files/7-Zip"
 
@@ -696,20 +752,17 @@ add_to_path "/c/Program Files/7-Zip"
 # Source aliases if available
 [ -f "$HOME/.aliases" ] && source "$HOME/.aliases"
 
-
-
 # =====================================================================
+# Finad and load the latest versions
 cli_blank_f " "
 find_latest_python
+find_latest_php
 cli_blank_f " "
-
-
 
 # =====================================================================
 # End-of-initialization message (single line) and cleanup
 cli_blank " "
 cli_completed
-
 
 # =====================================================================
 # Greetings
@@ -723,7 +776,6 @@ case $HOUR in
   1[2-7])       cli_info "Good afternoon" ;;
   *)            cli_info "Good evening" ;;
 esac
-
 
 # ---------------------------------------------------------------------
 # Welcome message
