@@ -2,7 +2,7 @@
 
 This guide explains how to set up the Laravel development environment used throughout this course.
 
-> **Important**ß
+> **Important**
 >
 > All students are expected to use the standard NMTAFE development environment to ensure demonstrations, practical activities and assessments are consistent.
 

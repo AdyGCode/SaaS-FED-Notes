@@ -62,7 +62,7 @@ database/
 tests/
 ```
 
-Discuss with a classmate:
+Discuss with your partner:
 
 1. Which folder probably contains the controllers?
 2. Which folder contains the application's web routes?
@@ -299,7 +299,7 @@ Display a personalised greeting.
 
 ### Task 4
 
-Demonstrate your completed work to your lecturer.
+Demonstrate your completed work.
 
 ---
 
