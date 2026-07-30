@@ -1,0 +1,78 @@
+name: laravel-mysql
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ghcr.io/REPLACE_WITH_COLLEGE_ORG/laravel-php-mysql:8.4-bookworm-v1
+    restart: unless-stopped
+    working_dir: /var/www/html
+    volumes:
+      - ./:/var/www/html
+    environment:
+      APP_ENV: local
+      APP_DEBUG: "true"
+      LOG_CHANNEL: stderr
+      DB_CONNECTION: mysql
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_DATABASE: ${MYSQL_DATABASE:-laravel}
+      DB_USERNAME: ${MYSQL_USER:-laravel}
+      DB_PASSWORD: ${MYSQL_PASSWORD:-development-password}
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - laravel
+
+  nginx:
+    # Replace with the approved GHCR mirror and digest.
+    image: nginx:stable-bookworm
+    restart: unless-stopped
+    ports:
+      - "${APP_PORT:-8080}:80"
+    volumes:
+      - ./:/var/www/html:ro
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - app
+    networks:
+      - laravel
+
+  mysql:
+    # MySQL 8.4 is the current LTS series.
+    # Replace with the approved GHCR mirror and digest.
+    image: mysql:8.4.11-oraclelinux9
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root-development-password}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-laravel}
+      MYSQL_USER: ${MYSQL_USER:-laravel}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-development-password}
+    volumes:
+      - mysql-data:/var/lib/mysql
+    ports:
+      - "${MYSQL_PORT:-3306}:3306"
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "mysqladmin ping -h 127.0.0.1 -u root -p\"$${MYSQL_ROOT_PASSWORD}\" --silent"
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+    networks:
+      - laravel
+
+volumes:
+  mysql-data:
+
+networks:
+  laravel:
+    driver: bridge
