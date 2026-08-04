@@ -1,348 +1,403 @@
-# Session 3 Practical Investigation
+# Session 3 Practical
 
-## Refactoring the Contact List Application using Controllers and Blade
+# Enterprise Development Sprint 03
+
+## Building the Contact List Public Website
+
+---
+
+# Session Information
+
+**Course**
+
+ICT50220 Diploma of Information Technology
+
+**Stage**
+
+Stage 1 – Enterprise Web Application Development
+
+**Session**
+
+Session 3
+
+**Duration**
+
+Approximately 2 Hours
+
+---
+
+# Sprint Goal
+
+Continue developing the Contact List application from **Session 2 Practical – Part 6**.
+
+During this sprint you will extend the public website by completing the static pages and improving the application's presentation using the existing Laravel architecture.
+
+You will work with:
+
+- Static routes
+- StaticPageController
+- Blade views
+- Shared layouts
+- Named routes
+
+The application should become more complete while maintaining a clean and maintainable structure.
+
+---
+
+# Learning Outcomes
 
 By completing this sprint you will be able to:
 
-- Apply MVC architecture.
-- Create a conventional Laravel Controller.
-- Refactor route closures into controller actions.
-- Create reusable Blade layouts.
-- Apply separation of concerns.
-- Improve maintainability using Laravel conventions.
+- Navigate an existing Laravel application.
+- Follow the Laravel request lifecycle.
+- Extend the Contact List application using the existing architecture.
+- Create professional static website content.
+- Apply Blade layouts to reduce duplicated HTML.
+- Follow Laravel conventions.
 
 ---
 
-# Prerequisites
+# Before You Begin
 
-Before beginning confirm you have completed:
+Continue from:
 
-- Session 2 Practical – Part 6 on
-- Working Laravel application
-- Git repository
-- Latest code committed
-- Application running correctly
+**Session 2 Practical – Part 6**
 
-If your application is not working correctly, resolve these issues or ask for help.
+Confirm:
+
+- Laragon is running.
+- The Contact List application loads successfully.
+- Home page loads.
+- About page loads.
+- Contact page loads.
+- Latest work has been committed to GitHub.
 
 ---
 
-# Development Sprint Overview
+# Sprint Overview
 
 ```text
-Checkpoint
-↓
-Build
-↓
-Observe
-↓
-Test
-↓
-Explain
-↓
-Improve
-↓
-Git Commit
+Review Application
+        │
+        ▼
+Review Architecture
+        │
+        ▼
+Complete Public Pages
+        │
+        ▼
+Improve Navigation
+        │
+        ▼
+Test Application
+        │
+        ▼
+Commit Changes
 ```
-
-Complete every stage before progressing.
 
 ---
 
-# Repository Checkpoint
+## Task 1 — Review the Application
 
-Open your project. Confirm the following folders exist.
+Run the Contact List application.
+
+Review the current public pages:
+
+- Home
+- About
+- Contact Us
+
+Locate any placeholder content that will need to be updated.
+
+---
+
+## Task 2 — Review the Project Structure
+
+Locate the following folders.
 
 ```text
 app/
 resources/
 routes/
 public/
-storage/
 ```
 
-Run the application.
+Identify where the following are stored:
 
-Verify:
-
-- Home page loads.
-- About page loads.
-- Contacts page loads.
-
-Do not continue until everything works correctly.
-
----
-
-## Review the Existing Routes
-
-Open
-
-```text
-routes/web.php
-```
-
-Identify:
-
-- Home route
-- About route
-- Contacts route
-
-Questions:
-
-- Which routes use closures?
-- Which routes return Blade views?
-- Where is the application logic currently located?
-
----
-
-# Observe
-
-Discuss with your partner. What problems might occur if the application grows to include:
-
-- Contact search
-- Contact editing
-- Categories
-- Authentication
-- Hundreds of contacts
-
-Would route closures remain manageable?
-
----
-
-## Generate the ContactController
-
-Use Artisan to create a conventional controller.
-
-```bash
-php artisan make:controller ContactController
-```
-
-Locate the generated controller.
-
-```text
-app/
-    Http/
-        Controllers/
-            ContactController.php
-```
-
-Review the generated class.
-
----
-
-# Observe 2
-
-Open the controller.
-
-- Namespace
-- Class declaration
-- Methods
-
-Why does Laravel create an empty controller rather than adding application logic automatically.
-
----
-
-# Build 3
-
-Create the following methods.
-
-```text
-index()
-
-show()
-```
-
-Initially both methods should return static Blade views.
-
-Do not introduce database queries.
-
----
-
-# Test 1
-
-Update the routes.
-
-Replace the route closure with a controller action.
-
-Verify:
-
-- The application still loads.
-- The Contact page still works.
-- No routing errors occur.
-
----
-
-# Explain
-
-Answer the following.
-
-Why is the controller a better location for application behaviour than a route closure?
-
-Discuss:
-
-- Maintainability
-- Readability
-- Scalability
-
----
-
-# Build 4
-
-## Create a Shared Layout
-
-Inside
-
-```text
-resources/views/
-```
-
-create
-
-```text
-layouts/
-
-app.blade.php
-```
-
-Move the following into the layout.
-
-- HTML document
-- Navigation
-- Shared CSS
-- Footer
-
----
-
-# Build 5
-
-Update the existing pages.
-
-Refactor:
-
-- Home
-- About
-- Contacts
-- Contact Details
-
-Each page should extend the shared layout rather than duplicating HTML.
-
----
-
-# Observe 3
-
-Compare the project before and after refactoring.
-
-Questions:
-
-- Has the amount of duplicated HTML reduced?
-- Is the navigation easier to maintain?
-- Which files became simpler?
-
----
-
-# Test 2
-
-Verify every page still loads correctly.
-
-Test:
-
-- Home
-- About
-- Contacts
-- Contact Details
-
-Confirm:
-
-- Navigation works.
-- Layout displays correctly.
-- No Blade errors occur.
-
----
-
-# Investigate
-
-Using the official Laravel documentation investigate:
-
+- Routes
 - Controllers
-- Blade Layouts
-- Template Inheritance
-
-Highlight three features that were not demonstrated during today's lesson.
+- Blade views
 
 ---
 
-# Improve
+## Task 3 — Review the Public Routes
 
-Consider how the application could be improved.
+Open:
 
-Ideas include:
-
-- Active navigation highlighting
-- Shared page titles
-- Consistent headings
-- Footer improvements
-- Contact cards
-- Better page structure
-
-Implement one improvement.
-
----
-
-# Enterprise Reflection
-
-Imagine another software developer joins your team tomorrow.
-
-Would they understand your project?
-
-- Folder structure
-- Naming conventions
-- Controller organisation
-- Blade layouts
-
-Write a short reflection describing how today's refactoring has improved the application.
-
----
-
-# Git Checkpoint
-
-Commit your completed sprint.
-
-Example commit message.
-
-```bash
-git commit -m "feat: Refactor Contact List application using ContactController and Blade layouts"
+```text
+routes/web.static.php
 ```
 
-Push your changes to GitHub.
+Locate the routes for:
+
+- Home
+- About
+- Contact Us
+- Privacy Policy
+- Terms and Conditions
+
+Confirm each route references the `StaticPageController`.
 
 ---
 
-# Sprint Review Checklist
+## Task 4 — Review the StaticPageController
 
-Your application should now contain:
+Open:
 
-- ContactController
-- index()
-- show()
-- Updated routes
+```text
+app/Http/Controllers/Web/StaticPageController.php
+```
+
+Locate the methods responsible for:
+
+- Home
+- About
+- Privacy Policy
+- Terms and Conditions
+
+Confirm each method returns the correct Blade view.
+
+---
+
+## Task 5 — Complete the Home Page
+
+Open:
+
+```text
+resources/views/web/static/welcome.blade.php
+```
+
+Complete the page by adding:
+
+- Application title
+- Introduction
+- Purpose
+- Key features
+- Navigation links
+
+Maintain the existing application layout.
+
+---
+
+## Task 6 — Complete the About Page
+
+Open:
+
+```text
+resources/views/web/static/about.blade.php
+```
+
+Replace placeholder content with:
+
+- Application overview
+- Intended users
+- Main features
+- Technologies used
+- Development approach
+
+---
+
+## Task 7 — Complete the Privacy Policy
+
+Open:
+
+```text
+resources/views/web/static/privacy.blade.php
+```
+
+Create sections for:
+
+- Information collected
+- Use of information
+- Security
+- User responsibilities
+- Contact information
+
+Use clear and concise language.
+
+---
+
+## Task 8 — Complete the Terms and Conditions
+
+Open:
+
+```text
+resources/views/web/static/terms.blade.php
+```
+
+Create sections for:
+
+- Acceptable use
+- User responsibilities
+- Service availability
+- Appropriate behaviour
+- Changes to the application
+
+---
+
+## Task 9 — Improve the Contact Us Page
+
+Open:
+
+```text
+resources/views/web/static/contact-us.blade.php
+```
+
+Improve the page by adding:
+
+- Page heading
+- Introduction
+- Contact information
+- Support information
+- Consistent page layout
+
+Do not modify the form processing.
+
+---
+
+## Task 10 — Review the Navigation
+
+Locate the application's main navigation.
+
+Ensure links exist for:
+
+- Home
+- About
+- Contact Us
+- Privacy Policy
+- Terms and Conditions
+
+Use Laravel named routes.
+
+Example:
+
+```php
+route('web.static.about')
+```
+
+Avoid hard-coded URLs.
+
+---
+
+## Task 11 — Review the Shared Layout
+
+Open the application's shared layout.
+
+Confirm the following are shared across every page:
+
+- Navigation
+- Footer
+- Stylesheets
+- Scripts
+
+Ensure individual pages only contain page-specific content.
+
+---
+
+## Task 12 — Test the Website
+
+Verify every public page loads successfully.
+
+| Page                 | Expected Result                    |
+| -------------------- | ---------------------------------- |
+| Home                 | Application introduction displayed |
+| About                | Application overview displayed     |
+| Contact Us           | Contact page displayed             |
+| Privacy Policy       | Privacy Policy displayed           |
+| Terms and Conditions | Terms and Conditions displayed     |
+
+Also confirm:
+
+- Navigation works correctly.
+- Blade layout is applied consistently.
+- No Laravel errors are displayed.
+- Browser output matches the expected page.
+
+---
+
+## Task 13 — Improve the Website
+
+Implement one improvement to the public website.
+
+Suggested improvements:
+
+- Active navigation
+- Better page headings
+- Improved footer
+- Consistent content spacing
+- Additional call-to-action buttons
+
+Keep the improvement consistent with the existing application design.
+
+---
+
+## Task 14 — Commit Your Changes
+
+Review the repository status.
+
+```bash
+git status
+```
+
+Stage your changes.
+
+```bash
+git add .
+```
+
+Commit your work.
+
+```bash
+git commit -m "feat: complete Contact List public website"
+```
+
+Push the latest commit.
+
+```bash
+git push
+```
+
+---
+
+# Sprint Checklist
+
+Before finishing, confirm the application contains:
+
+- Completed Home page
+- Completed About page
+- Completed Privacy Policy
+- Completed Terms and Conditions
+- Improved Contact Us page
+- Working named routes
+- Consistent navigation
 - Shared Blade layout
 - Reduced duplicated HTML
-- Working navigation
-- Successful Git commit
+- Successful Git commit and push
 
 ---
 
 # Preparing for Session 4
 
-Next session we will begin making the application interactive.
+Next session you will begin making the Contact List application interactive.
 
 Topics include:
 
 - HTML forms
-- User input
+- HTTP requests
 - Form Requests
 - Validation
-- Error messages
+- Error handling
+- User feedback
 
 Ensure your repository is committed and pushed before attending the next class.
 
@@ -350,12 +405,14 @@ Ensure your repository is committed and pushed before attending the next class.
 
 # Extension Challenge
 
-Research Resource Controllers. Investigate the Artisan command used to generate one.
+Investigate the following Laravel features using the official documentation.
 
-Do not implement it yet.
+- Resource Controllers
+- Blade Components
+- Route Groups
 
-- Why Laravel provides Resource Controllers.
-- When they should be used.
-- How they differ from a standard controller.
+Be prepared to explain:
 
-This investigation will prepare you for later sessions.
+- What problem each feature solves.
+- Where it could be used in the Contact List application.
+- Whether it should be introduced later in the project.
