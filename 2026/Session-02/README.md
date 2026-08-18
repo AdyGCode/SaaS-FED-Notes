@@ -91,6 +91,9 @@ Clone the course repository.
 
 ```bash
 git clone <repository-url>
+
+# If creating composer
+create-project --prefer-dist laravel/laravel my-app
 ```
 
 Move into the project.

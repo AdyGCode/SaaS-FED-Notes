@@ -535,7 +535,11 @@ find_latest_composer() {
 
     composer_dir="$(dirname "$latest_composer")"
 
-    add_to_path "$composer_dir"
+    if [[ "$latest_composer" == *.phar ]]; then
+        alias composer="php \"$latest_composer\""
+    else
+        add_to_path "$(dirname "$latest_composer")"
+    fi
 
     hash -r
 
